@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::LOGIN;
 
     /**
      * Create a new controller instance.
@@ -50,9 +50,20 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'f_name' => ['required', 'string', 'max:255'],
+            'l_name' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'string', 'max:255'],
+            'dob' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'country' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'state' => ['required', 'string', 'max:255'],
+            'h_adress_1' => ['required', 'string', 'max:255'],
+            'h_adress_2' => ['required', 'string', 'max:255'],
+            'zipcode' => ['required', 'string', 'max:255'],
+
         ]);
     }
 
@@ -64,10 +75,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+          return User::create([
+            'f_name' => $data['f_name'],
+            'l_name' => $data['l_name'],
+            'gender' => $data['gender'],
+            'dob' => $data['dob'],
+            'phone' => $data['phone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'country' => $data['country'],
+            'city' => $data['city'],
+            'state' => $data['state'],
+            'h_adress_1' => $data['h_adress_1'],
+            'h_adress_2' => $data['h_adress_2'],
+            'zipcode' => $data['zipcode'],
         ]);
     }
 }

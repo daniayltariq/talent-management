@@ -1,0 +1,40 @@
+<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="footer__widgets clearfix">
+					<div class="col-md-3 col-sm-6 col-xs-12 footer__social">
+						<div class="footer__title">We are social</div>
+						<ul class="fs__list clearfix">
+							<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-linkedin"></i></a></li>
+							<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-facebook"></i></a></li>
+							<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-instagram"></i></a></li>
+							<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-twitter"></i></a></li>
+						</ul>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12 footer__adres">
+						<div class="footer__title">Visit us</div>
+						<div class="fa__text">53 Abernathy Trace Suite 289,<br> Los Angeles</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12 footer__contacts">
+						<div class="footer__title">Contact us</div>
+						<div class="fa__tel">+32 456-086-9345</div>
+						<a href="mailto:mail@domain.com">mail@domain.com</a>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12 footer__subscribe">
+						<div class="footer__title">Our newsletter</div>
+						<div class="footer__subscribe-wrapp">
+							<input class="input input__subscribe" placeholder="Your e-mail">
+							<button type="submit" class="submit__button animation"><i class="mdi mdi-arrow-right"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="footer__copyrite">© 2019 Backstage Agency. All Rights Reserved.</div>
+			</div>
+		</div>
+	</footer><!-- Footer End -->
+
+	<div class="scroll-top animation"><i class="mdi mdi-arrow-up"></i></div>
+
+
+
+	<div class="hidden"></div>

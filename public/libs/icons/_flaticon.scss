@@ -1,0 +1,139 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 19/02/2016 14:48
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("././fonts/shopping-mall/Flaticon.eot");
+  src: url("././fonts/shopping-mall/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("././fonts/shopping-mall/Flaticon.woff") format("woff"),
+       url("././fonts/shopping-mall/Flaticon.ttf") format("truetype"),
+       url("././fonts/shopping-mall/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("././fonts/shopping-mall/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-bar-code:before { content: "\f100"; }
+.flaticon-beauty-products:before { content: "\f101"; }
+.flaticon-big-tea-pot:before { content: "\f102"; }
+.flaticon-birthday-gift:before { content: "\f103"; }
+.flaticon-cash-register:before { content: "\f104"; }
+.flaticon-clipboard-with-a-list:before { content: "\f105"; }
+.flaticon-closed-sign:before { content: "\f106"; }
+.flaticon-coffee-to-go:before { content: "\f107"; }
+.flaticon-credit-card-payment:before { content: "\f108"; }
+.flaticon-directional-arrows-of-elevator:before { content: "\f109"; }
+.flaticon-discount-label:before { content: "\f10a"; }
+.flaticon-dress-and-bag:before { content: "\f10b"; }
+.flaticon-escalator-up:before { content: "\f10c"; }
+.flaticon-exit-direction-sign:before { content: "\f10d"; }
+.flaticon-fresh-drink:before { content: "\f10e"; }
+.flaticon-fries-and-soft-drink:before { content: "\f10f"; }
+.flaticon-luggage-cart:before { content: "\f110"; }
+.flaticon-mall-hanger:before { content: "\f111"; }
+.flaticon-mall-information-sign:before { content: "\f112"; }
+.flaticon-mall-open-sign:before { content: "\f113"; }
+.flaticon-mall-parking-sign:before { content: "\f114"; }
+.flaticon-mall-pets-sign:before { content: "\f115"; }
+.flaticon-mall-shopping-cart:before { content: "\f116"; }
+.flaticon-mall-smoking-room-sign:before { content: "\f117"; }
+.flaticon-mall-stand:before { content: "\f118"; }
+.flaticon-mall-wifi-sign:before { content: "\f119"; }
+.flaticon-mechanic-stairs:before { content: "\f11a"; }
+.flaticon-men-clothes:before { content: "\f11b"; }
+.flaticon-new-label:before { content: "\f11c"; }
+.flaticon-no-food-allowed:before { content: "\f11d"; }
+.flaticon-no-parking-sign:before { content: "\f11e"; }
+.flaticon-no-pets-sign:before { content: "\f11f"; }
+.flaticon-no-photography:before { content: "\f120"; }
+.flaticon-no-smoking:before { content: "\f121"; }
+.flaticon-pair-of-banknotes:before { content: "\f122"; }
+.flaticon-perfume-bottle:before { content: "\f123"; }
+.flaticon-photo-camera:before { content: "\f124"; }
+.flaticon-piggy-bank-savings:before { content: "\f125"; }
+.flaticon-scissors-cutting:before { content: "\f126"; }
+.flaticon-searching-tool:before { content: "\f127"; }
+.flaticon-shopping-bags:before { content: "\f128"; }
+.flaticon-shopping-basket:before { content: "\f129"; }
+.flaticon-shopping-center:before { content: "\f12a"; }
+.flaticon-shopping-credit-cards:before { content: "\f12b"; }
+.flaticon-shopping-mall-security-cam:before { content: "\f12c"; }
+.flaticon-stairs-with-handrail:before { content: "\f12d"; }
+.flaticon-store-mannequin:before { content: "\f12e"; }
+.flaticon-t-shirt-on-the-hanger:before { content: "\f12f"; }
+.flaticon-three-balls-ice-cream-cone:before { content: "\f130"; }
+.flaticon-wallet-with-money:before { content: "\f131"; }
+    
+    $font-Flaticon-bar-code: "\f100";
+    $font-Flaticon-beauty-products: "\f101";
+    $font-Flaticon-big-tea-pot: "\f102";
+    $font-Flaticon-birthday-gift: "\f103";
+    $font-Flaticon-cash-register: "\f104";
+    $font-Flaticon-clipboard-with-a-list: "\f105";
+    $font-Flaticon-closed-sign: "\f106";
+    $font-Flaticon-coffee-to-go: "\f107";
+    $font-Flaticon-credit-card-payment: "\f108";
+    $font-Flaticon-directional-arrows-of-elevator: "\f109";
+    $font-Flaticon-discount-label: "\f10a";
+    $font-Flaticon-dress-and-bag: "\f10b";
+    $font-Flaticon-escalator-up: "\f10c";
+    $font-Flaticon-exit-direction-sign: "\f10d";
+    $font-Flaticon-fresh-drink: "\f10e";
+    $font-Flaticon-fries-and-soft-drink: "\f10f";
+    $font-Flaticon-luggage-cart: "\f110";
+    $font-Flaticon-mall-hanger: "\f111";
+    $font-Flaticon-mall-information-sign: "\f112";
+    $font-Flaticon-mall-open-sign: "\f113";
+    $font-Flaticon-mall-parking-sign: "\f114";
+    $font-Flaticon-mall-pets-sign: "\f115";
+    $font-Flaticon-mall-shopping-cart: "\f116";
+    $font-Flaticon-mall-smoking-room-sign: "\f117";
+    $font-Flaticon-mall-stand: "\f118";
+    $font-Flaticon-mall-wifi-sign: "\f119";
+    $font-Flaticon-mechanic-stairs: "\f11a";
+    $font-Flaticon-men-clothes: "\f11b";
+    $font-Flaticon-new-label: "\f11c";
+    $font-Flaticon-no-food-allowed: "\f11d";
+    $font-Flaticon-no-parking-sign: "\f11e";
+    $font-Flaticon-no-pets-sign: "\f11f";
+    $font-Flaticon-no-photography: "\f120";
+    $font-Flaticon-no-smoking: "\f121";
+    $font-Flaticon-pair-of-banknotes: "\f122";
+    $font-Flaticon-perfume-bottle: "\f123";
+    $font-Flaticon-photo-camera: "\f124";
+    $font-Flaticon-piggy-bank-savings: "\f125";
+    $font-Flaticon-scissors-cutting: "\f126";
+    $font-Flaticon-searching-tool: "\f127";
+    $font-Flaticon-shopping-bags: "\f128";
+    $font-Flaticon-shopping-basket: "\f129";
+    $font-Flaticon-shopping-center: "\f12a";
+    $font-Flaticon-shopping-credit-cards: "\f12b";
+    $font-Flaticon-shopping-mall-security-cam: "\f12c";
+    $font-Flaticon-stairs-with-handrail: "\f12d";
+    $font-Flaticon-store-mannequin: "\f12e";
+    $font-Flaticon-t-shirt-on-the-hanger: "\f12f";
+    $font-Flaticon-three-balls-ice-cream-cone: "\f130";
+    $font-Flaticon-wallet-with-money: "\f131";
