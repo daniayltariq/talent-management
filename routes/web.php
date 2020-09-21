@@ -23,9 +23,11 @@ Auth::routes();
 
 //Frontend Routes
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::get('blogs', [App\Http\Controllers\HomeController::class, 'blogs'])->name('blogs');
 Route::get('/models', [App\Http\Controllers\HomeController::class, 'models'])->name('models');
+Route::get('models/grid', [App\Http\Controllers\HomeController::class, 'modelsgrid'])->name('models.grid');
 Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
-Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'postjob'])->name('postjob');
+
 
 //Backend Routes
 

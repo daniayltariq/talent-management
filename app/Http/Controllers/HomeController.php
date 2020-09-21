@@ -27,9 +27,9 @@ class HomeController extends Controller
 
     public function index()
     {
-       
         return view('web.index');
     } 
+
 
     public function findtalent()
     {
@@ -42,10 +42,24 @@ class HomeController extends Controller
     public function models()
     {
          $notification = array(
-    'message' => 'I am a successful message!', 
-    'alert-type' => 'success'
-);
+        'message' => 'I am a successful message!', 
+        'alert-type' => 'success'
+        );
+        
         return redirect('/')->with($notification);
     }
+  
+
+    public function modelsgrid()
+    {    
+       return view('web.pages.models-grid');
+    }
+
+    public function blogs()
+    {    
+       return view('web.pages.blogs');
+    }
+
+
 
 }

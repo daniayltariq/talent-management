@@ -30,39 +30,20 @@
 					<li class="m-menu__list-item menu-item-has-children" >
 									<a href="{{ route('models') }}">Models</a>
 									<ul class="m-menu__sub">
+										
 										<li class="m-menu__sub-item">
-											<a href="models-masonry.html">Masorny style</a>
+											<a href="{{ route('models.grid') }}">Grid style</a>
 										</li>
-										<li class="m-menu__sub-item">
-											<a href="models-grid.html">Grid style</a>
-										</li>
-										<li class="m-menu__sub-item">
-											<a href="single-model.html">Single Model</a>
-										</li>
+										
 									</ul>
 								</li>
-								{{-- <li class="m-menu__list-item">
-									<a href="about.html">The agency</a>
-								</li> --}}
+					
 								<li class="m-menu__list-item">
-									<a href="services.html">Services</a>
+									<a href="{{ route('register') }}">Apply</a>
 								</li>
 								<li class="m-menu__list-item">
-									<a href="apply.html">Apply</a>
-								</li>
-								<li class="m-menu__list-item menu-item-has-children">
-									<a href="blog.html">Blog</a>
-									<ul class="m-menu__sub">
-										<li class="m-menu__sub-item">
-											<a href="blog-masonry.html">Masorny style</a>
-										</li>
-										<li class="m-menu__sub-item">
-											<a href="blog.html">List style</a>
-										</li>
-										<li class="m-menu__sub-item">
-											<a href="single-post.html">Single post</a>
-										</li>
-									</ul>
+									<a href="{{ route('blogs') }}">Blogs</a>
+
 								</li>
 								<li class="m-menu__list-item">
 									<a href="contacts.html">Contacts</a>
