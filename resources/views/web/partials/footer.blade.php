@@ -28,7 +28,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="footer__copyrite">© 2019 Backstage Agency. All Rights Reserved.</div>
+				<div class="footer__copyrite">© 2019 Talent Agency. All Rights Reserved.</div>
 			</div>
 		</div>
 	</footer><!-- Footer End -->

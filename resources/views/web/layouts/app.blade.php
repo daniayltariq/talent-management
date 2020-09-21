@@ -9,7 +9,7 @@
 	<meta charset="utf-8" />
 
 	<!--Meta Tegs-->
-	<title>Backstage</title>
+	<title>Talent DB</title>
 	<meta content="" name="description" />
 
 	<!--Icons-->

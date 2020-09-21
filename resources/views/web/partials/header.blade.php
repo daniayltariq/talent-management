@@ -17,7 +17,7 @@
 				<div class="row">
 					<div class="logo col-md-3 col-sm-4 col-xs-12">
 						<a class="navbar-brand" href="index.html">
-							<span class="logo__text">Backstage</span>
+							<span class="logo__text">Talent DB</span>
 						</a>
 					</div>
 					<div class="main__menu-wrap col-md-8 col-sm-7 col-xs-6">
