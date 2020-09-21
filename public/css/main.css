@@ -191,7 +191,9 @@ cite{
 /*----------------------------------------------------
 	BUBBA ANIMATION
 ------------------------------------------------------*/
-
+.this{
+	margin-top: 140px;
+}
 a.effect-bubba {
 	background: #000;
 }
@@ -1255,7 +1257,7 @@ a.grid-item__height2.grid-item__width1 .grid-item__contant-name {
 }
 .grid-item__contant-place {
 	font-size: 12px;
-	line-height: 50px;
+	line-height: 40px;
 	letter-spacing: 2px;
 }
 .grid-item__contant i {
