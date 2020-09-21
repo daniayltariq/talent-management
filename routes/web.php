@@ -25,6 +25,7 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::get('/models', [App\Http\Controllers\HomeController::class, 'models'])->name('models');
 Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
+Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'postjob'])->name('postjob');
 
 //Backend Routes
 
@@ -35,3 +36,6 @@ Route::group([
 ],function(){
 Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
 });
+
+//postjob controller
+Route::resource('postjob',App\Http\Controllers\PostJobController::class);

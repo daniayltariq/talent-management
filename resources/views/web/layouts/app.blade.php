@@ -34,6 +34,8 @@
 
 	<link href="{{ asset('css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/media.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/forms.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/multiform.css') }}" rel="stylesheet">
    
 	
 

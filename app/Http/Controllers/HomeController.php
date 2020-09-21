@@ -30,8 +30,11 @@ class HomeController extends Controller
 
     public function findtalent()
     {
-        return view('web..forms.find-talent');
+        return view('web.forms.find-talent');
     }
+
+   
+
 
     public function models()
     {
@@ -41,4 +44,5 @@ class HomeController extends Controller
 );
         return redirect('/')->with($notification);
     }
+
 }
