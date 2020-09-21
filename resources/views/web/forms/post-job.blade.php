@@ -65,7 +65,7 @@
                  
                         <div class="form-block">
                             <div class="form-group">
-                                <label for="phone" class="col-sm-4 control-label">Phone</label>
+                                <label for="phone" class="col-sm-4 control-label">Union Status</label>
                                 <div class="col-sm-8">      
                                  <div class="form-check checkbox-inline">
                               <input class="form-check-input" type="radio" name="unionstatus" id="union_nonunion" value="union_nonunion">
@@ -79,37 +79,32 @@
                               <input class="form-check-input" type="radio" name="unionstatus" id="nonunion" value="nonunion">
                               <label class="form-check-label" for="nonunion">Non Union</label>
                             </div>
-                            <div class="form-check checkbox-inline">
-                              <input class="form-check-input" type="radio" name="unionstatus" id="na" value="na">
-                              <label class="form-check-label" for="na">N/A</label>
-                            </div>
+                        
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email" class="col-sm-4 control-label">Email <span class="req">*</span></label>
-                                <div class="col-md-8">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                              <div class="form-group">
+                                <label for="state" class="col-sm-4 control-label">Will you be paying talent?</label>
+                                <div class="col-sm-8">
+                                    <select name="pay" id="pay" class="form-control">
+                                        <option value="no pay">No Pay</option>
+                                        <option value="deferred pay">Deffered Pay</option>
+                                        <option value="stipend">Stipend</option>
+                                        <option value="professional">Professional Pay</option>
+                                    </select>
+                                </div>
                             </div>
                              
                             <div class="form-group">
-                                <label for="password" class="col-sm-4 control-label">Password <span class="req">*</span></label>
-                                <<div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <label for="password" class="col-sm-4 control-label">Compensation & Contract Details <span class="req">*</span></label>
+                                <div class="col-md-6">
+                            <textarea id="contract_details" name="contract_details" rows="4" cols="50" placeholder="At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+                            "></textarea>
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                             </div>
+
+                            <hr>
                             <div class="form-group">
                                 <label for="password-confirm" class="col-sm-4 control-label">Confirm Password <span class="req">*</span></label>
                                 <div class="col-sm-8">
@@ -128,17 +123,7 @@
                                     <input type="text" class="form-control" name="city" id="city">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="state" class="col-sm-4 control-label">State</label>
-                                <div class="col-sm-8">
-                                    <select name="state" id="state" class="form-control">
-                                        <option value="AK">Alaska</option>
-                                        <option value="AZ">Arizona</option>
-                                        <option value="AR">Arkansas</option>
-                                        <option value="CA">California</option>
-                                    </select>
-                                </div>
-                            </div>
+                          
                             <div class="form-group">
                                 <label for="address" class="col-sm-4 control-label">Home Address 1</label>
                                 <div class="col-sm-8">
