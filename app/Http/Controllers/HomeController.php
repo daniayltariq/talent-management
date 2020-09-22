@@ -55,6 +55,11 @@ class HomeController extends Controller
        return view('web.pages.models-grid');
     }
 
+    public function modelsingle()
+    {    
+       return view('web.pages.models-single');
+    }
+
     public function blogs()
     {    
        return view('web.pages.blogs');
