@@ -23,7 +23,7 @@ Auth::routes();
 
 //Frontend Routes
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-Route::get('blogs', [App\Http\Controllers\HomeController::class, 'blogs'])->name('blogs');
+Route::get('/community', [App\Http\Controllers\HomeController::class, 'community'])->name('community');
 Route::get('/models', [App\Http\Controllers\HomeController::class, 'models'])->name('models');
 Route::get('models/grid', [App\Http\Controllers\HomeController::class, 'modelsgrid'])->name('models.grid');
 Route::get('models/single', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('models.single');

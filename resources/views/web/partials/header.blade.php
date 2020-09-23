@@ -34,6 +34,9 @@
 										<li class="m-menu__sub-item">
 											<a href="{{ route('models.grid') }}">Grid style</a>
 										</li>
+										<li class="m-menu__sub-item">
+											<a href="{{ route('models.single') }}">Signle Model</a>
+										</li>
 										
 									</ul>
 								</li>
@@ -42,7 +45,7 @@
 									<a href="{{ route('register') }}">Apply</a>
 								</li>
 								<li class="m-menu__list-item">
-									<a href="{{ route('blogs') }}">Blogs</a>
+									<a href="{{ route('community') }}">community</a>
 
 								</li>
 								<li class="m-menu__list-item">

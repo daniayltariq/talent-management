@@ -215,9 +215,7 @@
                                     </select>
                                 </div>
                             </div>
-                    
-
-                      <div class="form-group">                       
+                    <div class="form-group">                       
                                 <label for="vc_workfromhome" class="col-sm-4 control-label">Is this a remote/work from home opportunity?</label>
                                 <div class="col-sm-8">      
                            <div class="form-check checkbox-inline">
@@ -249,8 +247,7 @@
                              
 
                           <div class="form-group">
-                          
-                            <label for="vc_language" class="col-sm-4 control-label">Accent<span class="req">*</span></label>
+                          <label for="vc_language" class="col-sm-4 control-label">Accent<span class="req">*</span></label>
                             <div class="col-sm-8">
                             <select class="vc_language" multiple="true" name="vc_language">
                               <option>Select</option> 
@@ -274,10 +271,7 @@
                                     </select>
                                 </div>
                        </div>
-                  
-                  
-
-                              <div class="form-group">                       
+                <div class="form-group">                       
                           <label class="col-sm-4 control-label">Media required from applicants</label>
                                 <div class="col-sm-8">      
                            <div class="form-check checkbox-inline">
@@ -298,7 +292,6 @@
                               <div class="col-md-6">
                            <textarea id="vc_roledesc" name="contract_details" rows="4" cols="50" placeholder="At you will learn how to make"></textarea>
                               </div>
-
                         </div>
 
                  <div class="row">
@@ -424,10 +417,6 @@
                     </div>
   </div> 
                      </div> {{-- Modal content --}}
-
-
-                         
-
                         </div>
                            
                     </form>              

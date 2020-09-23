@@ -1531,6 +1531,13 @@ h2.post__title{
 .sidebar-widget .mdi{
 	padding-right:10px
 }
+.height_line{
+	line-height: 10px;
+}
+.widget__titless{
+		font-size: 14px !important;
+	margin-top: -43px !important;
+}
 .widget__title{
 	text-transform: uppercase;
 	font-size: 17px;

@@ -60,9 +60,9 @@ class HomeController extends Controller
        return view('web.pages.models-single');
     }
 
-    public function blogs()
+    public function community()
     {    
-       return view('web.pages.blogs');
+       return view('web.pages.community');
     }
 
 
