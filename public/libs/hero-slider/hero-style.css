@@ -471,7 +471,7 @@ Slider navigation
   width: 22px;
   height: 22px;
   margin-top: -2px;
-  border:2px solid #EC0008;
+  border:2px solid #b15315;
   box-sizing: border-box;
 }
 .no-touch .cd-slider-nav li.selected a:hover {

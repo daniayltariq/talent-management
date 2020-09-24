@@ -30,7 +30,7 @@
                 	<div class="grid">
 	               		<div class="grid-sizer"></div>
 	               		<div class="grid-gutter"></div>
-		            	<a href="single-model.html" class="effect-bubba grid-item grid-item__width1 grid-item__height1  lifestyle women" data-category="women">
+		            	<a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width1 grid-item__height1  lifestyle women" data-category="women">
 			            	<img class="img-responsive" src="img/model1.jpg" alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
@@ -38,7 +38,7 @@
 				            	<i class="grid-item__contant-arrow mdi mdi-arrow-right"></i>
 			            	</div>
 	                    </a>
-	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 grid-item__height2 new-faces lifestyle" data-category="women">
+	                    <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 grid-item__height2 new-faces lifestyle" data-category="women">
 		                    <img class="img-responsive" src="img/model7.jpg" alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
@@ -46,7 +46,7 @@
 				            	<i class="grid-item__contant-arrow mdi mdi-arrow-right"></i>
 			            	</div>
 	                    </a>
-	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 grid-item__height2 women" data-category="women">
+	                    <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 grid-item__height2 women" data-category="women">
 		                    <img class="img-responsive" src="img/model8.jpg" alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
@@ -55,7 +55,7 @@
 			            	</div>
 	                    </a>
 
-	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 grid-item__height2 new-faces stylists" data-category="men">
+	                    <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 grid-item__height2 new-faces stylists" data-category="men">
 		                    <img class="img-responsive" src="img/model9.jpg" alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
@@ -63,7 +63,7 @@
 				            	<i class="grid-item__contant-arrow mdi mdi-arrow-right"></i>
 			            	</div>
 	                    </a>
-	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width1 grid-item__height2 men " data-category="women">
+	                    <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width1 grid-item__height2 men " data-category="women">
 		                    <img class="img-responsive" src="img/model10.jpg" alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
@@ -71,7 +71,7 @@
 				            	<i class="grid-item__contant-arrow mdi mdi-arrow-right"></i>
 			            	</div>
 	                    </a>
-	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 grid-item__height1 stylists new-faces" data-category="men">
+	                    <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 grid-item__height1 stylists new-faces" data-category="men">
 		                    <img class="img-responsive" src="img/model11.jpg" alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
@@ -79,7 +79,7 @@
 				            	<i class="grid-item__contant-arrow mdi mdi-arrow-right"></i>
 			            	</div>
 	                    </a>
-	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 grid-item__height2 lifestyle teenagers men" data-category="men">
+	                    <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 grid-item__height2 lifestyle teenagers men" data-category="men">
 	                   		 <img class="img-responsive" src="img/model4.jpg" alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
@@ -87,7 +87,7 @@
 				            	<i class="grid-item__contant-arrow mdi mdi-arrow-right"></i>
 			            	</div>
 	                    </a>
-	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 grid-item__height2 stylists teenagers" data-category="men">
+	                    <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 grid-item__height2 stylists teenagers" data-category="men">
 		                    <img class="img-responsive" src="img/model14.jpg" alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
@@ -95,7 +95,7 @@
 				            	<i class="grid-item__contant-arrow mdi mdi-arrow-right"></i>
 			            	</div>
 	                    </a>
-	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width1 grid-item__height1 new-faces" data-category="men">
+	                    <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width1 grid-item__height1 new-faces" data-category="men">
 		                    <img class="img-responsive" src="img/model12.jpg" alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
@@ -103,7 +103,7 @@
 				            	<i class="grid-item__contant-arrow mdi mdi-arrow-right"></i>
 			            	</div>
 	                    </a>
-	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 grid-item__height2 new-faces teenagers women" data-category="men">
+	                    <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 grid-item__height2 new-faces teenagers women" data-category="men">
 		                    <img class="img-responsive" src="img/model13.jpg" alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
@@ -123,7 +123,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="text__quote action__text">We have best of photographers from the fashion industry, who understands the current trend, style and format as required by clients </div>
-				<a href="apply.html" class="btn btn__red animation">apply now</a>
+				<a href="{{route('findtalent')}}" class="btn btn__red animation">Find Talent</a>
 			</div>
 		</div>
 	</div>

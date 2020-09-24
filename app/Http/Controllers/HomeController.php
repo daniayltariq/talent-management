@@ -35,10 +35,7 @@ class HomeController extends Controller
     {
         return view('web.forms.find-talent');
     }
-
-   
-
-
+  
     public function models()
     {
          $notification = array(
@@ -46,7 +43,8 @@ class HomeController extends Controller
         'alert-type' => 'success'
         );
         
-        return redirect('/')->with($notification);
+        // return redirect('models')->with($notification);
+        return view('web.pages.models');
     }
   
 
@@ -63,6 +61,31 @@ class HomeController extends Controller
     public function community()
     {    
        return view('web.pages.community');
+    }
+
+    public function magzine()
+    {    
+       return view('web.pages.magzine');
+    } 
+
+    public function magzinesingle()
+    {    
+       return view('web.pages.magzine-single');
+    } 
+
+    public function findproductions()
+    {    
+       return view('web.pages.find-productions');
+    }
+
+    public function singleproduction()
+    {    
+       return view('web.pages.production-single');
+    }
+
+    public function applyproduction()
+    {    
+       return view('web.forms.apply');
     }
 
 

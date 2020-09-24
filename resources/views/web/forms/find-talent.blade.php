@@ -196,7 +196,7 @@
                     <div class="grid">
                         <div class="grid-sizer"></div>
                         <div class="grid-gutter"></div>
-                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                    <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
@@ -211,7 +211,7 @@
 
                             </div>
                         </a>
-                        <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                        <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
@@ -226,7 +226,7 @@
 
                             </div>
                         </a>
-                        <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                        <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
@@ -241,7 +241,7 @@
 
                             </div>
                         </a>
-                        <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                        <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
@@ -256,7 +256,7 @@
 
                             </div>
                         </a>
-                        <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                        <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
@@ -271,7 +271,7 @@
 
                             </div>
                         </a>
-                        <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                        <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
