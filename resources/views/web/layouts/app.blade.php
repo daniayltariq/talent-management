@@ -32,6 +32,9 @@
 	<link rel="stylesheet" href="{{ asset('libs/icons/flaticon.css') }}">
 	<link rel="stylesheet" href="{{ asset('libs/hero-slider/hero-style.css') }}">
 
+
+ 
+
 	<link href="{{ asset('css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/media.css') }}" rel="stylesheet">
   <link href="{{ asset('css/forms.css') }}" rel="stylesheet">
@@ -58,6 +61,8 @@
 	<script src=" {{ asset('libs/izotope/isotope.pkgd.min.js') }}"></script>
 	<script src=" {{ asset('libs/hero-slider/hero-slider.js') }}"></script> <!-- Resource jQuery -->
 	<script src=" {{ asset('js/common.js') }}"></script>
+
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
 	<script>
             @if (Session::has('message'))

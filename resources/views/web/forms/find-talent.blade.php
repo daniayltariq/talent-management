@@ -92,7 +92,7 @@
 										<option value="mozarella">US3</option>
 										<option value="mushrooms">Us4</option>
 										<option value="pepperoni">US5</option>
-												</select>
+								</select>
                                  </div>
                             </div>  
 <br>
@@ -105,7 +105,7 @@
                                         <option value="mozarella">Audio</option>
                                         <option value="mushrooms">Document</option>
                                         <option value="pepperoni">Reels</option>
-                                                </select>
+                                 </select>
                                  </div>
                             </div>   
 <br>                        
@@ -120,7 +120,7 @@
                                         <option value="latino">Latino / Hispanic</option>
                                         <option value="south asian/indian ">South Asian / Indian</option>
                                         <option value="Southeast Asian ">Southeast Asian / Pacific Islander</option>
-                                                </select>
+                              </select>
                                  </div>
                             </div> 
   <br>
@@ -135,7 +135,7 @@
                                         <option value="gray">Gray</option>
                                         <option value="white">White</option>
                                             
-                                                </select>
+                                 </select>
                                  </div>
                             </div>  
 <br>
@@ -150,7 +150,7 @@
                                         <option value="gray">Gray</option>
                                         <option value="white">White</option>
                                             
-                                                </select>
+                                  </select>
                                  </div>
                             </div>  
 <br>    
@@ -162,27 +162,24 @@
                                         <option value="slim">Slim</option>
                                         <option value="muscular">Muscular</option>
                                         <option value="curvy">Curvy</option>
-                                                </select>
+                                </select>
                                  </div>
                             </div>
                           
                         </div>
 
                       <div class="form-group">
-                                <label for="phone" class="col-sm-4 control-label"></label>                          
-                                  <input type="checkbox" style="height: 10px"   class="form-check-input" id="hasPassport">
-    <label class="form-check-label" for="hasPassport">Has Passport</label>
-<input type="checkbox" style="height: 10px"   class="form-check-input" id="hasDrivingLicense">
-    <label class="form-check-label" for="hasDrivingLicense">Has License</label>
-                          
-                            </div>
+                        <label for="phone" class="col-sm-4 control-label"></label>                          
+                        <input type="checkbox" style="height: 10px"   class="form-check-input" id="hasPassport">
+                        <label class="form-check-label" for="hasPassport">Has Passport</label>
+                        <input type="checkbox" style="height: 10px"   class="form-check-input" id="hasDrivingLicense">
+                        <label class="form-check-label" for="hasDrivingLicense">Has License</label>              
+                      </div>
 
           
                               <div class="col-sm-8 col-sm-offset-4">
-                                    <button type="submit" class="btn btn__red animation btn-half pull-right ">Search</button>
-                                    
-                          
-                                </div>
+                                    <button type="submit" class="btn btn__red animation btn-half pull-right ">Search</button>   
+                             </div>
                     </form>
                 </div>
 
@@ -199,7 +196,7 @@
                     <div class="grid">
                         <div class="grid-sizer"></div>
                         <div class="grid-gutter"></div>
-                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                    <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
@@ -214,7 +211,7 @@
 
                             </div>
                         </a>
-                        <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                        <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
@@ -229,7 +226,7 @@
 
                             </div>
                         </a>
-                        <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                        <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
@@ -244,7 +241,7 @@
 
                             </div>
                         </a>
-                        <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                        <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
@@ -259,7 +256,7 @@
 
                             </div>
                         </a>
-                        <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                        <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
@@ -274,7 +271,7 @@
 
                             </div>
                         </a>
-                        <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                        <a href="{{route('models.single')}} " class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                             <img class="img-responsive" src="img/02_model-5.jpg" alt="sample image">
                             <div class="grid-item__contant-info">
                                 <div class="grid-item__contant-name">Kate Farmer</div>
@@ -316,7 +313,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" integrity="sha512-yVvxUQV0QESBt1SyZbNJMAwyKvFTLMyXSyBHDO4BG5t7k/Lw34tyqlSDlKIrIENIzCl+RVUNjmCPG+V/GMesRw==" crossorigin="anonymous" />
 
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js" integrity="sha512-aFvi2oPv3NjnjQv1Y/hmKD7RNMendo4CZ2DwQqMWzoURKxcqAoktj0nNG4LU8m23+Ws9X5uVDD4OXLqpUVXD5Q==" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />

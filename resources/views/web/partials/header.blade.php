@@ -15,58 +15,52 @@
 		<div class="header-sticky__wrapp">
 			<div class="container">
 				<div class="row">
-					<div class="logo col-md-3 col-sm-4 col-xs-12">
+					<div class="logo col-md-2 col-sm-4 col-xs-12">
 						<a class="navbar-brand" href="index.html">
 							<span class="logo__text">Talent DB</span>
 						</a>
 					</div>
-					<div class="main__menu-wrap col-md-8 col-sm-7 col-xs-6">
+					<div class="main__menu-wrap col-md-8 col-sm-7 col-xs-6 width_h">
 						<span class="responsive-menu__button" id="responsive-menu"><i class="mdi mdi-menu"></i></span>
 						<nav class="main__menu pull-right" id="main__nav">
 							<ul class="m-menu__list clearfix">
 								<li class="m-menu__list-item {{ Request::is('/') ? 'm-menu__list-item_active' : '' }}">
 									<a href="{{ route('index') }}">Home</a>
 								</li>
-					<li class="m-menu__list-item menu-item-has-children" >
+					<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}""  >
 									<a href="{{ route('models') }}">Models</a>
 									<ul class="m-menu__sub">
+										
 										<li class="m-menu__sub-item">
-											<a href="models-masonry.html">Masorny style</a>
+											<a href="{{ route('models.grid') }}">Grid style</a>
 										</li>
 										<li class="m-menu__sub-item">
-											<a href="models-grid.html">Grid style</a>
+											<a href="{{ route('models.single') }}">Signle Model</a>
 										</li>
-										<li class="m-menu__sub-item">
-											<a href="single-model.html">Single Model</a>
-										</li>
+										
 									</ul>
 								</li>
-								{{-- <li class="m-menu__list-item">
-									<a href="about.html">The agency</a>
-								</li> --}}
-								<li class="m-menu__list-item">
-									<a href="services.html">Services</a>
+					
+								<li class="m-menu__list-item  {{ Request::is('register') ? 'm-menu__list-item_active' : '' }}"">
+									<a href="{{ route('register') }}">Apply</a>
 								</li>
-								<li class="m-menu__list-item">
-									<a href="apply.html">Apply</a>
+								<li class="m-menu__list-item  {{ Request::is('community') ? 'm-menu__list-item_active' : '' }}"">
+									<a href="{{ route('community') }}">community</a>
+
 								</li>
-								<li class="m-menu__list-item menu-item-has-children">
-									<a href="blog.html">Blog</a>
-									<ul class="m-menu__sub">
-										<li class="m-menu__sub-item">
-											<a href="blog-masonry.html">Masorny style</a>
-										</li>
-										<li class="m-menu__sub-item">
-											<a href="blog.html">List style</a>
-										</li>
-										<li class="m-menu__sub-item">
-											<a href="single-post.html">Single post</a>
-										</li>
-									</ul>
+								<li class="m-menu__list-item  {{ Request::is('magzine') ? 'm-menu__list-item_active' : '' }}"">
+									<a href="{{ route('magzine') }}">Magzine</a>
+
 								</li>
-								<li class="m-menu__list-item">
-									<a href="contacts.html">Contacts</a>
+								<li class="m-menu__list-item  {{ Request::is('findtalent') ? 'm-menu__list-item_active' : '' }}"">
+									<a href="{{ route('findtalent') }}">Find Talent</a>
+
 								</li>
+								<li class="m-menu__list-item  {{ Request::is('find-productions') ? 'm-menu__list-item_active' : '' }}"">
+									<a href="{{ route('findproductions') }}">Find Productions Jobs</a>
+
+								</li>
+								
 						  @if(Auth::guest()) 
 								           <li class="m-menu__list-item {{ Request::is('login') ? 'm-menu__list-item_active' : '' }}">
 									<a href="{{ route('login') }}">Login</a>
@@ -77,8 +71,6 @@
 								</li>
 								</ul>
 				            @else
-								<li class="m-menu__list-item" ><a>Welcome  </a>
-								</li>
 								<li class="m-menu__list-item" >
 					<a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -91,11 +83,11 @@
 							</ul>
 						</nav>
 					</div>
-					<div class="col-sm-1 col-xs-6 main__search">
+				{{-- 	<div class="col-sm-1 col-xs-6 main__search">
 						<a href="#0" class="form-search__input_search">
 							<i class="mdi mdi-magnify"></i>
 						</a>
-					</div>
+					</div> --}}
 				</div>
 			</div>
 		</div>

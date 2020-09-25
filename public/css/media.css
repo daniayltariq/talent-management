@@ -183,7 +183,7 @@
 	}
 	.m-menu__sub-item a:hover {
 		background-color: #0f0f0f;
-		color:#ec0008;
+		color:#b15315;
 	}
 	.main__search {
 		padding-left: 0;
@@ -654,7 +654,7 @@
     left: 50%;
     right: 50%;
     height: 1px;
-    background: #ec0008;
+    background: #b15315;
     transition: all ease 0.1s;
 	}
 	.m-menu__list-item a:hover:after {

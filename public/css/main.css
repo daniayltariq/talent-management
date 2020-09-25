@@ -84,7 +84,7 @@ body textarea:required:valid {
 ------------------------------------------------------*/
 
 body {
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	font-size: 16px;
 	position: relative;
 	color: #0f0f0f;
@@ -107,7 +107,7 @@ a{
 a:focus,
 a:hover {
 	text-decoration: none;
-	color: #ec0008;
+	color: #df691a;
 }
 a:focus,
 button:focus,
@@ -168,7 +168,7 @@ h4 {
 }
 cite{
 	font-family: 'Playfair Display', serif;
-	border-left: 4px solid #ec0008;
+	border-left: 4px solid #df691a;
 	font-style: normal;
 	font-size: 25px;
 	margin: 0 0 25px;
@@ -292,12 +292,12 @@ a.effect-bubba:hover .grid-item__contant-place {
 	z-index: 1;
 }
 .btn__red {
-	background: #ec0008;
+	background: #df691a;
 	color: white;
 }
 .btn__red:hover {
 	color: #fff;
-	background: #ec0008;
+	background: #df691a;
 }
 .btn__grey {
 	background-color: #F6F6F6;
@@ -337,16 +337,16 @@ a.effect-bubba:hover .grid-item__contant-place {
 	transition-delay: 0.175s;
 }
 .btn__grey::before {
-	background: #FF3A3E;
+	background:#b15315;
 }
 .btn__grey::after {
-	background: #EB0208;
+	background: #df691a;
 }
 .btn__red::before {
-	background: #FF5357;
+	background: white;
 }
 .btn__red::after {
-	background: #FF3A3E;
+	background:#b15315;
 }
 
 .btn-full {
@@ -372,14 +372,14 @@ a.effect-bubba:hover .grid-item__contant-place {
 .more:after {
 	content: "\F054";
 	padding-left: 12px;
-	color: #ec0008;
+	color: #df691a;
 	font: normal normal normal 17px/1 "Material Design Icons";
 	-webkit-transition: all 0.1s;
 	-o-transition: all 0.1s;
 	transition: all 0.1s;
 }
 .more:hover {
-	color: #ec0008;
+	color: #df691a;
 	text-decoration: none;
 }
 .more:hover:after{
@@ -419,7 +419,7 @@ a.effect-bubba:hover .grid-item__contant-place {
 	width: 1px;
 	height: 235px;
 	z-index: -1;
-	background-color: #ec0008;
+	background-color: #df691a;
 	-ms-transform: rotate(45deg); /* IE 9 */
 	-webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
 	transform: rotate(45deg);
@@ -438,7 +438,7 @@ a.effect-bubba:hover .grid-item__contant-place {
 	left: 14%;
 	width: 1px;
 	height: 300px;
-	background-color: #ec0008;
+	background-color: #df691a;
 	-ms-transform: rotate(45deg); /* IE 9 */
 	-webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
 	transform: rotate(45deg);
@@ -464,6 +464,13 @@ a.effect-bubba:hover .grid-item__contant-place {
 	font-weight: 400;
 }
 
+.text__quote2 {
+	font-family: 'Playfair Display', serif;
+	font-size: 20px;
+	line-height: 40px;
+	font-weight: 200;
+}
+
 /*----------------------------------------------------
 	TEXT
 ------------------------------------------------------*/
@@ -480,7 +487,7 @@ a.effect-bubba:hover .grid-item__contant-place {
 .date {
 	font-size: 10px;
 	letter-spacing: 1.8px;
-	color: #ec0008;
+	color: #df691a;
 	text-transform: uppercase;
 }
 /*----------------------------------------------------
@@ -499,7 +506,7 @@ a.effect-bubba:hover .grid-item__contant-place {
 	border-color:#ccc;
 }
 span.req{
-	color: #ec0008;
+	color: #df691a;
 }
 .form-horizontal .control-label{
 	text-align: left;
@@ -583,7 +590,7 @@ textarea.form-control{
 .m-menu__list-item {
 	float: left;
 	position: relative;
-	margin-left: 31px;
+	margin-left: 21px;
 	letter-spacing: 1.6px;
 	line-height: 20px;
 	-webkit-transform: translateZ(0);
@@ -599,7 +606,7 @@ textarea.form-control{
 }
 .m-menu__list-item_active>a{
 	text-decoration: none;
-	border-bottom: 1px solid #ec0008 !important;
+	border-bottom: 1px solid #df691a !important;
 }
 .m-menu__list-item a:hover + .m-menu__sub{
 	border-bottom: 0;
@@ -612,14 +619,14 @@ textarea.form-control{
 	cursor: pointer;
 }
 .responsive-menu__button:hover {
-	color: #ec0008;
+	color: #df691a;
 }
 .header.sticky {
 	position: fixed;
 	height: 90px;
 	width: 100%;
 	padding-top: 20px;
-	background: rgba( 15, 15, 15, 0.9);
+	background: #b15315;
 }
 .toggle-sub-menu{
 	padding: 0 10px;
@@ -635,7 +642,7 @@ textarea.form-control{
 }
 .m-menu__sub-item:first-child {
 	margin-top: 0;
-	border-top: 1px solid #ec0008;
+	border-top: 1px solid #df691a;
 }
 .m-menu__sub-item a {
 	background: #0f0f0f;
@@ -684,7 +691,7 @@ textarea.form-control{
 }
 .m-menu__list-item_search a:hover {
 	border-bottom: none;
-	color: #ec0008;
+	color: #df691a;
 }
 
 
@@ -816,7 +823,7 @@ textarea.form-control{
 	left: -70px;
 	width: 50px;
 	height: 1px;
-	background-color: #ec0008;
+	background-color: #df691a;
 }
 .services__double-item:first-child {
 	margin-bottom: 30px;
@@ -878,7 +885,7 @@ textarea.form-control{
 	color: #0f0f0f;
 }
 .lp__title a:hover {
-	color: #ec0008;
+	color: #df691a;
 	text-decoration: none;
 }
 .lp__text {
@@ -940,7 +947,7 @@ textarea.form-control{
 	left: -30px;
 	width: 20px;
 	height: 1px;
-	background-color: #ec0008;
+	background-color: #df691a;
 }
 /*----------------------------------------------------
 	Footer
@@ -982,10 +989,10 @@ textarea.form-control{
     transition: all 0.5s ease-out 0.1s;
 }
 .fs__list-item a:hover {
-	border: 1px solid #ec0008;
+	border: 1px solid #df691a;
 }
 .fs__list-item a:hover i {
-	color: #ec0008;
+	color: #df691a;
 }
 
 .fa__text, .fa__tel {
@@ -1013,7 +1020,7 @@ textarea.form-control{
 	font-size: 18px;
 }
 .submit__button:hover {
-	background: #ec0008;
+	background: #df691a;
 }
 .input__subscribe:focus {
 	outline: none;
@@ -1043,7 +1050,7 @@ textarea.form-control{
 	cursor: pointer;
 }
 .scroll-top:hover {
-	background-color: #ec0008;
+	background-color: #df691a;
 }
 
 
@@ -1110,7 +1117,7 @@ textarea.form-control{
 	color: #5d5d5f !important;
 }
 .close-s a:hover {
-	color: #ec0008 !important;
+	color: #df691a !important;
 }
 .form-row input[type='text'],
 .form-row input[type='email'],
@@ -1168,14 +1175,18 @@ select.form-control{
 }
 
 .button:hover {
-	color: #ec0008;
+	color: #df691a;
 }
 
 .button:active,
 .button.is-checked {
-	color: #ec0008;
+	color: #df691a;
 }
 
+.width_h{
+	font-size: 14px;
+	width:80%;
+}
 .button-group:after {
 	content: '';
 	display: block;
@@ -1261,7 +1272,7 @@ a.grid-item__height2.grid-item__width1 .grid-item__contant-name {
 	letter-spacing: 2px;
 }
 .grid-item__contant i {
-	color: #ec0008;
+	color: #df691a;
 }
 .grid-item__contant-info {
 	position: absolute;
@@ -1362,7 +1373,7 @@ img.sp-image {
 }
 .skills__icon:before{
 	margin: 0;
-	color: #ec0008;
+	color: #df691a;
 	font-size: 32px;
 	line-height: 34px;
 }
@@ -1406,7 +1417,7 @@ img.sp-image {
 }
 .post__meta .mdi{
 	padding-right: 13px;
-	color: #EC0008;
+	color: #df691a;
 }
 .blog__pagination{
     margin: 0;
@@ -1495,7 +1506,7 @@ h2.post__title{
 }
 .pagination>li>a:hover,
 .pagination>li>span:hover{
-	color: #EC0008;
+	color: #df691a;
 	background: #F6F6F6;
 }
 
@@ -1523,6 +1534,13 @@ h2.post__title{
 }
 .sidebar-widget .mdi{
 	padding-right:10px
+}
+.height_line{
+	line-height: 10px;
+}
+.widget__titless{
+		font-size: 14px !important;
+	margin-top: -43px !important;
 }
 .widget__title{
 	text-transform: uppercase;
@@ -1558,8 +1576,8 @@ a.widget-latest__title{
 }
 .widget__tagcloud a:hover,
 .sidebar-widget li a:hover{
-	color: #ec0008;
-}
+	color: #df691a;
+
 .widget__latest{
 	margin: 15px 0 45px;
 }
@@ -1670,7 +1688,7 @@ a.widget-latest__title{
 	margin: 115px 0 25px;
 }
 .contact-info .mdi{
-	color: #EC0008;
+	color: #df691a;
 	padding-right: 10px
 }
 .contact-info__item{
@@ -1724,3 +1742,4 @@ a.widget-latest__title{
 	color: #fff;
 	margin-bottom: 25px;
 }
+#df691a

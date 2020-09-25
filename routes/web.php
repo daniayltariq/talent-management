@@ -23,9 +23,22 @@ Auth::routes();
 
 //Frontend Routes
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::get('/community', [App\Http\Controllers\HomeController::class, 'community'])->name('community');
+
+Route::get('/magzine', [App\Http\Controllers\HomeController::class, 'magzine'])->name('magzine');
+Route::get('/magzine/single', [App\Http\Controllers\HomeController::class, 'magzinesingle'])->name('magzine-single');
+
 Route::get('/models', [App\Http\Controllers\HomeController::class, 'models'])->name('models');
+Route::get('models/grid', [App\Http\Controllers\HomeController::class, 'modelsgrid'])->name('models.grid');
+Route::get('models/single', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('models.single');
 Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
-Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'postjob'])->name('postjob');
+
+
+
+Route::get('/find-productions', [App\Http\Controllers\HomeController::class, 'findproductions'])->name('findproductions');
+Route::get('/production/single', [App\Http\Controllers\HomeController::class, 'singleproduction'])->name('singleproduction');
+Route::get('/production/apply', [App\Http\Controllers\HomeController::class, 'applyproduction'])->name('applyproduction');
+
 
 //Backend Routes
 

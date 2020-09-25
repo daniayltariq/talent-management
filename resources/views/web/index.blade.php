@@ -14,7 +14,7 @@
 					<div class="cd-full__contant">
 						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="models-masonry.html" class="cd-btn btn btn__red secondary">Browse Talent</a>
+						<a href="{{route('models')}}" class="cd-btn btn btn__red secondary">Browse Talent</a>
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>
@@ -23,7 +23,7 @@
 					<div class="cd-full__contant">
 						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="models-masonry.html" class="cd-btn btn btn__red secondary">Browse Talent</a>
+						<a href="{{route('models')}}" class="cd-btn btn btn__red secondary">Browse Talent</a>
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>
@@ -32,7 +32,7 @@
 					<div class="cd-full__contant">
 						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="models-masonry.html" class="cd-btn btn btn__red secondary">Browse Talent</a>
+						<a href="{{route('models')}}" class="cd-btn btn btn__red secondary">Browse Talent</a>
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>

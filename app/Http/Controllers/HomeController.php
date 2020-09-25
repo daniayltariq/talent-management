@@ -24,25 +24,67 @@ class HomeController extends Controller
 
     public function index()
     {
-       
         return view('web.index');
     } 
+
 
     public function findtalent()
     {
         return view('web.forms.find-talent');
     }
-
-   
-
-
+  
     public function models()
     {
          $notification = array(
-    'message' => 'I am a successful message!', 
-    'alert-type' => 'success'
-);
-        return redirect('/')->with($notification);
+        'message' => 'I am a successful message!', 
+        'alert-type' => 'success'
+        );
+        
+        // return redirect('models')->with($notification);
+        return view('web.pages.models');
     }
+  
+
+    public function modelsgrid()
+    {    
+       return view('web.pages.models-grid');
+    }
+
+    public function modelsingle()
+    {    
+       return view('web.pages.models-single');
+    }
+
+    public function community()
+    {    
+       return view('web.pages.community');
+    }
+
+    public function magzine()
+    {    
+       return view('web.pages.magzine');
+    } 
+
+    public function magzinesingle()
+    {    
+       return view('web.pages.magzine-single');
+    } 
+
+    public function findproductions()
+    {    
+       return view('web.pages.find-productions');
+    }
+
+    public function singleproduction()
+    {    
+       return view('web.pages.production-single');
+    }
+
+    public function applyproduction()
+    {    
+       return view('web.forms.apply');
+    }
+
+
 
 }
