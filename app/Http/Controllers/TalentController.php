@@ -11,4 +11,10 @@ class TalentController extends Controller
     	return view('web.account.profile');
 
     }
+
+    public function detail(){
+
+    	return view('web.account.detail');
+
+    }
 }

@@ -61,17 +61,13 @@ button.btn.btn__red.animation.btn-half.pull-right {
                                             <div class="form-holder">
                                                 <input type="text" placeholder="Last Name" class="form-control">
                                             </div>
-                                            <div class="form-holder">
-                                                <input type="text" placeholder="Team Name" class="form-control">
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div class="form-holder">
                                         <input type="text" placeholder="Email" class="form-control">
                                     </div>
-                                    <div class="form-holder">
-                                        <input type="password" placeholder="Create a password" class="form-control">
-                                    </div>
+                                    
                                 </section>
                                 
                                 <!-- SECTION 2 -->
@@ -93,9 +89,8 @@ button.btn.btn__red.animation.btn-half.pull-right {
                                                 </div>
                                             </div>
 
-                                            
-
-                                            <div class="form-holder ">
+                                             
+                                            <div class="form-holder">
                                                 <select name="" class="form-control" placeholder="Hair" id="">
                                                     <option value="">Brown</option>
                                                 </select>
@@ -122,10 +117,10 @@ button.btn.btn__red.animation.btn-half.pull-right {
                                     </div>
                                     <div class="form-row">
                                         <div class="form-holder">
-                                            <input type="text" placeholder="Street Name" class="form-control">
+                                            <input type="text" placeholder="Address 1" class="form-control">
                                         </div>
                                         <div class="form-holder">
-                                            <input type="text" placeholder="Street Number" class="form-control">
+                                            <input type="text" placeholder="Address 2" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -353,6 +348,36 @@ button.btn.btn__red.animation.btn-half.pull-right {
                                     
                                 </section>
 
+                                <!-- SECTION 3 -->
+                                <h4></h4>
+                                <section>
+                                    <h4 class="text__quote mb-5">Specials Skills</h4>
+
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Basketball
+                                    </label>
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Baseball
+                                    </label>
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Golf
+                                    </label>
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Rollerblading
+                                    </label>
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Juggling
+                                    </label>
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Scuba (PADI certified),
+                                    </label>
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Valid Driver’s License and U.S. Passport.
+                                    </label>
+                                     
+                                  </form>
+                                    
+                                </section>
 
                             </div>
                 </form>

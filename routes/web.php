@@ -118,6 +118,8 @@ Route::get('/production/apply', [App\Http\Controllers\HomeController::class, 'ap
 
 Route::get('/account/talent/profile', [App\Http\Controllers\TalentController::class, 'profile'])->name('account.talent.profile');
 
+Route::get('/account/talent/detail', [App\Http\Controllers\TalentController::class, 'detail'])->name('account.talent.detail');
+
 // Talent Profile ========================================================
 
 
