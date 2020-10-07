@@ -1,13 +1,21 @@
 @extends('web.layouts.app')
 
+
+
+
+@section('styles')
+<style type="text/css">
+button.btn.btn-default.btn__red.animation.btn-full.pull-right {
+    padding: 15px 30px;
+    margin-bottom: 20px;
+}
+</style>
+@endsection
+
+
 @section('content')
 
-
-
-
-
-
-<section class="page__img" style="background-image: url('img/apply_bg.jpg')">
+<section class="page__img" style="background-image: url('{{ asset('web/img/apply_bg.jpg') }}')">
         <div class="container">
             <div class="row">
                 <div class="title__wrapp">
@@ -69,8 +77,7 @@
                                    
                                  </div>
                             </div>
-                        </div>
-                        <div class="form-block">
+                        
                             <div class="form-group">
                                 <label for="phone" class="col-sm-4 control-label">Phone</label>
                                 <div class="col-sm-8">
@@ -92,21 +99,21 @@
                              
                             <div class="form-group">
                                 <label for="password" class="col-sm-4 control-label">Password <span class="req">*</span></label>
-                                <<div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                                <div class="col-sm-8">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                </div>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                            </div>
+                           
                             <div class="form-group">
                                 <label for="password-confirm" class="col-sm-4 control-label">Confirm Password <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="country" class="col-sm-4 control-label">Country</label>
@@ -155,6 +162,7 @@
                                     <button type="submit" class="btn btn-default btn__red animation btn-full pull-right">apply now</button>
                                 </div>
                             </div>
+                        </div>
 
                         </div>
                     </form>

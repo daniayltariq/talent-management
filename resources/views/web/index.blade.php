@@ -9,33 +9,34 @@
 	<!-- Slider Section Start -->
 	<section class="cd-hero">
 		<ul class="cd-hero-slider">
-			<li class="selected" style="background-image: url('img/main_img.jpg')">
+			<li class="selected"  style="background-image: url('{{ asset('web/img/banner/banner-3.jpg') }}')">
 				<div class="cd-full-width">
 					<div class="cd-full__contant">
 						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="{{route('models')}}" class="cd-btn btn btn__red secondary">Browse Talent</a>
+						<a href="{{route('login')}}" class="cd-btn btn btn__red secondary">Join Now</a>
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>
-			<li style="background-image: url('img/main_img.jpg')">
+			<li style="background-image: url('{{ asset('web/img/banner/banner-1.jpg') }}')">
 				<div class="cd-full-width">
 					<div class="cd-full__contant">
 						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="{{route('models')}}" class="cd-btn btn btn__red secondary">Browse Talent</a>
+						<a href="{{route('login')}}" class="cd-btn btn btn__red secondary">Join Now</a>
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>
-			<li style="background-image: url('img/main_img.jpg')">
+			<li style="background-image: url('{{ asset('web/img/banner/banner-2.jpg') }}')">
 				<div class="cd-full-width">
 					<div class="cd-full__contant">
 						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="{{route('models')}}" class="cd-btn btn btn__red secondary">Browse Talent</a>
+						<a href="{{route('login')}}" class="cd-btn btn btn__red secondary">Join Now</a>
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>
+			
 
 		</ul> <!-- .cd-hero-slider -->
 
@@ -82,19 +83,19 @@
 					<li class="testimonal__list-item col-md-4">
 						<div class="date testimonal__date">02 Jul 2016</div>
 						<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
-						<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
+						<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
 						<div class="testimonal__name">Carolyn Potter</div>
 					</li>
 					<li class="testimonal__list-item col-md-4">
 						<div class="date testimonal__date">04 Jan 2016</div>
 						<div class="text testimonal__text">“ Always strive for excellence, to grow to such a level that the Agency was as respectable as possible in the fashion and modeling industry. ”</div>
-						<div class="testimonal__photo"><img src="img/testimonal-photo2.png" alt=""></div>
+						<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo2.png') }}" alt=""></div>
 						<div class="testimonal__name">Raymond Kelly</div>
 					</li>
 					<li class="testimonal__list-item col-md-4">
 						<div class="date testimonal__date">14 Feb 2016</div>
 						<div class="text testimonal__text">“ Training allows you to meet with famous top models and photographers who will share secrets of success and valuable lessons. ”</div>
-						<div class="testimonal__photo"><img src="img/testimonal-photo3.png" alt=""></div>
+						<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo3.png') }}" alt=""></div>
 						<div class="testimonal__name">Elijah Maxwell</div>
 					</li>
 				</ul>
@@ -111,7 +112,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text__quote action__text">We have best of photographers from the fashion industry, who understands the current trend, style and format as required by clients </div>
-				<a href="apply.html" class="btn btn__red animation">apply now</a>
+				<a href="{{ route('register') }}" class="btn btn__red animation">Join now</a>
 			</div>
 		</div>
 	</div><!-- Call To Action Section End -->
@@ -120,7 +121,7 @@
 	<section class="section last-posts">
 		<div class="container">
 			<div class="row">
-				<h2 class="section__title"><span class="line line__right"></span>Last from blog</h2>
+				<h2 class="section__title"><span class="line line__right"></span>Latest Topics</h2>
 				<div class="lp__wrapp clearfix">
 					<div class="col-md-4 col-sm-12 lp__content">
 						<div class="lp__content-wrapp">
@@ -147,7 +148,7 @@
 						</div>
 					</div>
 				</div>
-				<a href="blog.html" class="btn btn__grey btn__grey_lg animation">Show all news</a>
+				<a href="blog.html" class="btn btn__grey btn__grey_lg animation">Show all topics</a>
 			</div>
 		</div>
 	</section><!-- Last Post Section End -->

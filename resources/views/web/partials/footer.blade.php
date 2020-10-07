@@ -1,40 +1,122 @@
-<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="footer__widgets clearfix">
-					<div class="col-md-3 col-sm-6 col-xs-12 footer__social">
-						<div class="footer__title">We are social</div>
-						<ul class="fs__list clearfix">
-							<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-linkedin"></i></a></li>
-							<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-facebook"></i></a></li>
-							<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-instagram"></i></a></li>
-							<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-twitter"></i></a></li>
-						</ul>
-					</div>
-					<div class="col-md-3 col-sm-6 col-xs-12 footer__adres">
-						<div class="footer__title">Visit us</div>
-						<div class="fa__text">53 Abernathy Trace Suite 289,<br> Los Angeles</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-xs-12 footer__contacts">
-						<div class="footer__title">Contact us</div>
-						<div class="fa__tel">+32 456-086-9345</div>
-						<a href="mailto:mail@domain.com">mail@domain.com</a>
-					</div>
-					<div class="col-md-3 col-sm-6 col-xs-12 footer__subscribe">
-						<div class="footer__title">Our newsletter</div>
-						<div class="footer__subscribe-wrapp">
-							<input class="input input__subscribe" placeholder="Your e-mail">
-							<button type="submit" class="submit__button animation"><i class="mdi mdi-arrow-right"></i></button>
-						</div>
-					</div>
-				</div>
-				<div class="footer__copyrite">© 2019 Talent Agency. All Rights Reserved.</div>
-			</div>
-		</div>
-	</footer><!-- Footer End -->
-
-	<div class="scroll-top animation"><i class="mdi mdi-arrow-up"></i></div>
+<script src="{{ asset('web/libs/jquery/jquery-1.11.2.min.js') }}"></script>
+<script src="{{ asset('web/libs/modernizr/modernizr.js') }}"></script>
+<script src=" {{ asset('web/libs/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src=" {{ asset('web/libs/plugins-scroll/plugins-scroll.js') }}"></script>
+<script src=" {{ asset('web/libs/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
+<script src=" {{ asset('web/libs/izotope/isotope.pkgd.min.js') }}"></script>
+<script src=" {{ asset('web/libs/hero-slider/hero-slider.js') }}"></script> <!-- Resource jQuery -->
+<script src=" {{ asset('web/js/common.js') }}"></script>
 
 
 
-	<div class="hidden"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
+<script>
+	@if (Session::has('message'))
+		var type = "{{ Session::get('alert-type', 'info') }}"
+		
+	switch(type){
+		case 'info':
+		
+		  
+			toastr.options = {
+			"closeButton": false,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-bottom-center",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+			}
+			toastr.info("{{Session::get('message')}}");
+			var audio = new Audio('audio.mp3');
+			audio.play();
+			break;
+
+
+		case 'success':
+		
+		   
+			toastr.options = {
+			"closeButton": false,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-bottom-center",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+			}
+			toastr.success("{{Session::get('message')}}");
+			var audio = new Audio('audio.mp3');
+			audio.play();
+			
+			break;
+		case 'warning':
+		
+		
+			toastr.options = {
+			"closeButton": false,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-bottom-center",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+			}
+			toastr.warning("{{Session::get('message')}}");
+			var audio = new Audio('audio.mp3');
+			audio.play();
+			
+			break;
+		case 'error':
+		
+		
+			toastr.options = {
+			"closeButton": false,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-bottom-center",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+			}
+			toastr.error("{{Session::get('message')}}");
+			var audio = new Audio('audio.mp3');
+			audio.play();
+		
+			break;
+	}
+	@endif
+	
+</script>

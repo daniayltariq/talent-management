@@ -1,16 +1,28 @@
 @extends('web.layouts.app')
 
+
+@section('styles')
+<style type="text/css">
+.btn-half {
+    width: 50%;
+    float: unset !important;
+    margin: auto;
+    margin-top: 15px !important;
+    padding: 15px 30px;
+}
+</style>
+@endsection
 @section('content')
-<section class="page__img" style="background-image: url('img/apply_bg.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="title__wrapp">
-                    <div class="page__subtitle title__grey">Apply</div>
-                    <h1 class="page__title">Work with us</h1>
-                </div>
+<section class="page__img" style="background-image: url('{{ asset('web/img/apply_bg.jpg') }}')">
+    <div class="container">
+        <div class="row">
+            <div class="title__wrapp">
+                <div class="page__subtitle title__grey">Apply</div>
+                <h1 class="page__title">Work with us</h1>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 
 <section class="section apply">                    
@@ -45,26 +57,21 @@
                                 @enderror
                                 </div>
                             </div>
-                      
-                         
-                        </div>
-                          <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                        <label class="form-check-label" for="remember">
+                                            {{ __('Remember Me') }}
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-block">
-                            
-                            
-                            
+
                             <div class="row">
-                                <div class="col-sm-8 col-sm-offset-4">
+                                <div class="col-sm-12 text-center">
                                     <button type="submit" class="btn btn-default btn__red animation btn-half pull-right">Sign in</button>
                                     @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -73,8 +80,11 @@
                                 @endif
                                 </div>
                             </div>
-
+                      
+                         
                         </div>
+                        
+                        
                     </form>
                 </div>
 

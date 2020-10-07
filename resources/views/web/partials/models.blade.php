@@ -16,7 +16,7 @@
 	               		<div class="grid-sizer"></div>
 						<div class="grid-gutter"></div>
 		            	<a href="single-model.html" class="effect-bubba grid-item grid-item__width1 grid-item__height1 teenagers women" data-category="women">
-			            	<img class="img-responsive" src="img/model1.jpg" alt="sample image">
+			            	<img class="img-responsive" src="{{ asset('web/img/model1.jpg') }} " alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
 				            	<div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
@@ -24,7 +24,7 @@
 			            	</div>
 	                    </a>
 	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 grid-item__height2 stylists lifestyle women" data-category="women">
-		                    <img class="img-responsive" src="img/model4.jpg" alt="sample image">
+		                    <img class="img-responsive" src="{{ asset('web/img/model4.jpg') }} " alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
 				            	<div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
@@ -32,7 +32,7 @@
 			            	</div>
 			            </a>
 	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 grid-item__height2 stylists teenagers women new-faces" data-category="women">
-		                    <img class="img-responsive" src="img/model5.jpg" alt="sample image">
+		                    <img class="img-responsive" src="{{ asset('web/img/model5.jpg') }} " alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
 				            	<div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
@@ -40,7 +40,7 @@
 			            	</div>
 			            </a>
 	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 grid-item__height2 stylists teenagers men new" data-category="men">
-		                    <img class="img-responsive" src="img/model2.jpg" alt="sample image">
+		                    <img class="img-responsive" src="{{ asset('web/img/model2.jpg') }} " alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
 				            	<div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
@@ -48,7 +48,7 @@
 			            	</div>
                    		</a>
 	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width1 grid-item__height2 women men new-faces new" data-category="women">
-		                    <img class="img-responsive" src="img/model6.jpg" alt="sample image">
+		                    <img class="img-responsive" src="{{ asset('web/img/model6.jpg') }} " alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
 				            	<div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
@@ -56,7 +56,7 @@
 			            	</div>
 	                    </a>
 	                    <a href="single-model.html" class="effect-bubba grid-item grid-item__width1 grid-item__height2 men new lifestyle" data-category="men">
-		                    <img class="img-responsive" src="img/model3.jpg" alt="sample image">
+		                    <img class="img-responsive" src="{{ asset('web/img/model3.jpg') }} " alt="sample image">
 			            	<div class="grid-item__contant-info">
 				            	<div class="grid-item__contant-name">Kate Farmer</div>
 				            	<div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
@@ -64,7 +64,7 @@
 			            	</div>
 	                    </a>
 	                    <div class="grid-item grid-item__width2 view__all women men" data-category="women">
-	                    	<a href="models-masonry.html" class="more animation">view all models</a>
+	                    	<a href="{{ route('models') }}" class="more animation">view all models</a>
 	                    </div>
 	                </div> <!-- end of grid -->
 	            </div>
