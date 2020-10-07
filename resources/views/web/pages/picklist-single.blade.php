@@ -51,9 +51,9 @@
 					
 
 
-					<div class="row">
+					<div class="row ">
 						<div class="col-sm-10 col-centered">
-							<div class="single-talent">
+							<div class="single-talent mb-5">
 								<div class="row">
 									<div class="col-sm-4">
 										<div class="profile-sec ml-5">
@@ -96,7 +96,7 @@
 									
 								</div>
 							</div>
-							<div class="single-talent">
+							<div class="single-talent mb-5">
 								<div class="row">
 									<div class="col-sm-4">
 										<div class="profile-sec ml-5">
@@ -139,7 +139,7 @@
 									
 								</div>
 							</div>
-							<div class="single-talent">
+							<div class="single-talent mb-5">
 								<div class="row">
 									<div class="col-sm-4">
 										<div class="profile-sec ml-5">

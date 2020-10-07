@@ -327,3 +327,13 @@ button.multiselect.dropdown-toggle.btn.btn-default {
     float: none;
     margin: 0 auto;
 }
+.w-100{
+    width: 100% !important;
+}
+
+.hr{
+    border-top: 1px solid #ddd;
+}
+.font-primary{
+    
+}
