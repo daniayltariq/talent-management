@@ -369,12 +369,12 @@ button.btn.btn__red.animation.btn-half.pull-right {
                                       <input type="checkbox" value="">Juggling
                                     </label>
                                     <label class="checkbox-inline">
-                                      <input type="checkbox" value="">Scuba (PADI certified),
+                                      <input type="checkbox" value="">Scuba (PADI certified)
                                     </label>
                                     <label class="checkbox-inline">
-                                      <input type="checkbox" value="">Valid Driver’s License and U.S. Passport.
+                                      <input type="checkbox" value="">Valid Driver’s License and U.S. Passport
                                     </label>
-                                     
+
                                   </form>
                                     
                                 </section>

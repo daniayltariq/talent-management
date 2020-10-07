@@ -20,6 +20,13 @@
     padding: 5px;
     background: #f8b248;
 }
+
+.skills .label-default {
+    background-color: #e0e0e0;
+    color: #565656;
+    font-weight: 400;
+    font-size: 15px;
+}
 </style>
 @endsection
 
@@ -47,7 +54,7 @@
                         <div class="col-sm-10 col-centered">
                             <div >
                                 <button class="ml-0 btn btn-share"><i class="mdi mdi-message-outline"></i>  Send Message</button>
-                                <button class="btn btn-share pull-right"><i class="mdi mdi-email-outline"></i>  Add to Picklist</button>
+                                <button class="btn btn-share pull-right"><i class="mdi mdi-download"></i>  Download</button>
                             </div>
                         </div>
                     </div>
@@ -138,7 +145,16 @@
                                                      <td>Ann (lead)</td>
                                                      <td>Arnold Legan dir.</td>
                                                  </tr>
-                                               
+                                                 <tr>
+                                                     <td>Kelly and the Guy</td>
+                                                     <td>Kelly (lead)</td>
+                                                     <td>Olivia Hammond dir.</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Crazy</td>
+                                                     <td>Chorus</td>
+                                                     <td>Connor Frank dir</td>
+                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
@@ -157,9 +173,15 @@
                                                  </tr>
 
                                                   <tr>
-                                                     <td>She's Mine</td>
-                                                     <td>Ann (lead)</td>
-                                                     <td>Arnold Legan dir.</td>
+                                                     <td>Killing Thomas</td>
+                                                     <td>Thomas Rachel Hazick</td>
+                                                     <td>New Age Productions</td>
+                                                 </tr>
+
+                                                 <tr>
+                                                     <td>Generating X</td>
+                                                     <td>Steve Howard Asche</td>
+                                                     <td>Fox Tone</td>
                                                  </tr>
                                                
                                             </table>
@@ -181,11 +203,16 @@
                                                  </tr>
 
                                                   <tr>
-                                                     <td>She's Mine</td>
-                                                     <td>Ann (lead)</td>
-                                                     <td>Arnold Legan dir.</td>
+                                                     <td>Teen Witch</td>
+                                                     <td>Molly (guest appearance)</td>
+                                                     <td>Jim Gordon, NBC</td>
                                                  </tr>
-                                               
+                                                
+                                                <tr>
+                                                     <td>Graphic Battles</td>
+                                                     <td>Guest Appearance</td>
+                                                     <td>Spike TV</td>
+                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
@@ -200,13 +227,13 @@
                                                  <tr>
                                                      <th>Name</th>
                                                      <th>Role</th>
-                                                     <th>Location</th>
+                                                     
                                                  </tr>
 
                                                   <tr>
-                                                     <td>She's Mine</td>
-                                                     <td>Ann (lead)</td>
-                                                     <td>Arnold Legan dir.</td>
+                                                     <td>Roach Killer</td>
+                                                     <td>Regional</td>
+                                                     
                                                  </tr>
                                                
                                             </table>
@@ -223,16 +250,35 @@
                                                  <tr>
                                                      <th>Name</th>
                                                      <th>Role</th>
-                                                     <th>Location</th>
+                                                      
                                                  </tr>
 
                                                   <tr>
-                                                     <td>She's Mine</td>
-                                                     <td>Ann (lead)</td>
-                                                     <td>Arnold Legan dir.</td>
+                                                     <td>MFA</td>
+                                                     <td>Mackenzie University</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>BFA</td>
+                                                     <td>Houseman College</td>
                                                  </tr>
                                                
                                             </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="hr">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h4 class="text__quote font-primary">Special Skills</h4>
+                                        <div class="skills">
+                                            <span class="label label-default">Basketball</span>
+                                            <span class="label label-default">Baseball</span>
+                                            <span class="label label-default">Golf</span>
+                                            <span class="label label-default">Rollerblading</span>
+                                            <span class="label label-default">Juggling</span>
+                                            <span class="label label-default">Scuba (PADI certified)</span>
+                                            <span class="label label-default">Valid Driver’s License and U.S. Passport.</span>
                                         </div>
                                     </div>
                                 </div>
