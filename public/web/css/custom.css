@@ -318,3 +318,12 @@ button.multiselect.dropdown-toggle.btn.btn-default {
     transition: all 0.3s ease;
     box-shadow: 0px 6px 22px #61616154;
 }
+
+.talent-specs th{
+    width: 58%
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}

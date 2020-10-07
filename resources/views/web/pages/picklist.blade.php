@@ -25,7 +25,7 @@
     background: #ffffff;
     border-radius: 0px;
     transition: all 0.3s ease;
-    box-shadow: 0px 0px 50px #61616121;
+    box-shadow: 0px 10px 14px #61616142
 }
 
 </style>
@@ -48,7 +48,7 @@
 <div class="section blog picklist">
 	<div class="container">
 		<div class="row">
-			<div class="blog__posts col-md-12">
+			<div class="blog__posts col-sm-10 col-centered">
 				<div class="blog__list">
 					<h4 class="widget__title">My Picklists</h4>
 
