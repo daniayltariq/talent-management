@@ -337,3 +337,18 @@ button.multiselect.dropdown-toggle.btn.btn-default {
 .font-primary{
     
 }
+
+@media only screen and (max-width: 768px){
+    .menu-center {
+        position: absolute;
+        left: -122%;
+        width: 200%;
+    }
+}
+
+
+@media only screen and (max-width: 992px){
+    .m-menu__list-item:hover {
+        background-color: #d97129;
+    }
+}
