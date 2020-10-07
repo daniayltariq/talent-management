@@ -124,6 +124,13 @@ Route::get('/production/single', [App\Http\Controllers\HomeController::class, 's
 Route::get('/production/apply', [App\Http\Controllers\HomeController::class, 'applyproduction'])->name('applyproduction');
 
 
+// Talent Profile ========================================================
+
+Route::get('/account/talent/profile', [App\Http\Controllers\TalentController::class, 'profile'])->name('account.talent.profile');
+
+// Talent Profile ========================================================
+
+
 //Backend Routes
 
 
