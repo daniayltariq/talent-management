@@ -72,6 +72,16 @@ Route::get('/pricing', function () {
 })->name('pricing');
 
 
+Route::get('/picklist', function () {
+    return view('web.pages.picklist');
+})->name('picklist');
+
+
+Route::get('/picklist-single', function () {
+    return view('web.pages.picklist-single');
+})->name('picklist-single');
+
+
 
 
 
