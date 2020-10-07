@@ -71,6 +71,18 @@
 									<li class="m-menu__sub-item">
 										<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
 									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('single-topic') }}">Community Topics</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('single-post') }}">Single Topic</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('404') }}">404</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('403') }}">403</a>
+									</li>
 								</ul>
 							</li>
 							
