@@ -92,6 +92,17 @@ td.default {
 .btn {
   padding: 19px 50px;
 }
+table.pricing td:nth-child(2) {
+    background: #fcfff3;
+}
+
+table.pricing td:nth-child(3) {
+    background: #fff0f0;
+}
+
+table.pricing td:nth-child(4) {
+    background: #f2fbff;
+}
 
 </style>
 @endsection
@@ -128,7 +139,7 @@ td.default {
   </li>
 </ul>  
 
-<table>
+<table class="pricing">
   <thead>
     <tr>
       <th ></th>

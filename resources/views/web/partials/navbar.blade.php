@@ -52,6 +52,27 @@
 							<li class="m-menu__list-item  {{ Request::is('testimonials') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('testimonials') }}">Testimonials</a>
 							</li>
+
+							<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
+								<a href="{{ route('login') }}">pages</a>
+								<ul class="m-menu__sub">
+									<li class="m-menu__sub-item">
+										<a href="{{ route('picklist') }}">Picklist</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('picklist-single') }}">Picklist Single</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('pricing') }}">Pricing</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
+									</li>
+								</ul>
+							</li>
 							
 							
 							

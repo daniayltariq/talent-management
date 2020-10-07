@@ -10,7 +10,19 @@ button.btn.btn__red.animation.btn-half.pull-right {
 .btn-half {
     width: 30%;
 }
-
+.actions li a:before{
+    content: '' !important
+}
+button.btn.btn-primary.btn-small.repeater-add-btn {
+    font-weight: 400;
+    text-transform: inherit;
+}
+.btn-small {
+    padding: 10px 14px !important;
+}
+.actions li:last-child a {
+    padding-left: 0px;
+}
 </style>
 
 <link rel="stylesheet" href="{{ asset('plugins/steps/css/style.css') }}">
@@ -44,7 +56,9 @@ button.btn.btn__red.animation.btn-half.pull-right {
                                     <div class="form-header">
                                         <div class="avartar">
                                             <a href="#">
-                                                <img src="{{ url('/') }}/plugins/steps/images/avartar.png" alt="">
+                                               <div class="profile-sec ml-5 mb-4">
+                                                    <img src="{{ asset('web/uploads/profile/talent-2.jpg') }}" class="img img-responsive">
+                                                </div>
                                             </a>
                                             <div class="avartar-picker">
                                                 <input type="file" name="file-1[]" id="file-1" class="inputfile" data-multiple-caption="{count} files selected" multiple />
@@ -61,12 +75,13 @@ button.btn.btn__red.animation.btn-half.pull-right {
                                             <div class="form-holder">
                                                 <input type="text" placeholder="Last Name" class="form-control">
                                             </div>
+                                            <div class="form-holder">
+                                                <input type="text" placeholder="Email" class="form-control">
+                                            </div>
                                             
                                         </div>
                                     </div>
-                                    <div class="form-holder">
-                                        <input type="text" placeholder="Email" class="form-control">
-                                    </div>
+                                    
                                     
                                 </section>
                                 

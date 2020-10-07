@@ -28,6 +28,7 @@
 		<div class="row">
 			<div class="blog__posts col-md-12">
 				<div class="text-center">
+					<h4>Opps.  Page not exist</h4>
 					<img style="margin: auto;" src="{{ asset('web/img/errors/404.jpg') }}" class="img img-responsive img-fluid">
 				</div>
 				

@@ -56,7 +56,7 @@
 							<div class="single-talent mb-5">
 								<div class="row">
 									<div class="col-sm-4">
-										<div class="profile-sec ml-5">
+										<div class="profile-sec ml-5 mb-4">
 											<img src="{{ asset('web/uploads/profile/talent-1.jpg') }}" class="img img-responsive">
 										</div>
 										<div class="ml-5 talent-specs">
@@ -99,7 +99,7 @@
 							<div class="single-talent mb-5">
 								<div class="row">
 									<div class="col-sm-4">
-										<div class="profile-sec ml-5">
+										<div class="profile-sec ml-5 mb-4">
 											<img src="{{ asset('web/uploads/profile/talent-2.jpg') }}" class="img img-responsive">
 										</div>
 										<div class="ml-5 talent-specs">
@@ -142,7 +142,7 @@
 							<div class="single-talent mb-5">
 								<div class="row">
 									<div class="col-sm-4">
-										<div class="profile-sec ml-5">
+										<div class="profile-sec ml-5 mb-4">
 											<img src="{{ asset('web/uploads/profile/talent-3.jpg') }}" class="img img-responsive">
 										</div>
 										<div class="ml-5 talent-specs">
