@@ -114,7 +114,7 @@
 
 
 <!-- Clients Section Start -->
-<section class="section clients">
+{{-- <section class="section clients">
 	<div class="container">
 		<div class="row">
 			<div class="clients__img col-lg-2 col-md-4 col-sm-6 col-xs-12"><img src="{{ asset('web/img/brand1.jpg') }}" alt=""></div>
@@ -125,6 +125,6 @@
 			<div class="clients__img col-lg-2 col-md-4 col-sm-6 col-xs-12"><img src="{{ asset('web/img/brand6.jpg') }}" alt=""></div>
 		</div>
 	</div>
-</section>
+</section> --}}
 
 @endsection
