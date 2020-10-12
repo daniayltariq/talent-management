@@ -34,7 +34,8 @@ ul.testimonal__list.clearfix.testimonial-slider.slick-initialized.slick-slider {
 <section class="section testimonal bg-grey ">
 		<div class="container">
 			<div class="row">
-				<h2 class="section__title"><span class="line"></span>Sucess Stories</h2>
+				<h2 class="section__title"><span class="line"></span>Our Client Says</h2>
+				<p>Simplify and streamline your casting process to find the perfect performers for your project.</p>
 				<ul class="testimonal__list clearfix testimonial-slider">
 					<li class="testimonal__list-item col-md-4">
 						<div class="single-testimonial">
