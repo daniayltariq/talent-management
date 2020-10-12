@@ -135,21 +135,7 @@
 							</div>
 						</form>
 					</div>
-					<div class="sidebar-widget">
-						<h4 class="widget__title">Categories</h4>
-						<ul class="widget-category">
-							<li class="active"><a href="#">Fashion</a></li>
-							<li><a href="#">Milano</a></li>
-							<li><a href="#">Models</a></li>
-							<li><a href="#">Elite</a></li>
-							<li><a href="#">Backstage</a></li>
-						</ul>
-					</div>
-
-					<div class="sidebar-widget">
-						<h4 class="widget__title">we are social</h4>
-						@include('web.components.widget-social')
-					</div>
+					
 
 					<div class="sidebar-widget">
 						<h4 class="widget__title">Latest Topics</h4>
@@ -187,8 +173,14 @@
 							</figure>
 						</div>
 					</div>
+					
 
-					<div class="sidebar-widget ">
+					<div class="sidebar-widget">
+						<h4 class="widget__title">our social media urls</h4>
+						@include('web.components.widget-social')
+					</div>
+
+					{{-- <div class="sidebar-widget ">
 						<h4 class="widget__title">Popular Tags</h4>
 						<div class="widget__tagcloud">
 							<a href="#" class="tagcloud__item">Backstage</a>
@@ -207,7 +199,7 @@
 							<li><a href="#">October 2016</a></li>
 							<li><a href="#">April 2016</a></li>
 						</ul>
-					</div>
+					</div> --}}
 
 				</aside>
 			</div>

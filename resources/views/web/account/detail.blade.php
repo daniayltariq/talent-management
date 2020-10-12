@@ -10,7 +10,8 @@
 }
 
 .single-talent {
-        padding: 40px;
+    padding: 40px;
+    background: #f7f7f7;
 }
 
 .profile-sec {

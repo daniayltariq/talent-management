@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="footer__widgets clearfix">
-				<div class="col-md-3 col-sm-6 col-xs-12 footer__social">
+				<div class="col-md-12 col-sm-12 col-xs-12 footer__social text-center">
 					<div class="footer__title">We are social</div>
 					<ul class="fs__list clearfix">
 						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-linkedin"></i></a></li>
@@ -11,7 +11,7 @@
 						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-twitter"></i></a></li>
 					</ul>
 				</div>
-				<div class="col-md-3 col-sm-6 col-xs-12 footer__adres">
+				{{-- <div class="col-md-3 col-sm-6 col-xs-12 footer__adres">
 					<div class="footer__title">Visit us</div>
 					<div class="fa__text">53 Abernathy Trace Suite 289,<br> Los Angeles</div>
 				</div>
@@ -26,7 +26,7 @@
 						<input class="input input__subscribe" placeholder="Your e-mail">
 						<button type="submit" class="submit__button animation"><i class="mdi mdi-arrow-right"></i></button>
 					</div>
-				</div>
+				</div> --}}
 			</div>
 			<div class="footer__copyrite">© 2019 Talent Agency. All Rights Reserved.</div>
 		</div>

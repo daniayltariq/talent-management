@@ -38,7 +38,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="title__wrapp">
-				<h1 class="page__title">Picklist</h1>
+				<h1 class="page__title">PICKLIST</h1>
 			</div>
 		</div>
 	</div>
@@ -53,7 +53,7 @@
 					<h4 class="widget__title">My Picklists</h4>
 
 					<a href="">
-						<h4 class="widget__title pull-right widget__titless" >Browse all the picklist</h4>
+						<h4 class="widget__title pull-right widget__titless" >Browse all picklists</h4>
 					</a>
 
 
@@ -61,26 +61,26 @@
 						<div class="col-sm-12">
 							<a href="{{ route('picklist-single') }}">
 								<div class="pick-item">
-									<h3>My Favourite Pickilist (10)</h3>
+									<h3>Short men with brown hair that ski. (10)</h3>
 									<p>Upon payment of one of the following tiers packages, the user’s account becomes Active and they are able to create a profile</p>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-12">
 							<div class="pick-item">
-								<h3>My Favourite Pickilist (30)</h3>
+								<h3>Children 5-8 years old with blue eyes (30)</h3>
 								<p>Upon payment of one of the following tiers packages, the user’s account becomes Active and they are able to create a profile</p>
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="pick-item">
-								<h3>My Favourite Pickilist (15)</h3>
+								<h3>Adults over 60 with dancing skills (15)</h3>
 								<p>Upon payment of one of the following tiers packages, the user’s account becomes Active and they are able to create a profile</p>
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="pick-item">
-								<h3>My Favourite Pickilist (8)</h3>
+								<h3>Lorem Ipsum (8)</h3>
 								<p>Upon payment of one of the following tiers packages, the user’s account becomes Active and they are able to create a profile</p>
 							</div>
 						</div>

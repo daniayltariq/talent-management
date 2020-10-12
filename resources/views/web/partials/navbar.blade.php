@@ -14,13 +14,13 @@
 	<div class="header-sticky__wrapp">
 		<div class="container">
 			<div class="row">
-				<div class="logo col-md-2 col-sm-4 col-xs-12">
+				<div class="logo col-md-2 col-sm-4 col-xs-7">
 					<a class="navbar-brand" href="{{ route('/') }}">
 					{{-- <span class="logo__text">Talent DB</span> --}}
 					<img src="{{ asset('web/img/logo/talent-logo.png') }}" class="logo img img-fluid">
 					</a>
 				</div>
-				<div class="main__menu-wrap col-md-8 col-sm-7 col-xs-6 width_h">
+				<div class="main__menu-wrap col-md-10 col-sm-8 col-xs-5">
 					<span class="responsive-menu__button" id="responsive-menu"><i class="mdi mdi-menu"></i></span>
 					<nav class="main__menu pull-right" id="main__nav">
 						<ul class="m-menu__list clearfix">
@@ -51,6 +51,39 @@
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('testimonials') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('testimonials') }}">Testimonials</a>
+							</li>
+
+							<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
+								<a href="{{ route('login') }}">pages</a>
+								<ul class="m-menu__sub">
+									<li class="m-menu__sub-item">
+										<a href="{{ route('picklist') }}">Picklist Favorites</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('picklist-single') }}">Picklist Single</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('pricing') }}">Pricing</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('single-topic') }}">Community Topics</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('single-post') }}">Single Topic</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('404') }}">404</a>
+									</li>
+									<li class="m-menu__sub-item">
+										<a href="{{ route('403') }}">403</a>
+									</li>
+								</ul>
 							</li>
 							
 							

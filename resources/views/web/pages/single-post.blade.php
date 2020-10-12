@@ -7,7 +7,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="title__wrapp">
-					<div class="page__subtitle title__grey">Forum Jobs & Castings</div>
+					{{-- <div class="page__subtitle title__grey">Forum Jobs & Castings</div> --}}
 					<h1 class="page__title">Free acting lessons</h1>
 				</div>
 			</div>
@@ -187,27 +187,12 @@
 							</div>
 						</form>
 					</div>
-					<div class="sidebar-widget">
-						<h4 class="widget__title">Categories</h4>
-						<ul class="widget-category">
-							<li class="active"><a href="#">Fashion</a></li>
-							<li><a href="#">Milano</a></li>
-							<li><a href="#">Models</a></li>
-							<li><a href="#">Elite</a></li>
-							<li><a href="#">Backstage</a></li>
-						</ul>
-					</div>
-
-					<div class="sidebar-widget">
-						<h4 class="widget__title">we are social</h4>
-						@include('web.components.widget-social')
-					</div>
 
 					<div class="sidebar-widget">
 						<h4 class="widget__title">Latest Topics</h4>
 						<div class="widget__latest">
 							<figure class="widget-latest__post">
-								<span class="pull-left"><a href="#"><img src="{{ asset('web/img/jessica-alba-campari-bts-56.jpg') }}" alt=""></a></span>
+								<span class="pull-left"></span>
 								<figcaption class="widget-latest__content">
 									<a href="#" class="widget-latest__title">Anti Aging Skin Care The Basics</a>
 									<p class="widget-latest__date">19 Oct 2016</p>
@@ -215,7 +200,7 @@
 							</figure>
 
 							<figure class="widget-latest__post">
-								<span class="pull-left"><a href="#"><img src="{{ asset('web/img/jessica-alba-campari-bts-45.jpg') }}" alt=""></a></span>
+								<span class="pull-left"></span>
 								<figcaption class="widget-latest__content">
 									<a href="#" class="widget-latest__title">Ageing Skin Care Does</a>
 									<p class="widget-latest__date">15 nov 2016</p>
@@ -223,7 +208,7 @@
 							</figure>
 
 							<figure class="widget-latest__post">
-								<span class="pull-left"><a href="#"><img src="{{ asset('web/img/jessica-alba-campari-bts-34.jpg') }}" alt=""></a></span>
+								<span class="pull-left"></span>
 								<figcaption class="widget-latest__content">
 									<a href="#" class="widget-latest__title">Easy Home Remedy For</a>
 									<p class="widget-latest__date">16 Oct 2016</p>
@@ -231,7 +216,7 @@
 							</figure>
 
 							<figure class="widget-latest__post">
-								<span class="pull-left"><a href="#"><img src="{{ asset('web/img/jessica-alba-campari-bts-57.jpg') }}" alt=""></a></span>
+								<span class="pull-left"></span>
 								<figcaption class="widget-latest__content">
 									<a href="#" class="widget-latest__title">Does Hydroderm Work</a>
 									<p class="widget-latest__date">16 dec 2016</p>
@@ -239,8 +224,15 @@
 							</figure>
 						</div>
 					</div>
+					
+					<div class="sidebar-widget">
+						<h4 class="widget__title">our social media urls</h4>
+						@include('web.components.widget-social')
+					</div>
 
-					<div class="sidebar-widget ">
+					
+
+					{{-- <div class="sidebar-widget ">
 						<h4 class="widget__title">Popular Tags</h4>
 						<div class="widget__tagcloud">
 							<a href="#" class="tagcloud__item">Backstage</a>
@@ -259,7 +251,7 @@
 							<li><a href="#">October 2016</a></li>
 							<li><a href="#">April 2016</a></li>
 						</ul>
-					</div>
+					</div> --}}
 
 				</aside>
 			</div>

@@ -14,8 +14,8 @@
     <div class="container">
         <div class="row">
             <div class="title__wrapp">
-                <div class="page__subtitle title__grey">Looking for talent ?</div>
-                <h1 class="page__title">Find talent</h1>
+                {{-- <div class="page__subtitle title__grey">Looking for talent ?</div> --}}
+                <h1 class="page__title">HOW IT WORKS</h1>
             </div>
         </div>
     </div>
@@ -74,19 +74,5 @@
 	</div>      
 </section>
 
-
-<!-- Clients Section Start -->
-	<div class="section clients">
-		<div class="container">
-			<div class="row">
-				<div class="clients__img col-lg-2 col-md-4 col-sm-6 col-xs-12"><img src="{{ asset('web/img/brand1.jpg') }}" alt=""></div>
-				<div class="clients__img col-lg-2 col-md-4 col-sm-6 col-xs-12"><img src="{{ asset('web/img/brand2.jpg') }}" alt=""></div>
-				<div class="clients__img col-lg-2 col-md-4 col-sm-6 col-xs-12"><img src="{{ asset('web/img/brand3.jpg') }}" alt=""></div>
-				<div class="clients__img col-lg-2 col-md-4 col-sm-6 col-xs-12"><img src="{{ asset('web/img/brand4.jpg') }}" alt=""></div>
-				<div class="clients__img col-lg-2 col-md-4 col-sm-6 col-xs-12"><img src="{{ asset('web/img/brand5.jpg') }}" alt=""></div>
-				<div class="clients__img col-lg-2 col-md-4 col-sm-6 col-xs-12"><img src="{{ asset('web/img/brand6.jpg') }}" alt=""></div>
-			</div>
-		</div>
-	</div><!-- Clients Section End -->
 
 @endsection

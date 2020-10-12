@@ -63,9 +63,9 @@
 				            	<i class="grid-item__contant-arrow mdi mdi-arrow-right"></i>
 			            	</div>
 	                    </a>
-	                    <div class="grid-item grid-item__width2 view__all women men" data-category="women">
+	                    {{-- <div class="grid-item grid-item__width2 view__all women men" data-category="women">
 	                    	<a href="{{ route('models') }}" class="more animation">view all models</a>
-	                    </div>
+	                    </div> --}}
 	                </div> <!-- end of grid -->
 	            </div>
 			</div>
