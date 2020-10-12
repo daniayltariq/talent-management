@@ -32,7 +32,7 @@
 		<div class="row">
 			<div class="blog__posts col-md-12">
 				<div class="blog__list">
-					<h4 class="widget__title">My Picklists</h4>
+					<h4 class="widget__title">Short men with brown hair that ski.</h4>
 
 					{{-- <a href="">
 

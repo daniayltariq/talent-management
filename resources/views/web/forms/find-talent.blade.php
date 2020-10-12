@@ -24,17 +24,16 @@ span.multiselect-selected-text {
             <div class="row">
                 <div class="title__wrapp">
                     <div class="page__subtitle title__grey">Looking for talent ?</div>
-                    <h1 class="page__title">Find talent</h1>
+                    <h1 class="page__title">Featured Talent</h1>
                 </div>
             </div>
         </div>
     </section><!-- Slider Section End -->
 
-    <!-- Services Section Start -->
-    <section class="section apply">
+    {{-- <section class="section apply">
         <div class="container">
             <div class="row">
-                <h3 class="text__quote centered">Find Actors and Talents for Hire</h3>
+                <!-- <h3 class="text__quote centered">Find Actors and Talents for Hire</h3> -->
                 <div class="col-lg-12 col-md-12 ">
                     <form class="apply-form form-horizontal" method="POST" action="#" id="form-size">
                        @csrf
@@ -161,14 +160,13 @@ span.multiselect-selected-text {
             </div>
 
         </div>
-    </section><!-- Services Section End -->
-    
+    </section> --}}
 
     <section>
         <div class="section portfolio">
             <div class="container">
                 <div class="row">
-                    <div class="button-group filters-button-group">
+                    {{-- <div class="button-group filters-button-group">
                         <button class="button title__grey is-checked" data-filter="*">all</button>
                         <button class="button title__grey" data-filter=".women">WOMEN</button>
                         <button class="button title__grey" data-filter=".men">MEN</button>
@@ -178,7 +176,7 @@ span.multiselect-selected-text {
                         <button class="button title__grey" data-filter=".lifestyle">Lifestyle</button>
 
 
-                    </div>
+                    </div> --}}
 
 
                     <div class="col-md-12" >

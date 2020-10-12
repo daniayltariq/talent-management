@@ -20,7 +20,7 @@ html{
 
 @media only screen and (min-width: 1600px){
     .cd-hero-slider {
-        height: 100vh; 
+        height: 75vh; 
     }
 }
 
@@ -351,4 +351,90 @@ button.multiselect.dropdown-toggle.btn.btn-default {
     .m-menu__list-item:hover {
         background-color: #d97129;
     }
+}
+
+.footer__copyrite{
+    padding: 40px 0 20px;
+}
+
+.fs__list {
+    margin: auto;
+    width: fit-content;
+}
+.footer__title {
+    margin-bottom: 40px;
+}
+
+
+.m-img__title {
+    font-size: 55px;
+}
+
+.footer {
+    padding-top: 40px;
+}
+.scroll-top {
+    padding: 14px 0;
+}
+
+@media only screen and (min-width: 768px){
+.cd-hero-slider .cd-full-width, .cd-hero-slider .cd-half-width {
+    padding-top: 100px;
+}
+}
+
+
+.header.sticky {
+    padding-top: 15px;
+}
+
+
+@media only screen and (min-width: 1170px){
+    .cd-hero-slider {
+        height: 75vh;
+    }
+}
+
+.m-img__title {
+    margin: 0px 0 20px 0;
+}
+
+.slick-prev:before, .slick-next:before {
+    color: #0f0f0f !important;
+}
+
+
+.single-testimonial {
+    /*border: 1px solid gainsboro;*/
+}
+
+
+li.testimonal__list-item.slick-slide.slick-active:nth-child(1) {
+    opacity: 0.5 !important;
+    /*display: none !important;*/
+}
+
+.middle-testimonial .border-1 {
+    min-height: 410px;
+    padding: 0 42px;
+}
+.middle-testimonial .single-testimonial {
+    transition: padding 0.5s;
+    padding-top: 42px;
+   
+}
+
+.border-1 {
+    border: 1px solid gainsboro;
+    min-height: 320px;
+    background:#ffffff;
+}
+.single-testimonial {
+    padding-top: 40px !important;
+}
+
+
+.slick-active:not(.middle-testimonial) .single-testimonial{
+    padding: 30px;
+    margin-top: 45px;
 }

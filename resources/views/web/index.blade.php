@@ -62,7 +62,7 @@
 					<div class="about__big-tex text__quote"><span class="line__text"></span>Models from our agency are involved in the New York, Paris and Milan fashion weeks, working with the world's leading photographers</div>
 				</div>
 				<div class="col-md-6 about__text-wrapp">
-					<div class="main__text main__text_about">We appear on the covers of sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </div>
+					<div class="main__text main__text_about">We appear on the covers of sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae tae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </div>
 					<a href="about.html" class="more animation">Read more</a>
 				</div>
 			</div>
@@ -148,7 +148,7 @@
 						</div>
 					</div>
 				</div>
-				<a href="blog.html" class="btn btn__grey btn__grey_lg animation">Show all topics</a>
+				{{-- <a href="blog.html" class="btn btn__grey btn__grey_lg animation">Show all topics</a> --}}
 			</div>
 		</div>
 	</section><!-- Last Post Section End -->

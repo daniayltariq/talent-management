@@ -57,7 +57,7 @@
 								<a href="{{ route('login') }}">pages</a>
 								<ul class="m-menu__sub">
 									<li class="m-menu__sub-item">
-										<a href="{{ route('picklist') }}">Picklist</a>
+										<a href="{{ route('picklist') }}">Picklist Favorites</a>
 									</li>
 									<li class="m-menu__sub-item">
 										<a href="{{ route('picklist-single') }}">Picklist Single</a>

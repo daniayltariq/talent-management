@@ -176,7 +176,7 @@
 					
 
 					<div class="sidebar-widget">
-						<h4 class="widget__title">we are social</h4>
+						<h4 class="widget__title">our social media urls</h4>
 						@include('web.components.widget-social')
 					</div>
 

@@ -10,7 +10,7 @@
   margin-bottom: 5rem;
   position:relative;
 }
-ul {
+.ul-pricing {
   display:flex;
   top:0px;
   z-index:10;
@@ -55,11 +55,17 @@ td+td, th+th {
 td.default {
   display:table-cell;
 }
+.bg-pri {
+    border-top: 10px solid #dddddd;
+}
 .bg-purple {
-  border-top:3px solid #A32362;
+    border-top: 10px solid #ccdbb1;
 }
 .bg-blue {
-  border-top:3px solid #0097CF;
+    border-top: 10px solid #78a5de;
+}
+.bg-green {
+  border-top:10px solid #00c1a1;
 }
 .sep {
   background:#F5F5F5;
@@ -74,7 +80,7 @@ td.default {
 }
 
 @media (min-width: 640px) {
-  ul {
+  .ul-pricing {
     display:none;
   }
   td,th {
@@ -114,8 +120,8 @@ table.pricing td:nth-child(4) {
     <div class="container">
       <div class="row">
         <div class="title__wrapp">
-          <div class="page__subtitle title__grey">Try premiuim</div>
-          <h1 class="page__title">Pricing plans</h1>
+          {{-- <div class="page__subtitle title__grey">Try premiuim</div> --}}
+          <h1 class="page__title">SUBSCRIPTION PLANS</h1>
         </div>
       </div>
     </div>
@@ -124,34 +130,32 @@ table.pricing td:nth-child(4) {
 
 <article class="mt-5">
 
-<ul>
+<ul class="ul-pricing">
   <li class="bg-purple">
     <button>Basic</button>
   </li>
   <li class="bg-blue">
     <button>Standard </button>
   </li>
-  <li class="bg-blue active">
+  <li class="bg-green active">
     <button>Professional</button>
   </li>
-  <li class="bg-blue">
-    <button>Plus</button>
-  </li>
+  
 </ul>  
 
 <table class="pricing">
   <thead>
     <tr>
-      <th ></th>
+      <th class="bg-pri"></th>
       <th class="bg-purple">Basic</th>
       <th class="bg-blue">Standard</th>
-      <th class="bg-blue default">Professional</th>
+      <th class="bg-green default">Professional</th>
       
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Yearly price</td>
+      <td>Annual price</td>
       <td><span class="txt-top">&dollar;</span><span class="txt-l">19.99 USD</span></td>
       <td><span class="txt-top">&dollar;</span><span class="txt-l">39.99 USD</span></td>
       <td class="default"><span class="txt-top">&dollar;</span><span class="txt-l">59.99 USD</span></td>
@@ -184,10 +188,10 @@ table.pricing td:nth-child(4) {
     </tr>
 
     <tr>
-      <td>Resume</td>
-      <td><span class="tick">&#10004;</span></td>
-      <td><span class="tick">&#10004;</span></td>
-      <td class="default"><span class="tick">Resume Builder Wizard with onscreen formatted resume and generated .pdf resume available for download.</span></td>
+      <td>Resume Builder Wizard with onscreen formatted resume and generated .pdf resume available for download.</td>
+     <td><span class="tick">&#10004;</span></td>
+     <td><span class="tick">&#10004;</span></td>
+     <td><span class="tick">&#10004;</span></td>
       
     </tr>
 
@@ -195,9 +199,9 @@ table.pricing td:nth-child(4) {
       <td colspan="4" class="sep">Communications</td>
     </tr>
     <tr>
-      <td>Link to Social Media</td>
+      <td>Links to Social Media</td>
       <td><span class="tick"></span></td>
-      <td><span class="tick">&#10004; (1)</span></td>
+      <td><span class="tick">&#10004; (2)</span></td>
       <td><span class="tick">&#10004; (unlimited)</span></td>
       
     </tr>
@@ -216,21 +220,21 @@ table.pricing td:nth-child(4) {
       
     </tr>
     <tr>
-      <td>Access to Community Forum</td>
+      <td>Access to Community Forums that include our Community Topics.</td>
       <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td>
       <td><span class="tick">&#10004;</span></td>
       
     </tr>
     <tr>
-      <td>Apply Now button on casting Community Posts</td>
+      <td>Apply Now button on Casting Community Posts</td>
       <td><span class="tick"></span></td>
       <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td>
       
     </tr>
     <tr>
-      <td>Agent-specific email me button. Agents can contact you directly for opportunities</td>
+      <td>Agents can contact you directly for opportunities TO Anyone looking for talent (casting agents, theater producers, directors) can contact you directly through the site.</td>
       <td><span class="tick"></span></td>
       <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td>
@@ -242,21 +246,21 @@ table.pricing td:nth-child(4) {
     </tr>
 
     <tr>
-      <td>Free “The Talent Guide” with 3 referrals ($50 value)</td>
+      <td>Free video download of “The Talent Guide” with 3 referrals ($50 value)</td>
       <td><span class="tick">&#10004;</span></td>
       <td><span class="tick">&#10004;</span></td>
       <td><span class="tick">&#10004;</span></td>
       
     </tr>
     <tr>
-      <td>Invitations to live, online training sessions (Cost = $4.99 per session)</td>
+      <td>Invitations to live, online training sessions </td>
       <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td>
       <td><span class="tick">&#10004;</span></td>
       
     </tr>
     <tr>
-      <td>Invitations to live, online training sessions (Cost = $4.99 per session)</td>
+      <td>Invitations to live, online industry professional Q&As (Cost = $9.99 per session)</td>
       <td><span class="tick"></span></td>
       <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td>
@@ -264,9 +268,9 @@ table.pricing td:nth-child(4) {
     </tr>
     <tr>
       <td></td>
-      <td><button class="cd-btn btn btn__red secondary">Subscribe</button></td>
-      <td><button class="cd-btn btn btn__red secondary">Subscribe</button></td>
-      <td><button class="cd-btn btn btn__red secondary">Subscribe</button></td>
+      <td><button class="cd-btn btn btn__red secondary">Subscribe to Basic</button></td>
+      <td><button class="cd-btn btn btn__red secondary">Subscribe to Standard</button></td>
+      <td><button class="cd-btn btn btn__red secondary">Subscribe to Professional</button></td>
       
     </tr>
     
