@@ -26,6 +26,9 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 .btn-warning {
     font-weight: 200;
 }
+.actions li:last-child a{
+    padding-left: 0 !important; 
+}
 </style>
 
 <link rel="stylesheet" href="{{ asset('plugins/steps/css/style.css') }}">
@@ -210,7 +213,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
                                     <div class="form-row">
                                         <div class="form-holder">
-                                            <input type="text" placeholder="Zip Code" class="form-control">
+                                            <input type="text" id="zip" placeholder="Zip Code" class="form-control">
                                         </div>
                                         <div class="form-holder">
                                             <input type="text" placeholder="Country" class="form-control">
@@ -524,6 +527,19 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             $(this).siblings('.btn').hide();
         });
 
+       jQuery("#zip").blur(function() {
+            $.ajax({
+                type: "GET",
+                beforeSend: function(request) {
+                    request.setRequestHeader("x-key", "afc92938e47b63ec399195c137e01fa20ca48439");
+                },
+                url: "//zip.getziptastic.com/v3/US/48867",
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+        });
+
     });
 
 
@@ -532,16 +548,11 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
 
 <script type="text/javascript">
-    $.ajax({
-        type: "GET",
-        beforeSend: function(request) {
-            request.setRequestHeader("x-key", "afc92938e47b63ec399195c137e01fa20ca48439");
-        },
-        url: "//zip.getziptastic.com/v3/US/48867",
-        success: function(data) {
-            console.log(data);
-        }
-    });
+
+    
+
+
+    
 </script>
 
 @endsection
