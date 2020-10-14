@@ -226,13 +226,15 @@
                                         <div class="">
                                             <table class="w-100">
                                                  <tr>
-                                                     <th>Name</th>
+                                                     <th>Commercial</th>
                                                      <th>Role</th>
+                                                     <th>Production Company or Director</th>
                                                      
                                                  </tr>
 
                                                   <tr>
                                                      <td>Roach Killer</td>
+                                                     <td>Lead</td>
                                                      <td>Regional</td>
                                                      
                                                  </tr>
@@ -249,17 +251,20 @@
                                         <div class="">
                                             <table class="w-100">
                                                  <tr>
-                                                     <th>Name</th>
-                                                     <th>Role</th>
+                                                     <th>Training Class</th>
+                                                     <th>Instructor</th>
+                                                     <th>Training Company</th>
                                                       
                                                  </tr>
 
                                                   <tr>
                                                      <td>MFA</td>
                                                      <td>Mackenzie University</td>
+                                                     <td>Mackenzie University</td>
                                                  </tr>
                                                  <tr>
                                                      <td>BFA</td>
+                                                     <td>Houseman College</td>
                                                      <td>Houseman College</td>
                                                  </tr>
                                                
