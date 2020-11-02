@@ -63,6 +63,7 @@ class RegisterController extends Controller
             'h_adress_1' => ['required', 'string', 'max:255'],
             'h_adress_2' => ['required', 'string', 'max:255'],
             'zipcode' => ['required', 'string', 'max:255'],
+            'account_type' => ['required', 'string'],
 
         ]);
     }
@@ -75,7 +76,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-          return User::create([
+        /* dd($data); */
+        $user = User::create([
             'f_name' => $data['f_name'],
             'l_name' => $data['l_name'],
             'gender' => $data['gender'],
@@ -90,5 +92,20 @@ class RegisterController extends Controller
             'h_adress_2' => $data['h_adress_2'],
             'zipcode' => $data['zipcode'],
         ]);
+
+        $user->assignRole($data['account_type']);
+        return $user;
     }
+
+    protected function registered()
+    {
+        if(Auth::check() && auth()->user()->hasRole('candidate')) {
+            return redirect()->route('account.talent.profile');
+            // return redirect()->route('superadmin.home');
+        } elseif(Auth::check() && auth()->user()->hasRole('agent')) {
+            return 'register controller';
+            
+        }
+    }
+
 }

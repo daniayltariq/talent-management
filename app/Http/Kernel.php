@@ -62,5 +62,13 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'isAdmin' => \App\Http\Middleware\isAdmin::class,
+        'isAgent' => \App\Http\Middleware\isAgent::class,
+        'isCandidate' => \App\Http\Middleware\isCandidate::class,
+        'subscription.active' => \App\Http\Middleware\Subscription\RedirectIfNotActive::class,
+        'subscription.notcancelled' => \App\Http\Middleware\Subscription\RedirectIfCancelled::class,
+        'subscription.cancelled' => \App\Http\Middleware\Subscription\RedirectIfNotCancelled::class,
+        'subscription.customer' => \App\Http\Middleware\Subscription\RedirectIfNotCustomer::class,
+        'subscription.inactive' => \App\Http\Middleware\Subscription\RedirectIfNotInactive::class,
     ];
 }

@@ -38,8 +38,23 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function logout(Request $request) {
-  Auth::logout();
-  return redirect('/login');
-}
+
+    public function authenticated()
+    {
+        /* dd(auth()->user()); */
+        if (Auth::check() && \Auth::user()->hasRole('superadmin')) {
+            return redirect()->route('backend.dashboard');
+        } elseif(Auth::check() && \Auth::user()->hasRole('agent')) {
+            return 'login controller';
+        } elseif(Auth::check() && auth()->user()->hasRole('buyer')) {
+            return redirect()->route('account.talent.profile');
+        }
+        
+    }
+
+    public function logout(Request $request) 
+    {
+      Auth::logout();
+      return redirect('/login');
+    }
 }

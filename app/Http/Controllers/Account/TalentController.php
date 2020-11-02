@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Account;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class TalentController extends Controller
 {
-    public function profile(){
-
+    public function profile()
+    {
     	return view('web.account.profile');
 
     }
