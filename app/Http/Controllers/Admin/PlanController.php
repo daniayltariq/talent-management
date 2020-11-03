@@ -45,14 +45,11 @@ class PlanController extends Controller
         /* dd($request->all()); */
         $plan = new Plan;
         /* dd($plan->getFillable()); */
-        /* $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:50'],
-            'user_type' => ['required', 'string', 'max:50'],
-            'pkg_type' => ['required', 'string'],
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string'],
             'description' => ['required', 'string', 'max:191'],
-            'cost' => ['required', 'integer'],
-            'product_allow' => ['required', 'integer'],
-            'sales_comm' => ['required', 'integer'],
+            'cost' => ['required', 'numeric'],
+            'pictures' => ['required', 'integer'],
         ]);
         
         if ($validator->fails()) {
@@ -60,15 +57,10 @@ class PlanController extends Controller
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
-        } */
-
-        /* $prop=$plan->getFillable();
-        array_push($prop,'_token');
-        $features=$request->except($prop); */
+        }
 
         $plan->fill($request->all());
         $plan->slug=Str::snake($request->name);
-        /* $plan->features=$features; */
 
         \Stripe\Stripe::setApiKey(\Config::get('app.STRIPE_SECRET'));
         $stripe_plan=StripePlan::create(array(
@@ -79,7 +71,7 @@ class PlanController extends Controller
             ),
             "currency" => "usd")
         );
-
+        /* dd($stripe_plan); */
         if (isset($stripe_plan->id)) {
             $plan->stripe_plan=$stripe_plan->id;
             $plan->save();
@@ -115,9 +107,8 @@ class PlanController extends Controller
         $plan=Plan::where('id',$plan)->orWhere('slug',$plan)->first();
     
         if ($plan) {
-            return view('admin.plan.create',compact('plan'));
+            return view('backend.plan.create',compact('plan'));
         }
-        
     }
 
     /**

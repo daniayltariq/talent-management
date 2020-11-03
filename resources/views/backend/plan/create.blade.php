@@ -50,29 +50,29 @@
                         {{ method_field('PATCH') }}
                      @endif
                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Package Name <span class="required">*</span>
+                        <label class="control-label col-md-12 col-sm-12 col-xs-12" for="first-name">Package Name <span class="required">*</span>
                         </label>
                         <div class="col-md-12 col-sm-12 col-xs-12">
                            <input type="text" id="first-name" name="name" value="{{$plan->name ?? ''}}" required="required" class="form-control col-md-12 col-xs-12">
                         </div>
                      </div>
                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Package Cost<span class="required">*</span>
+                        <label class="control-label col-md-12 col-sm-12 col-xs-12" >Package Cost<span class="required">*</span>
                         </label>
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                           <input type="number" required="required" name="cost" value="{{$plan->cost ?? ''}}" class="form-control col-md-12 col-xs-12">
+                           <input type="text" required="required" name="cost" value="{{$plan->cost ?? ''}}" class="form-control col-md-12 col-xs-12">
                         </div>
                      </div>
                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Pictures<span class="required">*</span>
+                        <label class="control-label col-md-12 col-sm-12 col-xs-12" >Pictures<span class="required">*</span>
                         </label>
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                           <input type="number" required="required" name="cost" value="{{$plan->pictures ?? ''}}" class="form-control col-md-12 col-xs-12">
+                           <input type="number" required="required" name="pictures" value="{{$plan->pictures ?? ''}}" class="form-control col-md-12 col-xs-12">
                         </div>
                      </div>
 
                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Add Package Details <span class="required">*</span>
+                        <label class="control-label col-md-12 col-sm-12 col-xs-12" for="first-name">Add Package Details <span class="required">*</span>
                         </label>
                         <div class="col-md-12 col-sm-12 col-xs-12">
                            <textarea name="description" id="summernote" class="summernote">{{$plan->description ?? ''}}</textarea>
@@ -80,11 +80,11 @@
                      </div>
 
                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Features Allow <span class="required">*</span>
+                        <label class="control-label col-md-12 col-sm-12 col-xs-12" for="first-name">Features Allow <span class="required">*</span>
                         </label>
                         <div class="col-md-12 col-sm-12 col-xs-12">
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Unique Url</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Unique Url</label>
                               <div id="unique_url" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->unique_url) && $plan->unique_url=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="unique_url" {{isset($plan) && isset($plan->unique_url) && $plan->unique_url=='0' ? 'checked' : '' }} value="0"> &nbsp; OFF &nbsp;
@@ -95,7 +95,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact info</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Contact info</label>
                               <div id="contact_info" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->contact_info) && $plan->contact_info=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="contact_info" value="0" {{isset($plan) && isset($plan->contact_info) && $plan->contact_info=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
@@ -106,7 +106,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Pictures</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Pictures</label>
                               <div id="pictures" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->pictures) && $plan->pictures =='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="pictures" value="0" {{isset($plan) && isset($plan->pictures) && $plan->pictures =='1' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
@@ -117,7 +117,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Resume</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Resume</label>
                               <div id="resume" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->resume) && $plan->resume=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="resume" value="0" {{isset($plan) && isset($plan->resume) && $plan->resume=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
@@ -128,7 +128,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Social Links</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Social Links</label>
                               <div id="social_links" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->social_links) && $plan->social_links=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="social_links" value="0" {{isset($plan) && isset($plan->social_links) && $plan->social_links=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
@@ -139,7 +139,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Email</label>
                               <div id="email_me" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->email_me) && $plan->email_me=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="email_me" value="0" {{isset($plan) && isset($plan->email_me) && $plan->email_me=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
@@ -150,7 +150,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Short Message</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Short Message</label>
                               <div id="short_message" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->short_message) && $plan->short_message=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="short_message" value="0" {{isset($plan) && isset($plan->short_message) && $plan->short_message=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
@@ -162,7 +162,7 @@
                            </div>
                            
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Community Access</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Community Access</label>
                               <div id="community_access" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->community_access) && $plan->community_access=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="community_access" value="0" {{isset($plan) && isset($plan->community_access) && $plan->community_access=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
@@ -173,7 +173,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Apply Now</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Apply Now</label>
                               <div id="apply_now" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->apply_now) && $plan->apply_now=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="apply_now" value="0" {{isset($plan) && isset($plan->apply_now) && $plan->apply_now=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
@@ -184,7 +184,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Agent Contact</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Agent Contact</label>
                               <div id="agent_contact" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->agent_contact) && $plan->agent_contact=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="agent_contact" value="0" {{isset($plan) && isset($plan->agent_contact) && $plan->agent_contact=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
@@ -195,7 +195,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Training Invitation</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Training Invitation</label>
                               <div id="training_invitation" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->training_invitation) && $plan->training_invitation=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="training_invitation" value="0" {{isset($plan) && isset($plan->training_invitation) && $plan->training_invitation=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
@@ -206,7 +206,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Inductory Invitation</label>
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Inductory Invitation</label>
                               <div id="inductry_invitation" class="btn-group" data-toggle="buttons">
                                  <label class="btn btn-default {{isset($plan) && isset($plan->inductry_invitation) && $plan->inductry_invitation=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="inductry_invitation" value="0" {{isset($plan) && isset($plan->inductry_invitation) && $plan->inductry_invitation=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
@@ -220,7 +220,7 @@
                      </div>
                      <div class="ln_solid"></div>
                      <div class="form-group">
-                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-12">
                            <button type="submit" class="btn btn-success btn-xs" style="background-color: #0abb87;" role="button" style="font-size:13px" ><b>Save</b></button>
                            {{-- <a href="#" class="btn btn-info btn-xs" role="button" style="font-size:13px" ><b>Reset</b></a> --}}
                            {{-- <a href="#" class="btn btn-primary btn-xs" role="button" style="font-size:13px" ><b>Cancel</b></a> --}}

@@ -76,13 +76,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         </div>
                                         <div class="form-group">
                                             <div class="form-holder active">
-                                                <input type="text" placeholder="Legal First Name" class="form-control">
+                                                <input type="text" placeholder="Legal First Name" name="legal_first_name" class="form-control">
                                             </div>
                                             <div class="form-holder">
-                                                <input type="text" placeholder="Legal Last Name" class="form-control">
+                                                <input type="text" placeholder="Legal Last Name" name="legal_last_name" class="form-control">
                                             </div>
                                             <div class="form-holder">
-                                                <input type="text" placeholder="Email" class="form-control">
+                                                <input type="email" placeholder="Email" name="email" class="form-control">
                                             </div>
                                             
                                         </div>
@@ -99,7 +99,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <select name="" class="form-control" placeholder="Height" id="" required>
+                                                        <select name="height" class="form-control" placeholder="Height" id="" required>
                                                             <option value="4">4</option>
                                                             <option value="5">5</option>
                                                             <option value="6">6</option>
@@ -112,7 +112,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <select name="" class="form-control" placeholder="Feet" id="" required>
+                                                        <select name="feet" class="form-control" placeholder="Feet" id="" required>
                                                             <option value="0">0</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
@@ -135,7 +135,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
                                              
                                             <div class="form-holder">
-                                                <select name="" class="form-control" placeholder="Eye Color" id="" required>
+                                                <select name="eyes" class="form-control" placeholder="Eye Color" id="" required>
                                                     <option>Brown Eyes</option>
                                                     <option>Blue Eyes </option>
                                                     <option>Hazel Eyes </option>
@@ -146,7 +146,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </select>
                                             </div>
                                             <div class="form-holder ">
-                                                <select name="" class="form-control" placeholder="Hair Color" id="" required>
+                                                <select name="hairs" class="form-control" placeholder="Hair Color" id="" required>
                                                     <option>Black</option>
                                                     <option>Brown</option>
                                                     <option>Red</option>
@@ -161,17 +161,17 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" placeholder="Chest (inches)" class="form-control">
+                                                        <input type="text" name="chest" placeholder="Chest (inches)" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" placeholder="Neck (inches) (Men only)" class="form-control">
+                                                        <input type="text" name="neck" placeholder="Neck (inches) (Men only)" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" placeholder="Waist (inches)" class="form-control">
+                                                        <input type="text" name="waist" placeholder="Waist (inches)" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -179,17 +179,17 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" placeholder="Sleeve (inches) (Men only)" class="form-control">
+                                                        <input type="text" name="sleves" placeholder="Sleeve (inches) (Men only)" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                {{-- <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" placeholder="Chest (inches)" class="form-control">
+                                                        <input type="text" name="" placeholder="Chest (inches)" class="form-control">
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" placeholder="Shoe size" class="form-control">
+                                                        <input type="text" name="shoes" placeholder="Shoe size" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -204,37 +204,37 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                     <h4 class="text__quote mb-5">Contact & Address</h4>
                                     <div class="form-row">
                                         <div class="form-holder">
-                                            <input type="text" placeholder="Address 1" class="form-control">
+                                            <input type="text" name="address_1" placeholder="Address 1" class="form-control">
                                         </div>
                                         <div class="form-holder">
-                                            <input type="text" placeholder="Address 2" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="form-holder">
-                                            <input type="text" id="zip" placeholder="Zip Code" class="form-control">
-                                        </div>
-                                        <div class="form-holder">
-                                            <input type="text" placeholder="Country" class="form-control">
+                                            <input type="text" name="address_2" placeholder="Address 2" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-holder">
-                                            <input type="text" placeholder="State" class="form-control">
+                                            <input type="text" id="zip" name="zip" placeholder="Zip Code" class="form-control">
                                         </div>
                                         <div class="form-holder">
-                                            <input type="text" placeholder="City" class="form-control">
+                                            <input type="text" name="country" placeholder="Country" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-holder">
+                                            <input type="text" name="state" placeholder="State" class="form-control">
+                                        </div>
+                                        <div class="form-holder">
+                                            <input type="text" name="city" placeholder="City" class="form-control">
                                         </div>
                                     </div>
                                     
                                     <div class="form-row">
                                         <div class="form-holder">
-                                            <input type="text" placeholder="Telephone" class="form-control">
+                                            <input type="text" name="telephone" placeholder="Telephone" class="form-control">
                                         </div>
                                         <div class="form-holder">
-                                            <input type="text" placeholder="Mobile" class="form-control">
+                                            <input type="text" name="mobile" placeholder="Mobile" class="form-control">
                                         </div>
                                     </div>
 

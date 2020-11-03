@@ -13,6 +13,13 @@ class TalentController extends Controller
 
     }
 
+    public function store(Request $request)
+    {
+        dd($request->all());
+    	return view('web.account.profile');
+
+    }
+
     public function detail(){
 
     	return view('web.account.detail');

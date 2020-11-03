@@ -66,10 +66,10 @@ Route::get('/how-it-works', function () {
     return view('web.pages.how-it-works');
 })->name('how-it-works');
 
-
+/* 
 Route::get('/pricing', function () {
     return view('web.pages.pricing');
-})->name('pricing');
+})->name('pricing'); */
 
 
 Route::get('/picklist', function () {
@@ -124,6 +124,8 @@ Route::get('/production/single', [App\Http\Controllers\HomeController::class, 's
 Route::get('/production/apply', [App\Http\Controllers\HomeController::class, 'applyproduction'])->name('applyproduction');
 
 
+Route::get('/pricing', [App\Http\Controllers\PlanController::class, 'index'])->name('pricing');
+
 // Talent Profile ========================================================
 
 /* Route::get('/account/talent/profile', [App\Http\Controllers\TalentController::class, 'profile'])->name('account.talent.profile');
@@ -132,8 +134,17 @@ Route::get('/account/talent/detail', [App\Http\Controllers\TalentController::cla
 
 // Talent Profile ========================================================
 
-Route::group(['middleware' => ['subscription.active']], function () {
+Route::group(['namespace' => 'Subscription\Controllers'], function () {
+    
+    /**
+     * Subscription Resource Routes
+     */
 
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/subscription/{plan}', [App\Http\Controllers\Subscription\SubscriptionController::class, 'index'])->name('subscription.index');
+        Route::post('/subscription', [App\Http\Controllers\Subscription\SubscriptionController::class, 'store'])->name('subscription.store');
+
+    });
 });
 
 Route::group(['prefix' => '/account', 'middleware' => ['auth','isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
@@ -143,7 +154,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','isCandidate'], 'n
      */
     Route::middleware(['subscription.customer'])->group(function () {
         Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
-
+        Route::post('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
     });
     
     Route::get('/talent/detail', [App\Http\Controllers\Account\TalentController::class, 'detail'])->name('talent.detail');
@@ -158,13 +169,13 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','isCandidate'], 'n
          *
          * Accessed if new subscription.
          */    
-        Route::group(['prefix' => '/new', 'as' => 'new.'], function () {
+        /* Route::group(['prefix' => '/new', 'as' => 'new.'], function () {
             // new index
-            Route::get('/', 'SubscriptionController@index')->name('index');
+            Route::get('/{plan}', [App\Http\Controllers\Account\Subscription\SubscriptionCardController::class,'newSubscription'])->name('index');
 
-            //  new store
-            Route::post('/', 'SubscriptionController@store')->name('store');
-        });
+        }); */
+
+        Route::get('getPaymentMethod', [App\Http\Controllers\Account\Subscription\SubscriptionController::class,'getPaymentMethod'])->name('getPaymentMethod');
 
         /**
          * Cancel

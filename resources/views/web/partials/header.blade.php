@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="{{ asset('web/libs/icons/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('web/libs/hero-slider/hero-style.css') }}">
 <link rel="stylesheet" href="{{ asset('web/css/main.css') }}" />
-
+<link href="{{ asset('backend-assets/assets/vendors/general/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css" />
 
 
 <!-- Materialdesignicons CSS (icon) -->
