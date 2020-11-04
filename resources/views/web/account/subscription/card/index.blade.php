@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-center">
-                                <button class="btn btn-stripe form-control" id="card-button" type="button" data-secret="{{ $intent->client_secret }}">Pay</button>
+                                <button class="btn btn-stripe form-control" style="padding: 0px 50px;" id="card-button" type="button" data-secret="{{ $intent->client_secret }}">Pay</button>
                             </div>
                         </form>
                         </div>

@@ -45,7 +45,8 @@ class LoginController extends Controller
         if (Auth::check() && \Auth::user()->hasRole('superadmin')) {
             return redirect()->route('backend.dashboard');
         } elseif(Auth::check() && \Auth::user()->hasRole('agent')) {
-            return 'login controller';
+            /* dd(session('url.intended')); */
+            return redirect()->to(session('url.intended'));
         } elseif(Auth::check() && auth()->user()->hasRole('buyer')) {
             return redirect()->route('account.talent.profile');
         }

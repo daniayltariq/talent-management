@@ -18,6 +18,7 @@ class isAgent
         if(\Auth::check() && \Auth::user()->hasRole("agent") ){ 
             return $next($request);
         }else{
+            $request->session()->put('url.intended', url()->current());
             return redirect()->route('login');
         }
     }

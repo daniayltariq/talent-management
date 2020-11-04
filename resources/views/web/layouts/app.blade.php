@@ -25,6 +25,10 @@
 
 	@include('web.partials.footer-content')
 
+	@auth
+		@include('web.partials.picklist-modal')
+	@endauth
+
 </body>
 
 	

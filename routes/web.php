@@ -72,7 +72,7 @@ Route::get('/pricing', function () {
 })->name('pricing'); */
 
 
-Route::get('/picklist', function () {
+/* Route::get('/picklist', function () {
     return view('web.pages.picklist');
 })->name('picklist');
 
@@ -80,7 +80,7 @@ Route::get('/picklist', function () {
 Route::get('/picklist-single', function () {
     return view('web.pages.picklist-single');
 })->name('picklist-single');
-
+ */
 
 
 
@@ -123,9 +123,9 @@ Route::get('/find-productions', [App\Http\Controllers\HomeController::class, 'fi
 Route::get('/production/single', [App\Http\Controllers\HomeController::class, 'singleproduction'])->name('singleproduction');
 Route::get('/production/apply', [App\Http\Controllers\HomeController::class, 'applyproduction'])->name('applyproduction');
 
-
-Route::get('/pricing', [App\Http\Controllers\PlanController::class, 'index'])->name('pricing');
-
+Route::middleware(['isCandidate'])->group(function () {
+    Route::get('/pricing', [App\Http\Controllers\PlanController::class, 'index'])->name('pricing');
+});
 // Talent Profile ========================================================
 
 /* Route::get('/account/talent/profile', [App\Http\Controllers\TalentController::class, 'profile'])->name('account.talent.profile');
@@ -240,6 +240,15 @@ Route::group([
 ],function(){
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('plan', App\Http\Controllers\Admin\PlanController::class);
+});
+
+Route::group([
+	'prefix' => 'agent',
+    'as' => 'agent.',
+	'middleware' => ['isAgent'],
+],function(){
+    /* Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard'); */
+    Route::resource('picklist', App\Http\Controllers\Agent\PicklistController::class);
 });
 
 //postjob controller

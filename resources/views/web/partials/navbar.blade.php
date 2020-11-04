@@ -57,11 +57,14 @@
 								<a href="{{ route('login') }}">pages</a>
 								<ul class="m-menu__sub">
 									<li class="m-menu__sub-item">
-										<a href="{{ route('picklist') }}">Picklist Favorites</a>
+										<a href="{{ route('agent.picklist.index') }}">Picklist Favorites</a>
 									</li>
-									<li class="m-menu__sub-item">
-										<a href="{{ route('picklist-single') }}">Picklist Single</a>
-									</li>
+									@auth
+										<li class="m-menu__sub-item">
+											<a href="{{ route('agent.picklist.show',auth()->user()->id) }}">Picklist Single</a>
+										</li>
+									@endauth
+									
 									<li class="m-menu__sub-item">
 										<a href="{{ route('pricing') }}">Pricing</a>
 									</li>

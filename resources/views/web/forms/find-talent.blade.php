@@ -4,17 +4,105 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 <style type="text/css">
-button.btn.btn__red.animation.btn-half.pull-right {
-    margin-bottom: 20px;
-}
-.btn-half {
-    width: 30%;
-}
-span.multiselect-selected-text {
-    font-size: 14px;
-    font-weight: 500;
-    color: #616161;
-}
+    button.btn.btn__red.animation.btn-half.pull-right {
+        margin-bottom: 20px;
+    }
+    .btn-half {
+        width: 30%;
+    }
+
+    .btn {
+        text-transform: capitalize;
+        font-size: 14px;
+    }
+
+    span.multiselect-selected-text {
+        font-size: 14px;
+        font-weight: 500;
+        color: #616161;
+    }
+
+    .modal {
+        text-align: left;
+    }
+    .modal-content {
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 16px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21);
+        width: 100%;
+    }
+    .modal-header{
+        border-bottom: 0;
+        padding-top: 15px;
+        padding-right: 26px;
+        padding-left: 26px;
+        padding-bottom: 0px;
+    }
+    .modal-title {
+        font-size: 28px;
+    }
+    .modal-body{
+        border-bottom: 0;
+        padding-top: 5px;
+        padding-right: 26px;
+        padding-left: 26px;
+        padding-bottom: 10px;
+        font-size: 15px;
+    }
+    .modal-footer {
+        border-top:0;
+        padding-top: 0px;
+        padding-right:26px;
+        padding-bottom:26px;
+        padding-left:26px;
+    }
+    .btn-default,.btn-primary {
+        border: none;
+        border-radius: 2px;
+        display: inline-block;
+        color: #424242;
+        background-color: #FFF;
+        text-align: center;
+        height: 36px;
+        line-height: 36px;
+        outline: 0;
+        padding: 0 2rem; 
+        vertical-align: middle;
+        -webkit-tap-highlight-color: transparent;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        letter-spacing: .5px;
+        transition: .2s ease-out;
+    }
+    .btn-default:hover{
+    background-color: #FFF;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    }
+    .btn-primary {
+    color: #FFF;
+    background-color: #2980B9;
+    }
+    .btn-primary:hover{
+    background-color: #2980B9;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    }
+    footer {
+    text-align: center;
+    margin: 15px;
+    }
+    footer h4{
+    font-size: 2.92rem;
+    font-weight:100;
+        margin: 1.46rem 0 1.168rem; 
+    }
+
+    .picklist-btn{
+        position: relative;
+        z-index: 999999;
+    }
+
+    .new-picklist{
+        display: none;
+    }
 </style>
 @endsection
 
@@ -178,26 +266,39 @@ span.multiselect-selected-text {
 
                     </div> --}}
 
-
                     <div class="col-md-12" >
                         <div class="grid">
                             <div class="grid-sizer"></div>
                             <div class="grid-gutter"></div>
-                            <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 new-faces women" data-category="women">
-                                <img class="img-responsive" src="{{ asset('web/img/02_model-1.jpg') }} " alt="sample image">
-                                <div class="grid-item__contant-info">
-                                    <div class="grid-item__contant-name">Kate Farmer</div>
-                                    <div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
-                                    <div class="grid-item__contant-place title__grey">Manchester City</div>
-                                    <div class="grid-item__contant-place title__grey">AGE: 23</div>
-                                    <div class="grid-item__contant-place title__grey">Height: 5' 3"</div>
-                                    <i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
+
+                            @foreach ($members as $member)
+                                <div class="effect-bubba grid-item grid-item__width2 new-faces women" data-category="women">
+                                    <img class="img-responsive" src="{{ asset('web/img/02_model-1.jpg') }} " alt="sample image">
+                                    <div class="grid-item__contant-info">
+                                        <div class="grid-item__contant-name">{{!is_null($member->profile) ? $member->profile->legal_first_name.' '.$member->profile->legal_last_name : ""}} </div>
+                                        <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->address_1 : ''}} {{!is_null($member->profile) ?$member->profile->country : ''}}</div>
+                                        <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->city : ''}}</div>
+                                        <div class="grid-item__contant-place title__grey">AGE: 23</div>
+                                        <div class="grid-item__contant-place title__grey">Height: {{!is_null($member->profile) ?$member->profile->height : ''}}</div>
+                                        <i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i>
+                                        <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
+                                        <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
+
+                                        @role('agent')
+                                            <a href="#picklist-modal" class="picklist-btn" data-memberid="{{$member->id}}" role="button" data-toggle="modal">
+                                        @endrole
+
+                                        {{-- @guest
+                                            <a href="{{route('login')}}">
+                                        @endguest --}}
+                                        
+                                            <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </a>
-                            <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                            @endforeach
+                            
+                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                                 <img class="img-responsive" src="{{ asset('web/img/02_model-5.jpg') }} " alt="sample image">
                                 <div class="grid-item__contant-info">
                                     <div class="grid-item__contant-name">Kate Farmer</div>
@@ -210,8 +311,8 @@ span.multiselect-selected-text {
                                     <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
                                     <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
                                 </div>
-                            </a>
-                            <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 new-faces stylists" data-category="women">
+                            </div>
+                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 new-faces stylists" data-category="women">
                                 <img class="img-responsive" src="{{ asset('web/img/02_model-6.jpg') }} " alt="sample image">
                                 <div class="grid-item__contant-info">
                                     <div class="grid-item__contant-name">Kate Farmer</div>
@@ -224,8 +325,8 @@ span.multiselect-selected-text {
                                     <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
                                     <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
                                 </div>
-                            </a>
-                            <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 women" data-category="women">
+                            </div>
+                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 women" data-category="women">
                                 <img class="img-responsive" src="{{ asset('web/img/02_model-4.jpg') }} " alt="sample image">
                                 <div class="grid-item__contant-info">
                                     <div class="grid-item__contant-name">Kate Farmer</div>
@@ -238,8 +339,8 @@ span.multiselect-selected-text {
                                     <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
                                     <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
                                 </div>
-                            </a>
-                            <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 women" data-category="women">
+                            </div>
+                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 women" data-category="women">
                                 <img class="img-responsive" src="{{ asset('web/img/02_model-7.jpg') }} " alt="sample image">
                                 <div class="grid-item__contant-info">
                                     <div class="grid-item__contant-name">Kate Farmer</div>
@@ -252,8 +353,8 @@ span.multiselect-selected-text {
                                     <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
                                     <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
                                 </div>
-                            </a>
-                            <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle " data-category="women">
+                            </div>
+                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle " data-category="women">
                                 <img class="img-responsive" src="{{ asset('web/img/02_model-3.jpg') }} " alt="sample image">
                                 <div class="grid-item__contant-info">
                                     <div class="grid-item__contant-name">Kate Farmer</div>
@@ -266,8 +367,8 @@ span.multiselect-selected-text {
                                     <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
                                     <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
                                 </div>
-                            </a>
-                            <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 new-faces stylists " data-category="women">
+                            </div>
+                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 new-faces stylists " data-category="women">
                                 <img class="img-responsive" src="{{ asset('web/img/02_model-2.jpg') }} " alt="sample image">
                                 <div class="grid-item__contant-info">
                                     <div class="grid-item__contant-name">Kate Farmer</div>
@@ -280,8 +381,8 @@ span.multiselect-selected-text {
                                     <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
                                     <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
                                 </div>
-                            </a>
-                            <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 lifestyle men" data-category="women">
+                            </div>
+                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 lifestyle men" data-category="women">
                                 <img class="img-responsive" src="{{ asset('web/img/02_model-8.jpg') }} " alt="sample image">
                                 <div class="grid-item__contant-info">
                                     <div class="grid-item__contant-name">Kate Farmer</div>
@@ -294,8 +395,8 @@ span.multiselect-selected-text {
                                     <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
                                     <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
                                 </div>
-                            </a>
-                            <a href="single-model.html" class="effect-bubba grid-item grid-item__width2 lifestyle men" data-category="women">
+                            </div>
+                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 lifestyle men" data-category="women">
                                 <img class="img-responsive" src="{{ asset('web/img/02_model-9.jpg') }} " alt="sample image">
                                 <div class="grid-item__contant-info">
                                     <div class="grid-item__contant-name">Kate Farmer</div>
@@ -308,7 +409,7 @@ span.multiselect-selected-text {
                                     <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
                                     <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
 
@@ -320,11 +421,15 @@ span.multiselect-selected-text {
 @section('scripts')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
         $('.example-getting-started').multiselect();
     });
+
+
 </script>
 
 @endsection

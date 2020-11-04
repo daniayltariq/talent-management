@@ -30,7 +30,13 @@ class HomeController extends Controller
 
     public function findtalent()
     {
-        return view('web.forms.find-talent');
+      $members=\App\Models\User::whereHas(
+         'roles', function($q){
+             $q->whereNotIn('name',['superadmin','agent']);
+         }
+      )->with('profile')->get();
+      /* dd($members); */
+      return view('web.forms.find-talent',compact('members'));
     }
   
     public function models()

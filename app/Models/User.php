@@ -46,4 +46,14 @@ class User extends Authenticatable /* implements MustVerifyEmail */
     {
         return $this->stripe_id;
     }
+
+    public function picklist()
+    {
+        return $this->hasMany('App\Models\Picklist','user_id');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne('App\Models\Profile','user_id');
+    }
 }
