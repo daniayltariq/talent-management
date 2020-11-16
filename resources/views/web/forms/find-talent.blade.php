@@ -288,9 +288,9 @@
                                             <a href="#picklist-modal" class="picklist-btn" data-memberid="{{$member->id}}" role="button" data-toggle="modal">
                                         @endrole
 
-                                        {{-- @guest
+                                        @guest
                                             <a href="{{route('login')}}">
-                                        @endguest --}}
+                                        @endguest
                                         
                                             <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
                                         </a>

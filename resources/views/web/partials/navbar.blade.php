@@ -68,12 +68,17 @@
 									<li class="m-menu__sub-item">
 										<a href="{{ route('pricing') }}">Pricing</a>
 									</li>
-									<li class="m-menu__sub-item">
-										<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
-									</li>
-									<li class="m-menu__sub-item">
-										<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
-									</li>
+
+									@if (\Auth::guest() || auth()->user()->hasRole('candidate'))
+										<li class="m-menu__sub-item">
+											<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
+										</li>
+										<li class="m-menu__sub-item">
+											<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
+										</li>
+									@endif
+									
+									
 									<li class="m-menu__sub-item">
 										<a href="{{ route('single-topic') }}">Community Topics</a>
 									</li>

@@ -53,7 +53,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             <div class="row">
                 <h3 class="text__quote centered">Complete your profile form</h3>
                 <div class="col-lg-12 col-md-12 ">
-                    <form action="">
+                    <form action="{{route('account.talent-profile.store')}}" method="POST" id="profile_form">
+                        @csrf
+
+                        @if ($profile)
+                            @method('PUT')
+                            <input type="hidden" name="profile_id" value="{{$profile->id}}">
+                        @endif
                         <div id="wizard">
                             <!-- SECTION 1 -->
                                 <h4></h4>
@@ -67,8 +73,8 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </div>
                                             </a>
                                             <div class="avartar-picker">
-                                                <input type="file" name="file-1[]" id="file-1" class="inputfile" data-multiple-caption="{count} files selected" multiple />
-                                                <label for="file-1">
+                                                <input type="file" name="profile_img[]" id="profile_img" class="inputfile" data-multiple-caption="{count} files selected" multiple/>
+                                                <label for="profile_img">
                                                     <i class="zmdi zmdi-camera"></i>
                                                     <span>Choose Picture</span>
                                                 </label>
@@ -76,13 +82,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         </div>
                                         <div class="form-group">
                                             <div class="form-holder active">
-                                                <input type="text" placeholder="Legal First Name" name="legal_first_name" class="form-control">
+                                                <input type="text" placeholder="Legal First Name" name="legal_first_name" value="{{$profile->legal_first_name ??''}}" class="form-control" required>
                                             </div>
                                             <div class="form-holder">
-                                                <input type="text" placeholder="Legal Last Name" name="legal_last_name" class="form-control">
+                                                <input type="text" placeholder="Legal Last Name" name="legal_last_name" value="{{$profile->legal_last_name?? ''}}" class="form-control" required>
                                             </div>
                                             <div class="form-holder">
-                                                <input type="email" placeholder="Email" name="email" class="form-control">
+                                                <input type="email" placeholder="Email" name="email" class="form-control" value="{{$profile->email ?? ''}}" required>
                                             </div>
                                             
                                         </div>
@@ -100,35 +106,37 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <select name="height" class="form-control" placeholder="Height" id="" required>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                            <option value="9">9</option>
-                                                            <option value="10">10</option>
+                                                            <option value="">select height</option>
+                                                            <option value="4" {{isset($profile->height) && $profile->height==4 ? 'selected' : ''}}>4</option>
+                                                            <option value="5" {{isset($profile->height) && $profile->height==5 ? 'selected' : ''}}>5</option>
+                                                            <option value="6" {{isset($profile->height) && $profile->height==6 ? 'selected' : ''}}>6</option>
+                                                            <option value="7" {{isset($profile->height) && $profile->height==7 ? 'selected' : ''}}>7</option>
+                                                            <option value="8" {{isset($profile->height) && $profile->height==8 ? 'selected' : ''}}>8</option>
+                                                            <option value="9" {{isset($profile->height) && $profile->height==9 ? 'selected' : ''}}>9</option>
+                                                            <option value="10" {{isset($profile->height) && $profile->height==10 ? 'selected' : ''}}>10</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <select name="feet" class="form-control" placeholder="Feet" id="" required>
-                                                            <option value="0">0</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                            <option value="9">9</option>
+                                                            <option value="">select feet</option>
+                                                            <option value="0" {{isset($profile->feet) && $profile->feet==0 ? 'selected' : ''}}>0</option>
+                                                            <option value="1" {{isset($profile->feet) && $profile->feet==1 ? 'selected' : ''}}>1</option>
+                                                            <option value="2" {{isset($profile->feet) && $profile->feet==2 ? 'selected' : ''}}>2</option>
+                                                            <option value="3" {{isset($profile->feet) && $profile->feet==3 ? 'selected' : ''}}>3</option>
+                                                            <option value="4" {{isset($profile->feet) && $profile->feet==4 ? 'selected' : ''}}>4</option>
+                                                            <option value="5" {{isset($profile->feet) && $profile->feet==5 ? 'selected' : ''}}>5</option>
+                                                            <option value="6" {{isset($profile->feet) && $profile->feet==6 ? 'selected' : ''}}>6</option>
+                                                            <option value="7" {{isset($profile->feet) && $profile->feet==7 ? 'selected' : ''}}>7</option>
+                                                            <option value="8" {{isset($profile->feet) && $profile->feet==8 ? 'selected' : ''}}>8</option>
+                                                            <option value="9" {{isset($profile->feet) && $profile->feet==9 ? 'selected' : ''}}>9</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" placeholder="Weight in lbs" class="form-control">
+                                                        <input type="text" name="weight"  value="{{$profile->weight ?? ''}}" placeholder="Weight in lbs" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -136,23 +144,23 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                              
                                             <div class="form-holder">
                                                 <select name="eyes" class="form-control" placeholder="Eye Color" id="" required>
-                                                    <option>Brown Eyes</option>
-                                                    <option>Blue Eyes </option>
-                                                    <option>Hazel Eyes </option>
-                                                    <option>Amber </option>
-                                                    <option>Gray </option>
-                                                    <option>Green </option>
-                                                    <option>Fill-in Other</option>
+                                                    <option value="brown" {{isset($profile->eyes) && $profile->eyes=="brown" ? 'selected' : ''}}>Brown Eyes</option>
+                                                    <option value="blue" {{isset($profile->eyes) && $profile->eyes=="blue" ? 'selected' : ''}}>Blue Eyes </option>
+                                                    <option value="hazel" {{isset($profile->eyes) && $profile->eyes=="hazel" ? 'selected' : ''}}>Hazel Eyes </option>
+                                                    <option value="amber" {{isset($profile->eyes) && $profile->eyes=="amber" ? 'selected' : ''}}>Amber </option>
+                                                    <option value="gray" {{isset($profile->eyes) && $profile->eyes=="gray" ? 'selected' : ''}}>Gray </option>
+                                                    <option value="green" {{isset($profile->eyes) && $profile->eyes=="green" ? 'selected' : ''}}>Green </option>
+                                                    <option >Fill-in Other</option>
                                                 </select>
                                             </div>
                                             <div class="form-holder ">
                                                 <select name="hairs" class="form-control" placeholder="Hair Color" id="" required>
-                                                    <option>Black</option>
-                                                    <option>Brown</option>
-                                                    <option>Red</option>
-                                                    <option>Grey</option>
-                                                    <option>White</option>
-                                                    <option>Blonde</option>
+                                                    <option value="black" {{isset($profile->hairs) && $profile->hairs=="black" ? 'selected' : ''}}>Black</option>
+                                                    <option value="brown" {{isset($profile->hairs) && $profile->hairs=="brown" ? 'selected' : ''}}>Brown</option>
+                                                    <option value="red" {{isset($profile->hairs) && $profile->hairs=="red" ? 'selected' : ''}}>Red</option>
+                                                    <option value="grey" {{isset($profile->hairs) && $profile->hairs=="grey" ? 'selected' : ''}}>Grey</option>
+                                                    <option value="white" {{isset($profile->hairs) && $profile->hairs=="white" ? 'selected' : ''}}>White</option>
+                                                    <option value="blonde" {{isset($profile->hairs) && $profile->hairs=="blonde" ? 'selected' : ''}}>Blonde</option>
                                                 </select>
                                             </div>
 
@@ -161,17 +169,17 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" name="chest" placeholder="Chest (inches)" class="form-control">
+                                                        <input type="text" value="{{$profile->chest ?? ''}}" name="chest" placeholder="Chest (inches)" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" name="neck" placeholder="Neck (inches) (Men only)" class="form-control">
+                                                        <input type="text" name="neck" value="{{$profile->neck ?? ''}}" placeholder="Neck (inches) (Men only)" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" name="waist" placeholder="Waist (inches)" class="form-control">
+                                                        <input type="text" name="waist" value="{{$profile->waist ?? ''}}" placeholder="Waist (inches)" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -179,7 +187,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" name="sleves" placeholder="Sleeve (inches) (Men only)" class="form-control">
+                                                        <input type="text" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="Sleeve (inches) (Men only)" class="form-control">
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-md-4">
@@ -189,7 +197,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </div> --}}
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" name="shoes" placeholder="Shoe size" class="form-control">
+                                                        <input type="text" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="Shoe size" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -204,37 +212,37 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                     <h4 class="text__quote mb-5">Contact & Address</h4>
                                     <div class="form-row">
                                         <div class="form-holder">
-                                            <input type="text" name="address_1" placeholder="Address 1" class="form-control">
+                                            <input type="text" name="address_1" value="{{$profile->address_1 ?? ''}}" placeholder="Address 1" class="form-control">
                                         </div>
                                         <div class="form-holder">
-                                            <input type="text" name="address_2" placeholder="Address 2" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="form-holder">
-                                            <input type="text" id="zip" name="zip" placeholder="Zip Code" class="form-control">
-                                        </div>
-                                        <div class="form-holder">
-                                            <input type="text" name="country" placeholder="Country" class="form-control">
+                                            <input type="text" name="address_2" value="{{$profile->address_2 ?? ''}}" placeholder="Address 2" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-holder">
-                                            <input type="text" name="state" placeholder="State" class="form-control">
+                                            <input type="text" id="zip" name="zip" value="{{$profile->zip ?? ''}}" placeholder="Zip Code" class="form-control">
                                         </div>
                                         <div class="form-holder">
-                                            <input type="text" name="city" placeholder="City" class="form-control">
+                                            <input type="text" name="country" value="{{$profile->country ?? ''}}" placeholder="Country" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-holder">
+                                            <input type="text" name="state" value="{{$profile->state ?? ''}}" placeholder="State" class="form-control">
+                                        </div>
+                                        <div class="form-holder">
+                                            <input type="text" name="city" value="{{$profile->city ?? ''}}" placeholder="City" class="form-control">
                                         </div>
                                     </div>
                                     
                                     <div class="form-row">
                                         <div class="form-holder">
-                                            <input type="text" name="telephone" placeholder="Telephone" class="form-control">
+                                            <input type="text" name="telephone" value="{{$profile->telephone ?? ''}}" placeholder="Telephone" class="form-control">
                                         </div>
                                         <div class="form-holder">
-                                            <input type="text" name="mobile" placeholder="Mobile" class="form-control">
+                                            <input type="text" name="mobile" value="{{$profile->mobile ?? ''}}" placeholder="Mobile" class="form-control">
                                         </div>
                                     </div>
 
@@ -244,23 +252,23 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                 <h4></h4>
                                 <section>
                                     <h4 class="text__quote mb-5">Experience: Films</h4>
-
+                                    <input type="hidden" name="type" value="films">
                                     <div id="Films" class="repeater">
                                       <!-- Repeater Heading -->
                                       
                                       <!-- Repeater Items -->
                                       
-                                          <div class="items" data-group="test">
+                                          <div class="items" data-group="experience[]">
 
                                             <div class="form-row">
-                                                <div class="form-holder">
-                                                    <input type="text" placeholder="Name" class="form-control">
+                                                <div class="form-holder" >
+                                                    <input type="text" placeholder="Name" data-name="name" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Role" class="form-control">
+                                                    <input type="text" data-name="role" placeholder="Role" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Production" class="form-control">
+                                                    <input type="text" data-name="production" placeholder="Production" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
                                                     <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
@@ -290,23 +298,23 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                 <h4></h4>
                                 <section>
                                     <h4 class="text__quote mb-5">Experience: Theater</h4>
-
+                                    <input type="hidden" name="type" value="theater">
                                     <div id="Theater" class="repeater">
                                       <!-- Repeater Heading -->
                                       
                                       <!-- Repeater Items -->
                                       
-                                          <div class="items" data-group="test">
+                                          <div class="items" data-group="experience[]">
 
                                             <div class="form-row">
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Name" class="form-control">
+                                                    <input type="text" data-name="name" placeholder="Name" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Role" class="form-control">
+                                                    <input type="text" data-name="role" placeholder="Role" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Location" class="form-control">
+                                                    <input type="text" data-name="production" placeholder="Location" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
                                                     <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
@@ -334,23 +342,23 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                 <h4></h4>
                                 <section>
                                     <h4 class="text__quote mb-5">Experience: Television</h4>
-
+                                    <input type="hidden" name="type" value="television">
                                     <div id="Television" class="repeater">
                                       <!-- Repeater Heading -->
                                       
                                       <!-- Repeater Items -->
                                       
-                                          <div class="items" data-group="test">
+                                          <div class="items" data-group="experience[]">
 
                                             <div class="form-row">
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Name" class="form-control">
+                                                    <input type="text" data-name="name" placeholder="Name" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Role" class="form-control">
+                                                    <input type="text" data-name="role" placeholder="Role" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Location" class="form-control">
+                                                    <input type="text" data-name="production" placeholder="Location" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
                                                     <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
@@ -378,24 +386,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                 <h4></h4>
                                 <section>
                                     <h4 class="text__quote mb-5">Experience: Commercials</h4>
-
+                                    <input type="hidden" name="type" value="commercials">
                                     <div id="Commercials" class="repeater">
                                       <!-- Repeater Heading -->
                                       
                                       <!-- Repeater Items -->
                                       
-                                          <div class="items" data-group="test">
+                                          <div class="items" data-group="experience[]">
 
                                             <div class="form-row">
                                                 <div class="form-holder">                     
-                                                    <input type="text" placeholder="Commercial" class="form-control">
+                                                    <input type="text" data-name="name" placeholder="Commercial" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Role" class="form-control">
+                                                    <input type="text" data-name="role"  placeholder="Role" class="form-control">
                                                 </div>
                                                  
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Production Company or Director" class="form-control">
+                                                    <input type="text" data-name="production"  placeholder="Production Company or Director" class="form-control">
                                                 </div>
                                                  
                                                 <div class="form-holder">
@@ -424,23 +432,23 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                 <h4></h4>
                                 <section>
                                     <h4 class="text__quote mb-5">Experience: Training</h4>
-
+                                    <input type="hidden" name="type" value="training">
                                     <div id="Training" class="repeater">
                                       <!-- Repeater Heading -->
                                       
                                       <!-- Repeater Items -->
                                       
-                                          <div class="items" data-group="test">
+                                          <div class="items" data-group="experience[]">
 
                                             <div class="form-row">              
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Training Class" class="form-control">
+                                                    <input type="text" data-name="name" placeholder="Training Class" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Instructor" class="form-control">
+                                                    <input type="text" data-name="role" placeholder="Instructor" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Training Company" class="form-control">
+                                                    <input type="text" data-name="production" placeholder="Training Company" class="form-control">
                                                 </div>
                                                
                                                 <div class="form-holder">
@@ -469,28 +477,19 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                 <h4></h4>
                                 <section>
                                     <h4 class="text__quote mb-5">Specials Skills</h4>
-
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" value="">Basketball
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" value="">Baseball
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" value="">Golf
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" value="">Rollerblading
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" value="">Juggling
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" value="">Scuba (PADI certified)
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" value="">Valid Driver’s License and U.S. Passport
-                                    </label>
+                                    @php
+                                        $cand_skills="";
+                                        if (isset(auth()->user()->skills)) {
+                                            $cand_skills=auth()->user()->skills->pluck('skill_id')->toArray();
+                                            
+                                        }
+                                        
+                                    @endphp
+                                    @foreach($skills as $key=> $skill)
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" class="flat" name="skills[]" value="{{$skill->id}}" {{isset($post) && in_array("$skill->id",$cand_skills)?'checked':''}}> {{$skill->title}}
+                                        </label>
+                                    @endforeach
 
                                     </form>
 
@@ -508,6 +507,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 @endsection
 @section('scripts')
 <script src="{{ asset('plugins/steps/js/jquery.steps.js') }}"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="{{ asset('plugins/steps/js/main.js') }}"></script>
 <script src="{{ asset('/js/repeater.js') }}"></script>
 
@@ -540,6 +540,10 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             });
         });
 
+        /* $('a[href="#finish"]').on('click',function(){
+            $('#profile_form').submit();
+        }) */
+
     });
 
 
@@ -549,10 +553,69 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
 <script type="text/javascript">
 
-    
+    $(document).on('click','a[href="#next"]',function(e){
+        if ($("#profile_form").valid()) 
+        {
+            var params = {};
+
+            @if ($profile)
+                params.method = 'PUT';
+                params.profile_id = "{{$profile->id}}";
+            @endif
 
 
-    
+            /* console.log($('section[aria-hidden="false"] *').serializeArray()); */
+            $('section[aria-hidden="false"] *').filter(':input').each(function () {
+                console.log($(this).attr('name')+' => '+ $(this).val());
+                params[$(this).attr('name')]=$(this).val();
+            });
+
+
+            $.post( "{{ route('account.talent-profile.store') }}",{
+                    _token : "{{ csrf_token() }}",
+                    params
+                }, function( res ) {
+                    if (res.alert_type) {
+                        toastr.success(res.message);
+                    } else {
+                        toastr.error(res.message);
+                    }
+            });
+        }
+        
+        
+    })
+
+    $(document).on('click','a[href="#finish"]',function(e){
+        if ($("#profile_form").valid()) 
+        {
+            var params = {};
+
+            @if ($profile)
+                params.method = 'PUT';
+                params.profile_id = "{{$profile->id}}";
+            @endif
+
+            var skills = $('input[name^=skills]:checked').map(function(idx, elem) {
+                return $(elem).val();
+            }).get();
+            /* console.log($('section[aria-hidden="false"] *').serializeArray()); */
+            $.post( "{{ route('account.talent-profile.store') }}",{
+                    _token : "{{ csrf_token() }}",
+                    params,
+                    skills:skills
+                }, function( res ) {
+                    if (res.alert_type) {
+                        toastr.success(res.message);
+                    } else {
+                        toastr.error(res.message);
+                    }
+            });
+        }
+        
+        
+    })
+
 </script>
 
 @endsection

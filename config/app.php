@@ -180,7 +180,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Spatie\Permission\PermissionServiceProvider::class,
-
+        Yoeunes\Toastr\ToastrServiceProvider::class,
+        
     ],
 
     /*

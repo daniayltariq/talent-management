@@ -90,9 +90,17 @@
 
 											<div class="talent-skill">
 												<p><b>Specials Skills</b></p>
-												<p>Basketball, Baseball, Golf, Rollerblading, Juggling, Scuba (PADI certified), Photography</p>
+												@if ($item->member()->exists() && $item->member->skills()->exists())
+													<p>
+														@foreach ($item->member->skills as $skill)
+														<span>{{$skill->title. (!$loop->last()?',':'')}} </span>
+														@endforeach
+													</p>
+												@endif
+												
+												{{-- <p>Basketball, Baseball, Golf, Rollerblading, Juggling, Scuba (PADI certified), Photography</p>
 
-												<p>Valid Driver’s License and U.S. Passport.</p>
+												<p>Valid Driver’s License and U.S. Passport.</p> --}}
 											</div>
 										</div>
 										

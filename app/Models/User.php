@@ -56,4 +56,14 @@ class User extends Authenticatable /* implements MustVerifyEmail */
     {
         return $this->hasOne('App\Models\Profile','user_id');
     }
+
+    public function experience()
+    {
+        return $this->hasMany('App\Models\Experience','candidate_id');
+    }
+
+    public function skills()
+    {
+        return $this->hasOne('App\Models\CandidateSkill','candidate_id');
+    }
 }
