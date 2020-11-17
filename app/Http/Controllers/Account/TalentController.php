@@ -21,7 +21,7 @@ class TalentController extends Controller
 
     public function store(Request $request)
     {
-        /* dd(json_decode($request->params,true)); */
+        dd(json_decode($request->skills,true));
         /* return $request->all(); */
         /* try { */
             $req=json_decode($request->params,true);
