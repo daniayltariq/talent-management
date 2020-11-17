@@ -76,9 +76,9 @@
                     <div class="kt-menu__submenu ">
                         <span class="kt-menu__arrow"></span>
                         <ul class="kt-menu__subnav">
-                            <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true" ><span class="kt-menu__link"><span class="kt-menu__link-text">Utils</span></span></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Blog list</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create Blog</span></a></li>
+                          
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Blog list</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.create') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create Blog</span></a></li>
                         </ul>
                     </div>
                 </li>

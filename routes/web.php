@@ -42,19 +42,21 @@ Route::get('/forum', function () {
 })->name('forum');
 
 
-Route::get('/community', function () {
-    return view('web.pages.community');
-})->name('community');
+// Route::get('/community', function () {
+//     return view('web.pages.community');
+// })->name('community');
+
+Route::get('/community', [App\Http\Controllers\CommunityController::class,'index'])->name('community');
 
 
-Route::get('/single-topic', function () {
-    return view('web.pages.single-topic');
-})->name('single-topic');
+// Route::get('/single-topic', function () {
+//     return view('web.pages.single-topic');
+// })->name('single-topic');
 
 
-Route::get('/single-post', function () {
-    return view('web.pages.single-post');
-})->name('single-post');
+Route::get('/community/single-post/{slug}', [App\Http\Controllers\CommunityController::class,'single'])->name('single-post');
+
+Route::get('/community/category/{slug}', [App\Http\Controllers\CommunityController::class,'categories'])->name('community.category');
 
 
 Route::get('/testimonials', function () {
@@ -241,6 +243,7 @@ Route::group([
 ],function(){
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('plan', App\Http\Controllers\Admin\PlanController::class);
+    Route::resource('topic', App\Http\Controllers\Admin\TopicController::class);
 });
 
 Route::group([
@@ -250,6 +253,7 @@ Route::group([
 ],function(){
     /* Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard'); */
     Route::resource('picklist', App\Http\Controllers\Agent\PicklistController::class);
+    Route::resource('topic', App\Http\Controllers\Agent\TopicController::class);
 });
 
 //postjob controller

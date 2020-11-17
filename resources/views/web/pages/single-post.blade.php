@@ -21,34 +21,26 @@
 				<div class="post-single col-md-7">
 					<article class="post-single__content">
 						<div class="post__thumbnail">
-							<img src="{{ asset('web/img/single-post.jpg') }}" alt="">
+							<img class="w-100"  src="{{ asset(isset($data) && $data->image ? $data->image : 'backend-assets/images/rec2.jpg') }}" alt="">
+							 
 						</div>
 						<div class="post__meta post__meta_single">
 							<span class="post__comments">
-								<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
+								<a href="#"><i class="mdi mdi-comment-text"></i>0 comments</a>
 							</span>
 							<span class="post__views">
 								<i class="mdi mdi-eye"></i>
-								152 views
+								453 views
 							</span>
 							<span class="post__likes">
-								<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
+								<a href="#"><i class="mdi mdi-heart"></i>0 likes</a>
 							</span>
 						</div>
 
-						<h2 class="post__title">The 6 Step Non Surgical Facial Rejuvenation Program</h2>
-						<p class="post__date date">01 dec 2016</p>
+						<h2 class="post__title">{{ $data->title }}</h2>
+						<p class="post__date date">{{ $data->created_at->format('d M Y') }}</p>
 						<div class="post__text">
-							<p>Cosmetic surgery, like other forms of elective surgery, involves a physical change to one’s appearance. Also known as plastic surgery, there are two kinds: cosmetic and reconstruction. The latter involves returning an individual’s sense of self after some form of injury and/or illness. The former allows the ability to overcome the physical characteristics one was born with. In a way, the former represents the forefront of how changes in technology can allow changes to the human body.</p>
-
-							<p>This surgery comes in all types, from the use of prosthetics as in breast augmentation and liposuction to non-invasive forms of surgery like laser hair removal or even laser correction of the eyes to eliminate the need for eye glasses.</p>
-
-							<cite>The fact remains that human beings have been altering their appearance for quite some time now</cite>
-
-							<p>None of this comes without a price however. Besides financial concerns, it remains the responsibility of the individual who will undergo such surgery. For this reason, they do need the support of those around them. This is the kind of support that not only affects their decision, but their ability to assimilate the surgical changes to the body.</p>
-
-							<p>In the case of surgery for cosmetic – as oppposed to reconstruction – purposes is the issue of aesthetics. Those around them need to understand the significance societies place upon appearance. How the appearance of someone can alter how they are perceived not only as a person, but as a human being. Surgery for aesthetic reasons, provides people with the opportunity to overcome stigmas associated with their appearance. However, what remains most important is that it’s a choice.</p>
-
+							 {!! $data->content !!}
 						</div>
 					</article> <!-- end of blog__post -->
 
