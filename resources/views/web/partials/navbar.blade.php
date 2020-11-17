@@ -79,12 +79,12 @@
 									@endif
 									
 									
-									<li class="m-menu__sub-item">
+									{{-- <li class="m-menu__sub-item">
 										<a href="{{ route('single-topic') }}">Community Topics</a>
 									</li>
 									<li class="m-menu__sub-item">
 										<a href="{{ route('single-post') }}">Single Topic</a>
-									</li>
+									</li> --}}
 									<li class="m-menu__sub-item">
 										<a href="{{ route('404') }}">404</a>
 									</li>
@@ -110,14 +110,24 @@
 								</ul>
 							</li>
 							@else
-							<li class="m-menu__list-item" >
-								<a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();.getElementById('logout-form').submit();">
-								{{ __('Logout') }}
-								</a>
-								<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-									@csrf
-								</form>
+
+							<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
+								<a href="#">Account</a>
+								<ul class="m-menu__sub">
+									<li class="m-menu__sub-item">
+										<a href="{{ route('agent.topic.create') }}">Create Post</a>
+									</li>
+									<li class="m-menu__sub-item">
+										 <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();.getElementById('logout-form').submit();">
+										{{ __('Logout') }}
+										</a>
+										<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+											@csrf
+										</form>
+									</li>
+								</ul>
 							</li>
+ 
 							@endif
 						</ul>
 					</nav>
