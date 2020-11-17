@@ -39,20 +39,21 @@ class TalentController extends Controller
                 \App\Models\Experience::insert($experience);
             }
 
-            if (isset($request->skills) ) {
-                /* auth()->user()->experience()->delete(); */
-                foreach($request->skills as $skill){
-                    $skills[] = ['candidate_id' => auth()->user()->id,'skill_id' => $skill];
-                }
-                \App\Models\CandidateSkill::insert($skills);
-            }
-
             if (isset($request->profile_img)) {
                 $destinationPath = 'uploads/products';
                 $img = custom_file_upload($request->profile_img,'public',$destinationPath,null,null,null,null);
 
                 $profile->profile_img=$img;
                 $profile->save();
+            }
+
+            
+            if (isset($request->skills) ) {
+                /* auth()->user()->experience()->delete(); */
+                foreach($request->skills as $skill){
+                    $skills[] = ['candidate_id' => auth()->user()->id,'skill_id' => $skill];
+                }
+                \App\Models\CandidateSkill::insert($skills);
             }
 
             $status = array(
