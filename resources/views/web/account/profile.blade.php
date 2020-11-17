@@ -69,11 +69,11 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <div class="avartar">
                                             <a href="#">
                                                <div class="profile-sec ml-5 mb-4">
-                                                    <img src="{{ asset('web/uploads/profile/talent-2.jpg') }}" class="img img-responsive">
+                                                    <img src="{{ asset('web/uploads/profile/talent-2.jpg') }}" id="preview_img" class="img img-responsive">
                                                 </div>
                                             </a>
                                             <div class="avartar-picker">
-                                                <input type="file" name="profile_img[]" id="profile_img" class="inputfile" data-multiple-caption="{count} files selected" multiple/>
+                                                <input type="file" name="profile_img" id="profile_img" class="inputfile" data-multiple-caption="{count} files selected" multiple/>
                                                 <label for="profile_img">
                                                     <i class="zmdi zmdi-camera"></i>
                                                     <span>Choose Picture</span>
@@ -253,30 +253,55 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                 <section>
                                     <h4 class="text__quote mb-5">Experience: Films</h4>
                                     <input type="hidden" name="type" value="films">
-                                    <div id="Films" class="repeater">
+                                    
+                                    @php
+                                        $expr=array();
+                                        $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','films') : '';
+                                    @endphp
+                                    <div id="Films" data-start="{{$expr->count()}}" class="repeater">
                                       <!-- Repeater Heading -->
                                       
                                       <!-- Repeater Items -->
-                                      
-                                          <div class="items" data-group="experience">
-
-                                            <div class="form-row">
-                                                <div class="form-holder" >
-                                                    <input type="text" placeholder="Name" data-name="name" class="form-control">
+                                            @foreach ($expr as $key => $exp)
+                                                <div class="items" data-group="experience[]">
+                                                    
+                                                    <div class="form-row">
+                                                        <div class="form-holder" >
+                                                            <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" placeholder="Role" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" placeholder="Production" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="role" placeholder="Role" class="form-control">
-                                                </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="production" placeholder="Production" class="form-control">
-                                                </div>
-                                                <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                      <i class="mdi mdi-close"></i>
-                                                  </button>
+                                            @endforeach
+                                            <div class="items" data-group="experience[]">
+                                                
+                                                <div class="form-row">
+                                                    <div class="form-holder" >
+                                                        <input type="text" placeholder="Name" data-name="name" class="form-control">
+                                                    </div>
+                                                    <div class="form-holder">
+                                                        <input type="text" data-name="role" placeholder="Role" class="form-control">
+                                                    </div>
+                                                    <div class="form-holder">
+                                                        <input type="text" data-name="production" placeholder="Production" class="form-control">
+                                                    </div>
+                                                    <div class="form-holder">
+                                                        <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                        <i class="mdi mdi-close"></i>
+                                                    </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                          </div>
                                       
 
                                       <div class="repeater-heading">
@@ -514,8 +539,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 
 <script type="text/javascript">
+    $.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
     $(document).ready(function() {
-       $("#Films").createRepeater();
+       $("#Films").createRepeater({showItemsToDefault: true,startIndex:$("#Films").data('start')});
        $("#Theater").createRepeater();
        $("#Commercials").createRepeater();
        $("#Television").createRepeater();
@@ -550,6 +580,42 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     
 </script>
 
+<script>
+    function readURL(input)
+    {
+        if (typeof (FileReader) != "undefined") {
+            
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+            
+            var date=new Date().toLocaleString();
+            
+            if (regex.test(input.files[0].name.toLowerCase())) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#preview_img').attr('src',e.target.result)
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                alert(input.files[0].name + " is not a valid image file.");
+                
+                return false;
+            }
+
+            formData.append('profile_img',$('[name="profile_img"]')[0].files.item(0));
+            console.log(formData);
+            
+        } else {
+            alert("This browser does not support HTML5 FileReader.");
+        }
+    }
+    
+    var formData=new FormData();
+    $(document).on('change','#profile_img',function () {
+        
+        readURL(this);
+    })
+</script>
+
 
 <script type="text/javascript">
 
@@ -564,26 +630,39 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                 params.profile_id = "{{$profile->id}}";
             @endif
 
+            if (formData.has('profile_img')) {
+                params.profile_img = formData.get('profile_img');
+            }
 
-            /* console.log($('section[aria-hidden="false"] *').serializeArray()); */
-            /* $('section[aria-hidden="false"] *').filter(':input').each(function () {
+            $('section[aria-hidden="false"] *').filter(':input').each(function () {
                 if( $(this).val().length !== 0 ) {
                     console.log($(this).attr('name')+' => '+ $(this).val());
                     params[$(this).attr('name')]=$(this).val();
                 }
-            }); */
-            params.experience=$('section[aria-hidden="false"] *').filter(':input').serialize();
-            console.log(params);
+            });
+            formData.append('params',JSON.stringify(params));
+            /* params.experience=$('section[aria-hidden="false"] *').filter(':input').serialize();
+            console.log(params); */
 
-            $.post( "{{ route('account.talent-profile.store') }}",{
-                    _token : "{{ csrf_token() }}",
-                    params
-                }, function( res ) {
-                    if (res.alert_type) {
-                        toastr.success(res.message);
+            $.ajax({
+                url: "{{ route('account.talent-profile.store') }}",
+			contentType: false,
+			processData: false,
+                
+                type: 'POST',
+                data:formData,
+                success: function(res) {
+                    fullPageLoader(false);
+                    console.log(res);
+                    if (res =='success') {
+                        toastr.success('Product updated successfully !');
+                        location.reload();
                     } else {
-                        toastr.error(res.message);
+                        toastr.error('something went wrong !');
                     }
+                },
+                error: function(error) {
+                }
             });
         }
         

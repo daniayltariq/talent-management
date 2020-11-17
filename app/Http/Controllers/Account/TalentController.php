@@ -21,19 +21,20 @@ class TalentController extends Controller
 
     public function store(Request $request)
     {
-        /* dd($request->all()); */
-        return unserialize($request->params['experience']);
+        /* dd(json_decode($request->params,true)); */
+        /* return $request->all(); */
         /* try { */
-            $profile=$request->params['method']=='PUT' ? Profile::findOrFail($request->params['profile_id']) : new Profile;
-            $profile->fill($request->params);
+            $req=json_decode($request->params,true);
+            $profile=$req['method']=='PUT' ? Profile::findOrFail($req['profile_id']) : new Profile;
+            $profile->fill($req);
             $profile->user_id=auth()->user()->id;
             $profile->save();
 
 
-            if (isset($request->params['experience[']) ) {
+            if (isset($req['experience[']) ) {
                 /* auth()->user()->experience()->delete(); */
-                foreach($request->params['experience['] as $exp){
-                    $experience[] = ['candidate_id' => auth()->user()->id,'type' => $request->params['type'],'name' => $exp['name'],'role' => $exp['role'],'production' => $exp['production']];
+                foreach($req['experience['] as $exp){
+                    $experience[] = ['candidate_id' => auth()->user()->id,'type' => $req['type'],'name' => $exp['name'],'role' => $exp['role'],'production' => $exp['production']];
                 }
                 \App\Models\Experience::insert($experience);
             }
@@ -44,6 +45,14 @@ class TalentController extends Controller
                     $skills[] = ['candidate_id' => auth()->user()->id,'skill_id' => $skill];
                 }
                 \App\Models\CandidateSkill::insert($skills);
+            }
+
+            if (isset($request->profile_img)) {
+                $destinationPath = 'uploads/products';
+                $img = custom_file_upload($request->profile_img,'public',$destinationPath,null,null,null,null);
+
+                $profile->profile_img=$img;
+                $profile->save();
             }
 
             $status = array(
@@ -62,9 +71,10 @@ class TalentController extends Controller
 
     }
 
-    public function detail(){
-
-    	return view('web.account.detail');
+    public function detail()
+    {
+        $profile=auth()->user()->profile;
+    	return view('web.account.detail',compact('profile'));
 
     }
 }

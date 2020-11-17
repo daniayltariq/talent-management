@@ -69,7 +69,12 @@ jQuery.fn.extend({
             if (hasOption('showFirstItemToDefault') && option('showFirstItemToDefault') == true) {
                 addItem($(item), key);
                 key++;
-            } else {
+            }
+            /* else if (hasOption('showItemsToDefault') && option('showItemsToDefault') == true) {
+                console.log(option('startIndex'));
+                key = option('startIndex');
+            } */
+            else {
                 if (items.length > 1) {
                     addItem($(item), key);
                     key++;
