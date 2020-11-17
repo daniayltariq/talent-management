@@ -22,7 +22,7 @@ class TalentController extends Controller
     public function store(Request $request)
     {
         /* dd($request->all()); */
-        /* return $request->all(); */
+        return unserialize($request->params['experience']);
         /* try { */
             $profile=$request->params['method']=='PUT' ? Profile::findOrFail($request->params['profile_id']) : new Profile;
             $profile->fill($request->params);

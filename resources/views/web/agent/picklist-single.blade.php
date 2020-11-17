@@ -90,10 +90,11 @@
 
 											<div class="talent-skill">
 												<p><b>Specials Skills</b></p>
+												{{-- {{dd($item->member->skills)}} --}}
 												@if ($item->member()->exists() && $item->member->skills()->exists())
 													<p>
 														@foreach ($item->member->skills as $skill)
-														<span>{{$skill->title. (!$loop->last()?',':'')}} </span>
+														<span>{{$skill->skill->title. (!$loop->last ?',':'')}} </span>
 														@endforeach
 													</p>
 												@endif

@@ -64,6 +64,6 @@ class User extends Authenticatable /* implements MustVerifyEmail */
 
     public function skills()
     {
-        return $this->hasOne('App\Models\CandidateSkill','candidate_id');
+        return $this->hasMany('App\Models\CandidateSkill','candidate_id');
     }
 }

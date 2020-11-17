@@ -258,7 +258,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                       
                                       <!-- Repeater Items -->
                                       
-                                          <div class="items" data-group="experience[]">
+                                          <div class="items" data-group="experience">
 
                                             <div class="form-row">
                                                 <div class="form-holder" >
@@ -553,6 +553,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
 <script type="text/javascript">
 
+
     $(document).on('click','a[href="#next"]',function(e){
         if ($("#profile_form").valid()) 
         {
@@ -565,11 +566,14 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
 
             /* console.log($('section[aria-hidden="false"] *').serializeArray()); */
-            $('section[aria-hidden="false"] *').filter(':input').each(function () {
-                console.log($(this).attr('name')+' => '+ $(this).val());
-                params[$(this).attr('name')]=$(this).val();
-            });
-
+            /* $('section[aria-hidden="false"] *').filter(':input').each(function () {
+                if( $(this).val().length !== 0 ) {
+                    console.log($(this).attr('name')+' => '+ $(this).val());
+                    params[$(this).attr('name')]=$(this).val();
+                }
+            }); */
+            params.experience=$('section[aria-hidden="false"] *').filter(':input').serialize();
+            console.log(params);
 
             $.post( "{{ route('account.talent-profile.store') }}",{
                     _token : "{{ csrf_token() }}",
