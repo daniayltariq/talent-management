@@ -16,7 +16,7 @@ class TopicController extends Controller
         $data['paginate_number'] = $data['paginate_number'] ?? 10;
 
 		$topics = new Topic;
-        $topics = $topics->with('category')->where('user_id',auth()->user()->id);
+        $topics = $topics->with('category')->withCount('comments')->where('user_id',auth()->user()->id);
 
 		if($data['no_paginate']){
 			return $topics->get();
@@ -210,4 +210,7 @@ class TopicController extends Controller
     public function destroy($id)
     {
     }
+
+
+
 }

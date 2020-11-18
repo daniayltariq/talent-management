@@ -35,4 +35,28 @@
 	@include('web.partials.footer') 
  	@yield('scripts') 
 
+ 	<script>
+
+ 		  $(document).on('click','.mark_post_like',function(e){
+ 		  	e.preventDefault();
+ 			mark_post_like($(this).data('topic'));
+ 		  });
+
+ 		 function mark_post_like(topic_id){
+
+ 		 	$.post("{{ route('post_like') }}",
+			  {
+			    topic_id: topic_id,
+			    _token: "{{ csrf_token() }}",
+			  },
+			  function(data, status){
+
+			  	$('.post__likes_wrapper_'+topic_id).html(data);
+			     
+			  });
+
+ 		 }
+ 		
+ 	</script>
+
 </html>

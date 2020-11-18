@@ -22,18 +22,17 @@
 					<article class="post-single__content">
 						<div class="post__thumbnail">
 							<img class="w-100"  src="{{ asset(isset($data) && $data->image ? $data->image : 'backend-assets/images/rec2.jpg') }}" alt="">
-							 
 						</div>
 						<div class="post__meta post__meta_single">
 							<span class="post__comments">
-								<a href="#"><i class="mdi mdi-comment-text"></i>0 comments</a>
+								<a href="#"><i class="mdi mdi-comment-text"></i>{{ count($data->comments) }} comments</a>
 							</span>
 							<span class="post__views">
 								<i class="mdi mdi-eye"></i>
-								453 views
+								{{ $data->views }} views
 							</span>
-							<span class="post__likes">
-								<a href="#"><i class="mdi mdi-heart"></i>0 likes</a>
+							<span class="post__likes post__likes_wrapper_{{ $data->id }}">
+								<a href="#" class="@if(\Auth::check()) mark_post_like @endif" data-topic="{{ $data->id }}"><i class="mdi mdi-heart"></i>{{ $data->likes_count }} likes</a>
 							</span>
 						</div>
 
@@ -76,26 +75,27 @@
 					  </div>
 					</nav>
 					<div class="comments">
-   						<h3>4 comments</h3>
+   						<h3>{{ count($data->comments) }} comments</h3>
    						<hr />
    						<ol class="comment-list">
+   							@foreach($data->comments as $comment)
    							<li class="comment-list__item">
 	   							<div class="comment__body">
 	   								<div class="comment__avatar">
 	   									<img src="{{ asset('web/img/ida.jpg') }}" alt="">
 	   								</div>
 	   								<div class="comment__info">
-	   									<p class="comment__author">Ida Tyler</p>
-	   									<p class="comment__date date">2 hours ago</p>
+	   									<p class="comment__author">{{ $comment->user->f_name }} {{ $comment->user->l_name }}</p>
+	   									<p class="comment__date date">{{ $comment->created_at->diffForHumans() }}</p>
 	   								</div>
 	   								<div class="comment__content">
-	   									Aloe is grown mainly in the dry regions of Africa, Asia, Europe and America. Because of its many therapeutic uses, it is now commercially cultivated in the United States, Japan, and countries in the Caribbean and Mediterranean.
+	   									{{ $comment->comment }}
 	   								</div>
 	   								<div class="comment__reply">
    										<button type="button" class="btn btn__grey animation">Reply</button>
    									</div>
 	   							</div>
-   								<ol class="comment-list children">
+   								{{-- <ol class="comment-list children">
    									<li class="comment-list__item">
    										<div class="comment__body">
 			   								<div class="comment__avatar">
@@ -128,43 +128,32 @@
 		   									</div>
 			   							</div>
    									</li>
-   								</ol>
+   								</ol> --}}
    							</li>
-   							<li class="comment-list__item">
-   								<div class="comment__body">
-	   								<div class="comment__avatar">
-	   									<img src="{{ asset('web/img/testimonal-photo3.png') }}" alt="">
-	   								</div>
-	   								<div class="comment__info">
-	   									<p class="comment__author">Richard Morton</p>
-	   									<p class="comment__date date">2 hours ago</p>
-	   								</div>
-	   								<div class="comment__content">What would you do if you could achieve the benefits of a professional skin care treatment at home for a fraction of the cost of a visit to the doctor or aesthetician? Cancel your next appointment, of course!</div>
-	   								<div class="comment__reply">
-   										<button type="button" class="btn btn__grey animation">Reply</button>
-   									</div>
-	   							</div>
-   							</li>
+   							@endforeach
+   							 
    						</ol>
    						<div class="comment__respond">
 	   						<h3>Leave your comment</h3>
 
-	   						<form class="vertical-form">
-								<div class="form-group">
+	   						<form action="{{ route('post_comment') }}" method="post" class="vertical-form">
+	   							@csrf
+								{{-- <div class="form-group">
 			    					<label for="c-name">Name <span class="req">*</span></label>
-			    					<input type="text" class="form-control" id="c-name">
+			    					<input name="name" type="text" class="form-control" id="c-name">
 				    			</div>
 				    			<div class="form-group">
 			    					<label for="c-email">Email <span class="req">*</span></label>
-			    					<input type="email" class="form-control" id="c-email">
-								</div>
+			    					<input name="" type="email" class="form-control" id="c-email">
+								</div> --}}
+								<input type="hidden" value="{{ $data->id }}" name="topic_id">
+								{{-- <input type="hidden" value="{{ $data->id }}" name="topic_id"> --}}
 								<div class="form-group">
 				    				<label for="c-text">Your message <span class="req">*</span></label>
-									<textarea name="c-text" id="c-text" class="form-control"></textarea>
+									<textarea name="comment" id="c-text" class="form-control"></textarea>
 								</div>
 								<input type="submit" class="btn btn__red animation" name="update_cart" value="Submit comment" />
 							</form>
-
 						</div>
    					</div>
 				</div>
