@@ -231,6 +231,8 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','isCandidate'], 'n
         });
 
     });
+
+    Route::get('/generate_referal', [App\Http\Controllers\Account\ReferalController::class, 'index'])->name('generate_referal');
 });
 
 //Backend Routes
