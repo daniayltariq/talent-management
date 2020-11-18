@@ -51,12 +51,14 @@
             }
             @endphp
             <form action="{{$route}}" method="POST" id="blog-content-form" enctype="multipart/form-data" class="kt-form">
+
                @csrf
                @if(isset($blog))
                {{ method_field('PATCH') }}
                @endif
                <input type="hidden" name="page" value="blog">
                <div class="kt-portlet__body">
+                  
                   <div class="row">
                      <div class="col-md-9 col-sm-12 col-xs-12">
                         <br />
@@ -110,21 +112,23 @@
 							</div>
 						</div>
                          --}}
-						<div class="form-group">
-							<h3 class="col-md-12 col-sm-12 col-xs-12">Image</h3>
-							<div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-								<div class="row">
-									<div class="col-xs-12 col-md-12">
-										<a href="#" class="thumbnail">
-										<img width="250" src="{{ asset(isset($blog) && $blog->image ? $blog->image : 'backend-assets/images/rec2.jpg') }}" id="cat_image" alt="...">
-										</a>
-									</div>
-								</div>
-								<input type="file" onchange="changeImageView(this, 'cat_image',250000)" name="image" class="form-control">
-								<sm><code>Image size should be 720 x 660 Pixels</code></sm>
-							</div>
-							<br>
-						</div>
+
+      						<div class="form-group">
+      							<h3 class="col-md-12 col-sm-12 col-xs-12">Image</h3>
+      							<div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+      								<div class="row">
+      									<div class="col-xs-12 col-md-12">
+      										<a href="#" class="thumbnail">
+      										<img width="250" src="{{ asset(isset($blog) && $blog->image ? $blog->image : 'backend-assets/images/rec2.jpg') }}" id="cat_image" alt="...">
+      										</a>
+      									</div>
+      								</div>
+      								<input type="file" onchange="changeImageView(this, 'cat_image',250000)" name="image" class="form-control">
+      								<sm><code>Image size should be 720 x 660 Pixels</code></sm>
+      							</div>
+      							<br>
+      						</div>
+
                         <div class="ln_solid"></div>
                         <div class="form-group">
                            <div class="col-md-12 col-sm-9 col-xs-12">
@@ -135,6 +139,7 @@
                      </div>
                   </div>
                </div>
+
             </form>
             <!--end::Form-->			
          </div>

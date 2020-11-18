@@ -13,15 +13,16 @@ class TopicController extends Controller
 	public static function topics($data = []){
 
 		$data['no_paginate'] = $data['no_paginate'] ?? false;
-		$data['paginate_number'] = $data['paginate_number'] ?? 10;
+        $data['paginate_number'] = $data['paginate_number'] ?? 10;
 
-		$data = new Topic;
-        $data->with('category')->where('allow_agent',1);
+		$topics = new Topic;
+        $topics = $topics->with('category')->where('user_id',auth()->user()->id);
+
 		if($data['no_paginate']){
-			     return $data->get();
+			return $topics->get();
 		}
 
-        return $data->paginate($data['paginate_number']);
+        return $topics->paginate($data['paginate_number']);
 	}
 
     public static function topic_categories($data = []){
@@ -30,9 +31,10 @@ class TopicController extends Controller
         $data['paginate_number'] = $data['paginate_number'] ?? 10;
 
         $data = new TopicCategory;
-        $data->with('category');
+        $data->where('allow_agent',1);
+
         if($data['no_paginate']){
-                 return $data->get();
+            return $data->get();
         }
 
         return $data->paginate($data['paginate_number']);
@@ -47,11 +49,11 @@ class TopicController extends Controller
     public function index(Request $request)
     {
  
-        $blog =  self::topics();
+       $topics =  self::topics();
         if ($request->ajax()) {
-            return $blog;
+            return $topics;
         } else {
-            return view('backend.topic.list',compact('blog'));
+            return view('web.agent.topic.list',compact('topics'));
         }
         
         
@@ -83,9 +85,10 @@ class TopicController extends Controller
         $destinationPath = 'uploads/'; $filename = null; $path_filename = null;
         $req = $request->all();
         $req['content'] = $request->content;
+        $req['topic_category_id'] = 2;
         if ($request->hasFile('image')) {
             
-            $file = $request->file('image');
+            $file = $request->file('image'); 
             $destinationPath = 'uploads/' . $request->page;
             $f_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $f_extension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
@@ -115,9 +118,10 @@ class TopicController extends Controller
         //     \App\Tag::insert($blog_tags);
         // }
 
-         
-        
-        return redirect()->back()->with("status", "Topic has been created.");
+        return redirect()->back()->with([
+            "message" => "Topic has been created.",
+            "alert-type" => "success",
+        ]);
         
     }
 
@@ -146,14 +150,14 @@ class TopicController extends Controller
      */
     public function edit($id)
     {
-        $blog=Topic::findOrFail($id);
+        $blog = Topic::findOrFail($id);
         $categories = self::topic_categories(['no_paginate' => true]);
         //dd($blog->tags->pluck('tag')->toArray());
         
-        return view('backend.topic.create',compact('categories','blog'));
+        return view('web.agent.topic.create',compact('categories','blog'));
     }
 
-    /**
+       /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -162,6 +166,39 @@ class TopicController extends Controller
      */
     public function update(Request $request,$id)
     {
+
+        $blog = Topic::findOrFail($id);
+        
+        $destinationPath = 'uploads/'; $filename = null; $path_filename = null;
+        $req = $request->all();
+        $req['content'] = $request->content;
+        $req['topic_category_id'] = 2;
+        
+        if ($request->hasFile('image')) {
+            
+            $file = $request->file('image');
+            $destinationPath = 'uploads/blog' ;
+            $f_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $f_extension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $formatfilename = preg_replace('/[^\w]+/', '_', $f_name);
+            $filename = date('Ymd_hisa').'_'.$formatfilename.'.'.$f_extension;
+            $uploadSuccess = $file->move($destinationPath, $filename);
+            $path_filename = 'uploads/blog' . '/' .$filename;
+
+            $req['image'] = $path_filename;
+
+        }
+
+        //$req = collect($req);
+        
+        $blog->fill($req);
+        $blog->save();
+
+        return redirect()->back()->with([
+            "message" => "Topic has been updated.",
+            "alert-type" => "success",
+        ]);
+
     }
 
     /**

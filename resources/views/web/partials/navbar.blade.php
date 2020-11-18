@@ -118,6 +118,9 @@
 										<a href="{{ route('agent.topic.create') }}">Create Post</a>
 									</li>
 									<li class="m-menu__sub-item">
+										<a href="{{ route('agent.topic.index') }}">Posts</a>
+									</li>
+									<li class="m-menu__sub-item">
 										 <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();.getElementById('logout-form').submit();">
 										{{ __('Logout') }}
 										</a>
