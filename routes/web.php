@@ -47,6 +47,8 @@ Route::get('/forum', function () {
 // })->name('community');
 
 Route::get('/community', [App\Http\Controllers\CommunityController::class,'index'])->name('community');
+Route::post('/community/topic/like', [App\Http\Controllers\CommunityController::class,'post_like'])->name('post_like');
+Route::post('/community/topic/comment', [App\Http\Controllers\CommunityController::class,'post_comment'])->name('post_comment');
 
 
 // Route::get('/single-topic', function () {
@@ -256,7 +258,9 @@ Route::group([
     /* Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard'); */
     Route::resource('picklist', App\Http\Controllers\Agent\PicklistController::class);
     Route::resource('topic', App\Http\Controllers\Agent\TopicController::class);
+
 });
+
 
 //postjob controller
 Route::resource('postjob',App\Http\Controllers\PostJobController::class);

@@ -31,4 +31,14 @@ class Topic extends Model
     {
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function likes()
+    {
+        return $this->hasMany(TopicLike::class,'topic_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(TopicComment::class,'topic_id');
+    }
 }

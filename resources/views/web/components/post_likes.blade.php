@@ -1,0 +1,1 @@
+<a href="#" class="mark_post_like" data-topic="{{ $post_id }}"><i class="mdi mdi-heart"></i>{{ $post_likes }} likes</a>

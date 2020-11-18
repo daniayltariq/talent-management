@@ -35,7 +35,7 @@
 								</div>
 								<div class="post__meta">
 									<span class="post__comments">
-										<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
+										<a href="#"><i class="mdi mdi-comment-text"></i>0 comments</a>
 									</span>
 									<span class="post__views">
 										<i class="mdi mdi-eye"></i>
