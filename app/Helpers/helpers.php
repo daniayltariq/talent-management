@@ -172,7 +172,7 @@ if (!function_exists('custom_file_upload'))
                     return $image_name;
                 }
             }
-            $path = Storage::putFileAs($path, $file, $image_name);
+            $path = Storage::putFileAs('public/'.$path, $file, $image_name);
             if ($path)
             {
                 return $image_name;

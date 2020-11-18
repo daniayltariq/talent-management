@@ -74,7 +74,7 @@
 
                                             </div>
                                              <div class="talent-intro text-center">
-                                                <h2 class="mb-0">John M. Smith</h2>
+                                                <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
                                                 <p>www.thetalentdepot.com/johnmsmith</p>
                                             </div>
                                         </div>
@@ -87,19 +87,19 @@
                                             <table>
                                                 <tr>
                                                     <th>Height</th>
-                                                    <td>5.8</td>
+                                                    <td>{{$profile->height  ?? ''}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Weight</th>
-                                                    <td>162 lbs</td>
+                                                    <td>{{$profile->weight. 'lbs' ?? ''}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Hair</th>
-                                                    <td>Brown</td>
+                                                    <td>{{$profile->hairs ?? ''}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Eyes</th>
-                                                    <td>Blonde</td>
+                                                    <td>{{$profile->eyes ?? ''}}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -109,19 +109,19 @@
                                         <div class="talent-specs">
                                             <table class="pull-right">
                                                 <tr>
-                                                    <th class="text-right">Suite 4A-1308,423, Graham ST</th>
+                                                    <th class="text-right">{{$profile->address_1 ?? $profile->address_2 ?? ''}} {{$profile->city ?? ''}}</th>
                                                      
                                                 </tr>
                                                 <tr>
-                                                    <th class="text-right">Madison, WI 56323</th>
+                                                    <th class="text-right">{{$profile->state ?? ''}}, {{$profile->country ?? ''}} {{$profile->zipcode ?? ''}}</th>
                                                     
                                                 </tr>
                                                 <tr>
-                                                    <th class="text-right">(123) 456-7890</th>
+                                                    <th class="text-right">{{$profile->telephone ?? ''}}</th>
                                                     
                                                 </tr>
                                                 <tr>
-                                                    <th class="text-right">(555) 666-7777</th>
+                                                    <th class="text-right">{{$profile->mobile ?? ''}}</th>
                                                      
                                                 </tr>
                                             </table>
@@ -135,27 +135,23 @@
                                         <h4 class="text__quote font-primary">Theater</h4>
                                         <div class="">
                                             <table class="w-100">
-                                                 <tr>
-                                                     <th>Name</th>
-                                                     <th>Role</th>
-                                                     <th>Location</th>
-                                                 </tr>
-
-                                                  <tr>
-                                                     <td>She's Mine</td>
-                                                     <td>Ann (lead)</td>
-                                                     <td>Arnold Legan dir.</td>
-                                                 </tr>
-                                                 <tr>
-                                                     <td>Kelly and the Guy</td>
-                                                     <td>Kelly (lead)</td>
-                                                     <td>Olivia Hammond dir.</td>
-                                                 </tr>
-                                                 <tr>
-                                                     <td>Crazy</td>
-                                                     <td>Chorus</td>
-                                                     <td>Connor Frank dir</td>
-                                                 </tr>
+                                                @php
+                                                    $expr=array();
+                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','theater') : '';
+                                                @endphp
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Role</th>
+                                                    <th>Location</th>
+                                                </tr>
+                                                @foreach ($expr as $key => $exp)
+                                                    <tr>
+                                                        <td>{{$exp->name ?? ''}}</td>
+                                                        <td>{{$exp->role ?? ''}}</td>
+                                                        <td>{{$exp->production ?? ''}}</td>
+                                                    </tr>
+                                                @endforeach
+                                                 
                                             </table>
                                         </div>
                                     </div>
@@ -172,18 +168,17 @@
                                                      <th>Role</th>
                                                      <th>Location</th>
                                                  </tr>
-
-                                                  <tr>
-                                                     <td>Killing Thomas</td>
-                                                     <td>Thomas Rachel Hazick</td>
-                                                     <td>New Age Productions</td>
-                                                 </tr>
-
-                                                 <tr>
-                                                     <td>Generating X</td>
-                                                     <td>Steve Howard Asche</td>
-                                                     <td>Fox Tone</td>
-                                                 </tr>
+                                                @php
+                                                    $expr=array();
+                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','films') : '';
+                                                @endphp
+                                                @foreach ($expr as $key => $exp)
+                                                    <tr>
+                                                        <td>{{$exp->name ?? ''}}</td>
+                                                        <td>{{$exp->role ?? ''}}</td>
+                                                        <td>{{$exp->production ?? ''}}</td>
+                                                    </tr>
+                                                @endforeach
                                                
                                             </table>
                                         </div>
@@ -203,17 +198,17 @@
                                                      <th>Location</th>
                                                  </tr>
 
-                                                  <tr>
-                                                     <td>Teen Witch</td>
-                                                     <td>Molly (guest appearance)</td>
-                                                     <td>Jim Gordon, NBC</td>
-                                                 </tr>
-                                                
-                                                <tr>
-                                                     <td>Graphic Battles</td>
-                                                     <td>Guest Appearance</td>
-                                                     <td>Spike TV</td>
-                                                 </tr>
+                                                @php
+                                                    $expr=array();
+                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','television') : '';
+                                                @endphp
+                                                @foreach ($expr as $key => $exp)
+                                                    <tr>
+                                                        <td>{{$exp->name ?? ''}}</td>
+                                                        <td>{{$exp->role ?? ''}}</td>
+                                                        <td>{{$exp->production ?? ''}}</td>
+                                                    </tr>
+                                                @endforeach
                                             </table>
                                         </div>
                                     </div>
@@ -232,12 +227,17 @@
                                                      
                                                  </tr>
 
-                                                  <tr>
-                                                     <td>Roach Killer</td>
-                                                     <td>Lead</td>
-                                                     <td>Regional</td>
-                                                     
-                                                 </tr>
+                                                @php
+                                                    $expr=array();
+                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','commercials') : '';
+                                                @endphp
+                                                @foreach ($expr as $key => $exp)
+                                                    <tr>
+                                                        <td>{{$exp->name ?? ''}}</td>
+                                                        <td>{{$exp->role ?? ''}}</td>
+                                                        <td>{{$exp->production ?? ''}}</td>
+                                                    </tr>
+                                                @endforeach
                                                
                                             </table>
                                         </div>
@@ -257,16 +257,17 @@
                                                       
                                                  </tr>
 
-                                                  <tr>
-                                                     <td>MFA</td>
-                                                     <td>Mackenzie University</td>
-                                                     <td>Mackenzie University</td>
-                                                 </tr>
-                                                 <tr>
-                                                     <td>BFA</td>
-                                                     <td>Houseman College</td>
-                                                     <td>Houseman College</td>
-                                                 </tr>
+                                                @php
+                                                    $expr=array();
+                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','training') : '';
+                                                @endphp
+                                                @foreach ($expr as $key => $exp)
+                                                    <tr>
+                                                        <td>{{$exp->name ?? ''}}</td>
+                                                        <td>{{$exp->role ?? ''}}</td>
+                                                        <td>{{$exp->production ?? ''}}</td>
+                                                    </tr>
+                                                @endforeach
                                                
                                             </table>
                                         </div>
@@ -278,13 +279,24 @@
                                     <div class="col-sm-12">
                                         <h4 class="text__quote font-primary">Special Skills</h4>
                                         <div class="skills">
-                                            <span class="label label-default">Basketball</span>
-                                            <span class="label label-default">Baseball</span>
+                                            @php
+                                                $skills=array();
+                                                $skills=$profile->user->skills()->exists() ? $profile->user->skills : '';
+                                            @endphp
+                                            
+                                            @foreach ($skills as $skill)
+                                                @if ($skill->skill()->exists())
+                                                    <span class="label label-default">{{$skill->skill->title ?? ''}}</span>
+                                                @endif
+                                                
+                                            @endforeach
+                                            
+                                            {{-- <span class="label label-default">Baseball</span>
                                             <span class="label label-default">Golf</span>
                                             <span class="label label-default">Rollerblading</span>
                                             <span class="label label-default">Juggling</span>
                                             <span class="label label-default">Scuba (PADI certified)</span>
-                                            <span class="label label-default">Valid Driver’s License and U.S. Passport.</span>
+                                            <span class="label label-default">Valid Driver’s License and U.S. Passport.</span> --}}
                                         </div>
                                     </div>
                                 </div>
