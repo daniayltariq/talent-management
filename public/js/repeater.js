@@ -62,19 +62,23 @@ jQuery.fn.extend({
         var repeater = this;
         var items = repeater.find(".items");
         var key = 0;
+        var itemToClone;
         var addButton = repeater.find('.repeater-add-btn');
 
         items.each(function (index, item) {
-            items.remove();
+            /* items.remove(); */
             if (hasOption('showFirstItemToDefault') && option('showFirstItemToDefault') == true) {
-                addItem($(item), key);
-                key++;
+                console.log('Show first');
+                /* addItem($(item), key);
+                key++; */
             }
-            /* else if (hasOption('showItemsToDefault') && option('showItemsToDefault') == true) {
+            else if (hasOption('showItemsToDefault') && option('showItemsToDefault') == true) {
                 console.log(option('startIndex'));
                 key = option('startIndex');
-            } */
+                itemToClone = option('startIndex');
+            }
             else {
+                items.remove();
                 if (items.length > 1) {
                     addItem($(item), key);
                     key++;
@@ -84,7 +88,7 @@ jQuery.fn.extend({
 
         /* handle click and add items */
         addButton.on("click", function () {
-            addItem($(items[0]), key);
+            addItem($(items[itemToClone]), key);
             key++;
         });
     }

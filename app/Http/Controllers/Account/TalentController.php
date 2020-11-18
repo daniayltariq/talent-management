@@ -21,36 +21,38 @@ class TalentController extends Controller
 
     public function store(Request $request)
     {
-        dd(json_decode($request->skills,true));
+        dd($request->all());
         /* return $request->all(); */
         /* try { */
-            $req=json_decode($request->params,true);
-            $profile=$req['method']=='PUT' ? Profile::findOrFail($req['profile_id']) : new Profile;
-            $profile->fill($req);
+            $profile=$request['method']=='PUT' ? Profile::findOrFail($request['profile_id']) : new Profile;
+            $profile->fill($request->all());
             $profile->user_id=auth()->user()->id;
             $profile->save();
 
 
-            if (isset($req['experience[']) ) {
+            if (isset($request['experience']) ) {
                 /* auth()->user()->experience()->delete(); */
-                foreach($req['experience['] as $exp){
-                    $experience[] = ['candidate_id' => auth()->user()->id,'type' => $req['type'],'name' => $exp['name'],'role' => $exp['role'],'production' => $exp['production']];
+                foreach($request['experience'] as $exp){
+                    if ($exp['name'] !== '' || $exp['role'] !=='' || $exp['production'] !=='') {
+                        $experience[] = ['candidate_id' => auth()->user()->id,'type' => $request['type'],'name' => $exp['name'],'role' => $exp['role'],'production' => $exp['production']];
+                    }
+                    
                 }
                 \App\Models\Experience::insert($experience);
             }
 
-            if (isset($request->profile_img)) {
-                $destinationPath = 'uploads/products';
-                $img = custom_file_upload($request->profile_img,'public',$destinationPath,null,null,null,null);
+            if (isset($request['profile_img'])) {
+                $destinationPath = 'uploads/profile';
+                $img = custom_file_upload($request['profile_img'],'public',$destinationPath,null,null,null,null);
 
                 $profile->profile_img=$img;
                 $profile->save();
             }
 
             
-            if (isset($request->skills) ) {
+            if (isset($request['skills']) ) {
                 /* auth()->user()->experience()->delete(); */
-                foreach($request->skills as $skill){
+                foreach($request['skills'] as $skill){
                     $skills[] = ['candidate_id' => auth()->user()->id,'skill_id' => $skill];
                 }
                 \App\Models\CandidateSkill::insert($skills);
