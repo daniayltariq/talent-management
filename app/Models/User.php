@@ -66,4 +66,14 @@ class User extends Authenticatable /* implements MustVerifyEmail */
     {
         return $this->hasMany('App\Models\CandidateSkill','candidate_id');
     }
+
+    public function referal_code()
+    {
+        return $this->hasOne('App\Models\Referal','user_id');
+    }
+
+    public function referrer()
+    {
+        return $this->belongsTo('App\Models\Referal','referrer_id');
+    }
 }
