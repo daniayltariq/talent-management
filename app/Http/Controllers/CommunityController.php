@@ -20,13 +20,16 @@ class CommunityController extends Controller
 
     }
 
-    public function single($slug){
-
+    public function single($slug)
+    {
     	$data = Topic::where('slug',$slug)->with('user')->with('comments.user')->withCount('likes')->first();
         $data->views =  $data->views + 1;
         $data->save();
+
+        $comments = TopicComment::where('topic_id',$data->id)->where('parent_id',null)->with('childComment')->get();
+        /* dD($comments[0]->childComment[0]->childComment); */
     	if($data){
-    		return view('web.pages.single-post',compact('data'));
+    		return view('web.pages.single-post',compact('data','comments'));
     	}
     	 
     }
@@ -67,7 +70,8 @@ class CommunityController extends Controller
 
     }
 
-    public function post_comment(Request $request){
+    public function post_comment(Request $request)
+    {
 
         if($request->topic_id){
 
@@ -77,7 +81,10 @@ class CommunityController extends Controller
             $new->user_id  =  auth()->user()->id;
             
             $new->comment   = $request->comment;
-            $new->parent_id = $request->parent_id;
+
+            if ($request->parent_comment && $request->topic_id) {
+                $new->parent_id = $request->parent_comment;
+            }
 
             $new->save();
         }

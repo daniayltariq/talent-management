@@ -1577,7 +1577,7 @@ a.widget-latest__title{
 .widget__tagcloud a:hover,
 .sidebar-widget li a:hover{
 	color: #df691a;
-
+}
 .widget__latest{
 	margin: 15px 0 45px;
 }
@@ -1742,4 +1742,3 @@ a.widget-latest__title{
 	color: #fff;
 	margin-bottom: 25px;
 }
-#df691a

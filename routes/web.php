@@ -49,6 +49,7 @@ Route::get('/forum', function () {
 Route::get('/community', [App\Http\Controllers\CommunityController::class,'index'])->name('community');
 Route::post('/community/topic/like', [App\Http\Controllers\CommunityController::class,'post_like'])->name('post_like');
 Route::post('/community/topic/comment', [App\Http\Controllers\CommunityController::class,'post_comment'])->name('post_comment');
+Route::post('/community/topic/reply_comment', [App\Http\Controllers\CommunityController::class,'reply_comment'])->name('reply_comment');
 
 
 // Route::get('/single-topic', function () {

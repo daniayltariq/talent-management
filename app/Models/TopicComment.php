@@ -14,4 +14,17 @@ class TopicComment extends Model
     	return $this->belongsTo(User::class,'user_id');
 
     }
+
+    public function parentComment()
+    {
+    	return $this->belongsTo(self::class, 'parent_id')->withDefault([
+            null
+        ]);
+    }
+
+    public function childComment()
+    {
+    	return $this->hasMany(self::class,'parent_id');
+    }
+
 }

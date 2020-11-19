@@ -75,68 +75,72 @@
 					  </div>
 					</nav>
 					<div class="comments">
-   						<h3>{{ count($data->comments) }} comments</h3>
-   						<hr />
-   						<ol class="comment-list">
-   							@foreach($data->comments as $comment)
-   							<li class="comment-list__item">
-	   							<div class="comment__body">
-	   								<div class="comment__avatar">
-	   									<img src="{{ asset('web/img/ida.jpg') }}" alt="">
-	   								</div>
-	   								<div class="comment__info">
-	   									<p class="comment__author">{{ $comment->user->f_name }} {{ $comment->user->l_name }}</p>
-	   									<p class="comment__date date">{{ $comment->created_at->diffForHumans() }}</p>
-	   								</div>
-	   								<div class="comment__content">
-	   									{{ $comment->comment }}
-	   								</div>
-	   								<div class="comment__reply">
-   										<button type="button" class="btn btn__grey animation">Reply</button>
-   									</div>
-	   							</div>
-   								{{-- <ol class="comment-list children">
-   									<li class="comment-list__item">
-   										<div class="comment__body">
-			   								<div class="comment__avatar">
-			   									<img src="{{ asset('web/img/testimonal-photo.png') }}" alt="">
-			   								</div>
-			   								<div class="comment__info">
-			   									<p class="comment__author">Ruby Little</p>
-			   									<p class="comment__date date">2 days ago</p>
-			   								</div>
-			   								<div class="comment__content">Have you recently been engaged? If you have, have you started planning your wedding yet? If you haven’t, you will want to get started with the planning soon.
-			   								</div>
-			   								<div class="comment__reply">
-		   										<button type="button" class="btn btn__grey animation">Reply</button>
-		   									</div>
-			   							</div>
-   									</li>
-   									<li class="comment-list__item">
-   										<div class="comment__body">
-			   								<div class="comment__avatar">
-			   									<img src="{{ asset('web/img/testimonal-photo2.png') }}" alt="">
-			   								</div>
-			   								<div class="comment__info">
-			   									<p class="comment__author">Jonathan Miles</p>
-			   									<p class="comment__date date">2 days ago</p>
-			   								</div>
-			   								<div class="comment__content">Before we begin to give you additional information on this topic, take a moment to think about how much you already know.
-			   								</div>
-			   								<div class="comment__reply">
-		   										<button type="button" class="btn btn__grey animation">Reply</button>
-		   									</div>
-			   							</div>
-   									</li>
-   								</ol> --}}
-   							</li>
-   							@endforeach
-   							 
-   						</ol>
+						<div id="comments">
+							@include('web.components.comments',["comments"=>$comments])
+							{{-- <h3>{{ count($data->comments) }} comments</h3>
+							<hr />
+							<ol class="comment-list">
+								@foreach($data->comments as $comment)
+								<li class="comment-list__item">
+									<div class="comment__body">
+										<div class="comment__avatar">
+											<img src="{{ asset('web/img/ida.jpg') }}" alt="">
+										</div>
+										<div class="comment__info">
+											<p class="comment__author">{{ $comment->user->f_name }} {{ $comment->user->l_name }}</p>
+											<p class="comment__date date">{{ $comment->created_at->diffForHumans() }}</p>
+										</div>
+										<div class="comment__content">
+											{{ $comment->comment }}
+										</div>
+										<div class="comment__reply">
+											<button type="button" class="btn btn__grey animation">Reply</button>
+										</div>
+									</div>
+									<ol class="comment-list children">
+										<li class="comment-list__item">
+											<div class="comment__body">
+												<div class="comment__avatar">
+													<img src="{{ asset('web/img/testimonal-photo.png') }}" alt="">
+												</div>
+												<div class="comment__info">
+													<p class="comment__author">Ruby Little</p>
+													<p class="comment__date date">2 days ago</p>
+												</div>
+												<div class="comment__content">Have you recently been engaged? If you have, have you started planning your wedding yet? If you haven’t, you will want to get started with the planning soon.
+												</div>
+												<div class="comment__reply">
+													<button type="button" class="btn btn__grey animation">Reply</button>
+												</div>
+											</div>
+										</li>
+										<li class="comment-list__item">
+											<div class="comment__body">
+												<div class="comment__avatar">
+													<img src="{{ asset('web/img/testimonal-photo2.png') }}" alt="">
+												</div>
+												<div class="comment__info">
+													<p class="comment__author">Jonathan Miles</p>
+													<p class="comment__date date">2 days ago</p>
+												</div>
+												<div class="comment__content">Before we begin to give you additional information on this topic, take a moment to think about how much you already know.
+												</div>
+												<div class="comment__reply">
+													<button type="button" class="btn btn__grey animation">Reply</button>
+												</div>
+											</div>
+										</li>
+									</ol>
+								</li>
+								@endforeach
+								
+							</ol> --}}
+						</div>
+   						
    						<div class="comment__respond">
-	   						<h3>Leave your comment</h3>
+	   						<h3 id="comment-form-heading">Leave your comment</h3>
 
-	   						<form action="{{ route('post_comment') }}" method="post" class="vertical-form">
+	   						<form action="{{ route('post_comment') }}" method="post" class="vertical-form" id="comment-form">
 	   							@csrf
 								{{-- <div class="form-group">
 			    					<label for="c-name">Name <span class="req">*</span></label>
@@ -240,4 +244,26 @@
 	</div><!-- Blog Section End -->
 
 
+@endsection
+
+@section('scripts')
+<script>
+
+	$(document).on('click','.reply_btn',function(e){
+	  	
+		$('<input>').attr({
+			type: 'hidden',
+			name: 'parent_comment',
+			value: $(this).data('commentid')
+		}).appendTo('form');
+
+		$('#comment-form-heading').text('Replying to '+$(this).data('commentowner'));
+
+		$('html, body').animate({
+			scrollTop: $("#comment-form").offset().top
+		}, 1000);
+	});
+
+  
+</script>
 @endsection
