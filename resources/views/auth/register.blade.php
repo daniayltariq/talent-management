@@ -86,8 +86,10 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
                     <form class="apply-form form-horizontal" method="POST" action="{{ route('register') }}">
                        @csrf
-                        <input type="hidden" name="account_type" value="farmer">
-
+                        <input type="hidden" name="account_type" value="agent">
+                        @if (\Request::query('referal'))
+                            <input type="hidden" name="referal" value="{{\Request::query('referal')}}">
+                        @endif
                         <div class="form-block">
                             <div class="tg-btn-sp m-b-20">
                                 <div class="switch-button">
