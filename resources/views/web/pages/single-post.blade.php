@@ -1,7 +1,46 @@
 @extends('web.layouts.app')
 
+@section('styles')
+	<style>
+		.stage {
+			padding:40px;
+			text-align:center;}
+			.stage a {
+			line-height:1em;
+			letter-spacing:0.06em;
+			font-family: 'Lato', sans-serif;
+			font-weight:normal;
+			font-size:16px;
+			text-decoration:none;
+			color:#fff;
+			background:#231f20;
+			display:inline-block;
+			padding:15px 12px 15px 15px;
+			transition:background 200ms;
+			border-radius:4px;
+		}
+		.stage a:hover {
+			background:#c26322;
+			color:#ffffff;
+		}
+		.stage a:after {
+			font-weight:300;
+			margin-left:20px;
+			color:#cea052;
+			font-size:18px;
+			vertical-align:middle;
+			transition:color 200ms;
+		}
+
+		.stage a:hover:after {
+			color:#231f20;
+		}
+	</style>
+@endsection
+
 @section('content')
 
+	@include('web.partials.loader')
 <!-- Slider Section Start -->
 	<section class="page__img" style="background-image: url('{{ asset('web/img/blog_bg.jpg') }}')">
 		<div class="container">
@@ -25,7 +64,7 @@
 						</div>
 						<div class="post__meta post__meta_single">
 							<span class="post__comments">
-								<a href="#"><i class="mdi mdi-comment-text"></i>{{ count($data->comments) }} comments</a>
+								<a href="#comment-form-heading"><i class="mdi mdi-comment-text"></i>{{ count($data->comments) }} comments</a>
 							</span>
 							<span class="post__views">
 								<i class="mdi mdi-eye"></i>
@@ -76,67 +115,74 @@
 					</nav>
 					<div class="comments">
 						<div id="comments">
-							@include('web.components.comments',["comments"=>$comments])
-							{{-- <h3>{{ count($data->comments) }} comments</h3>
+							<h3>{{ count($comments) }} comments</h3>
 							<hr />
-							<ol class="comment-list">
-								@foreach($data->comments as $comment)
-								<li class="comment-list__item">
-									<div class="comment__body">
-										<div class="comment__avatar">
-											<img src="{{ asset('web/img/ida.jpg') }}" alt="">
-										</div>
-										<div class="comment__info">
-											<p class="comment__author">{{ $comment->user->f_name }} {{ $comment->user->l_name }}</p>
-											<p class="comment__date date">{{ $comment->created_at->diffForHumans() }}</p>
-										</div>
-										<div class="comment__content">
-											{{ $comment->comment }}
-										</div>
-										<div class="comment__reply">
-											<button type="button" class="btn btn__grey animation">Reply</button>
-										</div>
-									</div>
-									<ol class="comment-list children">
-										<li class="comment-list__item">
-											<div class="comment__body">
-												<div class="comment__avatar">
-													<img src="{{ asset('web/img/testimonal-photo.png') }}" alt="">
-												</div>
-												<div class="comment__info">
-													<p class="comment__author">Ruby Little</p>
-													<p class="comment__date date">2 days ago</p>
-												</div>
-												<div class="comment__content">Have you recently been engaged? If you have, have you started planning your wedding yet? If you haven’t, you will want to get started with the planning soon.
-												</div>
-												<div class="comment__reply">
-													<button type="button" class="btn btn__grey animation">Reply</button>
-												</div>
+							
+							<ol class="comment-list" id="comments-list">	
+								@include('web.components.comments',["comments"=>$comments])
+								{{-- <h3>{{ count($data->comments) }} comments</h3>
+								<hr />
+								<ol class="comment-list">
+									@foreach($data->comments as $comment)
+									<li class="comment-list__item">
+										<div class="comment__body">
+											<div class="comment__avatar">
+												<img src="{{ asset('web/img/ida.jpg') }}" alt="">
 											</div>
-										</li>
-										<li class="comment-list__item">
-											<div class="comment__body">
-												<div class="comment__avatar">
-													<img src="{{ asset('web/img/testimonal-photo2.png') }}" alt="">
-												</div>
-												<div class="comment__info">
-													<p class="comment__author">Jonathan Miles</p>
-													<p class="comment__date date">2 days ago</p>
-												</div>
-												<div class="comment__content">Before we begin to give you additional information on this topic, take a moment to think about how much you already know.
-												</div>
-												<div class="comment__reply">
-													<button type="button" class="btn btn__grey animation">Reply</button>
-												</div>
+											<div class="comment__info">
+												<p class="comment__author">{{ $comment->user->f_name }} {{ $comment->user->l_name }}</p>
+												<p class="comment__date date">{{ $comment->created_at->diffForHumans() }}</p>
 											</div>
-										</li>
-									</ol>
-								</li>
-								@endforeach
-								
-							</ol> --}}
+											<div class="comment__content">
+												{{ $comment->comment }}
+											</div>
+											<div class="comment__reply">
+												<button type="button" class="btn btn__grey animation">Reply</button>
+											</div>
+										</div>
+										<ol class="comment-list children">
+											<li class="comment-list__item">
+												<div class="comment__body">
+													<div class="comment__avatar">
+														<img src="{{ asset('web/img/testimonal-photo.png') }}" alt="">
+													</div>
+													<div class="comment__info">
+														<p class="comment__author">Ruby Little</p>
+														<p class="comment__date date">2 days ago</p>
+													</div>
+													<div class="comment__content">Have you recently been engaged? If you have, have you started planning your wedding yet? If you haven’t, you will want to get started with the planning soon.
+													</div>
+													<div class="comment__reply">
+														<button type="button" class="btn btn__grey animation">Reply</button>
+													</div>
+												</div>
+											</li>
+											<li class="comment-list__item">
+												<div class="comment__body">
+													<div class="comment__avatar">
+														<img src="{{ asset('web/img/testimonal-photo2.png') }}" alt="">
+													</div>
+													<div class="comment__info">
+														<p class="comment__author">Jonathan Miles</p>
+														<p class="comment__date date">2 days ago</p>
+													</div>
+													<div class="comment__content">Before we begin to give you additional information on this topic, take a moment to think about how much you already know.
+													</div>
+													<div class="comment__reply">
+														<button type="button" class="btn btn__grey animation">Reply</button>
+													</div>
+												</div>
+											</li>
+										</ol>
+									</li>
+									@endforeach
+									
+								</ol> --}}
+							</ol>
 						</div>
-   						
+						<div class="stage">
+							<a href="#" id="read-more-btn" data-skipcount="{{count($comments)}}">Read More <i class="fas fa-arrow-down"></i></a>
+						</div>
    						<div class="comment__respond">
 	   						<h3 id="comment-form-heading">Leave your comment</h3>
 
@@ -264,6 +310,28 @@
 		}, 1000);
 	});
 
+
+	$(document).on('click','#read-more-btn',function(e){
+		e.preventDefault();
+		fullPageLoader(true);
+		var skip=$(this).data('skipcount');
+		$.ajax({
+			url: "{{ route('read_more_comments') }}",
+			type: 'get',
+			data:{
+				topic:"{{ $data->id }}",
+				skipcount:$('#read-more-btn').attr('data-skipcount'),
+			},
+			success: function(res) {
+				console.log(res);
+				fullPageLoader(false);
+				$('#comments-list').append(res);
+				$('#read-more-btn').attr('data-skipcount',skip+skip);
+			},
+			error: function(error) {
+			}
+		});
+	});
   
 </script>
 @endsection

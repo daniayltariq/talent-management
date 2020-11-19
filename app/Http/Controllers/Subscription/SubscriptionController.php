@@ -42,7 +42,18 @@ class SubscriptionController extends Controller
         /* dd($request->all()); */
         $res=$this->processPayment($request->paymentMethod,$request->plan,auth()->user());
         if ($res =='success') {
-            return redirect()->route('account.talent.detail')->with('success', 'Thanks for becoming a subscriber');
+            if (isset(auth()->user()->referrer_id)) 
+            {
+                $user=\App\Models\User::findOrFail(auth()->user()->referrer_id);
+                $referal=\App\Models\Referal::where('refer_code',$user->referal_code->refer_code)->first(); 
+                if ($referal) 
+                {
+                    $referal->points+=1;
+                    $referal->save();
+                }
+            }
+            return redirect()->route('account.talent.detail')
+                            ->with('success', 'Thanks for becoming a subscriber');
         }
 
         return redirect()->back()->with('error','Something went wrong.');

@@ -100,8 +100,8 @@ class RegisterController extends Controller
             $referal=\App\Models\Referal::where('refer_code',$data['referal'])->first(); 
             if ($referal) 
             {
-                $referal->points+=1;
-                $referal->save();
+                $user->referrer_id=$referal->user_id;
+                $user->save();
             }
         }
         $user->assignRole($data['account_type']);

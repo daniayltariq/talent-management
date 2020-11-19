@@ -1,6 +1,4 @@
-<h3>{{ count($comments) }} comments</h3>
-<hr />
-<ol class="comment-list">
+
     @foreach($comments as $comment)
         <li class="comment-list__item">
             <div class="comment__body">
@@ -42,5 +40,3 @@
             
         </li>
     @endforeach
-        
-</ol>

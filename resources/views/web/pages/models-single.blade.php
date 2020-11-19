@@ -259,23 +259,30 @@
 	});
 
 	$(document).on('click','#refer-btn',function(e){
-		$.ajax({
-			url: "{{ route('account.generate_referal') }}",
-			
-			type: 'get',
-			success: function(res) {
-				console.log(res);
-				$('[name="refer_link"]').val(res);
-				$('.refer_code_div').show();
-				/* if (res.alert_type) {
-					toastr.success(res.message);
-				} else {
-					toastr.error(res.message);
-				} */
-			},
-			error: function(error) {
-			}
-		});
+		
+		@if(\Auth::guest())
+			window.location.replace("{{route('login')}}");
+		@else
+			$.ajax({
+				url: "{{ route('account.generate_referal') }}",
+				
+				type: 'get',
+				success: function(res) {
+					console.log(res);
+					$('[name="refer_link"]').val(res);
+					$('.refer_code_div').show();
+					/* if (res.alert_type) {
+						toastr.success(res.message);
+					} else {
+						toastr.error(res.message);
+					} */
+				},
+				error: function(error) {
+				}
+			});
+		@endif
+
+		
 	});
 </script>
 @endsection

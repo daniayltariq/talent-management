@@ -26,8 +26,8 @@ class CommunityController extends Controller
         $data->views =  $data->views + 1;
         $data->save();
 
-        $comments = TopicComment::where('topic_id',$data->id)->where('parent_id',null)->with('childComment')->get();
-        /* dD($comments[0]->childComment[0]->childComment); */
+        $comments = TopicComment::where('topic_id',$data->id)->where('parent_id',null)->with('childComment')->get()->take(1);
+        /* dD($comments); */
     	if($data){
     		return view('web.pages.single-post',compact('data','comments'));
     	}
@@ -94,6 +94,15 @@ class CommunityController extends Controller
             "alert-type" => "success",
         ]);
 
+    }
+
+    public function read_more_comments(Request $request)
+    {
+        /* return $request->all(); */
+        $comments = TopicComment::where('topic_id',$request->topic)->where('parent_id',null)->with('childComment')->get()->skip($request->skipcount)->take(1);
+        if($comments){
+    		return view('web.components.comments',compact('comments'));
+    	}
     }
 
 }

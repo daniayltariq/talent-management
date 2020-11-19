@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Account\Controllers\Subscription;
+namespace App\Http\Controllers\Account\Subscription;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Controllers\Controller;
-use App\Domain\Subscriptions\Models\Plan;
+use App\Http\Controllers\Controller;
+use App\Models\Plan;
 use App\Domain\Subscriptions\Requests\SubscriptionStoreRequest;
 
 class SubscriptionController extends Controller
@@ -50,18 +50,28 @@ class SubscriptionController extends Controller
         /* return $request->payment_id; */
         if(\Auth::check())
         {
-            $owner=\App\User::findOrFail(auth()->user()->farm->owner_id);
-            $paymentMethod = $owner->findPaymentMethod($request->payment_id);
+            /* $owner=\App\User::findOrFail(auth()->user()->farm->owner_id); */
+            $paymentMethod = auth()->user()->findPaymentMethod($request->payment_id);
             /* dd($paymentMethod->id); */
             if ($paymentMethod) {
 
                 if ($request->q && $request->q=='upgrade') {
-                    $res=$this->processPayment($paymentMethod->id,$request->plan,$owner);
+                    $res=$this->swipePlan($paymentMethod->id,$request->plan,auth()->user());
                 } else {
-                    $res=$this->swipePlan($paymentMethod->id,$request->plan,$owner);
+                    $res=$this->processPayment($paymentMethod->id,$request->plan,auth()->user());
                 }
                 
                 if ($res=='success') {
+                    if (isset(auth()->user()->referrer_id)) 
+                    {
+                        $user=\App\Models\User::findOrFail(auth()->user()->referrer_id);
+                        $referal=\App\Models\Referal::where('refer_code',$user->referal_code->refer_code)->first(); 
+                        if ($referal) 
+                        {
+                            $referal->points+=1;
+                            $referal->save();
+                        }
+                    }
                     return response()->json([
                         'status' => 'success',
                         'message' => 'Payment Processed successfully!',

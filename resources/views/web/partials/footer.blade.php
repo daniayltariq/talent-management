@@ -145,3 +145,13 @@
 		$('#picklist-modal').modal('toggle');
 	} */
 </script>
+
+<script>
+	function fullPageLoader(val){
+        if(val == true){
+            $('#fullpage-loader').show();
+        }else{
+            $('#fullpage-loader').hide();
+        }
+    }
+</script>

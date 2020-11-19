@@ -241,12 +241,14 @@ function stripeTokenHandler(setupIntent) {
             plan: $('[name="plan"]').val(),
             _token : "{{ csrf_token() }}"
           }, function( res ) {
-            fullPageLoader(false);
+            fullPageLoader(true);
             if (res.status=='success') {
                 toastr.success(res.message)
             } else if(res.status=='error') {
                 toastr.error(res.message)
-            } 
+            }
+
+            window.location.replace("{{route('/')}}");
         /* updateCartByRes(data); */
     });
   });
