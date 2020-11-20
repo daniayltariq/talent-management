@@ -43,8 +43,8 @@ jQuery.fn.extend({
                 $(el).parent().find('label').attr('for', generateId($(el).attr('name')));
             })
 
-            console.log(item.html());
-            console.log(itemClone.html());
+            /* console.log(item.html());
+            console.log(itemClone.html()); */
             /* Handling remove btn */
             var removeButton = itemClone.find('.remove-btn');
 
@@ -93,7 +93,7 @@ jQuery.fn.extend({
         /* handle click and add items */
         addButton.on("click", function () {
             items = repeater.find(".items");
-            console.log(itemToClone, $(items).last().html());
+            /* console.log(itemToClone, $(items).last().html()); */
             addItem($(items).last(), key);
 
             key++;
