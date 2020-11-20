@@ -124,13 +124,16 @@
 							<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
 								<a href="#">Account</a>
 								<ul class="m-menu__sub">
+									<li class="m-menu__sub-item">
+										<a href="{{ route('account.dashboard') }}">Dashboard</a>
+									</li>
 									@role('agent')
-									<li class="m-menu__sub-item">
-										<a href="{{ route('agent.topic.create') }}">Create Post</a>
-									</li>
-									<li class="m-menu__sub-item">
-										<a href="{{ route('agent.topic.index') }}">Posts</a>
-									</li>
+										<li class="m-menu__sub-item">
+											<a href="{{ route('agent.topic.create') }}">Create Post</a>
+										</li>
+										<li class="m-menu__sub-item">
+											<a href="{{ route('agent.topic.index') }}">Posts</a>
+										</li>
 									@endrole
 									<li class="m-menu__sub-item">
 										 <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();.getElementById('logout-form').submit();">
