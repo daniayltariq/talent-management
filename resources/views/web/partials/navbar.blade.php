@@ -69,6 +69,16 @@
 										<a href="{{ route('pricing') }}">Pricing</a>
 									</li>
 
+									@role('candidate')
+										@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 2)
+											<li class="m-menu__sub-item">
+												<a href="{{ url('/') }}/account/reward">Reward</a>
+											</li>
+										@endif
+										
+									@endrole
+									
+
 									@if (\Auth::guest() || auth()->user()->hasRole('candidate'))
 										<li class="m-menu__sub-item">
 											<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>

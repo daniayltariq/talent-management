@@ -236,6 +236,28 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','isCandidate'], 'n
     });
 
     Route::get('/generate_referal', [App\Http\Controllers\Account\ReferalController::class, 'index'])->name('generate_referal');
+
+    Route::get('/reward', function()
+	{
+		// Check if file exists in app/storage/file folder
+        $file_path = public_path().'/uploads/reward/book.pdf';
+        /* echo($file_path); */
+		if (file_exists($file_path))
+		{
+      /* return 123; */
+			// Send Download
+			return Response::download($file_path, 'book.pdf', [
+				'Content-Length: '. filesize($file_path)
+			]);
+		}
+		else
+		{
+			// Error
+			exit('Requested file does not exist on our server!');
+		}
+	})
+	->where('filename', '[A-Za-z0-9\-\_\.]+');
+
 });
 
 //Backend Routes

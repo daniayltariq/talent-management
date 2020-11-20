@@ -21,9 +21,9 @@ class TalentController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        /* dd($request->all()); */
         /* return $request->all(); */
-        /* try { */
+        try {
             $profile=$request['method']=='PUT' ? Profile::findOrFail($request['profile_id']) : new Profile;
             $profile->fill($request->all());
             $profile->user_id=auth()->user()->id;
@@ -31,6 +31,7 @@ class TalentController extends Controller
 
 
             if (isset($request['experience']) ) {
+                auth()->user()->experience()->where('type',$request['type'])->delete();
                 /* auth()->user()->experience()->delete(); */
                 foreach($request['experience'] as $exp){
                     if ($exp['name'] !== '' || $exp['role'] !=='' || $exp['production'] !=='') {
@@ -51,7 +52,7 @@ class TalentController extends Controller
 
             
             if (isset($request['skills']) ) {
-                /* auth()->user()->experience()->delete(); */
+                auth()->user()->skills()->delete();
                 foreach($request['skills'] as $skill){
                     $skills[] = ['candidate_id' => auth()->user()->id,'skill_id' => $skill];
                 }
@@ -63,12 +64,12 @@ class TalentController extends Controller
                 'alert_type' => 'success'
             );
 
-        /* } catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             $status = array(
                 'message' => 'something went wrong!', 
                 'alert_type' => 'error'
             );
-        } */
+        }
         
     	return $status;
 
