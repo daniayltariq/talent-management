@@ -5,6 +5,7 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 <!-- Google font -->
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700,900' rel='stylesheet' type='text/css'>
@@ -16,7 +17,7 @@
 <link rel="stylesheet" href="{{ asset('web/libs/icons/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('web/libs/hero-slider/hero-style.css') }}">
 <link rel="stylesheet" href="{{ asset('web/css/main.css') }}" />
-
+<link href="{{ asset('backend-assets/assets/vendors/general/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css" />
 
 
 <!-- Materialdesignicons CSS (icon) -->

@@ -9,6 +9,58 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     padding: 15px 30px;
     margin-bottom: 20px;
 }
+
+.tg-btn-sp {
+    position: relative;
+    width: 100%;
+    /* margin: 10px 3.8% 18px 3.5%; */
+    /* border: 1px solid black; */
+    height: 34px;
+}
+
+.switch-button, .switch-button-case {
+    width: 50%;
+    /* height: 43px; */
+    font-size: 1.5rem;
+    line-height: 3;
+}
+
+.switch-button {
+    width: 100%;
+    /* height: 50px; */
+    text-align: center;
+    position: absolute;
+    /* left: 50%;
+    top: 50%; */
+    /* -webkit-transform: translate3D(-50%, -50%, 0);
+    transform: translate3D(-50%, -50%, 0);
+    will-change: transform;
+    z-index: 197 !important; */
+    cursor: pointer;
+    /* -webkit-transition: .3s ease all; */
+    /* transition: .3s ease all; */
+    border: 2px solid #e2dddd;;
+    display: inline-flex;
+}
+
+.switch-button .active {
+    color: #151515;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -1;
+    -webkit-transition: .3s ease-out all;
+    transition: .3s ease-out all;
+}
+
+.switch-button .active-case {
+    color: #151515;
+    background: #ee8d32;
+    /* line-height: 3; */
+}
 </style>
 @endsection
 
@@ -34,6 +86,20 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
                     <form class="apply-form form-horizontal" method="POST" action="{{ route('register') }}">
                        @csrf
+                        <input type="hidden" name="account_type" value="agent">
+                        @if (\Request::query('referal'))
+                            <input type="hidden" name="referal" value="{{\Request::query('referal')}}">
+                        @endif
+                        <div class="form-block">
+                            <div class="tg-btn-sp m-b-20">
+                                <div class="switch-button">
+                                    <span class="active"></span>
+                                    <span class="switch-button-case left active-case">Agent</span>
+                                    <span class="switch-button-case right">Candidate</span>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="form-block">
                             <div class="form-group">
                                 <label for="f_name" class="col-sm-4 control-label">First Name <span class="req">*</span></label>
@@ -171,4 +237,41 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             </div>
         </div>
     </section><!-- Services Section End -->
+@endsection
+
+@section('scripts')
+    <script>
+        var user_type = 'agent';
+
+        var switchButton            = document.querySelector('.switch-button');
+        var switchBtnRight          = document.querySelector('.switch-button-case.right');
+        var switchBtnLeft           = document.querySelector('.switch-button-case.left');
+        var activeSwitch            = document.querySelector('.active');
+
+        function switchLeft(){
+            user_type = 'agent';
+            switchBtnRight.classList.remove('active-case');
+            switchBtnLeft.classList.add('active-case');
+            activeSwitch.style.left = '0%';
+            $('[name="account_type"]').val('agent');
+        }
+
+        function switchRight(){
+            user_type = 'candidate';
+            switchBtnRight.classList.add('active-case');
+            switchBtnLeft.classList.remove('active-case');
+            activeSwitch.style.left = '50%';
+            $('[name="account_type"]').val('candidate');
+        }
+
+        
+        switchBtnLeft.addEventListener('click', function(){
+            switchLeft();
+        }, false);
+
+        switchBtnRight.addEventListener('click', function(){
+            switchRight();
+        }, false);
+
+    </script>
 @endsection

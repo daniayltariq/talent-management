@@ -57,26 +57,44 @@
 								<a href="{{ route('login') }}">pages</a>
 								<ul class="m-menu__sub">
 									<li class="m-menu__sub-item">
-										<a href="{{ route('picklist') }}">Picklist Favorites</a>
+										<a href="{{ route('agent.picklist.index') }}">Picklist Favorites</a>
 									</li>
-									<li class="m-menu__sub-item">
-										<a href="{{ route('picklist-single') }}">Picklist Single</a>
-									</li>
+									@auth
+										<li class="m-menu__sub-item">
+											<a href="{{ route('agent.picklist.show',auth()->user()->id) }}">Picklist Single</a>
+										</li>
+									@endauth
+									
 									<li class="m-menu__sub-item">
 										<a href="{{ route('pricing') }}">Pricing</a>
 									</li>
-									<li class="m-menu__sub-item">
-										<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
-									</li>
-									<li class="m-menu__sub-item">
-										<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
-									</li>
-									<li class="m-menu__sub-item">
+
+									@role('candidate')
+										@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 2)
+											<li class="m-menu__sub-item">
+												<a href="{{ url('/') }}/account/reward">Reward</a>
+											</li>
+										@endif
+										
+									@endrole
+									
+
+									@if (\Auth::guest() || auth()->user()->hasRole('candidate'))
+										<li class="m-menu__sub-item">
+											<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
+										</li>
+										<li class="m-menu__sub-item">
+											<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
+										</li>
+									@endif
+									
+									
+									{{-- <li class="m-menu__sub-item">
 										<a href="{{ route('single-topic') }}">Community Topics</a>
 									</li>
 									<li class="m-menu__sub-item">
 										<a href="{{ route('single-post') }}">Single Topic</a>
-									</li>
+									</li> --}}
 									<li class="m-menu__sub-item">
 										<a href="{{ route('404') }}">404</a>
 									</li>
@@ -102,14 +120,32 @@
 								</ul>
 							</li>
 							@else
-							<li class="m-menu__list-item" >
-								<a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();.getElementById('logout-form').submit();">
-								{{ __('Logout') }}
-								</a>
-								<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-									@csrf
-								</form>
+
+							<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
+								<a href="#">Account</a>
+								<ul class="m-menu__sub">
+									<li class="m-menu__sub-item">
+										<a href="{{ route('account.dashboard') }}">Dashboard</a>
+									</li>
+									@role('agent')
+										<li class="m-menu__sub-item">
+											<a href="{{ route('agent.topic.create') }}">Create Post</a>
+										</li>
+										<li class="m-menu__sub-item">
+											<a href="{{ route('agent.topic.index') }}">Posts</a>
+										</li>
+									@endrole
+									<li class="m-menu__sub-item">
+										 <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();.getElementById('logout-form').submit();">
+										{{ __('Logout') }}
+										</a>
+										<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+											@csrf
+										</form>
+									</li>
+								</ul>
 							</li>
+ 
 							@endif
 						</ul>
 					</nav>

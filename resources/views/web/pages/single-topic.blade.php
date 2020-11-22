@@ -6,7 +6,7 @@
 			<div class="row">
 				<div class="title__wrapp">
 					<div class="page__subtitle title__grey">from our community topics</div>
-					<h1 class="page__title">Jobs & Castings</h1>
+					<h1 class="page__title">{{ $category->title }}</h1>
 				</div>
 			</div>
 		</div>
@@ -19,109 +19,66 @@
 				<div class="blog__posts col-md-7">
 					<div class="blog__list">
 
-						<article class="blog__post">
-							<a href="{{ route('single-post') }}">
-								<div class="post__thumbnail">
-									<img src="{{ asset('web/img/post1.jpg') }}" alt="">
+						@foreach($data as $topic)
+							<article class="blog__post">
+								<a href="{{ route('single-post',['slug' => $topic->slug]) }}">
+									<div class="post__thumbnail">
+										<img src="{{ asset(isset($topic) && $topic->image ? $topic->image : 'backend-assets/images/rec2.jpg') }}" alt="">
+									</div>
+								</a>
+								<div class="post__content">
+									<a href="{{ route('single-post',['slug' => $topic->slug]) }}"><h3 class="post__title">{{ $topic->title }}</h3></a>
 								</div>
-							</a>
-							<div class="post__content">
-								<a href="{{ route('single-post') }}"><h3 class="post__title">The 6 Step Non Surgical Facial Rejuvenation Program</h3></a>
-							</div>
-							<p class="post__date date">01 dec 2016</p>
-							<div class="post__excerpt">
-								<p>Cosmetic surgery, like other forms of elective surgery, involves a physical change to one’s appearance. Also known as plastic surgery, there are two kinds: cosmetic and reconstruction. The latter involves returning an individual’s sense of self after some form of injury and/or</p>
-							</div>
-							<div class="post__meta">
-								<span class="post__comments">
-									<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
-								</span>
-								<span class="post__views">
-									<i class="mdi mdi-eye"></i>
-									152 views
-								</span>
-								<span class="post__likes">
-									<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
-								</span>
-							</div>
-							<a href="{{ route('single-post') }}" class="btn btn-default btn__grey animation">read more</a>
-						</article>
-
-
-						<article class="blog__post">
-							<a href="{{ route('single-post') }}">
-								<div class="post__thumbnail">
-									<img src="{{ asset('web/img/post2.jpg') }}" alt="">
+								<p class="post__date date">{{ $topic->created_at->format('d M Y') }}</p>
+								<div class="post__excerpt">
+									{{ \Illuminate\Support\Str::words(strip_tags($topic->content), 30,'...') }}
 								</div>
-							</a>
-							<div class="post__content">
-								<a href="{{ route('single-post') }}"><h3 class="post__title">Breast Augmentation Breast Enlargement Medical Tourism In The Philippine</h3></a>
-							</div>
-							<p class="post__date date">01 dec 2016</p>
-							<div class="post__excerpt">
-								<p>Cosmetic surgery, like other forms of elective surgery, involves a physical change to one’s appearance. Also known as plastic surgery, there are two kinds: cosmetic and reconstruction. The latter involves returning an individual’s sense of self after some form of injury and/or</p>
-							</div>
-							<div class="post__meta">
-								<span class="post__comments">
-									<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
-								</span>
-								<span class="post__views">
-									<i class="mdi mdi-eye"></i>
-									152 views
-								</span>
-								<span class="post__likes">
-									<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
-								</span>
-							</div>
-							<a href="{{ route('single-post') }}" class="btn btn-default btn__grey animation">read more</a>
-						</article>
-
-
-						<article class="blog__post">
-							<a href="{{ route('single-post') }}">
-								<div class="post__thumbnail">
-									<img src="{{ asset('web/img/post3.jpg') }}" alt="">
+								<div class="post__meta">
+									<span class="post__comments">
+										<a href="#"><i class="mdi mdi-comment-text"></i>0 comments</a>
+									</span>
+									<span class="post__views">
+										<i class="mdi mdi-eye"></i>
+										152 views
+									</span>
+									<span class="post__likes">
+										<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
+									</span>
 								</div>
-							</a>
-							<div class="post__content">
-								<h3 class="post__title"><a href="{{ route('single-post') }}">Having Your Breasts Reduced With Breast Augmentation</a></h3>
-							</div>
-							<p class="post__date date">23 sep 2016</p>
-							<div class="post__excerpt">
-								<p>There’s good news for parents who have a child born with significant hearing loss. Advances in technology are making it possible to address profound hearing loss in children as young as 12 months of age. Approximately one of every 1,000 newborns in the United States-about 33</p>
-							</div>
-							<div class="post__meta">
-								<span class="post__comments">
-									<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
-								</span>
-								<span class="post__views">
-									<i class="mdi mdi-eye"></i>
-									152 views
-								</span>
-								<span class="post__likes">
-									<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
-								</span>
-							</div>
-							<a href="{{ route('single-post') }}" class="btn btn-default btn__grey animation">read more</a>
-						</article>
+								<a href="{{ route('single-post',['slug' => $topic->slug]) }}" class="btn btn-default btn__grey animation">read more</a>
+							</article>
+						@endforeach
+				  
 					</div> <!-- end of blog__list -->
 					<nav class="blog__pagination">
-					  <ul class="pagination">
-					    <!-- <li>
-					      <a href="#" class="prev" aria-label="Previous">
-					        <span aria-hidden="true">Previous</span>
-					      </a>
-					    </li> -->
-					    <li class="active"><a href="#">01 <span class="sr-only">(current)</span></a></li>
-					    <li><a href="#">02</a></li>
-					    <li><a href="#">03</a></li>
-					    <li><a href="#">...</a></li>
-					    <li>
-					      <a href="#" class="next" aria-label="Next">
-					        <span aria-hidden="true">Next</span>
-					      </a>
-					    </li>
-					  </ul>
+					   @if ($data->lastPage() > 1)
+					    <ul class="pagination">
+					        <li class="{{ ($data->currentPage() == 1) ? ' disabled' : '' }}">
+					            <a href="{{ $data->url(1) }}">First</a>
+					         </li>
+					        @for ($i = 1; $i <= $data->lastPage(); $i++)
+					            <?php
+					            $half_total_links = floor(5 / 2);
+					            $from = $data->currentPage() - $half_total_links;
+					            $to = $data->currentPage() + $half_total_links;
+					            if ($data->currentPage() < $half_total_links) {
+					               $to += $half_total_links - $data->currentPage();
+					            }
+					            if ($data->lastPage() - $data->currentPage() < $half_total_links) {
+					                $from -= $half_total_links - ($data->lastPage() - $data->currentPage()) - 1;
+					            }
+					            ?>
+					            @if ($from < $i && $i < $to)
+					                <li class="{{ ($data->currentPage() == $i) ? ' active' : '' }}">
+					                    <a href="{{ $data->url($i) }}">{{ $i }}</a>
+					                </li>
+					            @endif
+					        @endfor
+					        <li class="{{ ($data->currentPage() == $data->lastPage()) ? ' disabled' : '' }}">
+					            <a href="{{ $data->url($data->lastPage()) }}">Last</a>
+					        </li>
+					    </ul>
+					@endif
 					</nav>
 				</div> <!-- end of blog__posts -->
 
@@ -136,7 +93,7 @@
 						</form>
 					</div>
 					
-
+{{-- 
 					<div class="sidebar-widget">
 						<h4 class="widget__title">Latest Topics</h4>
 						<div class="widget__latest">
@@ -173,7 +130,7 @@
 							</figure>
 						</div>
 					</div>
-					
+					 --}}
 
 					<div class="sidebar-widget">
 						<h4 class="widget__title">our social media urls</h4>

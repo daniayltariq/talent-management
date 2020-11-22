@@ -131,15 +131,18 @@ table.pricing td:nth-child(4) {
 <article class="mt-5">
 
 <ul class="ul-pricing">
-  <li class="bg-purple">
-    <button>Basic</button>
-  </li>
-  <li class="bg-blue">
+  @foreach ($plans as $plan)
+    <li class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
+      <button>{{$plan->name}}</button>
+    </li>
+  @endforeach
+  
+  {{-- <li class="bg-blue">
     <button>Standard </button>
   </li>
   <li class="bg-green active">
     <button>Professional</button>
-  </li>
+  </li> --}}
   
 </ul>  
 
@@ -147,18 +150,24 @@ table.pricing td:nth-child(4) {
   <thead>
     <tr>
       <th class="bg-pri"></th>
-      <th class="bg-purple">Basic</th>
+      @foreach ($plans as $plan)
+        <th class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
+          {{$plan->name ?? ''}}
+        </th>
+      @endforeach
+      {{-- <th class="bg-purple">Basic</th>
       <th class="bg-blue">Standard</th>
-      <th class="bg-green default">Professional</th>
+      <th class="bg-green default">Professional</th> --}}
       
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>Annual price</td>
-      <td><span class="txt-top">&dollar;</span><span class="txt-l">19.99 USD</span></td>
-      <td><span class="txt-top">&dollar;</span><span class="txt-l">39.99 USD</span></td>
-      <td class="default"><span class="txt-top">&dollar;</span><span class="txt-l">59.99 USD</span></td>
+      @foreach ($plans as $plan)
+        <td><span class="txt-top">&dollar;</span><span class="txt-l">{{$plan->cost ??''}}</span></td>
+      @endforeach
+      
       
     </tr>
     <tr>
@@ -166,32 +175,42 @@ table.pricing td:nth-child(4) {
     </tr>
     <tr>
       <td>Unique URL based on legal name</td>
-      <td><span class="tick">&#10004;</span></td>
-      <td><span class="tick">&#10004;</span></td>
-      <td class="default"><span class="tick">&#10004;</span></td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->unique_url==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
+      {{-- <td><span class="tick">&#10004;</span></td>
+      <td class="default"><span class="tick">&#10004;</span></td> --}}
       
     </tr>
     <tr>
       <td>Contact Info</td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->contact_info==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
+      {{-- <td><span class="tick">&#10004;</span></td>
       <td><span class="tick">&#10004;</span></td>
-      <td><span class="tick">&#10004;</span></td>
-      <td class="default"><span class="tick">&#10004;</span></td>
+      <td class="default"><span class="tick">&#10004;</span></td> --}}
       
     </tr>
      
     <tr>
       <td>Pictures</td>
-      <td><span class="tick">2</span></td>
+      @foreach ($plans as $plan)
+        <td><span class="tick">{{$plan->pictures ?? ''}}</span></td>
+      @endforeach
+      {{-- <td><span class="tick">2</span></td>
       <td><span class="tick">5</span></td>
-      <td class="default"><span class="tick">15</span></td>
+      <td class="default"><span class="tick">15</span></td> --}}
       
     </tr>
 
     <tr>
       <td>Resume Builder Wizard with onscreen formatted resume and generated .pdf resume available for download.</td>
-     <td><span class="tick">&#10004;</span></td>
-     <td><span class="tick">&#10004;</span></td>
-     <td><span class="tick">&#10004;</span></td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->resume==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
+     {{-- <td><span class="tick">&#10004;</span></td>
+     <td><span class="tick">&#10004;</span></td> --}}
       
     </tr>
 
@@ -200,44 +219,63 @@ table.pricing td:nth-child(4) {
     </tr>
     <tr>
       <td>Links to Social Media</td>
-      <td><span class="tick"></span></td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->social_links==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
+      {{-- <td><span class="tick"></span></td>
       <td><span class="tick">&#10004; (2)</span></td>
-      <td><span class="tick">&#10004; (unlimited)</span></td>
+      <td><span class="tick">&#10004; (unlimited)</span></td> --}}
       
     </tr>
     <tr>
       <td>Profile includes Email Me button</td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->email_me==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
+      {{-- <td><span class="tick">&#10004;</span></td>
       <td><span class="tick">&#10004;</span></td>
-      <td><span class="tick">&#10004;</span></td>
-      <td><span class="tick">&#10004;</span></td>
+      <td><span class="tick">&#10004;</span></td> --}}
       
     </tr>
     <tr>
       <td>Ability to send a short professional message including you’re your profile URL to a list of comma delimited email addresses</td>
-      <td><span class="tick"></span></td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->short_message==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
+      {{-- <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td>
-      <td><span class="tick">&#10004;</span></td>
+      <td><span class="tick">&#10004;</span></td> --}}
       
     </tr>
     <tr>
       <td>Access to Community Forums that include our Community Topics.</td>
-      <td><span class="tick"></span></td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->community_access==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
+      {{-- <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td>
-      <td><span class="tick">&#10004;</span></td>
+      <td><span class="tick">&#10004;</span></td> --}}
       
     </tr>
     <tr>
       <td>Apply Now button on Casting Community Posts</td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->apply_now==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
+      {{-- <td><span class="tick"></span></td>
       <td><span class="tick"></span></td>
-      <td><span class="tick"></span></td>
-      <td><span class="tick">&#10004;</span></td>
+      <td><span class="tick">&#10004;</span></td> --}}
+      
       
     </tr>
     <tr>
       <td>Agents can contact you directly for opportunities TO Anyone looking for talent (casting agents, theater producers, directors) can contact you directly through the site.</td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->agent_contact==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
+      {{-- <td><span class="tick"></span></td>
       <td><span class="tick"></span></td>
-      <td><span class="tick"></span></td>
-      <td><span class="tick">&#10004;</span></td>
+      <td><span class="tick">&#10004;</span></td> --}}
       
     </tr>
 
@@ -247,30 +285,39 @@ table.pricing td:nth-child(4) {
 
     <tr>
       <td>Free video download of “The Talent Guide” with 3 referrals ($50 value)</td>
+      {{-- <td><span class="tick">&#10004;</span></td>
       <td><span class="tick">&#10004;</span></td>
-      <td><span class="tick">&#10004;</span></td>
-      <td><span class="tick">&#10004;</span></td>
+      <td><span class="tick">&#10004;</span></td> --}}
       
     </tr>
     <tr>
       <td>Invitations to live, online training sessions </td>
-      <td><span class="tick"></span></td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->training_invitation==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
+      {{-- <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td>
-      <td><span class="tick">&#10004;</span></td>
+      <td><span class="tick">&#10004;</span></td> --}}
       
     </tr>
     <tr>
       <td>Invitations to live, online industry professional Q&As (Cost = $9.99 per session)</td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->inductry_invitation==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
+      {{-- <td><span class="tick"></span></td>
       <td><span class="tick"></span></td>
-      <td><span class="tick"></span></td>
-      <td><span class="tick">&#10004;</span></td>
+      <td><span class="tick">&#10004;</span></td> --}}
       
     </tr>
     <tr>
       <td></td>
-      <td><button class="cd-btn btn btn__red secondary">Subscribe to Basic</button></td>
+      @foreach ($plans as $plan)
+        <td><button class="cd-btn btn btn__red secondary"> <a href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}}</a> </button></td>
+      @endforeach
+      {{-- <td><button class="cd-btn btn btn__red secondary">Subscribe to Basic</button></td>
       <td><button class="cd-btn btn btn__red secondary">Subscribe to Standard</button></td>
-      <td><button class="cd-btn btn btn__red secondary">Subscribe to Professional</button></td>
+      <td><button class="cd-btn btn btn__red secondary">Subscribe to Professional</button></td> --}}
       
     </tr>
     

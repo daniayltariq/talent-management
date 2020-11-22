@@ -12,7 +12,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
 <script>
 	@if (Session::has('message'))
-		var type = "{{ Session::get('alert-type', 'info') }}"
+		var type = "{{ Session::get('alert-type') }}"
 		
 	switch(type){
 		case 'info':
@@ -36,7 +36,7 @@
 			"hideMethod": "fadeOut"
 			}
 			toastr.info("{{Session::get('message')}}");
-			var audio = new Audio('audio.mp3');
+			var audio = new Audio("{{asset('audio/notification.mp3')}}");
 			audio.play();
 			break;
 
@@ -62,7 +62,7 @@
 			"hideMethod": "fadeOut"
 			}
 			toastr.success("{{Session::get('message')}}");
-			var audio = new Audio('audio.mp3');
+			var audio = new Audio("{{asset('audio/notification.mp3')}}");
 			audio.play();
 			
 			break;
@@ -87,7 +87,7 @@
 			"hideMethod": "fadeOut"
 			}
 			toastr.warning("{{Session::get('message')}}");
-			var audio = new Audio('audio.mp3');
+			var audio = new Audio("{{asset('audio/notification.mp3')}}");
 			audio.play();
 			
 			break;
@@ -112,11 +112,46 @@
 			"hideMethod": "fadeOut"
 			}
 			toastr.error("{{Session::get('message')}}");
-			var audio = new Audio('audio.mp3');
+			var audio = new Audio("{{asset('audio/notification.mp3')}}");
 			audio.play();
 		
 			break;
 	}
 	@endif
 	
+
+	$(".modal").each(function(l){
+        $(this).on("show.bs.modal",function(l)
+        {
+            var o=$(this).attr("data-easein");
+            $(".modal-dialog").velocity("transition."+o)
+        })
+    });
+
+	$(document).on('click','#create-picklist-btn',function(){
+		$('[name="picklist_id"]').val('');
+		$('div#picklist-select').toggleClass('new-picklist');
+
+		$('div#new-picklist').toggleClass('new-picklist');
+		/* $(this).text('Add to picklist'); */
+	})
+
+	$(document).on('click','.picklist-btn',function(){
+		var member=$(this).data('memberid');
+		$('[name="member_id"]').val(member);
+	})
+	/* function toggleModal() 
+	{
+		$('#picklist-modal').modal('toggle');
+	} */
+</script>
+
+<script>
+	function fullPageLoader(val){
+        if(val == true){
+            $('#fullpage-loader').show();
+        }else{
+            $('#fullpage-loader').hide();
+        }
+    }
 </script>

@@ -42,284 +42,86 @@ a.btn.btn-default.btn__grey.animation {
 						<h4 class="widget__title pull-right widget__titless" >Browse conversations from all topics </h4>
 					</a>
 
+					@foreach($community as $comn)
 
-					<article class="blog__post">
-						<div class="post__content">
-							<a href="{{ route('single-topic') }}">
-								<h3 class="post__title">General</h3>
-							</a>
-						</div>
-						<p class="widget-latest__date">RECENT POSTS</p>
-						<a href="{{ route('single-post') }}">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date">Replies: 0</p>
-						<a href="{{ route('single-post') }}">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line" >Replies: 2</p>
-						<a href="{{ route('single-post') }}">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line">Replies: 3</p>
-						<div class="post__meta">
-							<span class="post__comments">
-							<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
-							</span>
-							<span class="post__views">
-							<i class="mdi mdi-eye"></i>
-							152 views
-							</span>
-							<span class="post__likes">
-							<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
-							</span>
-						</div>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">28 Conversation</a>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">Follow Topic</a>
-					</article>
+						<article class="blog__post">
+							<div class="post__content">
+								<a href="{{ route('community.category',['slug' => $comn->slug]) }}">
+									<h3 class="post__title">{{ $comn->title }}</h3>
+								</a>
+							</div>
+							<p class="widget-latest__date">RECENT POSTS</p>
+
+							@foreach($comn->topics as $topic)
+							<div>
+								<a href="{{ route('single-post',['slug' => $topic->slug]) }}">
+									<h4 class="widget__title height_line" >{{ $topic->title }}</h4>
+								</a>
+								<p class="widget-latest__date" >Created {{ $topic->created_at->format('M d') }} at {{ $topic->created_at->format('h:i A') }}  By {{ $topic->user->f_name }} {{ $topic->user->l_name }}</p>
+							</div>
+
+							@endforeach
+							
+						 
+							<p class="widget-latest__date height_line">Replies: 3</p>
+							<div class="post__meta">
+								<span class="post__comments">
+								<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
+								</span>
+								<span class="post__views">
+								<i class="mdi mdi-eye"></i>
+								152 views
+								</span>
+								<span class="post__likes">
+								<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
+								</span>
+							</div>
+							<a href="single-post.html" class="btn btn-default btn__grey animation">{{ $comn->topics_count }} Conversation</a>
+							<a href="single-post.html" class="btn btn-default btn__grey animation">Follow Topic</a>
+						</article>
+						
+					@endforeach
 					
 
-					<article class="blog__post">
-						<div class="post__content">
-							<a href="{{ route('single-topic') }}">
-								<h3 class="post__title">Jobs & Castings</h3>
-							</a>
-						</div>
-						<p class="widget-latest__date">RECENT POSTS</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date">Replies: 0</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line" >Replies: 2</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line">Replies: 3</p>
-						<div class="post__meta">
-							<span class="post__comments">
-							<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
-							</span>
-							<span class="post__views">
-							<i class="mdi mdi-eye"></i>
-							152 views
-							</span>
-							<span class="post__likes">
-							<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
-							</span>
-						</div>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">28 Conversation</a>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">Follow Topic</a>
-					</article>
-
-					<article class="blog__post">
-						<div class="post__content">
-							<a href="{{ route('single-topic') }}">
-								<h3 class="post__title">Q & A</h3>
-							</a>
-						</div>
-						<p class="widget-latest__date">RECENT POSTS</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date">Replies: 0</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line" >Replies: 2</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line">Replies: 3</p>
-						<div class="post__meta">
-							<span class="post__comments">
-							<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
-							</span>
-							<span class="post__views">
-							<i class="mdi mdi-eye"></i>
-							152 views
-							</span>
-							<span class="post__likes">
-							<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
-							</span>
-						</div>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">28 Conversation</a>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">Follow Topic</a>
-					</article>
-
-					<article class="blog__post">
-						<div class="post__content">
-							<a href="{{ route('single-topic') }}">
-								<h3 class="post__title">Career Development</h3>
-							</a>
-						</div>
-						<p class="widget-latest__date">RECENT POSTS</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date">Replies: 0</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line" >Replies: 2</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line">Replies: 3</p>
-						<div class="post__meta">
-							<span class="post__comments">
-							<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
-							</span>
-							<span class="post__views">
-							<i class="mdi mdi-eye"></i>
-							152 views
-							</span>
-							<span class="post__likes">
-							<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
-							</span>
-						</div>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">28 Conversation</a>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">Follow Topic</a>
-					</article>
-
-					<article class="blog__post">
-						<div class="post__content">
-							<a href="{{ route('single-topic') }}">
-								<h3 class="post__title">Events</h3>
-							</a>
-						</div>
-						<p class="widget-latest__date">RECENT POSTS</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date">Replies: 0</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line" >Replies: 2</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line">Replies: 3</p>
-						<div class="post__meta">
-							<span class="post__comments">
-							<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
-							</span>
-							<span class="post__views">
-							<i class="mdi mdi-eye"></i>
-							152 views
-							</span>
-							<span class="post__likes">
-							<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
-							</span>
-						</div>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">28 Conversation</a>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">Follow Topic</a>
-					</article>
-
-					<article class="blog__post">
-						<div class="post__content">
-							<a href="{{ route('single-topic') }}">
-								<h3 class="post__title">Congratulations</h3>
-							</a>
-						</div>
-						<p class="widget-latest__date">RECENT POSTS</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date">Replies: 0</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line" >Replies: 2</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line">Replies: 3</p>
-						<div class="post__meta">
-							<span class="post__comments">
-							<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
-							</span>
-							<span class="post__views">
-							<i class="mdi mdi-eye"></i>
-							152 views
-							</span>
-							<span class="post__likes">
-							<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
-							</span>
-						</div>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">28 Conversation</a>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">Follow Topic</a>
-					</article>
-
-					<article class="blog__post">
-						<div class="post__content">
-							<a href="{{ route('single-topic') }}">
-								<h3 class="post__title">Industry News</h3>
-							</a>
-						</div>
-						<p class="widget-latest__date">RECENT POSTS</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date">Replies: 0</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line" >Replies: 2</p>
-						<a href="">
-							<h4 class="widget__title height_line" >Free Acting Lessons</h4>
-						</a>
-						<p class="widget-latest__date" >Created July 2 at 6:47 PM By Theaterhippie  |  Last post by ShayaJ1215: September 13 at 12:46 AM</p>
-						<p class="widget-latest__date height_line">Replies: 3</p>
-						<div class="post__meta">
-							<span class="post__comments">
-							<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
-							</span>
-							<span class="post__views">
-							<i class="mdi mdi-eye"></i>
-							152 views
-							</span>
-							<span class="post__likes">
-							<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
-							</span>
-						</div>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">28 Conversation</a>
-						<a href="single-post.html" class="btn btn-default btn__grey animation">Follow Topic</a>
-					</article>
-
+				
 					
 				</div>
 				<!-- end of blog__list -->
+ 
+					
+
 				<nav class="blog__pagination">
+					@if ($community->lastPage() > 1)
+					    <ul class="pagination">
+					        <li class="{{ ($community->currentPage() == 1) ? ' disabled' : '' }}">
+					            <a href="{{ $community->url(1) }}">First</a>
+					         </li>
+					        @for ($i = 1; $i <= $community->lastPage(); $i++)
+					            <?php
+					            $half_total_links = floor(5 / 2);
+					            $from = $community->currentPage() - $half_total_links;
+					            $to = $community->currentPage() + $half_total_links;
+					            if ($community->currentPage() < $half_total_links) {
+					               $to += $half_total_links - $community->currentPage();
+					            }
+					            if ($community->lastPage() - $community->currentPage() < $half_total_links) {
+					                $from -= $half_total_links - ($community->lastPage() - $community->currentPage()) - 1;
+					            }
+					            ?>
+					            @if ($from < $i && $i < $to)
+					                <li class="{{ ($community->currentPage() == $i) ? ' active' : '' }}">
+					                    <a href="{{ $community->url($i) }}">{{ $i }}</a>
+					                </li>
+					            @endif
+					        @endfor
+					        <li class="{{ ($community->currentPage() == $community->lastPage()) ? ' disabled' : '' }}">
+					            <a href="{{ $community->url($community->lastPage()) }}">Last</a>
+					        </li>
+					    </ul>
+					@endif
+{{-- 
 					<ul class="pagination">
-						<!-- <li>
-							<a href="#" class="prev" aria-label="Previous">
-							  <span aria-hidden="true">Previous</span>
-							</a>
-							</li> -->
+						 
 						<li class="active"><a href="#">01 <span class="sr-only">(current)</span></a></li>
 						<li><a href="#">02</a></li>
 						<li><a href="#">03</a></li>
@@ -329,7 +131,7 @@ a.btn.btn-default.btn__grey.animation {
 							<span aria-hidden="true">Next</span>
 							</a>
 						</li>
-					</ul>
+					</ul> --}}
 				</nav>
 			</div>
 			<!-- end of blog__posts -->

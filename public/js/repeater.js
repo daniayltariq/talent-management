@@ -21,6 +21,10 @@ jQuery.fn.extend({
             var item = itemContent;
             var input = item.find('input,select,textarea');
 
+            var itemClone = items.clone();
+
+            /* console.log(item.html());
+            console.log(itemClone.html()); */
             input.each(function (index, el) {
                 var attrName = $(el).data('name');
                 var skipName = $(el).data('skip-name');
@@ -39,8 +43,8 @@ jQuery.fn.extend({
                 $(el).parent().find('label').attr('for', generateId($(el).attr('name')));
             })
 
-            var itemClone = items;
-
+            /* console.log(item.html());
+            console.log(itemClone.html()); */
             /* Handling remove btn */
             var removeButton = itemClone.find('.remove-btn');
 
@@ -52,7 +56,7 @@ jQuery.fn.extend({
 
             removeButton.attr('onclick', '$(this).parents(\'.items\').remove()');
 
-            var newItem = $("<div class='items'>" + itemClone.html() + "<div/>");
+            var newItem = $("<div class='items' data-group='experience'>" + itemClone.html() + "<div/>");
             newItem.attr('data-index', key)
 
             newItem.appendTo(repeater);
@@ -62,14 +66,23 @@ jQuery.fn.extend({
         var repeater = this;
         var items = repeater.find(".items");
         var key = 0;
+        var itemToClone;
         var addButton = repeater.find('.repeater-add-btn');
 
         items.each(function (index, item) {
-            items.remove();
+            /* items.remove(); */
             if (hasOption('showFirstItemToDefault') && option('showFirstItemToDefault') == true) {
-                addItem($(item), key);
-                key++;
-            } else {
+                console.log('Show first');
+                /* addItem($(item), key);
+                key++; */
+            }
+            else if (hasOption('showItemsToDefault') && option('showItemsToDefault') == true) {
+                console.log(option('startIndex'));
+                key = option('startIndex');
+                itemToClone = option('startIndex');
+            }
+            else {
+                items.remove();
                 if (items.length > 1) {
                     addItem($(item), key);
                     key++;
@@ -79,7 +92,10 @@ jQuery.fn.extend({
 
         /* handle click and add items */
         addButton.on("click", function () {
-            addItem($(items[0]), key);
+            items = repeater.find(".items");
+            /* console.log(itemToClone, $(items).last().html()); */
+            addItem($(items).last(), key);
+
             key++;
         });
     }

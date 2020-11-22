@@ -1,7 +1,46 @@
 @extends('web.layouts.app')
 
+@section('styles')
+	<style>
+		.stage {
+			padding:40px;
+			text-align:center;}
+			.stage a {
+			line-height:1em;
+			letter-spacing:0.06em;
+			font-family: 'Lato', sans-serif;
+			font-weight:normal;
+			font-size:16px;
+			text-decoration:none;
+			color:#fff;
+			background:#231f20;
+			display:inline-block;
+			padding:15px 12px 15px 15px;
+			transition:background 200ms;
+			border-radius:4px;
+		}
+		.stage a:hover {
+			background:#c26322;
+			color:#ffffff;
+		}
+		.stage a:after {
+			font-weight:300;
+			margin-left:20px;
+			color:#cea052;
+			font-size:18px;
+			vertical-align:middle;
+			transition:color 200ms;
+		}
+
+		.stage a:hover:after {
+			color:#231f20;
+		}
+	</style>
+@endsection
+
 @section('content')
 
+	@include('web.partials.loader')
 <!-- Slider Section Start -->
 	<section class="page__img" style="background-image: url('{{ asset('web/img/blog_bg.jpg') }}')">
 		<div class="container">
@@ -21,34 +60,25 @@
 				<div class="post-single col-md-7">
 					<article class="post-single__content">
 						<div class="post__thumbnail">
-							<img src="{{ asset('web/img/single-post.jpg') }}" alt="">
+							<img class="w-100"  src="{{ asset(isset($data) && $data->image ? $data->image : 'backend-assets/images/rec2.jpg') }}" alt="">
 						</div>
 						<div class="post__meta post__meta_single">
 							<span class="post__comments">
-								<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
+								<a href="#comment-form-heading"><i class="mdi mdi-comment-text"></i>{{ count($data->comments) }} comments</a>
 							</span>
 							<span class="post__views">
 								<i class="mdi mdi-eye"></i>
-								152 views
+								{{ $data->views }} views
 							</span>
-							<span class="post__likes">
-								<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
+							<span class="post__likes post__likes_wrapper_{{ $data->id }}">
+								<a href="#" class="@if(\Auth::check()) mark_post_like @endif" data-topic="{{ $data->id }}"><i class="mdi mdi-heart"></i>{{ $data->likes_count }} likes</a>
 							</span>
 						</div>
 
-						<h2 class="post__title">The 6 Step Non Surgical Facial Rejuvenation Program</h2>
-						<p class="post__date date">01 dec 2016</p>
+						<h2 class="post__title">{{ $data->title }}</h2>
+						<p class="post__date date">{{ $data->created_at->format('d M Y') }}</p>
 						<div class="post__text">
-							<p>Cosmetic surgery, like other forms of elective surgery, involves a physical change to one’s appearance. Also known as plastic surgery, there are two kinds: cosmetic and reconstruction. The latter involves returning an individual’s sense of self after some form of injury and/or illness. The former allows the ability to overcome the physical characteristics one was born with. In a way, the former represents the forefront of how changes in technology can allow changes to the human body.</p>
-
-							<p>This surgery comes in all types, from the use of prosthetics as in breast augmentation and liposuction to non-invasive forms of surgery like laser hair removal or even laser correction of the eyes to eliminate the need for eye glasses.</p>
-
-							<cite>The fact remains that human beings have been altering their appearance for quite some time now</cite>
-
-							<p>None of this comes without a price however. Besides financial concerns, it remains the responsibility of the individual who will undergo such surgery. For this reason, they do need the support of those around them. This is the kind of support that not only affects their decision, but their ability to assimilate the surgical changes to the body.</p>
-
-							<p>In the case of surgery for cosmetic – as oppposed to reconstruction – purposes is the issue of aesthetics. Those around them need to understand the significance societies place upon appearance. How the appearance of someone can alter how they are perceived not only as a person, but as a human being. Surgery for aesthetic reasons, provides people with the opportunity to overcome stigmas associated with their appearance. However, what remains most important is that it’s a choice.</p>
-
+							 {!! $data->content !!}
 						</div>
 					</article> <!-- end of blog__post -->
 
@@ -84,95 +114,96 @@
 					  </div>
 					</nav>
 					<div class="comments">
-   						<h3>4 comments</h3>
-   						<hr />
-   						<ol class="comment-list">
-   							<li class="comment-list__item">
-	   							<div class="comment__body">
-	   								<div class="comment__avatar">
-	   									<img src="{{ asset('web/img/ida.jpg') }}" alt="">
-	   								</div>
-	   								<div class="comment__info">
-	   									<p class="comment__author">Ida Tyler</p>
-	   									<p class="comment__date date">2 hours ago</p>
-	   								</div>
-	   								<div class="comment__content">
-	   									Aloe is grown mainly in the dry regions of Africa, Asia, Europe and America. Because of its many therapeutic uses, it is now commercially cultivated in the United States, Japan, and countries in the Caribbean and Mediterranean.
-	   								</div>
-	   								<div class="comment__reply">
-   										<button type="button" class="btn btn__grey animation">Reply</button>
-   									</div>
-	   							</div>
-   								<ol class="comment-list children">
-   									<li class="comment-list__item">
-   										<div class="comment__body">
-			   								<div class="comment__avatar">
-			   									<img src="{{ asset('web/img/testimonal-photo.png') }}" alt="">
-			   								</div>
-			   								<div class="comment__info">
-			   									<p class="comment__author">Ruby Little</p>
-			   									<p class="comment__date date">2 days ago</p>
-			   								</div>
-			   								<div class="comment__content">Have you recently been engaged? If you have, have you started planning your wedding yet? If you haven’t, you will want to get started with the planning soon.
-			   								</div>
-			   								<div class="comment__reply">
-		   										<button type="button" class="btn btn__grey animation">Reply</button>
-		   									</div>
-			   							</div>
-   									</li>
-   									<li class="comment-list__item">
-   										<div class="comment__body">
-			   								<div class="comment__avatar">
-			   									<img src="{{ asset('web/img/testimonal-photo2.png') }}" alt="">
-			   								</div>
-			   								<div class="comment__info">
-			   									<p class="comment__author">Jonathan Miles</p>
-			   									<p class="comment__date date">2 days ago</p>
-			   								</div>
-			   								<div class="comment__content">Before we begin to give you additional information on this topic, take a moment to think about how much you already know.
-			   								</div>
-			   								<div class="comment__reply">
-		   										<button type="button" class="btn btn__grey animation">Reply</button>
-		   									</div>
-			   							</div>
-   									</li>
-   								</ol>
-   							</li>
-   							<li class="comment-list__item">
-   								<div class="comment__body">
-	   								<div class="comment__avatar">
-	   									<img src="{{ asset('web/img/testimonal-photo3.png') }}" alt="">
-	   								</div>
-	   								<div class="comment__info">
-	   									<p class="comment__author">Richard Morton</p>
-	   									<p class="comment__date date">2 hours ago</p>
-	   								</div>
-	   								<div class="comment__content">What would you do if you could achieve the benefits of a professional skin care treatment at home for a fraction of the cost of a visit to the doctor or aesthetician? Cancel your next appointment, of course!</div>
-	   								<div class="comment__reply">
-   										<button type="button" class="btn btn__grey animation">Reply</button>
-   									</div>
-	   							</div>
-   							</li>
-   						</ol>
+						<div id="comments">
+							<h3>{{ count($comments) }} comments</h3>
+							<hr />
+							
+							<ol class="comment-list" id="comments-list">	
+								@include('web.components.comments',["comments"=>$comments])
+								{{-- <h3>{{ count($data->comments) }} comments</h3>
+								<hr />
+								<ol class="comment-list">
+									@foreach($data->comments as $comment)
+									<li class="comment-list__item">
+										<div class="comment__body">
+											<div class="comment__avatar">
+												<img src="{{ asset('web/img/ida.jpg') }}" alt="">
+											</div>
+											<div class="comment__info">
+												<p class="comment__author">{{ $comment->user->f_name }} {{ $comment->user->l_name }}</p>
+												<p class="comment__date date">{{ $comment->created_at->diffForHumans() }}</p>
+											</div>
+											<div class="comment__content">
+												{{ $comment->comment }}
+											</div>
+											<div class="comment__reply">
+												<button type="button" class="btn btn__grey animation">Reply</button>
+											</div>
+										</div>
+										<ol class="comment-list children">
+											<li class="comment-list__item">
+												<div class="comment__body">
+													<div class="comment__avatar">
+														<img src="{{ asset('web/img/testimonal-photo.png') }}" alt="">
+													</div>
+													<div class="comment__info">
+														<p class="comment__author">Ruby Little</p>
+														<p class="comment__date date">2 days ago</p>
+													</div>
+													<div class="comment__content">Have you recently been engaged? If you have, have you started planning your wedding yet? If you haven’t, you will want to get started with the planning soon.
+													</div>
+													<div class="comment__reply">
+														<button type="button" class="btn btn__grey animation">Reply</button>
+													</div>
+												</div>
+											</li>
+											<li class="comment-list__item">
+												<div class="comment__body">
+													<div class="comment__avatar">
+														<img src="{{ asset('web/img/testimonal-photo2.png') }}" alt="">
+													</div>
+													<div class="comment__info">
+														<p class="comment__author">Jonathan Miles</p>
+														<p class="comment__date date">2 days ago</p>
+													</div>
+													<div class="comment__content">Before we begin to give you additional information on this topic, take a moment to think about how much you already know.
+													</div>
+													<div class="comment__reply">
+														<button type="button" class="btn btn__grey animation">Reply</button>
+													</div>
+												</div>
+											</li>
+										</ol>
+									</li>
+									@endforeach
+									
+								</ol> --}}
+							</ol>
+						</div>
+						<div class="stage">
+							<a href="#" id="read-more-btn" data-skipcount="{{count($comments)}}">Read More <i class="fas fa-arrow-down"></i></a>
+						</div>
    						<div class="comment__respond">
-	   						<h3>Leave your comment</h3>
+	   						<h3 id="comment-form-heading">Leave your comment</h3>
 
-	   						<form class="vertical-form">
-								<div class="form-group">
+	   						<form action="{{ route('post_comment') }}" method="post" class="vertical-form" id="comment-form">
+	   							@csrf
+								{{-- <div class="form-group">
 			    					<label for="c-name">Name <span class="req">*</span></label>
-			    					<input type="text" class="form-control" id="c-name">
+			    					<input name="name" type="text" class="form-control" id="c-name">
 				    			</div>
 				    			<div class="form-group">
 			    					<label for="c-email">Email <span class="req">*</span></label>
-			    					<input type="email" class="form-control" id="c-email">
-								</div>
+			    					<input name="" type="email" class="form-control" id="c-email">
+								</div> --}}
+								<input type="hidden" value="{{ $data->id }}" name="topic_id">
+								{{-- <input type="hidden" value="{{ $data->id }}" name="topic_id"> --}}
 								<div class="form-group">
 				    				<label for="c-text">Your message <span class="req">*</span></label>
-									<textarea name="c-text" id="c-text" class="form-control"></textarea>
+									<textarea name="comment" id="c-text" class="form-control"></textarea>
 								</div>
 								<input type="submit" class="btn btn__red animation" name="update_cart" value="Submit comment" />
 							</form>
-
 						</div>
    					</div>
 				</div>
@@ -259,4 +290,48 @@
 	</div><!-- Blog Section End -->
 
 
+@endsection
+
+@section('scripts')
+<script>
+
+	$(document).on('click','.reply_btn',function(e){
+	  	
+		$('<input>').attr({
+			type: 'hidden',
+			name: 'parent_comment',
+			value: $(this).data('commentid')
+		}).appendTo('form');
+
+		$('#comment-form-heading').text('Replying to '+$(this).data('commentowner'));
+
+		$('html, body').animate({
+			scrollTop: $("#comment-form").offset().top
+		}, 1000);
+	});
+
+
+	$(document).on('click','#read-more-btn',function(e){
+		e.preventDefault();
+		fullPageLoader(true);
+		var skip=$(this).data('skipcount');
+		$.ajax({
+			url: "{{ route('read_more_comments') }}",
+			type: 'get',
+			data:{
+				topic:"{{ $data->id }}",
+				skipcount:$('#read-more-btn').attr('data-skipcount'),
+			},
+			success: function(res) {
+				console.log(res);
+				fullPageLoader(false);
+				$('#comments-list').append(res);
+				$('#read-more-btn').attr('data-skipcount',skip+skip);
+			},
+			error: function(error) {
+			}
+		});
+	});
+  
+</script>
 @endsection

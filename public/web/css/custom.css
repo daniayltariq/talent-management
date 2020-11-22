@@ -43,7 +43,9 @@ button.multiselect.dropdown-toggle.btn.btn-default {
     width: 100%;
 }
 
-
+input.readonly_normal{
+    background-color: #ffffff !important;
+}
 button.multiselect.dropdown-toggle.btn.btn-default {
     text-align: left;
 }
