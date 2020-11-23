@@ -399,7 +399,7 @@
 				console.log(res);
 				fullPageLoader(false);
 				$('#comments-list').append(res);
-				$('#read-more-btn').attr('data-skipcount',skip+skip);
+				$('#read-more-btn').attr('data-skipcount',++skip);
 			},
 			error: function(error) {
 			}
