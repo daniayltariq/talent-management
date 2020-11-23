@@ -387,7 +387,7 @@
 	$(document).on('click','#read-more-btn',function(e){
 		e.preventDefault();
 		fullPageLoader(true);
-		var skip=$(this).data('skipcount');
+		var skip=$(this).attr('data-skipcount');
 		console.log(skip);
 		$.ajax({
 			url: "{{ route('read_more_comments') }}",
