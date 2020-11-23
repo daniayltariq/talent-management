@@ -38,7 +38,7 @@ a.btn.btn-default.btn__grey.animation {
 				<div class="blog__list">
 					<h4 class="widget__title">TOPICS</h4>
 
-					<a href="">
+					<a href="{{ route('community',['category' => 'all']) }}">
 						<h4 class="widget__title pull-right widget__titless" >Browse conversations from all topics </h4>
 					</a>
 
@@ -76,8 +76,8 @@ a.btn.btn-default.btn__grey.animation {
 								<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
 								</span>
 							</div>
-							<a href="single-post.html" class="btn btn-default btn__grey animation">{{ $comn->topics_count }} Conversation</a>
-							<a href="single-post.html" class="btn btn-default btn__grey animation">Follow Topic</a>
+							<a href="{{ route('community.category',['slug' => $comn->slug]) }}" class="btn btn-default btn__grey animation">{{ $comn->topics_count }} Conversation</a>
+							<a href="{{ route('community.category',['slug' => $comn->slug]) }}" class="btn btn-default btn__grey animation">Follow Topic</a>
 						</article>
 						
 					@endforeach

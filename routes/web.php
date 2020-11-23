@@ -60,7 +60,7 @@ Route::get('/community/topic/read_more_comments', [App\Http\Controllers\Communit
 Route::get('/community/single-post/{slug}', [App\Http\Controllers\CommunityController::class,'single'])->name('single-post');
 
 Route::get('/community/category/{slug}', [App\Http\Controllers\CommunityController::class,'categories'])->name('community.category');
-
+Route::get('/community/post_suggest', [App\Http\Controllers\CommunityController::class,'post_suggest'])->name('post.suggest');
 
 Route::get('/testimonials', function () {
     return view('web.pages.testimonials');

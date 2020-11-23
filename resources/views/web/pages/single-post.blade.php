@@ -35,6 +35,96 @@
 		.stage a:hover:after {
 			color:#231f20;
 		}
+
+		.search .results {
+			width: 91%;
+			max-height: 350px;
+			min-height: 140px;
+			overflow: auto;
+			display: none;
+			position: absolute;
+			top: 53px;
+			left: 0;
+			right: 0;
+			z-index: 10;
+			padding: 0;
+			margin: 0;
+			border-width: 1px;
+			border-style: solid;
+			border-color: #cbcfe2 #c8cee7 #c4c7d7;
+			border-radius: 3px;
+			background-color: #fdfdfd;
+			
+			-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+			-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+			-ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+			-o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+		}
+
+		.search .results li { display: block }
+
+		.search .results li:first-child { margin-top: -1px }
+
+		.search .results li:first-child:before, .search .results li:first-child:after {
+			display: block;
+			content: '';
+			width: 0;
+			height: 0;
+			position: absolute;
+			left: 50%;
+			margin-left: -5px;
+			border: 5px outset transparent;
+		}
+
+		.search .results li:first-child:before {
+			border-bottom: 5px solid #c4c7d7;
+			top: -11px;
+		}
+
+		.search .results li:first-child:after {
+			border-bottom: 5px solid #fdfdfd;
+			top: -10px;
+		}
+
+		.search .results li:first-child:hover:before, .search .results li:first-child:hover:after { display: none }
+
+		.search .results li:last-child { margin-bottom: -1px }
+
+		.search .results a {
+			display: block;
+			position: relative;
+			margin: 0 -1px;
+			padding: 6px 6px 6px 10px;
+			color: #808394;
+			font-weight: 500;
+			/* text-shadow: 0 1px #fff; */
+			border: 1px solid transparent;
+			border-radius: 3px;
+		}
+
+		.search .results a span { font-size: 12px; }
+
+		/* .search .results a:before {
+			content: '';
+			width: 18px;
+			height: 18px;
+			position: absolute;
+			top: 50%;
+			right: 10px;
+			margin-top: -9px;
+			background: url("https://cssdeck.com/uploads/media/items/7/7BNkBjd.png") 0 0 no-repeat;
+		} */
+
+		.search .results li:hover {
+			color: #fff;
+			border-color: #ee7322;
+    		background-color: #e88e54;
+		}
+
+		.search .results li:hover .hover-text-clr{
+			color: #fff;
+		}
 	</style>
 @endsection
 
@@ -213,46 +303,29 @@
 						<h4 class="widget__title">Post search</h4>
 						<form class="widget__form">
 							<div class="input-group">
-							  	<input type="text" class="form-control" aria-describedby="search-icon">
+							  	<input type="text" class="form-control" name="search_post" id="search_post" aria-describedby="search-icon">
 							  	<span class="input-group-addon" id="search-icon"><i class="glyphicon glyphicon-search"></i></span>
 							</div>
+
+							<div class="search">
+                                
+                            </div>
 						</form>
 					</div>
 
 					<div class="sidebar-widget">
 						<h4 class="widget__title">Latest Topics</h4>
 						<div class="widget__latest">
-							<figure class="widget-latest__post">
-								<span class="pull-left"></span>
-								<figcaption class="widget-latest__content">
-									<a href="#" class="widget-latest__title">Anti Aging Skin Care The Basics</a>
-									<p class="widget-latest__date">19 Oct 2016</p>
-								</figcaption>
-							</figure>
-
-							<figure class="widget-latest__post">
-								<span class="pull-left"></span>
-								<figcaption class="widget-latest__content">
-									<a href="#" class="widget-latest__title">Ageing Skin Care Does</a>
-									<p class="widget-latest__date">15 nov 2016</p>
-								</figcaption>
-							</figure>
-
-							<figure class="widget-latest__post">
-								<span class="pull-left"></span>
-								<figcaption class="widget-latest__content">
-									<a href="#" class="widget-latest__title">Easy Home Remedy For</a>
-									<p class="widget-latest__date">16 Oct 2016</p>
-								</figcaption>
-							</figure>
-
-							<figure class="widget-latest__post">
-								<span class="pull-left"></span>
-								<figcaption class="widget-latest__content">
-									<a href="#" class="widget-latest__title">Does Hydroderm Work</a>
-									<p class="widget-latest__date">16 dec 2016</p>
-								</figcaption>
-							</figure>
+							@foreach ($latest as $topic)
+								<figure class="widget-latest__post">
+									<span class="pull-left"></span>
+									<figcaption class="widget-latest__content">
+										<a href="#" class="widget-latest__title">{{$topic->title}}</a>
+										<p class="widget-latest__date">{{$topic->created_at->diffForHumans()}}</p>
+									</figcaption>
+								</figure>
+							@endforeach
+							
 						</div>
 					</div>
 					
@@ -333,5 +406,29 @@
 		});
 	});
   
+</script>
+
+<script>
+	$(document).on('change','#search_post',function(){
+		$('.search').empty();
+		if ($(this).val() !=='') {
+			fullPageLoader(true);
+			$.get( "{{ route('post.suggest') }}",{
+					q: $(this).val(),
+					_token : "{{ csrf_token() }}"
+				}, function( data ) {
+					fullPageLoader(false);
+					$('.search').html(data);
+					$('.results').show();
+					/* updateSearchResult(data); */
+			});
+		}
+		
+	})
+
+	$(document).on('click','.suggested-post',function(){
+		var post_slug=$(this).data('postslug');
+		window.location.replace('{{url('/')}}/community/single-post/'+post_slug);
+	})
 </script>
 @endsection
