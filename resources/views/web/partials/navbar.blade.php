@@ -65,9 +65,12 @@
 										</li>
 									@endauth
 									
-									<li class="m-menu__sub-item">
-										<a href="{{ route('pricing') }}">Pricing</a>
-									</li>
+									@if (\Auth::guest() || \Auth::user()->hasRole('candidate'))
+										<li class="m-menu__sub-item">
+											<a href="{{ route('pricing') }}">Pricing</a>
+										</li>
+									@endif
+									
 
 									@role('candidate')
 										@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 2)

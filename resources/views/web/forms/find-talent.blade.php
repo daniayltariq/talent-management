@@ -276,8 +276,7 @@
                                     <img class="img-responsive" src="{{ asset('web/img/02_model-1.jpg') }} " alt="sample image">
                                     <div class="grid-item__contant-info">
                                         <div class="grid-item__contant-name">{{!is_null($member->profile) ? $member->profile->legal_first_name.' '.$member->profile->legal_last_name : ""}} </div>
-                                        <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->address_1 : ''}} {{!is_null($member->profile) ?$member->profile->country : ''}}</div>
-                                        <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->city : ''}}</div>
+                                        <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->address_1 : ''}} {{!is_null($member->profile) ?$member->profile->country : ''}} {{!is_null($member->profile) ?$member->profile->city : ''}}</div>
                                         <div class="grid-item__contant-place title__grey">AGE: 23</div>
                                         <div class="grid-item__contant-place title__grey">Height: {{!is_null($member->profile) ?$member->profile->height : ''}}</div>
                                         <i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i>
