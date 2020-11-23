@@ -43,7 +43,7 @@
 			overflow: auto;
 			display: none;
 			position: absolute;
-			top: 53px;
+			top: 115px;
 			left: 0;
 			right: 0;
 			z-index: 10;
@@ -409,15 +409,15 @@
 </script>
 
 <script>
-	$(document).on('change','#search_post',function(){
+	$(document).on('keyup','#search_post',function(){
 		$('.search').empty();
 		if ($(this).val() !=='') {
-			fullPageLoader(true);
+			/* fullPageLoader(true); */
 			$.get( "{{ route('post.suggest') }}",{
 					q: $(this).val(),
 					_token : "{{ csrf_token() }}"
 				}, function( data ) {
-					fullPageLoader(false);
+					/* fullPageLoader(false); */
 					$('.search').html(data);
 					$('.results').show();
 					/* updateSearchResult(data); */
