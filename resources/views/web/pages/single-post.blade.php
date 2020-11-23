@@ -397,10 +397,15 @@
 				skipcount:$('#read-more-btn').attr('data-skipcount'),
 			},
 			success: function(res) {
-				console.log(res);
+				console.log(res.length);
 				fullPageLoader(false);
-				$('#comments-list').append(res);
-				$('#read-more-btn').attr('data-skipcount',++skip);
+				if (res.length>0) {
+					$('#comments-list').append(res);
+					$('#read-more-btn').attr('data-skipcount',skip+skip);
+				} else {
+					$('#read-more-btn').hide();
+				}
+				
 			},
 			error: function(error) {
 			}
