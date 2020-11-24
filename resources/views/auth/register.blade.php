@@ -161,7 +161,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             </div>
                         
                             <div class="form-group">
-                                <label for="phone" class="col-sm-4 control-label">Phone</label>
+                                <label for="phone" class="col-sm-4 control-label">Phone <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="number" class="form-control" name="phone" id="phone">
                                     @error('phone')
@@ -203,7 +203,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="country" class="col-sm-4 control-label">Country</label>
+                                <label for="country" class="col-sm-4 control-label">Country <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="country" id="country">
                                     @error('country')
@@ -214,7 +214,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div>  
                             <div class="form-group">
-                                <label for="city" class="col-sm-4 control-label">City</label>
+                                <label for="city" class="col-sm-4 control-label">City <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="city" id="city">
                                     @error('city')
@@ -225,7 +225,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="state" class="col-sm-4 control-label">State</label>
+                                <label for="state" class="col-sm-4 control-label">State <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <select name="state" id="state" class="form-control">
                                         <option value="AK">Alaska</option>
@@ -241,7 +241,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="address" class="col-sm-4 control-label">Home Address 1</label>
+                                <label for="address" class="col-sm-4 control-label">Home Address 1 <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="h_adress_1" id="h_adress_1">
                                     @error('h_adress_1')
@@ -252,7 +252,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="h_adress_2" class="col-sm-4 control-label">Home Address 2</label>
+                                <label for="h_adress_2" class="col-sm-4 control-label">Home Address 2 <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="h_adress_2" name="h_adress_2">
                                     @error('h_adress_2')
@@ -264,7 +264,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             </div>
                         
                             <div class="form-group">
-                                <label for="zipcode" class="col-sm-4 control-label">ZipCode</label>
+                                <label for="zipcode" class="col-sm-4 control-label">ZipCode <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="zipcode" id="zipcode">
                                     @error('zipcode')
