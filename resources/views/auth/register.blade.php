@@ -4,6 +4,9 @@
 
 
 @section('styles')
+{!! htmlScriptTagJsApi([
+    'action' => 'homepage',
+]) !!}
 <style type="text/css">
 button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     padding: 15px 30px;
@@ -60,6 +63,10 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     color: #151515;
     background: #ee8d32;
     /* line-height: 3; */
+}
+
+.invalid-feedback{
+    color: red;
 }
 </style>
 @endsection
@@ -134,13 +141,22 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         <option value="female">Female</option>
                                         <option value="male">Male</option>
                                     </select>
+                                    @error('gender')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                  </div>
                             </div>
                             <div class="form-group">
                                 <label for="dob" class="col-sm-4 control-label">Date of birth <span class="req">*</span></label>
                                 <div class="col-sm-8 form-row">
                                     <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
-                                   
+                                    @error('dob')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                  </div>
                             </div>
                         
@@ -148,6 +164,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <label for="phone" class="col-sm-4 control-label">Phone</label>
                                 <div class="col-sm-8">
                                     <input type="number" class="form-control" name="phone" id="phone">
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
@@ -185,12 +206,22 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <label for="country" class="col-sm-4 control-label">Country</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="country" id="country">
+                                    @error('country')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>  
                             <div class="form-group">
                                 <label for="city" class="col-sm-4 control-label">City</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="city" id="city">
+                                    @error('city')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
@@ -202,18 +233,33 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         <option value="AR">Arkansas</option>
                                         <option value="CA">California</option>
                                     </select>
+                                    @error('state')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="address" class="col-sm-4 control-label">Home Address 1</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="h_adress_1" id="h_adress_1">
+                                    @error('h_adress_1')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="h_adress_2" class="col-sm-4 control-label">Home Address 2</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="h_adress_2" name="h_adress_2">
+                                    @error('h_adress_2')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         
@@ -221,6 +267,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <label for="zipcode" class="col-sm-4 control-label">ZipCode</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="zipcode" id="zipcode">
+                                    @error('zipcode')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row">
@@ -240,6 +291,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 @endsection
 
 @section('scripts')
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
         var user_type = 'agent';
 
