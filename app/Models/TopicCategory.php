@@ -14,4 +14,14 @@ class TopicCategory extends Model
     	return $this->hasMany(Topic::class,'topic_category_id');
 
     }
+
+    public function comments()
+    {
+        return $this->hasManyThrough(TopicComment::class, Topic::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasManyThrough(TopicLike::class, Topic::class);
+    }
 }

@@ -21,8 +21,8 @@ class CommunityController extends Controller
         }
 
     	$community = TopicCategory::with(['topics' => function($q){
-    		return $q->with('user')->limit(3);
-    	}])->withCount('topics')->paginate(5);
+    		return $q->with('user')->limit(4);
+    	}])->withCount(['topics','comments','likes'])->withSum('topics','views')->paginate(5);
 
     	return view('web.pages.community',compact('community'));
 
