@@ -53,7 +53,7 @@
 								<a href="{{ route('testimonials') }}">Testimonials</a>
 							</li>
 
-							<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
+							{{-- <li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
 								<a href="{{ route('login') }}">pages</a>
 								<ul class="m-menu__sub">
 									<li class="m-menu__sub-item">
@@ -65,39 +65,20 @@
 										</li>
 									@endauth
 									
+									
 									@if (\Auth::guest() || \Auth::user()->hasRole('candidate'))
 										<li class="m-menu__sub-item">
 											<a href="{{ route('pricing') }}">Pricing</a>
 										</li>
 									@endif
 									
-
-									@role('candidate')
-										@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 2)
-											<li class="m-menu__sub-item">
-												<a href="{{ url('/') }}/account/reward">Reward</a>
-											</li>
-										@endif
-										
-									@endrole
 									
-
-									@if (\Auth::guest() || auth()->user()->hasRole('candidate'))
-										<li class="m-menu__sub-item">
-											<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
-										</li>
-										<li class="m-menu__sub-item">
-											<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
-										</li>
-									@endif
-									
-									
-									{{-- <li class="m-menu__sub-item">
+									<li class="m-menu__sub-item">
 										<a href="{{ route('single-topic') }}">Community Topics</a>
 									</li>
 									<li class="m-menu__sub-item">
 										<a href="{{ route('single-post') }}">Single Topic</a>
-									</li> --}}
+									</li>
 									<li class="m-menu__sub-item">
 										<a href="{{ route('404') }}">404</a>
 									</li>
@@ -105,8 +86,14 @@
 										<a href="{{ route('403') }}">403</a>
 									</li>
 								</ul>
-							</li>
+							</li> --}}
 							
+							
+							@if (\Auth::guest() || \Auth::user()->hasRole('candidate'))
+								<li class="m-menu__list-item {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}">
+									<a href="{{ route('pricing') }}">Pricing</a>
+								</li>
+							@endif
 							
 							
 							@if(Auth::guest()) 
@@ -130,7 +117,30 @@
 									<li class="m-menu__sub-item">
 										<a href="{{ route('account.dashboard') }}">Dashboard</a>
 									</li>
+
+									@role('candidate')
+										@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 2)
+											<li class="m-menu__sub-item">
+												<a href="{{ url('/') }}/account/reward">Reward</a>
+											</li>
+										@endif
+										
+									@endrole
+									
+
+									@if (\Auth::guest() || auth()->user()->hasRole('candidate'))
+										<li class="m-menu__sub-item">
+											<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
+										</li>
+										<li class="m-menu__sub-item">
+											<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
+										</li>
+									@endif
+
 									@role('agent')
+										<li class="m-menu__sub-item">
+											<a href="{{ route('agent.picklist.index') }}">Picklist Favorites</a>
+										</li>
 										<li class="m-menu__sub-item">
 											<a href="{{ route('agent.topic.create') }}">Create Post</a>
 										</li>

@@ -53,7 +53,7 @@
 
 					<div class="row ">
 						<div class="col-sm-10 col-centered">
-							@foreach ($items as $item)
+							@forelse ($items as $item)
 								<div class="single-talent mb-5">
 									<div class="row">
 										<div class="col-sm-4">
@@ -107,7 +107,9 @@
 										
 									</div>
 								</div>
-							@endforeach
+							@empty
+								<h4 style="text-align: center">No items!</h4>
+							@endforelse
 							
 							{{-- <div class="single-talent mb-5">
 								<div class="row">
