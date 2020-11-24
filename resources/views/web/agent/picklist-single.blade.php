@@ -53,7 +53,7 @@
 
 					<div class="row ">
 						<div class="col-sm-10 col-centered">
-							@foreach ($picklist->items as $item)
+							@foreach ($items as $item)
 								<div class="single-talent mb-5">
 									<div class="row">
 										<div class="col-sm-4">
@@ -203,22 +203,34 @@
 				</div>
 				<!-- end of blog__list -->
 				<nav class="blog__pagination">
-					<ul class="pagination">
-						<!-- <li>
-							<a href="#" class="prev" aria-label="Previous">
-							  <span aria-hidden="true">Previous</span>
-							</a>
-							</li> -->
-						<li class="active"><a href="#">01 <span class="sr-only">(current)</span></a></li>
-						<li><a href="#">02</a></li>
-						<li><a href="#">03</a></li>
-						<li><a href="#">...</a></li>
-						<li>
-							<a href="#" class="next" aria-label="Next">
-							<span aria-hidden="true">Next</span>
-							</a>
-						</li>
-					</ul>
+					@if ($items->lastPage() > 1)
+					    <ul class="pagination">
+					        <li class="{{ ($items->currentPage() == 1) ? ' disabled' : '' }}">
+					            <a href="{{ $items->url(1) }}">First</a>
+					         </li>
+					        @for ($i = 1; $i <= $items->lastPage(); $i++)
+					            <?php
+					            $half_total_links = floor(5 / 2);
+					            $from = $items->currentPage() - $half_total_links;
+					            $to = $items->currentPage() + $half_total_links;
+					            if ($items->currentPage() < $half_total_links) {
+					               $to += $half_total_links - $items->currentPage();
+					            }
+					            if ($items->lastPage() - $items->currentPage() < $half_total_links) {
+					                $from -= $half_total_links - ($items->lastPage() - $items->currentPage()) - 1;
+					            }
+					            ?>
+					            @if ($from < $i && $i < $to)
+					                <li class="{{ ($items->currentPage() == $i) ? ' active' : '' }}">
+					                    <a href="{{ $items->url($i) }}">{{ $i }}</a>
+					                </li>
+					            @endif
+					        @endfor
+					        <li class="{{ ($items->currentPage() == $items->lastPage()) ? ' disabled' : '' }}">
+					            <a href="{{ $items->url($items->lastPage()) }}">Last</a>
+					        </li>
+					    </ul>
+					@endif
 				</nav>
 			</div>
 			

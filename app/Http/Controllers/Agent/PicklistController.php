@@ -86,7 +86,9 @@ class PicklistController extends Controller
     public function show( Request $request,Picklist $picklist)
     {
         /* dd($picklist); */
-        return view('web.agent.picklist-single',compact('picklist'));
+        $items=$picklist->items()->paginate(5);
+        
+        return view('web.agent.picklist-single',compact('picklist','items'));
     }
 
     /**
