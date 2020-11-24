@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Topic;
 use App\Models\TopicCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
 {
@@ -81,9 +82,7 @@ class TopicController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'topic_category_id' => ['required', 'numeric'],
             'title' => ['required', 'string'],
-            'meta_title' => ['required', 'string', 'max:191'],
             'slug' => ['required', 'string','unique:topics,slug'],
             'content' => ['required', 'string'],
         ]);
