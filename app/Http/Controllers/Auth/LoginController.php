@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request as httpRequest;
+
 class LoginController extends Controller
 {
     /*
@@ -36,6 +38,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        session()->put('url.intended', url()->current());
         $this->middleware('guest')->except('logout');
     }
 
@@ -47,8 +50,10 @@ class LoginController extends Controller
         } elseif(Auth::check() && \Auth::user()->hasRole('agent')) {
             /* dd(session('url.intended')); */
             return redirect()->to(session('url.intended'));
-        } elseif(Auth::check() && auth()->user()->hasRole('buyer')) {
-            return redirect()->route('account.talent.profile');
+        } elseif(Auth::check() && auth()->user()->hasRole('candidate')) {
+            /* return redirect()->route('account.talent.profile'); */
+            dd(session('url.intended'));
+            return redirect()->to(session('url.intended'));
         }
         
     }

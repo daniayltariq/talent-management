@@ -18,6 +18,7 @@ class isCandidate
         if(\Auth::check() && \Auth::user()->hasRole("candidate") ){ 
             return $next($request);
         }else{
+            $request->session()->put('url.intended', url()->current());
             return redirect()->route('login');
         }
     }

@@ -27,6 +27,10 @@
 		background-color: #5969ff;
 		border-radius: 4px;
 	}
+
+   .error{
+      color: red;
+   }
 </style>
 @endsection
 @section('content')
@@ -65,13 +69,19 @@
                         <div class="form-group">
                            <label class="col-md-3 col-sm-3 col-xs-12">Add Title</label>
                            <div class="col-md-11 col-sm-11 col-xs-12">
-                              <input type="text" class="form-control" name="title" value="{{isset($blog)?$blog->title : ''}}"/> 
+                              <input type="text" class="form-control" name="title" value="{{isset($blog)?$blog->title : ''}}"/>
+                              @error('title')
+                                  <div class="error">{{$message}}</div>
+                              @enderror
                            </div>
                         </div>
                         <div class="form-group">
                            <label class="col-md-3 col-sm-3 col-xs-12">Add Slug</label>
                            <div class="col-md-11 col-sm-11 col-xs-12">
-                              <input type="text" class="form-control" name="slug" value="{{isset($blog)?$blog->slug : ''}}"/> 
+                              <input type="text" class="form-control" name="slug" value="{{isset($blog)?$blog->slug : ''}}"/>
+                              @error('slug')
+                                  <div class="error">{{$message}}</div>
+                              @enderror
                            </div>
                         </div>
                      
@@ -83,7 +93,10 @@
                         </div> --}}
                         <div class="form-group">
                            <div class="col-md-11 col-sm-11 col-xs-12">
-							         <textarea name="content" id="summernote" class="summernote">{!!isset($blog)?html_entity_decode($blog->content) : ''!!}</textarea>
+                              <textarea name="content" id="summernote" class="summernote">{!!isset($blog)?html_entity_decode($blog->content) : ''!!}</textarea>
+                              @error('content')
+                                  <div class="error">{{$message}}</div>
+                              @enderror
                            </div>
                         </div>
                      </div>

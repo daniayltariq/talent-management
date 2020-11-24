@@ -292,9 +292,9 @@
 				    				<label for="c-text">Your message <span class="req">*</span></label>
 									<textarea name="comment" id="c-text" class="form-control"></textarea>
 								</div>
-								@auth
+								@role('agent|candidate')
 									<input type="submit" class="btn btn__red animation" name="update_cart" value="Submit comment" />
-								@endauth
+								@endrole
 								@guest
 									<a href="{{route('login')}}"  class="btn btn__red animation">Submit</a>
 								@endguest
