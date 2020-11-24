@@ -401,7 +401,7 @@
 				fullPageLoader(false);
 				if (res.length>0) {
 					$('#comments-list').append(res);
-					$('#read-more-btn').attr('data-skipcount',skip+1);
+					$('#read-more-btn').attr('data-skipcount',++skip);
 				} else {
 					$('#read-more-btn').hide();
 				}
