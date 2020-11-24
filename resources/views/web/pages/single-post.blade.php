@@ -326,7 +326,7 @@
 								<figure class="widget-latest__post">
 									<span class="pull-left"></span>
 									<figcaption class="widget-latest__content">
-										<a href="#" class="widget-latest__title">{{$topic->title}}</a>
+										<a href="{{ route('single-post',['slug' => $topic->slug]) }}" class="widget-latest__title">{{$topic->title}}</a>
 										<p class="widget-latest__date">{{$topic->created_at->diffForHumans()}}</p>
 									</figcaption>
 								</figure>
