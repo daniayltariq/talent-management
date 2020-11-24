@@ -47,9 +47,11 @@ Route::get('/forum', function () {
 // })->name('community');
 
 Route::get('/community', [App\Http\Controllers\CommunityController::class,'index'])->name('community');
-Route::post('/community/topic/like', [App\Http\Controllers\CommunityController::class,'post_like'])->name('post_like');
-Route::post('/community/topic/comment', [App\Http\Controllers\CommunityController::class,'post_comment'])->name('post_comment');
-Route::post('/community/topic/reply_comment', [App\Http\Controllers\CommunityController::class,'reply_comment'])->name('reply_comment');
+Route::group(['middleware' => ['isAgentOrCandidate']], function() {
+    Route::post('/community/topic/like', [App\Http\Controllers\CommunityController::class,'post_like'])->name('post_like');
+    Route::post('/community/topic/comment', [App\Http\Controllers\CommunityController::class,'post_comment'])->name('post_comment');
+    Route::post('/community/topic/reply_comment', [App\Http\Controllers\CommunityController::class,'reply_comment'])->name('reply_comment');
+});
 Route::get('/community/topic/read_more_comments', [App\Http\Controllers\CommunityController::class,'read_more_comments'])->name('read_more_comments');
 
 // Route::get('/single-topic', function () {

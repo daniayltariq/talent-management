@@ -99,7 +99,7 @@ class CommunityController extends Controller
 
             $new->save();
         }
-
+        /* dd(123); */
         return redirect()->back()->with([
             "message" => "Comment has been posted.",
             "alert-type" => "success",
