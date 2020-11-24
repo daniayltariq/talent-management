@@ -119,7 +119,7 @@ a.btn.btn-default.btn__grey.animation {
 					        </li>
 					    </ul>
 					@endif
-{{-- 
+					{{-- 
 					<ul class="pagination">
 						 
 						<li class="active"><a href="#">01 <span class="sr-only">(current)</span></a></li>

@@ -17,7 +17,7 @@ class PicklistController extends Controller
      */
     public function index(Request $request)
     {
-        $picklist=Picklist::all();
+        $picklist=Picklist::paginate(5);
         return view('web.agent.picklist',compact('picklist'));
     }
 
