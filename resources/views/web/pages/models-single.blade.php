@@ -137,7 +137,7 @@
 							</div>
 							<a href="" class="btn btn__red animation">Book this model</a><br><br>
 
-							<div class="row">
+							{{-- <div class="row">
 								<div class="col-md-12">
 									<button class="btn btn__red animation" id="refer-btn">Refer a Friend</button>
 								</div>
@@ -147,7 +147,7 @@
 								<div class="col-md-12">
 									<input class="form-control" type="text" name="refer_link">
 								</div>
-							</div>
+							</div> --}}
 							
 						</div>
 					</div>
