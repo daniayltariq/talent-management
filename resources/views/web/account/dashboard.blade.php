@@ -333,7 +333,7 @@
                                         <div class="sp-thumbnails">
                                             @forelse ($data['audio'] as $audio)
                                                 <audio controls>
-                                                    <source src="{{ asset('storage/uploads/uploadData/' . $audio->file ?? '') }}" type="video/mpeg">
+                                                    <source src="{{ asset('storage/uploads/uploadData/' . $audio->file ?? '') }}" type="audio/mpeg">
                                                 </audio>
                                             @empty
                                                 <h4 class="text-center">No audio found</h4>
@@ -503,6 +503,7 @@
                 /* console.log(fileType); */
                 const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
                 const validVideoTypes = ['video/mp4', 'video/mkv', 'video/mov', 'video/wmv'];
+                const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
                 
                 if (validImageTypes.includes(fileType)) {
                     formData.append('type', 'image');
@@ -510,9 +511,9 @@
                 else if (validVideoTypes.includes(fileType)) {
                     formData.append('type', 'video');
                 }
-                /* else if (validAudioTypes.includes(fileType)) {
+                else if (validAudioTypes.includes(fileType)) {
                     formData.append('type', 'audio');
-                } */
+                }
             },
             success: function (file, response) {
                console.log(file);
@@ -553,16 +554,16 @@
                 
             },
             init: function (file) {
-                var myDropzone = this;
+                /* var myDropzone = this;
                 const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
                 this.on('addedfile', function(file) {
                     if ( validAudioTypes.includes(file.type)) {
                         sendAudio(file);
-                    }/* 
+                    }
                     else{
                         myDropzone.processQueue();
-                    } */
-                });
+                    }
+                }); */
 
             }
         }
