@@ -82,13 +82,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-holder active">
-                                                    <input type="text" placeholder="Legal First Name" name="legal_first_name" value="{{$profile->legal_first_name ??''}}" class="form-control" required>
+                                                    <input type="text" placeholder="Legal First Name" name="legal_first_name" value="{{$profile->legal_first_name ??''}}" class="form-control required">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Legal Last Name" name="legal_last_name" value="{{$profile->legal_last_name?? ''}}" class="form-control" required>
+                                                    <input type="text" placeholder="Legal Last Name" name="legal_last_name" value="{{$profile->legal_last_name?? ''}}" class="form-control required">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="email" placeholder="Email" name="email" class="form-control" value="{{$profile->email ?? ''}}" required>
+                                                    <input type="email" placeholder="Email" name="email" class="form-control required" value="{{$profile->email ?? ''}}">
                                                 </div>
                                                 
                                             </div>
@@ -652,8 +652,8 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     
 @endsection
 @section('scripts')
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="{{ asset('plugins/steps/js/jquery.steps.js') }}"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="{{ asset('plugins/steps/js/main.js') }}"></script>
 <script src="{{ asset('/js/repeater.js') }}"></script>
 
@@ -772,6 +772,9 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                     console.log(res);
                     if (res.alert_type) {
                         toastr.success(res.message);
+                        if (res.method) {
+                            $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
+                        }
                     } else {
                         toastr.error(res.message);
                     }

@@ -24,7 +24,12 @@ class TalentController extends Controller
         /* dd($request->all()); */
         /* return $request->all(); */
         try {
-            $profile=$request['method']=='PUT' ? Profile::findOrFail($request['profile_id']) : new Profile;
+            if($request['method']=='PUT'){
+                $profile=Profile::where('user_id',auth()->user()->id/* $request['profile_id'] */)->first();
+            }else{
+                $profile=new Profile ;
+                $status['method']='PUT';
+            }
             $profile->fill($request->all());
             $profile->user_id=auth()->user()->id;
             $profile->save();
@@ -59,10 +64,8 @@ class TalentController extends Controller
                 \App\Models\CandidateSkill::insert($skills);
             }
 
-            $status = array(
-                'message' => 'Data saved !', 
-                'alert_type' => 'success'
-            );
+            $status ['message']= 'Data saved !'; 
+            $status ['alert_type']= 'success';
 
         } catch (\Throwable $th) {
             $status = array(

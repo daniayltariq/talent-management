@@ -17,7 +17,7 @@ $(function () {
         enableAllSteps: true,
         transitionEffectSpeed: 500,
         onStepChanging: function (event, currentIndex, newIndex) {
-
+            /* console.log($('#wizard-p-' + currentIndex + ' >form')); */
             /*  if (newIndex >= 1) {
                  $('.actions ul').addClass('actions-next');
              } else {
@@ -38,7 +38,7 @@ $(function () {
             } else {
                 $('.actions ul').removeClass('actions-next');
             }
-
+            form = $('#wizard-p-' + currentIndex + ' >form');
             form.validate().settings.ignore = ":disabled,:hidden";
 
             return form.valid();
