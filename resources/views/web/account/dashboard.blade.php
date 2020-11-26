@@ -490,26 +490,23 @@
             },
             addRemoveLinks: true,
             headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}",
-                'type':'image'
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
             sending: function(file, xhr, formData){
                 const  fileType = file.type;
                 /* console.log(fileType); */
                 const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
                 const validVideoTypes = ['video/mp4', 'video/mkv', 'video/mov', 'video/wmv'];
-                const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
+                
                 if (validImageTypes.includes(fileType)) {
                     formData.append('type', 'image');
                 }
                 else if (validVideoTypes.includes(fileType)) {
                     formData.append('type', 'video');
                 }
-                else if (validAudioTypes.includes(fileType)) {
-                    alert(123);
-                    return false;
-                    /* formData.append('type', 'audio'); */
-                }
+                /* else if (validAudioTypes.includes(fileType)) {
+                    formData.append('type', 'audio');
+                } */
             },
             success: function (file, response) {
                console.log(file);
@@ -549,8 +546,14 @@
 
                 
             },
-            init: function () {
-                @if(isset($project) && $project->document)
+            init: function (file) {
+                const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
+                this.on('sending', function(file) {
+                    if ( validVideoTypes.includes(file.type)) {
+                        
+                    }
+                })
+                /* @if(isset($project) && $project->document)
                     var files =
                     {!! json_encode($project->document) !!}
                     for (var i in files) {
@@ -559,7 +562,7 @@
                         file.previewElement.classList.add('dz-complete')
                         $('#imageDropzone').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
                     }
-                @endif
+                @endif */
             }
         }
     );
