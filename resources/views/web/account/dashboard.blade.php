@@ -484,6 +484,12 @@
             maxFilesize: 12, // MB
             acceptedFiles: "image/*,.mp4,.mkv,.mov,.wmv,audio/*",
             dictDefaultMessage:"Drop Your Files here.",
+            /* autoProcessQueue: false, */
+            accept: function(file, done) {
+                console.log("uploaded");
+                done();
+            },
+
             renameFile: function(file) {
                 let newName = new Date().getTime() + '_' + file.name;
                 return newName;
@@ -547,22 +553,17 @@
                 
             },
             init: function (file) {
+                var myDropzone = this;
                 const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
-                this.on('sending', function(file) {
-                    if ( validVideoTypes.includes(file.type)) {
-                        
-                    }
-                })
-                /* @if(isset($project) && $project->document)
-                    var files =
-                    {!! json_encode($project->document) !!}
-                    for (var i in files) {
-                        var file = files[i]
-                        this.options.addedfile.call(this, file)
-                        file.previewElement.classList.add('dz-complete')
-                        $('#imageDropzone').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
-                    }
-                @endif */
+                this.on('addedfile', function(file) {
+                    if ( validAudioTypes.includes(file.type)) {
+                        sendAudio(file);
+                    }/* 
+                    else{
+                        myDropzone.processQueue();
+                    } */
+                });
+
             }
         }
     );
@@ -589,9 +590,26 @@
 		
 	});
 
-    function sendAudio()
+    function sendAudio(file)
     {
-        alert(123);
+        console.log(file);
+        var audiofile=new FormData($('#imageDropzone')[0]);
+        audiofile.append('audio',file);
+        $.ajax({
+            url: '{{ route('account.storeMedia') }}',
+            contentType: false,
+            processData: false,
+            
+            type: 'POST',
+            data: audiofile,
+            success: function(res) {
+                console.log(res);
+                toastr.success('file uploaded');
+            },
+            error: function(error) {
+                toastr.error('something went wrong!');
+            }
+        });
     }
 </script>
 

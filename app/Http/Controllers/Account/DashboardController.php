@@ -60,7 +60,7 @@ class DashboardController extends Controller
 
     public function storeMedia(Request $request)
     {
-        /* $file = new File($request->file);
+        /* $file = new File($request->audio);
         dd($file); */
         if ($request->hasFile('file') || $request->file('file')) {
             $img = custom_file_upload($request->file('file'),'public','uploads/uploadData',null,null,null,null);
