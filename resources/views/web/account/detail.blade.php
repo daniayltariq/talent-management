@@ -137,20 +137,23 @@
                                             <table class="w-100">
                                                 @php
                                                     $expr=array();
-                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','theater') : '';
+                                                    $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','theater') : null):null;
                                                 @endphp
                                                 <tr>
                                                     <th>Name</th>
                                                     <th>Role</th>
                                                     <th>Location</th>
                                                 </tr>
-                                                @foreach ($expr as $key => $exp)
-                                                    <tr>
-                                                        <td>{{$exp->name ?? ''}}</td>
-                                                        <td>{{$exp->role ?? ''}}</td>
-                                                        <td>{{$exp->production ?? ''}}</td>
-                                                    </tr>
-                                                @endforeach
+                                                @if (!is_null($expr))
+                                                    @foreach ($expr as $key => $exp)
+                                                        <tr>
+                                                            <td>{{$exp->name ?? ''}}</td>
+                                                            <td>{{$exp->role ?? ''}}</td>
+                                                            <td>{{$exp->production ?? ''}}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                                
                                                  
                                             </table>
                                         </div>
@@ -170,15 +173,18 @@
                                                  </tr>
                                                 @php
                                                     $expr=array();
-                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','films') : '';
+                                                    $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','films') : null):null;
                                                 @endphp
-                                                @foreach ($expr as $key => $exp)
-                                                    <tr>
-                                                        <td>{{$exp->name ?? ''}}</td>
-                                                        <td>{{$exp->role ?? ''}}</td>
-                                                        <td>{{$exp->production ?? ''}}</td>
-                                                    </tr>
-                                                @endforeach
+
+                                                @if (!is_null($expr))
+                                                    @foreach ($expr as $key => $exp)
+                                                        <tr>
+                                                            <td>{{$exp->name ?? ''}}</td>
+                                                            <td>{{$exp->role ?? ''}}</td>
+                                                            <td>{{$exp->production ?? ''}}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                                
                                             </table>
                                         </div>
@@ -200,15 +206,18 @@
 
                                                 @php
                                                     $expr=array();
-                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','television') : '';
+                                                    $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','television') : null):null;
                                                 @endphp
-                                                @foreach ($expr as $key => $exp)
-                                                    <tr>
-                                                        <td>{{$exp->name ?? ''}}</td>
-                                                        <td>{{$exp->role ?? ''}}</td>
-                                                        <td>{{$exp->production ?? ''}}</td>
-                                                    </tr>
-                                                @endforeach
+
+                                                @if (!is_null($expr))
+                                                    @foreach ($expr as $key => $exp)
+                                                        <tr>
+                                                            <td>{{$exp->name ?? ''}}</td>
+                                                            <td>{{$exp->role ?? ''}}</td>
+                                                            <td>{{$exp->production ?? ''}}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                             </table>
                                         </div>
                                     </div>
@@ -229,15 +238,18 @@
 
                                                 @php
                                                     $expr=array();
-                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','commercials') : '';
+                                                    $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','commercials') : null):null;
                                                 @endphp
-                                                @foreach ($expr as $key => $exp)
-                                                    <tr>
-                                                        <td>{{$exp->name ?? ''}}</td>
-                                                        <td>{{$exp->role ?? ''}}</td>
-                                                        <td>{{$exp->production ?? ''}}</td>
-                                                    </tr>
-                                                @endforeach
+
+                                                @if (!is_null($expr))
+                                                    @foreach ($expr as $key => $exp)
+                                                        <tr>
+                                                            <td>{{$exp->name ?? ''}}</td>
+                                                            <td>{{$exp->role ?? ''}}</td>
+                                                            <td>{{$exp->production ?? ''}}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                                
                                             </table>
                                         </div>
@@ -259,15 +271,18 @@
 
                                                 @php
                                                     $expr=array();
-                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','training') : '';
+                                                    $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','training') : null):null;
                                                 @endphp
-                                                @foreach ($expr as $key => $exp)
-                                                    <tr>
-                                                        <td>{{$exp->name ?? ''}}</td>
-                                                        <td>{{$exp->role ?? ''}}</td>
-                                                        <td>{{$exp->production ?? ''}}</td>
-                                                    </tr>
-                                                @endforeach
+
+                                                @if (!is_null($expr))
+                                                    @foreach ($expr as $key => $exp)
+                                                        <tr>
+                                                            <td>{{$exp->name ?? ''}}</td>
+                                                            <td>{{$exp->role ?? ''}}</td>
+                                                            <td>{{$exp->production ?? ''}}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                                
                                             </table>
                                         </div>
@@ -281,15 +296,17 @@
                                         <div class="skills">
                                             @php
                                                 $skills=array();
-                                                $skills=$profile->user->skills()->exists() ? $profile->user->skills : '';
+                                                $skills=!is_null($profile) ? ($profile->user->skills()->exists() ? $profile->user->skills : null):null;
                                             @endphp
                                             
-                                            @foreach ($skills as $skill)
-                                                @if ($skill->skill()->exists())
-                                                    <span class="label label-default">{{$skill->skill->title ?? ''}}</span>
-                                                @endif
-                                                
-                                            @endforeach
+                                            @if (!is_null($skills))
+                                                @foreach ($skills as $skill)
+                                                    @if ($skill->skill()->exists())
+                                                        <span class="label label-default">{{$skill->skill->title ?? ''}}</span>
+                                                    @endif
+                                                    
+                                                @endforeach
+                                            @endif
                                             
                                             {{-- <span class="label label-default">Baseball</span>
                                             <span class="label label-default">Golf</span>
