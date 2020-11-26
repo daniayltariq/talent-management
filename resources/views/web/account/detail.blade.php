@@ -91,7 +91,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Weight</th>
-                                                    <td>{{$profile->weight. 'lbs' ?? ''}}</td>
+                                                    <td>{{$profile->weight ?? ''}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Hair</th>
