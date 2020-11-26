@@ -482,7 +482,7 @@
         '#imageDropzone',{
             url: '{{ route('account.storeMedia') }}',
             maxFilesize: 12, // MB
-            acceptedFiles: "image/*,.mp4,.mkv,.mov,.wmv,.mp3,.wav,.mpeg",
+            acceptedFiles: "image/*,.mp4,.mkv,.mov,.wmv,audio/*",
             dictDefaultMessage:"Drop Your Files here.",
             renameFile: function(file) {
                 let newName = new Date().getTime() + '_' + file.name;
@@ -495,7 +495,7 @@
             },
             sending: function(file, xhr, formData){
                 const  fileType = file.type;
-                console.log(fileType);
+                /* console.log(fileType); */
                 const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
                 const validVideoTypes = ['video/mp4', 'video/mkv', 'video/mov', 'video/wmv'];
                 const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
@@ -506,7 +506,9 @@
                     formData.append('type', 'video');
                 }
                 else if (validAudioTypes.includes(fileType)) {
-                    formData.append('type', 'audio');
+                    alert(123);
+                    return false;
+                    /* formData.append('type', 'audio'); */
                 }
             },
             success: function (file, response) {
@@ -583,6 +585,11 @@
 
 		
 	});
+
+    function sendAudio()
+    {
+        alert(123);
+    }
 </script>
 
 @endsection

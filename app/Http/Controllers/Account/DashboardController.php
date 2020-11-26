@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Attachment;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\File;
 
 class DashboardController extends Controller
 {
@@ -59,7 +60,8 @@ class DashboardController extends Controller
 
     public function storeMedia(Request $request)
     {
-        /* dd($request->hasFile('file')); */
+        $file = new File($request->file);
+        dd($file);
         if ($request->hasFile('file') || $request->file('file')) {
             $img = custom_file_upload($request->file('file'),'public','uploads/uploadData',null,null,null,null);
             

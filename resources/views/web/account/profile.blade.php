@@ -69,7 +69,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="avartar">
                                                 <a href="#">
                                                 <div class="profile-sec ml-5 mb-4">
-                                                        <img src="{{ asset('storage/uploads/profile/' . $profile->profile_img ?? '') }}" id="preview_img" class="img img-responsive">
+                                                        <img src="{{ asset('storage/uploads/profile/' . is_null($profile) ? '': $profile->profile_img) }}" id="preview_img" class="img img-responsive">
                                                     </div>
                                                 </a>
                                                 <div class="avartar-picker">
@@ -259,13 +259,14 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <input type="hidden" name="type" value="films">
                                         
                                         @php
-                                            $expr=array();
-                                            $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','films') : '';
+                                            $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','films') : null):null;
                                         @endphp
-                                        <div id="Films" data-start="{{$expr->count()}}" class="repeater">
+                                        
+                                        <div id="Films" data-start="{{!is_null($expr)?$expr->count() :0}}" class="repeater">
                                         <!-- Repeater Heading -->
                                         
                                         <!-- Repeater Items -->
+                                            @if (!is_null($expr))
                                                 @foreach ($expr as $key => $exp)
                                                     <div class="items" data-group="experience">
                                                         
@@ -287,25 +288,27 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                         </div>
                                                     </div>
                                                 @endforeach
-                                                <div class="items" data-group="experience">
-                                                    
-                                                    <div class="form-row">
-                                                        <div class="form-holder" >
-                                                            <input type="text" placeholder="Name" data-name="name" {{-- name="experience[{{$expr->count() ?? 0}}][name]" --}} class="form-control">
-                                                        </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="role" placeholder="Role"{{--  name="experience[{{$expr->count() ?? 0}}][role]" --}} class="form-control">
-                                                        </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="production" placeholder="Production"{{--  name="experience[{{$expr->count() ?? 0}}][production]" --}} class="form-control">
-                                                        </div>
-                                                        <div class="form-holder">
-                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                            <i class="mdi mdi-close"></i>
-                                                        </button>
-                                                        </div>
+                                            @endif
+                                                
+                                            <div class="items" data-group="experience">
+                                                
+                                                <div class="form-row">
+                                                    <div class="form-holder" >
+                                                        <input type="text" placeholder="Name" data-name="name" {{-- name="experience[{{$expr->count() ?? 0}}][name]" --}} class="form-control">
+                                                    </div>
+                                                    <div class="form-holder">
+                                                        <input type="text" data-name="role" placeholder="Role"{{--  name="experience[{{$expr->count() ?? 0}}][role]" --}} class="form-control">
+                                                    </div>
+                                                    <div class="form-holder">
+                                                        <input type="text" data-name="production" placeholder="Production"{{--  name="experience[{{$expr->count() ?? 0}}][production]" --}} class="form-control">
+                                                    </div>
+                                                    <div class="form-holder">
+                                                        <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                        <i class="mdi mdi-close"></i>
+                                                    </button>
                                                     </div>
                                                 </div>
+                                            </div>
                                         
 
                                         <div class="repeater-heading">
@@ -332,11 +335,12 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <!-- Repeater Heading -->
                                         @php
                                             $expr_theater=array();
-                                            $expr_theater=$profile->user->experience()->exists() ? $profile->user->experience->where('type','theater') : '';
+                                            $expr_theater=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','theater') : null):null;
                                         @endphp
 
-                                        <div id="Theater" data-start="{{$expr_theater->count()}}" class="repeater">
+                                        <div id="Theater" data-start="{{!is_null($expr_theater) ?$expr_theater->count() : 0}}" class="repeater">
                                         <!-- Repeater Items -->
+                                        @if (!is_null($expr_theater))
                                             @foreach ($expr_theater as $key2 => $exp)
                                             
                                                 <div class="items" data-group="experience">
@@ -359,25 +363,27 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     </div>
                                                 </div>
                                             @endforeach
-                                            <div class="items" data-group="experience">
+                                        @endif
+                                            
+                                        <div class="items" data-group="experience">
 
-                                                <div class="form-row">
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="name"{{--  name="experience[{{$expr_theater->count() ?? 0}}][name]" --}} placeholder="Name" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="role" {{-- name="experience[{{$expr_theater->count() ?? 0}}][role]" --}} placeholder="Role" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="Location" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                        <i class="mdi mdi-close"></i>
-                                                    </button>
-                                                    </div>
+                                            <div class="form-row">
+                                                <div class="form-holder">
+                                                    <input type="text" data-name="name"{{--  name="experience[{{$expr_theater->count() ?? 0}}][name]" --}} placeholder="Name" class="form-control">
+                                                </div>
+                                                <div class="form-holder">
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_theater->count() ?? 0}}][role]" --}} placeholder="Role" class="form-control">
+                                                </div>
+                                                <div class="form-holder">
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="Location" class="form-control">
+                                                </div>
+                                                <div class="form-holder">
+                                                    <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                    <i class="mdi mdi-close"></i>
+                                                </button>
                                                 </div>
                                             </div>
+                                        </div>
                                         
 
                                         <div class="repeater-heading">
@@ -402,32 +408,35 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <input type="hidden" name="type" value="television">
                                         @php
                                             $expr_tele=array();
-                                            $expr_tele=$profile->user->experience()->exists() ? $profile->user->experience->where('type','television') : '';
+                                            $expr_tele=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','television') : null) : null;
                                         @endphp
-                                        <div id="Television" data-start="{{$expr_tele->count()}}" class="repeater">
+                                        <div id="Television" data-start="{{!is_null($expr_tele) ? $expr_tele->count() : 0}}" class="repeater">
                                         <!-- Repeater Heading -->
                                         <!-- Repeater Items -->
-                                        @foreach ($expr_tele as $key3 => $exp)
-                                            <div class="items" data-group="experience">
-                                                
-                                                <div class="form-row">
-                                                    <div class="form-holder" >
-                                                        <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="Role" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="Production" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                        <i class="mdi mdi-close"></i>
-                                                    </button>
+                                        @if (!is_null($expr_tele) )
+                                            @foreach ($expr_tele as $key3 => $exp)
+                                                <div class="items" data-group="experience">
+                                                    
+                                                    <div class="form-row">
+                                                        <div class="form-holder" >
+                                                            <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="Role" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="Production" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        @endif
+                                        
                                         <div class="items" data-group="experience">
 
                                             <div class="form-row">
@@ -470,32 +479,35 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <input type="hidden" name="type" value="commercials">
                                         @php
                                             $expr_comm=array();
-                                            $expr_comm=$profile->user->experience()->exists() ? $profile->user->experience->where('type','commercials') : '';
+                                            $expr_comm=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','commercials') : null) : null;
                                         @endphp
-                                        <div id="Commercials" data-start="{{$expr_comm->count()}}" class="repeater">
+                                        <div id="Commercials" data-start="{{!is_null($expr_comm) ? $expr_comm->count() : 0}}" class="repeater">
                                         <!-- Repeater Heading -->
                                         <!-- Repeater Items -->
-                                        @foreach ($expr_comm as $key => $exp)
-                                            <div class="items" data-group="experience">
-                                                
-                                                <div class="form-row">
-                                                    <div class="form-holder" >
-                                                        <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="Role" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="Production Company or Director" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                        <i class="mdi mdi-close"></i>
-                                                    </button>
+                                        @if (!is_null($expr_comm))
+                                            @foreach ($expr_comm as $key => $exp)
+                                                <div class="items" data-group="experience">
+                                                    
+                                                    <div class="form-row">
+                                                        <div class="form-holder" >
+                                                            <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="Role" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="Production Company or Director" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        @endif
+                                        
                                         
                                         <div class="items" data-group="experience">
 
@@ -541,32 +553,35 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <input type="hidden" name="type" value="training">
                                         @php
                                             $expr_train=array();
-                                            $expr_train=$profile->user->experience()->exists() ? $profile->user->experience->where('type','training') : '';
+                                            $expr_train=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','training') : null) : null;
                                         @endphp
-                                        <div id="Training" data-start="{{$expr_train->count()}}" class="repeater">
+                                        <div id="Training" data-start="{{!is_null($expr_train) ? $expr_train->count() : 0}}" class="repeater">
                                         <!-- Repeater Heading -->
                                         <!-- Repeater Items -->
-                                        @foreach ($expr_train as $key => $exp)
-                                            <div class="items" data-group="experience">
-                                                
-                                                <div class="form-row">
-                                                    <div class="form-holder" >
-                                                        <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="Role" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="Production Company or Director" class="form-control">
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                        <i class="mdi mdi-close"></i>
-                                                    </button>
+                                        @if (!is_null($expr_train))
+                                            @foreach ($expr_train as $key => $exp)
+                                                <div class="items" data-group="experience">
+                                                    
+                                                    <div class="form-row">
+                                                        <div class="form-holder" >
+                                                            <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="Role" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="Production Company or Director" class="form-control">
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        @endif
+                                        
                                         
                                         <div class="items" data-group="experience">
 
@@ -637,7 +652,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     
 @endsection
 @section('scripts')
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.2/jquery.validate.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="{{ asset('plugins/steps/js/jquery.steps.js') }}"></script>
 <script src="{{ asset('plugins/steps/js/main.js') }}"></script>
 <script src="{{ asset('/js/repeater.js') }}"></script>
