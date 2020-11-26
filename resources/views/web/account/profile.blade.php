@@ -652,7 +652,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     
 @endsection
 @section('scripts')
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="{{ asset('plugins/steps/js/jquery.steps.js') }}"></script>
 <script src="{{ asset('plugins/steps/js/main.js') }}"></script>
 <script src="{{ asset('/js/repeater.js') }}"></script>
