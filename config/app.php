@@ -182,6 +182,8 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Yoeunes\Toastr\ToastrServiceProvider::class,
         Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
+        Lab404\Impersonate\ImpersonateServiceProvider::class,
+        
     ],
 
     /*
