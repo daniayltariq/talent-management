@@ -29,6 +29,12 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 .actions li:last-child a{
     padding-left: 0 !important; 
 }
+
+.tal-profile{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
 </style>
 
 <link rel="stylesheet" href="{{ asset('plugins/steps/css/style.css') }}">
@@ -69,7 +75,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="avartar">
                                                 <a href="#">
                                                 <div class="profile-sec ml-5 mb-4">
-                                                        <img src="{{ asset('storage/uploads/profile/' . (is_null($profile) ? '': $profile->profile_img)) }}" id="preview_img" class="img img-responsive">
+                                                        <img src="{{ asset('storage/uploads/profile/' . (is_null($profile) ? '': $profile->profile_img)) }}" id="preview_img" class="img img-responsive tal-profile">
                                                     </div>
                                                 </a>
                                                 <div class="avartar-picker">
