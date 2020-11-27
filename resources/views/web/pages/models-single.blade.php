@@ -90,7 +90,7 @@
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->eyes ?? 'Nil'}}</li>
                      </ul>
                   </div>
-                  <a href="" class="btn btn__red animation">Book this model</a><br><br>
+                  <a href="#" class="btn btn__red animation">Book this model</a><br><br>
                   {{-- 
                   <div class="row">
                      <div class="col-md-12">
