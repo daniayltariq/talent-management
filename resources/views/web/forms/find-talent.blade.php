@@ -273,7 +273,7 @@
 
                             @foreach ($members as $member)
                                 <div class="effect-bubba grid-item grid-item__width2 new-faces women" data-category="women">
-                                    <img class="img-responsive" src="{{ asset(!is_null($member->profile) ? (!is_null($member->profile->profile_img)? $member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }} " alt="sample image">
+                                    <img class="img-responsive" src="{{ asset(!is_null($member->profile) ? (!is_null($member->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$member->profile->profile_img)? 'storage/uploads/profile/'.$member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }} " alt="sample image">
                                     <div class="grid-item__contant-info">
                                         <div class="grid-item__contant-name">{{!is_null($member->profile) ? $member->profile->legal_first_name.' '.$member->profile->legal_last_name : ""}} </div>
                                         <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->address_1 : ''}} {{!is_null($member->profile) ?$member->profile->country : ''}} {{!is_null($member->profile) ?$member->profile->city : ''}}</div>
