@@ -163,6 +163,11 @@
     .fadeIn-bottom{
     top: 80%;
     }
+
+    .m-menu__list-item a:hover{
+        text-decoration: none;
+        color: #fff;
+    }
 </style>
 
 <!-- jQuery library -->

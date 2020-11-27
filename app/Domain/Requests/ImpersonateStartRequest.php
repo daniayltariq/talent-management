@@ -1,6 +1,6 @@
 <?php
 
-namespace CreatyDev\Domain\Requests;
+namespace App\Domain\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
