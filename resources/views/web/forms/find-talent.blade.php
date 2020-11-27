@@ -118,7 +118,7 @@
         </div>
     </section><!-- Slider Section End -->
 
-    <section class="section apply">
+    {{-- <section class="section apply">
         <div class="container">
             <div class="row">
                 <!-- <h3 class="text__quote centered">Find Actors and Talents for Hire</h3> -->
@@ -248,7 +248,7 @@
             </div>
 
         </div>
-    </section>
+    </section> --}}
 
     <section>
         <div class="section portfolio">
