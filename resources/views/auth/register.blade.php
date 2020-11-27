@@ -102,7 +102,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="switch-button">
                                     <span class="active"></span>
                                     <span class="switch-button-case left active-case">Agent</span>
-                                    <span class="switch-button-case right">Candidate</span>
+                                    <span class="switch-button-case right">Talent</span>
                                 </div>
                             </div>
                         </div>

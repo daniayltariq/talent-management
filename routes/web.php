@@ -121,7 +121,7 @@ Route::get('/magzine/single', [App\Http\Controllers\HomeController::class, 'magz
 
 Route::get('/models', [App\Http\Controllers\HomeController::class, 'models'])->name('models');
 Route::get('models/grid', [App\Http\Controllers\HomeController::class, 'modelsgrid'])->name('models.grid');
-Route::get('models/single', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('models.single');
+Route::get('models/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('models.single');
 Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
 
 

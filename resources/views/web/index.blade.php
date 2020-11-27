@@ -63,7 +63,7 @@
 				</div>
 				<div class="col-md-6 about__text-wrapp">
 					<div class="main__text main__text_about">We appear on the covers of sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae tae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </div>
-					<a href="about.html" class="more animation">Read more</a>
+					<a href="{{route('about-us')}}" class="more animation">Read more</a>
 				</div>
 			</div>
 		</div>
@@ -128,7 +128,7 @@
 							<div class="date">01 Dec 2016</div>
 							<h4 class="lp__title"><a href="#0" class="animation">Search of staff is not an easy task</a></h4>
 							<div class="text lp__text">According to the departmental heads' of personnel management words, in order to find a ...</div>
-							<a href="single-post.html" class="more animation">read more</a>
+							<a href="#" class="more animation">read more</a>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-12 lp__content">
@@ -136,7 +136,7 @@
 							<div class="date">01 Dec 2016</div>
 							<h4 class="lp__title"><a href="#0" class="animation">Overalls bearing the company's logo</a></h4>
 							<div class="text lp__text">A preference of corporate style involves a significant increase of costs for development of design ...</div>
-							<a href="single-post.html" class="more animation">read more</a>
+							<a href="#" class="more animation">read more</a>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-12 lp__content">
@@ -144,7 +144,7 @@
 							<div class="date">01 Dec 2016</div>
 							<h4 class="lp__title"><a href="#0" class="animation">Mistakes related to money</a></h4>
 							<div class="text lp__text">The ability to manage money competently is especially valuable quality in the conditions of ... </div>
-							<a href="single-post.html" class="more animation">read more</a>
+							<a href="#" class="more animation">read more</a>
 						</div>
 					</div>
 				</div>

@@ -3,6 +3,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css">
 <style type="text/css">
+    *{
+        font-size: 16px;
+    }
     .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
         background-color: #17172D;
     }
@@ -220,7 +223,7 @@
                 <div class="col-md-9">
                     <!-- Tabs content -->
                     <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade shadow rounded bg-white show active p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <div class="tab-pane fade shadow rounded bg-white show active in p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <form action="{{route('account.dashboard.profile')}}" method="POST">
                                 @csrf
                                 <h4 class="font-italic mb-4">Personal information</h4>
