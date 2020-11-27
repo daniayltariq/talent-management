@@ -297,7 +297,7 @@
                                 </div>
                             @endforeach
                             
-                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
+                            {{-- <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
                                 <img class="img-responsive" src="{{ asset('web/img/02_model-5.jpg') }} " alt="sample image">
                                 <div class="grid-item__contant-info">
                                     <div class="grid-item__contant-name">Kate Farmer</div>
@@ -408,7 +408,7 @@
                                     <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
                                     <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 
