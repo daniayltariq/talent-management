@@ -61,6 +61,7 @@ class HomeController extends Controller
       $user=\App\Models\User::findOrFail($id);
       if ($user->attachments()->exists()) {
          $data=[
+            'profile'=>$user->profile,
             'images'=>$user->attachments->where('type','image'),
             'video'=>$user->attachments->where('type','video'),
             'audio'=>$user->attachments->where('type','audio')
