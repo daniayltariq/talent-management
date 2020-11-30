@@ -174,6 +174,24 @@
         text-decoration: none;
         background-color: transparent;
     }
+
+    .btn-primary,.btn-primary:hover{
+        background-color: #e77929;
+        border-color: #e77929;
+    }
+
+    .p-8{
+        padding: 8px;
+        font-weight: 700;
+    }
+
+    .form-control{
+        font-size: 1.4rem;
+    }
+
+    footer >.container >.row{
+        display: block;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -237,7 +255,11 @@
                         <div class="tab-pane fade shadow rounded bg-white show active in p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <form action="{{route('account.dashboard.profile')}}" method="POST">
                                 @csrf
-                                <h4 class="font-italic mb-4">Personal information</h4>
+                                <div class="row">
+                                    <h4 class="font-italic mb-4" style="flex: auto;">Personal information</h4>
+                                    <a href="{{route('account.talent.profile')}}" class="btn btn-primary p-8">My Resume</a>
+                                </div>
+                                
                                 <div class="row mb-5">
                                     <div class="col-6">
                                         <label for="f_name" class="form-label mt-3">First Name</label>
@@ -254,6 +276,20 @@
                                         @enderror
                                     </div>
                                     <div class="col-6">
+                                        <label for="gender" class="form-label mt-3">Gender</label>
+                                        <input class="form-control" type="text" name="gender" id="gender" value="{{auth()->user()->gender ?? ''}}" />
+                                        @error('gender')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="dob" class="form-label mt-3">DOB</label>
+                                        <input class="form-control" type="date" name="dob" id="dob" value="{{auth()->user()->dob ?? ''}}" />
+                                        @error('dob')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
                                         <label for="phone" class="form-label mt-3">Phone</label>
                                         <input class="form-control" type="text" name="phone" id="phone" value="{{auth()->user()->phone ?? ''}}" />
                                         @error('phone')
@@ -264,6 +300,49 @@
                                         <label for="email" class="form-label mt-3">Email</label>
                                         <input class="form-control" type="email" name="email" id="email" value="{{auth()->user()->email ?? ''}}" />
                                         @error('email')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="country" class="form-label mt-3">Country</label>
+                                        <input class="form-control" type="text" name="country" id="country" value="{{auth()->user()->country ?? ''}}" />
+                                        @error('country')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="city" class="form-label mt-3">City</label>
+                                        <input class="form-control" type="text" name="city" id="city" value="{{auth()->user()->city ?? ''}}" />
+                                        @error('city')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="state" class="form-label mt-3">State</label>
+                                        <input class="form-control" type="text" name="state" id="state" value="{{auth()->user()->state ?? ''}}" />
+                                        @error('state')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="h_adress_1" class="form-label mt-3">Address 1</label>
+                                        <input class="form-control" type="h_adress_1" name="h_adress_1" id="h_adress_1" value="{{auth()->user()->h_adress_1 ?? ''}}" />
+                                        @error('h_adress_1')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="h_adress_2" class="form-label mt-3">Address 2</label>
+                                        <input class="form-control" type="text" name="h_adress_2" id="h_adress_2" value="{{auth()->user()->h_adress_2 ?? ''}}" />
+                                        @error('h_adress_2')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="zipcode" class="form-label mt-3">Zipcode</label>
+                                        <input class="form-control" type="zipcode" name="zipcode" id="zipcode" value="{{auth()->user()->zipcode ?? ''}}" />
+                                        @error('zipcode')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
