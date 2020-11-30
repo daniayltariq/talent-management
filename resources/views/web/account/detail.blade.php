@@ -70,12 +70,12 @@
                                     <div class="col-sm-12">
                                         <div>
                                             <div class="profile-sec mx-auto ml-5">
-                                                <img src="{{ asset('web/uploads/profile/talent-1.jpg') }}" class="img img-responsive ">
+                                                <img src="{{ asset(is_null($profile) && is_null($profile->profile_img) ? 'public/web/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive ">
 
                                             </div>
                                              <div class="talent-intro text-center">
                                                 <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
-                                                <p>www.thetalentdepot.com/johnmsmith</p>
+                                                <p>{{url('/').'/models/'.$profile->custom_link}}</p>
                                             </div>
                                         </div>
                                     </div>

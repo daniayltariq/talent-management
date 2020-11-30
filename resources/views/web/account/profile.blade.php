@@ -116,7 +116,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="avartar">
                                                 <a href="#">
                                                 <div class="profile-sec ml-5 mb-4">
-                                                        <img src="{{ asset('storage/uploads/profile/' . (is_null($profile) ? '': $profile->profile_img)) }}" id="preview_img" class="img img-responsive tal-profile">
+                                                        <img src="{{ asset(is_null($profile) && is_null($profile->profile_img) ? 'public/web/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" id="preview_img" class="img img-responsive tal-profile">
                                                     </div>
                                                 </a>
                                                 <div class="avartar-picker">
