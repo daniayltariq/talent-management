@@ -76,7 +76,7 @@
                                     <div class="col-sm-12">
                                         <div>
                                             <div class="profile-sec mx-auto ml-5">
-                                                <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'public/web/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
+                                                <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'public/web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
 
                                             </div>
                                              <div class="talent-intro text-center">
