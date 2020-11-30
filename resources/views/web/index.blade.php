@@ -71,7 +71,7 @@
 	<!-- About Section End -->
 
 	<!-- Portfolio Section Start -->
-@include('web.partials.models')
+@include('web.partials.models',['models'=>$models])
 	<!-- Portfolio Section End -->
 
 	<!-- Testimonal Section Start -->

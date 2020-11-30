@@ -27,9 +27,8 @@ Auth::routes();
 |
 */
 
-Route::get('/', function () {
-    return view('web.index');
-})->name('/');
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 
 
 Route::get('/about-us', function () {

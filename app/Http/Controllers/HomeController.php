@@ -24,7 +24,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('web.index');
+      $models=\App\Models\Profile::all();
+      
+      return view('web.index',compact('models'));
     } 
 
 
