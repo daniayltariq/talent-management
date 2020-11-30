@@ -44,7 +44,7 @@
     <div class="container">
         <div class="row">
             <div class="title__wrapp">
-                <h1 class="page__title">John carry</h1>
+                <h1 class="page__title">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h1>
             </div>
         </div>
     </div>

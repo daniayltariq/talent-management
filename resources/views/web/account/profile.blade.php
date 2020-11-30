@@ -208,20 +208,20 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     <option value="brown" {{isset($profile->eyes) && $profile->eyes=="brown" ? 'selected' : ''}}>Brown Eyes</option>
                                                     <option value="blue" {{isset($profile->eyes) && $profile->eyes=="blue" ? 'selected' : ''}}>Blue Eyes </option>
                                                     <option value="hazel" {{isset($profile->eyes) && $profile->eyes=="hazel" ? 'selected' : ''}}>Hazel Eyes </option>
-                                                    <option value="amber" {{isset($profile->eyes) && $profile->eyes=="amber" ? 'selected' : ''}}>Amber </option>
-                                                    <option value="gray" {{isset($profile->eyes) && $profile->eyes=="gray" ? 'selected' : ''}}>Gray </option>
-                                                    <option value="green" {{isset($profile->eyes) && $profile->eyes=="green" ? 'selected' : ''}}>Green </option>
+                                                    <option value="amber" {{isset($profile->eyes) && $profile->eyes=="amber" ? 'selected' : ''}}>Amber Eyes</option>
+                                                    <option value="gray" {{isset($profile->eyes) && $profile->eyes=="gray" ? 'selected' : ''}}>Gray Eyes</option>
+                                                    <option value="green" {{isset($profile->eyes) && $profile->eyes=="green" ? 'selected' : ''}}>Green Eyes</option>
                                                     <option >Fill-in Other</option>
                                                 </select>
                                             </div>
                                             <div class="form-holder ">
                                                 <select name="hairs" class="form-control" placeholder="Hair Color" id="" required>
-                                                    <option value="black" {{isset($profile->hairs) && $profile->hairs=="black" ? 'selected' : ''}}>Black</option>
-                                                    <option value="brown" {{isset($profile->hairs) && $profile->hairs=="brown" ? 'selected' : ''}}>Brown</option>
-                                                    <option value="red" {{isset($profile->hairs) && $profile->hairs=="red" ? 'selected' : ''}}>Red</option>
-                                                    <option value="grey" {{isset($profile->hairs) && $profile->hairs=="grey" ? 'selected' : ''}}>Grey</option>
-                                                    <option value="white" {{isset($profile->hairs) && $profile->hairs=="white" ? 'selected' : ''}}>White</option>
-                                                    <option value="blonde" {{isset($profile->hairs) && $profile->hairs=="blonde" ? 'selected' : ''}}>Blonde</option>
+                                                    <option value="black" {{isset($profile->hairs) && $profile->hairs=="black" ? 'selected' : ''}}>Black hair</option>
+                                                    <option value="brown" {{isset($profile->hairs) && $profile->hairs=="brown" ? 'selected' : ''}}>Brown hair</option>
+                                                    <option value="red" {{isset($profile->hairs) && $profile->hairs=="red" ? 'selected' : ''}}>Red hair</option>
+                                                    <option value="grey" {{isset($profile->hairs) && $profile->hairs=="grey" ? 'selected' : ''}}>Grey hair</option>
+                                                    <option value="white" {{isset($profile->hairs) && $profile->hairs=="white" ? 'selected' : ''}}>White hair</option>
+                                                    <option value="blonde" {{isset($profile->hairs) && $profile->hairs=="blonde" ? 'selected' : ''}}>Blonde hair</option>
                                                 </select>
                                             </div>
 
@@ -853,7 +853,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                 data:formDataa,
                 success: function(res) {
                     console.log(res);
-                    if (res.alert_type) {
+                    if (res.alert_type=='success') {
                         toastr.success(res.message);
                         if (res.method) {
                             $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
@@ -891,7 +891,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                 data:formDataa,
                 success: function(res) {
                     console.log(res);
-                    if (res.alert_type) {
+                    if (res.alert_type=='success') {
                         toastr.success(res.message);
                         window.location.reload();
                     } else {

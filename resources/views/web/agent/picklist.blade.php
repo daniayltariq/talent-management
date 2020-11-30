@@ -55,9 +55,9 @@
 				<div class="blog__list">
 					<h4 class="widget__title">My Picklists</h4>
 
-					<a href="">
+					{{-- <a href="">
 						<h4 class="widget__title pull-right widget__titless" >Browse all picklists</h4>
-					</a>
+					</a> --}}
 
 
 					<div class="row">
