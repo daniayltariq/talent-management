@@ -893,6 +893,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                     console.log(res);
                     if (res.alert_type) {
                         toastr.success(res.message);
+                        window.location.reload();
                     } else {
                         toastr.error(res.message);
                     }
