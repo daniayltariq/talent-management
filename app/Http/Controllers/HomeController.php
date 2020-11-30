@@ -24,8 +24,13 @@ class HomeController extends Controller
 
     public function index()
     {
-      $models=\App\Models\Profile::all();
-      
+      $models=\App\Models\User::whereHas(
+         'roles', function($q){
+             $q->whereNotIn('name',['superadmin','agent']);
+         }
+      )->with('profile')->get();
+
+      /* dd($models[0]->profile); */
       return view('web.index',compact('models'));
     } 
 

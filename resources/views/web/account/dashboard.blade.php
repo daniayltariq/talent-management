@@ -198,6 +198,13 @@
         border-color: #e77929;
         color: #fff;
     }
+
+    .btn-primary:not(:disabled):not(.disabled):active,.btn-primary:not(:disabled):not(.disabled):focus{
+        color: #fff;
+        background-color: #e77929 !important;
+        border-color: #e77929 !important;
+        box-shadow: 0 0 0 0.2rem rgba(253, 166, 84, 0.5);
+    }
 </style>
 
 <!-- jQuery library -->
