@@ -279,7 +279,7 @@
                                         <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->address_1 : ''}} {{!is_null($member->profile) ?$member->profile->country : ''}} {{!is_null($member->profile) ?$member->profile->city : ''}}</div>
                                         <div class="grid-item__contant-place title__grey">AGE: 23</div>
                                         <div class="grid-item__contant-place title__grey">Height: {{!is_null($member->profile) ?$member->profile->height : ''}}</div>
-                                        <a href="{{route('login')}}"><i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i></a>
+                                        <a href="{{route('model.single',$member->id)}}" class="picklist-btn"><i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i></a>
                                         <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
                                         <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
 
@@ -291,7 +291,7 @@
                                             <a href="{{route('login')}}">
                                         @endguest
                                         
-                                            <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
+                                            <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px" style="color: white" ></i>
                                         </a>
                                     </div>
                                 </div>
