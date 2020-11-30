@@ -35,6 +35,47 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     width: 100%;
     object-fit: cover;
 }
+
+.input-group-bs{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    width: 100%;
+}
+
+.input-group-prepend {
+    margin-right: -1px;
+    display: flex;
+
+}
+
+.input-group-text-bs {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: .375rem .75rem;
+    margin-bottom: 0;
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #f7f7f7;
+    border-radius: .25rem;
+}
+
+.input-group-bs>.input-group-prepend>.input-group-text-bs {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 </style>
 
 <link rel="stylesheet" href="{{ asset('plugins/steps/css/style.css') }}">
@@ -96,6 +137,19 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="form-holder">
                                                     <input type="email" placeholder="Email" name="email" class="form-control required" value="{{$profile->email ?? ''}}">
                                                 </div>
+
+                                                @if ($custom_url)
+                                                    <div class="form-holder">
+                                                        <div class="input-group-bs mb-3">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text-bs" id="basic-addon3">{{url('/').'/models/'}}</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" name="custom_link" value="{{$profile->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3">
+                                                        </div>
+                                                        <small id="link_error" style="color: red"></small>
+                                                    </div>
+                                                @endif
+                                                
                                                 
                                             </div>
                                         </div>
@@ -697,9 +751,29 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             });
         });
 
-        /* $('a[href="#finish"]').on('click',function(){
-            $('#profile_form').submit();
-        }) */
+        $('#custom_link').on('keyup',function(){
+            if ($(this).val() !=='') {
+                $.ajax({
+                    url: "{{ route('account.talent.checkCustomLink') }}",
+                    type: 'GET',
+                    data:{
+                        'link':$(this).val()
+                    },
+                    success: function(res) {
+                        console.log(res);
+                        if (res.alert_type=='success') {
+                            $('#link_error').hide();
+                        } else {
+                            
+                            $('#link_error').html(res.message);
+                            $('#link_error').show();
+                        }
+                    },
+                    error: function(error) {
+                    }
+                });
+            }
+        })
 
     });
 
@@ -766,6 +840,9 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             @endif
             
             /* console.log(params); */
+            if ($('#link_error').is(":visible")) {
+                $('#custom_link').val('');
+            }
 
             $.ajax({
                 url: "{{ route('account.talent-profile.store') }}",

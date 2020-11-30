@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\Skill;
+use App\Models\Plan;
 
 class TalentController extends Controller
 {
@@ -14,8 +15,11 @@ class TalentController extends Controller
         $profile=auth()->user()->profile;
         $skills=Skill::all();
         
-        /* dd($profile); */
-    	return view('web.account.profile',compact('profile','skills'));
+        $sub=auth()->user()->subscriptions()->active()->first();
+        $plan=Plan::where('stripe_plan',$sub->stripe_plan)->first();
+        $custom_url=$plan->unique_url==1?true:false;
+        
+    	return view('web.account.profile',compact('profile','skills','custom_url'));
 
     }
 
@@ -82,6 +86,25 @@ class TalentController extends Controller
     {
         $profile=auth()->user()->profile;
     	return view('web.account.detail',compact('profile'));
+
+    }
+
+    public function checkCustomLink(Request $request)
+    {
+        $profile=Profile::where('custom_link',$request->link)->first();
+        if ($profile && $profile->user_id !==auth()->user()->id) {
+            $status = array(
+                'message' => 'link already assigned!', 
+                'alert_type' => 'error'
+            );
+        }
+        else{
+            $status = array(
+                'message' => 'good to go!', 
+                'alert_type' => 'success'
+            );
+        }
+        return $status;
 
     }
 }

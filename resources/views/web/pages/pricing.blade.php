@@ -20,9 +20,9 @@ li {
   list-style:none;
   flex:1;
 }
-li:last-child {
+/* li:last-child {
   border-right:1px solid #DDD;
-}
+} */
 button {
   width:100%;
   border: 1px solid #DDD;
@@ -87,7 +87,7 @@ td.default {
     display:table-cell !important;
   }
   td,th {
-    width: 330px;
+    /* width: 330px; */
   
   }
   td+td, th+th {
@@ -96,7 +96,8 @@ td.default {
 }
 
 .btn {
-  padding: 19px 50px;
+  padding: 9px 50px;
+  white-space: normal;
 }
 table.pricing td:nth-child(2) {
     background: #fcfff3;

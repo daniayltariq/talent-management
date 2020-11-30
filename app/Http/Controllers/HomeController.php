@@ -39,15 +39,27 @@ class HomeController extends Controller
       return view('web.forms.find-talent',compact('members'));
     }
   
-    public function models()
+    public function models($link)
     {
-         $notification = array(
-        'message' => 'I am a successful message!', 
-        'alert-type' => 'success'
-        );
-        
-        // return redirect('models')->with($notification);
-        return view('web.pages.models');
+      $pro=\App\Models\Profile::where('custom_link',$link)->first();
+      if ($pro) {
+         $user=\App\Models\User::findOrFail($pro->user_id);
+         if ($user->attachments()->exists()) {
+            $data=[
+               'profile'=>$user->profile,
+               'images'=>$user->attachments->where('type','image'),
+               'video'=>$user->attachments->where('type','video'),
+               'audio'=>$user->attachments->where('type','audio')
+            ];
+
+            return view('web.pages.models-single',compact('data'));
+         }
+         else{
+            return view('web.errors.404')->with('text','Please add attachments to your Profile');
+         }
+      }
+      abort(404);
+      
     }
   
 

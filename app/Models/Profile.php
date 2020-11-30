@@ -15,6 +15,7 @@ class Profile extends Model
         'legal_first_name',
         'legal_last_name',
         'email',
+        'custom_link',
         'height',
         'feet',
         'weight',

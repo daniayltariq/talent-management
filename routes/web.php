@@ -121,6 +121,7 @@ Route::get('/magzine/single', [App\Http\Controllers\HomeController::class, 'magz
 
 Route::get('/models', [App\Http\Controllers\HomeController::class, 'models'])->name('models');
 Route::get('models/grid', [App\Http\Controllers\HomeController::class, 'modelsgrid'])->name('models.grid');
+Route::get('models/{link}', [App\Http\Controllers\HomeController::class, 'models'])->name('models');
 Route::get('models/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('models.single');
 Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
 
@@ -169,6 +170,8 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','isCandidate'], 'n
         Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
         Route::post('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
         Route::put('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
+
+        Route::get('/talent/checkCustomLink', [App\Http\Controllers\Account\TalentController::class, 'checkCustomLink'])->name('talent.checkCustomLink');
     });
     
     Route::get('/talent/detail', [App\Http\Controllers\Account\TalentController::class, 'detail'])->name('talent.detail');
