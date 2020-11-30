@@ -122,7 +122,9 @@ Route::get('/models', [App\Http\Controllers\HomeController::class, 'models'])->n
 Route::get('models/grid', [App\Http\Controllers\HomeController::class, 'modelsgrid'])->name('models.grid');
 Route::get('model/{link}', [App\Http\Controllers\HomeController::class, 'models'])->name('model');
 
-Route::get('model/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('model.single');
+Route::middleware(['auth'])->group(function () {
+    Route::get('model/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('model.single');
+});
 Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
 
 
