@@ -81,7 +81,7 @@
                                             </div>
                                              <div class="talent-intro text-center">
                                                 <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
-                                                @if (!is_null($profile->custom_link))
+                                                @if (isset($profile->custom_link))
                                                     <p>{{url('/').'/models/'.$profile->custom_link}}</p>
                                                 @endif
                                                 
