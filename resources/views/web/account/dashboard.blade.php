@@ -7,13 +7,13 @@
         font-size: 16px;
     }
     .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-        background-color: #17172D;
+        background-color: #e77929;
     }
     tr td {
         padding-bottom: 10px;
     }
     header.header-section {
-        box-shadow: 0px 1px 25px #2e2e2e1a;
+        box-shadow: 0px 1px 25px #e77929;
     }
 
     .error{
@@ -168,6 +168,12 @@
         text-decoration: none;
         color: #fff;
     }
+
+    a,a:hover{
+        color: #e77929;
+        text-decoration: none;
+        background-color: transparent;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -215,13 +221,13 @@
                             <i class="fa fa-user-circle-o mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">Personal information</span></a>
                         <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-                            <i class="fa fa-calendar-minus-o mr-2"></i>
-                            <span class="font-weight-bold small text-uppercase">Attachments</span></a>
+                            <i class="fa fa-user mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Profile</span></a>
                         <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
                             <i class="fa fa-star mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">Invoices</span></a>
                         <a class="nav-link mb-3 p-3 shadow" id="v-refer-tab" data-toggle="pill" href="#v-refer" role="tab" aria-controls="v-refer" aria-selected="false">
-                            <i class="fa fa-user mr-2"></i>
+                            <i class="fa fa-users mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">Refer a Friend </span></a>
                         </div>
                 </div>
