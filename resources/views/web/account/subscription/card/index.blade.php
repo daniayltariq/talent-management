@@ -3,8 +3,8 @@
     <style>
       .btn-stripe{
         color: white;
-        background-color: #6772e5;
-        border-color: #6772e5;
+        background-color: #e77929;
+        border-color: #e77929;
         border-radius: 0.4rem;
       }
       
@@ -16,7 +16,7 @@
       }
 
       #payment-head{
-        border-top: 1px solid #6772e5;
+        border-top: 1px solid #e77929;
       }
 
       #payment-head h3 {
@@ -26,7 +26,7 @@
           margin-bottom: 25px;
           color: #ffffff;
           text-transform: uppercase;
-          background: #6772e5;
+          background: #e77929;
           border-radius: 0 0 6px 6px;
           font-weight: 500;
           font-family: 'Alegreya Sans', sans-serif;
@@ -43,7 +43,7 @@
       }
 
       li.resp-tab-item.resp-tab-active span label {
-        border: 3px solid #9097e6;
+        border: 3px solid #e77929;
       }
 
       li.resp-tab-item span .pic {
@@ -53,7 +53,7 @@
           font-size: 1.2rem;
           font-style: italic;
           font-weight: 700;
-          color: #536ce8;
+          color: #e77929;
 
           border: 1px solid #e7ebee;
           padding: 9px 0px;
@@ -82,6 +82,10 @@
           margin: 0 4%;
           float: left;
           width: 17%;
+      }
+
+      .header {
+        background: #000000cf;
       }
     </style>
 @endsection

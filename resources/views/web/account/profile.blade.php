@@ -142,7 +142,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     <div class="form-holder">
                                                         <div class="input-group-bs mb-3">
                                                             <div class="input-group-prepend">
-                                                            <span class="input-group-text-bs" id="basic-addon3">{{url('/').'/models/'}}</span>
+                                                            <span class="input-group-text-bs" id="basic-addon3">{{url('/').'/model/'}}</span>
                                                             </div>
                                                             <input type="text" class="form-control" name="custom_link" value="{{$profile->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3">
                                                         </div>
