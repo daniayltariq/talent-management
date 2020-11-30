@@ -192,6 +192,12 @@
     footer >.container >.row{
         display: block;
     }
+
+    .copy-btn{
+        background-color: #e77929;
+        border-color: #e77929;
+        color: #fff;
+    }
 </style>
 
 <!-- jQuery library -->
