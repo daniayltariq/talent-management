@@ -218,7 +218,7 @@
                     <!-- Tabs nav -->
                     <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <a class="nav-link mb-3 p-3 shadow active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
-                            <i class="fa fa-user-circle-o mr-2"></i>
+                            <i class="fa fa-list-alt mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">Personal information</span></a>
                         <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
                             <i class="fa fa-user mr-2"></i>
