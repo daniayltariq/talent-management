@@ -207,6 +207,10 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="col-sm-8">
                                     <select name="state" id="state" class="form-control">
                                         <option value="">Select</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{{$country->nicename}}">{{$country->nicename}}</option>
+                                        @endforeach
+                                        
                                     </select>
                                     @error('country')
                                         <span class="invalid-feedback" role="alert">
@@ -241,7 +245,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div> --}}
                             <div class="form-group">
-                                <label for="address" class="col-sm-4 control-label">Home Address 1 <span class="req">*</span></label>
+                                <label for="address" class="col-sm-4 control-label">Home Address 1</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="h_adress_1" id="h_adress_1">
                                     @error('h_adress_1')
@@ -252,7 +256,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="h_adress_2" class="col-sm-4 control-label">Home Address 2 <span class="req">*</span></label>
+                                <label for="h_adress_2" class="col-sm-4 control-label">Home Address 2</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="h_adress_2" name="h_adress_2">
                                     @error('h_adress_2')
