@@ -440,3 +440,13 @@ li.testimonal__list-item.slick-slide.slick-active:nth-child(1) {
     padding: 30px;
     margin-top: 45px;
 }
+
+
+.bio-box {
+    margin-top: 33%;
+    background: #ffffffd1;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 1rem 3rem;
+}
