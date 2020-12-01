@@ -125,6 +125,10 @@
 		.search .results li:hover .hover-text-clr{
 			color: #fff;
 		}
+
+		.w-30{
+			width: 30%;
+		}
 	</style>
 @endsection
 
@@ -173,7 +177,7 @@
 					</article> <!-- end of blog__post -->
 
 
-					<div class="post__widget">
+					{{-- <div class="post__widget">
 						<h4 class="widget__title">Popular Tags</h4>
 						<div class="widget__tagcloud">
 							<a href="#" class="tagcloud__item">Backstage</a>
@@ -181,31 +185,25 @@
 							<a href="#" class="tagcloud__item">Fashion</a>
 							<a href="#" class="tagcloud__item">Milano</a>
 						</div>
-					</div>
+					</div> --}}
 
 					<nav class="post__navigation">
 					  <div class="nav-links row">
-				  		<figure class="nav-links__previous col-sm-6">
-							<span class="pull-left"><a href="#"><img src="{{ asset('web/img/nav-prev.jpg') }}" alt=""></a></span>
-							<figcaption class="widget-latest__content">
-								<a href="#" class="widget-latest__title">Easy Home Remedy For</a>
-								<p class="widget-latest__date">16 Oct 2016</p>
-							</figcaption>
-						</figure>
-
-						<figure class="nav-links__next col-sm-6">
-							<span class="pull-right"><a href="#"><img src="{{ asset('web/img/nav-next.jpg') }}" alt=""></a></span>
-							<figcaption class="widget-latest__content">
-								<a href="#" class="widget-latest__title">Does Hydroderm Work</a>
-								<p class="widget-latest__date">13 Dec 2016</p>
-							</figcaption>
-						</figure>
+						@foreach ($latest->take(2) as $topic)
+							<figure class="nav-links__{{$loop->index==0?'previous':'next'}} col-sm-6">
+								<span class="pull-left w-30"><a href="{{ route('single-post',['slug' => $topic->slug]) }}"><img src="{{ asset(isset($topic->image) ? $topic->image : 'backend-assets/images/rec2.jpg') }}" alt=""></a></span>
+								<figcaption class="widget-latest__content">
+									<a href="{{ route('single-post',['slug' => $topic->slug]) }}" class="widget-latest__title">{{$topic->title}}</a>
+									<p class="widget-latest__date">{{$topic->created_at->diffForHumans()}}</p>
+								</figcaption>
+							</figure>
+						@endforeach
 
 					  </div>
 					</nav>
 					<div class="comments">
 						<div id="comments">
-							<h3>{{ count($comments) }} comments</h3>
+							<h3><span id="topic_comm">{{ count($comments) }}</span> comments</h3>
 							<hr />
 							
 							<ol class="comment-list" id="comments-list">	
@@ -405,6 +403,8 @@
 				if (res.length>0) {
 					$('#comments-list').append(res);
 					$('#read-more-btn').attr('data-skipcount',++skip);
+
+					$('#topic_comm').text($('#comments-list li').length);
 				} else {
 					$('#read-more-btn').hide();
 				}
