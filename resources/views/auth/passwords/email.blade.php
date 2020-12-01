@@ -10,8 +10,8 @@
             height: 500px;
         }
 
-        .mt-11{
-            margin-top: 11rem;
+        .mt-14{
+            margin-top: 14rem;
         }
 
         .card {
@@ -67,8 +67,8 @@
 
 @section('content')
 <div class="container mh-500">
-    <div class="row mt-5">
-        <div class="col-md-offset-2 col-md-8 mt-11">
+    <div class="row mt-14">
+        <div class="col-md-offset-2 col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Reset Password') }}</div>
 

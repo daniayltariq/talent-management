@@ -265,6 +265,7 @@ Route::group([
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('plan', App\Http\Controllers\Admin\PlanController::class);
     Route::resource('topic', App\Http\Controllers\Admin\TopicController::class);
+    Route::resource('user', App\Http\Controllers\Admin\UserController::class);
 });
 
 Route::group([
