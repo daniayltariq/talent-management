@@ -51,7 +51,7 @@
 									<img class="img-responsive" src="{{ asset(!is_null($model->profile) ? (!is_null($model->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$model->profile->profile_img)? 'storage/uploads/profile/'.$model->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }}" alt="sample image" style="height: 100%;width: 100%;object-fit: cover;">
 									<div class="grid-item__contant-info">
 										<div class="bio-box">
-											<div class="grid-item__contant-name">{{ $model->legal_first_name . ' ' . $model->legal_last_name }}</div>
+											<div class="grid-item__contant-name">{{ $model->profile->legal_first_name . ' ' . $model->profile->legal_last_name }}</div>
 											<div class="grid-item__contant-place title__grey">{{ $model->city . ' ' . $model->country }}</div>
 											<i class="grid-item__contant-arrow mdi mdi-arrow-right"></i>
 										</div>
