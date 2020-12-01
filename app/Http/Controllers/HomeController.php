@@ -62,7 +62,7 @@ class HomeController extends Controller
             return view('web.pages.models-single',compact('data'));
          }
          else{
-            return view('web.errors.404')->with('text','Please add attachments to your Profile');
+            return view('web.errors.404')->with('text','Profile not found');
          }
       }
       abort(404);
