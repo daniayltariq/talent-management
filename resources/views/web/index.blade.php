@@ -1,5 +1,15 @@
 @extends('web.layouts.app')
 
+@section('styles')
+	<style>
+		.view__all {
+			text-align: center;
+			padding: 105px 0;
+			/* background-color: #f6f6f6; */
+		}
+	</style>
+@endsection
+
 @section('content')
 	
 	<!-- Header Section Start -->

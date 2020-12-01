@@ -275,13 +275,13 @@
                                 <div class="effect-bubba grid-item grid-item__width2 new-faces women" data-category="women">
                                     <img class="img-responsive" src="{{ asset(!is_null($member->profile) ? (!is_null($member->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$member->profile->profile_img)? 'storage/uploads/profile/'.$member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }} " alt="sample image">
                                     <div class="grid-item__contant-info">
-                                        <div class="grid-item__contant-name">{{!is_null($member->profile) ? $member->profile->legal_first_name.' '.$member->profile->legal_last_name : ""}} </div>
+                                        <div class="grid-item__contant-name">{{!is_null($member->profile) ? $member->profile->legal_first_name.' '.$member->profile->legal_last_name : $member->f_name.' '.$member->l_name}} </div>
                                         <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->address_1 : ''}} {{!is_null($member->profile) ?$member->profile->country : ''}} {{!is_null($member->profile) ?$member->profile->city : ''}}</div>
                                         <div class="grid-item__contant-place title__grey">AGE: 23</div>
                                         <div class="grid-item__contant-place title__grey">Height: {{!is_null($member->profile) ?$member->profile->height : ''}}</div>
                                         <a href="{{route('model.single',$member->id)}}" class="picklist-btn"><i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i></a>
-                                        <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
-                                        <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
+                                        {{-- <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
+                                        <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i> --}}
 
                                         @role('agent')
                                             <a href="#picklist-modal" class="picklist-btn" data-memberid="{{$member->id}}" role="button" data-toggle="modal">
