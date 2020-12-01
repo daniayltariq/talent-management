@@ -44,13 +44,14 @@
                 	<div class="grid">
 	               		<div class="grid-sizer"></div>
 						<div class="grid-gutter"></div>
+
 						@foreach ($models->take(6) as $key => $model)
 							@if ($model->profile)
 								<a href="{{route('model.single',$model->id)}}" class="effect-bubba grid-item grid-item__{{$grid_layout[$key]['width']}} grid-item__{{$grid_layout[$key]['height']}} teenagers women" data-category="women" style="height: 500px;">
 									<img class="img-responsive" src="{{ asset(!is_null($model->profile) ? (!is_null($model->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$model->profile->profile_img)? 'storage/uploads/profile/'.$model->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }}" alt="sample image" style="height: 100%;width: 100%;object-fit: cover;">
 									<div class="grid-item__contant-info">
-										<div class="grid-item__contant-name">Kate Farmer</div>
-										<div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
+										<div class="grid-item__contant-name">{{ $model->legal_first_name . ' ' . $model->legal_last_name }}</div>
+										<div class="grid-item__contant-place title__grey">{{ $model->city . ' ' . $model->country }}</div>
 										<i class="grid-item__contant-arrow mdi mdi-arrow-right"></i>
 									</div>
 								</a>
