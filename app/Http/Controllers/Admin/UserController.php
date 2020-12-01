@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -176,5 +176,13 @@ class UserController extends Controller
         $user=User::findOrFail($id);
         $user->delete();
         return redirect()->back();
+    }
+
+    public function impersonate($id)
+    {
+        $user=User::findOrFail($id);
+        \Auth::user()->impersonate($user);
+
+        return redirect()->back()->with("status", "User Impersonated.");
     }
 }

@@ -266,6 +266,7 @@ Route::group([
     Route::resource('plan', App\Http\Controllers\Admin\PlanController::class);
     Route::resource('topic', App\Http\Controllers\Admin\TopicController::class);
     Route::resource('user', App\Http\Controllers\Admin\UserController::class);
+    Route::get('/user/impersonate/{id}', [App\Http\Controllers\Admin\UserController::class, 'impersonate'])->name('user.impersonate');
 });
 
 Route::group([
@@ -276,6 +277,7 @@ Route::group([
     /* Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard'); */
     Route::resource('picklist', App\Http\Controllers\Agent\PicklistController::class);
     Route::resource('topic', App\Http\Controllers\Agent\TopicController::class);
+
 
 });
 
