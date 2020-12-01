@@ -50,7 +50,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        /* dd($data); */
         return Validator::make($data, [
             'f_name' => ['required', 'string', 'max:255'],
             'l_name' => ['required', 'string', 'max:255'],
@@ -62,8 +61,8 @@ class RegisterController extends Controller
             'country' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'state' => ['required', 'string', 'max:255'],
-            'h_adress_1' => ['required', 'string', 'max:255'],
-            'h_adress_2' => ['required', 'string', 'max:255'],
+            'h_adress_1' => ['string', 'max:255'],
+            'h_adress_2' => ['string', 'max:255'],
             'zipcode' => ['required', 'string', 'max:255'],
             'account_type' => ['required', 'string'],
 
