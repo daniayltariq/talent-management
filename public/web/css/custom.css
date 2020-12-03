@@ -440,3 +440,28 @@ li.testimonal__list-item.slick-slide.slick-active:nth-child(1) {
     padding: 30px;
     margin-top: 45px;
 }
+
+
+.bio-box {
+    margin-top: 33%;
+    background: #ffffffd1;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 1rem 3rem;
+}
+
+
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

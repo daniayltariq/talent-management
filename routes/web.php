@@ -27,9 +27,8 @@ Auth::routes();
 |
 */
 
-Route::get('/', function () {
-    return view('web.index');
-})->name('/');
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 
 
 Route::get('/about-us', function () {
@@ -47,9 +46,11 @@ Route::get('/forum', function () {
 // })->name('community');
 
 Route::get('/community', [App\Http\Controllers\CommunityController::class,'index'])->name('community');
-Route::post('/community/topic/like', [App\Http\Controllers\CommunityController::class,'post_like'])->name('post_like');
-Route::post('/community/topic/comment', [App\Http\Controllers\CommunityController::class,'post_comment'])->name('post_comment');
-Route::post('/community/topic/reply_comment', [App\Http\Controllers\CommunityController::class,'reply_comment'])->name('reply_comment');
+Route::group(['middleware' => ['isAgentOrCandidate']], function() {
+    Route::post('/community/topic/like', [App\Http\Controllers\CommunityController::class,'post_like'])->name('post_like');
+    Route::post('/community/topic/comment', [App\Http\Controllers\CommunityController::class,'post_comment'])->name('post_comment');
+    Route::post('/community/topic/reply_comment', [App\Http\Controllers\CommunityController::class,'reply_comment'])->name('reply_comment');
+});
 Route::get('/community/topic/read_more_comments', [App\Http\Controllers\CommunityController::class,'read_more_comments'])->name('read_more_comments');
 
 // Route::get('/single-topic', function () {
@@ -60,7 +61,7 @@ Route::get('/community/topic/read_more_comments', [App\Http\Controllers\Communit
 Route::get('/community/single-post/{slug}', [App\Http\Controllers\CommunityController::class,'single'])->name('single-post');
 
 Route::get('/community/category/{slug}', [App\Http\Controllers\CommunityController::class,'categories'])->name('community.category');
-
+Route::get('/community/post_suggest', [App\Http\Controllers\CommunityController::class,'post_suggest'])->name('post.suggest');
 
 Route::get('/testimonials', function () {
     return view('web.pages.testimonials');
@@ -119,7 +120,11 @@ Route::get('/magzine/single', [App\Http\Controllers\HomeController::class, 'magz
 
 Route::get('/models', [App\Http\Controllers\HomeController::class, 'models'])->name('models');
 Route::get('models/grid', [App\Http\Controllers\HomeController::class, 'modelsgrid'])->name('models.grid');
-Route::get('models/single', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('models.single');
+Route::get('model/{link}', [App\Http\Controllers\HomeController::class, 'models'])->name('model');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('model/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('model.single');
+});
 Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
 
 
@@ -161,9 +166,14 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','isCandidate'], 'n
         Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
         Route::post('/dashboard/profile', [App\Http\Controllers\Account\DashboardController::class, 'store'])->name('dashboard.profile');
 
+        Route::post('/storeMedia', [App\Http\Controllers\Account\DashboardController::class, 'storeMedia'])->name('storeMedia');
+        Route::delete('/fileDestroy', [App\Http\Controllers\Account\DashboardController::class, 'fileDestroy'])->name('fileDestroy');
+
         Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
         Route::post('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
         Route::put('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
+
+        Route::get('/talent/checkCustomLink', [App\Http\Controllers\Account\TalentController::class, 'checkCustomLink'])->name('talent.checkCustomLink');
     });
     
     Route::get('/talent/detail', [App\Http\Controllers\Account\TalentController::class, 'detail'])->name('talent.detail');
@@ -240,26 +250,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','isCandidate'], 'n
 
     Route::get('/generate_referal', [App\Http\Controllers\Account\ReferalController::class, 'index'])->name('generate_referal');
 
-    Route::get('/reward', function()
-	{
-		// Check if file exists in app/storage/file folder
-        $file_path = public_path().'/uploads/reward/book.pdf';
-        /* echo($file_path); */
-		if (file_exists($file_path))
-		{
-      /* return 123; */
-			// Send Download
-			return Response::download($file_path, 'book.pdf', [
-				'Content-Length: '. filesize($file_path)
-			]);
-		}
-		else
-		{
-			// Error
-			exit('Requested file does not exist on our server!');
-		}
-	})
-	->where('filename', '[A-Za-z0-9\-\_\.]+');
+    Route::get('/reward', [App\Http\Controllers\Account\ReferalController::class, 'reward'])->name('reward');
 
 });
 
@@ -274,6 +265,8 @@ Route::group([
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('plan', App\Http\Controllers\Admin\PlanController::class);
     Route::resource('topic', App\Http\Controllers\Admin\TopicController::class);
+    Route::resource('user', App\Http\Controllers\Admin\UserController::class);
+    Route::get('/user/impersonate/{id}', [App\Http\Controllers\Admin\UserController::class, 'impersonate'])->name('user.impersonate');
 });
 
 Route::group([
@@ -284,6 +277,7 @@ Route::group([
     /* Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard'); */
     Route::resource('picklist', App\Http\Controllers\Agent\PicklistController::class);
     Route::resource('topic', App\Http\Controllers\Agent\TopicController::class);
+
 
 });
 

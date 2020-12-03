@@ -5,14 +5,21 @@ namespace App\Http\Controllers\Account;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Attachment;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\File;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-
-        return view('web.account.dashboard');
+        $data=[
+            'images'=>auth()->user()->attachments->where('type','image'),
+            'video'=>auth()->user()->attachments->where('type','video'),
+            'audio'=>auth()->user()->attachments->where('type','audio')
+        ];
+        /* dd($data); */
+        return view('web.account.dashboard',compact('data'));
 
     }
 
@@ -49,6 +56,40 @@ class DashboardController extends Controller
             ));
         }
         
+    }
+
+    public function storeMedia(Request $request)
+    {
+        /* $file = new File($request->file('file'));
+        dd($file); */
+        if ($request->hasFile('file') || $request->file('file')) {
+            $img = custom_file_upload($request->file('file'),'public','uploads/uploadData',null,null,null,null);
+            
+            $attach=new Attachment;
+            $attach->user_id=auth()->user()->id;
+            $attach->type=$request->type;
+            $attach->file=$img;
+            $attach->save();
+
+            $notify=array('name'=>$img,'original_name' => $request->file('file')->getClientOriginalName());
+        }
+        else{
+            $notify=array('name'=>null,'original_name' => null);
+        }
+        
+
+        return response()->json($notify);
+    }
+
+    public function fileDestroy(Request $request)
+    {
+        $filename =  $request->get('filename');
+        Attachment::where('file',$filename)->delete();
+        $path=storage_path('app/public/uploads/uploadData/'.$filename);
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        return $filename;  
     }
 
 }

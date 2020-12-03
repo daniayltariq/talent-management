@@ -35,6 +35,100 @@
 		.stage a:hover:after {
 			color:#231f20;
 		}
+
+		.search .results {
+			width: 91%;
+			max-height: 350px;
+			min-height: 140px;
+			overflow: auto;
+			display: none;
+			position: absolute;
+			top: 115px;
+			left: 0;
+			right: 0;
+			z-index: 10;
+			padding: 0;
+			margin: 0;
+			border-width: 1px;
+			border-style: solid;
+			border-color: #cbcfe2 #c8cee7 #c4c7d7;
+			border-radius: 3px;
+			background-color: #fdfdfd;
+			
+			-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+			-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+			-ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+			-o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+		}
+
+		.search .results li { display: block }
+
+		.search .results li:first-child { margin-top: -1px }
+
+		.search .results li:first-child:before, .search .results li:first-child:after {
+			display: block;
+			content: '';
+			width: 0;
+			height: 0;
+			position: absolute;
+			left: 50%;
+			margin-left: -5px;
+			border: 5px outset transparent;
+		}
+
+		.search .results li:first-child:before {
+			border-bottom: 5px solid #c4c7d7;
+			top: -11px;
+		}
+
+		.search .results li:first-child:after {
+			border-bottom: 5px solid #fdfdfd;
+			top: -10px;
+		}
+
+		.search .results li:first-child:hover:before, .search .results li:first-child:hover:after { display: none }
+
+		.search .results li:last-child { margin-bottom: -1px }
+
+		.search .results a {
+			display: block;
+			position: relative;
+			margin: 0 -1px;
+			padding: 6px 6px 6px 10px;
+			color: #808394;
+			font-weight: 500;
+			/* text-shadow: 0 1px #fff; */
+			border: 1px solid transparent;
+			border-radius: 3px;
+		}
+
+		.search .results a span { font-size: 12px; }
+
+		/* .search .results a:before {
+			content: '';
+			width: 18px;
+			height: 18px;
+			position: absolute;
+			top: 50%;
+			right: 10px;
+			margin-top: -9px;
+			background: url("https://cssdeck.com/uploads/media/items/7/7BNkBjd.png") 0 0 no-repeat;
+		} */
+
+		.search .results li:hover {
+			color: #fff;
+			border-color: #ee7322;
+    		background-color: #e88e54;
+		}
+
+		.search .results li:hover .hover-text-clr{
+			color: #fff;
+		}
+
+		.w-30{
+			width: 30%;
+		}
 	</style>
 @endsection
 
@@ -83,7 +177,7 @@
 					</article> <!-- end of blog__post -->
 
 
-					<div class="post__widget">
+					{{-- <div class="post__widget">
 						<h4 class="widget__title">Popular Tags</h4>
 						<div class="widget__tagcloud">
 							<a href="#" class="tagcloud__item">Backstage</a>
@@ -91,31 +185,25 @@
 							<a href="#" class="tagcloud__item">Fashion</a>
 							<a href="#" class="tagcloud__item">Milano</a>
 						</div>
-					</div>
+					</div> --}}
 
 					<nav class="post__navigation">
 					  <div class="nav-links row">
-				  		<figure class="nav-links__previous col-sm-6">
-							<span class="pull-left"><a href="#"><img src="{{ asset('web/img/nav-prev.jpg') }}" alt=""></a></span>
-							<figcaption class="widget-latest__content">
-								<a href="#" class="widget-latest__title">Easy Home Remedy For</a>
-								<p class="widget-latest__date">16 Oct 2016</p>
-							</figcaption>
-						</figure>
-
-						<figure class="nav-links__next col-sm-6">
-							<span class="pull-right"><a href="#"><img src="{{ asset('web/img/nav-next.jpg') }}" alt=""></a></span>
-							<figcaption class="widget-latest__content">
-								<a href="#" class="widget-latest__title">Does Hydroderm Work</a>
-								<p class="widget-latest__date">13 Dec 2016</p>
-							</figcaption>
-						</figure>
+						@foreach ($latest->take(2) as $topic)
+							<figure class="nav-links__{{$loop->index==0?'previous':'next'}} col-sm-6">
+								<span class="pull-left w-30"><a href="{{ route('single-post',['slug' => $topic->slug]) }}"><img src="{{ asset(isset($topic->image) ? $topic->image : 'backend-assets/images/rec2.jpg') }}" alt=""></a></span>
+								<figcaption class="widget-latest__content">
+									<a href="{{ route('single-post',['slug' => $topic->slug]) }}" class="widget-latest__title">{{$topic->title}}</a>
+									<p class="widget-latest__date">{{$topic->created_at->diffForHumans()}}</p>
+								</figcaption>
+							</figure>
+						@endforeach
 
 					  </div>
 					</nav>
 					<div class="comments">
 						<div id="comments">
-							<h3>{{ count($comments) }} comments</h3>
+							<h3><span id="topic_comm">{{ count($comments) }}</span> comments</h3>
 							<hr />
 							
 							<ol class="comment-list" id="comments-list">	
@@ -202,7 +290,10 @@
 				    				<label for="c-text">Your message <span class="req">*</span></label>
 									<textarea name="comment" id="c-text" class="form-control"></textarea>
 								</div>
+								
 								<input type="submit" class="btn btn__red animation" name="update_cart" value="Submit comment" />
+								
+								
 							</form>
 						</div>
    					</div>
@@ -213,46 +304,29 @@
 						<h4 class="widget__title">Post search</h4>
 						<form class="widget__form">
 							<div class="input-group">
-							  	<input type="text" class="form-control" aria-describedby="search-icon">
+							  	<input type="text" class="form-control" name="search_post" id="search_post" aria-describedby="search-icon">
 							  	<span class="input-group-addon" id="search-icon"><i class="glyphicon glyphicon-search"></i></span>
 							</div>
+
+							<div class="search">
+                                
+                            </div>
 						</form>
 					</div>
 
 					<div class="sidebar-widget">
 						<h4 class="widget__title">Latest Topics</h4>
 						<div class="widget__latest">
-							<figure class="widget-latest__post">
-								<span class="pull-left"></span>
-								<figcaption class="widget-latest__content">
-									<a href="#" class="widget-latest__title">Anti Aging Skin Care The Basics</a>
-									<p class="widget-latest__date">19 Oct 2016</p>
-								</figcaption>
-							</figure>
-
-							<figure class="widget-latest__post">
-								<span class="pull-left"></span>
-								<figcaption class="widget-latest__content">
-									<a href="#" class="widget-latest__title">Ageing Skin Care Does</a>
-									<p class="widget-latest__date">15 nov 2016</p>
-								</figcaption>
-							</figure>
-
-							<figure class="widget-latest__post">
-								<span class="pull-left"></span>
-								<figcaption class="widget-latest__content">
-									<a href="#" class="widget-latest__title">Easy Home Remedy For</a>
-									<p class="widget-latest__date">16 Oct 2016</p>
-								</figcaption>
-							</figure>
-
-							<figure class="widget-latest__post">
-								<span class="pull-left"></span>
-								<figcaption class="widget-latest__content">
-									<a href="#" class="widget-latest__title">Does Hydroderm Work</a>
-									<p class="widget-latest__date">16 dec 2016</p>
-								</figcaption>
-							</figure>
+							@foreach ($latest as $topic)
+								<figure class="widget-latest__post">
+									<span class="pull-left"></span>
+									<figcaption class="widget-latest__content">
+										<a href="{{ route('single-post',['slug' => $topic->slug]) }}" class="widget-latest__title">{{$topic->title}}</a>
+										<p class="widget-latest__date">{{$topic->created_at->diffForHumans()}}</p>
+									</figcaption>
+								</figure>
+							@endforeach
+							
 						</div>
 					</div>
 					
@@ -314,7 +388,8 @@
 	$(document).on('click','#read-more-btn',function(e){
 		e.preventDefault();
 		fullPageLoader(true);
-		var skip=$(this).data('skipcount');
+		var skip=$(this).attr('data-skipcount');
+		console.log(skip);
 		$.ajax({
 			url: "{{ route('read_more_comments') }}",
 			type: 'get',
@@ -323,15 +398,46 @@
 				skipcount:$('#read-more-btn').attr('data-skipcount'),
 			},
 			success: function(res) {
-				console.log(res);
+				console.log(res.length);
 				fullPageLoader(false);
-				$('#comments-list').append(res);
-				$('#read-more-btn').attr('data-skipcount',skip+skip);
+				if (res.length>0) {
+					$('#comments-list').append(res);
+					$('#read-more-btn').attr('data-skipcount',++skip);
+
+					$('#topic_comm').text($('#comments-list li').length);
+				} else {
+					$('#read-more-btn').hide();
+				}
+				
 			},
 			error: function(error) {
 			}
 		});
 	});
   
+</script>
+
+<script>
+	$(document).on('keyup','#search_post',function(){
+		$('.search').empty();
+		if ($(this).val() !=='') {
+			/* fullPageLoader(true); */
+			$.get( "{{ route('post.suggest') }}",{
+					q: $(this).val(),
+					_token : "{{ csrf_token() }}"
+				}, function( data ) {
+					/* fullPageLoader(false); */
+					$('.search').html(data);
+					$('.results').show();
+					/* updateSearchResult(data); */
+			});
+		}
+		
+	})
+
+	$(document).on('click','.suggested-post',function(){
+		var post_slug=$(this).data('postslug');
+		window.location.replace('{{url('/')}}/community/single-post/'+post_slug);
+	})
 </script>
 @endsection

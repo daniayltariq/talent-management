@@ -38,7 +38,7 @@ a.btn.btn-default.btn__grey.animation {
 				<div class="blog__list">
 					<h4 class="widget__title">TOPICS</h4>
 
-					<a href="">
+					<a href="{{ route('community',['category' => 'all']) }}">
 						<h4 class="widget__title pull-right widget__titless" >Browse conversations from all topics </h4>
 					</a>
 
@@ -63,21 +63,21 @@ a.btn.btn-default.btn__grey.animation {
 							@endforeach
 							
 						 
-							<p class="widget-latest__date height_line">Replies: 3</p>
+							{{-- <p class="widget-latest__date height_line">Replies: 3</p> --}}
 							<div class="post__meta">
 								<span class="post__comments">
-								<a href="#"><i class="mdi mdi-comment-text"></i>167 comments</a>
+								<a href="#"><i class="mdi mdi-comment-text"></i>{{$comn->comments_count ?? 0}} comments</a>
 								</span>
 								<span class="post__views">
 								<i class="mdi mdi-eye"></i>
-								152 views
+								{{$comn->topics_sum_views ?? 0}} views
 								</span>
 								<span class="post__likes">
-								<a href="#"><i class="mdi mdi-heart"></i>67 likes</a>
+								<a href="#"><i class="mdi mdi-heart"></i>{{$comn->likes_coun ?? 0}} likes</a>
 								</span>
 							</div>
-							<a href="single-post.html" class="btn btn-default btn__grey animation">{{ $comn->topics_count }} Conversation</a>
-							<a href="single-post.html" class="btn btn-default btn__grey animation">Follow Topic</a>
+							<a href="{{ route('community.category',['slug' => $comn->slug]) }}" class="btn btn-default btn__grey animation">{{ $comn->topics_count }} Conversation</a>
+							<a href="{{ route('community.category',['slug' => $comn->slug]) }}" class="btn btn-default btn__grey animation">Follow Topic</a>
 						</article>
 						
 					@endforeach
@@ -119,7 +119,7 @@ a.btn.btn-default.btn__grey.animation {
 					        </li>
 					    </ul>
 					@endif
-{{-- 
+					{{-- 
 					<ul class="pagination">
 						 
 						<li class="active"><a href="#">01 <span class="sr-only">(current)</span></a></li>

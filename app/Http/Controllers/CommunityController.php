@@ -10,11 +10,19 @@ use Illuminate\Http\Request;
 
 class CommunityController extends Controller
 {
-    public function index(){
+    public function index(Request $request)
+    {
+        /* dd($request->all()); */
+        if ($request->query('category') && $request->category == 'all') {
+
+            $data = Topic::with('user')->paginate(10);
+            
+            return view('web.pages.single-topic',compact('data'));
+        }
 
     	$community = TopicCategory::with(['topics' => function($q){
-    		return $q->with('user')->limit(3);
-    	}])->withCount('topics')->paginate(5);
+    		return $q->with('user')->limit(4);
+    	}])->withCount(['topics','comments','likes'])->withSum('topics','views')->paginate(5);
 
     	return view('web.pages.community',compact('community'));
 
@@ -26,15 +34,18 @@ class CommunityController extends Controller
         $data->views =  $data->views + 1;
         $data->save();
 
+        $latest=Topic::latest()->get()->take(4);
+        
         $comments = TopicComment::where('topic_id',$data->id)->where('parent_id',null)->with('childComment')->get()->take(1);
         /* dD($comments); */
     	if($data){
-    		return view('web.pages.single-post',compact('data','comments'));
+    		return view('web.pages.single-post',compact('data','comments','latest'));
     	}
     	 
     }
 
-    public function categories($slug){
+    public function categories($slug)
+    {
 
 		$category = TopicCategory::where('slug',$slug)->first();
 
@@ -88,7 +99,7 @@ class CommunityController extends Controller
 
             $new->save();
         }
-
+        /* dd(123); */
         return redirect()->back()->with([
             "message" => "Comment has been posted.",
             "alert-type" => "success",
@@ -103,6 +114,19 @@ class CommunityController extends Controller
         if($comments){
     		return view('web.components.comments',compact('comments'));
     	}
+    }
+
+    /**
+     * Suggestion.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function post_suggest(Request $request)
+    {
+        $posts=Topic::where('title','LIKE','%'.$request->q.'%')
+                ->orWhere('content','LIKE','%'.$request->q.'%')
+                ->get();
+        return view('web.components.post-suggestion',compact('posts'));
     }
 
 }

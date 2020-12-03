@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
-
+use Lab404\Impersonate\Models\Impersonate;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable /* implements MustVerifyEmail */
@@ -15,6 +15,7 @@ class User extends Authenticatable /* implements MustVerifyEmail */
     use HasFactory, Notifiable;
     use HasRoles;
     use Billable;
+    use Impersonate;
     /**
      * The attributes that are mass assignable.
      *
@@ -75,5 +76,10 @@ class User extends Authenticatable /* implements MustVerifyEmail */
     public function referrer()
     {
         return $this->belongsTo('App\Models\Referal','referrer_id');
+    }
+
+    public function attachments()
+    {
+        return $this->hasMany('App\Models\Attachment','user_id');
     }
 }

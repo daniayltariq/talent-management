@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -43,6 +44,18 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $countries=DB::table('countries')->select('nicename')->get();
+        
+        return view('auth.register', compact('countries'));
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -50,7 +63,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        /* dd($data); */
         return Validator::make($data, [
             'f_name' => ['required', 'string', 'max:255'],
             'l_name' => ['required', 'string', 'max:255'],
@@ -61,9 +73,9 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'country' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
-            'state' => ['required', 'string', 'max:255'],
-            'h_adress_1' => ['required', 'string', 'max:255'],
-            'h_adress_2' => ['required', 'string', 'max:255'],
+            // 'state' => ['required', 'string', 'max:255'],
+            // 'h_adress_1' => ['string', 'max:255'],
+            // 'h_adress_2' => ['string', 'max:255'],
             'zipcode' => ['required', 'string', 'max:255'],
             'account_type' => ['required', 'string'],
 

@@ -28,6 +28,12 @@
     font-weight: 400;
     font-size: 15px;
 }
+
+.tal-profile{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
 </style>
 @endsection
 
@@ -38,7 +44,7 @@
     <div class="container">
         <div class="row">
             <div class="title__wrapp">
-                <h1 class="page__title">John carry</h1>
+                <h1 class="page__title">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h1>
             </div>
         </div>
     </div>
@@ -70,12 +76,15 @@
                                     <div class="col-sm-12">
                                         <div>
                                             <div class="profile-sec mx-auto ml-5">
-                                                <img src="{{ asset('web/uploads/profile/talent-1.jpg') }}" class="img img-responsive ">
+                                                <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'public/web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
 
                                             </div>
                                              <div class="talent-intro text-center">
                                                 <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
-                                                <p>www.thetalentdepot.com/johnmsmith</p>
+                                                @if (isset($profile->custom_link))
+                                                    <p>{{url('/').'/models/'.$profile->custom_link}}</p>
+                                                @endif
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +100,15 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Weight</th>
-                                                    <td>{{$profile->weight. 'lbs' ?? ''}}</td>
+                                                    <td>{{$profile->weight ?? ''}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Waist</th>
+                                                    <td>{{$profile->waist ?? ''}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Shoe</th>
+                                                    <td>{{$profile->shoes ?? ''}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Hair</th>
@@ -100,6 +117,18 @@
                                                 <tr>
                                                     <th>Eyes</th>
                                                     <td>{{$profile->eyes ?? ''}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Neck</th>
+                                                    <td>{{$profile->neck ?? ''}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Sleves</th>
+                                                    <td>{{$profile->sleves ?? ''}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Chest</th>
+                                                    <td>{{$profile->chest ?? ''}}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -130,176 +159,210 @@
 
                                 </div>
                                 <hr class="hr">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h4 class="text__quote font-primary">Theater</h4>
-                                        <div class="">
-                                            <table class="w-100">
-                                                @php
-                                                    $expr=array();
-                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','theater') : '';
-                                                @endphp
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Role</th>
-                                                    <th>Location</th>
-                                                </tr>
-                                                @foreach ($expr as $key => $exp)
+                                
+                                @php
+                                    $expr=array();
+                                    $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','theater') : null):null;
+                                @endphp
+                                @if (!is_null($expr)&&  count($expr)>0)
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="text__quote font-primary">Theater</h4>
+                                            <div class="">
+                                                <table class="w-100">
                                                     <tr>
-                                                        <td>{{$exp->name ?? ''}}</td>
-                                                        <td>{{$exp->role ?? ''}}</td>
-                                                        <td>{{$exp->production ?? ''}}</td>
+                                                        <th>Name</th>
+                                                        <th>Role</th>
+                                                        <th>Location</th>
                                                     </tr>
-                                                @endforeach
-                                                 
-                                            </table>
+                                                    @if (!is_null($expr))
+                                                        @foreach ($expr as $key => $exp)
+                                                            <tr>
+                                                                <td>{{$exp->name ?? ''}}</td>
+                                                                <td>{{$exp->role ?? ''}}</td>
+                                                                <td>{{$exp->production ?? ''}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                    
+                                                    
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <hr class="hr">
+                                @endif
+                                
+                                @php
+                                    $expr=array();
+                                    $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','films') : null):null;
+                                @endphp
 
-                                <hr class="hr">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h4 class="text__quote font-primary">Films</h4>
-                                        <div class="">
-                                            <table class="w-100">
-                                                 <tr>
-                                                     <th>Name</th>
-                                                     <th>Role</th>
-                                                     <th>Location</th>
-                                                 </tr>
-                                                @php
-                                                    $expr=array();
-                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','films') : '';
-                                                @endphp
-                                                @foreach ($expr as $key => $exp)
+                                @if (!is_null($expr)&&  count($expr)>0)
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="text__quote font-primary">Films</h4>
+                                            <div class="">
+                                                <table class="w-100">
                                                     <tr>
-                                                        <td>{{$exp->name ?? ''}}</td>
-                                                        <td>{{$exp->role ?? ''}}</td>
-                                                        <td>{{$exp->production ?? ''}}</td>
+                                                        <th>Name</th>
+                                                        <th>Role</th>
+                                                        <th>Location</th>
                                                     </tr>
-                                                @endforeach
-                                               
-                                            </table>
+
+                                                    @if (!is_null($expr))
+                                                        @foreach ($expr as $key => $exp)
+                                                            <tr>
+                                                                <td>{{$exp->name ?? ''}}</td>
+                                                                <td>{{$exp->role ?? ''}}</td>
+                                                                <td>{{$exp->production ?? ''}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                    <hr class="hr">
+                                @endif
+                                
+                                @php
+                                    $expr=array();
+                                    $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','television') : null):null;
+                                @endphp
 
-                                <hr class="hr">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h4 class="text__quote font-primary">Telivision</h4>
-                                        <div class="">
-                                            <table class="w-100">
-                                                 <tr>
-                                                     <th>Name</th>
-                                                     <th>Role</th>
-                                                     <th>Location</th>
-                                                 </tr>
-
-                                                @php
-                                                    $expr=array();
-                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','television') : '';
-                                                @endphp
-                                                @foreach ($expr as $key => $exp)
+                                @if (!is_null($expr)&&  count($expr)>0)
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="text__quote font-primary">Telivision</h4>
+                                            <div class="">
+                                                <table class="w-100">
                                                     <tr>
-                                                        <td>{{$exp->name ?? ''}}</td>
-                                                        <td>{{$exp->role ?? ''}}</td>
-                                                        <td>{{$exp->production ?? ''}}</td>
+                                                        <th>Name</th>
+                                                        <th>Role</th>
+                                                        <th>Location</th>
                                                     </tr>
-                                                @endforeach
-                                            </table>
+
+                                                    @if (!is_null($expr))
+                                                        @foreach ($expr as $key => $exp)
+                                                            <tr>
+                                                                <td>{{$exp->name ?? ''}}</td>
+                                                                <td>{{$exp->role ?? ''}}</td>
+                                                                <td>{{$exp->production ?? ''}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <hr class="hr">
+                                @endif
 
-                                <hr class="hr">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h4 class="text__quote font-primary">Commercials</h4>
-                                        <div class="">
-                                            <table class="w-100">
-                                                 <tr>
-                                                     <th>Commercial</th>
-                                                     <th>Role</th>
-                                                     <th>Production Company or Director</th>
-                                                     
-                                                 </tr>
+                                @php
+                                    $expr=array();
+                                    $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','commercials') : null):null;
+                                @endphp
 
-                                                @php
-                                                    $expr=array();
-                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','commercials') : '';
-                                                @endphp
-                                                @foreach ($expr as $key => $exp)
+                                @if (!is_null($expr)&&  count($expr)>0)
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="text__quote font-primary">Commercials</h4>
+                                            <div class="">
+                                                <table class="w-100">
                                                     <tr>
-                                                        <td>{{$exp->name ?? ''}}</td>
-                                                        <td>{{$exp->role ?? ''}}</td>
-                                                        <td>{{$exp->production ?? ''}}</td>
+                                                        <th>Commercial</th>
+                                                        <th>Role</th>
+                                                        <th>Production Company or Director</th>
+                                                        
                                                     </tr>
-                                                @endforeach
-                                               
-                                            </table>
+
+                                                    @if (!is_null($expr))
+                                                        @foreach ($expr as $key => $exp)
+                                                            <tr>
+                                                                <td>{{$exp->name ?? ''}}</td>
+                                                                <td>{{$exp->role ?? ''}}</td>
+                                                                <td>{{$exp->production ?? ''}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <hr class="hr">
+                                @endif
 
-                                <hr class="hr">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h4 class="text__quote font-primary">Traning</h4>
-                                        <div class="">
-                                            <table class="w-100">
-                                                 <tr>
-                                                     <th>Training Class</th>
-                                                     <th>Instructor</th>
-                                                     <th>Training Company</th>
-                                                      
-                                                 </tr>
+                                @php
+                                    $expr=array();
+                                    $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','training') : null):null;
+                                @endphp
 
-                                                @php
-                                                    $expr=array();
-                                                    $expr=$profile->user->experience()->exists() ? $profile->user->experience->where('type','training') : '';
-                                                @endphp
-                                                @foreach ($expr as $key => $exp)
+                                @if (!is_null($expr) &&  count($expr)>0)
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="text__quote font-primary">Traning</h4>
+                                            <div class="">
+                                                <table class="w-100">
                                                     <tr>
-                                                        <td>{{$exp->name ?? ''}}</td>
-                                                        <td>{{$exp->role ?? ''}}</td>
-                                                        <td>{{$exp->production ?? ''}}</td>
+                                                        <th>Training Class</th>
+                                                        <th>Instructor</th>
+                                                        <th>Training Company</th>
+                                                        
                                                     </tr>
-                                                @endforeach
-                                               
-                                            </table>
+
+                                                    @if (!is_null($expr))
+                                                        @foreach ($expr as $key => $exp)
+                                                            <tr>
+                                                                <td>{{$exp->name ?? ''}}</td>
+                                                                <td>{{$exp->role ?? ''}}</td>
+                                                                <td>{{$exp->production ?? ''}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <hr class="hr">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h4 class="text__quote font-primary">Special Skills</h4>
-                                        <div class="skills">
-                                            @php
-                                                $skills=array();
-                                                $skills=$profile->user->skills()->exists() ? $profile->user->skills : '';
-                                            @endphp
-                                            
-                                            @foreach ($skills as $skill)
-                                                @if ($skill->skill()->exists())
-                                                    <span class="label label-default">{{$skill->skill->title ?? ''}}</span>
+                                    <hr class="hr">
+                                @endif
+                                
+                                @php
+                                    $skills=array();
+                                    $skills=!is_null($profile) ? ($profile->user->skills()->exists() ? $profile->user->skills : null):null;
+                                @endphp
+
+                                @if (!is_null($skills) && count($expr)>0)
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="text__quote font-primary">Special Skills</h4>
+                                            <div class="skills">
+                                                
+                                                @if (!is_null($skills))
+                                                    @foreach ($skills as $skill)
+                                                        @if ($skill->skill()->exists())
+                                                            <span class="label label-default">{{$skill->skill->title ?? ''}}</span>
+                                                        @endif
+                                                        
+                                                    @endforeach
                                                 @endif
                                                 
-                                            @endforeach
-                                            
-                                            {{-- <span class="label label-default">Baseball</span>
-                                            <span class="label label-default">Golf</span>
-                                            <span class="label label-default">Rollerblading</span>
-                                            <span class="label label-default">Juggling</span>
-                                            <span class="label label-default">Scuba (PADI certified)</span>
-                                            <span class="label label-default">Valid Driver’s License and U.S. Passport.</span> --}}
+                                                {{-- <span class="label label-default">Baseball</span>
+                                                <span class="label label-default">Golf</span>
+                                                <span class="label label-default">Rollerblading</span>
+                                                <span class="label label-default">Juggling</span>
+                                                <span class="label label-default">Scuba (PADI certified)</span>
+                                                <span class="label label-default">Valid Driver’s License and U.S. Passport.</span> --}}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
+                                
 
                             </div>
                              

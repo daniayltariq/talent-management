@@ -55,9 +55,9 @@
 				<div class="blog__list">
 					<h4 class="widget__title">My Picklists</h4>
 
-					<a href="">
+					{{-- <a href="">
 						<h4 class="widget__title pull-right widget__titless" >Browse all picklists</h4>
-					</a>
+					</a> --}}
 
 
 					<div class="row">
@@ -100,12 +100,37 @@
 				</div>
 				<!-- end of blog__list -->
 				<nav class="blog__pagination">
+					@if ($picklist->lastPage() > 1)
+					    <ul class="pagination">
+					        <li class="{{ ($picklist->currentPage() == 1) ? ' disabled' : '' }}">
+					            <a href="{{ $picklist->url(1) }}">First</a>
+					         </li>
+					        @for ($i = 1; $i <= $picklist->lastPage(); $i++)
+					            <?php
+					            $half_total_links = floor(5 / 2);
+					            $from = $picklist->currentPage() - $half_total_links;
+					            $to = $picklist->currentPage() + $half_total_links;
+					            if ($picklist->currentPage() < $half_total_links) {
+					               $to += $half_total_links - $picklist->currentPage();
+					            }
+					            if ($picklist->lastPage() - $picklist->currentPage() < $half_total_links) {
+					                $from -= $half_total_links - ($picklist->lastPage() - $picklist->currentPage()) - 1;
+					            }
+					            ?>
+					            @if ($from < $i && $i < $to)
+					                <li class="{{ ($picklist->currentPage() == $i) ? ' active' : '' }}">
+					                    <a href="{{ $picklist->url($i) }}">{{ $i }}</a>
+					                </li>
+					            @endif
+					        @endfor
+					        <li class="{{ ($picklist->currentPage() == $picklist->lastPage()) ? ' disabled' : '' }}">
+					            <a href="{{ $picklist->url($picklist->lastPage()) }}">Last</a>
+					        </li>
+					    </ul>
+					@endif
+					{{-- 
 					<ul class="pagination">
-						<!-- <li>
-							<a href="#" class="prev" aria-label="Previous">
-							  <span aria-hidden="true">Previous</span>
-							</a>
-							</li> -->
+						 
 						<li class="active"><a href="#">01 <span class="sr-only">(current)</span></a></li>
 						<li><a href="#">02</a></li>
 						<li><a href="#">03</a></li>
@@ -115,7 +140,7 @@
 							<span aria-hidden="true">Next</span>
 							</a>
 						</li>
-					</ul>
+					</ul> --}}
 				</nav>
 			</div>
 			

@@ -24,7 +24,14 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('web.index');
+      $models=\App\Models\User::whereHas(
+         'roles', function($q){
+             $q->whereNotIn('name',['superadmin','agent']);
+         }
+      )->with('profile')->get();
+
+      /* dd($models[0]->profile); */
+      return view('web.index',compact('models'));
     } 
 
 
@@ -39,15 +46,27 @@ class HomeController extends Controller
       return view('web.forms.find-talent',compact('members'));
     }
   
-    public function models()
+    public function models($link)
     {
-         $notification = array(
-        'message' => 'I am a successful message!', 
-        'alert-type' => 'success'
-        );
-        
-        // return redirect('models')->with($notification);
-        return view('web.pages.models');
+      $pro=\App\Models\Profile::where('custom_link',$link)->first();
+      if ($pro) {
+         $user=\App\Models\User::findOrFail($pro->user_id);
+         if ($user->attachments()->exists()) {
+            $data=[
+               'profile'=>$user->profile,
+               'images'=>$user->attachments->where('type','image'),
+               'video'=>$user->attachments->where('type','video'),
+               'audio'=>$user->attachments->where('type','audio')
+            ];
+
+            return view('web.pages.models-single',compact('data'));
+         }
+         else{
+            return view('web.errors.404')->with('text','Profile not found');
+         }
+      }
+      abort(404);
+      
     }
   
 
@@ -56,9 +75,23 @@ class HomeController extends Controller
        return view('web.pages.models-grid');
     }
 
-    public function modelsingle()
-    {    
-       return view('web.pages.models-single');
+    public function modelsingle($id)
+    { 
+      $user=\App\Models\User::findOrFail($id);
+      if ($user->attachments()->exists()) {
+         $data=[
+            'profile'=>$user->profile,
+            'images'=>$user->attachments->where('type','image'),
+            'video'=>$user->attachments->where('type','video'),
+            'audio'=>$user->attachments->where('type','audio')
+         ];
+
+         return view('web.pages.models-single',compact('data'));
+      }
+      else{
+         return view('web.errors.404')->with('text','Profile not setup yet, What needs to do here ?');
+      }
+      
     }
 
     public function community()

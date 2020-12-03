@@ -4,6 +4,9 @@
 
 
 @section('styles')
+{!! htmlScriptTagJsApi([
+    'action' => 'homepage',
+]) !!}
 <style type="text/css">
 button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     padding: 15px 30px;
@@ -61,6 +64,10 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     background: #ee8d32;
     /* line-height: 3; */
 }
+
+.invalid-feedback{
+    color: red;
+}
 </style>
 @endsection
 
@@ -84,6 +91,18 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             <div class="row">
                 <h3 class="text__quote centered">Please provide us with your contact information.</h3>
                 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+
+                    @if(count($errors)>0)
+                        <div class="alert alert-danger mt-4">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    
                     <form class="apply-form form-horizontal" method="POST" action="{{ route('register') }}">
                        @csrf
                         <input type="hidden" name="account_type" value="agent">
@@ -95,7 +114,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="switch-button">
                                     <span class="active"></span>
                                     <span class="switch-button-case left active-case">Agent</span>
-                                    <span class="switch-button-case right">Candidate</span>
+                                    <span class="switch-button-case right">Talent</span>
                                 </div>
                             </div>
                         </div>
@@ -134,20 +153,34 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         <option value="female">Female</option>
                                         <option value="male">Male</option>
                                     </select>
+                                    @error('gender')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                  </div>
                             </div>
                             <div class="form-group">
                                 <label for="dob" class="col-sm-4 control-label">Date of birth <span class="req">*</span></label>
                                 <div class="col-sm-8 form-row">
                                     <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
-                                   
+                                    @error('dob')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                  </div>
                             </div>
                         
                             <div class="form-group">
-                                <label for="phone" class="col-sm-4 control-label">Phone</label>
+                                <label for="phone" class="col-sm-4 control-label">Phone <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="number" class="form-control" name="phone" id="phone">
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
@@ -182,45 +215,79 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="country" class="col-sm-4 control-label">Country</label>
+                                <label for="country" class="col-sm-4 control-label">Country <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="country" id="country">
+                                    <select name="country" id="country" class="form-control">
+                                        <option value="">Select</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{{$country->nicename}}">{{$country->nicename}}</option>
+                                        @endforeach
+                                        
+                                    </select>
+                                    @error('country')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>  
                             <div class="form-group">
-                                <label for="city" class="col-sm-4 control-label">City</label>
+                                <label for="city" class="col-sm-4 control-label">City <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="city" id="city">
+                                    @error('city')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="state" class="col-sm-4 control-label">State</label>
+                            {{-- <div class="form-group">
+                                <label for="state" class="col-sm-4 control-label">State <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <select name="state" id="state" class="form-control">
                                         <option value="AK">Alaska</option>
-                                        <option value="AZ">Arizona</option>
-                                        <option value="AR">Arkansas</option>
-                                        <option value="CA">California</option>
+                                        
                                     </select>
+                                    @error('state')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="address" class="col-sm-4 control-label">Home Address 1</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="h_adress_1" id="h_adress_1">
+                                    @error('h_adress_1')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="h_adress_2" class="col-sm-4 control-label">Home Address 2</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="h_adress_2" name="h_adress_2">
+                                    @error('h_adress_2')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         
                             <div class="form-group">
-                                <label for="zipcode" class="col-sm-4 control-label">ZipCode</label>
+                                <label for="zipcode" class="col-sm-4 control-label">ZipCode <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="zipcode" id="zipcode">
+                                    @error('zipcode')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row">
@@ -240,6 +307,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 @endsection
 
 @section('scripts')
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
         var user_type = 'agent';
 

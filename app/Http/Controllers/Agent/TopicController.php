@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Topic;
 use App\Models\TopicCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
 {
@@ -80,7 +81,19 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => ['required', 'string'],
+            'slug' => ['required', 'string','unique:topics,slug'],
+            'content' => ['required', 'string'],
+        ]);
 
+        if ($validator->fails()) {
+            $request->session()->flash('error', 'Something went wrong !');
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        
         $blog = new Topic;
         $destinationPath = 'uploads/'; $filename = null; $path_filename = null;
         $req = $request->all();

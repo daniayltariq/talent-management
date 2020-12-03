@@ -6,6 +6,7 @@ use App\Language;
 use App\Currency;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage; 
+use Illuminate\Http\File;
 
 /**
  * Created by PhpStorm.
@@ -172,6 +173,7 @@ if (!function_exists('custom_file_upload'))
                     return $image_name;
                 }
             }
+            
             $path = Storage::putFileAs('public/'.$path, $file, $image_name);
             if ($path)
             {

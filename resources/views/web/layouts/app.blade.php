@@ -41,7 +41,7 @@
 		height: 30px;
 		width: 30px;
 		border-radius: 50%;
-		background-color: #f44336;
+		background-color: #df691a;
 		position: relative;
 		-webkit-animation: 1.2s grow ease-in-out infinite;
 		animation: 1.2s grow ease-in-out infinite;

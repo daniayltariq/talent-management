@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class isAgent
+class isAgentOrCandidate
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,10 @@ class isAgent
      */
     public function handle($request, Closure $next)
     {
-        if(\Auth::check() && \Auth::user()->hasRole("agent") ){ 
-            return $next($request);
+        if(\Auth::check()){ 
+            if( \Auth::user()->hasRole("agent") || \Auth::user()->hasRole("candidate") ){
+                return $next($request);
+            }
         }else{
             $request->session()->put('url.intended', url()->previous());
             return redirect()->route('login');

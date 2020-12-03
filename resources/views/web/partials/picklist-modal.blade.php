@@ -34,11 +34,11 @@
                     <div id="new-picklist" class="new-picklist">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Title</label>
-                            <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="name@example.com">
+                            <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="Enter Title">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">description</label>
-                            <input type="text" class="form-control" name="description" id="exampleFormControlInput1" placeholder="name@example.com">
+                            <input type="text" class="form-control" name="description" id="exampleFormControlInput1" placeholder="Enter Description">
                         </div>
                     </div>
                 </div>
