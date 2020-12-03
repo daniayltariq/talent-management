@@ -10,7 +10,7 @@ use Laravel\Cashier\Billable;
 use Lab404\Impersonate\Models\Impersonate;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable /* implements MustVerifyEmail */
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
     use HasRoles;

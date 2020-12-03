@@ -157,7 +157,7 @@ Route::group(['namespace' => 'Subscription\Controllers'], function () {
     });
 });
 
-Route::group(['prefix' => '/account', 'middleware' => ['auth','isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
+Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
 
     /**
      * Profile

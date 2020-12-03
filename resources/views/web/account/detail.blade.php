@@ -34,6 +34,18 @@
     width: 100%;
     object-fit: cover;
 }
+
+.w-4{
+    width: 40%;
+}
+
+.w-3{
+    width: 30%;
+}
+
+.talent-specs th {
+    width: 70%;
+}
 </style>
 @endsection
 
@@ -79,7 +91,7 @@
                                                 <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'public/web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
 
                                             </div>
-                                             <div class="talent-intro text-center">
+                                            <div class="talent-intro text-center">
                                                 <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
                                                 @if (isset($profile->custom_link))
                                                     <p>{{url('/').'/models/'.$profile->custom_link}}</p>
@@ -138,15 +150,15 @@
                                         <div class="talent-specs">
                                             <table class="pull-right">
                                                 <tr>
-                                                    <th class="text-right">{{$profile->address_1 ?? $profile->address_2 ?? ''}} {{$profile->city ?? ''}}</th>
+                                                    <th class="text-right">{{$profile->address_1 ?? $profile->address_2 ?? auth()->user()->h_adress_1 ?? auth()->user()->h_adress_2 ??''}} {{$profile->city ?? ''}}</th>
                                                      
                                                 </tr>
                                                 <tr>
-                                                    <th class="text-right">{{$profile->state ?? ''}}, {{$profile->country ?? ''}} {{$profile->zipcode ?? ''}}</th>
+                                                    <th class="text-right">{{$profile->state ?? auth()->user()->state ?? ''}}, {{$profile->country ?? auth()->user()->country ?? ''}} {{$profile->zipcode ?? auth()->user()->zipcode ?? ''}}</th>
                                                     
                                                 </tr>
                                                 <tr>
-                                                    <th class="text-right">{{$profile->telephone ?? ''}}</th>
+                                                    <th class="text-right">{{$profile->telephone ?? auth()->user()->phone ?? ''}}</th>
                                                     
                                                 </tr>
                                                 <tr>
@@ -173,14 +185,14 @@
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Role</th>
-                                                        <th>Location</th>
+                                                        <th>Director or Venue</th>
                                                     </tr>
                                                     @if (!is_null($expr))
                                                         @foreach ($expr as $key => $exp)
                                                             <tr>
-                                                                <td>{{$exp->name ?? ''}}</td>
-                                                                <td>{{$exp->role ?? ''}}</td>
-                                                                <td>{{$exp->production ?? ''}}</td>
+                                                                <td class="w-4">{{$exp->name ?? ''}}</td>
+                                                                <td class="w-3">{{$exp->role ?? ''}}</td>
+                                                                <td class="w-3">{{$exp->production ?? ''}}</td>
                                                             </tr>
                                                         @endforeach
                                                     @endif
@@ -207,15 +219,15 @@
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Role</th>
-                                                        <th>Location</th>
+                                                        <th>Director or Production Company</th>
                                                     </tr>
 
                                                     @if (!is_null($expr))
                                                         @foreach ($expr as $key => $exp)
                                                             <tr>
-                                                                <td>{{$exp->name ?? ''}}</td>
-                                                                <td>{{$exp->role ?? ''}}</td>
-                                                                <td>{{$exp->production ?? ''}}</td>
+                                                                <td class="w-4">{{$exp->name ?? ''}}</td>
+                                                                <td class="w-3">{{$exp->role ?? ''}}</td>
+                                                                <td class="w-3">{{$exp->production ?? ''}}</td>
                                                             </tr>
                                                         @endforeach
                                                     @endif
@@ -242,15 +254,15 @@
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Role</th>
-                                                        <th>Location</th>
+                                                        <th>Production</th>
                                                     </tr>
 
                                                     @if (!is_null($expr))
                                                         @foreach ($expr as $key => $exp)
                                                             <tr>
-                                                                <td>{{$exp->name ?? ''}}</td>
-                                                                <td>{{$exp->role ?? ''}}</td>
-                                                                <td>{{$exp->production ?? ''}}</td>
+                                                                <td class="w-4">{{$exp->name ?? ''}}</td>
+                                                                <td class="w-3">{{$exp->role ?? ''}}</td>
+                                                                <td class="w-3">{{$exp->production ?? ''}}</td>
                                                             </tr>
                                                         @endforeach
                                                     @endif
@@ -273,18 +285,18 @@
                                             <div class="">
                                                 <table class="w-100">
                                                     <tr>
-                                                        <th>Commercial</th>
-                                                        <th>Role</th>
-                                                        <th>Production Company or Director</th>
+                                                        <th>Name of Commercial</th>
+                                                        <th>Role Played</th>
+                                                        <th>Director or Production Company</th>
                                                         
                                                     </tr>
 
                                                     @if (!is_null($expr))
                                                         @foreach ($expr as $key => $exp)
                                                             <tr>
-                                                                <td>{{$exp->name ?? ''}}</td>
-                                                                <td>{{$exp->role ?? ''}}</td>
-                                                                <td>{{$exp->production ?? ''}}</td>
+                                                                <td class="w-4">{{$exp->name ?? ''}}</td>
+                                                                <td class="w-3">{{$exp->role ?? ''}}</td>
+                                                                <td class="w-3">{{$exp->production ?? ''}}</td>
                                                             </tr>
                                                         @endforeach
                                                     @endif
@@ -317,9 +329,9 @@
                                                     @if (!is_null($expr))
                                                         @foreach ($expr as $key => $exp)
                                                             <tr>
-                                                                <td>{{$exp->name ?? ''}}</td>
-                                                                <td>{{$exp->role ?? ''}}</td>
-                                                                <td>{{$exp->production ?? ''}}</td>
+                                                                <td class="w-4">{{$exp->name ?? ''}}</td>
+                                                                <td class="w-3">{{$exp->role ?? ''}}</td>
+                                                                <td class="w-3">{{$exp->production ?? ''}}</td>
                                                             </tr>
                                                         @endforeach
                                                     @endif

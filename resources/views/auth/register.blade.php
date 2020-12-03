@@ -245,9 +245,9 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div> --}}
                             <div class="form-group">
-                                <label for="address" class="col-sm-4 control-label">Home Address 1</label>
+                                <label for="address" class="col-sm-4 control-label">Home Address 1 <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="h_adress_1" id="h_adress_1">
+                                    <input type="text" class="form-control" name="h_adress_1" id="h_adress_1" required>
                                     @error('h_adress_1')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -268,7 +268,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             </div>
                         
                             <div class="form-group">
-                                <label for="zipcode" class="col-sm-4 control-label">ZipCode <span class="req">*</span></label>
+                                <label for="zipcode" class="col-sm-4 control-label">Zip Code <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="zipcode" id="zipcode">
                                     @error('zipcode')
@@ -280,7 +280,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             </div>
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-4">
-                                    <button type="submit" class="btn btn-default btn__red animation btn-full pull-right">apply now</button>
+                                    <button type="submit" class="btn btn-default btn__red animation btn-full pull-right">join now</button>
                                 </div>
                             </div>
                         </div>

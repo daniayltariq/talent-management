@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'country' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'state' => ['required', 'string', 'max:255'],
-            'h_adress_1' => ['string', 'max:255'],
+            'h_adress_1' => ['string', 'max:255','required'],
             'h_adress_2' => ['string', 'max:255'],
             'zipcode' => ['required', 'string', 'max:255'],
             'account_type' => ['required', 'string'],
