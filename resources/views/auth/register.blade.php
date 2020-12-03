@@ -91,6 +91,18 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             <div class="row">
                 <h3 class="text__quote centered">Please provide us with your contact information.</h3>
                 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+
+                    @if(count($errors)>0)
+                        <div class="alert alert-danger mt-4">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    
                     <form class="apply-form form-horizontal" method="POST" action="{{ route('register') }}">
                        @csrf
                         <input type="hidden" name="account_type" value="agent">
@@ -205,7 +217,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="country" class="col-sm-4 control-label">Country <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <select name="state" id="state" class="form-control">
+                                    <select name="country" id="country" class="form-control">
                                         <option value="">Select</option>
                                         @foreach ($countries as $country)
                                             <option value="{{$country->nicename}}">{{$country->nicename}}</option>
