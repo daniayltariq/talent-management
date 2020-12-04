@@ -581,12 +581,23 @@
 {{------------------------------------}}
 {{-------------- Dropzone ------------}}
 <script type="text/javascript">
+
+    const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+    const validVideoTypes = ['video/mp4', 'video/mkv', 'video/mov', 'video/wmv'];
+    const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
+
     var uploadedDocumentMap = {};
     Dropzone.autoDiscover = false;
     var myDropzoneTheFirst = new Dropzone(
         //id of drop zone element 1
         '#imageDropzone',{
             url: '{{ route('account.storeMedia') }}',
+            maxFiles:function(file, done) {
+                if (validImageTypes.includes(file.type)) {
+                    done("No more images!");
+                }
+                else { done(); }
+            },
             maxFilesize: 12, // MB
             acceptedFiles: "image/*,.mp4,.mkv,.mov,.wmv,audio/*",
             dictDefaultMessage:"Drop Your Files here.",
@@ -607,9 +618,6 @@
             sending: function(file, xhr, formData){
                 const  fileType = file.type;
                 /* console.log(fileType); */
-                const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
-                const validVideoTypes = ['video/mp4', 'video/mkv', 'video/mov', 'video/wmv'];
-                const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
                 
                 if (validImageTypes.includes(fileType)) {
                     formData.append('type', 'image');
@@ -671,6 +679,14 @@
                     }
                 }); */
 
+                this.on('addedfile', function(file) {
+                    setDropzoneImgLimit(file);
+                });
+
+                this.on("maxfilesexceeded", function(file){
+                    alert("No more files please!");
+                });
+
             }
         }
     );
@@ -696,6 +712,16 @@
 
 		
 	});
+
+    function setDropzoneImgLimit(file)
+    {
+        if ( validImageTypes.includes(file.type)) {
+            $('#imageDropzone')[0].dropzone.options.maxFiles = 2;
+        }
+        else{
+            $('#imageDropzone')[0].dropzone.options.maxFiles = 20;
+        }
+    }
 
     function sendAudio(file)
     {

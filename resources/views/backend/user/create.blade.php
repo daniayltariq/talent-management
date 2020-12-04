@@ -44,9 +44,9 @@
             </div>
             <!--begin::Form-->
             @php 
-            $route = route('superadmin.user.store');
+            $route = route('backend.user.store');
             if(isset($user)){
-            $route = route('superadmin.user.update',$user->id);
+            $route = route('backend.user.update',$user->id);
             }
             @endphp
             <form action="{{$route}}" method="POST" id="user-content-form" enctype="multipart/form-data" class="kt-form">

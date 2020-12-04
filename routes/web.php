@@ -46,7 +46,7 @@ Route::get('/forum', function () {
 // })->name('community');
 
 Route::get('/community', [App\Http\Controllers\CommunityController::class,'index'])->name('community');
-Route::group(['middleware' => ['isAgentOrCandidate']], function() {
+Route::group(['middleware' => ['isAdminOrAgentOrCandidate']], function() {
     Route::post('/community/topic/like', [App\Http\Controllers\CommunityController::class,'post_like'])->name('post_like');
     Route::post('/community/topic/comment', [App\Http\Controllers\CommunityController::class,'post_comment'])->name('post_comment');
     Route::post('/community/topic/reply_comment', [App\Http\Controllers\CommunityController::class,'reply_comment'])->name('reply_comment');
@@ -133,7 +133,7 @@ Route::get('/find-productions', [App\Http\Controllers\HomeController::class, 'fi
 Route::get('/production/single', [App\Http\Controllers\HomeController::class, 'singleproduction'])->name('singleproduction');
 Route::get('/production/apply', [App\Http\Controllers\HomeController::class, 'applyproduction'])->name('applyproduction');
 
-Route::middleware(['isCandidate'])->group(function () {
+Route::middleware(['isGuestOrCandidate'])->group(function () {
     Route::get('/pricing', [App\Http\Controllers\PlanController::class, 'index'])->name('pricing');
 });
 // Talent Profile ========================================================
@@ -157,7 +157,7 @@ Route::group(['namespace' => 'Subscription\Controllers'], function () {
     });
 });
 
-Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
+Route::group(['prefix' => '/account', 'middleware' => ['auth','isActive','verified','isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
 
     /**
      * Profile
@@ -266,6 +266,7 @@ Route::group([
     Route::resource('plan', App\Http\Controllers\Admin\PlanController::class);
     Route::resource('topic', App\Http\Controllers\Admin\TopicController::class);
     Route::resource('user', App\Http\Controllers\Admin\UserController::class);
+    Route::get('/user_status', [App\Http\Controllers\Admin\UserController::class, 'updateStatus'])->name('user.updateStatus');
     Route::get('/user/impersonate/{id}', [App\Http\Controllers\Admin\UserController::class, 'impersonate'])->name('user.impersonate');
 });
 

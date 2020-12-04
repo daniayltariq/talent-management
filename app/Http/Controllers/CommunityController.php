@@ -83,7 +83,7 @@ class CommunityController extends Controller
 
     public function post_comment(Request $request)
     {
-
+        $request->all();
         if($request->topic_id){
 
             $new = new TopicComment;

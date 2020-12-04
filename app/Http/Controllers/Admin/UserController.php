@@ -104,12 +104,22 @@ class UserController extends Controller
 
     }
 
-    public function updateStatus($id)
+    public function updateStatus(Request $request)
     {
-        $career=Career::findOrFail($id);
-        $career->status=0;
-        $career->save();
-        return redirect()->back();
+        $status=array(1,0);
+        if ($request['user_id'] && in_array($request['status'],$status)) {
+            $user=User::findOrFail($request['user_id']);
+            $user->status=$request['status'];
+            $user->save();
+            if ($user) {
+                $status="success";
+            }
+            else{
+                $status="error";
+            }
+            return $status;
+        }
+        
     }
 
     /**
