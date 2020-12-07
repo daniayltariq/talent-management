@@ -38,7 +38,7 @@
             <div class="kt-portlet__head">
                <div class="kt-portlet__head-label">
                   <h3 class="kt-portlet__head-title">
-                     Create User
+                     {{isset($user) ? 'Update' : 'Create'}} User
                   </h3>
                </div>
             </div>
@@ -59,7 +59,7 @@
                      <div class="col-md-8 col-sm-12 col-xs-12 mx-auto">
                         <br />
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                            <label class="col-md-12">Add Role</label>
                            <div class="col-md-12">
                            <select class="form-control" name="role_id">
@@ -69,24 +69,183 @@
                               @endforeach
                            </select>
                            </div>
+                        </div> --}}
+
+                        <div class="row">
+                           
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label class="col-md-6">Profile Type</label>
+                                 <select class="form-control" name="role_id">
+                                    <option value="">Select type</option>
+                                    <option value="">Option1</option>
+                                    <option value="">Option2</option>
+                                    <option value="">Option3</option>
+                                 </select>
+                              </div>
+                           </div>
+
+                           
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label class="col-md-6">Gender</label>
+                                 <select class="form-control" name="role_id">
+                                    <option value="">Select gender</option>
+                                    <option value="">male</option>
+                                    <option value="">female</option>
+                                    <option value="">other</option>
+                                 </select>
+                              </div>
+                           </div>
                         </div>
                         
-                        <div class="form-group">
-                           <label class="col-md-3 col-sm-3 col-xs-12">Add Name</label>
-                           <div class="col-md-12 col-sm-12 col-xs-12">
-                              <input type="text" class="form-control" name="name" value="{{isset($user)?$user->name : ''}}"/> 
+                        
+                        <div class="row">
+                           
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label class="col-md-12 col-sm-12 col-xs-12">First Name</label>
+                                 <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" class="form-control" name="f_name" value="{{isset($user)?$user->f_name : ''}}"/> 
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label class="col-md-12 col-sm-12 col-xs-12">Last Name</label>
+                                 <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" class="form-control" name="l_name" value="{{isset($user)?$user->l_name : ''}}"/> 
+                                 </div>
+                              </div>
                            </div>
                         </div>
-                        <div class="form-group">
-                           <label class="col-md-3 col-sm-3 col-xs-12">Add Email</label>
-                           <div class="col-md-12 col-sm-12 col-xs-12">
-                              <input type="email" class="form-control" name="email" value="{{isset($user)?$user->email : ''}}"/> 
+
+                        <div class="row">
+                           
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label class="col-md-12 col-sm-12 col-xs-12">Age</label>
+                                 <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" class="form-control" name="age" value="{{isset($user)?$user->age : ''}}"/> 
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label class="col-md-12 col-sm-12 col-xs-12">Location</label>
+                                 <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" class="form-control" name="location" value="{{isset($user)?$user->location : ''}}"/> 
+                                 </div>
+                              </div>
                            </div>
                         </div>
+
+                        <div class="row">
+                           
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label class="col-md-6">Hair Color</label>
+                                 
+                                 <select class="form-control" name="role_id">
+                                    <option value="">Select color</option>
+                                    <option value="">black</option>
+                                    <option value="">grey</option>
+                                    <option value="">other</option>
+                                 </select>
+                                 
+                              </div>
+                           </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label class="col-md-6">Eye Color</label>
+                                 
+                                 <select class="form-control" name="role_id">
+                                    <option value="">Select color</option>
+                                    <option value="">black</option>
+                                    <option value="">brown</option>
+                                    <option value="">blue</option>
+                                 </select>
+                                 
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="row">
+                           
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label class="col-md-6">Body Color</label>
+                                 
+                                 <select class="form-control" name="role_id">
+                                    <option value="">Select body type</option>
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                 </select>
+                              </div>
+                           </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label class="col-md-6">Ethnicity</label>
+                              
+                                 <select class="form-control" name="role_id">
+                                    <option value="">black</option>
+                                    <option value="">white</option>
+                                    <option value="">brown</option>
+                                    <option value="">African</option>
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                           <label class="col-lg-2 col-form-label">Skills:</label>
+                           <div class="col-xl-8 col-lg-8 col-sm-12 col-md-12">
+                               <div class="kt-checkbox-inline">
+                                   <label class="kt-checkbox">
+                                   <input type="checkbox"> Email 
+                                   <span></span>
+                                   </label>
+                                   <label class="kt-checkbox">
+                                   <input type="checkbox"> SMS 
+                                   <span></span>
+                                   </label>
+                                   <label class="kt-checkbox">
+                                   <input type="checkbox"> Phone 
+                                   <span></span>
+                                   </label>
+                               </div>
+                           </div>
+                       </div>
+
+                       <div class="form-group row">
+                           <label class="col-lg-2 col-form-label">Union Status:</label>
+                           <div class="col-xl-8 col-lg-8 col-sm-12 col-md-12">
+                              <div class="kt-checkbox-inline">
+                                 <label class="kt-checkbox">
+                                 <input type="checkbox"> Email 
+                                 <span></span>
+                                 </label>
+                                 <label class="kt-checkbox">
+                                 <input type="checkbox"> SMS 
+                                 <span></span>
+                                 </label>
+                                 <label class="kt-checkbox">
+                                 <input type="checkbox"> Phone 
+                                 <span></span>
+                                 </label>
+                              </div>
+                           </div>
+                        </div>
+
                         <div class="form-group">
-                           <label class="col-md-3 col-sm-3 col-xs-12">Add Password</label>
+                           <label class="col-md-3 col-sm-3 col-xs-12">Other Info</label>
                            <div class="col-md-12 col-sm-12 col-xs-12">
-                              <input type="password" class="form-control" name="password"/> 
+                              <input type="text" class="form-control" name="info" value=""/> 
                            </div>
                         </div>
                         

@@ -205,6 +205,18 @@
         border-color: #e77929 !important;
         box-shadow: 0 0 0 0.2rem rgba(253, 166, 84, 0.5);
     }
+
+    .toast-success{
+        background-color: #51A351;
+    }
+
+    .toast-error{
+        background-color: #BD362F;
+    }
+
+    .toast-warning{
+        background-color: #F89406;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -244,6 +256,11 @@
             </div>
         </section> --}}
         <div class="container py-4">
+            <div class="alert alert-primary" role="alert">
+                <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
+                Your account has been deactivated,please make a <a href="{{route('user_request.create')}}" class="alert-link">request</a> to re-activate.
+            </div>
+            <br>
             <div class="row fz-15">
                 <div class="col-md-3">
                     <!-- Tabs nav -->

@@ -135,6 +135,7 @@ Route::get('/production/apply', [App\Http\Controllers\HomeController::class, 'ap
 
 Route::middleware(['isGuestOrCandidate'])->group(function () {
     Route::get('/pricing', [App\Http\Controllers\PlanController::class, 'index'])->name('pricing');
+    Route::resource('user_request', App\Http\Controllers\UserRequestController::class);
 });
 // Talent Profile ========================================================
 
@@ -256,7 +257,6 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','isActive','verifi
 
 //Backend Routes
 
-
 Route::group([
 	'prefix' => 'backend',
     'as' => 'backend.',
@@ -268,6 +268,13 @@ Route::group([
     Route::resource('user', App\Http\Controllers\Admin\UserController::class);
     Route::get('/user_status', [App\Http\Controllers\Admin\UserController::class, 'updateStatus'])->name('user.updateStatus');
     Route::get('/user/impersonate/{id}', [App\Http\Controllers\Admin\UserController::class, 'impersonate'])->name('user.impersonate');
+    Route::get('/user_request', [App\Http\Controllers\Admin\UserRequestController::class, 'userRequest'])->name('user.requests');
+    Route::put('/user_request/{id}', [App\Http\Controllers\Admin\UserRequestController::class, 'acceptRequest'])->name('user.accept_request');
+    Route::delete('/user_request/{id}', [App\Http\Controllers\Admin\UserRequestController::class, 'deleteRequest'])->name('user.delete_request');
+
+    Route::resource('tag', App\Http\Controllers\Admin\TagController::class);
+    Route::resource('room', App\Http\Controllers\Admin\RoomController::class);
+    Route::get('/room_status', [App\Http\Controllers\Admin\RoomController::class, 'updateStatus'])->name('room.updateStatus');
 });
 
 Route::group([
