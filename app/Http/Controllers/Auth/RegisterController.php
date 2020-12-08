@@ -101,7 +101,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'country' => $data['country'],
             'city' => $data['city'],
-            'state' => $data['state'],
             'h_adress_1' => $data['h_adress_1'],
             'h_adress_2' => $data['h_adress_2'],
             'zipcode' => $data['zipcode'],
