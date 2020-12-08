@@ -158,22 +158,24 @@ Route::group(['namespace' => 'Subscription\Controllers'], function () {
     });
 });
 
-Route::group(['prefix' => '/account', 'middleware' => ['auth','isActive','verified','isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
+Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
 
     /**
      * Profile
      */
     Route::middleware(['subscription.customer'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
-        Route::post('/dashboard/profile', [App\Http\Controllers\Account\DashboardController::class, 'store'])->name('dashboard.profile');
 
-        Route::post('/storeMedia', [App\Http\Controllers\Account\DashboardController::class, 'storeMedia'])->name('storeMedia');
-        Route::delete('/fileDestroy', [App\Http\Controllers\Account\DashboardController::class, 'fileDestroy'])->name('fileDestroy');
+        Route::middleware(['isActive'])->group(function () {
+            Route::post('/dashboard/profile', [App\Http\Controllers\Account\DashboardController::class, 'store'])->name('dashboard.profile');
+            Route::post('/storeMedia', [App\Http\Controllers\Account\DashboardController::class, 'storeMedia'])->name('storeMedia');
+            Route::delete('/fileDestroy', [App\Http\Controllers\Account\DashboardController::class, 'fileDestroy'])->name('fileDestroy');
+            Route::post('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
+            Route::put('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
 
+        });
+        
         Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
-        Route::post('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
-        Route::put('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
-
         Route::get('/talent/checkCustomLink', [App\Http\Controllers\Account\TalentController::class, 'checkCustomLink'])->name('talent.checkCustomLink');
     });
     

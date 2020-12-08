@@ -256,10 +256,13 @@
             </div>
         </section> --}}
         <div class="container py-4">
-            <div class="alert alert-primary" role="alert">
-                <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
-                Your account has been deactivated,please make a <a href="{{route('user_request.create')}}" class="alert-link">request</a> to re-activate.
-            </div>
+            @if (auth()->user()->status==0)
+               <div class="alert alert-primary" role="alert">
+                    <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
+                    Your account has been deactivated,please make a <a href="{{route('user_request.create')}}" class="alert-link">request</a> to re-activate.
+                </div> 
+            @endif
+            
             <br>
             <div class="row fz-15">
                 <div class="col-md-3">
