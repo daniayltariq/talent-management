@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Search\TalentSearch;
 
 class HomeController extends Controller
 {
@@ -93,6 +94,15 @@ class HomeController extends Controller
       }
       
     }
+
+   public function searchTalent(Request $request)
+   {    
+      /* dd(session('old_query')); */
+      if($request->query()){
+         $members=TalentSearch::apply($request);
+         return view('web.forms.find-talent',compact('members'));
+      }
+   }
 
     public function community()
     {    

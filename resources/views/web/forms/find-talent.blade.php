@@ -3,6 +3,7 @@
 @section('styles')
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+<link rel="stylesheet" href="{{ asset('css/tagsinput.css') }}">
 <style type="text/css">
     button.btn.btn__red.animation.btn-half.pull-right {
         margin-bottom: 20px;
@@ -103,6 +104,78 @@
     .new-picklist{
         display: none;
     }
+
+    .new-search-save{
+        display: none;
+    }
+
+    .bootstrap-tagsinput .badge{
+		margin: 2px 2px;
+		background-color: #f2832c;
+		border-radius: 4px;
+	}
+
+    .bootstrap-tagsinput {
+        line-height: 28px;
+    }
+
+    .bootstrap-tagsinput .badge [data-role="remove"]:after {
+        padding: 0px 5px 1px 5px;
+    }
+
+    .btn-ss{
+    font-family: 'Montserrat', sans-serif;
+    color:#e9862e;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    line-height: 45px;
+    border: 2px solid #fff;
+    border-radius: 3px;
+    box-shadow: 0 -3px rgba(0, 0, 0, 0.1) inset;
+    padding: 0 42px;
+    position: relative;
+    transition: opacity 0.3s linear 0s;
+    }
+
+    .btn-ss span{
+    left: 0;
+    position: relative;
+    transition: all 0.2s ease-out 0s;
+    }
+
+    .btn-ss i{
+        width: 18px;
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        margin-top: -9px;
+        line-height: 18px;
+        opacity: 0;
+        transition: all 0.2s ease-out 0s;
+    }
+
+    .btn-ss:hover span{
+    left: -18px;
+    }
+
+    .btn-ss:hover i{
+        opacity: 1;
+        right: 24px;
+    }
+
+    @media (min-width: 992px)
+    {
+        .col-md-offset-10-right {
+            margin-right: 83.33333333%;
+        }
+    }
+
+    .pt-0{
+        padding-top: 2% !important;
+    }
+    
+
 </style>
 @endsection
 
@@ -118,25 +191,37 @@
         </div>
     </section><!-- Slider Section End -->
 
-    <section class="section apply">
+    @if (auth()->user()->hasRole('superadmin') && session('old_query'))
+        <div class="container mt-3">
+            <div class="row">
+                <a href="#save-search-modal" role="button" data-toggle="modal" class="btn-ss" >
+                    <span>Save search</span>
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    @endif
+    
+
+    <section class="section apply pt-0">
         <div class="container">
             <div class="row">
                 <!-- <h3 class="text__quote centered">Find Actors and Talents for Hire</h3> -->
                 <div class="col-lg-12 col-md-12 ">
-                    <form class="apply-form form-horizontal" method="POST" action="#" id="form-size">
+                    <form class="apply-form form-horizontal" method="GET" action="{{route('search_talent')}}" id="talent-search-form">
                        @csrf
                         <div class="row form-block">
                             <div class="form-group col-sm-6">
                                 <label for="f_name" class="col-sm-4 control-label">Search by names <span class="req">*</span></label>
                                  <div class="col-sm-8">
-                                   <input class="form-control" id="form-size" type="text" aria-label="Search">
+                                   <input class="form-control taginput" name="name" value="{{session('old_query.name') ?? ''}}" id="form-size" type="text" aria-label="Search">
                                 </div> 
                             </div>
 
                             <div class="form-group col-sm-6">
                                 <label for="state" class="col-sm-4 control-label">Profile Type</label>
                                 <div class="col-sm-8">
-                                    @include('components.multiselect', ['options' => ['Regular','Voiceover']])
+                                    @include('components.multiselect', ['options' => ['Regular','Voiceover'],'name'=>'profile_type'])
                                 </div>
                             </div>
 
@@ -144,7 +229,7 @@
                                 <label for="gender" class="col-sm-4 control-label">Gender <span class="req">*</span></label>
                                 <div class="col-sm-8">
 
-                                    @include('components.multiselect', ['options' => ['Female','Male','Transgender']])
+                                    @include('components.multiselect', ['options' => ['Female','Male','Transgender'],'name'=>'gender'])
                                     
                                  </div>
                              </div>
@@ -152,7 +237,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="age" class="col-sm-4 control-label">Age <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <div class="d-flex justify-content-center my-4">
+                                    <div class="d-flex justify-content-center mb-4">
                                         <input type="number" id="age" name="age" class="form-control">
     							    </div>
                                 </div>
@@ -168,7 +253,7 @@
                            <div class="form-group col-sm-6">
                                 <label for="skills" class="col-sm-4 control-label">Skills <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    @include('components.multiselect', ['options' => ['Skill1','Skill2','Skill3','Skill4','Skill5']])
+                                    @include('components.multiselect', ['options' => ['Skill1','Skill2','Skill3','Skill4','Skill5'],'name'=>'skills'])
                                     
                                  </div>
                              </div>
@@ -176,7 +261,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="unionstatus" class="col-sm-4 control-label">Union Status<span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    @include('components.multiselect', ['options' => ['Status 1','Status 2','Status 3','Status 4','Status 5']])
+                                    @include('components.multiselect', ['options' => ['Status 1','Status 2','Status 3','Status 4','Status 5'],'name'=>'union'])
     							
                                 </div>
                             </div>  
@@ -184,7 +269,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="assets" class="col-sm-4 control-label">Availible Assets <span class="req">*</span></label>
                                 <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Photos','Video','Audio','Document','Reels']])
+                                    @include('components.multiselect', ['options' => ['Photos','Video','Audio','Document','Reels'],'name'=>'assets'])
                                 
                                 </div>
                             </div>   
@@ -192,7 +277,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="ethnicity" class="col-sm-4 control-label">Ethnicity<span class="req">*</span></label>
                                 <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Asian','Black / African Descent','Ethnically Ambiguous / Multiracial','Indigenous Peoples','Latino / Hispanic','South Asian / Indian','Southeast Asian / Pacific Islander']])
+                                    @include('components.multiselect', ['options' => ['Asian','Black / African Descent','Ethnically Ambiguous / Multiracial','Indigenous Peoples','Latino / Hispanic','South Asian / Indian','Southeast Asian / Pacific Islander'],'name'=>'ethnicity'])
                                 
                                 </div>
                             </div> 
@@ -201,7 +286,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="haircolor" class="col-sm-4 control-label">Select Hair Color<span class="req">*</span></label>
                                 <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray']])
+                                    @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray'],'name'=>'hair_color'])
                                     
                                 </div>
                             </div>  
@@ -209,7 +294,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="eyecolor" class="col-sm-4 control-label">Select Eye Color<span class="req">*</span></label>
                                 <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray']])
+                                    @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray'],'name'=>'eye_color'])
                                     
                                  </div>
                             </div>  
@@ -217,7 +302,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="bodytype" class="col-sm-4 control-label">Body Type<span class="req">*</span></label>
                                 <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Average','Slim','Muscular','Curvy']])
+                                    @include('components.multiselect', ['options' => ['Average','Slim','Muscular','Curvy'],'name'=>'body_type'])
                                 
                                 </div>
                             </div>
@@ -249,7 +334,7 @@
 
         </div>
     </section>
-
+    
     <section>
         <div class="section portfolio">
             <div class="container">
@@ -416,18 +501,77 @@
             </div>
         </div>
     </section>
+
+<div id="save-search-modal" class="modal" data-easein="swoopIn"  tabindex="-1" role="dialog" aria-labelledby="save-search-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" style="cursor: pointer" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    Save Search
+                </h4>
+            </div>
+            
+            <form action="{{route('backend.save_search')}}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <hr>
+                    
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Title</label>
+                        <input type="text" class="form-control" name="title" required id="exampleFormControlInput1" placeholder="Enter Title">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
+                        Close
+                    </button>
+                    <button class="btn btn-primary" type="submit">
+                        Save changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @endsection
 @section('scripts')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script>
+<script src="{{ asset('js/tagsinput.js') }}"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
         $('.example-getting-started').multiselect();
-    });
+        $(".taginput").tagsinput({
+			maxTags: 5,
+		})
 
+        /* $('#talent-search-form').on('submit',function(e){
+            e.preventDefault();
+            
+            $('#talent-search-form *').filter(':input').each(function () {
+                
+                if ( $(this).val()=='') {
+                    console.log($(this).attr('name'));
+                    $(this).addClass( "custom-border" );
+                    if (! $(this).next().is('.custom-error')) {
+                        $(this).after( "<div class='custom-error'>This field is required.</div>" );
+                    }
+                    
+                }
+                else{
+                    $(this).css( "border-color", "#dddddd" );
+                    $(this).next( ".custom-error" ).remove();
+                }
+            });
+        }) */
+    });
 
 </script>
 
