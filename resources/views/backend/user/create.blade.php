@@ -104,19 +104,16 @@
                            
                            <div class="col-md-6">
                               <div class="form-group">
-                                 <label class="col-md-12 col-sm-12 col-xs-12">First Name</label>
-                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" class="form-control" name="f_name" value="{{isset($user)?$user->f_name : ''}}"/> 
-                                 </div>
+                                 <label>First Name</label>
+                                 <input type="text" class="form-control" name="f_name" value="{{isset($user)?$user->f_name : ''}}"/> 
+                                 
                               </div>
                            </div>
 
                            <div class="col-md-6">
                               <div class="form-group">
-                                 <label class="col-md-12 col-sm-12 col-xs-12">Last Name</label>
-                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" class="form-control" name="l_name" value="{{isset($user)?$user->l_name : ''}}"/> 
-                                 </div>
+                                 <label>Last Name</label>
+                                 <input type="text" class="form-control" name="l_name" value="{{isset($user)?$user->l_name : ''}}"/> 
                               </div>
                            </div>
                         </div>
@@ -125,19 +122,15 @@
                            
                            <div class="col-md-6">
                               <div class="form-group">
-                                 <label class="col-md-12 col-sm-12 col-xs-12">Age</label>
-                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" class="form-control" name="age" value="{{isset($user)?$user->age : ''}}"/> 
-                                 </div>
+                                 <label>Age</label>
+                                 <input type="text" class="form-control" name="age" value="{{isset($user)?$user->age : ''}}"/> 
                               </div>
                            </div>
 
                            <div class="col-md-6">
                               <div class="form-group">
-                                 <label class="col-md-12 col-sm-12 col-xs-12">Location</label>
-                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" class="form-control" name="location" value="{{isset($user)?$user->location : ''}}"/> 
-                                 </div>
+                                 <label>Location</label>
+                                 <input type="text" class="form-control" name="location" value="{{isset($user)?$user->location : ''}}"/> 
                               </div>
                            </div>
                         </div>
@@ -146,7 +139,7 @@
                            
                            <div class="col-md-6">
                               <div class="form-group">
-                                 <label class="col-md-6">Hair Color</label>
+                                 <label>Hair Color</label>
                                  
                                  <select class="form-control" name="role_id">
                                     <option value="">Select color</option>
@@ -160,7 +153,7 @@
 
                            <div class="col-md-6">
                               <div class="form-group">
-                                 <label class="col-md-6">Eye Color</label>
+                                 <label>Eye Color</label>
                                  
                                  <select class="form-control" name="role_id">
                                     <option value="">Select color</option>
@@ -177,7 +170,7 @@
                            
                            <div class="col-md-6">
                               <div class="form-group">
-                                 <label class="col-md-6">Body Color</label>
+                                 <label>Body Color</label>
                                  
                                  <select class="form-control" name="role_id">
                                     <option value="">Select body type</option>
@@ -190,7 +183,7 @@
 
                            <div class="col-md-6">
                               <div class="form-group">
-                                 <label class="col-md-6">Ethnicity</label>
+                                 <label>Ethnicity</label>
                               
                                  <select class="form-control" name="role_id">
                                     <option value="">black</option>
@@ -243,10 +236,8 @@
                         </div>
 
                         <div class="form-group">
-                           <label class="col-md-3 col-sm-3 col-xs-12">Other Info</label>
-                           <div class="col-md-12 col-sm-12 col-xs-12">
-                              <input type="text" class="form-control" name="info" value=""/> 
-                           </div>
+                           <label>Other Info</label>
+                           <input type="text" class="form-control" name="info" value=""/> 
                         </div>
                         
                         {{-- <div class="form-group mt-3">
@@ -257,7 +248,7 @@
 
                         <div class="form-group">
                            <div class="col-md-12 col-sm-9 col-xs-12">
-                              <button type="submit" {{-- onclick="formSubmitWithTextEditor('editor-post_content','long_desc','post-content-form')" --}} class="btn btn-info btn-xs" role="button" style="font-size:13px" ><b>Save</b></button>
+                              <button type="button" {{-- onclick="formSubmitWithTextEditor('editor-post_content','long_desc','post-content-form')" --}} class="btn btn-info btn-xs" role="button" style="font-size:13px" ><b>Save</b></button>
                               
                            </div>
                         </div>

@@ -168,6 +168,24 @@ class TopicController extends Controller
         return view('backend.topic.create',compact('categories','blog'));
     }
 
+    public function updateStatus(Request $request)
+    {
+        $status=array(1,0);
+        if ($request['topic_id'] && in_array($request['status'],$status)) {
+            $topic=Topic::findOrFail($request['topic_id']);
+            $topic->status=$request['status'];
+            $topic->save();
+            if ($topic) {
+                $status="success";
+            }
+            else{
+                $status="error";
+            }
+            return $status;
+        }
+        
+    }
+
     /**
      * Update the specified resource in storage.
      *

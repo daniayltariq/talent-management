@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\Skill;
 use App\Models\Plan;
+use Illuminate\Support\Str;
 
 class TalentController extends Controller
 {
@@ -26,7 +27,6 @@ class TalentController extends Controller
     public function store(Request $request)
     {
         /* dd($request->all()); */
-        /* return $request->all(); */
         try {
             if($request['method']=='PUT'){
                 $profile=Profile::where('user_id',auth()->user()->id/* $request['profile_id'] */)->first();
@@ -35,6 +35,10 @@ class TalentController extends Controller
                 $status['method']='PUT';
             }
             $profile->fill($request->all());
+            if ($request->custom_link) {
+                $profile->custom_link=Str::slug(Str::lower($request->custom_link),'_');
+            }
+            
             $profile->user_id=auth()->user()->id;
             $profile->save();
 
