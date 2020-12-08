@@ -125,11 +125,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                  <div class="col-sm-8">
                                 <input id="f_name" type="text" class="form-control @error('f_name') is-invalid @enderror" name="f_name" value="{{ old('f_name') }}" required autocomplete="f_name" autofocus>
 
-                                @error('f_name')
+                                {{-- @error('f_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror --}}
                             </div>
                             </div> 
                             <div class="form-group">
@@ -137,11 +137,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                  <div class="col-sm-8">
                                 <input id="l_name" type="text" class="form-control @error('l_name') is-invalid @enderror" name="l_name" value="{{ old('l_name') }}" required autocomplete="l_name" autofocus>
 
-                                @error('f_name')
+                               {{--  @error('f_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror --}}
                             </div>
                             </div>
                           
@@ -153,34 +153,34 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         <option value="female">Female</option>
                                         <option value="male">Male</option>
                                     </select>
-                                    @error('gender')
+                                    {{-- @error('gender')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                  </div>
                             </div>
                             <div class="form-group">
                                 <label for="dob" class="col-sm-4 control-label">Date of birth <span class="req">*</span></label>
                                 <div class="col-sm-8 form-row">
                                     <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
-                                    @error('dob')
+                                    {{-- @error('dob')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                  </div>
                             </div>
                         
                             <div class="form-group">
                                 <label for="phone" class="col-sm-4 control-label">Phone <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" name="phone" id="phone">
-                                    @error('phone')
+                                    <input type="number" class="form-control" name="phone" id="phone" value="{{ old('phone') }}">
+                                    {{-- @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -188,11 +188,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="col-md-8">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                                @error('email')
+                                {{-- @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror --}}
                             </div>
                             </div>
                              
@@ -201,11 +201,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="col-sm-8">
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                 </div>
-                                @error('password')
+                                {{-- @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror --}}
                             </div>
                            
                             <div class="form-group">
@@ -234,12 +234,12 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="city" class="col-sm-4 control-label">City <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="city" id="city">
-                                    @error('city')
+                                    <input type="text" class="form-control" name="city" value="{{ old('city') }}" id="city">
+                                    {{-- @error('city')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             {{-- <div class="form-group">
@@ -259,35 +259,35 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="address" class="col-sm-4 control-label">Home Address 1 <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="h_adress_1" id="h_adress_1" required>
-                                    @error('h_adress_1')
+                                    <input type="text" class="form-control" name="h_adress_1" value="{{ old('h_adress_1') }}" id="h_adress_1" required>
+                                   {{--  @error('h_adress_1')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="h_adress_2" class="col-sm-4 control-label">Home Address 2</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="h_adress_2" name="h_adress_2">
-                                    @error('h_adress_2')
+                                    <input type="text" class="form-control" id="h_adress_2" value="{{ old('h_adress_2') }}" name="h_adress_2">
+                                    {{-- @error('h_adress_2')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                         
                             <div class="form-group">
                                 <label for="zipcode" class="col-sm-4 control-label">Zip Code <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="zipcode" id="zipcode">
-                                    @error('zipcode')
+                                    <input type="text" class="form-control" value="{{ old('zipcode') }}" name="zipcode" id="zipcode">
+                                    {{-- @error('zipcode')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="row">
