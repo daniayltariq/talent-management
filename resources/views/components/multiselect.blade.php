@@ -1,6 +1,6 @@
-<select class="example-getting-started" name="{{$name}}" multiple="multiple">
+<select class="js-example-basic-multiple gender-multi" name="{{$name}}[]" multiple="multiple">
     @foreach($options as $opt)
-        <option value="{{ $opt }}" >{{ $opt }}</option>
+        <option value="{{ strtolower($opt) }}">{{ $opt }}</option>
     @endforeach
     
 </select>

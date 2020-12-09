@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Search\TalentSearch;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -44,6 +45,8 @@ class HomeController extends Controller
          }
       )->with('profile')->get();
       /* dd($members); */
+
+      session()->forget('old_query');
       return view('web.forms.find-talent',compact('members'));
     }
   

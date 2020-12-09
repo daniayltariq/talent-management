@@ -1,7 +1,7 @@
 <?php
 namespace App\Search;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class TalentSearch
 {
     public static function apply(Request $filters)
@@ -48,13 +48,102 @@ class TalentSearch
                 $names=explode(',',session('old_query')['name']);
                 $user->whereHas('profile', function($q) use ($names){
                     foreach ($names as $key => $name) {
-                        $q->orWhere('legal_first_name','LIKE','%'.$name.'%')
+                        if ($key==0)
+                        {
+                            $q->where('legal_first_name','LIKE','%'.$name.'%')
+                                ->orWhere('legal_last_name','LIKE','%'.$name.'%');
+                        }
+                        else{
+                            $q->orWhere('legal_first_name','LIKE','%'.$name.'%')
                             ->orWhere('legal_last_name','LIKE','%'.$name.'%');
+                        }
+                        
                     }
                 });
                         
                 
             }
+            if (session()->has('old_query.new_age') && session('old_query')['new_age'] !==null) {
+                
+                /* $user->whereIn('farm_id',session('old_query')['farm_id']); */
+                $ages=explode(';',session('old_query')['new_age']);
+                $ages[0]=Carbon::now()->subYears($ages[0])->toDateString();
+                $ages[1]=Carbon::now()->subYears($ages[1])->toDateString();
+                /* dd($ages); */
+
+                $user->whereBetween('dob',array_reverse($ages));
+                
+            }
+
+            if (session()->has('old_query.gender')) {
+                /* dd($user->get()); */
+                $genders=session('old_query')['gender'];
+                $user->where(function($query) use ($genders)
+                {
+                    foreach ($genders as $key => $gender) {
+                        if ($key==0)
+                        {
+                            $query->where('gender',$gender);
+                        }
+                        else{
+                            $query->orWhere('gender',$gender);
+                        }
+                        
+                    }
+                });
+                /* dd($user->get()); */
+            }
+
+            if (session()->has('old_query.location')) {
+                /* dd($user->get()); */
+                $locations=session('old_query')['location'];
+                $user->where(function($query) use ($locations)
+                {
+                    $query->where('country','LIKE','%'.$locations.'%')
+                            ->orWhere('city','LIKE','%'.$locations.'%')
+                            ->orWhere('state','LIKE','%'.$locations.'%')
+                            ->orWhere('h_adress_1','LIKE','%'.$locations.'%')
+                            ->orWhere('h_adress_2','LIKE','%'.$locations.'%');
+                });
+                
+            }
+
+            if (session()->has('old_query.eye_color')) {
+                /* dd($user->get()); */
+                $eye_colors=session('old_query')['eye_color'];
+                $user->whereHas('profile', function($q) use ($eye_colors){
+                    foreach ($eye_colors as $key => $eye_color) {
+                        if ($key==0)
+                        {
+                            $q->where('eyes',$eye_color);
+                        }
+                        else{
+                            $q->orWhere('eyes',$eye_color);
+                        }
+                        
+                    }
+                });
+                /* dd($user->get()); */
+            }
+
+            if (session()->has('old_query.hair_color')) {
+                /* dd($user->get()); */
+                $hair_colors=session('old_query')['hair_color'];
+                $user->whereHas('profile', function($q) use ($hair_colors){
+                    foreach ($hair_colors as $key => $hair_color) {
+                        if ($key==0)
+                        {
+                            $q->where('hairs',$hair_color);
+                        }
+                        else{
+                            $q->orWhere('hairs',$hair_color);
+                        }
+                        
+                    }
+                });
+                /* dd($user->get()); */
+            }
+
             if (session()->has('old_query.prod_price')) {
                 $prod_price=explode(',',session('old_query')['prod_price']);
                 $user->where('regular_price','<>',null)->Where('sale_price','<>',null)->whereBetween('regular_price',$prod_price)->orWhereBetween('sale_price',$prod_price);

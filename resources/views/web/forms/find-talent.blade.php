@@ -2,8 +2,10 @@
 
 @section('styles')
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"> --}}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('css/tagsinput.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
 <style type="text/css">
     button.btn.btn__red.animation.btn-half.pull-right {
         margin-bottom: 20px;
@@ -134,6 +136,10 @@
     .pb-0{
         padding-bottom: 0 !important;
     }
+
+    .mb-0{
+        margin-bottom: 0 !important;
+    }
     
     .f-r{
         float: right;
@@ -147,6 +153,26 @@
     .btn-dd:hover{
         background-color: #f1a466;
         color: white;
+    }
+
+    .irs--round .irs-from, .irs--round .irs-to, .irs--round .irs-single {
+        background-color: #ee7322;
+    }
+
+    .irs--round .irs-handle {
+        border: 4px solid #ee7322;
+    }
+
+    .irs--round .irs-from:before, .irs--round .irs-to:before,.irs--round .irs-single:before {
+        border-top-color: #ee7322;
+    }
+
+    .irs--round .irs-bar {
+        background-color: #ee7322;
+    }
+
+    .select2-container{
+        width: 100% !important;
     }
 
 </style>
@@ -201,15 +227,15 @@
                 <div class="col-lg-12 col-md-12 ">
                     <form class="apply-form form-horizontal" method="GET" action="{{route('search_talent')}}" id="talent-search-form">
                        @csrf
-                        <div class="row form-block">
-                            <div class="form-group col-sm-6">
+                        <div class="row form-block pb-0">
+                            <div class="form-group col-sm-6 mb-0">
                                 <label for="f_name" class="col-sm-4 control-label">Search by names <span class="req">*</span></label>
                                  <div class="col-sm-8">
-                                   <input class="form-control taginput" name="name" value="{{session('old_query.name') ?? ''}}" id="form-size" type="text" aria-label="Search">
+                                   <input class="form-control taginput" name="name" value="{{\Request::has('name')?\Request::get('name') : ''}}" id="form-size" type="text" aria-label="Search">
                                 </div> 
                             </div>
 
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-sm-6 mb-0">
                                 <label for="state" class="col-sm-4 control-label">Profile Type</label>
                                 <div class="col-sm-8">
                                     @include('components.multiselect', ['options' => ['Regular','Voiceover'],'name'=>'profile_type'])
@@ -217,8 +243,8 @@
                             </div>
                         </div>
 
-                        <div class="row form-block">
-                            <div class="form-group col-sm-6">
+                        <div class="row form-block pb-0">
+                            <div class="form-group col-sm-6 mb-0">
                                 <label for="gender" class="col-sm-4 control-label">Gender <span class="req">*</span></label>
                                 <div class="col-sm-8">
 
@@ -227,11 +253,12 @@
                                  </div>
                              </div>
 
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-sm-6 mb-0">
                                 <label for="age" class="col-sm-4 control-label">Age <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <div class="d-flex justify-content-center mb-4">
-                                        <input type="number" id="age" name="age" class="form-control">
+                                        <input type="text" id="age" name="age" value="{{ (session('old_query')['new_age']) ?? ''}}" class="form-control js-range-slider" data-type="double">
+                                        <input type="hidden" name="new_age" value="{{ (session('old_query')['new_age']) ?? ''}}">
     							    </div>
                                 </div>
                             </div>
@@ -241,7 +268,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="location" class="col-sm-4 control-label">Location</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="location" id="location">
+                                    <input type="text" class="form-control" name="location" id="location" value="{{ (session('old_query')['location']) ?? ''}}">
                                 </div>
                             </div>
 
@@ -535,18 +562,50 @@
 @endsection
 @section('scripts')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script>
 <script src="{{ asset('js/tagsinput.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>   
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.example-getting-started').multiselect();
+        $('.js-example-basic-multiple').select2();
+        
+        @if(session()->has('old_query.gender'))
+            var gender={!!json_encode(session('old_query')['gender'])!!};
+            
+            $('[name="gender[]"]').val(gender);
+            $('[name="gender[]"]').trigger('change');
+        @endif
+
+        @if(session()->has('old_query.eye_color'))
+            var eye_color={!!json_encode(session('old_query')['eye_color'])!!};
+            
+            $('[name="eye_color[]"]').val(eye_color);
+            $('[name="eye_color[]"]').trigger('change');
+        @endif
+
+        @if(session()->has('old_query.hair_color'))
+            var hair_color={!!json_encode(session('old_query')['hair_color'])!!};
+            
+            $('[name="hair_color[]"]').val(hair_color);
+            $('[name="hair_color[]"]').trigger('change');
+        @endif
+
         $(".taginput").tagsinput({
 			maxTags: 5,
 		})
 
+        $(".js-range-slider").ionRangeSlider({
+            skin: "round",
+            onChange: function (data) {
+                // Called every time handle position is changed
+                $('[name="new_age"]').val(data.from+';'+data.to);
+                console.log(data);
+            },
+        });
         /* $('#talent-search-form').on('submit',function(e){
             e.preventDefault();
             
