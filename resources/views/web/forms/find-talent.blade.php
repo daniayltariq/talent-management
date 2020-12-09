@@ -191,7 +191,7 @@
         </div>
     </section><!-- Slider Section End -->
 
-    @if (auth()->user()->hasRole('superadmin') && session('old_query'))
+    @if (\Auth::check() && auth()->user()->hasRole('superadmin') && session('old_query'))
         <div class="container mt-3">
             <div class="row">
                 <a href="#save-search-modal" role="button" data-toggle="modal" class="btn-ss" >
