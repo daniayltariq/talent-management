@@ -123,58 +123,31 @@
         padding: 0px 5px 1px 5px;
     }
 
-    .btn-ss{
-    font-family: 'Montserrat', sans-serif;
-    color:#e9862e;
-    text-transform: uppercase;
-    text-decoration: none;
-    letter-spacing: 2px;
-    line-height: 45px;
-    border: 2px solid #fff;
-    border-radius: 3px;
-    box-shadow: 0 -3px rgba(0, 0, 0, 0.1) inset;
-    padding: 0 42px;
-    position: relative;
-    transition: opacity 0.3s linear 0s;
-    }
-
-    .btn-ss span{
-    left: 0;
-    position: relative;
-    transition: all 0.2s ease-out 0s;
-    }
-
-    .btn-ss i{
-        width: 18px;
-        position: absolute;
-        right: 30px;
-        top: 50%;
-        margin-top: -9px;
-        line-height: 18px;
-        opacity: 0;
-        transition: all 0.2s ease-out 0s;
-    }
-
-    .btn-ss:hover span{
-    left: -18px;
-    }
-
-    .btn-ss:hover i{
-        opacity: 1;
-        right: 24px;
-    }
-
-    @media (min-width: 992px)
-    {
-        .col-md-offset-10-right {
-            margin-right: 83.33333333%;
-        }
+    .btn-talent{
+        color:#e9862e !important;
     }
 
     .pt-0{
         padding-top: 2% !important;
     }
+
+    .pb-0{
+        padding-bottom: 0 !important;
+    }
     
+    .f-r{
+        float: right;
+    }
+
+    .btn-dd{
+        border-radius: 31px;
+        height: 45px;
+    }
+
+    .btn-dd:hover{
+        background-color: #f1a466;
+        color: white;
+    }
 
 </style>
 @endsection
@@ -191,17 +164,35 @@
         </div>
     </section><!-- Slider Section End -->
 
-    @if (\Auth::check() && auth()->user()->hasRole('superadmin') && session('old_query'))
+    @if (\Auth::check() && auth()->user()->hasRole('superadmin'))
         <div class="container mt-3">
-            <div class="row">
+            {{-- <div class="row">
                 <a href="#save-search-modal" role="button" data-toggle="modal" class="btn-ss" >
                     <span>Save search</span>
                     <i class="fa fa-plus"></i>
                 </a>
-            </div>
+            </div> --}}
+            <div class="dropdown f-r">
+                <button class="btn btn-default dropdown-toggle btn-dd" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <i class="fa fa-plus"></i>
+                </button>
+                <ul class="dropdown-menu mt-3" aria-labelledby="dropdownMenu1">
+                    @if (session('old_query'))
+                        <li>
+                            <a href="#save-search-modal" role="button" data-toggle="modal" class="btn-talent" >
+                                Save search
+                            </a>
+                        </li>
+                    @endif
+                    
+                    <li><a href="{{route('backend.picklist.index')}}">View Picklist</a></li>
+                    <li><a href="{{route('backend.dashboard')}}">Dashboard</a></li>
+                </ul>
+              </div>
         </div>
     @endif
-    
+
+    <!-- Example single danger button -->    
 
     <section class="section apply pt-0">
         <div class="container">
@@ -224,7 +215,9 @@
                                     @include('components.multiselect', ['options' => ['Regular','Voiceover'],'name'=>'profile_type'])
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="row form-block">
                             <div class="form-group col-sm-6">
                                 <label for="gender" class="col-sm-4 control-label">Gender <span class="req">*</span></label>
                                 <div class="col-sm-8">
@@ -242,7 +235,9 @@
     							    </div>
                                 </div>
                             </div>
+                        </div>
                               
+                        <div class="row form-block">
                             <div class="form-group col-sm-6">
                                 <label for="location" class="col-sm-4 control-label">Location</label>
                                 <div class="col-sm-8">

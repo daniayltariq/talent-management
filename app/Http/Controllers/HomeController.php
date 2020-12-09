@@ -97,9 +97,10 @@ class HomeController extends Controller
 
    public function searchTalent(Request $request)
    {    
-      /* dd(session('old_query')); */
+      /* dd( $request->all()); */
       if($request->query()){
          $members=TalentSearch::apply($request);
+         /* dd( $members); */
          return view('web.forms.find-talent',compact('members'));
       }
    }

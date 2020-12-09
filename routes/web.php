@@ -46,7 +46,7 @@ Route::get('/forum', function () {
 // })->name('community');
 
 Route::get('/community', [App\Http\Controllers\CommunityController::class,'index'])->name('community');
-Route::group(['middleware' => ['isAdminOrAgentOrCandidate']], function() {
+Route::group(['middleware' => ['isAdminOrAgentOrCandidate','isActive']], function() {
     Route::post('/community/topic/like', [App\Http\Controllers\CommunityController::class,'post_like'])->name('post_like');
     Route::post('/community/topic/comment', [App\Http\Controllers\CommunityController::class,'post_comment'])->name('post_comment');
     Route::post('/community/topic/reply_comment', [App\Http\Controllers\CommunityController::class,'reply_comment'])->name('reply_comment');
@@ -279,6 +279,7 @@ Route::group([
     Route::put('/user_request/{id}', [App\Http\Controllers\Admin\UserRequestController::class, 'acceptRequest'])->name('user.accept_request');
     Route::delete('/user_request/{id}', [App\Http\Controllers\Admin\UserRequestController::class, 'deleteRequest'])->name('user.delete_request');
 
+    Route::resource('picklist', App\Http\Controllers\Admin\PicklistController::class);
     Route::resource('tag', App\Http\Controllers\Admin\TagController::class);
     Route::resource('room', App\Http\Controllers\Admin\RoomController::class);
     Route::get('/room_status', [App\Http\Controllers\Admin\RoomController::class, 'updateStatus'])->name('room.updateStatus');

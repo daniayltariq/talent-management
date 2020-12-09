@@ -16,7 +16,7 @@ class isAdminOrAgentOrCandidate
     public function handle($request, Closure $next)
     {
         if(\Auth::check()){ 
-            if(\Auth::user()->hasRole("superadmin") || ( \Auth::user()->hasAnyRole("agent|candidate") && \Auth::user()->status==1 ) ){
+            if(\Auth::user()->hasRole("superadmin") || ( \Auth::user()->hasAnyRole("agent|candidate") /* && \Auth::user()->status==1 */ ) ){
                 return $next($request);
             }
         }else{

@@ -45,10 +45,14 @@ class TalentSearch
             if (session()->has('old_query.name')) {
                 
                 /* $user->whereIn('farm_id',session('old_query')['farm_id']); */
-                $user->whereHas('profile', function($q){
-                        $q->where('legal_first_name','LIKE','%'.session('old_query')['name'].'%')
-                            ->orWhere('legal_last_name','LIKE','%'.session('old_query')['name'].'%');
-                        });
+                $names=explode(',',session('old_query')['name']);
+                $user->whereHas('profile', function($q) use ($names){
+                    foreach ($names as $key => $name) {
+                        $q->orWhere('legal_first_name','LIKE','%'.$name.'%')
+                            ->orWhere('legal_last_name','LIKE','%'.$name.'%');
+                    }
+                });
+                        
                 
             }
             if (session()->has('old_query.prod_price')) {
