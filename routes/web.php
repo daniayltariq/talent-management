@@ -281,6 +281,7 @@ Route::group([
 
     Route::resource('picklist', App\Http\Controllers\Admin\PicklistController::class);
     Route::get('/delete_picklist_item/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'delete_picklist_item'])->name('delete_picklist_item');
+    Route::post('/picklist_share/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'picklist_share'])->name('picklist_share');
 
     Route::resource('tag', App\Http\Controllers\Admin\TagController::class);
     Route::resource('room', App\Http\Controllers\Admin\RoomController::class);

@@ -8,6 +8,8 @@ use App\Models\PicklistUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Domain\Mail\SharePicklist;
 
 class PicklistController extends Controller
 {
@@ -119,6 +121,31 @@ class PicklistController extends Controller
             return redirect()->back()->with([
                 "message" => "Picklist Deleted",
                 "alert-type" => "success",
+            ]);
+        }
+         
+    }
+
+    public function picklist_share(Request $request,$id)
+    {
+        /* dd($request->all()); */
+        $picklist=Picklist::findOrFail($id);
+        
+        try {
+            $recip=explode(',',$request->recipients);
+            foreach ($recip as $key => $email) {
+                Mail::to($email)->send(new SharePicklist($picklist));
+            }
+
+            return redirect()->back()->with([
+                "message" => "Picklist Shared",
+                "alert-type" => "success",
+            ]);
+            
+        } catch (\Throwable $th) {
+            return redirect()->back()->with([
+                "message" => "Something went wrong",
+                "alert-type" => "error",
             ]);
         }
          

@@ -1,10 +1,25 @@
 @extends('backend.layouts.app')
 
 @section('styles')
-<link href="{{asset('backend-assets/assets/vendors/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css')}}" rel="stylesheet" type="text/css" />
+{{-- <link href="{{asset('backend-assets/assets/vendors/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css')}}" rel="stylesheet" type="text/css" /> --}}
+<link rel="stylesheet" href="{{ asset('css/tagsinput.css') }}">
 	<style>
 		.bootstrap-switch-container{
 			width: 160px !important;
+		}
+
+		.bootstrap-tagsinput .badge{
+			margin: 2px 2px;
+			background-color: #f2832c;
+			border-radius: 4px;
+		}
+
+		.bootstrap-tagsinput {
+			line-height: 28px;
+		}
+
+		.bootstrap-tagsinput .badge [data-role="remove"]:after {
+			padding: 0px 5px 1px 5px;
 		}
 	</style>
 @endsection
@@ -52,6 +67,8 @@
 											</div> </a>
 											
 											@include('components.delete' , ['data' => $list->id, 'route' => 'backend.picklist.destroy'])
+
+											<button class="btn btn-success btn-sm btn-bg-white" name="sharePicklist" data-picklistid="{{$list->id}}"><i class="fa fa-paper-plane" style="color: #5578eb;"></i></button>
 										</td>
 									</tr>
 								@endforeach
@@ -102,11 +119,44 @@
         </div>
     </div>
 </div> --}}
+
+<div class="modal fade" id="share_picklist_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+			<form action="#" method="POST" id="share_picklist_form" enctype="multipart/form-data" class="kt-form">
+				@csrf
+				
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Share Picklist</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="col-md-3 col-sm-3 col-xs-12">Recipient</label>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<input type="text" class="form-control taginput" name="recipients"/>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-info">Send</button>
+				</div>
+			</form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js" data-turbolinks-track="true"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js" data-turbolinks-track="true"></script> --}}
+<script src="{{ asset('js/tagsinput.js') }}"></script>
 <script type="text/javascript">
 
 // $("input[type=file]").change(function(){
@@ -114,7 +164,11 @@
 // });
 
 $(document).ready(function(){
-	$("[name='status']").bootstrapSwitch();
+	$(".taginput").tagsinput({
+		maxTags: 5,
+	})
+
+	/* $("[name='status']").bootstrapSwitch();
 
 	$('[name="userRole"]').click(function(e){
 		$('[name="user_id"]').val($(this).data('user'));
@@ -122,7 +176,7 @@ $(document).ready(function(){
 	});
 
 	$("[name='status']").on('switchChange.bootstrapSwitch',function (e, state) {
-		/* console.log($(this).data('userid')); */
+		console.log($(this).data('userid'));
 		const that=this;
 		$.get("{{ route('backend.room.updateStatus') }}",
 		{
@@ -138,6 +192,15 @@ $(document).ready(function(){
 			}
 		});
 		
+	}); */
+
+
+	$('[name="sharePicklist"]').click(function(e){
+		var picklist_id=$(this).data('picklistid');
+		console.log(picklist_id);
+		
+		$('#share_picklist_form').attr('action','{{ url('/')}}'+'/backend/picklist_share/'+picklist_id);
+		$('#share_picklist_modal').modal('toggle');
 	});
 
 	

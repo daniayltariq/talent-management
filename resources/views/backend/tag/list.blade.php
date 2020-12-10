@@ -45,7 +45,7 @@
 										<td>{{ $tag->title ?? '' }}</td>
 										<td>{{ $tag->slug ?? '' }}</td>
 										<td>
-											<button class="btn btn-info btn-sm btn-bg-white" id="editTag" data-tag="{{$tag}}"><i class="fa fa-pencil-alt" style="color: #5578eb;"></i></button>
+											<button class="btn btn-info btn-sm btn-bg-white" name="editTag" data-tag="{{$tag}}"><i class="fa fa-pencil-alt" style="color: #5578eb;"></i></button>
 											@include('components.delete' , ['data' => $tag->id, 'route' => 'backend.tag.destroy'])
 										</td>
 									</tr>
@@ -121,7 +121,7 @@
 @endif
 
 $(document).ready(function(){
-	$('#editTag').click(function(e){
+	$('[name="editTag"]').click(function(e){
 		var tag=$(this).data('tag');
 		console.log(tag);
 		$('[name="title"]').val(tag.title);
