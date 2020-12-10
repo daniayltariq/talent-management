@@ -16,7 +16,7 @@
 		<div class="kt-portlet__head">
 			<div class="kt-portlet__head-label">
 				<h3 class="kt-portlet__head-title">
-					Room list
+					Picklist
 				</h3>
 				
 			</div>
@@ -34,26 +34,24 @@
 							<thead>
 								<tr>
 									<th>#</th>
-								   <th>Room</th>
-								   <th>Slug</th>
-								   <th>Active</th>
+								   <th>Title</th>
+								   <th>Description</th>
+								   <th>Talent</th>
 								   <th>Operation</th>
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($categories as $key => $room)
+								@foreach($picklist as $key => $list)
 									<tr>
 										<td>{{++$key}}</td>
-										<td>{{ $room->title ?? '' }}</td>
-										<td>{{ $room->slug ?? '' }}</td>
+										<td>{{ $list->title ?? '' }}</td>
+										<td>{{ $list->description ?? '' }}</td>
+										<td>{{ count($list->items) }}</td>
 										<td>
-											<input data-switch="true" name="status" type="checkbox" data-roomid="{{$room->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$room->status==1?"checked=checked":""}}>
-										</td>
-										<td>
-											<a href="{{route('backend.room.edit',$room->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Edit
+											<a href="{{route('backend.picklist.show',$list->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">View
 											</div> </a>
 											
-											@include('components.delete' , ['data' => $room->id, 'route' => 'backend.room.destroy'])
+											@include('components.delete' , ['data' => $list->id, 'route' => 'backend.picklist.destroy'])
 										</td>
 									</tr>
 								@endforeach

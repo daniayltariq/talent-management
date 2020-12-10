@@ -17,8 +17,9 @@ class PicklistController extends Controller
      */
     public function index(Request $request)
     {
-        $picklist=Picklist::where('user_id',auth()->user()->id)->paginate(5);
-        return view('web.agent.picklist',compact('picklist'));
+        $picklist=Picklist::where('user_id',auth()->user()->id)->get();
+        
+        return view('backend.picklist.list',compact('picklist'));
     }
 
     /**
@@ -40,14 +41,20 @@ class PicklistController extends Controller
     public function store(Request $request)
     {
         /* dd($request->all()); */
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'name' => ['string', 'max:50'],
             'description' => ['string', 'max:191'],
             'member_id' => ['required', 'numeric'],
-        ]);
+        ];
+
+        if ($request->picklist_id) {
+            $rules['picklist_id'] = ['integer','unique:picklist_user,user_id,NULL,id,picklist_id,'.$request->picklist_id];
+        }
+
+        $validator = Validator::make($request->all(), $rules);
         
         if ($validator->fails()) {
-            $request->session()->flash('error', 'Something went wrong !');
+            
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
@@ -70,10 +77,16 @@ class PicklistController extends Controller
         $picklist_item->save();
 
         if ($picklist_item) {
-            return redirect()->back()->with('success', 'Plan created successfully !');
+            return redirect()->back()->with([
+				"message" => "Picklist Saved",
+				"alert-type" => "success",
+			]);
         }
         else{
-            return redirect()->back()->with('error', 'something went wrong !');
+            return redirect()->back()->with([
+				"message" => "Something went wrong",
+				"alert-type" => "error",
+			]);
         }
     }
 
@@ -120,13 +133,13 @@ class PicklistController extends Controller
      * @param  \App\Farm  $farm
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $plan)
+    public function destroy( $picklist)
     {
-        $plan=Plan::findOrFail($plan);
-        /* dd($plan); */
-        if ($plan) {
-            $plan->delete();
-            return redirect()->back()->with('success', 'Plan deleted successfully !');
+        $picklist=Picklist::findOrFail($picklist);
+        /* dd($picklist); */
+        if ($picklist) {
+            $picklist->delete();
+            return redirect()->back()->with('success', 'Picklist deleted successfully !');
         }
     }
 }

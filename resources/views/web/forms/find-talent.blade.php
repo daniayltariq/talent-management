@@ -193,7 +193,7 @@
                 <div class="title__wrapp">
                     <div class="page__subtitle title__grey">Looking for talent ?</div>
                     <h1 class="page__title">Featured Talent</h1>
-                    
+                    {{-- {{dd($errors->all())}} --}}
                 </div>
             </div>
         </div>
@@ -224,7 +224,7 @@
                     @endif
                     
                     
-                    <li><a class="btn-talent" href="{{route('backend.picklist.index')}}">View Picklist</a></li>
+                    <li class="p-5-0"><a class="btn-talent" href="{{route('backend.picklist.index')}}">View Picklist</a></li>
                     <li><a class="btn-talent" href="{{route('backend.dashboard')}}">Dashboard</a></li>
                 </ul>
               </div>
@@ -242,7 +242,7 @@
                        @csrf
                         <div class="row form-block pb-0">
                             <div class="form-group col-sm-6 mb-0">
-                                <label for="f_name" class="col-sm-4 control-label">Search by names <span class="req">*</span></label>
+                                <label for="f_name" class="col-sm-4 control-label">Search by names {{-- <span class="req">*</span> --}}</label>
                                  <div class="col-sm-8">
                                    <input class="form-control taginput" name="name" value="{{ (session('old_query')['name']) ?? ''}}" id="form-size" type="text" aria-label="Search">
                                 </div> 
@@ -258,7 +258,7 @@
 
                         <div class="row form-block pb-0">
                             <div class="form-group col-sm-6 mb-0">
-                                <label for="gender" class="col-sm-4 control-label">Gender <span class="req">*</span></label>
+                                <label for="gender" class="col-sm-4 control-label">Gender </label>
                                 <div class="col-sm-8">
 
                                     @include('components.multiselect', ['options' => ['Female','Male','Transgender'],'name'=>'gender'])
@@ -267,7 +267,7 @@
                              </div>
 
                             <div class="form-group col-sm-6 mb-0">
-                                <label for="age" class="col-sm-4 control-label">Age <span class="req">*</span></label>
+                                <label for="age" class="col-sm-4 control-label">Age </label>
                                 <div class="col-sm-8">
                                     <div class="d-flex justify-content-center mb-4">
                                         <input type="text" id="age" name="age" value="{{ (session('old_query')['new_age']) ?? ''}}" class="form-control js-range-slider" data-type="double" data-min="0">
@@ -286,7 +286,7 @@
                             </div>
 
                            <div class="form-group col-sm-6">
-                                <label for="skills" class="col-sm-4 control-label">Skills <span class="req">*</span></label>
+                                <label for="skills" class="col-sm-4 control-label">Skills </label>
                                 <div class="col-sm-8">
                                     @include('components.multiselect', ['options' => $skills,'option_value'=>'id','option_text'=>'title','name'=>'skills'])
                                     
@@ -294,7 +294,7 @@
                              </div>
 
                             <div class="form-group col-sm-6">
-                                <label for="unionstatus" class="col-sm-4 control-label">Union Status<span class="req">*</span></label>
+                                <label for="unionstatus" class="col-sm-4 control-label">Union Status</label>
                                 <div class="col-sm-8">
                                     @include('components.multiselect', ['options' => ['Status 1','Status 2','Status 3','Status 4','Status 5'],'name'=>'union'])
     							
@@ -302,7 +302,7 @@
                             </div>  
 
                             <div class="form-group col-sm-6">
-                                <label for="assets" class="col-sm-4 control-label">Availible Assets <span class="req">*</span></label>
+                                <label for="assets" class="col-sm-4 control-label">Availible Assets </label>
                                 <div class="col-sm-8 ">
                                     @include('components.multiselect', ['options' => ['Image','Video','Audio','Document','Reels'],'name'=>'assets'])
                                 
@@ -310,7 +310,7 @@
                             </div>   
 
                             <div class="form-group col-sm-6">
-                                <label for="ethnicity" class="col-sm-4 control-label">Ethnicity<span class="req">*</span></label>
+                                <label for="ethnicity" class="col-sm-4 control-label">Ethnicity</label>
                                 <div class="col-sm-8 ">
                                     @include('components.multiselect', ['options' => ['Asian','Black / African Descent','Ethnically Ambiguous / Multiracial','Indigenous Peoples','Latino / Hispanic','South Asian / Indian','Southeast Asian / Pacific Islander'],'name'=>'ethnicity'])
                                 
@@ -319,7 +319,7 @@
 
 
                             <div class="form-group col-sm-6">
-                                <label for="haircolor" class="col-sm-4 control-label">Select Hair Color<span class="req">*</span></label>
+                                <label for="haircolor" class="col-sm-4 control-label">Select Hair Color</label>
                                 <div class="col-sm-8 ">
                                     @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray'],'name'=>'hair_color'])
                                     
@@ -327,7 +327,7 @@
                             </div>  
 
                             <div class="form-group col-sm-6">
-                                <label for="eyecolor" class="col-sm-4 control-label">Select Eye Color<span class="req">*</span></label>
+                                <label for="eyecolor" class="col-sm-4 control-label">Select Eye Color</label>
                                 <div class="col-sm-8 ">
                                     @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray'],'name'=>'eye_color'])
                                     
@@ -335,7 +335,7 @@
                             </div>  
 
                             <div class="form-group col-sm-6">
-                                <label for="bodytype" class="col-sm-4 control-label">Body Type<span class="req">*</span></label>
+                                <label for="bodytype" class="col-sm-4 control-label">Body Type</label>
                                 <div class="col-sm-8 ">
                                     @include('components.multiselect', ['options' => ['Average','Slim','Muscular','Curvy'],'name'=>'body_type'])
                                 
@@ -403,9 +403,9 @@
                                         {{-- <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
                                         <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i> --}}
 
-                                        @role('agent')
+                                        @hasanyrole('agent|superadmin')
                                             <a href="#picklist-modal" class="picklist-btn" data-memberid="{{$member->id}}" role="button" data-toggle="modal">
-                                        @endrole
+                                        @endhasanyrole
 
                                         @guest
                                             <a href="{{route('login')}}">
@@ -590,6 +590,10 @@
 
         @if($errors->has('ss_title'))
             $('#save-search-modal').modal('toggle');
+        @endif
+
+        @if($errors->has('picklist_id'))
+            $('#picklist-modal').modal('toggle');
         @endif
 
         $('.js-example-basic-multiple').select2();

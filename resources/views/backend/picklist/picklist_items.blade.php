@@ -16,7 +16,7 @@
 		<div class="kt-portlet__head">
 			<div class="kt-portlet__head-label">
 				<h3 class="kt-portlet__head-title">
-					Room list
+					Picklist
 				</h3>
 				
 			</div>
@@ -34,26 +34,24 @@
 							<thead>
 								<tr>
 									<th>#</th>
-								   <th>Room</th>
-								   <th>Slug</th>
-								   <th>Active</th>
+								   <th>Title</th>
+								   <th>Description</th>
+								   <th>Talent</th>
 								   <th>Operation</th>
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($categories as $key => $room)
+								@foreach($picklist as $key => $list)
 									<tr>
 										<td>{{++$key}}</td>
-										<td>{{ $room->title ?? '' }}</td>
-										<td>{{ $room->slug ?? '' }}</td>
+										<td>{{ $list->title ?? '' }}</td>
+										<td>{{ $list->description ?? '' }}</td>
+										<td>{{ count($list->items) }}</td>
 										<td>
-											<input data-switch="true" name="status" type="checkbox" data-roomid="{{$room->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$room->status==1?"checked=checked":""}}>
-										</td>
-										<td>
-											<a href="{{route('backend.room.edit',$room->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Edit
+											<a href="{{route('backend.picklist.show',$list->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">View
 											</div> </a>
 											
-											@include('components.delete' , ['data' => $room->id, 'route' => 'backend.room.destroy'])
+											@include('components.delete' , ['data' => $list->id, 'route' => 'backend.picklist.destroy'])
 										</td>
 									</tr>
 								@endforeach
@@ -68,42 +66,7 @@
 	</div>
 	<!--end::Portlet-->
 </div>
-{{-- <div class="modal fade" id="role_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-			<form action="{{route('backend.user.assignRole')}}" method="POST" id="user-content-form" enctype="multipart/form-data" class="kt-form">
-				@csrf
-				<input type="hidden" name="user_id" >
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Assign Role</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label class="col-md-12">Add Name</label>
-								<div class="col-md-12">
-								<select class="form-control" name="role_id">
-									<option value="">Select Role</option>
-									@foreach ($roles as $role)
-											<option value="{{$role->id}}">{{$role->name}}</option>
-									@endforeach
-								</select>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-info">Save</button>
-				</div>
-			</form>
-        </div>
-    </div>
-</div> --}}
+
 @endsection
 
 @section('scripts')
