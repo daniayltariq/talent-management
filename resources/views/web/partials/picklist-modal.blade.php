@@ -11,6 +11,7 @@
                 </h4>
             </div>
             @php
+                $route="#";
                 if (\Auth::check() && auth()->user()->hasRole('superadmin')) {
                     $route=route('backend.picklist.store');
                 } 
