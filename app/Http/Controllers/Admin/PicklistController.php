@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Picklist;
+use App\Models\PicklistUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -101,7 +102,26 @@ class PicklistController extends Controller
         /* dd($picklist); */
         $items=$picklist->items()->paginate(5);
         
-        return view('web.agent.picklist-single',compact('picklist','items'));
+        return view('backend.picklist.picklist_items',compact('picklist','items'));
+    }
+
+    /**
+     * Show the form for delete the specified resource.
+     *
+     * @param  \App\Farm  $farm
+     * @return \Illuminate\Http\Response
+     */
+    public function delete_picklist_item($item)
+    {
+        $item=PicklistUser::findOrFail($item);
+        $item->delete();
+        if($item){
+            return redirect()->back()->with([
+                "message" => "Picklist Deleted",
+                "alert-type" => "success",
+            ]);
+        }
+         
     }
 
     /**

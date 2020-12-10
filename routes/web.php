@@ -280,6 +280,8 @@ Route::group([
     Route::delete('/user_request/{id}', [App\Http\Controllers\Admin\UserRequestController::class, 'deleteRequest'])->name('user.delete_request');
 
     Route::resource('picklist', App\Http\Controllers\Admin\PicklistController::class);
+    Route::get('/delete_picklist_item/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'delete_picklist_item'])->name('delete_picklist_item');
+
     Route::resource('tag', App\Http\Controllers\Admin\TagController::class);
     Route::resource('room', App\Http\Controllers\Admin\RoomController::class);
     Route::get('/room_status', [App\Http\Controllers\Admin\RoomController::class, 'updateStatus'])->name('room.updateStatus');
