@@ -42,7 +42,7 @@
             >
             <ul class="kt-menu__nav ">
                 <li class="kt-menu__item  kt-menu__item--active" aria-haspopup="true" >
-                    <a href="#" class="kt-menu__link ">
+                    <a href="{{route('backend.dashboard')}}" class="kt-menu__link ">
                         <span class="kt-menu__link-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -55,12 +55,13 @@
                         <span class="kt-menu__link-text">Dashboard</span>
                     </a>
                 </li>
-                <li class="kt-menu__section ">
+                {{-- <li class="kt-menu__section ">
                     <h4 class="kt-menu__section-text">Custom</h4>
                     <i class="kt-menu__section-icon flaticon-more-v2"></i>
-                </li>
+                </li> --}}
+                <hr>
                 
-                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
+                <li class="kt-menu__item  kt-menu__item--submenu mt-3" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
                     <a  href="javascript:;" class="kt-menu__link kt-menu__toggle">
                         <span class="kt-menu__link-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -83,7 +84,7 @@
                     </div>
                 </li>
 
-                <li class="kt-menu__item" aria-haspopup="true" >
+                <li class="kt-menu__item mt-3" aria-haspopup="true" >
                     <a  href="{{route('backend.tag.index')}}" class="kt-menu__link ">
                         <span class="kt-menu__link-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -98,7 +99,7 @@
                     </a>
                 </li>
                 
-                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
+                <li class="kt-menu__item  kt-menu__item--submenu mt-3" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
                     <a  href="javascript:;" class="kt-menu__link kt-menu__toggle">
                         <span class="kt-menu__link-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -121,7 +122,7 @@
                     </div>
                 </li>
 
-                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
+                <li class="kt-menu__item  kt-menu__item--submenu mt-3" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
                     <a  href="javascript:;" class="kt-menu__link kt-menu__toggle">
                         <span class="kt-menu__link-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -144,7 +145,7 @@
                     </div>
                 </li>
 
-                <li class="kt-menu__item" aria-haspopup="true" >
+                <li class="kt-menu__item mt-3" aria-haspopup="true" >
                     <a  href="{{route('backend.picklist.index')}}" class="kt-menu__link ">
                         <span class="kt-menu__link-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -176,7 +177,7 @@
                     </a>
                 </li> --}}
 
-                <li class="kt-menu__item" aria-haspopup="true" >
+                <li class="kt-menu__item mt-3" aria-haspopup="true" >
                     <a  href="{{route('backend.plan.index')}}" class="kt-menu__link ">
                         <span class="kt-menu__link-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">

@@ -402,7 +402,7 @@
 </div>
 <!-- end::Scrolltop -->
 <!-- begin::Sticky Toolbar -->
-<ul class="kt-sticky-toolbar" style="margin-top: 30px;">
+{{-- <ul class="kt-sticky-toolbar" style="margin-top: 30px;">
     <li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success" id="kt_demo_panel_toggle" data-toggle="kt-tooltip"  title="Check out more demos" data-placement="right">
         <a href="#" class=""><i class="flaticon2-drop"></i></a>
     </li>
@@ -415,7 +415,7 @@
     <li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--danger" id="kt_sticky_toolbar_chat_toggler" data-toggle="kt-tooltip" title="Chat Example" data-placement="left">
         <a href="#" data-toggle="modal" data-target="#kt_chat_modal"><i class="flaticon2-chat-1"></i></a>
     </li>
-</ul>
+</ul> --}}
 <!-- end::Sticky Toolbar -->
 <!-- begin::Demo Panel -->
 <div id="kt_demo_panel" class="kt-demo-panel">
