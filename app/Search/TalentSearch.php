@@ -8,7 +8,7 @@ class TalentSearch
     {
         /* dd($filters->all()); */
         /* dd($prod_price=explode('-',$filters->prod_price)); */
-        $currentquery = $filters->query();
+        $currentquery = $filters->all();
         
         if (session()->has('old_query')) {
             $allQueries = array_merge( session('old_query'),$currentquery);
@@ -19,7 +19,7 @@ class TalentSearch
         else{
             session()->put('old_query',$currentquery);
         }
-        /* dd(session('old_query')['prod_price']); */
+        /* dd(session('old_query')); */
         
         session()->forget('old_query._token');
         $user=(new \App\Models\User)->newQuery();
@@ -42,7 +42,7 @@ class TalentSearch
                 }
                 
             }
-            if (session()->has('old_query.name')) {
+            if (session()->has('old_query.name') && session('old_query')['name'] !==null) {
                 
                 /* $user->whereIn('farm_id',session('old_query')['farm_id']); */
                 $names=explode(',',session('old_query')['name']);
@@ -94,7 +94,30 @@ class TalentSearch
                 /* dd($user->get()); */
             }
 
-            if (session()->has('old_query.location')) {
+            if (session()->has('old_query.skills')) {
+                $skills=session('old_query')['skills'];
+                $user->whereHas('skills', function($q) use ($skills){
+                    $q->whereIn('skill_id',$skills);
+                });
+            }
+
+            if (session()->has('old_query.assets')) {
+                $assets=session('old_query')['assets'];
+                $user->whereHas('attachments', function($q) use ($assets){
+                    foreach ($assets as $key => $asset) {
+                        if ($key==0)
+                        {
+                            $q->where('type',$asset);
+                        }
+                        else{
+                            $q->orWhere('type',$asset);
+                        }
+                        
+                    }
+                });
+            }
+
+            if (session()->has('old_query.location') && session('old_query')['location'] !==null) {
                 /* dd($user->get()); */
                 $locations=session('old_query')['location'];
                 $user->where(function($query) use ($locations)

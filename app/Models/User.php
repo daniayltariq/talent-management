@@ -82,4 +82,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Models\Attachment','user_id');
     }
+
+    public function saved_search()
+    {
+        return $this->hasMany('App\Models\SavedSearch','user_id');
+    }
 }

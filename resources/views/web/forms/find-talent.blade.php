@@ -175,6 +175,14 @@
         width: 100% !important;
     }
 
+    .p-5-0{
+        padding: 5px 0px;
+    }
+
+    .dropdown-menu>li>a:hover {
+        border-left: 3px solid #f2832c;
+    }
+
 </style>
 @endsection
 
@@ -185,6 +193,7 @@
                 <div class="title__wrapp">
                     <div class="page__subtitle title__grey">Looking for talent ?</div>
                     <h1 class="page__title">Featured Talent</h1>
+                    
                 </div>
             </div>
         </div>
@@ -204,15 +213,19 @@
                 </button>
                 <ul class="dropdown-menu mt-3" aria-labelledby="dropdownMenu1">
                     @if (session('old_query'))
-                        <li>
+                        <li class="p-5-0">
                             <a href="#save-search-modal" role="button" data-toggle="modal" class="btn-talent" >
                                 Save search
                             </a>
                         </li>
                     @endif
+                    @if (count(auth()->user()->saved_search)>0)
+                        <li><a class="btn-talent" href="{{route('backend.view_save_search')}}">View Search</a></li>
+                    @endif
                     
-                    <li><a href="{{route('backend.picklist.index')}}">View Picklist</a></li>
-                    <li><a href="{{route('backend.dashboard')}}">Dashboard</a></li>
+                    
+                    <li><a class="btn-talent" href="{{route('backend.picklist.index')}}">View Picklist</a></li>
+                    <li><a class="btn-talent" href="{{route('backend.dashboard')}}">Dashboard</a></li>
                 </ul>
               </div>
         </div>
@@ -231,7 +244,7 @@
                             <div class="form-group col-sm-6 mb-0">
                                 <label for="f_name" class="col-sm-4 control-label">Search by names <span class="req">*</span></label>
                                  <div class="col-sm-8">
-                                   <input class="form-control taginput" name="name" value="{{\Request::has('name')?\Request::get('name') : ''}}" id="form-size" type="text" aria-label="Search">
+                                   <input class="form-control taginput" name="name" value="{{ (session('old_query')['name']) ?? ''}}" id="form-size" type="text" aria-label="Search">
                                 </div> 
                             </div>
 
@@ -257,7 +270,7 @@
                                 <label for="age" class="col-sm-4 control-label">Age <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <div class="d-flex justify-content-center mb-4">
-                                        <input type="text" id="age" name="age" value="{{ (session('old_query')['new_age']) ?? ''}}" class="form-control js-range-slider" data-type="double">
+                                        <input type="text" id="age" name="age" value="{{ (session('old_query')['new_age']) ?? ''}}" class="form-control js-range-slider" data-type="double" data-min="0">
                                         <input type="hidden" name="new_age" value="{{ (session('old_query')['new_age']) ?? ''}}">
     							    </div>
                                 </div>
@@ -275,7 +288,7 @@
                            <div class="form-group col-sm-6">
                                 <label for="skills" class="col-sm-4 control-label">Skills <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    @include('components.multiselect', ['options' => ['Skill1','Skill2','Skill3','Skill4','Skill5'],'name'=>'skills'])
+                                    @include('components.multiselect', ['options' => $skills,'option_value'=>'id','option_text'=>'title','name'=>'skills'])
                                     
                                  </div>
                              </div>
@@ -291,7 +304,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="assets" class="col-sm-4 control-label">Availible Assets <span class="req">*</span></label>
                                 <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Photos','Video','Audio','Document','Reels'],'name'=>'assets'])
+                                    @include('components.multiselect', ['options' => ['Image','Video','Audio','Document','Reels'],'name'=>'assets'])
                                 
                                 </div>
                             </div>   
@@ -524,7 +537,7 @@
         </div>
     </section>
 
-<div id="save-search-modal" class="modal" data-easein="swoopIn"  tabindex="-1" role="dialog" aria-labelledby="save-search-modal" aria-hidden="true">
+<div id="save-search-modal" class="modal" style="z-index: 9999;" data-easein="swoopIn"  tabindex="-1" role="dialog" aria-labelledby="save-search-modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -543,7 +556,10 @@
                     
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Title</label>
-                        <input type="text" class="form-control" name="title" required id="exampleFormControlInput1" placeholder="Enter Title">
+                        <input type="text" class="form-control" name="ss_title" required id="exampleFormControlInput1" placeholder="Enter Title">
+                        @error('ss_title')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -571,6 +587,11 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+
+        @if($errors->has('ss_title'))
+            $('#save-search-modal').modal('toggle');
+        @endif
+
         $('.js-example-basic-multiple').select2();
         
         @if(session()->has('old_query.gender'))
@@ -592,6 +613,20 @@
             
             $('[name="hair_color[]"]').val(hair_color);
             $('[name="hair_color[]"]').trigger('change');
+        @endif
+
+        @if(session()->has('old_query.skills'))
+            var skills={!!json_encode(session('old_query')['skills'])!!};
+            
+            $('[name="skills[]"]').val(skills);
+            $('[name="skills[]"]').trigger('change');
+        @endif
+
+        @if(session()->has('old_query.assets'))
+            var assets={!!json_encode(session('old_query')['assets'])!!};
+            
+            $('[name="assets[]"]').val(assets);
+            $('[name="assets[]"]').trigger('change');
         @endif
 
         $(".taginput").tagsinput({

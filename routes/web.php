@@ -284,6 +284,8 @@ Route::group([
     Route::resource('room', App\Http\Controllers\Admin\RoomController::class);
     Route::get('/room_status', [App\Http\Controllers\Admin\RoomController::class, 'updateStatus'])->name('room.updateStatus');
 
+    Route::get('/view_save_search', [App\Http\Controllers\Admin\DashboardController::class, 'viewSaveSearch'])->name('view_save_search');
+    Route::get('/apply_saved_search/{id}', [App\Http\Controllers\Admin\DashboardController::class, 'applySaveSearch'])->name('apply_saved_search');
     Route::post('/save_search', [App\Http\Controllers\Admin\DashboardController::class, 'saveSearch'])->name('save_search');
 });
 

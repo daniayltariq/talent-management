@@ -93,6 +93,10 @@
 		}
 		}
 
+		.error{
+			color: red;
+		}
+
 	</style>
 </head>
 
