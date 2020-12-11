@@ -195,25 +195,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 @enderror --}}
                             </div>
                             </div>
-                             
-                            <div class="form-group">
-                                <label for="password" class="col-sm-4 control-label">Password <span class="req">*</span></label>
-                                <div class="col-sm-8">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                </div>
-                                {{-- @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror --}}
-                            </div>
-                           
-                            <div class="form-group">
-                                <label for="password-confirm" class="col-sm-4 control-label">Confirm Password <span class="req">*</span></label>
-                                <div class="col-sm-8">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                </div>
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="country" class="col-sm-4 control-label">Country <span class="req">*</span></label>
                                 <div class="col-sm-8">
@@ -290,9 +272,29 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     @enderror --}}
                                 </div>
                             </div>
+                             
+                            <div class="form-group">
+                                <label for="password" class="col-sm-4 control-label">Create a Password <span class="req">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                </div>
+                                {{-- @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror --}}
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="password-confirm" class="col-sm-4 control-label">Confirm Password <span class="req">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-4">
-                                    <button type="submit" class="btn btn-default btn__red animation btn-full pull-right">join now</button>
+                                    <button type="submit" class="btn btn-default btn__red animation btn-full pull-right">join us</button>
                                 </div>
                             </div>
                         </div>
