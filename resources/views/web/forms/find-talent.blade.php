@@ -183,6 +183,10 @@
         border-left: 3px solid #f2832c;
     }
 
+    .lh-23{
+        line-height: 23px !important;
+    }
+
 </style>
 @endsection
 
@@ -241,30 +245,52 @@
                     <form class="apply-form form-horizontal" method="GET" action="{{route('search_talent')}}" id="talent-search-form">
                        @csrf
                         <div class="row form-block pb-0">
-                            <div class="form-group col-sm-6 mb-0">
-                                <label for="f_name" class="col-sm-4 control-label">Search by names {{-- <span class="req">*</span> --}}</label>
+                            {{-- <div class="form-group col-sm-6 mb-0">
+                                <label for="f_name" class="col-sm-4 control-label">Search by names</label>
                                  <div class="col-sm-8">
                                    <input class="form-control taginput" name="name" value="{{ (session('old_query')['name']) ?? ''}}" id="form-size" type="text" aria-label="Search">
                                 </div> 
+                            </div> --}}
+
+                            <div class="form-group col-sm-4 mb-0">
+                                <label for="f_name" class="col-sm-4 lh-23">Search by First Name {{-- <span class="req">*</span> --}}</label>
+                                 <div class="col-sm-8">
+                                   <input class="form-control" name="f_name" value="{{ (session('old_query')['f_name']) ?? ''}}" id="form-size" type="text" aria-label="Search">
+                                </div> 
                             </div>
 
-                            <div class="form-group col-sm-6 mb-0">
+                            <div class="form-group col-sm-4 mb-0">
+                                <label for="f_name" class="col-sm-4 lh-23">Search by Last Name {{-- <span class="req">*</span> --}}</label>
+                                 <div class="col-sm-8">
+                                   <input class="form-control" name="l_name" value="{{ (session('old_query')['l_name']) ?? ''}}" id="form-size" type="text" aria-label="Search">
+                                </div> 
+                            </div>
+
+                            {{-- <div class="form-group col-sm-6 mb-0">
                                 <label for="state" class="col-sm-4 control-label">Profile Type</label>
                                 <div class="col-sm-8">
                                     @include('components.multiselect', ['options' => ['Regular','Voiceover'],'name'=>'profile_type'])
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="row form-block pb-0">
-                            <div class="form-group col-sm-6 mb-0">
-                                <label for="gender" class="col-sm-4 control-label">Gender </label>
+                            </div> --}}
+                            <div class="form-group col-sm-4 mb-0">
+                                <label for="gender" class="col-sm-4 lh-23">Gender </label>
                                 <div class="col-sm-8">
 
                                     @include('components.multiselect', ['options' => ['Female','Male','Transgender'],'name'=>'gender'])
                                     
                                  </div>
                              </div>
+                        </div>
+
+                        <div class="row form-block pb-0">
+
+                             <div class="form-group col-sm-6">
+                                <label for="ethnicity" class="col-sm-4 control-label">Ethnicity</label>
+                                <div class="col-sm-8 ">
+                                    @include('components.multiselect', ['options' => ['Asian','Black / African Descent','Ethnically Ambiguous / Multiracial','Indigenous Peoples','Latino / Hispanic','South Asian / Indian','Southeast Asian / Pacific Islander'],'name'=>'ethnicity'])
+                                
+                                </div>
+                            </div> 
 
                             <div class="form-group col-sm-6 mb-0">
                                 <label for="age" class="col-sm-4 control-label">Age </label>
@@ -296,26 +322,18 @@
                             <div class="form-group col-sm-6">
                                 <label for="unionstatus" class="col-sm-4 control-label">Union Status</label>
                                 <div class="col-sm-8">
-                                    @include('components.multiselect', ['options' => ['Status 1','Status 2','Status 3','Status 4','Status 5'],'name'=>'union'])
+                                    @include('components.multiselect', ['options' => ['Yes','No'],'name'=>'union'])
     							
                                 </div>
                             </div>  
 
-                            <div class="form-group col-sm-6">
+                            {{-- <div class="form-group col-sm-6">
                                 <label for="assets" class="col-sm-4 control-label">Availible Assets </label>
                                 <div class="col-sm-8 ">
                                     @include('components.multiselect', ['options' => ['Image','Video','Audio','Document','Reels'],'name'=>'assets'])
                                 
                                 </div>
-                            </div>   
-
-                            <div class="form-group col-sm-6">
-                                <label for="ethnicity" class="col-sm-4 control-label">Ethnicity</label>
-                                <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Asian','Black / African Descent','Ethnically Ambiguous / Multiracial','Indigenous Peoples','Latino / Hispanic','South Asian / Indian','Southeast Asian / Pacific Islander'],'name'=>'ethnicity'])
-                                
-                                </div>
-                            </div> 
+                            </div>  --}}
 
 
                             <div class="form-group col-sm-6">
@@ -344,9 +362,9 @@
 
                             <div class="form-group col-sm-6">
                                 <input type="checkbox"  class="form-check-input" id="hasDrivingLicense">
-                                <label class="form-check-label" for="hasDrivingLicense">Has Driver's License</label>
+                                <label class="form-check-label" for="hasDrivingLicense">Have Driver's License</label>
                                 <input type="checkbox"  class="form-check-input" id="hasPassport">
-                                <label class="form-check-label" for="hasPassport">Has Passport</label>
+                                <label class="form-check-label" for="hasPassport">Have Passport</label>
                                 <input type="checkbox"  class="form-check-input" id="selfRecord">
                                 <label class="form-check-label" for="selfRecord">Self-record</label>              
                             </div>

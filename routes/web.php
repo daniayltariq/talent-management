@@ -29,7 +29,9 @@ Auth::routes();
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
-
+Route::get('/verified_email', function () {
+    return view('web.verified');
+})->name('verified_email');
 
 Route::get('/about-us', function () {
     return view('web.pages.about-us');

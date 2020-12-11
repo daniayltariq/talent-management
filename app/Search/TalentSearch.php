@@ -42,6 +42,7 @@ class TalentSearch
                 }
                 
             }
+            //Search By name
             if (session()->has('old_query.name') && session('old_query')['name'] !==null) {
                 
                 /* $user->whereIn('farm_id',session('old_query')['farm_id']); */
@@ -60,9 +61,26 @@ class TalentSearch
                         
                     }
                 });
-                        
-                
             }
+            //Search By First name
+            if (session()->has('old_query.f_name') && session('old_query')['f_name'] !==null) {
+                
+                /* $user->whereIn('farm_id',session('old_query')['farm_id']); */
+                $user->whereHas('profile', function($q){
+                    $q->where('legal_first_name','LIKE','%'.session('old_query')['f_name'].'%');
+                });
+            }
+
+            //Search By last name
+            if (session()->has('old_query.l_name') && session('old_query')['l_name'] !==null) {
+                
+                /* $user->whereIn('farm_id',session('old_query')['farm_id']); */
+                $user->whereHas('profile', function($q){
+                    $q->where('legal_last_name','LIKE','%'.session('old_query')['l_name'].'%');
+                });
+            }
+
+            //Search By Age
             if (session()->has('old_query.new_age') && session('old_query')['new_age'] !==null) {
                 
                 /* $user->whereIn('farm_id',session('old_query')['farm_id']); */
@@ -75,6 +93,7 @@ class TalentSearch
                 
             }
 
+            //Search By gender
             if (session()->has('old_query.gender')) {
                 /* dd($user->get()); */
                 $genders=session('old_query')['gender'];
@@ -94,6 +113,7 @@ class TalentSearch
                 /* dd($user->get()); */
             }
 
+            //Search By skills
             if (session()->has('old_query.skills')) {
                 $skills=session('old_query')['skills'];
                 $user->whereHas('skills', function($q) use ($skills){
@@ -101,6 +121,7 @@ class TalentSearch
                 });
             }
 
+            //Search By attachments
             if (session()->has('old_query.assets')) {
                 $assets=session('old_query')['assets'];
                 $user->whereHas('attachments', function($q) use ($assets){
@@ -117,6 +138,7 @@ class TalentSearch
                 });
             }
 
+            //Search By location
             if (session()->has('old_query.location') && session('old_query')['location'] !==null) {
                 /* dd($user->get()); */
                 $locations=session('old_query')['location'];
@@ -131,6 +153,7 @@ class TalentSearch
                 
             }
 
+            //Search By eye color
             if (session()->has('old_query.eye_color')) {
                 /* dd($user->get()); */
                 $eye_colors=session('old_query')['eye_color'];
@@ -149,6 +172,7 @@ class TalentSearch
                 /* dd($user->get()); */
             }
 
+            //Search By hair color
             if (session()->has('old_query.hair_color')) {
                 /* dd($user->get()); */
                 $hair_colors=session('old_query')['hair_color'];
