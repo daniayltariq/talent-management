@@ -9,8 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
 use Lab404\Impersonate\Models\Impersonate;
 use Spatie\Permission\Traits\HasRoles;
+use Carbon\Carbon;
 
-class User extends Authenticatable /* implements MustVerifyEmail */
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
     use HasRoles;
@@ -42,6 +43,14 @@ class User extends Authenticatable /* implements MustVerifyEmail */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Accessor for Age.
+     */
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->attributes['dob'])->age;
+    }
 
     public function hasStripeId()
     {
@@ -81,5 +90,10 @@ class User extends Authenticatable /* implements MustVerifyEmail */
     public function attachments()
     {
         return $this->hasMany('App\Models\Attachment','user_id');
+    }
+
+    public function saved_search()
+    {
+        return $this->hasMany('App\Models\SavedSearch','user_id');
     }
 }

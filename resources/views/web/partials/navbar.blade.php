@@ -116,11 +116,11 @@
 							<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
 								<a href="#">Account</a>
 								<ul class="m-menu__sub">
-									<li class="m-menu__sub-item">
-										<a href="{{ route('account.dashboard') }}">Dashboard</a>
-									</li>
 
 									@role('candidate')
+										<li class="m-menu__sub-item">
+											<a href="{{ route('account.dashboard') }}">Dashboard</a>
+										</li>
 										@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 1)
 											<li class="m-menu__sub-item">
 												<a href="{{ url('/') }}/account/reward">Reward</a>

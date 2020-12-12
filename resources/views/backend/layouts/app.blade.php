@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
         @include('backend.partials.header')
         <style>
-            .btn-primary, .btn-danger, .btn-success{
+            .btn-bg-white{
                 background-color: #ffffff;
             }
         </style>

@@ -10,8 +10,18 @@
                     Add to Picklist
                 </h4>
             </div>
+            @php
+                $route="#";
+                if (\Auth::check() && auth()->user()->hasRole('superadmin')) {
+                    $route=route('backend.picklist.store');
+                } 
+                elseif(\Auth::check() && auth()->user()->hasRole('agent')) {
+                    $route=route('agent.picklist.store');
+                }
+                
+            @endphp
             
-            <form action="{{route('agent.picklist.store')}}" method="POST">
+            <form action="{{$route}}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <hr>
@@ -28,6 +38,9 @@
                                     <option value="{{$picklist->id}}">{{$picklist->title}}</option>
                                 @endforeach
                             </select>
+                            @error('picklist_id')
+                                <div class="error">Talent already exist</div>
+                            @enderror
                         </div>
                     @endif
                     
@@ -35,10 +48,16 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Title</label>
                             <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="Enter Title">
+                            @error('title')
+                                <div class="error">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">description</label>
                             <input type="text" class="form-control" name="description" id="exampleFormControlInput1" placeholder="Enter Description">
+                            @error('description')
+                                <div class="error">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>

@@ -2,9 +2,7 @@
 {{-- {{ dd($contents) }} --}}
 @section('styles')
 <!--Third party Styles(used by this page)--> 
-<link href="{{asset('backend/assets/plugins/summernote/summernote.css')}}" rel="stylesheet">
-<link href="{{asset('backend/assets/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('backend/assets/css/tagsinput.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <style>
    .form-group label {
    font-size: 1.2rem;
@@ -38,15 +36,21 @@
             <div class="kt-portlet__head">
                <div class="kt-portlet__head-label">
                   <h3 class="kt-portlet__head-title">
-                     Create User
+                     {{isset($user) ? 'Update' : 'Create'}} User
                   </h3>
                </div>
             </div>
+            @if($errors->any())
+               @foreach ($errors->all() as $error)
+                  <div>{{ $error }}</div>
+               @endforeach
+            @endif
+
             <!--begin::Form-->
             @php 
-            $route = route('superadmin.user.store');
+            $route = route('backend.user.store');
             if(isset($user)){
-            $route = route('superadmin.user.update',$user->id);
+            $route = route('backend.user.update',$user->id);
             }
             @endphp
             <form action="{{$route}}" method="POST" id="user-content-form" enctype="multipart/form-data" class="kt-form">
@@ -59,7 +63,7 @@
                      <div class="col-md-8 col-sm-12 col-xs-12 mx-auto">
                         <br />
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                            <label class="col-md-12">Add Role</label>
                            <div class="col-md-12">
                            <select class="form-control" name="role_id">
@@ -69,25 +73,152 @@
                               @endforeach
                            </select>
                            </div>
+                        </div> --}}
+
+                        <div class="row">
+                           
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>First Name</label>
+                                 <input type="text" class="form-control" name="f_name" value="{{isset($user)?$user->f_name : ''}}"/> 
+                                 
+                              </div>
+                           </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Last Name</label>
+                                 <input type="text" class="form-control" name="l_name" value="{{isset($user)?$user->l_name : ''}}"/> 
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="row">
+                           
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Dob</label>
+                                 <input type="date" class="form-control" name="dob" value="{{isset($user)?/* $user->age */$user->dob : ''}}"/> 
+                              </div>
+                           </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Location</label>
+                                 <input type="text" class="form-control" name="country" value="{{isset($user)?$user->country : ''}}"/> 
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="row">
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label class="col-md-6">Gender</label>
+                                 <select class="form-control" name="gender">
+                                    <option value="">Select gender</option>
+                                    <option value="male" {{ $user->gender=="male" ? 'selected' : '' }}>male</option>
+                                    <option value="female" {{ $user->gender=="female" ? 'selected' : '' }}>female</option>
+                                    <option value="transgender" {{ $user->gender=="transgender" ? 'selected' : '' }}>Transgender</option>
+                                 </select>
+                              </div>
+                           </div>
+
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Hair Color</label>
+                                 
+                                 <select class="form-control" name="hairs">
+                                    <option>Select color</option>
+                                    <option value="black" {{$user->profile()->exists() && $user->profile->hairs=="black" ? 'selected' : '' }}>black</option>
+                                    <option value="grey" {{$user->profile()->exists() && $user->profile->hairs=="grey" ? 'selected' : '' }}>grey</option>
+                                    <option value="brown" {{$user->profile()->exists() && $user->profile->hairs=="brown" ? 'selected' : '' }}>Brown</option>
+                                    <option value="white" {{$user->profile()->exists() && $user->profile->hairs=="white" ? 'selected' : '' }}>White</option>
+                                 </select>
+                                 
+                              </div>
+                           </div>
+
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Eye Color</label>
+                                 
+                                 <select class="form-control" name="eyes">
+                                    <option>Select color</option>
+                                    <option value="black" {{$user->profile()->exists() && $user->profile->eyes=="black" ? 'selected' : '' }}>black</option>
+                                    <option value="brown" {{$user->profile()->exists() && $user->profile->eyes=="brown" ? 'selected' : '' }}>brown</option>
+                                    <option value="blue" {{$user->profile()->exists() && $user->profile->eyes=="blue" ? 'selected' : '' }}>blue</option>
+                                 </select>
+                                 
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="row">
+                           
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Body Type</label>
+                                 
+                                 <select class="form-control" name="body">
+                                    <option value="">Select body type</option>
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                 </select>
+                              </div>
+                           </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Ethnicity</label>
+                              
+                                 <select class="form-control" name="role_id">
+                                    <option value="">black</option>
+                                    <option value="">white</option>
+                                    <option value="">brown</option>
+                                    <option value="">African</option>
+                                 </select>
+                              </div>
+                           </div>
                         </div>
                         
-                        <div class="form-group">
-                           <label class="col-md-3 col-sm-3 col-xs-12">Add Name</label>
-                           <div class="col-md-12 col-sm-12 col-xs-12">
-                              <input type="text" class="form-control" name="name" value="{{isset($user)?$user->name : ''}}"/> 
+                        <div class="row">
+                           <div class="col-xl-12 col-lg-12 col-sm-12 col-md-12">
+                              <div class="form-group">
+                              
+                                 <label>Skills:</label>
+                                 <select class="form-control js-example-basic-multiple"  multiple="multiple" name="skills[]">
+                                    @foreach ($skills as $skill)
+                                       <option value="{{$skill->id}}">{{$skill->title}}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                           </div>
+                       </div>
+
+                       <div class="form-group row">
+                           <label class="col-lg-2 col-form-label">Union Status:</label>
+                           <div class="col-xl-8 col-lg-8 col-sm-12 col-md-12">
+                              <div class="kt-checkbox-inline">
+                                 <label class="kt-checkbox">
+                                 <input type="checkbox"> Email 
+                                 <span></span>
+                                 </label>
+                                 <label class="kt-checkbox">
+                                 <input type="checkbox"> SMS 
+                                 <span></span>
+                                 </label>
+                                 <label class="kt-checkbox">
+                                 <input type="checkbox"> Phone 
+                                 <span></span>
+                                 </label>
+                              </div>
                            </div>
                         </div>
+
                         <div class="form-group">
-                           <label class="col-md-3 col-sm-3 col-xs-12">Add Email</label>
-                           <div class="col-md-12 col-sm-12 col-xs-12">
-                              <input type="email" class="form-control" name="email" value="{{isset($user)?$user->email : ''}}"/> 
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <label class="col-md-3 col-sm-3 col-xs-12">Add Password</label>
-                           <div class="col-md-12 col-sm-12 col-xs-12">
-                              <input type="password" class="form-control" name="password"/> 
-                           </div>
+                           <label>Other Info</label>
+                           <input type="text" class="form-control" name="info" value=""/> 
                         </div>
                         
                         {{-- <div class="form-group mt-3">
@@ -98,7 +229,7 @@
 
                         <div class="form-group">
                            <div class="col-md-12 col-sm-9 col-xs-12">
-                              <button type="submit" {{-- onclick="formSubmitWithTextEditor('editor-post_content','long_desc','post-content-form')" --}} class="btn btn-info btn-xs" role="button" style="font-size:13px" ><b>Save</b></button>
+                              <button type="submit" class="btn btn-info btn-xs" role="button" style="font-size:13px" ><b>Save</b></button>
                               
                            </div>
                         </div>
@@ -115,15 +246,23 @@
 @endsection
 @section('scripts')
 <!-- Third Party Scripts(used by this page)-->
-<script src="{{asset('backend/assets/plugins/summernote/summernote.min.js')}}"></script>
-<script src="{{asset('backend/assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
-<!--Page Active Scripts(used by this page)-->
-<script src="{{asset('backend/assets/plugins/summernote/summernote.active.js')}}"></script>
-<script src="{{ asset('backend/assets/js/tagsinput.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
 <script type="text/javascript">
    
    $(document).ready(function(){
+
+      $('.js-example-basic-multiple').select2();
+        
+      @if($user->skills()->exists())
+         var skills={{$user->skills->pluck('skill_id')}};
+         console.log(skills);
+         $('[name="skills[]"]').val(skills);
+         $('[name="skills[]"]').trigger('change');
+      @endif
+
+
+
       @if (session('status'))
          toastr.success('{{session('status')}}', "Success");
       @endif
@@ -153,10 +292,6 @@
 				}
 			}
 		}
-
-		$(".taginput").tagsinput({
-			maxTags: 5,
-		})
 		
 	})
    

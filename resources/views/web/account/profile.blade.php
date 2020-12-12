@@ -129,13 +129,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-holder active">
-                                                    <input type="text" placeholder="Legal First Name" name="legal_first_name" value="{{$profile->legal_first_name ??''}}" class="form-control required">
+                                                    <input type="text" placeholder="{{strtoupper('Legal First Name')}}" name="legal_first_name" value="{{$profile->legal_first_name ??''}}" class="form-control required">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="Legal Last Name" name="legal_last_name" value="{{$profile->legal_last_name?? ''}}" class="form-control required">
+                                                    <input type="text" placeholder="{{strtoupper('Legal Last Name')}}" name="legal_last_name" value="{{$profile->legal_last_name?? ''}}" class="form-control required">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="email" placeholder="Email" name="email" class="form-control required" value="{{$profile->email ?? ''}}">
+                                                    <input type="email" placeholder="{{strtoupper('Email')}}" name="email" class="form-control required" value="{{$profile->email ?? ''}}">
                                                 </div>
 
                                                 @if ($custom_url)
@@ -166,23 +166,8 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <select name="height" class="form-control" placeholder="Height" id="" required>
-                                                            <option value="">select height</option>
-                                                            <option value="4" {{isset($profile->height) && $profile->height==4 ? 'selected' : ''}}>4</option>
-                                                            <option value="5" {{isset($profile->height) && $profile->height==5 ? 'selected' : ''}}>5</option>
-                                                            <option value="6" {{isset($profile->height) && $profile->height==6 ? 'selected' : ''}}>6</option>
-                                                            <option value="7" {{isset($profile->height) && $profile->height==7 ? 'selected' : ''}}>7</option>
-                                                            <option value="8" {{isset($profile->height) && $profile->height==8 ? 'selected' : ''}}>8</option>
-                                                            <option value="9" {{isset($profile->height) && $profile->height==9 ? 'selected' : ''}}>9</option>
-                                                            <option value="10" {{isset($profile->height) && $profile->height==10 ? 'selected' : ''}}>10</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-holder">
-                                                        <select name="feet" class="form-control" placeholder="Feet" id="" required>
-                                                            <option value="">select feet</option>
-                                                            <option value="0" {{isset($profile->feet) && $profile->feet==0 ? 'selected' : ''}}>0</option>
+                                                        <select name="feet" class="form-control" placeholder="{{strtoupper('Feet')}}" id="" required>
+                                                            <option value="">Select Height in Feet</option>
                                                             <option value="1" {{isset($profile->feet) && $profile->feet==1 ? 'selected' : ''}}>1</option>
                                                             <option value="2" {{isset($profile->feet) && $profile->feet==2 ? 'selected' : ''}}>2</option>
                                                             <option value="3" {{isset($profile->feet) && $profile->feet==3 ? 'selected' : ''}}>3</option>
@@ -197,14 +182,31 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" name="weight"  value="{{$profile->weight ?? ''}}" placeholder="Weight in lbs" class="form-control">
+                                                        <select name="height" class="form-control" placeholder="{{strtoupper('Height')}}" id="" required>
+                                                            <option value="">Select Height in Inches</option>
+                                                            <option value="0" {{isset($profile->height) && $profile->height==0 ? 'selected' : ''}}>0</option>
+                                                            <option value="1" {{isset($profile->height) && $profile->height==1 ? 'selected' : ''}}>1</option>
+                                                            <option value="2" {{isset($profile->height) && $profile->height==2 ? 'selected' : ''}}>2</option>
+                                                            <option value="3" {{isset($profile->height) && $profile->height==3 ? 'selected' : ''}}>3</option>
+                                                            <option value="4" {{isset($profile->height) && $profile->height==4 ? 'selected' : ''}}>4</option>
+                                                            <option value="5" {{isset($profile->height) && $profile->height==5 ? 'selected' : ''}}>5</option>
+                                                            <option value="6" {{isset($profile->height) && $profile->height==6 ? 'selected' : ''}}>6</option>
+                                                            <option value="7" {{isset($profile->height) && $profile->height==7 ? 'selected' : ''}}>7</option>
+                                                            <option value="8" {{isset($profile->height) && $profile->height==8 ? 'selected' : ''}}>8</option>
+                                                            <option value="9" {{isset($profile->height) && $profile->height==9 ? 'selected' : ''}}>9</option>
+                                                            <option value="10" {{isset($profile->height) && $profile->height==10 ? 'selected' : ''}}>10</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-holder">
+                                                        <input type="text" name="weight"  value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
 
-                                             
                                             <div class="form-holder">
-                                                <select name="eyes" class="form-control" placeholder="Eye Color" id="" required>
+                                                <select name="eyes" class="form-control" placeholder="{{strtoupper('Eye Color')}}" id="" required>
                                                     <option value="brown" {{isset($profile->eyes) && $profile->eyes=="brown" ? 'selected' : ''}}>Brown Eyes</option>
                                                     <option value="blue" {{isset($profile->eyes) && $profile->eyes=="blue" ? 'selected' : ''}}>Blue Eyes </option>
                                                     <option value="hazel" {{isset($profile->eyes) && $profile->eyes=="hazel" ? 'selected' : ''}}>Hazel Eyes </option>
@@ -214,8 +216,9 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     <option >Fill-in Other</option>
                                                 </select>
                                             </div>
+
                                             <div class="form-holder ">
-                                                <select name="hairs" class="form-control" placeholder="Hair Color" id="" required>
+                                                <select name="hairs" class="form-control" placeholder="{{strtoupper('Hair Color')}}" id="" required>
                                                     <option value="black" {{isset($profile->hairs) && $profile->hairs=="black" ? 'selected' : ''}}>Black hair</option>
                                                     <option value="brown" {{isset($profile->hairs) && $profile->hairs=="brown" ? 'selected' : ''}}>Brown hair</option>
                                                     <option value="red" {{isset($profile->hairs) && $profile->hairs=="red" ? 'selected' : ''}}>Red hair</option>
@@ -230,17 +233,17 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" value="{{$profile->chest ?? ''}}" name="chest" placeholder="Chest (inches)" class="form-control">
+                                                        <input type="text" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" name="neck" value="{{$profile->neck ?? ''}}" placeholder="Neck (inches) (Men only)" class="form-control">
+                                                        <input type="text" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" name="waist" value="{{$profile->waist ?? ''}}" placeholder="Waist (inches)" class="form-control">
+                                                        <input type="text" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -248,7 +251,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="Sleeve (inches) (Men only)" class="form-control">
+                                                        <input type="text" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control">
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-md-4">
@@ -258,7 +261,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </div> --}}
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <input type="text" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="Shoe size" class="form-control">
+                                                        <input type="text" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -275,37 +278,37 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <h4 class="text__quote mb-5">Contact & Address</h4>
                                         <div class="form-row">
                                             <div class="form-holder">
-                                                <input type="text" name="address_1" value="{{$profile->address_1 ?? ''}}" placeholder="Address 1" class="form-control">
+                                                <input type="text" name="address_1" value="{{$profile->address_1 ?? ''}}" placeholder="{{strtoupper('Address 1')}}" class="form-control" required>
                                             </div>
                                             <div class="form-holder">
-                                                <input type="text" name="address_2" value="{{$profile->address_2 ?? ''}}" placeholder="Address 2" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="form-holder">
-                                                <input type="text" id="zip" name="zip" value="{{$profile->zip ?? ''}}" placeholder="Zip Code" class="form-control">
-                                            </div>
-                                            <div class="form-holder">
-                                                <input type="text" name="country" value="{{$profile->country ?? ''}}" placeholder="Country" class="form-control">
+                                                <input type="text" name="address_2" value="{{$profile->address_2 ?? ''}}" placeholder="{{strtoupper('Address 2')}}" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-row">
                                             <div class="form-holder">
-                                                <input type="text" name="state" value="{{$profile->state ?? ''}}" placeholder="State" class="form-control">
+                                                <input type="text" id="zip" name="zip" value="{{$profile->zip ?? ''}}" placeholder="{{strtoupper('Zip Code')}}" class="form-control">
                                             </div>
                                             <div class="form-holder">
-                                                <input type="text" name="city" value="{{$profile->city ?? ''}}" placeholder="City" class="form-control">
+                                                <input type="text" name="country" value="{{$profile->country ?? ''}}" placeholder="{{strtoupper('Country')}}" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-holder">
+                                                <input type="text" name="state" value="{{$profile->state ?? ''}}" placeholder="{{strtoupper('State')}}" class="form-control">
+                                            </div>
+                                            <div class="form-holder">
+                                                <input type="text" name="city" value="{{$profile->city ?? ''}}" placeholder="{{strtoupper('City')}}" class="form-control">
                                             </div>
                                         </div>
                                         
                                         <div class="form-row">
                                             <div class="form-holder">
-                                                <input type="text" name="telephone" value="{{$profile->telephone ?? ''}}" placeholder="Telephone" class="form-control">
+                                                <input type="text" name="telephone" value="{{$profile->telephone ?? ''}}" placeholder="{{strtoupper('Telephone')}}" class="form-control">
                                             </div>
                                             <div class="form-holder">
-                                                <input type="text" name="mobile" value="{{$profile->mobile ?? ''}}" placeholder="Mobile" class="form-control">
+                                                <input type="text" name="mobile" value="{{$profile->mobile ?? ''}}" placeholder="{{strtoupper('Mobile')}}" class="form-control">
                                             </div>
                                         </div>
                                     </form>
@@ -332,13 +335,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                         
                                                         <div class="form-row">
                                                             <div class="form-holder" >
-                                                                <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$key}}][name]" class="form-control">
+                                                                <input type="text" placeholder="{{strtoupper('Name')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$key}}][name]" class="form-control">
                                                             </div>
                                                             <div class="form-holder">
-                                                                <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$key}}][role]" placeholder="Role" class="form-control">
+                                                                <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$key}}][role]" placeholder="{{strtoupper('Role')}}" class="form-control">
                                                             </div>
                                                             <div class="form-holder">
-                                                                <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$key}}][production]" placeholder="Production" class="form-control">
+                                                                <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$key}}][production]" placeholder="{{strtoupper('Director or Production Company')}}" class="form-control">
                                                             </div>
                                                             <div class="form-holder">
                                                                 <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
@@ -354,13 +357,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 
                                                 <div class="form-row">
                                                     <div class="form-holder" >
-                                                        <input type="text" placeholder="Name" data-name="name" {{-- name="experience[{{$expr->count() ?? 0}}][name]" --}} class="form-control">
+                                                        <input type="text" placeholder="{{strtoupper('NAME')}}" data-name="name" {{-- name="experience[{{$expr->count() ?? 0}}][name]" --}} class="form-control">
                                                     </div>
                                                     <div class="form-holder">
-                                                        <input type="text" data-name="role" placeholder="Role"{{--  name="experience[{{$expr->count() ?? 0}}][role]" --}} class="form-control">
+                                                        <input type="text" data-name="role" placeholder="{{strtoupper('ROLE')}}"{{--  name="experience[{{$expr->count() ?? 0}}][role]" --}} class="form-control">
                                                     </div>
                                                     <div class="form-holder">
-                                                        <input type="text" data-name="production" placeholder="Production"{{--  name="experience[{{$expr->count() ?? 0}}][production]" --}} class="form-control">
+                                                        <input type="text" data-name="production" placeholder="{{strtoupper('DIRECTOR or PRODUCTION COMPANY')}}"{{--  name="experience[{{$expr->count() ?? 0}}][production]" --}} class="form-control">
                                                     </div>
                                                     <div class="form-holder">
                                                         <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
@@ -375,9 +378,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <button type="button" class="btn btn-primary btn-small repeater-add-btn">
                                                 Add
                                             </button>
-                                            <button type="button" class="btn btn-warning btn-small">
-                                                None yet. Continue
-                                            </button>
+                                            
                                         </div>
 
                                         </div>
@@ -429,13 +430,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
                                             <div class="form-row">
                                                 <div class="form-holder">
-                                                    <input type="text" data-name="name"{{--  name="experience[{{$expr_theater->count() ?? 0}}][name]" --}} placeholder="Name" class="form-control">
+                                                    <input type="text" data-name="name"{{--  name="experience[{{$expr_theater->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Name of the Production')}}" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_theater->count() ?? 0}}][role]" --}} placeholder="Role" class="form-control">
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_theater->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Role Played')}}" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="Location" class="form-control">
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Director or Venue')}}" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
                                                     <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
@@ -450,9 +451,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <button type="button" class="btn btn-primary btn-small repeater-add-btn">
                                                 Add
                                             </button>
-                                            <button type="button" class="btn btn-warning btn-small">
-                                                None yet. Continue
-                                            </button>
+                                            
                                         </div>
 
                                         </div>
@@ -479,13 +478,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     
                                                     <div class="form-row">
                                                         <div class="form-holder" >
-                                                            <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                            <input type="text" placeholder="{{strtoupper('Name')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
                                                         </div>
                                                         <div class="form-holder">
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="Role" class="form-control">
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="{{strtoupper('Role')}}" class="form-control">
                                                         </div>
                                                         <div class="form-holder">
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="Production" class="form-control">
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="{{strtoupper('Production')}}" class="form-control">
                                                         </div>
                                                         <div class="form-holder">
                                                             <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
@@ -501,13 +500,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
                                             <div class="form-row">
                                                 <div class="form-holder">
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_tele->count() ?? 0}}][name]" --}} placeholder="Name" class="form-control">
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_tele->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Name')}}" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_tele->count() ?? 0}}][role]" --}} placeholder="Role" class="form-control">
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_tele->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Role')}}" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_tele->count() ?? 0}}][production]" --}} placeholder="Location" class="form-control">
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_tele->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Location')}}" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
                                                     <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
@@ -522,9 +521,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <button type="button" class="btn btn-primary btn-small repeater-add-btn">
                                                 Add
                                             </button>
-                                            <button type="button" class="btn btn-warning btn-small">
-                                                None yet. Continue
-                                            </button>
+                                            
                                         </div>
 
                                         </div>
@@ -550,13 +547,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     
                                                     <div class="form-row">
                                                         <div class="form-holder" >
-                                                            <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                            <input type="text" placeholder="{{strtoupper('Name of Commercial')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
                                                         </div>
                                                         <div class="form-holder">
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="Role" class="form-control">
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="{{strtoupper('Role Played')}}" class="form-control">
                                                         </div>
                                                         <div class="form-holder">
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="Production Company or Director" class="form-control">
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="{{strtoupper('Director or Production Company')}}" class="form-control">
                                                         </div>
                                                         <div class="form-holder">
                                                             <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
@@ -573,14 +570,14 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
                                             <div class="form-row">
                                                 <div class="form-holder">                     
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_comm->count() ?? 0}}][name]" --}} placeholder="Commercial" class="form-control">
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_comm->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Commercial')}}" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_comm->count() ?? 0}}][role]" --}} placeholder="Role" class="form-control">
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_comm->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Role')}}" class="form-control">
                                                 </div>
                                                 
                                                 <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_comm->count() ?? 0}}][production]" --}} placeholder="Production Company or Director" class="form-control">
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_comm->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Production Company or Director')}}" class="form-control">
                                                 </div>
                                                 
                                                 <div class="form-holder">
@@ -596,9 +593,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <button type="button" class="btn btn-primary btn-small repeater-add-btn">
                                                 Add
                                             </button>
-                                            <button type="button" class="btn btn-warning btn-small">
-                                                None yet. Continue
-                                            </button>
+                                            
                                         </div>
 
                                         </div>
@@ -624,13 +619,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     
                                                     <div class="form-row">
                                                         <div class="form-holder" >
-                                                            <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                            <input type="text" placeholder="{{strtoupper('Training Class')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
                                                         </div>
                                                         <div class="form-holder">
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="Role" class="form-control">
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="{{strtoupper('Instructor')}}" class="form-control">
                                                         </div>
                                                         <div class="form-holder">
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="Production Company or Director" class="form-control">
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="{{strtoupper('Training Company')}}" class="form-control">
                                                         </div>
                                                         <div class="form-holder">
                                                             <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
@@ -647,13 +642,13 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
                                             <div class="form-row">              
                                                 <div class="form-holder">
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_train->count() ?? 0}}][name]" --}} placeholder="Training Class" class="form-control">
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_train->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Training Class')}}" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_train->count() ?? 0}}][role]" --}} placeholder="Instructor" class="form-control">
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_train->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Instructor')}}" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_train->count() ?? 0}}][production]" --}} placeholder="Training Company" class="form-control">
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_train->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Training Company')}}" class="form-control">
                                                 </div>
                                             
                                                 <div class="form-holder">
@@ -669,9 +664,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <button type="button" class="btn btn-primary btn-small repeater-add-btn">
                                                 Add
                                             </button>
-                                            <button type="button" class="btn btn-warning btn-small">
-                                                None yet. Continue
-                                            </button>
+                                            
                                         </div>
 
                                         </div>

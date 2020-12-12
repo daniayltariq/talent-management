@@ -104,12 +104,22 @@ class UserController extends Controller
 
     }
 
-    public function updateStatus($id)
+    public function updateStatus(Request $request)
     {
-        $career=Career::findOrFail($id);
-        $career->status=0;
-        $career->save();
-        return redirect()->back();
+        $status=array(1,0);
+        if ($request['user_id'] && in_array($request['status'],$status)) {
+            $user=User::findOrFail($request['user_id']);
+            $user->status=$request['status'];
+            $user->save();
+            if ($user) {
+                $status="success";
+            }
+            else{
+                $status="error";
+            }
+            return $status;
+        }
+        
     }
 
     /**
@@ -121,8 +131,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user= User::findOrFail($id);
+        $skills=\App\Models\Skill::all();
         $roles=Role::where('name','<>','superadmin')->get();
-        return view('backend.user.create',compact('user','roles'));
+        return view('backend.user.create',compact('user','roles','skills'));
     }
 
     /**
@@ -134,32 +145,39 @@ class UserController extends Controller
      */
     public function update(Request $request,$id)
     {
+        /* dd($request->all()); */
         $validator = Validator::make($request->all(),[
-            'name'  => 'required|string',
-            'email' => 'required|string',
+            'gender'  => 'required|string',
+            'f_name' => 'required|string',
+            'l_name' => 'required|string',
+            'dob' => 'required|date',
+            'country' => 'required|string',
+            'hairs' => 'required|string',
+            'eyes' => 'required|string',
+            "skills"    => "required|array",
+            "skills.*"  => "required|string|distinct",
             'password'  => 'string|nullable',
         ]);
         
         if ($validator->fails()) {
-            return $validator->errors();
-            /* return redirect()->back()
+            return redirect()->back()
                         ->withErrors($validator)
-                        ->withInput(); */
-            /* return 'error'; */
+                        ->withInput();
         }
 
         $user =User::findOrFail($id);
-        $user->name=$request->name;
-        $user->email=$request->email;
-        if ($request->has('password')) {
-			$user->password =  Hash::make($request->password);
-		}
+        $user->fill($request->all());
         $user->save();
 
-        if ($request->has('role_id')) {
-            $user->removeRole($user->roles[0]->name);
-            $role=Role::where('id',$request->role_id)->first();
-            $user->assignRole($role->name);
+        $user->profile->fill($request->all());
+        $user->profile->save();
+
+        if ($request->skills) {
+            $user->skills()->delete();
+            foreach($request->skills as $skill){
+                $skills[] = ['candidate_id' => $user->id,'skill_id' => $skill];
+            }
+            \App\Models\CandidateSkill::insert($skills);
         }
         
         return redirect()->back()->with("status", "User has been Updated.");

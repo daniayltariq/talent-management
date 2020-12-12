@@ -205,6 +205,18 @@
         border-color: #e77929 !important;
         box-shadow: 0 0 0 0.2rem rgba(253, 166, 84, 0.5);
     }
+
+    .toast-success{
+        background-color: #51A351;
+    }
+
+    .toast-error{
+        background-color: #BD362F;
+    }
+
+    .toast-warning{
+        background-color: #F89406;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -244,6 +256,14 @@
             </div>
         </section> --}}
         <div class="container py-4">
+            @if (auth()->user()->status==0)
+               <div class="alert alert-primary" role="alert">
+                    <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
+                    Your account has been deactivated,please make a <a href="{{route('user_request.create')}}" class="alert-link">request</a> to re-activate.
+                </div> 
+            @endif
+            
+            <br>
             <div class="row fz-15">
                 <div class="col-md-3">
                     <!-- Tabs nav -->
@@ -276,42 +296,42 @@
                                 <div class="row mb-5">
                                     <div class="col-6">
                                         <label for="f_name" class="form-label mt-3">First Name</label>
-                                        <input class="form-control" type="text" name="f_name" id="f_name" value="{{auth()->user()->f_name ?? ''}}" />
+                                        <input class="form-control" type="text" name="f_name" id="f_name" placeholder="FIRST NAME" value="{{auth()->user()->f_name ?? ''}}" />
                                         @error('f_name')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="l_name" class="form-label mt-3">Last Name</label>
-                                        <input class="form-control" type="text" name="l_name" id="l_name" value="{{auth()->user()->l_name ?? ''}}" />
+                                        <input class="form-control" type="text" name="l_name" id="l_name" placeholder="LAST NAME" value="{{auth()->user()->l_name ?? ''}}" />
                                         @error('l_name')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="gender" class="form-label mt-3">Gender</label>
-                                        <input class="form-control" type="text" name="gender" id="gender" value="{{auth()->user()->gender ?? ''}}" />
+                                        <input class="form-control" type="text" name="gender" id="gender" placeholder="GENDER" value="{{auth()->user()->gender ?? ''}}" />
                                         @error('gender')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="dob" class="form-label mt-3">DOB</label>
-                                        <input class="form-control" type="date" name="dob" id="dob" value="{{auth()->user()->dob ?? ''}}" />
+                                        <input class="form-control" type="date" name="dob" id="dob" placeholder="DATE OF BIRTH" value="{{auth()->user()->dob ?? ''}}" />
                                         @error('dob')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="phone" class="form-label mt-3">Phone</label>
-                                        <input class="form-control" type="text" name="phone" id="phone" value="{{auth()->user()->phone ?? ''}}" />
+                                        <input class="form-control" type="text" name="phone" id="phone" placeholder="PHONE" value="{{auth()->user()->phone ?? ''}}" />
                                         @error('phone')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="email" class="form-label mt-3">Email</label>
-                                        <input class="form-control" type="email" name="email" id="email" value="{{auth()->user()->email ?? ''}}" />
+                                        <input class="form-control" type="email" name="email" id="email" placeholder="EMAIL" value="{{auth()->user()->email ?? ''}}" />
                                         @error('email')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -319,42 +339,42 @@
 
                                     <div class="col-6">
                                         <label for="country" class="form-label mt-3">Country</label>
-                                        <input class="form-control" type="text" name="country" id="country" value="{{auth()->user()->country ?? ''}}" />
+                                        <input class="form-control" type="text" name="country" id="country" placeholder="COUNTRY" value="{{auth()->user()->country ?? ''}}" />
                                         @error('country')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="city" class="form-label mt-3">City</label>
-                                        <input class="form-control" type="text" name="city" id="city" value="{{auth()->user()->city ?? ''}}" />
+                                        <input class="form-control" type="text" name="city" id="city" placeholder="CITY" value="{{auth()->user()->city ?? ''}}" />
                                         @error('city')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="state" class="form-label mt-3">State</label>
-                                        <input class="form-control" type="text" name="state" id="state" value="{{auth()->user()->state ?? ''}}" />
+                                        <input class="form-control" type="text" name="state" id="state" placeholder="STATE" value="{{auth()->user()->state ?? ''}}" />
                                         @error('state')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="h_adress_1" class="form-label mt-3">Address 1</label>
-                                        <input class="form-control" type="h_adress_1" name="h_adress_1" id="h_adress_1" value="{{auth()->user()->h_adress_1 ?? ''}}" />
+                                        <input class="form-control" type="h_adress_1" name="h_adress_1" id="h_adress_1" placeholder="HOME ADDRESS 1" value="{{auth()->user()->h_adress_1 ?? ''}}" />
                                         @error('h_adress_1')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="h_adress_2" class="form-label mt-3">Address 2</label>
-                                        <input class="form-control" type="text" name="h_adress_2" id="h_adress_2" value="{{auth()->user()->h_adress_2 ?? ''}}" />
+                                        <input class="form-control" type="text" name="h_adress_2" id="h_adress_2" placeholder="HOME ADDRESS 2" value="{{auth()->user()->h_adress_2 ?? ''}}" />
                                         @error('h_adress_2')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="zipcode" class="form-label mt-3">Zipcode</label>
-                                        <input class="form-control" type="zipcode" name="zipcode" id="zipcode" value="{{auth()->user()->zipcode ?? ''}}" />
+                                        <input class="form-control" type="zipcode" name="zipcode" id="zipcode" placeholder="ZIPCODE" value="{{auth()->user()->zipcode ?? ''}}" />
                                         @error('zipcode')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -581,12 +601,23 @@
 {{------------------------------------}}
 {{-------------- Dropzone ------------}}
 <script type="text/javascript">
+
+    const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+    const validVideoTypes = ['video/mp4', 'video/mkv', 'video/mov', 'video/wmv'];
+    const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
+
     var uploadedDocumentMap = {};
     Dropzone.autoDiscover = false;
     var myDropzoneTheFirst = new Dropzone(
         //id of drop zone element 1
         '#imageDropzone',{
             url: '{{ route('account.storeMedia') }}',
+            maxFiles:function(file, done) {
+                if (validImageTypes.includes(file.type)) {
+                    done("No more images!");
+                }
+                else { done(); }
+            },
             maxFilesize: 12, // MB
             acceptedFiles: "image/*,.mp4,.mkv,.mov,.wmv,audio/*",
             dictDefaultMessage:"Drop Your Files here.",
@@ -607,9 +638,6 @@
             sending: function(file, xhr, formData){
                 const  fileType = file.type;
                 /* console.log(fileType); */
-                const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
-                const validVideoTypes = ['video/mp4', 'video/mkv', 'video/mov', 'video/wmv'];
-                const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
                 
                 if (validImageTypes.includes(fileType)) {
                     formData.append('type', 'image');
@@ -671,6 +699,14 @@
                     }
                 }); */
 
+                this.on('addedfile', function(file) {
+                    setDropzoneImgLimit(file);
+                });
+
+                this.on("maxfilesexceeded", function(file){
+                    alert("No more files please!");
+                });
+
             }
         }
     );
@@ -696,6 +732,16 @@
 
 		
 	});
+
+    function setDropzoneImgLimit(file)
+    {
+        if ( validImageTypes.includes(file.type)) {
+            $('#imageDropzone')[0].dropzone.options.maxFiles = 2;
+        }
+        else{
+            $('#imageDropzone')[0].dropzone.options.maxFiles = 20;
+        }
+    }
 
     function sendAudio(file)
     {

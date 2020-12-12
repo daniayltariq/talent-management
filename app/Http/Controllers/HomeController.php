@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Search\TalentSearch;
+use App\Models\Skill;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -42,8 +45,11 @@ class HomeController extends Controller
              $q->whereNotIn('name',['superadmin','agent']);
          }
       )->with('profile')->get();
+      $skills=Skill::all();
       /* dd($members); */
-      return view('web.forms.find-talent',compact('members'));
+
+      session()->forget('old_query');
+      return view('web.forms.find-talent',compact('members','skills'));
     }
   
     public function models($link)
@@ -93,6 +99,17 @@ class HomeController extends Controller
       }
       
     }
+
+   public function searchTalent(Request $request)
+   {    
+      /* dd( $request->all()); */
+      $skills=Skill::all();
+      if($request->query()){
+         $members=TalentSearch::apply($request);
+         /* dd( $members); */
+         return view('web.forms.find-talent',compact('members','skills'));
+      }
+   }
 
     public function community()
     {    

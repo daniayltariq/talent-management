@@ -6,7 +6,7 @@
                     <img src="{{ asset('web/img/ida.jpg') }}" alt="">
                 </div>
                 <div class="comment__info">
-                    <p class="comment__author">{{ $comment->user->f_name }} {{ $comment->user->l_name }}</p>
+                    <p class="comment__author">{{ $comment->user->hasRole('superadmin') ? 'Admin' : ($comment->user->f_name ?? ''.' '.$comment->user->l_name ?? '') }}</p>
                     <p class="comment__date date">{{ $comment->created_at->diffForHumans() }}</p>
                 </div>
                 <div class="comment__content">

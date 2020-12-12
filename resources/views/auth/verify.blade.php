@@ -6,7 +6,7 @@
 
 
 
-<section class="page__img" style="background-image: url('/img/apply_bg.jpg')">
+<section class="page__img" style="background-image: url({{asset('web/img/apply_bg.jpg')}})">
    
         <div class="container">
             <div class="row">

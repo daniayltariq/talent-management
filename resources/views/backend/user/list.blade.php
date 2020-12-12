@@ -1,5 +1,14 @@
 @extends('backend.layouts.app')
 
+@section('styles')
+<link href="{{asset('backend-assets/assets/vendors/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css')}}" rel="stylesheet" type="text/css" />
+	<style>
+		.bootstrap-switch-container{
+			width: 160px !important;
+		}
+	</style>
+@endsection
+
 @section('content')
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 	<!--begin::Portlet-->
@@ -11,9 +20,9 @@
 				</h3>
 				
 			</div>
-			<div class="kt-portlet__head-label" style="float: right">
+			{{-- <div class="kt-portlet__head-label" style="float: right">
 				<a href="{{ route('backend.user.create') }}" class="btn btn-info btn-xs"><i class='fa fa-plus'></i> New User</a>
-			</div>
+			</div> --}}
 		</div>
 		<div class="kt-portlet__body">
 			<!--begin::Section-->
@@ -28,6 +37,7 @@
 								   <th>Name</th>
 								   <th>Email</th>
 								   <th>Role</th>
+								   <th>Active</th>
 								   <th>Operation</th>
 								</tr>
 							</thead>
@@ -42,6 +52,9 @@
 												{{ $role->name ?? '' }}
 												<br>
 											@endforeach
+										</td>
+										<td>
+											<input data-switch="true" name="status" type="checkbox" data-userid="{{$user->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$user->status==1?"checked=checked":""}}>
 										</td>
 										<td>
 											<a href="{{route('backend.user.edit',$user->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Edit
@@ -109,6 +122,8 @@
 @endsection
 
 @section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js" data-turbolinks-track="true"></script>
 <script type="text/javascript">
 
 // $("input[type=file]").change(function(){
@@ -116,10 +131,33 @@
 // });
 
 $(document).ready(function(){
+	$("[name='status']").bootstrapSwitch();
+
 	$('[name="userRole"]').click(function(e){
 		$('[name="user_id"]').val($(this).data('user'));
 		
 	});
+
+	$("[name='status']").on('switchChange.bootstrapSwitch',function (e, state) {
+		/* console.log($(this).data('userid')); */
+		const that=this;
+		$.get("{{ route('backend.user.updateStatus') }}",
+		{
+			user_id: $(this).data('userid'),
+			status:state==true?1 : 0
+		},
+		function(status){
+			
+			if (status=="success") {
+				$(that).bootstrapSwitch('state', state, true);
+			} else {
+				$(that).bootstrapSwitch('state', !state, true);
+			}
+		});
+		
+	});
+
+	
 });
 </script>
 @endsection

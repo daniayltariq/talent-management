@@ -5,7 +5,7 @@
 				<div class="col-md-12 col-sm-12 col-xs-12 footer__social text-center">
 					<div class="footer__title">We are social</div>
 					<ul class="fs__list clearfix">
-						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-linkedin"></i></a></li>
+						{{-- <li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-linkedin"></i></a></li> --}}
 						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-facebook"></i></a></li>
 						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-instagram"></i></a></li>
 						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-twitter"></i></a></li>

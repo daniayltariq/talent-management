@@ -29,7 +29,9 @@ Auth::routes();
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
-
+Route::get('/verified_email', function () {
+    return view('web.verified');
+})->name('verified_email');
 
 Route::get('/about-us', function () {
     return view('web.pages.about-us');
@@ -46,7 +48,7 @@ Route::get('/forum', function () {
 // })->name('community');
 
 Route::get('/community', [App\Http\Controllers\CommunityController::class,'index'])->name('community');
-Route::group(['middleware' => ['isAgentOrCandidate']], function() {
+Route::group(['middleware' => ['isAdminOrAgentOrCandidate','isActive']], function() {
     Route::post('/community/topic/like', [App\Http\Controllers\CommunityController::class,'post_like'])->name('post_like');
     Route::post('/community/topic/comment', [App\Http\Controllers\CommunityController::class,'post_comment'])->name('post_comment');
     Route::post('/community/topic/reply_comment', [App\Http\Controllers\CommunityController::class,'reply_comment'])->name('reply_comment');
@@ -125,7 +127,9 @@ Route::get('model/{link}', [App\Http\Controllers\HomeController::class, 'models'
 Route::middleware(['auth'])->group(function () {
     Route::get('model/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('model.single');
 });
+
 Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
+Route::get('/search_talent', [App\Http\Controllers\HomeController::class, 'searchTalent'])->name('search_talent');
 
 
 
@@ -133,8 +137,9 @@ Route::get('/find-productions', [App\Http\Controllers\HomeController::class, 'fi
 Route::get('/production/single', [App\Http\Controllers\HomeController::class, 'singleproduction'])->name('singleproduction');
 Route::get('/production/apply', [App\Http\Controllers\HomeController::class, 'applyproduction'])->name('applyproduction');
 
-Route::middleware(['isCandidate'])->group(function () {
+Route::middleware(['isGuestOrCandidate'])->group(function () {
     Route::get('/pricing', [App\Http\Controllers\PlanController::class, 'index'])->name('pricing');
+    Route::resource('user_request', App\Http\Controllers\UserRequestController::class);
 });
 // Talent Profile ========================================================
 
@@ -157,22 +162,24 @@ Route::group(['namespace' => 'Subscription\Controllers'], function () {
     });
 });
 
-Route::group(['prefix' => '/account', 'middleware' => ['auth','isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
+Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
 
     /**
      * Profile
      */
     Route::middleware(['subscription.customer'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
-        Route::post('/dashboard/profile', [App\Http\Controllers\Account\DashboardController::class, 'store'])->name('dashboard.profile');
 
-        Route::post('/storeMedia', [App\Http\Controllers\Account\DashboardController::class, 'storeMedia'])->name('storeMedia');
-        Route::delete('/fileDestroy', [App\Http\Controllers\Account\DashboardController::class, 'fileDestroy'])->name('fileDestroy');
+        Route::middleware(['isActive'])->group(function () {
+            Route::post('/dashboard/profile', [App\Http\Controllers\Account\DashboardController::class, 'store'])->name('dashboard.profile');
+            Route::post('/storeMedia', [App\Http\Controllers\Account\DashboardController::class, 'storeMedia'])->name('storeMedia');
+            Route::delete('/fileDestroy', [App\Http\Controllers\Account\DashboardController::class, 'fileDestroy'])->name('fileDestroy');
+            Route::post('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
+            Route::put('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
 
+        });
+        
         Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
-        Route::post('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
-        Route::put('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
-
         Route::get('/talent/checkCustomLink', [App\Http\Controllers\Account\TalentController::class, 'checkCustomLink'])->name('talent.checkCustomLink');
     });
     
@@ -256,7 +263,6 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','isCandidate'], 'n
 
 //Backend Routes
 
-
 Route::group([
 	'prefix' => 'backend',
     'as' => 'backend.',
@@ -264,9 +270,28 @@ Route::group([
 ],function(){
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('plan', App\Http\Controllers\Admin\PlanController::class);
+
     Route::resource('topic', App\Http\Controllers\Admin\TopicController::class);
+    Route::get('/topic_status', [App\Http\Controllers\Admin\TopicController::class, 'updateStatus'])->name('topic.updateStatus');
+
     Route::resource('user', App\Http\Controllers\Admin\UserController::class);
+    Route::get('/user_status', [App\Http\Controllers\Admin\UserController::class, 'updateStatus'])->name('user.updateStatus');
     Route::get('/user/impersonate/{id}', [App\Http\Controllers\Admin\UserController::class, 'impersonate'])->name('user.impersonate');
+    Route::get('/user_request', [App\Http\Controllers\Admin\UserRequestController::class, 'userRequest'])->name('user.requests');
+    Route::put('/user_request/{id}', [App\Http\Controllers\Admin\UserRequestController::class, 'acceptRequest'])->name('user.accept_request');
+    Route::delete('/user_request/{id}', [App\Http\Controllers\Admin\UserRequestController::class, 'deleteRequest'])->name('user.delete_request');
+
+    Route::resource('picklist', App\Http\Controllers\Admin\PicklistController::class);
+    Route::get('/delete_picklist_item/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'delete_picklist_item'])->name('delete_picklist_item');
+    Route::post('/picklist_share/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'picklist_share'])->name('picklist_share');
+
+    Route::resource('tag', App\Http\Controllers\Admin\TagController::class);
+    Route::resource('room', App\Http\Controllers\Admin\RoomController::class);
+    Route::get('/room_status', [App\Http\Controllers\Admin\RoomController::class, 'updateStatus'])->name('room.updateStatus');
+
+    Route::get('/view_save_search', [App\Http\Controllers\Admin\DashboardController::class, 'viewSaveSearch'])->name('view_save_search');
+    Route::get('/apply_saved_search/{id}', [App\Http\Controllers\Admin\DashboardController::class, 'applySaveSearch'])->name('apply_saved_search');
+    Route::post('/save_search', [App\Http\Controllers\Admin\DashboardController::class, 'saveSearch'])->name('save_search');
 });
 
 Route::group([

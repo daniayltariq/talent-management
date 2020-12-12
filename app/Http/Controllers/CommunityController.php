@@ -15,12 +15,12 @@ class CommunityController extends Controller
         /* dd($request->all()); */
         if ($request->query('category') && $request->category == 'all') {
 
-            $data = Topic::with('user')->paginate(10);
+            $data = Topic::where('status',1)->with('user')->paginate(10);
             
             return view('web.pages.single-topic',compact('data'));
         }
 
-    	$community = TopicCategory::with(['topics' => function($q){
+    	$community = TopicCategory::where('status',1)->with(['topics' => function($q){
     		return $q->with('user')->limit(4);
     	}])->withCount(['topics','comments','likes'])->withSum('topics','views')->paginate(5);
 
@@ -34,7 +34,7 @@ class CommunityController extends Controller
         $data->views =  $data->views + 1;
         $data->save();
 
-        $latest=Topic::latest()->get()->take(4);
+        $latest=Topic::where('status',1)->latest()->get()->take(4);
         
         $comments = TopicComment::where('topic_id',$data->id)->where('parent_id',null)->with('childComment')->get()->take(1);
         /* dD($comments); */
@@ -51,7 +51,7 @@ class CommunityController extends Controller
 
     	$data = Topic::whereHas('category',function($q) use ($slug){
     		$q->where('slug',$slug);
-    	})->with('user')->paginate(10);
+    	})->where('status',1)->with('user')->paginate(10);
 
     	if($data){
     		return view('web.pages.single-topic',compact('data','category'));
@@ -83,7 +83,7 @@ class CommunityController extends Controller
 
     public function post_comment(Request $request)
     {
-
+        $request->all();
         if($request->topic_id){
 
             $new = new TopicComment;
@@ -123,7 +123,7 @@ class CommunityController extends Controller
      */
     public function post_suggest(Request $request)
     {
-        $posts=Topic::where('title','LIKE','%'.$request->q.'%')
+        $posts=Topic::where('status',1)->where('title','LIKE','%'.$request->q.'%')
                 ->orWhere('content','LIKE','%'.$request->q.'%')
                 ->get();
         return view('web.components.post-suggestion',compact('posts'));
