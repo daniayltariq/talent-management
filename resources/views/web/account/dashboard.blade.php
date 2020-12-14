@@ -217,6 +217,10 @@
     .toast-warning{
         background-color: #F89406;
     }
+
+    .mt-4r{
+        margin-top:4rem; 
+    }
 </style>
 
 <!-- jQuery library -->
@@ -280,6 +284,11 @@
                         <a class="nav-link mb-3 p-3 shadow" id="v-refer-tab" data-toggle="pill" href="#v-refer" role="tab" aria-controls="v-refer" aria-selected="false">
                             <i class="fa fa-users mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">Refer a Friend </span></a>
+                        {{-- @if ($data['plan'] && $data['plan']->social_links==1) --}}
+                        <a class="nav-link mb-3 p-3 shadow" id="v-social-tab" data-toggle="pill" href="#v-social" role="tab" aria-controls="v-social" aria-selected="false">
+                            <i class="fa fa-icons mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Social Links</span></a>
+                        {{-- @endif --}}
                         </div>
                 </div>
                 <div class="col-md-9">
@@ -536,6 +545,42 @@
                                 </div> --}}
                             </div>
                         </div>
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-social" role="tabpanel" aria-labelledby="v-social-tab">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form class="repeater" action="{{route('account.dashboard.social_links')}}" method="POST">
+                                        <!--
+                                            The value given to the data-repeater-list attribute will be used as the
+                                            base of rewritten name attributes.  In this example, the first
+                                            data-repeater-item's name attribute would become group-a[0][text-input],
+                                            and the second data-repeater-item would become group-a[1][text-input]
+                                        -->
+                                        @csrf
+                                        <div data-repeater-list="social">
+                                            <div data-repeater-item>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <input class="form-control" type="text" name="source" id="source" placeholder="Title" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input class="form-control" type="text" name="link" id="link" placeholder="Link" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input data-repeater-delete type="button" class="btn btn-danger" value="Delete"/>
+                                                    </div>
+                                                    
+                                                </div><br>
+                                                
+                                            </div>
+                                        </div>
+                                        <input data-repeater-create type="button" class="btn btn-primary" value="Add"/>
+                                        <hr>
+                                        <button type="submit" class="btn btn-secondary">Save</button>
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -545,6 +590,7 @@
 
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.js" integrity="sha512-bZAXvpVfp1+9AUHQzekEZaXclsgSlAeEnMJ6LfFAvjqYUVZfcuVXeQoN5LhD7Uw0Jy4NCY9q3kbdEXbwhZUmUQ==" crossorigin="anonymous"></script>
 <script>
     function copyToClipboard() {
         /* Get the text field */
@@ -736,7 +782,7 @@
     function setDropzoneImgLimit(file)
     {
         if ( validImageTypes.includes(file.type)) {
-            $('#imageDropzone')[0].dropzone.options.maxFiles = 2;
+            $('#imageDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->pictures}}";
         }
         else{
             $('#imageDropzone')[0].dropzone.options.maxFiles = 20;
@@ -764,6 +810,62 @@
             }
         });
     }
+</script>
+
+<script>
+    $(document).ready(function () {
+        var $social_repeater = $('.repeater').repeater({
+            // (Optional)
+            // start with an empty list of repeaters. Set your first (and only)
+            // "data-repeater-item" with style="display:none;" and pass the
+            // following configuration flag
+            initEmpty: true,
+            // (Optional)
+            // "defaultValues" sets the values of added items.  The keys of
+            // defaultValues refer to the value of the input's name attribute.
+            // If a default value is not specified for an input, then it will
+            // have its value cleared.
+            defaultValues: {
+                'text-input': 'foo'
+            },
+            // (Optional)
+            // "show" is called just after an item is added.  The item is hidden
+            // at this point.  If a show callback is not given the item will
+            // have $(this).show() called on it.
+            show: function () {
+                $(this).slideDown();
+            },
+            // (Optional)
+            // "hide" is called when a user clicks on a data-repeater-delete
+            // element.  The item is still visible.  "hide" is passed a function
+            // as its first argument which will properly remove the item.
+            // "hide" allows for a confirmation step, to send a delete request
+            // to the server, etc.  If a hide callback is not given the item
+            // will be deleted.
+            hide: function (deleteElement) {
+                if(confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                }
+            },
+            // (Optional)
+            // You can use this if you need to manually re-index the list
+            // for example if you are using a drag and drop library to reorder
+            // list items.
+            /* ready: function (setIndexes) {
+                $dragAndDrop.on('drop', setIndexes);
+            }, */
+            // (Optional)
+            // Removes the delete button from the first list item,
+            // defaults to false.
+            isFirstItemUndeletable: true
+        })
+
+        @if(count($data["social"])>0)
+            var social={!!json_encode($data["social"])!!};
+            $social_repeater.setList(social);
+        @endif
+        
+    });
 </script>
 
 @endsection

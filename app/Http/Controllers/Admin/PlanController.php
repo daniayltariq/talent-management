@@ -120,16 +120,13 @@ class PlanController extends Controller
      */
     public function update(Request $request,$id)
     {
+        /* dd($request->all()); */
         $plan=Plan::findOrFail($id);
         
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:50'],
-            'user_type' => ['required', 'string', 'max:50'],
-            'pkg_type' => ['required', 'string'],
-            'description' => ['required', 'string', 'max:5000'],
-            'cost' => ['required', 'integer'],
-            'product_allow' => ['required', 'integer'],
-            'sales_comm' => ['required', 'integer'],
+            'name' => ['required', 'string'],
+            'description' => ['required', 'string', 'max:191'],
+            'cost' => ['required', 'numeric'],
         ]);
         
         if ($validator->fails()) {
@@ -144,6 +141,9 @@ class PlanController extends Controller
         $features=$request->except($prop); */
 
         $plan->fill($request->all());
+        if ($request->social_links==1) {
+            $plan->social_limit=is_null($request->social_limit)?'unlimited':$request->social_limit;
+        }
         $plan->slug=Str::snake($request->name);
         /* $plan->features=$features; */
 
@@ -152,22 +152,30 @@ class PlanController extends Controller
         $stripe_plan=$stripe->plans->update(
             $plan->stripe_plan,
             [
-                "amount" => currencyToCent($request->cost ?? $plan->cost),
-                "interval" => $request->pkg_type ?? $plan->pkg_type,
-                "product" => array(
-                        "name" => $request->name ?? $plan->name
-                ),
+                'metadata' =>[
+                    "amount" => currencyToCent($request->cost),
+                    "interval" => 'year',
+                    "currency" => "usd"
+                ]
             ]
         );
 
         if (isset($stripe_plan->id)) {
-            $plan->stripe_plan=$stripe_plan->id;
-            $plan->save();
-            if ($plan) {
-                return redirect()->back()->with('success', 'Plan updated successfully !');
-            }
-            else{
-                return redirect()->back()->with('error', 'something went wrong !');
+
+            $stripe_prod=$stripe->products->update(
+                $stripe_plan->product,
+                ['metadata' => ["name" => $request->name]]
+            );
+
+            if ($stripe_prod) {
+                $plan->stripe_plan=$stripe_plan->id;
+                $plan->save();
+                if ($plan) {
+                    return redirect()->back()->with('success', 'Plan updated successfully !');
+                }
+                else{
+                    return redirect()->back()->with('error', 'something went wrong !');
+                }
             }
         }
     }

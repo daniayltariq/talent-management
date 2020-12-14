@@ -111,6 +111,11 @@ table.pricing td:nth-child(4) {
     background: #f2fbff;
 }
 
+.tw-4{
+  font-weight: 400;
+  text-align: left;
+}
+
 </style>
 @endsection
 
@@ -153,8 +158,10 @@ table.pricing td:nth-child(4) {
       <th class="bg-pri"></th>
       @foreach ($plans as $plan)
         <th class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
-          {{$plan->name ?? ''}}
+          {{$plan->name ?? ''}} <hr>
+          <div class="tw-4">{!!$plan->description ?? ''!!}</div>
         </th>
+        
       @endforeach
       {{-- <th class="bg-purple">Basic</th>
       <th class="bg-blue">Standard</th>

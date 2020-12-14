@@ -77,6 +77,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Models\CandidateSkill','candidate_id');
     }
 
+    public function social_links()
+    {
+        return $this->hasMany('App\Models\SocialLink','user_id');
+    }
+
     public function referal_code()
     {
         return $this->hasOne('App\Models\Referal','user_id');

@@ -177,6 +177,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCand
             Route::post('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
             Route::put('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
 
+            Route::post('/dashboard/social_links', [App\Http\Controllers\Account\DashboardController::class, 'social_links'])->name('dashboard.social_links');
         });
         
         Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
