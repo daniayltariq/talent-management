@@ -284,11 +284,11 @@
                         <a class="nav-link mb-3 p-3 shadow" id="v-refer-tab" data-toggle="pill" href="#v-refer" role="tab" aria-controls="v-refer" aria-selected="false">
                             <i class="fa fa-users mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">Refer a Friend </span></a>
-                        {{-- @if ($data['plan'] && $data['plan']->social_links==1) --}}
+                        @if ($data['plan'] && $data['plan']->social_links==1)
                         <a class="nav-link mb-3 p-3 shadow" id="v-social-tab" data-toggle="pill" href="#v-social" role="tab" aria-controls="v-social" aria-selected="false">
                             <i class="fa fa-icons mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">Social Links</span></a>
-                        {{-- @endif --}}
+                        @endif
                         </div>
                 </div>
                 <div class="col-md-9">
@@ -573,9 +573,11 @@
                                                 
                                             </div>
                                         </div>
-                                        <input data-repeater-create type="button" class="btn btn-primary" value="Add"/>
-                                        <hr>
-                                        <button type="submit" class="btn btn-secondary">Save</button>
+                                        @if($data['plan'] && ($data['plan']->social_limit=='unlimited' || $data['plan']->social_limit !== count($data["social"])) )
+                                            <input data-repeater-create type="button" class="btn btn-primary" value="Add"/>
+                                            <hr>
+                                            <button type="submit" class="btn btn-secondary">Save</button>
+                                        @endif
                                     </form>
                                     
                                 </div>
