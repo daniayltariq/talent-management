@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Picklist;
+use App\Models\User;
 use App\Models\PicklistUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -21,8 +22,12 @@ class PicklistController extends Controller
     public function index(Request $request)
     {
         $picklist=Picklist::where('user_id',auth()->user()->id)->get();
-        
-        return view('backend.picklist.list',compact('picklist'));
+        $agents = User::whereHas(
+            'roles', function($q){
+                $q->where('name','<>','agent');
+            }
+        )->where('status',1)->get();
+        return view('backend.picklist.list',compact('picklist','agents'));
     }
 
     /**
@@ -132,21 +137,16 @@ class PicklistController extends Controller
         $picklist=Picklist::findOrFail($id);
         
         try {
-            $recip=explode(',',$request->recipients);
-            foreach ($recip as $key => $email) {
+            /* $recip=explode(',',$request->recipients); */
+            foreach ($request->recipients as $key => $email) {
                 Mail::to($email)->send(new SharePicklist($picklist));
             }
 
-            return redirect()->back()->with([
-                "message" => "Picklist Shared",
-                "alert-type" => "success",
-            ]);
+            return redirect()->back()->with('success', 'Picklist Shared.');
             
         } catch (\Throwable $th) {
-            return redirect()->back()->with([
-                "message" => "Something went wrong",
-                "alert-type" => "error",
-            ]);
+            
+            return redirect()->back()->with('error', 'Something went wrong.');
         }
          
     }
