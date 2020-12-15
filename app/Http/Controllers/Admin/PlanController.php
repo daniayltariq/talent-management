@@ -60,6 +60,13 @@ class PlanController extends Controller
         }
 
         $plan->fill($request->all());
+        if ($request->social_links==1) {
+            $plan->social_limit=is_null($request->social_limit)?'unlimited':$request->social_limit;
+        }
+
+        if ($request->community_access==1) {
+            $plan->community_access_perm=$request->community_access_perm;
+        }
         $plan->slug=Str::snake($request->name);
 
         \Stripe\Stripe::setApiKey(\Config::get('app.STRIPE_SECRET'));
@@ -143,6 +150,10 @@ class PlanController extends Controller
         $plan->fill($request->all());
         if ($request->social_links==1) {
             $plan->social_limit=is_null($request->social_limit)?'unlimited':$request->social_limit;
+        }
+
+        if ($request->community_access==1) {
+            $plan->community_access_perm=$request->community_access_perm;
         }
         $plan->slug=Str::snake($request->name);
         /* $plan->features=$features; */

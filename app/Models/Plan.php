@@ -24,6 +24,7 @@ class Plan extends Model
         'community_access',
         'apply_now',
         'agent_contact',
+        'free_guide',
         'training_invitation',
         'inductry_invitation',
         'description',

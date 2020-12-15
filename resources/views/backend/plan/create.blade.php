@@ -15,6 +15,10 @@
       border: 1px solid #e8ecfa;
       outline: none;
    }
+
+   .h-34{
+      height: 34px;
+   }
 </style>
 @endsection
 
@@ -150,7 +154,7 @@
                                  </div>
                                  @if (isset($plan) && isset($plan->social_links) && $plan->social_links=='1')
                                     <div class="row">
-                                       <input type="number" class="social_limit col-md-4" name="social_limit" id="social_limit" tabindex="1">
+                                       <input type="number" class="social_limit col-md-4" name="social_limit" value="{{$plan->social_limit}}" id="social_limit" tabindex="1">
                                     </div>
                                  @endif
                                  
@@ -180,16 +184,30 @@
                               </div>
                            </div>
                            
-                           <div class="form-group">
+                           <div class="form-group d-flex">
                               <label class="control-label col-md-5 col-sm-12 col-xs-12">Community Access</label>
-                              <div id="community_access" class="btn-group" data-toggle="buttons">
-                                 <label class="btn btn-default {{isset($plan) && isset($plan->community_access) && $plan->community_access=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                 <input type="radio" name="community_access" value="0" {{isset($plan) && isset($plan->community_access) && $plan->community_access=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
-                                 </label>
-                                 <label class="btn btn-croply {{isset($plan) && $plan->community_access && $plan->community_access=='1' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                 <input type="radio" name="community_access" value="1" {{isset($plan) && $plan->community_access && $plan->community_access=='1' ? 'checked' : '' }}> ON
-                                 </label>
+                              <div class="col-md-7">
+                                 <div class="row">
+                                    <div id="community_access" class="btn-group" data-toggle="buttons">
+                                       <label class="btn btn-default {{isset($plan) && isset($plan->community_access) && $plan->community_access=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                       <input type="radio" name="community_access" value="0" {{isset($plan) && isset($plan->community_access) && $plan->community_access=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
+                                       </label>
+                                       <label class="btn btn-croply {{isset($plan) && $plan->community_access && $plan->community_access=='1' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                       <input type="radio" name="community_access" value="1" {{isset($plan) && $plan->community_access && $plan->community_access=='1' ? 'checked' : '' }}> ON
+                                       </label>
+                                    </div>
+                                 </div>
+                                 @if (isset($plan) && isset($plan->community_access) && $plan->community_access=='1')
+                                    <div class="row">
+                                       <select class="social_limit col-md-4 h-34" name="community_access_perm" id="community_access_perm">
+                                          <option value="">Access Level..</option>
+                                          <option value="R" {{$plan->community_access_perm=='R'?'selected' : ''}}>Read Only</option>
+                                          <option value="R/W" {{$plan->community_access_perm=='R/W'?'selected' : ''}}>Read Write</option>
+                                       </select>
+                                    </div>
+                                 @endif
                               </div>
+                              
                            </div>
                            <div class="form-group">
                               <label class="control-label col-md-5 col-sm-12 col-xs-12">Apply Now</label>
@@ -210,6 +228,17 @@
                                  </label>
                                  <label class="btn btn-croply {{isset($plan) && $plan->agent_contact && $plan->agent_contact=='1' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                  <input type="radio" name="agent_contact" value="1" {{isset($plan) && $plan->agent_contact && $plan->agent_contact=='1' ? 'checked' : '' }}> ON
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label class="control-label col-md-5 col-sm-12 col-xs-12">Free Guide Download</label>
+                              <div id="free_guide" class="btn-group" data-toggle="buttons">
+                                 <label class="btn btn-default {{isset($plan) && isset($plan->free_guide) && $plan->free_guide=='0' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                 <input type="radio" name="free_guide" value="0" {{isset($plan) && isset($plan->free_guide) && $plan->free_guide=='0' ? 'checked' : '' }}> &nbsp; OFF &nbsp;
+                                 </label>
+                                 <label class="btn btn-croply {{isset($plan) && $plan->free_guide && $plan->free_guide=='1' ? 'active' : '' }}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                 <input type="radio" name="free_guide" value="1" {{isset($plan) && $plan->free_guide && $plan->free_guide=='1' ? 'checked' : '' }}> ON
                                  </label>
                               </div>
                            </div>
@@ -323,6 +352,17 @@
          else{
             $('#social_limit').val('');
             $('#social_limit').hide();
+         }
+      })
+
+      $('[name="community_access"]').on('change',function(){
+         var comm_perm=$('[name="community_access"]:checked').val();
+         if (comm_perm==1) {
+            $('#community_access_perm').show();
+         }
+         else{
+            $('#community_access_perm').val('');
+            $('#community_access_perm').hide();
          }
       })
 

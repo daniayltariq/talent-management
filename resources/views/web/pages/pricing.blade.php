@@ -228,7 +228,7 @@ table.pricing td:nth-child(4) {
     <tr>
       <td>Links to Social Media</td>
       @foreach ($plans as $plan)
-        <td><span class="tick"><i class="fa fa-{{$plan->social_links==1 ? 'check' : ''}}"></i> </span></td>
+        <td><span class="tick"><i class="fa fa-{{$plan->social_links==1 ? 'check' : ''}}"></i> {{$plan->social_links==1?($plan->social_limit=='unlimited'? '(unlimited)' : $plan->social_limit) : ''}}</span></td>
       @endforeach
       {{-- <td><span class="tick"></span></td>
       <td><span class="tick">&#10004; (2)</span></td>
@@ -258,7 +258,7 @@ table.pricing td:nth-child(4) {
     <tr>
       <td>Access to Community Forums that include our Community Topics.</td>
       @foreach ($plans as $plan)
-        <td><span class="tick"><i class="fa fa-{{$plan->community_access==1 ? 'check' : ''}}"></i> </span></td>
+        <td><span class="tick"><i class="fa fa-{{$plan->community_access==1 ? 'check' : ''}}"></i> {{$plan->community_access==1?($plan->community_access_perm=='R'? '(Read Only)' : '(Read/Write)') : ''}} </span></td>
       @endforeach
       {{-- <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td>
@@ -292,7 +292,10 @@ table.pricing td:nth-child(4) {
     </tr>
 
     <tr>
-      <td>Free video download of “The Talent Guide” with 3 referrals ($50 value)</td>
+      <td>Free “The Talent Guide” with 3 referrals ($50 value)</td>
+      @foreach ($plans as $plan)
+        <td><span class="tick"><i class="fa fa-{{$plan->free_guide==1 ? 'check' : ''}}"></i> </span></td>
+      @endforeach
       {{-- <td><span class="tick">&#10004;</span></td>
       <td><span class="tick">&#10004;</span></td>
       <td><span class="tick">&#10004;</span></td> --}}
@@ -309,7 +312,7 @@ table.pricing td:nth-child(4) {
       
     </tr>
     <tr>
-      <td>Invitations to live, online industry professional Q&As (Cost = $9.99 per session)</td>
+      <td> Q&As (Cost = $9.99 per session)</td>
       @foreach ($plans as $plan)
         <td><span class="tick"><i class="fa fa-{{$plan->inductry_invitation==1 ? 'check' : ''}}"></i> </span></td>
       @endforeach
