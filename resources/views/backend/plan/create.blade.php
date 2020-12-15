@@ -31,7 +31,7 @@
             <div class="kt-portlet__head">
                <div class="kt-portlet__head-label">
                   <h3 class="kt-portlet__head-title">
-                     Create Blog
+                     Create Plan
                   </h3>
                </div>
             </div>
