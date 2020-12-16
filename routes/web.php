@@ -170,7 +170,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCand
     /**
      * Profile
      */
-    Route::middleware(['subscription.customer'])->group(function () {
+    Route::middleware(['subscription.customer','subscription.active'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
 
         Route::middleware(['isActive'])->group(function () {

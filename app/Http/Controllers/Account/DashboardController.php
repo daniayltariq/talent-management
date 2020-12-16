@@ -22,7 +22,8 @@ class DashboardController extends Controller
         ];
         
         $subs=auth()->user()->subscriptions()->active()->first();
-        if ($subs->count()>0) {
+        
+        if (!is_null($subs) && $subs->count()>0) {
             $plan=Plan::select('name','description','pictures','social_links','social_limit')->where('stripe_plan',$subs->stripe_plan)->first();
             
             $data["plan"]=$plan;

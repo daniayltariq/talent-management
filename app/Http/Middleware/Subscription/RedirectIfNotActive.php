@@ -16,8 +16,11 @@ class RedirectIfNotActive
     public function handle($request, Closure $next)
     {
         if (!auth()->check() || auth()->user()->doesNotHaveSubscription()) {
-            return redirect()->route('plans.index')
-                ->withSuccess('You need to be subscribed to access this feature.');
+            return redirect()->route('pricing')
+                    ->with(array(
+                        'message' => 'You need to be subscribed to access this feature.', 
+                        'alert-type' => 'warning'
+                    ));
         }
 
         return $next($request);
