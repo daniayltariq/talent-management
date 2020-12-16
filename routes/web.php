@@ -301,7 +301,7 @@ Route::group([
 Route::group([
 	'prefix' => 'agent',
     'as' => 'agent.',
-	'middleware' => ['isAgent'],
+	'middleware' => ['isAgent','verified'],
 ],function(){
     /* Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard'); */
     Route::resource('picklist', App\Http\Controllers\Agent\PicklistController::class);
