@@ -2,7 +2,7 @@ function render_dropzone() {
     var myDropzoneTheFirst = new Dropzone(
         //id of drop zone element 1
         '#imageDropzone', {
-        url: "{{ route('account.storeMedia') }}",
+        url: "{!! route('account.storeMedia') !!}",
         maxFiles: function (file, done) {
             if (validImageTypes.includes(file.type)) {
                 done("No more images!");
@@ -10,7 +10,7 @@ function render_dropzone() {
             else { done(); }
         },
         maxFilesize: 12, // MB
-        acceptedFiles: "image/*,.mp4,.mkv,.mov,.wmv,audio/*",
+        acceptedFiles: "image/*",
         dictDefaultMessage: "Drop Your Files here.",
         /* autoProcessQueue: false, */
         accept: function (file, done) {
@@ -32,12 +32,6 @@ function render_dropzone() {
 
             if (validImageTypes.includes(fileType)) {
                 formData.append('type', 'image');
-            }
-            else if (validVideoTypes.includes(fileType)) {
-                formData.append('type', 'video');
-            }
-            else if (validAudioTypes.includes(fileType)) {
-                formData.append('type', 'audio');
             }
         },
         success: function (file, response) {
@@ -79,16 +73,6 @@ function render_dropzone() {
 
         },
         init: function (file) {
-            /* var myDropzone = this;
-            const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
-            this.on('addedfile', function(file) {
-                if ( validAudioTypes.includes(file.type)) {
-                    sendAudio(file);
-                }
-                else{
-                    myDropzone.processQueue();
-                }
-            }); */
 
             this.on('addedfile', function (file) {
                 setDropzoneImgLimit(file);

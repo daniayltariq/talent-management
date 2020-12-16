@@ -591,7 +591,7 @@
                 else { done(); }
             },
             maxFilesize: 12, // MB
-            acceptedFiles: "image/*,.mp4,.mkv,.mov,.wmv,audio/*",
+            acceptedFiles: "image/*", /* ,.mp4,.mkv,.mov,.wmv,audio */
             dictDefaultMessage:"Drop Your Files here.",
             /* autoProcessQueue: false, */
             accept: function(file, done) {
@@ -614,12 +614,12 @@
                 if (validImageTypes.includes(fileType)) {
                     formData.append('type', 'image');
                 }
-                else if (validVideoTypes.includes(fileType)) {
+                /* else if (validVideoTypes.includes(fileType)) {
                     formData.append('type', 'video');
                 }
                 else if (validAudioTypes.includes(fileType)) {
                     formData.append('type', 'audio');
-                }
+                } */
             },
             success: function (file, response) {
                console.log(file);
@@ -708,14 +708,14 @@
     function setDropzoneImgLimit(file)
     {
         if ( validImageTypes.includes(file.type)) {
-            $('#imageDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->pictures}}";
+            $('#imageDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->pictures}}"- "{{count($data['images'])}}";
         }
-        else{
+        /* else{
             $('#imageDropzone')[0].dropzone.options.maxFiles = 20;
-        }
+        } */
     }
 
-    function sendAudio(file)
+    /* function sendAudio(file)
     {
         console.log(file);
         var audiofile=new FormData($('#imageDropzone')[0]);
@@ -735,7 +735,7 @@
                 toastr.error('something went wrong!');
             }
         });
-    }
+    } */
 </script>
 
 <script src="{{asset('js/mydropzone.js')}}"></script>
