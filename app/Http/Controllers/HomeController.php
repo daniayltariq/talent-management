@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Search\TalentSearch;
 use App\Models\Skill;
 use App\Models\Plan;
+use App\Models\Topic;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -34,8 +35,9 @@ class HomeController extends Controller
          }
       )->with('profile')->get();
 
-      /* dd($models[0]->profile); */
-      return view('web.index',compact('models'));
+      $topics=Topic::where('status',1)->latest()->get()->take(3);
+      
+      return view('web.index',compact('models','topics'));
     } 
 
 

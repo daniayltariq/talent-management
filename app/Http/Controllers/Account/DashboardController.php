@@ -131,4 +131,15 @@ class DashboardController extends Controller
         return $filename;  
     }
 
+    public function fetchAttachments()
+    {
+        $data=[
+            'images'=>auth()->user()->attachments->where('type','image'),
+            'video'=>auth()->user()->attachments->where('type','video'),
+            'audio'=>auth()->user()->attachments->where('type','audio')
+        ];
+
+        return view('components.attachments',compact('data'));
+    }
+
 }

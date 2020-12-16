@@ -916,6 +916,7 @@ if (!function_exists('printTruncated')) {
         // Print any remaining text.
         if ($printedLength < $maxLength && $position < strlen($html))
             print(substr($html, $position, $maxLength - $printedLength));
+            $html ? printf('<span>...</span>') : '';
 
         // Close any open tags.
         while (!empty($tags))

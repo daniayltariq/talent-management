@@ -7,6 +7,10 @@
 			padding: 105px 0;
 			/* background-color: #f6f6f6; */
 		}
+
+		.d-flex{
+			display: flex;
+		}
 	</style>
 @endsection
 
@@ -133,30 +137,16 @@
 			<div class="row">
 				<h2 class="section__title"><span class="line line__right"></span>Latest Topics</h2>
 				<div class="lp__wrapp clearfix">
-					<div class="col-md-4 col-sm-12 lp__content">
-						<div class="lp__content-wrapp">
-							<div class="date">01 Dec 2016</div>
-							<h4 class="lp__title"><a href="#0" class="animation">Search of staff is not an easy task</a></h4>
-							<div class="text lp__text">According to the departmental heads' of personnel management words, in order to find a ...</div>
-							<a href="#" class="more animation">read more</a>
+					@foreach ($topics as $topic)
+						<div class="col-md-4 col-sm-12 lp__content">
+							<div class="lp__content-wrapp">
+								<div class="date">{{$topic->created_at->diffForHumans()}}</div>
+								<h4 class="lp__title"><a href="#0" class="animation">{{$topic->title}}</a></h4>
+								<div class="text lp__text d-flex">{!!printTruncated(200, $topic->content,true)!!}</div>
+								<a href="{{ route('single-post',['slug' => $topic->slug]) }}" class="more animation">read more</a>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-4 col-sm-12 lp__content">
-						<div class="lp__content-wrapp">
-							<div class="date">01 Dec 2016</div>
-							<h4 class="lp__title"><a href="#0" class="animation">Overalls bearing the company's logo</a></h4>
-							<div class="text lp__text">A preference of corporate style involves a significant increase of costs for development of design ...</div>
-							<a href="#" class="more animation">read more</a>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-12 lp__content">
-						<div class="lp__content-wrapp">
-							<div class="date">01 Dec 2016</div>
-							<h4 class="lp__title"><a href="#0" class="animation">Mistakes related to money</a></h4>
-							<div class="text lp__text">The ability to manage money competently is especially valuable quality in the conditions of ... </div>
-							<a href="#" class="more animation">read more</a>
-						</div>
-					</div>
+					@endforeach
 				</div>
 				{{-- <a href="blog.html" class="btn btn__grey btn__grey_lg animation">Show all topics</a> --}}
 			</div>

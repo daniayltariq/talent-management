@@ -263,7 +263,7 @@
             @if (auth()->user()->status==0)
                <div class="alert alert-primary" role="alert">
                     <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
-                    Your account has been deactivated,please make a <a href="{{route('user_request.create')}}" class="alert-link">request</a> to re-activate.
+                    Your account has been deactivated,all features are locked,in order to unlock please make a <a href="{{route('user_request.create')}}" class="alert-link">request</a> to re-activate.
                 </div> 
             @endif
             
@@ -399,85 +399,9 @@
                         </div>
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             
-                            <div class="row mt-5">
+                            <div id="render_attachments">
+                                @include('components.attachments',['data'=>$data])
                                 
-                                <div class="col-md-12 mt-5">
-                                    <form method="post" action="{{url('image/upload/store')}}" enctype="multipart/form-data" class="dropzone" id="imageDropzone">
-                                        @csrf
-                                    </form> 
-                                </div>
-                                
-                                <div class="col-md-12 mt-5">
-                                    <h4 class="mb-4 upload-head heading">Your Images</h4>
-                                </div>
-                                
-                                <div class="col-md-12">
-                                    <div class="container">
-                                        <div class="gallery">
-                                    
-                                            @forelse($data['images'] as $img)
-                                                <div class="content">
-                                                    <div class="content-overlay"></div>
-                                                    <img class="content-image" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}">
-                                                    <div class="content-details fadeIn-bottom">
-                                                        <a type="button" class="content-title" data-img="{{$img->file}}" id="remove-img-btn">Remove</a>
-                                                    </div>
-                                                </div>
-                                            @empty
-                                                <h4 class="text-center">No images found</h4>
-                                            @endforelse
-                                            
-                                    
-                                        </div>
-                                    
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br><hr class="hr-style">
-
-                            <div class="row mt-5">
-                                <div class="col-md-12 mt-5">
-                                    <h4 class="mb-4 upload-head heading">Your Videos</h4>
-                                </div>
-                                <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
-                                    <div class="row">
-                                        <div class="sp-thumbnails">
-                                            @forelse ($data['video'] as $vid)
-                                                <video width="320" height="240" controls>
-                                                    <source src="{{ asset('storage/uploads/uploadData/' . $vid->file ?? '') }}" type="video/mp4">
-                                                </video>
-                                            @empty
-                                                <h4 class="text-center">No videos found</h4>
-                                            @endforelse
-                                            	
-            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br><hr class="hr-style">
-
-                            <div class="row mt-5">
-                                <div class="col-md-12 mt-5">
-                                    <h4 class="mb-4 upload-head heading">Your Audios</h4>
-                                </div>
-                                <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
-                                    <div class="row">
-                                        <div class="sp-thumbnails">
-                                            @forelse ($data['audio'] as $audio)
-                                                <audio controls>
-                                                    <source src="{{ asset('storage/uploads/uploadData/' . $audio->file ?? '') }}" type="audio/mpeg">
-                                                </audio>
-                                            @empty
-                                                <h4 class="text-center">No audio found</h4>
-                                            @endforelse
-                                            	
-            
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
@@ -814,6 +738,7 @@
     }
 </script>
 
+<script src="{{asset('js/mydropzone.js')}}"></script>
 <script>
     $(document).ready(function () {
         var $social_repeater = $('.repeater').repeater({
@@ -867,7 +792,35 @@
             $social_repeater.setList(social);
         @endif
         
+        @if (auth()->user()->status==0)
+            myDropzoneTheFirst.disable();
+        @endif
+        
     });
+
+    $(document).on('click',function(e){
+        
+        if ( $('div#v-pills-tab').find(e.target).length) 
+        {
+            if (e.target.id === $('a.nav-link.active').attr('id')) {
+                myDropzoneTheFirst.disable();
+                $.ajax({
+                    url: '{{ route('account.fetch_attachments') }}',
+                    type: 'GET',
+                    success: function(res) {
+                        $('#render_attachments').html(res);
+                        render_dropzone();
+                        /* myDropzoneTheFirst.enable(); */
+                    },
+                    error: function(error) {
+                        $('#render_attachments').html("<h4>No Attachments Found</h4>");
+                    }
+                });
+            }
+        }
+        
+        
+    })
 </script>
 
 @endsection
