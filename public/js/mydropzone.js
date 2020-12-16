@@ -51,7 +51,7 @@ function render_dropzone() {
             file.previewElement.remove()
             $.ajax({
                 type: 'delete',
-                url: "{{ route('account.fileDestroy') }}",
+                url: "{!! route('account.fileDestroy') !!}",
                 data: {
                     filename: uploadedDocumentMap[file.upload.filename],
                     _method: 'DELETE',

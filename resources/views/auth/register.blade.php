@@ -224,20 +224,17 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     @enderror --}}
                                 </div>
                             </div>
-                            {{-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="state" class="col-sm-4 control-label">State <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <select name="state" id="state" class="form-control">
-                                        <option value="AK">Alaska</option>
-                                        
-                                    </select>
+                                    <input type="text" class="form-control" name="state" value="{{ old('state') }}" id="state">
                                     @error('state')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="form-group">
                                 <label for="address" class="col-sm-4 control-label">Home Address 1 <span class="req">*</span></label>
                                 <div class="col-sm-8">
