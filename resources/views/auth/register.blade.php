@@ -113,8 +113,8 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="tg-btn-sp m-b-20">
                                 <div class="switch-button">
                                     <span class="active"></span>
-                                    <span class="switch-button-case left active-case">Agent</span>
-                                    <span class="switch-button-case right">Talent</span>
+                                    <span class="switch-button-case left active-case">Creator</span>
+                                    <span class="switch-button-case right">Creative</span>
                                 </div>
                             </div>
                         </div>
