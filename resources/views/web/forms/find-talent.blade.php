@@ -187,214 +187,22 @@
     .lh-23{
         line-height: 23px !important;
     }
-    
-    /* Slider css */
-
-    .slider-custom-container {
-        overflow: hidden !important;
-        position: relative !important;
-        width: 100% !important;
-    }
-
-    .dark-blocks {
-        height: 100% !important;
-        position: absolute !important;
-        right: 0 !important;
-        top: 0 !important;
-    }
-
-    .image-slider {
-      z-index: 0;
-      margin: 0 auto;
-      padding: 0;
-      width: 100%;
-      height: 100vh;
-    }
-
-    .image-slide {
-        height: 100vh;
-        margin: 0 auto;
-    }
-
-    .slick-slide.slick-center {
-        transform: scale(1.2);
-        transition: transform .8s 1.4s cubic-bezier(.84, 0, .08, .99);
-    }
-
-    .slick-slide {
-        transition: transform .7s cubic-bezier(.84, 0, .08, .99);
-    }
-
-    .slider-control {
-        margin: 0%;
-        position: absolute;
-        z-index: 2;
-        bottom: 4%;
-        left: 15%;
-        transform: translate(-50%, -50%);
-        display: flex;
-    }
-
-    button.slider-btns {
-        color: #fff;
-        background: none;
-        padding: 12px 19px;
-        /* border: 1px solid rgba(255, 255, 255, .3); */
-        border: none;
-        font-size: 16px;
-        border-radius: 50%;
-        margin: .4em;
-        display: inline-block;
-    }
-
-    button.slider-btns:hover {
-        background-color: #f2832c !important;
-        color: #fff !important;
-    }
-
-    button.slider-btns:focus {
-        outline: none;
-    }
-
-    .block-1 {
-        z-index: 1;
-        position: fixed;
-        height: 100vh;
-        width: 5%;
-        left: 0%;
-        background: #0f0f0f;
-    }
-
-    .block-2 {
-        z-index: 1;
-        position: fixed;
-        height: 100vh;
-        width: 25%;
-        left: 25%;
-        background: #0f0f0f;
-    }
-
-    .block-3 {
-        z-index: 1;
-        position: fixed;
-        height: 100vh;
-        width: 5%;
-        right: 0%;
-        background: #0f0f0f;
-    }
-
-    .overlay {
-        z-index: 1;
-        position: fixed;
-        height: 100vh;
-        width: 20%;
-        left: 5%;
-        background: rgba(0, 0, 0, .65);
-    }
-
-    .text-slider-wrapper {
-        z-index: 2;
-        position: absolute;
-        width: 100%;
-        top: 30%;
-    }
-
-    .text-slider {
-        margin: 0%;
-        padding: 0%;
-        height: 100vh;
-    }
-
-    .text-slide h1 {
-        color: #fff;
-        font-size: 36px;
-        font-family: "Cinzel";
-        font-weight: lighter;
-        text-transform: uppercase;
-        padding-left: 10%;
-    }
-
-    @media(max-width: 990px) {
-        .block-2, .overlay {
-                display: none;
-        }
-
-        .block-1 {
-                width: 50%;
-        }
-
-        .block-3 {
-                width: 12%;
-        }
-
-        .slide-slick {
-                display: none !important;
-        }
-
-        .text-slide h1 {
-                font-size: 30px !important;
-        }
-
-        .text-slider-wrapper {
-                position: absolute;
-                top: 50% !important;
-        }
-
-        .slider-control {
-                left: 22.5%;
-        }
-    }
-
-
-    /* End Slider css */
 
 </style>
 @endsection
 
 @section('content')
-<div class="slider-custom-container">
-<div class="text-slider-wrapper">
-    <div class="text-slider">
-          <div class="text-slide"><h1>A blessing for <br> every skin.</h1></div>
-          <div class="text-slide"><h1>The perfect mix of <br> old & new.</h1></div>
-          <div class="text-slide"><h1>A journey over borders <br> & generations.</h1></div>
-          <div class="text-slide"><h1>Your are the <br> stylist.</h1></div>
-          <div class="text-slide"><h1>To be on the <br> forerfront.</h1></div>
-    </div>
-</div>
 
-<div class="slider-control">
-    <div class="prev"><button class="slider-btns" type="button"><i class="fas fa-arrow-left"></i></button></div>
-    <div class="next"><button class="slider-btns" type="button"><i class="fas fa-arrow-right"></i></button></div>
-</div>
-
-<div class="blocks">
-    <div class="block-1 dark-blocks"></div>
-    <div class="block-2 dark-blocks"></div>
-    <div class="block-3 dark-blocks"></div>
-</div>
-
-<div class="overlay dark-blocks"></div>
-
-<div class="image-slider">
-    <div class="image-slide" id="one" style="background: url(https://images.unsplash.com/photo-1519011985187-444d62641929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2452&q=80) no-repeat 50% 50%; background-size: cover;"></div>
-    <div class="image-slide" id="two" style="background: url(https://images.unsplash.com/photo-1509679708047-e0e562d21e44?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60) no-repeat 50% 50%; background-size: cover;"></div>
-    <div class="image-slide" id="three" style="background: url(https://images.unsplash.com/photo-1508215302842-8a015a452a20?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80) no-repeat 50% 50%; background-size: cover;"></div>
-    <div class="image-slide" id="four" style="background: url(https://images.unsplash.com/photo-1537510929030-2ffb7888f379?ixlib=rb-1.2.1&auto=format&fit=crop&w=2378&q=80) no-repeat 50% 50%; background-size: cover;"></div>
-    <div class="image-slide" id="five" style="background: url(https://images.unsplash.com/photo-1552793084-49132af00ff1?ixlib=rb-1.2.1&auto=format&fit=crop&w=2953&q=80) no-repeat 50% 50%; background-size: cover;"></div>
-</div>
-</div>
-    {{-- <section class="page__img" style="background-image: url('{{ asset('web/img/apply_bg.jpg') }}')">
+    <section class="page__img" style="background-image: url('{{ asset('web/img/apply_bg.jpg') }}')">
         <div class="container">
             <div class="row">
                 <div class="title__wrapp">
-                    <div class="page__subtitle title__grey">Looking for talent ?</div>
-                    <h1 class="page__title">Featured Talent</h1>
+                    <h1 class="page__title">Find Talent</h1>
                     
                 </div>
             </div>
         </div>
-    </section> --}}<!-- Slider Section End -->
+    </section><!-- Slider Section End -->
 
     @if (\Auth::check() && auth()->user()->hasRole('superadmin'))
         <div class="container mt-3">

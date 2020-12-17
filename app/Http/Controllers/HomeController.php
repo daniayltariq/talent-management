@@ -40,6 +40,10 @@ class HomeController extends Controller
       return view('web.index',compact('models','topics'));
     } 
 
+    public function featured_talents()
+    {
+      return view('web.pages.talents');
+    }
 
     public function findtalent()
     {

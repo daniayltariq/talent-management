@@ -131,6 +131,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('model/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('model.single');
 });
 
+Route::get('/featured-talents', [App\Http\Controllers\HomeController::class, 'featured_talents'])->name('featured_talents');
 Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
 Route::get('/search_talent', [App\Http\Controllers\HomeController::class, 'searchTalent'])->name('search_talent');
 
