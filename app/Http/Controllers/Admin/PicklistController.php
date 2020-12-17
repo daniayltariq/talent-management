@@ -24,9 +24,10 @@ class PicklistController extends Controller
         $picklist=Picklist::where('user_id',auth()->user()->id)->get();
         $agents = User::whereHas(
             'roles', function($q){
-                $q->where('name','<>','agent');
+                $q->whereNotIn('name',['candidate','superadmin']);
             }
         )->where('status',1)->get();
+        /* dd($agents); */
         return view('backend.picklist.list',compact('picklist','agents'));
     }
 
@@ -137,8 +138,17 @@ class PicklistController extends Controller
         $picklist=Picklist::findOrFail($id);
         
         try {
-            /* $recip=explode(',',$request->recipients); */
-            foreach ($request->recipients as $key => $email) {
+            if ($request->query('q') && $request->query('q')=='talents') {
+                $talents=PicklistUser::where('picklist_id',$id)->pluck('user_id');
+                $users_email=User::whereIn('id',$talents)->pluck('email');
+                
+                $recp=$users_email;
+            }
+            else{
+                $recp=$request->recipients;
+            }
+            
+            foreach ($recp as $key => $email) {
                 Mail::to($email)->send(new SharePicklist($picklist));
             }
 

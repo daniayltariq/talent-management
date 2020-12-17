@@ -9,6 +9,129 @@
     margin-left: 10px;
 }
 
+	/* Book talent modal */
+	.popup {
+      
+      overflow-x: hidden;
+      overflow-y: auto;
+      font-family: "Google Sans",Roboto,Arial,sans-serif;
+   width: 100%;
+   height: 100%;
+   display: none;
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   background: rgba(0, 0, 0, 0.75);
+   }
+
+   .popup {
+      z-index: 999999;
+      text-align: center;
+   }
+
+   .popup:before {
+   content: '';
+   display: inline-block;
+   height: 100%;
+   margin-right: -4px;
+   vertical-align: middle;
+   }
+
+   .popup-header {
+      color: white;
+      font-family: "Google Sans",Roboto,Arial,sans-serif;
+      width: fit-content;
+      background-color: #e77826;
+      border-radius: 0px 0px 6px 6px;
+      margin-top: 0;
+      padding: 0px 11px;
+   }
+
+   .popup-inner {
+   display: inline-block;
+   text-align: left;
+   vertical-align: middle;
+   position: relative;
+   max-width: 700px;
+   width: 90%;
+   padding: 40px;
+   box-shadow: 0px 2px 6px rgba(0, 0, 0, 1);
+   border-radius: 3px;
+   background: #fff;
+   text-align: center;
+   }
+
+   .popup-inner h1 {
+   font-family: 'Roboto Slab', serif;
+   font-weight: 700;
+   }
+
+   .popup-inner p {
+      padding: 0px 27px;
+   font-size: 19px;
+   font-weight: 400;
+   }
+
+   .popup-contact-wrapper{
+      border-radius: 8px;
+      border: 2px solid #dadce0;
+      border-top: 4px solid #e77826;
+   }
+
+   .popup-close {
+   width: 34px;
+   height: 34px;
+   padding-top: 4px;
+   display: inline-block;
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   -webkit-transform: translate(50%, -50%);
+   transform: translate(50%, -50%);
+   border-radius: 100%;
+   background: transparent;
+   border: solid 4px #808080;
+   }
+
+   .popup-close:after,
+   .popup-close:before {
+   content: "";
+   position: absolute;
+   top: 11px;
+   left: 5px;
+   height: 4px;
+   width: 16px;
+   border-radius: 30px;
+   background: #808080;
+   -webkit-transform: rotate(45deg);
+   transform: rotate(45deg);
+   }
+
+   .popup-close:after {
+   -webkit-transform: rotate(-45deg);
+   transform: rotate(-45deg);
+   }
+
+   .popup-close:hover {
+   -webkit-transform: translate(50%, -50%) rotate(180deg);
+   transform: translate(50%, -50%) rotate(180deg);
+   background: #f00;
+   text-decoration: none;
+   border-color: #f00;
+   }
+
+   .popup-close:hover:after,
+   .popup-close:hover:before {
+   background: #fff;
+   }
+
+	.d-none{
+      display: none;
+   	}
+   .popup-form{
+      text-align: left;
+      padding: 28px;
+   	}
 
 </style>
 @endsection
@@ -42,7 +165,10 @@
 					<div class="row mb-5">
 						<div class="col-sm-10 col-centered">
 							<div class="pull-right">
-								<button class="btn btn-share"><i class="mdi mdi-message-outline"></i>  Send Message</button>
+								@if (count($items) > 0)
+									<button class="btn btn-share" pd-popup-open="popupNew"><i class="mdi mdi-message-outline"></i>  Send Message</button>
+								@endif
+								
 								<button class="btn btn-share"><i class="mdi mdi-email-outline"></i>  Share Picklist</button>
 							</div>
 						</div>
@@ -239,5 +365,70 @@
 		</div>
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="popup" pd-popup="popupNew">
+	<div class="popup-inner">
+	   <div class="popup-contact-wrapper">
+		  <h4 class="popup-header mx-auto">{{$picklist->title}} </h4>
+		  
+		  
+		  <form method="POST" action="{{route('agent.send_text')}}" class="popup-form">
+			 <hr>
+			 @csrf
+			 <input type="hidden" name="picklist_id" value="{{$picklist->id}}">
+			 <div class="form-group">
+				<label for="recipient-name" class="col-form-label">Select Recipient:</label>
+				<select class="form-control" name="recipient" >
+					<option value="all_talents">all talents</option>
+					@forelse ($items as $item)
+						<option value="{{$item->member->phone ?? '' }}">{{$item->member->profile->legal_first_name ?? ''}}
+							{{$item->member->profile->legal_last_name ?? ''}}</option>
+					@endforeach
+					
+				</select>
+			 </div>
+			 <div class="form-group">
+				<label for="message-text" class="col-form-label">Message:</label>
+				<textarea class="form-control" name="message"></textarea>
+			 </div>
+			 <div class="form-group">
+				<button type="submit" class="btn btn-primary btn-sm" style="padding: 7px 22px;"><i class="fas fa-paper-plane"></i></button>
+			 </div>
+		  </form>
+
+
+		  <a class="popup-close" pd-popup-close="popupNew" href="#"> </a>
+	   </div>
+	   
+	</div>
+</div>
 <!-- Blog Section End -->
+@endsection
+
+@section('scripts')
+<script>
+	$(function() {
+	 //----- OPEN
+	   $('[pd-popup-open]').on('click', function(e)  {
+		  var targeted_popup_class = jQuery(this).attr('pd-popup-open');
+		  $('[pd-popup="' + targeted_popup_class + '"]').fadeIn(100);
+	
+		  e.preventDefault();
+	   });
+	
+	   //----- CLOSE
+	   $('[pd-popup-close]').on('click', function(e)  {
+		  var targeted_popup_class = jQuery(this).attr('pd-popup-close');
+		  $('[pd-popup="' + targeted_popup_class + '"]').fadeOut(200);
+	
+		  e.preventDefault();
+	   });
+ 
+	   $('#send_mail').on('click', function(e)  {
+		  $('.popup-form').toggleClass( "d-none" );
+	   });
+	});
+ </script>
+	
 @endsection

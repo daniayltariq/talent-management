@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Agent;
 use App\Http\Controllers\Controller;
 
 use App\Models\Picklist;
+use App\Models\PicklistUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class PicklistController extends Controller
 {
@@ -89,6 +91,58 @@ class PicklistController extends Controller
         $items=$picklist->items()->paginate(5);
         
         return view('web.agent.picklist-single',compact('picklist','items'));
+    }
+
+    public function sendText(Request $request)
+    {
+        /* dd($request->all()); */
+        if($request->recipient=='all_talents')
+        {
+            $talents=PicklistUser::where('picklist_id',$request->picklist_id)->get();
+            try {
+                foreach ($talents as $key => $talent) {
+                    Nexmo::message()->send([
+                        'to'   => $talent->member->phone,
+                        'from' => '16105552344',
+                        'text' => $request->message
+                    ]);
+                }
+
+                $status=array(
+                    'message' => 'message sent !', 
+                    'alert-type' => 'success'
+                );
+                
+            } catch (\Throwable $th) {
+                $status=array(
+                    'message' => 'Something went wrong.', 
+                    'alert-type' => 'error'
+                );
+                
+            }
+        }
+        else{
+            try {
+                Nexmo::message()->send([
+                    'to'   => $request->recipient,
+                    'from' => '16105552344',
+                    'text' => $request->message
+                ]);
+
+                $status=array(
+                    'message' => 'message sent !', 
+                    'alert-type' => 'success'
+                );
+            } catch (\Throwable $th) {
+                $status=array(
+                    'message' => 'Something went wrong.', 
+                    'alert-type' => 'error'
+                );
+            }
+            
+        }
+
+        return redirect()->back()->with($status);
     }
 
     /**

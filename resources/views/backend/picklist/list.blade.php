@@ -26,6 +26,10 @@
 		.select2-container{
 			width: 100% !important;
 		}
+
+		.overflow-in{
+			overflow: inherit;
+		}
 	</style>
 @endsection
 
@@ -49,7 +53,7 @@
 			<div class="kt-section">
 				 
 				<div class="kt-section__content">
-					<div class="table-responsive">
+					<div class="table-responsive overflow-in">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -73,7 +77,17 @@
 											
 											@include('components.delete' , ['data' => $list->id, 'route' => 'backend.picklist.destroy'])
 
-											<button class="btn btn-success btn-sm btn-bg-white" name="sharePicklist" data-picklistid="{{$list->id}}"><i class="fa fa-paper-plane" style="color: #5578eb;"></i></button>
+											{{-- <button class="btn btn-success btn-sm btn-bg-white" name="sharePicklist" data-picklistid="{{$list->id}}"><i class="fa fa-paper-plane" style="color: #5578eb;"></i></button> --}}
+											<div class="dropdown dropdown-inline">
+												<button type="button" class="btn btn-default btn-icon btn-sm btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="flaticon-more"></i>
+												</button>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="{{route('backend.picklist_share',$list->id)}}?q=talents"><i class="fa fa-paper-plane"></i>Email to all talents</a>
+													<a class="dropdown-item" href="#"  name="sharePicklist" data-picklistid="{{$list->id}}"><i class="fa fa-paper-plane"></i> Email to agent</a>
+													<a class="dropdown-item" href="#"  name="sharePicklist" data-picklistid="{{$list->id}}"><i class="fa fa-paper-plane"></i> Text to talents</a>
+												</div>
+											</div>
 										</td>
 									</tr>
 								@endforeach
@@ -128,7 +142,7 @@
 <div class="modal fade" id="share_picklist_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-			<form action="#" method="POST" id="share_picklist_form" enctype="multipart/form-data" class="kt-form">
+			<form action="#" method="GET" id="share_picklist_form" enctype="multipart/form-data" class="kt-form">
 				@csrf
 				
 				<div class="modal-header">

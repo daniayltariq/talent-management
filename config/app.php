@@ -183,6 +183,7 @@ return [
         Yoeunes\Toastr\ToastrServiceProvider::class,
         Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
         Lab404\Impersonate\ImpersonateServiceProvider::class,
+        Nexmo\Laravel\NexmoServiceProvider::class,
         
     ],
 
@@ -236,6 +237,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
+        'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
 
     ],
 
