@@ -61,7 +61,7 @@ class PlanController extends Controller
 
         $plan->fill($request->all());
         if ($request->social_links==1) {
-            $plan->social_limit=is_null($request->social_limit)?'unlimited':$request->social_limit;
+            $plan->social_limit=$request->social_limit;
         }
 
         if ($request->community_access==1) {

@@ -497,8 +497,8 @@
                                                 
                                             </div>
                                         </div>
-                                        @if($data['plan'] && ($data['plan']->social_limit=='unlimited' || $data['plan']->social_limit !== count($data["social"])) )
-                                            <input data-repeater-create type="button" class="btn btn-primary" value="Add"/>
+                                        @if($data['plan'] && ( $data['plan']->social_limit !== count($data["social"])) )
+                                            <input data-repeater-create type="button" class="btn btn-primary" id="repeater-add-btn" value="Add"/>
                                             <hr>
                                             <button type="submit" class="btn btn-secondary">Save</button>
                                         @endif
@@ -759,9 +759,9 @@
             // "show" is called just after an item is added.  The item is hidden
             // at this point.  If a show callback is not given the item will
             // have $(this).show() called on it.
-            show: function () {
+            /* show: function () {
                 $(this).slideDown();
-            },
+            }, */
             // (Optional)
             // "hide" is called when a user clicks on a data-repeater-delete
             // element.  The item is still visible.  "hide" is passed a function
@@ -770,9 +770,9 @@
             // to the server, etc.  If a hide callback is not given the item
             // will be deleted.
             hide: function (deleteElement) {
-                if(confirm('Are you sure you want to delete this element?')) {
+                /* if(confirm('Are you sure you want to delete this element?')) { */
                     $(this).slideUp(deleteElement);
-                }
+                /* } */
             },
             // (Optional)
             // You can use this if you need to manually re-index the list
@@ -785,6 +785,18 @@
             // Removes the delete button from the first list item,
             // defaults to false.
             isFirstItemUndeletable: true
+        })
+
+        $('#repeater-add-btn').on('click',function(e){
+            e.preventDefault();
+            if ($('.repeater').find('[data-repeater-delete]').length > "{{count($data["social"])}}")
+            {
+                $('.repeater').find('[data-repeater-delete]').last().click();
+                toastr.warning('Limit exceeded');
+            }else{
+                $social_repeater.slideDown();
+            }
+            
         })
 
         @if(count($data["social"])>0)

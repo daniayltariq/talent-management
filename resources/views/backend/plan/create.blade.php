@@ -154,7 +154,7 @@
                                  </div>
                                  @if (isset($plan) && isset($plan->social_links) && $plan->social_links=='1')
                                     <div class="row">
-                                       <input type="number" class="social_limit col-md-4" name="social_limit" value="{{$plan->social_limit}}" id="social_limit" tabindex="1">
+                                       <input type="number" class="social_limit col-md-4" min="1" max="10" name="social_limit" value="{{$plan->social_limit}}" id="social_limit" tabindex="1">
                                     </div>
                                  @endif
                                  
