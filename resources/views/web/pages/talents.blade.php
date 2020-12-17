@@ -374,11 +374,13 @@
 <div class="slider-custom-container">
 <div class="text-slider-wrapper">
     <div class="text-slider">
+        @foreach ($featured as $talent)
           <div class="text-slide"><h1>A blessing for <br> every skin.</h1></div>
-          <div class="text-slide"><h1>The perfect mix of <br> old & new.</h1></div>
+        @endforeach
+          {{-- <div class="text-slide"><h1>The perfect mix of <br> old & new.</h1></div>
           <div class="text-slide"><h1>A journey over borders <br> & generations.</h1></div>
           <div class="text-slide"><h1>Your are the <br> stylist.</h1></div>
-          <div class="text-slide"><h1>To be on the <br> forerfront.</h1></div>
+          <div class="text-slide"><h1>To be on the <br> forerfront.</h1></div> --}}
     </div>
 </div>
 
@@ -399,11 +401,17 @@
 <div class="overlay dark-blocks"></div>
 
 <div class="image-slider">
-    <div class="image-slide" id="one" style="background: url(https://images.unsplash.com/photo-1519011985187-444d62641929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2452&q=80) no-repeat 50% 50%; background-size: cover;"></div>
-    <div class="image-slide" id="two" style="background: url(https://images.unsplash.com/photo-1509679708047-e0e562d21e44?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60) no-repeat 50% 50%; background-size: cover;"></div>
+    @foreach ($featured as $talent)
+        @php
+            $img=!is_null($talent->profile) ? (!is_null($talent->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$talent->profile->profile_img)? 'storage/uploads/profile/'.$talent->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg';
+        @endphp
+        <div class="image-slide" id="one" style="background: url({{asset($img)}}) no-repeat 50% 50%; background-size: cover;"></div>
+    @endforeach
+    
+    {{-- <div class="image-slide" id="two" style="background: url(https://images.unsplash.com/photo-1509679708047-e0e562d21e44?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60) no-repeat 50% 50%; background-size: cover;"></div>
     <div class="image-slide" id="three" style="background: url(https://images.unsplash.com/photo-1508215302842-8a015a452a20?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80) no-repeat 50% 50%; background-size: cover;"></div>
     <div class="image-slide" id="four" style="background: url(https://images.unsplash.com/photo-1537510929030-2ffb7888f379?ixlib=rb-1.2.1&auto=format&fit=crop&w=2378&q=80) no-repeat 50% 50%; background-size: cover;"></div>
-    <div class="image-slide" id="five" style="background: url(https://images.unsplash.com/photo-1552793084-49132af00ff1?ixlib=rb-1.2.1&auto=format&fit=crop&w=2953&q=80) no-repeat 50% 50%; background-size: cover;"></div>
+    <div class="image-slide" id="five" style="background: url(https://images.unsplash.com/photo-1552793084-49132af00ff1?ixlib=rb-1.2.1&auto=format&fit=crop&w=2953&q=80) no-repeat 50% 50%; background-size: cover;"></div> --}}
 </div>
 </div>
     {{-- <section class="page__img" style="background-image: url('{{ asset('web/img/apply_bg.jpg') }}')">
