@@ -107,7 +107,7 @@
 										<a href="{{ route('login') }}">Login</a>
 									</li>
 									<li class="m-menu__sub-item">
-										<a href="{{ route('register') }}">Register</a>
+										<a href="{{ route('register') }}">Join</a>
 									</li>
 								</ul>
 							</li>

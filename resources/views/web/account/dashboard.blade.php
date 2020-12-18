@@ -238,7 +238,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="title__wrapp">
-                    {{-- <div class="page__subtitle title__grey">Profile</div> --}}
                     <h1 class="page__title">My Account</h1>
                     <p class="font-italic mb-1 fz-15">You can update your personal details, download reports and download invoice details here.</p>
                 </div>

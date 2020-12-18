@@ -4,6 +4,7 @@
 
 
 @section('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
 {!! htmlScriptTagJsApi([
     'action' => 'homepage',
 ]) !!}
@@ -68,6 +69,10 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 .invalid-feedback{
     color: red;
 }
+
+    .iti{
+        width: 100%;
+    }
 </style>
 @endsection
 
@@ -78,7 +83,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
         <div class="container">
             <div class="row">
                 <div class="title__wrapp">
-                    <div class="page__subtitle title__grey">Apply</div>
+                    <div class="{{-- page__subtitle --}} title__grey">Apply</div>
                     <h1 class="page__title">Work with us</h1>
                 </div>
             </div>
@@ -103,9 +108,9 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                         </div>
                     @endif
                     
-                    <form class="apply-form form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="apply-form form-horizontal" method="POST" id="registerForm" action="{{ route('register') }}">
                        @csrf
-                        <input type="hidden" name="account_type" value="agent">
+                        <input type="hidden" name="account_type" value="candidate">
                         @if (\Request::query('referal'))
                             <input type="hidden" name="referal" value="{{\Request::query('referal')}}">
                         @endif
@@ -113,8 +118,8 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="tg-btn-sp m-b-20">
                                 <div class="switch-button">
                                     <span class="active"></span>
-                                    <span class="switch-button-case left active-case">Creator</span>
-                                    <span class="switch-button-case right">Creative</span>
+                                    <span class="switch-button-case left">Creator</span>
+                                    <span class="switch-button-case right active-case">Creative</span>
                                 </div>
                             </div>
                         </div>
@@ -122,15 +127,15 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                         <div class="form-block">
                             <div class="form-group">
                                 <label for="f_name" class="col-sm-4 control-label">First Name <span class="req">*</span></label>
-                                 <div class="col-sm-8">
-                                <input id="f_name" type="text" class="form-control @error('f_name') is-invalid @enderror" name="f_name" value="{{ old('f_name') }}" required autocomplete="f_name" autofocus>
+                                <div class="col-sm-8">
+                                    <input id="f_name" type="text" class="form-control @error('f_name') is-invalid @enderror" name="f_name" value="{{ old('f_name') }}" required autocomplete="f_name" autofocus>
 
-                                {{-- @error('f_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror --}}
-                            </div>
+                                    {{-- @error('f_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror --}}
+                                </div>
                             </div> 
                             <div class="form-group">
                                 <label for="l_name" class="col-sm-4 control-label">Last Name <span class="req">*</span></label>
@@ -150,8 +155,8 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="col-sm-8">
                                     <select name="gender" id="gender" name = "gender" class="form-control" required>
                                         <option label="Select"></option>
-                                        <option value="female">Female</option>
-                                        <option value="male">Male</option>
+                                        <option value="female" {{ old('gender')=='female' ?'selected':''}}>Female</option>
+                                        <option value="male" {{ old('gender')=='male' ?'selected':''}}>Male</option>
                                     </select>
                                     {{-- @error('gender')
                                         <span class="invalid-feedback" role="alert">
@@ -163,7 +168,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="dob" class="col-sm-4 control-label">Date of birth <span class="req">*</span></label>
                                 <div class="col-sm-8 form-row">
-                                    <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
+                                    <input id="dob" type="date" min='1920-01-01' class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
                                     {{-- @error('dob')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -175,7 +180,8 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="phone" class="col-sm-4 control-label">Phone <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" name="phone" id="phone" value="{{ old('phone') }}">
+                                    <input type="tel" maxlength="15"  class="form-control" name="phone" id="phone" value="{{ old('phone') }}">
+                                    <input type="tel" class="hide" name="new_phone" id="hiden">
                                     {{-- @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -202,7 +208,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     <select name="country" id="country" class="form-control">
                                         <option value="">Select</option>
                                         @foreach ($countries as $country)
-                                            <option value="{{$country->nicename}}">{{$country->nicename}}</option>
+                                            <option value="{{$country->nicename}}" {{ !is_null(old('country')) ? (old('country')==$country->nicename ?'selected':''): ($country->nicename=="United States" ? 'selected' : '')}}>{{$country->nicename}}</option>
                                         @endforeach
                                         
                                     </select>
@@ -306,6 +312,9 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 @endsection
 
 @section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js" integrity="sha512-DNeDhsl+FWnx5B1EQzsayHMyP6Xl/Mg+vcnFPXGNjUZrW28hQaa1+A4qL9M+AiOMmkAhKAWYHh1a+t6qxthzUw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
         var user_type = 'agent';
@@ -340,5 +349,71 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             switchRight();
         }, false);
 
+    </script>
+
+    {{-- input phone setting --}}
+    <script>
+        /* INITIALIZE BOTH INPUTS WITH THE intlTelInput FEATURE*/
+
+        var phone = document.querySelector("#phone");
+        var iti=window.intlTelInput(phone,{
+            initialCountry: "us",
+            separateDialCode: true,
+            preferredCountries: ["fr", "us", "gb"],
+            geoIpLookup: function (callback) {
+                $.get('https://ipinfo.io', function () {
+                }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+        });
+
+        var hiden_phone = document.querySelector("#hiden");
+        window.intlTelInput(hiden_phone,{
+            initialCountry: "us",
+            dropdownContainer: 'body',
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+        });
+
+        /* var phone = document.querySelector("#phone");
+		var iti =intlTelInput(phone); */
+
+        var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+
+        $(document).ready(function () {
+            $('#phone').mask(mask1)
+        });
+
+        $("#phone").on("countrychange", function (e, countryData) {
+            $("#phone").val('');
+            var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+            $('#phone').mask(mask1);
+
+            var country_data=iti.getSelectedCountryData();
+            console.log(country_data);
+            document.getElementById("hiden").value = country_data.dialCode;/* $("#phone").val().replace(/\s+/g, '') */;
+        });
+
+
+        $('input.hide').parent().hide();
+
+    </script>
+
+    <script>
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10){
+                dd='0'+dd
+            } 
+            if(mm<10){
+                mm='0'+mm
+            } 
+
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("dob").setAttribute("max", today)
     </script>
 @endsection

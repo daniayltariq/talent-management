@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="title__wrapp">
-                    <div class="page__subtitle title__grey">Form</div>
+                    <div class="{{-- page__subtitle --}} title__grey">Form</div>
                     <h1 class="page__title">Post Job</h1>
                 </div>
             </div>

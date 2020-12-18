@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row">
             <div class="title__wrapp">
-                <div class="page__subtitle title__grey">Post</div>
+                <div class="{{-- page__subtitle --}} title__grey">Post</div>
                 <h1 class="page__title">Create a Post</h1>
             </div>
         </div>

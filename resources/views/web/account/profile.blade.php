@@ -87,7 +87,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
         <div class="container">
             <div class="row">
                 <div class="title__wrapp">
-                    {{-- <div class="page__subtitle title__grey">Profile</div> --}}
+                    
                     <h1 class="page__title">PROFILE INFORMATION</h1>
                 </div>
             </div>
