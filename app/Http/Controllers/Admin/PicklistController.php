@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Domain\Mail\SharePicklist;
+use App\Domain\Mail\PicklistTalent;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class PicklistController extends Controller
 {
@@ -27,7 +29,7 @@ class PicklistController extends Controller
                 $q->whereNotIn('name',['candidate','superadmin']);
             }
         )->where('status',1)->get();
-        /* dd($agents); */
+        /* dd($picklist[0]->items_data('phone')); */
         return view('backend.picklist.list',compact('picklist','agents'));
     }
 
@@ -135,24 +137,80 @@ class PicklistController extends Controller
     public function picklist_share(Request $request,$id)
     {
         /* dd($request->all()); */
+        $validator = Validator::make($request->all(), [
+            "recipients"    => "required|array",
+            "recipients.*"  => "required|string|distinct",
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $picklist=Picklist::findOrFail($id);
         
         try {
-            if ($request->query('q') && $request->query('q')=='talents') {
-                $talents=PicklistUser::where('picklist_id',$id)->pluck('user_id');
-                $users_email=User::whereIn('id',$talents)->pluck('email');
-                
-                $recp=$users_email;
-            }
-            else{
-                $recp=$request->recipients;
-            }
+            $recp=$request->recipients;
             
             foreach ($recp as $key => $email) {
                 Mail::to($email)->send(new SharePicklist($picklist));
             }
 
             return redirect()->back()->with('success', 'Picklist Shared.');
+            
+        } catch (\Throwable $th) {
+            
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+         
+    }
+
+    public function text_talent(Request $request,$id)
+    {
+        /* dd($request->all()); */
+        $validator = Validator::make($request->all(), [
+            "talent_recipients"    => "required|string",
+            "message"    => "required|string",
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $picklist=Picklist::findOrFail($id);
+        
+        try {
+            if ($request->source && $request->source=='text') {
+
+                $recp=$request->talent_recipients;
+                $recp=explode(',',$recp);
+                /* dd('text'); */
+                foreach ($recp as $key => $phone) {
+                    Nexmo::message()->send([
+                        'to'   => $phone,
+                        'from' => '16105552344',
+                        'text' => $request->message
+                    ]);
+                }
+            }
+            elseif ($request->source && $request->source=='email') {
+                $recp=$request->talent_recipients;
+                $recp=explode(',',$recp);
+                
+                $data=[
+                    "subject"=>$request->mail_subject,
+                    "message"=>$request->message,
+                ];
+                /* dd($recp); */
+                foreach ($recp as $key => $email) {
+                    Mail::to($email)->send(new PicklistTalent($data));
+                }
+            }
+
+            return redirect()->back()->with('success', 'Success.');
             
         } catch (\Throwable $th) {
             
