@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" style="margin: 15px 0px;">
 	<div class="container">
 		<div class="row">
 			<div class="footer__widgets clearfix">
@@ -28,7 +28,7 @@
 					</div>
 				</div> --}}
 			</div>
-			<div class="footer__copyrite">© 2019 Talent Agency. All Rights Reserved.</div>
+			<div class="footer__copyrite">© 2019 The Talent Agency. All Rights Reserved.</div>
 		</div>
 	</div>
 </footer><!-- Footer End -->

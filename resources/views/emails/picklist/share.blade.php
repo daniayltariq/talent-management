@@ -7,7 +7,7 @@
     <meta name="x-apple-disable-message-reformatting">  <!-- Disable auto-scale in iOS 10 Mail entirely -->
     <title></title> <!-- The title tag shows in email notifications, like Android 4.4. -->
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600,700" rel="stylesheet">
 
     <!-- CSS Reset : BEGIN -->
     <style>
@@ -111,7 +111,6 @@ img.g-img + div {
     }
 }
 
-
     </style>
 
     <!-- CSS Reset : END -->
@@ -120,13 +119,13 @@ img.g-img + div {
     <style>
 
 	    .primary{
-	background: #17bebb;
+	background: #ff8b00;
 }
 .bg_white{
 	background: #ffffff;
 }
 .bg_light{
-	background: #f7fafa;
+	background: #fafafa;
 }
 .bg_black{
 	background: #000000;
@@ -140,12 +139,12 @@ img.g-img + div {
 
 /*BUTTON*/
 .btn{
-	padding: 10px 15px;
+	padding: 5px 20px;
 	display: inline-block;
 }
 .btn.btn-primary{
 	border-radius: 5px;
-	background: #17bebb;
+	background: #ff8b00;
 	color: #ffffff;
 }
 .btn.btn-white{
@@ -159,6 +158,11 @@ img.g-img + div {
 	border: 1px solid #fff;
 	color: #fff;
 }
+.btn.btn-black{
+	border-radius: 0px;
+	background: #000;
+	color: #fff;
+}
 .btn.btn-black-outline{
 	border-radius: 0px;
 	background: transparent;
@@ -166,28 +170,33 @@ img.g-img + div {
 	color: #000;
 	font-weight: 700;
 }
-.btn-custom{
-	color: rgba(0,0,0,.3);
-	text-decoration: underline;
+.btn.btn-custom{
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: 12px;
 }
 
 h1,h2,h3,h4,h5,h6{
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Work Sans', sans-serif;
 	color: #000000;
 	margin-top: 0;
 	font-weight: 400;
 }
 
 body{
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Work Sans', sans-serif;
 	font-weight: 400;
 	font-size: 15px;
 	line-height: 1.8;
-	color: rgba(0,0,0,.4);
+	color: rgba(0,0,0,.5);
 }
 
 a{
-	color: #17bebb;
+	color: #ff8b00;
+}
+
+p{
+	margin-top: 0;
 }
 
 table{
@@ -198,10 +207,31 @@ table{
 	margin: 0;
 }
 .logo h1 a{
-	color: #17bebb;
-	font-size: 24px;
+	color: #000000;
+	font-size: 20px;
 	font-weight: 700;
-	font-family: 'Poppins', sans-serif;
+	/*text-transform: uppercase;*/
+	font-family: 'Work Sans', sans-serif;
+}
+
+.navigation{
+	padding: 0;
+	padding: 1em 0;
+	/*background: rgba(0,0,0,1);*/
+	border-top: 1px solid rgba(0,0,0,.05);
+	border-bottom: 1px solid rgba(0,0,0,.05);
+	margin-bottom: 0;
+}
+.navigation li{
+	list-style: none;
+	display: inline-block;;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 14px;
+	font-weight: 500;
+}
+.navigation li a{
+	color: rgba(0,0,0,1);
 }
 
 /*HERO*/
@@ -209,45 +239,206 @@ table{
 	position: relative;
 	z-index: 0;
 }
-
+.hero .overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	content: '';
+	width: 100%;
+	background: #000000;
+	z-index: -1;
+	opacity: .2;
+}
 .hero .text{
-	color: rgba(0,0,0,.3);
+	color: rgba(255,255,255,.9);
+	max-width: 50%;
+	margin: 0 auto 0;
 }
 .hero .text h2{
-	color: #000;
+	color: #fff;
 	font-size: 34px;
 	margin-bottom: 0;
-	font-weight: 200;
+	font-weight: 400;
 	line-height: 1.4;
-}
-.hero .text h3{
-	font-size: 24px;
-	font-weight: 300;
 }
 .hero .text h2 span{
 	font-weight: 600;
-	color: #000;
+	color: #ff8b00;
 }
 
-.text-author{
-	bordeR: 1px solid rgba(0,0,0,.05);
-	max-width: 50%;
-	margin: 0 auto;
-	padding: 2em;
+/*INTRO*/
+.intro{
+	position: relative;
+	z-index: 0;
 }
-.text-author img{
-	border-radius: 50%;
-	padding-bottom: 20px;
+
+.intro .text{
+	color: rgba(0,0,0,.3);
 }
-.text-author h3{
+.intro .text h2{
+	color: #000;
+	font-size: 34px;
+	margin-bottom: 0;
+	font-weight: 300;
+}
+.intro .text h2 span{
+	font-weight: 600;
+	color: #ff8b00;
+}
+
+/*SERVICES*/
+.services{
+}
+.text-services{
+	padding: 10px 10px 0; 
+	text-align: center;
+}
+.text-services h3{
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.services-list{
+	margin: 0 0 20px 0;
+	width: 100%;
+}
+
+.services-list img{
+	float: left;
+}
+.services-list h3{
+	margin-top: 0;
 	margin-bottom: 0;
 }
+.services-list p{
+	margin: 0;
+}
+
+
+
+/*COUNTER*/
+.counter{
+	width: 100%;
+	position: relative;
+	z-index: 0;
+}
+.counter .overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	content: '';
+	width: 100%;
+	background: #000000;
+	z-index: -1;
+	opacity: .3;
+}
+.counter-text{
+	text-align: center;
+}
+.counter-text .num{
+	display: block;
+	color: #ffffff;
+	font-size: 34px;
+	font-weight: 700;
+}
+.counter-text .name{
+	display: block;
+	color: rgba(255,255,255,.9);
+	font-size: 13px;
+}
+
+/*TOPIC*/
+.topic{
+	width: 100%;
+	display: block;
+	float: left;
+	border-bottom: 1px solid rgba(0,0,0,.1);
+	padding: 1.5em 0;
+}
+.topic .img{
+	width: 120px;
+	float: left;
+}
+.topic .text{
+	width: calc(100% - 150px);
+	padding-left: 20px;
+	float: left;
+}
+.topic .text h3{
+	font-size: 20px;
+	margin-bottom: 15px;
+	line-height: 1.2;
+}
+.topic .text .meta{
+	margin-bottom: 10px;
+}
+
+/*HEADING SECTION*/
+.heading-section{
+}
+.heading-section h2{
+	color: #000000;
+	font-size: 28px;
+	margin-top: 0;
+	line-height: 1.4;
+	font-weight: 400;
+}
+.heading-section .subheading{
+	margin-bottom: 20px !important;
+	display: inline-block;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: rgba(0,0,0,.4);
+	position: relative;
+}
+.heading-section .subheading::after{
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -10px;
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: #ff8b00;
+	margin: 0 auto;
+}
+
+.heading-section-white{
+	color: rgba(255,255,255,.8);
+}
+.heading-section-white h2{
+	font-family: 
+	line-height: 1;
+	padding-bottom: 0;
+}
+.heading-section-white h2{
+	color: #ffffff;
+}
+.heading-section-white .subheading{
+	margin-bottom: 0;
+	display: inline-block;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: rgba(255,255,255,.4);
+}
+
+
 ul.social{
 	padding: 0;
 }
 ul.social li{
 	display: inline-block;
 	margin-right: 10px;
+	/*border: 1px solid #ff8b00;*/
+	padding: 10px;
+	border-radius: 50%;
+	background: rgba(0,0,0,.05);
 }
 
 /*FOOTER*/
@@ -284,7 +475,7 @@ ul.social li{
 
 </head>
 
-<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f1f1f1;">
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #fafafa;">
 	<center style="width: 100%; background-color: #f1f1f1;">
     <div style="display: none; font-size: 1px;max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
       &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
@@ -293,45 +484,57 @@ ul.social li{
     	<!-- BEGIN BODY -->
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
       	<tr>
-          <td valign="top" class="bg_white" style="padding: 1em 2.5em 0 2.5em;">
+          <td valign="top" class="bg_light" style="padding: .5em 2.5em 1em 2.5em;">
           	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
           		<tr>
-          			<td class="logo">
-			            <h1 style="text-align: center"><a href="#" style="text-align: center">Talent Depot</a></h1>
+          			<td class="logo" style="text-align: center;">
+			            <h1 style="text-align: center;"><a href="{{route('/')}}">Talent Depot</a></h1>
 			          </td>
           		</tr>
           	</table>
           </td>
 	      </tr><!-- end tr -->
-				<tr>
-          <td valign="middle" class="hero bg_white" style="padding: 2em 0 4em 0;">
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-            	<tr>
-            		<td style="padding: 0 2.5em; text-align: center; padding-bottom: 3em;">
-            			<div class="text">
-            				<h4>Admin Shared a picklist with you,visit the link below:</h4>
-            			</div>
-            		</td>
-            	</tr>
-            	<tr>
-			          <thead>
-			          	<div class="text-author">
-				          	{{-- <img src="images/person_2.jpg" alt="" style="width: 100px; max-width: 600px; height: auto; margin: auto; display: block;"> --}}
-				          	<h3 class="name" style="text-align: center;">Ronald Tuff</h3>
-				          	<span class="position" style="text-align: center;">CEO, Founder at e-Verify</span>
-				           	<p><a href="#" class="btn btn-primary" style="text-align: center;">Accept Request</a></p>
-				           	<p><a href="#" class="btn-custom" style="text-align: center;">Ignore Request</a></p>
-			           	</div>
-			          </td>
-			        </tr>
-            </table>
+	      <tr>
+          <td class="bg_white email-section">
+          	<div class="heading-section" style="text-align: center; padding: 0 30px;">
+            	<h2>{{$data->title ?? ''}}</h2>
+            	<p>{{$data->description ?? ''}}</p>
+          	</div>
+          	<table role="presentation" border="0" cellpadding="10" cellspacing="0" width="100%">
+          		<tr>
+		            <td valign="top" style="width: 100%;">
+		            	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+		            		<tr>
+		            			<td valign="top" width="100%">
+									@php
+										 $items=$data->items;
+									@endphp
+									@foreach ($items as $item)
+										<div class="topic">
+											<div class="img">
+												<img src="images/person_1.jpg" alt="" style="width: 100%; max-width: 600px; height: auto; margin: auto; margin-bottom: 20px; display: block;">
+											</div>
+											<div class="text">
+												<h3>{{$item->member->profile->legal_first_name ?? ''}} {{$item->member->profile->legal_last_name ?? ''}}</h3>
+												<p class="meta"><span>{{$item->member->getAgeAttribute() ?? ''}}</span></p>
+												<a href="{{route('model.single',$item->member->id)}}" target="_blank">view profile</a>
+											</div>
+										</div>
+									@endforeach
+		            				
+								</td>
+							</tr>
+		            	</table>
+		            </td>
+		          </tr><!-- end: tr -->
+          	</table>
           </td>
-	      </tr><!-- end tr -->
+        </tr><!-- end: tr -->
       <!-- 1 Column Text + Button : END -->
       </table>
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
       	<tr>
-          <td valign="middle" class="bg_light footer email-section">
+          <td valign="middle" class="bg_light footer email-section" style="padding: 2.5em !important;">
             <table>
             	<tr>
                 <td valign="top" width="33.333%" style="padding-top: 20px;">
@@ -339,7 +542,7 @@ ul.social li{
                     <tr>
                       <td style="text-align: left; padding-right: 10px;">
                       	<h3 class="heading">About</h3>
-                      	<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                      	<p style="text-align: inherit">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
                       </td>
                     </tr>
                   </table>
@@ -364,9 +567,9 @@ ul.social li{
                       	<h3 class="heading">Useful Links</h3>
                       	<ul>
 					                <li><a href="#">Home</a></li>
-					                <li><a href="#">About</a></li>
-					                <li><a href="#">Services</a></li>
-					                <li><a href="#">Work</a></li>
+					                <li><a href="#">Conference</a></li>
+					                <li><a href="#">Events</a></li>
+					                <li><a href="#">Blog</a></li>
 					              </ul>
                       </td>
                     </tr>
@@ -377,7 +580,7 @@ ul.social li{
           </td>
         </tr><!-- end: tr -->
         <tr>
-          <td class="bg_light" style="text-align: center;">
+          <td class="bg_white" style="text-align: center; padding-top: 20px;">
           	<p>No longer want to receive these email? You can <a href="#" style="color: rgba(0,0,0,.8);">Unsubscribe here</a></p>
           </td>
         </tr>

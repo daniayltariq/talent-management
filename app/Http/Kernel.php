@@ -63,6 +63,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'hasCommunityReadAccess' => \App\Http\Middleware\hasCommunityReadAccess::class,
+        'hasCommunityReadWriteAccess' => \App\Http\Middleware\hasCommunityReadWriteAccess::class,
         'isActive' => \App\Http\Middleware\isActive::class,
         'isAdmin' => \App\Http\Middleware\isAdmin::class,
         'isAgent' => \App\Http\Middleware\isAgent::class,

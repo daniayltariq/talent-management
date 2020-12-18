@@ -30,15 +30,18 @@ class AppServiceProvider extends ServiceProvider
     {
       Schema::defaultStringLength(191);
 
-      VerifyEmail::toMailUsing(function ($notifiable) {
-        $verifyUrl = URL::temporarySignedRoute(
-             'verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey(),'hash' => sha1($notifiable->getEmailForVerification()),]
-         );
+      if (auth()->check()) {
+        VerifyEmail::toMailUsing(function ($notifiable) {
+          $verifyUrl = URL::temporarySignedRoute(
+              'verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey(),'hash' => sha1($notifiable->getEmailForVerification()),]
+          );
 
-        // Return your mail here...
-        return (new MailMessage)
-        ->subject('Verify Email Address')
-        ->markdown('emails.verify', ['url' => $verifyUrl,'user'=>auth()->user()->f_name]);
-      });
+          // Return your mail here...
+          return (new MailMessage)
+          ->subject('Verify Email Address')
+          ->markdown('emails.verify', ['url' => $verifyUrl,'user'=>auth()->user()->f_name]);
+        });
+      }
+      
     }
 }

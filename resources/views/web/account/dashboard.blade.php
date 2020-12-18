@@ -217,6 +217,10 @@
     .toast-warning{
         background-color: #F89406;
     }
+
+    .mt-4r{
+        margin-top:4rem; 
+    }
 </style>
 
 <!-- jQuery library -->
@@ -259,7 +263,7 @@
             @if (auth()->user()->status==0)
                <div class="alert alert-primary" role="alert">
                     <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
-                    Your account has been deactivated,please make a <a href="{{route('user_request.create')}}" class="alert-link">request</a> to re-activate.
+                    Your account has been deactivated,all features are locked,in order to unlock please make a <a href="{{route('user_request.create')}}" class="alert-link">request</a> to re-activate.
                 </div> 
             @endif
             
@@ -280,6 +284,11 @@
                         <a class="nav-link mb-3 p-3 shadow" id="v-refer-tab" data-toggle="pill" href="#v-refer" role="tab" aria-controls="v-refer" aria-selected="false">
                             <i class="fa fa-users mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">Refer a Friend </span></a>
+                        @if ($data['plan'] && $data['plan']->social_links==1)
+                        <a class="nav-link mb-3 p-3 shadow" id="v-social-tab" data-toggle="pill" href="#v-social" role="tab" aria-controls="v-social" aria-selected="false">
+                            <i class="fa fa-icons mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Social Links</span></a>
+                        @endif
                         </div>
                 </div>
                 <div class="col-md-9">
@@ -390,85 +399,9 @@
                         </div>
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             
-                            <div class="row mt-5">
+                            <div id="render_attachments">
+                                @include('components.attachments',['data'=>$data])
                                 
-                                <div class="col-md-12 mt-5">
-                                    <form method="post" action="{{url('image/upload/store')}}" enctype="multipart/form-data" class="dropzone" id="imageDropzone">
-                                        @csrf
-                                    </form> 
-                                </div>
-                                
-                                <div class="col-md-12 mt-5">
-                                    <h4 class="mb-4 upload-head heading">Your Images</h4>
-                                </div>
-                                
-                                <div class="col-md-12">
-                                    <div class="container">
-                                        <div class="gallery">
-                                    
-                                            @forelse($data['images'] as $img)
-                                                <div class="content">
-                                                    <div class="content-overlay"></div>
-                                                    <img class="content-image" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}">
-                                                    <div class="content-details fadeIn-bottom">
-                                                        <a type="button" class="content-title" data-img="{{$img->file}}" id="remove-img-btn">Remove</a>
-                                                    </div>
-                                                </div>
-                                            @empty
-                                                <h4 class="text-center">No images found</h4>
-                                            @endforelse
-                                            
-                                    
-                                        </div>
-                                    
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br><hr class="hr-style">
-
-                            <div class="row mt-5">
-                                <div class="col-md-12 mt-5">
-                                    <h4 class="mb-4 upload-head heading">Your Videos</h4>
-                                </div>
-                                <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
-                                    <div class="row">
-                                        <div class="sp-thumbnails">
-                                            @forelse ($data['video'] as $vid)
-                                                <video width="320" height="240" controls>
-                                                    <source src="{{ asset('storage/uploads/uploadData/' . $vid->file ?? '') }}" type="video/mp4">
-                                                </video>
-                                            @empty
-                                                <h4 class="text-center">No videos found</h4>
-                                            @endforelse
-                                            	
-            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br><hr class="hr-style">
-
-                            <div class="row mt-5">
-                                <div class="col-md-12 mt-5">
-                                    <h4 class="mb-4 upload-head heading">Your Audios</h4>
-                                </div>
-                                <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
-                                    <div class="row">
-                                        <div class="sp-thumbnails">
-                                            @forelse ($data['audio'] as $audio)
-                                                <audio controls>
-                                                    <source src="{{ asset('storage/uploads/uploadData/' . $audio->file ?? '') }}" type="audio/mpeg">
-                                                </audio>
-                                            @empty
-                                                <h4 class="text-center">No audio found</h4>
-                                            @endforelse
-                                            	
-            
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
@@ -536,6 +469,44 @@
                                 </div> --}}
                             </div>
                         </div>
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-social" role="tabpanel" aria-labelledby="v-social-tab">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form class="repeater" action="{{route('account.dashboard.social_links')}}" method="POST">
+                                        <!--
+                                            The value given to the data-repeater-list attribute will be used as the
+                                            base of rewritten name attributes.  In this example, the first
+                                            data-repeater-item's name attribute would become group-a[0][text-input],
+                                            and the second data-repeater-item would become group-a[1][text-input]
+                                        -->
+                                        @csrf
+                                        <div data-repeater-list="social">
+                                            <div data-repeater-item>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <input class="form-control" type="text" name="source" id="source" placeholder="Title" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input class="form-control" type="text" name="link" id="link" placeholder="Link" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input data-repeater-delete type="button" class="btn btn-danger" value="Delete"/>
+                                                    </div>
+                                                    
+                                                </div><br>
+                                                
+                                            </div>
+                                        </div>
+                                        @if($data['plan'] && ( $data['plan']->social_limit !== count($data["social"])) )
+                                            <input data-repeater-create type="button" class="btn btn-primary" id="repeater-add-btn" value="Add"/>
+                                            <hr>
+                                            <button type="submit" class="btn btn-secondary">Save</button>
+                                        @endif
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -545,6 +516,7 @@
 
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.js" integrity="sha512-bZAXvpVfp1+9AUHQzekEZaXclsgSlAeEnMJ6LfFAvjqYUVZfcuVXeQoN5LhD7Uw0Jy4NCY9q3kbdEXbwhZUmUQ==" crossorigin="anonymous"></script>
 <script>
     function copyToClipboard() {
         /* Get the text field */
@@ -619,7 +591,7 @@
                 else { done(); }
             },
             maxFilesize: 12, // MB
-            acceptedFiles: "image/*,.mp4,.mkv,.mov,.wmv,audio/*",
+            acceptedFiles: "image/*", /* ,.mp4,.mkv,.mov,.wmv,audio */
             dictDefaultMessage:"Drop Your Files here.",
             /* autoProcessQueue: false, */
             accept: function(file, done) {
@@ -642,12 +614,12 @@
                 if (validImageTypes.includes(fileType)) {
                     formData.append('type', 'image');
                 }
-                else if (validVideoTypes.includes(fileType)) {
+                /* else if (validVideoTypes.includes(fileType)) {
                     formData.append('type', 'video');
                 }
                 else if (validAudioTypes.includes(fileType)) {
                     formData.append('type', 'audio');
-                }
+                } */
             },
             success: function (file, response) {
                console.log(file);
@@ -736,14 +708,14 @@
     function setDropzoneImgLimit(file)
     {
         if ( validImageTypes.includes(file.type)) {
-            $('#imageDropzone')[0].dropzone.options.maxFiles = 2;
+            $('#imageDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->pictures}}"- "{{count($data['images'])}}";
         }
-        else{
+        /* else{
             $('#imageDropzone')[0].dropzone.options.maxFiles = 20;
-        }
+        } */
     }
 
-    function sendAudio(file)
+    /* function sendAudio(file)
     {
         console.log(file);
         var audiofile=new FormData($('#imageDropzone')[0]);
@@ -763,7 +735,104 @@
                 toastr.error('something went wrong!');
             }
         });
-    }
+    } */
+</script>
+
+<script src="{{asset('js/mydropzone.js')}}"></script>
+<script>
+    $(document).ready(function () {
+        var $social_repeater = $('.repeater').repeater({
+            // (Optional)
+            // start with an empty list of repeaters. Set your first (and only)
+            // "data-repeater-item" with style="display:none;" and pass the
+            // following configuration flag
+            initEmpty: true,
+            // (Optional)
+            // "defaultValues" sets the values of added items.  The keys of
+            // defaultValues refer to the value of the input's name attribute.
+            // If a default value is not specified for an input, then it will
+            // have its value cleared.
+            defaultValues: {
+                'text-input': 'foo'
+            },
+            // (Optional)
+            // "show" is called just after an item is added.  The item is hidden
+            // at this point.  If a show callback is not given the item will
+            // have $(this).show() called on it.
+            /* show: function () {
+                $(this).slideDown();
+            }, */
+            // (Optional)
+            // "hide" is called when a user clicks on a data-repeater-delete
+            // element.  The item is still visible.  "hide" is passed a function
+            // as its first argument which will properly remove the item.
+            // "hide" allows for a confirmation step, to send a delete request
+            // to the server, etc.  If a hide callback is not given the item
+            // will be deleted.
+            hide: function (deleteElement) {
+                /* if(confirm('Are you sure you want to delete this element?')) { */
+                    $(this).slideUp(deleteElement);
+                /* } */
+            },
+            // (Optional)
+            // You can use this if you need to manually re-index the list
+            // for example if you are using a drag and drop library to reorder
+            // list items.
+            /* ready: function (setIndexes) {
+                $dragAndDrop.on('drop', setIndexes);
+            }, */
+            // (Optional)
+            // Removes the delete button from the first list item,
+            // defaults to false.
+            isFirstItemUndeletable: true
+        })
+
+        $('#repeater-add-btn').on('click',function(e){
+            e.preventDefault();
+            if ($('.repeater').find('[data-repeater-delete]').length > "{{count($data["social"])}}")
+            {
+                $('.repeater').find('[data-repeater-delete]').last().click();
+                toastr.warning('Limit exceeded');
+            }else{
+                $social_repeater.slideDown();
+            }
+            
+        })
+
+        @if(count($data["social"])>0)
+            var social={!!json_encode($data["social"])!!};
+            $social_repeater.setList(social);
+        @endif
+        
+        @if (auth()->user()->status==0)
+            myDropzoneTheFirst.disable();
+        @endif
+        
+    });
+
+    $(document).on('click',function(e){
+        
+        if ( $('div#v-pills-tab').find(e.target).length) 
+        {
+            if (e.target.id === $('a.nav-link.active').attr('id')) {
+                myDropzoneTheFirst.disable();
+                $.ajax({
+                    url: '{{ route('account.fetch_attachments') }}',
+                    type: 'GET',
+                    success: function(res) {
+                        $('#render_attachments').html(res);
+                        render_dropzone();
+                        /* myDropzoneTheFirst.enable(); */
+                    },
+                    error: function(error) {
+                        $('#render_attachments').html("<h4>No Attachments Found</h4>");
+                    }
+                });
+            }
+        }
+        
+        
+    })
 </script>
 
 @endsection

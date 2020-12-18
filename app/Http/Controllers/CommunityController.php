@@ -7,6 +7,7 @@ use App\Models\TopicCategory;
 use App\Models\TopicComment;
 use App\Models\TopicLike;
 use Illuminate\Http\Request;
+use App\Models\Plan;
 
 class CommunityController extends Controller
 {
@@ -58,26 +59,36 @@ class CommunityController extends Controller
     	}
     }
 
-     public function post_like(Request $request){
+     public function post_like(Request $request)
+     {
+        $subs=auth()->user()->subscriptions()->active()->first();
+        if ($subs->count()>0) {
+            $plan=Plan::select('community_access','community_access_perm')->where('stripe_plan',$subs->stripe_plan)->first();
+            if ($plan->community_access==1 && $plan->community_access_perm=='R/W') {
+                if($request->topic_id){
+                    $res_liked = 0;
+                    $post = TopicLike::where('topic_id',$request->topic_id)->where('user_id',auth()->user()->id)->first();
 
-        if($request->topic_id){
-            $res_liked = 0;
-            $post = TopicLike::where('topic_id',$request->topic_id)->where('user_id',auth()->user()->id)->first();
+                    if($post){
+                        $post->delete();
+                    }else{
+                        $post = new TopicLike;
+                        $res_liked = 1;
+                        $post->topic_id = $request->topic_id;
+                        $post->user_id  = auth()->user()->id;
+                        $post->save();
+                    }
 
-            if($post){
-                $post->delete();
-            }else{
-                $post = new TopicLike;
-                $res_liked = 1;
-                $post->topic_id = $request->topic_id;
-                $post->user_id  = auth()->user()->id;
-                $post->save();
+                    $post_likes = TopicLike::where('topic_id',$request->topic_id)->get()->count();
+                    return view('web.components.post_likes')->with(['post_id' => $post->topic_id,'post_likes' => $post_likes]);
+        
+                }
             }
-
-            $post_likes = TopicLike::where('topic_id',$request->topic_id)->get()->count();
-            return view('web.components.post_likes')->with(['post_id' => $post->topic_id,'post_likes' => $post_likes]);
- 
         }
+        return array(
+            'message' => 'Access Denied', 
+            'alert_type' => 'error'
+        );
 
     }
 

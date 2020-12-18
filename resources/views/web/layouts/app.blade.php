@@ -132,9 +132,13 @@
 			    topic_id: topic_id,
 			    _token: "{{ csrf_token() }}",
 			  },
-			  function(data, status){
-
-			  	$('.post__likes_wrapper_'+topic_id).html(data);
+			  function(res, status){
+				if (res.alert_type=='error') {
+					toastr.error(res.message);
+				} else {
+					$('.post__likes_wrapper_'+topic_id).html(res);
+				}
+			  	
 			     
 			  });
 

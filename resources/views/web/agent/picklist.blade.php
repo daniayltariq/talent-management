@@ -147,5 +147,7 @@
 		</div>
 	</div>
 </div>
+
+
 <!-- Blog Section End -->
 @endsection

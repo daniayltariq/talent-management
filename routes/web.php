@@ -46,24 +46,27 @@ Route::get('/forum', function () {
 // Route::get('/community', function () {
 //     return view('web.pages.community');
 // })->name('community');
+Route::middleware(['hasCommunityReadAccess'])->group(function () {
+    Route::get('/community', [App\Http\Controllers\CommunityController::class,'index'])->name('community');
+    Route::get('/community/topic/read_more_comments', [App\Http\Controllers\CommunityController::class,'read_more_comments'])->name('read_more_comments');
+    
+    Route::get('/community/single-post/{slug}', [App\Http\Controllers\CommunityController::class,'single'])->name('single-post');
 
-Route::get('/community', [App\Http\Controllers\CommunityController::class,'index'])->name('community');
-Route::group(['middleware' => ['isAdminOrAgentOrCandidate','isActive']], function() {
-    Route::post('/community/topic/like', [App\Http\Controllers\CommunityController::class,'post_like'])->name('post_like');
+    Route::get('/community/category/{slug}', [App\Http\Controllers\CommunityController::class,'categories'])->name('community.category');
+    Route::get('/community/post_suggest', [App\Http\Controllers\CommunityController::class,'post_suggest'])->name('post.suggest');
+
+});
+
+Route::post('/community/topic/like', [App\Http\Controllers\CommunityController::class,'post_like'])->name('post_like');
+Route::group(['middleware' => ['isAdminOrAgentOrCandidate','isActive','hasCommunityReadWriteAccess']], function() {
     Route::post('/community/topic/comment', [App\Http\Controllers\CommunityController::class,'post_comment'])->name('post_comment');
     Route::post('/community/topic/reply_comment', [App\Http\Controllers\CommunityController::class,'reply_comment'])->name('reply_comment');
 });
-Route::get('/community/topic/read_more_comments', [App\Http\Controllers\CommunityController::class,'read_more_comments'])->name('read_more_comments');
 
 // Route::get('/single-topic', function () {
 //     return view('web.pages.single-topic');
 // })->name('single-topic');
 
-
-Route::get('/community/single-post/{slug}', [App\Http\Controllers\CommunityController::class,'single'])->name('single-post');
-
-Route::get('/community/category/{slug}', [App\Http\Controllers\CommunityController::class,'categories'])->name('community.category');
-Route::get('/community/post_suggest', [App\Http\Controllers\CommunityController::class,'post_suggest'])->name('post.suggest');
 
 Route::get('/testimonials', function () {
     return view('web.pages.testimonials');
@@ -128,6 +131,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('model/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('model.single');
 });
 
+Route::get('/featured-talents', [App\Http\Controllers\HomeController::class, 'featured_talents'])->name('featured_talents');
 Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
 Route::get('/search_talent', [App\Http\Controllers\HomeController::class, 'searchTalent'])->name('search_talent');
 
@@ -167,7 +171,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCand
     /**
      * Profile
      */
-    Route::middleware(['subscription.customer'])->group(function () {
+    Route::middleware(['subscription.customer','subscription.active'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
 
         Route::middleware(['isActive'])->group(function () {
@@ -177,6 +181,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCand
             Route::post('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
             Route::put('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
 
+            Route::post('/dashboard/social_links', [App\Http\Controllers\Account\DashboardController::class, 'social_links'])->name('dashboard.social_links');
         });
         
         Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
@@ -184,6 +189,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCand
     });
     
     Route::get('/talent/detail', [App\Http\Controllers\Account\TalentController::class, 'detail'])->name('talent.detail');
+    Route::get('/fetch_attachments', [App\Http\Controllers\Account\DashboardController::class, 'fetchAttachments'])->name('fetch_attachments');
 
     /**
      * Subscription
@@ -268,7 +274,7 @@ Route::group([
     'as' => 'backend.',
 	'middleware' => ['isAdmin'],
 ],function(){
-    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class,'dashboard'])->name('dashboard');
     Route::resource('plan', App\Http\Controllers\Admin\PlanController::class);
 
     Route::resource('topic', App\Http\Controllers\Admin\TopicController::class);
@@ -283,7 +289,7 @@ Route::group([
 
     Route::resource('picklist', App\Http\Controllers\Admin\PicklistController::class);
     Route::get('/delete_picklist_item/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'delete_picklist_item'])->name('delete_picklist_item');
-    Route::post('/picklist_share/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'picklist_share'])->name('picklist_share');
+    Route::get('/picklist_share/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'picklist_share'])->name('picklist_share');
 
     Route::resource('tag', App\Http\Controllers\Admin\TagController::class);
     Route::resource('room', App\Http\Controllers\Admin\RoomController::class);
@@ -297,13 +303,14 @@ Route::group([
 Route::group([
 	'prefix' => 'agent',
     'as' => 'agent.',
-	'middleware' => ['isAgent'],
+	'middleware' => ['isAgent','verified'],
 ],function(){
     /* Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard'); */
     Route::resource('picklist', App\Http\Controllers\Agent\PicklistController::class);
     Route::resource('topic', App\Http\Controllers\Agent\TopicController::class);
+    Route::post('mail_talent',[App\Http\Controllers\Agent\DashboardController::class, 'mailTalent'])->name('mail_talent');
 
-
+    Route::post('send_text',[App\Http\Controllers\Agent\PicklistController::class, 'sendText'])->name('send_text');
 });
 
 

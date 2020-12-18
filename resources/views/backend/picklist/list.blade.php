@@ -2,6 +2,7 @@
 
 @section('styles')
 {{-- <link href="{{asset('backend-assets/assets/vendors/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css')}}" rel="stylesheet" type="text/css" /> --}}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('css/tagsinput.css') }}">
 	<style>
 		.bootstrap-switch-container{
@@ -20,6 +21,14 @@
 
 		.bootstrap-tagsinput .badge [data-role="remove"]:after {
 			padding: 0px 5px 1px 5px;
+		}
+
+		.select2-container{
+			width: 100% !important;
+		}
+
+		.overflow-in{
+			overflow: inherit;
 		}
 	</style>
 @endsection
@@ -44,7 +53,7 @@
 			<div class="kt-section">
 				 
 				<div class="kt-section__content">
-					<div class="table-responsive">
+					<div class="table-responsive overflow-in">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -68,7 +77,17 @@
 											
 											@include('components.delete' , ['data' => $list->id, 'route' => 'backend.picklist.destroy'])
 
-											<button class="btn btn-success btn-sm btn-bg-white" name="sharePicklist" data-picklistid="{{$list->id}}"><i class="fa fa-paper-plane" style="color: #5578eb;"></i></button>
+											{{-- <button class="btn btn-success btn-sm btn-bg-white" name="sharePicklist" data-picklistid="{{$list->id}}"><i class="fa fa-paper-plane" style="color: #5578eb;"></i></button> --}}
+											<div class="dropdown dropdown-inline">
+												<button type="button" class="btn btn-default btn-icon btn-sm btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="flaticon-more"></i>
+												</button>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="{{route('backend.picklist_share',$list->id)}}?q=talents"><i class="fa fa-paper-plane"></i>Email to all talents</a>
+													<a class="dropdown-item" href="#"  name="sharePicklist" data-picklistid="{{$list->id}}"><i class="fa fa-paper-plane"></i> Email to agent</a>
+													<a class="dropdown-item" href="#"  name="sharePicklist" data-picklistid="{{$list->id}}"><i class="fa fa-paper-plane"></i> Text to talents</a>
+												</div>
+											</div>
 										</td>
 									</tr>
 								@endforeach
@@ -123,7 +142,7 @@
 <div class="modal fade" id="share_picklist_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-			<form action="#" method="POST" id="share_picklist_form" enctype="multipart/form-data" class="kt-form">
+			<form action="#" method="GET" id="share_picklist_form" enctype="multipart/form-data" class="kt-form">
 				@csrf
 				
 				<div class="modal-header">
@@ -137,7 +156,12 @@
 							<div class="form-group">
 								<label class="col-md-3 col-sm-3 col-xs-12">Recipient</label>
 								<div class="col-md-12 col-sm-12 col-xs-12">
-									<input type="text" class="form-control taginput" name="recipients"/>
+									<select class="form-control js-example-basic-multiple" name="recipients[]" multiple>
+										@foreach ($agents as $agent)
+											<option value="{{$agent->email ?? ''}}">{{$agent->email ?? ''}}</option>
+										@endforeach
+										
+									</select>
 									
 								</div>
 							</div>
@@ -156,7 +180,8 @@
 
 @section('scripts')
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js" data-turbolinks-track="true"></script> --}}
-<script src="{{ asset('js/tagsinput.js') }}"></script>
+{{-- <script src="{{ asset('js/tagsinput.js') }}"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
 
 // $("input[type=file]").change(function(){
@@ -164,9 +189,11 @@
 // });
 
 $(document).ready(function(){
-	$(".taginput").tagsinput({
+	/* $(".taginput").tagsinput({
 		maxTags: 5,
-	})
+	}) */
+
+	$('.js-example-basic-multiple').select2();
 
 	/* $("[name='status']").bootstrapSwitch();
 

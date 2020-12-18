@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Search\TalentSearch;
 use App\Models\Skill;
+use App\Models\Plan;
+use App\Models\Topic;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -33,10 +35,22 @@ class HomeController extends Controller
          }
       )->with('profile')->get();
 
-      /* dd($models[0]->profile); */
-      return view('web.index',compact('models'));
+      $topics=Topic::where('status',1)->latest()->get()->take(3);
+      
+      return view('web.index',compact('models','topics'));
     } 
 
+    public function featured_talents()
+    {
+      $featured=\App\Models\User::whereHas(
+         'roles', function($q){
+             $q->whereNotIn('name',['superadmin','agent']);
+         }
+      )->with('profile')->where('status',1)->where('featured',1)->get();
+
+      /* dd($featured); */
+      return view('web.pages.talents',compact('featured'));
+    }
 
     public function findtalent()
     {
@@ -91,6 +105,14 @@ class HomeController extends Controller
             'video'=>$user->attachments->where('type','video'),
             'audio'=>$user->attachments->where('type','audio')
          ];
+
+         $subs=$user->subscriptions()->active()->first();
+         
+         if ($subs->count()>0) {
+            $plan=Plan::select('name','description','agent_contact')->where('stripe_plan',$subs->stripe_plan)->first();
+            
+            $data["plan"]=$plan;
+         }
 
          return view('web.pages.models-single',compact('data'));
       }

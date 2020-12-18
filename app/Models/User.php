@@ -52,6 +52,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return Carbon::parse($this->attributes['dob'])->age;
     }
 
+    public function doesNotHaveSubscription()
+    {
+        $subs= $this->subscriptions()->active()->get();
+        if (!is_null($subs) && $subs->count()>0) {
+            $status=false;
+        }
+        else{
+            $status=true;
+        }
+        return $status;
+    }
+
     public function hasStripeId()
     {
         return $this->stripe_id;
@@ -75,6 +87,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function skills()
     {
         return $this->hasMany('App\Models\CandidateSkill','candidate_id');
+    }
+
+    public function social_links()
+    {
+        return $this->hasMany('App\Models\SocialLink','user_id');
     }
 
     public function referal_code()

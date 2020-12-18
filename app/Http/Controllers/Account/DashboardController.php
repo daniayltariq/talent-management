@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Account;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Plan;
 use App\Models\Attachment;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\File;
@@ -16,9 +17,18 @@ class DashboardController extends Controller
         $data=[
             'images'=>auth()->user()->attachments->where('type','image'),
             'video'=>auth()->user()->attachments->where('type','video'),
-            'audio'=>auth()->user()->attachments->where('type','audio')
+            'audio'=>auth()->user()->attachments->where('type','audio'),
+            'social'=>auth()->user()->social_links()->select('source','link')->get()->toArray()
         ];
-        /* dd($data); */
+        
+        $subs=auth()->user()->subscriptions()->active()->first();
+        
+        if (!is_null($subs) && $subs->count()>0) {
+            $plan=Plan::select('name','description','pictures','social_links','social_limit')->where('stripe_plan',$subs->stripe_plan)->first();
+            
+            $data["plan"]=$plan;
+        }
+        /* dd($data['social'][0]); */
         return view('web.account.dashboard',compact('data'));
 
     }
@@ -80,6 +90,35 @@ class DashboardController extends Controller
 
         return response()->json($notify);
     }
+    
+    public function social_links(Request $request)
+    {
+        /* dd($request->social); */
+        if ($request->social && count($request->social)>0) {
+            auth()->user()->social_links()->delete();
+            foreach($request->social as $key =>$link)
+            {
+                $social=new \App\Models\SocialLink;
+                $social->user_id=auth()->user()->id;
+                $social->source=$link['source'];
+                $social->link=$link['link'];
+                $social->save();
+            }
+            if ($social) {
+                return redirect()->back()->with(array(
+                    'message' => 'Data saved !', 
+                    'alert_type' => 'success'
+                ));
+            }
+            
+        }
+        
+        return redirect()->back()->with(array(
+            'message' => 'Something went wrong.', 
+            'alert_type' => 'error'
+        ));
+        
+    }
 
     public function fileDestroy(Request $request)
     {
@@ -90,6 +129,17 @@ class DashboardController extends Controller
             unlink($path);
         }
         return $filename;  
+    }
+
+    public function fetchAttachments()
+    {
+        $data=[
+            'images'=>auth()->user()->attachments->where('type','image'),
+            'video'=>auth()->user()->attachments->where('type','video'),
+            'audio'=>auth()->user()->attachments->where('type','audio')
+        ];
+
+        return view('components.attachments',compact('data'));
     }
 
 }

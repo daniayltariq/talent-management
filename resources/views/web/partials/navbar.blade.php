@@ -43,8 +43,8 @@
 							<li class="m-menu__list-item  {{ Request::is('about-us') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('about-us') }}">About Us</a>
 							</li>
-							<li class="m-menu__list-item  {{ Request::is('findtalent') ? 'm-menu__list-item_active' : '' }}">
-								<a href="{{ route('findtalent') }}">Featured Talent</a>
+							<li class="m-menu__list-item  {{ Request::is('featured_talents') ? 'm-menu__list-item_active' : '' }}">
+								<a href="{{ route('featured_talents') }}">Featured Talent</a>
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('community') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('community') }}">Community</a>
