@@ -52,6 +52,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return Carbon::parse($this->attributes['dob'])->age;
     }
 
+    public function routeNotificationForClickSend()
+    {
+        return $this->phone;
+    }
+
     public function doesNotHaveSubscription()
     {
         $subs= $this->subscriptions()->active()->get();

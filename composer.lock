@@ -4,8 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02976988dd23d350338ec10aac0822c3",
+    "content-hash": "9a647946a561b0f17d8eec252af1261f",
     "packages": [
+        {
+            "name": "apimatic/jsonmapper",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/apimatic/jsonmapper.git",
+                "reference": "6925ede91d6a85a886d8e00819fe53e439d6e4c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/apimatic/jsonmapper/zipball/6925ede91d6a85a886d8e00819fe53e439d6e4c2",
+                "reference": "6925ede91d6a85a886d8e00819fe53e439d6e4c2",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.2.*",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "apimatic\\jsonmapper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Weiske",
+                    "email": "christian.weiske@netresearch.de",
+                    "homepage": "http://www.netresearch.de/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Mehdi Jaffery",
+                    "email": "mehdi.jaffery@apimatic.io",
+                    "homepage": "http://apimatic.io/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Map nested JSON structures onto PHP classes",
+            "time": "2017-01-24T12:48:47+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.2",
@@ -169,6 +214,60 @@
                 "math"
             ],
             "time": "2020-08-18T23:57:15+00:00"
+        },
+        {
+            "name": "clicksend/clicksend-php",
+            "version": "v4.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ClickSend/clicksend-php.git",
+                "reference": "c6fdcee0d6778459681e372eb7b9771a04d44301"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ClickSend/clicksend-php/zipball/c6fdcee0d6778459681e372eb7b9771a04d44301",
+                "reference": "c6fdcee0d6778459681e372eb7b9771a04d44301",
+                "shasum": ""
+            },
+            "require": {
+                "apimatic/jsonmapper": "~1.0.0",
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "mashape/unirest-php": "~3.0.1",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ClickSendLib\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthew Larner",
+                    "email": "matt@clicksend.com",
+                    "homepage": "https://www.clicksend.com",
+                    "role": "Director"
+                }
+            ],
+            "description": "A PHP wrapper for ClickSend's API",
+            "homepage": "https://www.clicksend.com",
+            "keywords": [
+                "ClickSend",
+                "api",
+                "email",
+                "fax",
+                "post",
+                "sdk",
+                "sms",
+                "voice"
+            ],
+            "time": "2017-06-06T09:21:46+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -1804,6 +1903,52 @@
             "time": "2020-10-18T11:50:25+00:00"
         },
         {
+            "name": "mashape/unirest-php",
+            "version": "v3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mashape/unirest-php.git",
+                "reference": "842c0f242dfaaf85f16b72e217bf7f7c19ab12cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mashape/unirest-php/zipball/842c0f242dfaaf85f16b72e217bf7f7c19ab12cb",
+                "reference": "842c0f242dfaaf85f16b72e217bf7f7c19ab12cb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "0.1.*",
+                "phpunit/phpunit": "~4.4"
+            },
+            "suggest": {
+                "ext-json": "Allows using JSON Bodies for sending and parsing requests"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Unirest\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Unirest PHP",
+            "homepage": "https://github.com/Mashape/unirest-php",
+            "keywords": [
+                "client",
+                "curl",
+                "http",
+                "https",
+                "rest"
+            ],
+            "time": "2016-08-11T17:49:21+00:00"
+        },
+        {
             "name": "moneyphp/money",
             "version": "v3.3.1",
             "source": {
@@ -3122,6 +3267,71 @@
                 "stripe"
             ],
             "time": "2020-11-09T16:57:44+00:00"
+        },
+        {
+            "name": "superloop-ltd/laravel-sms-clicksend",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/superloop-ltd/laravel-sms-clicksend.git",
+                "reference": "91ec79efdf0154d78cf26cbad3c7e604cae271c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/superloop-ltd/laravel-sms-clicksend/zipball/91ec79efdf0154d78cf26cbad3c7e604cae271c6",
+                "reference": "91ec79efdf0154d78cf26cbad3c7e604cae271c6",
+                "shasum": ""
+            },
+            "require": {
+                "clicksend/clicksend-php": "4.0.*",
+                "illuminate/notifications": "^8.0",
+                "illuminate/queue": "^8.0",
+                "illuminate/support": "^8.0",
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^5.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NotificationChannels\\ClickSend\\ClickSendServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NotificationChannels\\ClickSend\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Kundrat",
+                    "email": "vlado@12345.com.au",
+                    "homepage": "https://github.com/vladski",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Benjamin Ayles",
+                    "email": "ben.ayles@superloop.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ClickSend Notifications channel for Laravel 5.1+",
+            "homepage": "https://github.com/superloop-ltd/laravel-sms-clicksend",
+            "keywords": [
+                "ClickSend",
+                "laravel",
+                "notifications",
+                "sms"
+            ],
+            "time": "2020-09-08T04:43:01+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -12,7 +12,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Domain\Mail\SharePicklist;
 use App\Domain\Mail\PicklistTalent;
-use Nexmo\Laravel\Facade\Nexmo;
+/* use Nexmo\Laravel\Facade\Nexmo; */
+
+use App\Notifications\ClickSendNotify;
+use NotificationChannels\ClickSend;
+use Illuminate\Notifications\Notification;
+use NotificationChannels\ClickSend\ClickSendChannel;
+use NotificationChannels\ClickSend\ClickSendMessage;
 
 class PicklistController extends Controller
 {
@@ -189,11 +195,24 @@ class PicklistController extends Controller
                 $recp=explode(',',$recp);
                 /* dd('text'); */
                 foreach ($recp as $key => $phone) {
-                    Nexmo::message()->send([
+                    $user = User::where('phone',$phone)->first();
+                    if ($user) {
+                        $content=[
+                            "message"=>$request->message,
+                            "from_user"=>auth()->user(),
+                            "to_user"=>$user
+                        ];
+                        $user->notify(new ClickSendNotify($content));
+                    } else {
+                        continue;
+                    }
+                    
+                    /* Nexmo::message()->send([
                         'to'   => $phone,
                         'from' => '16105552344',
                         'text' => $request->message
-                    ]);
+                    ]); */
+                    
                 }
             }
             elseif ($request->source && $request->source=='email') {

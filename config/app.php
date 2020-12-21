@@ -127,6 +127,11 @@ return [
     'STRIPE_KEY' => env('STRIPE_KEY', 'pk_test_51HiwvXIhVw0fWBHdonQYP4aawvtPgcbJknm8289iDlnHcHukcpNBT6ozlaMzVW3EhEdoyJJQhTDemu4HXth2zobI00m1SffHhQ'),
     'STRIPE_SECRET' => env('STRIPE_SECRET', 'sk_test_51HiwvXIhVw0fWBHdv33nNJuQaA4eXmfzyQdFCE2EJulVtjDtSWnWjHq1um8uJaUvzYEZEMPDFjaYUaEr73LUI9N800bnBp70dt'),
     
+    'clicksend' => [
+        'username' => env('CLICKSEND_USERNAME'),
+        'api_key'  => env('CLICKSEND_API_KEY'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -184,6 +189,7 @@ return [
         Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
         Lab404\Impersonate\ImpersonateServiceProvider::class,
         Nexmo\Laravel\NexmoServiceProvider::class,
+        NotificationChannels\ClickSend\ClickSendServiceProvider::class,
         
     ],
 

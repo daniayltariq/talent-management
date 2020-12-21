@@ -5,10 +5,17 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Picklist;
 use App\Models\PicklistUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
-use Nexmo\Laravel\Facade\Nexmo;
+/* use Nexmo\Laravel\Facade\Nexmo; */
+
+use App\Notifications\ClickSendNotify;
+use NotificationChannels\ClickSend;
+use Illuminate\Notifications\Notification;
+use NotificationChannels\ClickSend\ClickSendChannel;
+use NotificationChannels\ClickSend\ClickSendMessage;
 
 class PicklistController extends Controller
 {
@@ -101,11 +108,22 @@ class PicklistController extends Controller
             $talents=PicklistUser::where('picklist_id',$request->picklist_id)->get();
             try {
                 foreach ($talents as $key => $talent) {
-                    Nexmo::message()->send([
+                    $user = User::find($talent->member->id);
+                    if ($user) {
+                        $content=[
+                            "message"=>$request->message,
+                            "from_user"=>auth()->user(),
+                            "to_user"=>$user
+                        ];
+                        $user->notify(new ClickSendNotify($content));
+                    } else {
+                        continue;
+                    }
+                    /* Nexmo::message()->send([
                         'to'   => $talent->member->phone,
                         'from' => '16105552344',
                         'text' => $request->message
-                    ]);
+                    ]); */
                 }
 
                 $status=array(
@@ -123,11 +141,20 @@ class PicklistController extends Controller
         }
         else{
             try {
-                Nexmo::message()->send([
+                $user = User::where('phone',$request->recipient)->first();
+                if ($user) {
+                    $content=[
+                        "message"=>$request->message,
+                        "from_user"=>auth()->user(),
+                        "to_user"=>$user
+                    ];
+                    $user->notify(new ClickSendNotify($content));
+                } 
+                /* Nexmo::message()->send([
                     'to'   => $request->recipient,
                     'from' => '16105552344',
                     'text' => $request->message
-                ]);
+                ]); */
 
                 $status=array(
                     'message' => 'message sent !', 

@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'clicksend' => [
+        'username' => env('CLICKSEND_USERNAME'),
+        'api_key'  => env('CLICKSEND_API_KEY'),
+    ],
+
 ];
