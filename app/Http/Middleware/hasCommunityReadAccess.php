@@ -16,7 +16,7 @@ class hasCommunityReadAccess
      */
     public function handle($request, Closure $next)
     {
-        if (\Auth::user()->hasAnyRole("agent|superadmin")) {
+        if (\Auth::check() && \Auth::user()->hasAnyRole("agent|superadmin")) {
             return $next($request);
         }
         if(\Auth::check() && (\Auth::user()->status==1) ){
