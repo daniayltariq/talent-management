@@ -17,7 +17,6 @@ class DashboardController extends Controller
 	}
 	public function mailTalent(Request $request)
 	{
-		/* dd($request->all()); */
 		$rules = [
 			'recipient' => ['required','email'],
             'subj' => ['required','string', 'max:191'],
@@ -34,7 +33,7 @@ class DashboardController extends Controller
 		
 		try {
 
-			$data=[
+			$data = [
 				"subj"=>$request->recipient,
 				"message"=>$request->message,
 			];
