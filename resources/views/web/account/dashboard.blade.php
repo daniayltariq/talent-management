@@ -820,7 +820,9 @@
                     type: 'GET',
                     success: function(res) {
                         $('#render_attachments').html(res);
-                        render_dropzone();
+                        
+                        var store_url='{{ route('account.storeMedia') }}';
+                        render_dropzone(store_url);
                         /* myDropzoneTheFirst.enable(); */
                     },
                     error: function(error) {

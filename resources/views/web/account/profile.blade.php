@@ -129,10 +129,10 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-holder active">
-                                                    <input type="text" placeholder="{{strtoupper('Legal First Name')}}" name="legal_first_name" value="{{$profile->legal_first_name ??''}}" class="form-control required">
+                                                    <input type="text" placeholder="{{strtoupper('Legal First Name')}}" name="legal_first_name" id="legal_first_name" value="{{$profile->legal_first_name ??''}}" class="form-control required">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="{{strtoupper('Legal Last Name')}}" name="legal_last_name" value="{{$profile->legal_last_name?? ''}}" class="form-control required">
+                                                    <input type="text" placeholder="{{strtoupper('Legal Last Name')}}" name="legal_last_name" id="legal_last_name" value="{{$profile->legal_last_name?? ''}}" class="form-control required">
                                                 </div>
                                                 <div class="form-holder">
                                                     <input type="email" placeholder="{{strtoupper('Email')}}" name="email" class="form-control required" value="{{$profile->email ?? ''}}">
@@ -744,7 +744,12 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             });
         });
 
-        $('#custom_link').on('keyup',function(){
+        $('#legal_first_name, #legal_last_name').on('keyup',function(){
+            $("#custom_link").val($('#legal_first_name').val()+'_'+$('#legal_last_name').val());
+            $('#custom_link').trigger('change');
+        })
+
+        $('#custom_link').on('keyup change',function(){
             if ($(this).val() !=='') {
                 $.ajax({
                     url: "{{ route('account.talent.checkCustomLink') }}",
