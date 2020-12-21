@@ -76,6 +76,10 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     border-bottom-right-radius: 0;
 }
 
+#wizard .actions {
+    padding: 0px 50px 50px 50px;
+}
+
 </style>
 
 <link rel="stylesheet" href="{{ asset('plugins/steps/css/style.css') }}">
