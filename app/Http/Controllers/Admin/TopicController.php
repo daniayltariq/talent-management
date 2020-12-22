@@ -82,7 +82,7 @@ class TopicController extends Controller
         $validator = Validator::make($request->all(), [
             'topic_category_id' => ['required', 'numeric'],
             'title' => ['required', 'string'],
-            'meta_title' => ['required', 'string', 'max:191'],
+            /* 'meta_title' => ['required', 'string', 'max:191'], */
             'slug' => ['required', 'string','unique:topics,slug'],
             'content' => ['required', 'string'],
         ]);
