@@ -148,9 +148,12 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::findOrFail($id);
-        $user->delete();
-        return redirect()->back();
+        $room=TopicCategory::findOrFail($id);
+        if ($room) {
+            $room->delete();
+            return redirect()->back()->with("success", "Room Deleted.");
+        }
+        
     }
 
 }
