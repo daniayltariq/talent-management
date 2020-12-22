@@ -12,7 +12,7 @@ use Illuminate\Http\File;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data=[
             'images'=>auth()->user()->attachments->where('type','image'),
@@ -20,6 +20,15 @@ class DashboardController extends Controller
             'audio'=>auth()->user()->attachments->where('type','audio'),
             'social'=>auth()->user()->social_links()->select('source','link')->get()->toArray()
         ];
+
+        if ($request->query('q') && $request->query('q')=='fetch_limit') {
+            $limit=[
+                'image_limit'=>count($data['images']),
+                'video_limit'=>count($data['video']),
+                'audio_limit'=> count($data['audio'])
+            ];
+            return $limit;
+        }
         
         $subs=auth()->user()->subscriptions()->active()->first();
         

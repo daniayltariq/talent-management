@@ -190,6 +190,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCand
     
     Route::get('/talent/detail', [App\Http\Controllers\Account\TalentController::class, 'detail'])->name('talent.detail');
     Route::get('/fetch_attachments', [App\Http\Controllers\Account\DashboardController::class, 'fetchAttachments'])->name('fetch_attachments');
+    Route::get('/get_limit', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('get_limit');
 
     /**
      * Subscription

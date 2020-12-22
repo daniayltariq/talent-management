@@ -10,7 +10,7 @@ function render_dropzone(store_url) {
             else { done(); }
         },
         maxFilesize: 12, // MB
-        acceptedFiles: "image/*",
+        acceptedFiles: "image/jpg,image/jpeg,image/png",
         dictDefaultMessage: "Drop Your Files here.",
         /* autoProcessQueue: false, */
         accept: function (file, done) {
@@ -74,9 +74,9 @@ function render_dropzone(store_url) {
         },
         init: function (file) {
 
-            this.on('addedfile', function (file) {
+            /* this.on('addedfile', function (file) {
                 setDropzoneImgLimit(file);
-            });
+            }); */
 
             this.on("maxfilesexceeded", function (file) {
                 alert("No more files please!");

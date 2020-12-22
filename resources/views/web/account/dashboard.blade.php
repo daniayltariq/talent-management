@@ -102,7 +102,7 @@
 
     .content {
     position: relative;
-    max-width: 400px;
+    max-width: 130px;
     margin: auto;
     overflow: hidden;
     }
@@ -318,7 +318,11 @@
                                     </div>
                                     <div class="col-6">
                                         <label for="gender" class="form-label mt-3">Gender</label>
-                                        <input class="form-control" type="text" name="gender" id="gender" placeholder="GENDER" value="{{auth()->user()->gender ?? ''}}" />
+                                        <select name="gender" id="gender" name = "gender" class="form-control" required>
+                                            <option label="Select"></option>
+                                            <option value="female" {{ auth()->user()->gender=='female' ?'selected':''}}>Female</option>
+                                            <option value="male" {{ auth()->user()->gender=='male' ?'selected':''}}>Male</option>
+                                        </select>
                                         @error('gender')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -583,12 +587,7 @@
         //id of drop zone element 1
         '#imageDropzone',{
             url: '{{ route('account.storeMedia') }}',
-            maxFiles:function(file, done) {
-                if (validImageTypes.includes(file.type)) {
-                    done("No more images!");
-                }
-                else { done(); }
-            },
+            maxFiles:"{{$data['plan']->pictures}}"-"{{count($data['images'])}}",
             maxFilesize: 12, // MB
             acceptedFiles: "image/*", /* ,.mp4,.mkv,.mov,.wmv,audio */
             dictDefaultMessage:"Drop Your Files here.",
@@ -670,9 +669,9 @@
                     }
                 }); */
 
-                this.on('addedfile', function(file) {
+                /* this.on('addedfile', function(file) {
                     setDropzoneImgLimit(file);
-                });
+                }); */
 
                 this.on("maxfilesexceeded", function(file){
                     alert("No more files please!");
@@ -704,15 +703,12 @@
 		
 	});
 
-    function setDropzoneImgLimit(file)
+    /* function setDropzoneImgLimit(file)
     {
         if ( validImageTypes.includes(file.type)) {
             $('#imageDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->pictures}}"- "{{count($data['images'])}}";
         }
-        /* else{
-            $('#imageDropzone')[0].dropzone.options.maxFiles = 20;
-        } */
-    }
+    } */
 
     /* function sendAudio(file)
     {
@@ -815,14 +811,25 @@
         {
             if (e.target.id === $('a.nav-link.active').attr('id')) {
                 myDropzoneTheFirst.disable();
+
                 $.ajax({
                     url: '{{ route('account.fetch_attachments') }}',
                     type: 'GET',
                     success: function(res) {
                         $('#render_attachments').html(res);
                         
-                        var store_url='{{ route('account.storeMedia') }}';
-                        render_dropzone(store_url);
+                        $.get( '{{ route('account.get_limit') }}/?q=fetch_limit', function() {})
+                            .done(function(res) {
+                                
+                                var store_url='{{ route('account.storeMedia') }}';
+                                render_dropzone(store_url);
+                                
+                                $('#imageDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->pictures}}"-res['image_limit'];
+                            })
+                            .fail(function() {
+                                alert( "error" );
+                            });
+                        
                         /* myDropzoneTheFirst.enable(); */
                     },
                     error: function(error) {
