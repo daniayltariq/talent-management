@@ -349,7 +349,7 @@
                                     $skills=!is_null($profile) ? ($profile->user->skills()->exists() ? $profile->user->skills : null):null;
                                 @endphp
 
-                                @if (!is_null($skills) && count($expr)>0)
+                                @if (!is_null($skills) && count($skills)>0)
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <h4 class="text__quote font-primary">Special Skills</h4>
