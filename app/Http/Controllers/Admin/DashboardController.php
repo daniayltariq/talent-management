@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\SavedSearch;
+use App\Models\Skill;
 use App\Search\TalentSearch;
 
 use Illuminate\Support\Facades\Validator;
