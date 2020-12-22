@@ -2,8 +2,8 @@
     <!-- begin:: Aside -->
     <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
         <div class="kt-aside__brand-logo mt-4">
-            <a href="demo1/index.html">
-            <img alt="Logo" src="{{asset('backend-assets/images/TD_only_white.png')}}" style="width: 70%;"/>
+            <a href="{{route('backend.dashboard')}}">
+            <img alt="Logo" src="{{asset('backend-assets/images/TD_and_Words_white.png')}}" style="width: 70%;"/>
             </a>
         </div>
         <div class="kt-aside__brand-tools">
