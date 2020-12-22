@@ -122,8 +122,8 @@ class CommunityController extends Controller
     {
         /* return $request->all(); */
         $comments = TopicComment::where('topic_id',$request->topic)->where('parent_id',null)->with('childComment')->get()->skip($request->skipcount)->take(1);
-        return $comments;
         if($comments){
+            return $comments;
     		return view('web.components.comments',compact('comments'));
     	}
     }
