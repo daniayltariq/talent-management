@@ -15,7 +15,7 @@
 		<div class="kt-portlet__head">
 			<div class="kt-portlet__head-label">
 				<h3 class="kt-portlet__head-title">
-					Roles list
+					Tag list
 				</h3>
 				
 			</div>

@@ -52,11 +52,10 @@ class RoomController extends Controller
         ]);
         
         if ($validator->fails()) {
-            return $validator->errors();
-            /* return redirect()->back()
+            /* return $validator->errors(); */
+            return redirect()->back()
                         ->withErrors($validator)
-                        ->withInput(); */
-            /* return 'error'; */
+                        ->withInput();
         }
 
         $room = new TopicCategory;
