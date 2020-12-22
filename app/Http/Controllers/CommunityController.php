@@ -37,7 +37,7 @@ class CommunityController extends Controller
 
         $latest=Topic::where('status',1)->latest()->get()->take(4);
         
-        $comments = TopicComment::where('topic_id',$data->id)->where('parent_id',null)->with('childComment')->get()->take(1);
+        $comments = TopicComment::where('topic_id',$data->id)->where('parent_id',null)->with('childComment')->get();
         /* dD($comments); */
     	if($data){
     		return view('web.pages.single-post',compact('data','comments','latest'));
