@@ -16,6 +16,9 @@ class hasCommunityReadWriteAccess
      */
     public function handle($request, Closure $next)
     {
+        if (\Auth::check() && \Auth::user()->hasAnyRole("agent|superadmin")) {
+            return $next($request);
+        }
         if(\Auth::check() && (\Auth::user()->status==1) ){
             $subs=auth()->user()->subscriptions()->active()->first();
             if ($subs->count()>0) {
