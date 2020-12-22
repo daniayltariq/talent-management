@@ -205,5 +205,11 @@ class TopicController extends Controller
      */
     public function destroy($id)
     {
+        $topic=Topic::findOrFail($id);
+        if ($topic) {
+            $topic->delete();
+            return redirect()->back()->with("success", "topic deleted.");
+        }
+        return redirect()->back()->with("error", "Something went wrong.");
     }
 }
