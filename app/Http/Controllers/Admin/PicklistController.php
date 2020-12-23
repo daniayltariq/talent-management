@@ -1,21 +1,22 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
+use App\Models\User;
 
 use App\Models\Picklist;
-use App\Models\User;
+use Illuminate\Support\Str;
 use App\Models\PicklistUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Mail;
+use Nexmo\Laravel\Facade\Nexmo;
 use App\Domain\Mail\SharePicklist;
 use App\Domain\Mail\PicklistTalent;
+use NotificationChannels\ClickSend;
+use App\Http\Controllers\Controller;
 /* use Nexmo\Laravel\Facade\Nexmo; */
 
+use Illuminate\Support\Facades\Mail;
 use App\Notifications\ClickSendNotify;
-use NotificationChannels\ClickSend;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\ClickSend\ClickSendChannel;
 use NotificationChannels\ClickSend\ClickSendMessage;
@@ -59,13 +60,13 @@ class PicklistController extends Controller
     {
         /* dd($request->all()); */
         $rules = [
-            'name' => ['string', 'max:50'],
-            'description' => ['string', 'max:191'],
-            'member_id' => ['required', 'numeric'],
+            'name' => ['string','nullable', 'max:50'],
+            'description' => ['string','nullable', 'max:191'],
+            'picklist_id' => ['required', 'numeric'],
         ];
 
         if ($request->picklist_id) {
-            $rules['picklist_id'] = ['integer','unique:picklist_user,user_id,NULL,id,picklist_id,'.$request->picklist_id];
+            $rules['member_id'] = ['integer','unique:picklist_user,user_id,NULL,id,picklist_id,'.$request->picklist_id];
         }
 
         $validator = Validator::make($request->all(), $rules);

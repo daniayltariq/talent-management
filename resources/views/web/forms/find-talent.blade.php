@@ -612,7 +612,7 @@
             $('#save-search-modal').modal('toggle');
         @endif
 
-        @if($errors->has('picklist_id'))
+        @if($errors->has('member_id') || $errors->has('title') || $errors->has('description') )
             $('#picklist-modal').modal('toggle');
         @endif
 

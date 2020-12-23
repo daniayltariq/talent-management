@@ -53,7 +53,7 @@
 											</div>
 											<div class="kt-widget5__section">
 												<a href="#" class="kt-widget5__title">
-												{{$item->member->profile->legal_first_name?? ''}} {{$item->member->profile->legal_last_name?? ''}}
+												{{$item->member->profile->legal_first_name?? $item->member->f_name ?? ''}} {{$item->member->profile->legal_last_name?? $item->member->l_name ?? ''}}
 												</a>
 												<p class="kt-widget5__desc">
 													Gender: {{ $item->member->gender ?? ''}}
@@ -70,7 +70,7 @@
 											</div>
 										</div>
 										<div class="kt-widget5__content">
-											<a href="{{route('backend.delete_picklist_item',$item->id)}}" class="btn btn-sm btn-label-danger btn-bold">Follow</a>
+											<a href="{{route('backend.delete_picklist_item',$item->id)}}" class="btn btn-sm btn-label-danger btn-bold">Delete</a>
 										</div>
 									</div>
 								@endforeach

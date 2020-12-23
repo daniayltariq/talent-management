@@ -38,8 +38,8 @@
                                     <option value="{{$picklist->id}}">{{$picklist->title}}</option>
                                 @endforeach
                             </select>
-                            @error('picklist_id')
-                                <div class="error">Talent already exist</div>
+                            @error('member_id')
+                                <div class="error">Talent already exists</div>
                             @enderror
                         </div>
                     @endif
@@ -53,7 +53,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">description</label>
+                            <label for="exampleFormControlInput1">Description</label>
                             <input type="text" class="form-control" name="description" id="exampleFormControlInput1" placeholder="Enter Description">
                             @error('description')
                                 <div class="error">{{ $message }}</div>

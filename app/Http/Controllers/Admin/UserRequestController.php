@@ -29,7 +29,11 @@ class UserRequestController extends Controller
         if ($user && $req) {
             $req->accepted=1;
             $req->save();
-            if ($req) {
+
+            $user->status=1;
+            $user->save();
+
+            if ($req && $user) {
                 return redirect()->back()->with("success", "Request Accepted.");
             }
             else{
