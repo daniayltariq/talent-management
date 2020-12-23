@@ -62,9 +62,12 @@ class CommunityController extends Controller
      public function post_like(Request $request)
      {
         $subs=auth()->user()->subscriptions()->active()->first();
-        if ($subs->count()>0) {
-            $plan=Plan::select('community_access','community_access_perm')->where('stripe_plan',$subs->stripe_plan)->first();
-            if ($plan->community_access==1 && $plan->community_access_perm=='R/W') {
+        if (auth()->user()->hasAnyRole("agent|superadmin") || $subs->count()>0) {
+            if (auth()->user()->hasRole('candidate')) {
+                $plan=Plan::select('community_access','community_access_perm')->where('stripe_plan',$subs->stripe_plan)->first();
+            }
+            
+            if (auth()->user()->hasAnyRole("agent|superadmin") || ($plan->community_access==1 && $plan->community_access_perm=='R/W')) {
                 if($request->topic_id){
                     $res_liked = 0;
                     $post = TopicLike::where('topic_id',$request->topic_id)->where('user_id',auth()->user()->id)->first();

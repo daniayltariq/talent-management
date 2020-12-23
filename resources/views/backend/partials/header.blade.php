@@ -1,6 +1,7 @@
 <meta charset="utf-8"/>
 
 <title>Talent Depot | Dashboard</title>
+<link rel="icon" href="{{asset('web/img/small_TD_only.png')}}" type="image/png" sizes="16x16">
 <meta name="description" content="Updates and statistics">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><!-- ... Then all the javascripts you need --> 
