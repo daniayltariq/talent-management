@@ -28,7 +28,7 @@
                     <button type="button" class="btn btn-primary" id="create-picklist-btn">
                         <i class="fa fa-plus"></i> Create new
                     </button>
-                    <input type="hidden" name="member_id">
+                    <input type="hidden" name="member_id" value="{{old('member_id')}}">
                     @if (count(auth()->user()->picklist) > 0 )
                         <div class="form-group" id="picklist-select">
                             <label for="exampleFormControlSelect1">Select Picklist</label>
