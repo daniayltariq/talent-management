@@ -62,7 +62,7 @@ class PicklistController extends Controller
         $rules = [
             'name' => ['string','nullable', 'max:50'],
             'description' => ['string','nullable', 'max:191'],
-            'picklist_id' => ['required', 'numeric'],
+            'member_id' => ['required', 'numeric'],
         ];
 
         if ($request->picklist_id) {
@@ -72,7 +72,6 @@ class PicklistController extends Controller
         $validator = Validator::make($request->all(), $rules);
         
         if ($validator->fails()) {
-            
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
