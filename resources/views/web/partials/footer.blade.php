@@ -130,6 +130,18 @@
 
 	$(document).on('click','#create-picklist-btn',function(){
 		$('[name="picklist_id"]').val('');
+
+		if ($('[name="picklist_id"]').prop('required')==true) {
+			$('[name="picklist_id"]').prop('required',false);
+
+			$('[name="title"]').prop('required',true);
+			$('[name="description"]').prop('required',true);
+		} else {
+			$('[name="picklist_id"]').prop('required',true);
+			$('[name="title"]').prop('required',false);
+			$('[name="description"]').prop('required',false);
+		}
+		
 		$('div#picklist-select').toggleClass('new-picklist');
 
 		$('div#new-picklist').toggleClass('new-picklist');

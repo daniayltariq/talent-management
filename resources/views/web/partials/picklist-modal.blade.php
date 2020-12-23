@@ -32,8 +32,8 @@
                     @if (count(auth()->user()->picklist) > 0 )
                         <div class="form-group" id="picklist-select">
                             <label for="exampleFormControlSelect1">Select Picklist</label>
-                            <select class="form-control" name="picklist_id" id="exampleFormControlSelect1">
-                                <option >Select</option>
+                            <select class="form-control" name="picklist_id" required="required" id="exampleFormControlSelect1">
+                                <option value="" disabled selected>Select</option>
                                 @foreach (auth()->user()->picklist as $picklist)
                                     <option value="{{$picklist->id}}">{{$picklist->title}}</option>
                                 @endforeach
