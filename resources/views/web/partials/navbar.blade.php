@@ -100,66 +100,69 @@
 							
 							@if(Auth::guest()) 
 							
-							<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
-								<a href="{{ route('login') }}">Join Now</a>
-								<ul class="m-menu__sub">
-									<li class="m-menu__sub-item">
-										<a href="{{ route('login') }}">Login</a>
-									</li>
-									<li class="m-menu__sub-item">
-										<a href="{{ route('register') }}">Join</a>
-									</li>
-								</ul>
-							</li>
-							@else
-
-							<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
-								<a href="#">Account</a>
-								<ul class="m-menu__sub">
-
-									@role('candidate')
+								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
+									<a href="{{ route('login') }}">Join Now</a>
+									<ul class="m-menu__sub">
 										<li class="m-menu__sub-item">
-											<a href="{{ route('account.dashboard') }}">Dashboard</a>
+											<a href="{{ route('login') }}">Login</a>
 										</li>
-										@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 1)
+										<li class="m-menu__sub-item">
+											<a href="{{ route('register') }}">Join</a>
+										</li>
+									</ul>
+								</li>
+							@else
+								
+								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
+									<div style="display: grid">
+										<a href="#" class="ptb-0">{{auth()->user()->f_name ?? ''}}</a>
+										<span class="role-nav">{{auth()->user()->roles->first()->name ?? ''}}</span>
+									</div>
+									<ul class="m-menu__sub">
+
+										@role('candidate')
 											<li class="m-menu__sub-item">
-												<a href="{{ url('/') }}/account/reward">Reward</a>
+												<a href="{{ route('account.dashboard') }}">Dashboard</a>
+											</li>
+											@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 1)
+												<li class="m-menu__sub-item">
+													<a href="{{ url('/') }}/account/reward">Reward</a>
+												</li>
+											@endif
+											
+										@endrole
+										
+
+										@if (\Auth::guest() || auth()->user()->hasRole('candidate'))
+											<li class="m-menu__sub-item">
+												<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
+											</li>
+											<li class="m-menu__sub-item">
+												<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
 											</li>
 										@endif
-										
-									@endrole
-									
 
-									@if (\Auth::guest() || auth()->user()->hasRole('candidate'))
+										@role('agent')
+											<li class="m-menu__sub-item">
+												<a href="{{ route('agent.picklist.index') }}">Picklist Favorites</a>
+											</li>
+											<li class="m-menu__sub-item">
+												<a href="{{ route('agent.topic.create') }}">Create Post</a>
+											</li>
+											<li class="m-menu__sub-item">
+												<a href="{{ route('agent.topic.index') }}">Posts</a>
+											</li>
+										@endrole
 										<li class="m-menu__sub-item">
-											<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
+											<a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();.getElementById('logout-form').submit();">
+											{{ __('Logout') }}
+											</a>
+											<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+												@csrf
+											</form>
 										</li>
-										<li class="m-menu__sub-item">
-											<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
-										</li>
-									@endif
-
-									@role('agent')
-										<li class="m-menu__sub-item">
-											<a href="{{ route('agent.picklist.index') }}">Picklist Favorites</a>
-										</li>
-										<li class="m-menu__sub-item">
-											<a href="{{ route('agent.topic.create') }}">Create Post</a>
-										</li>
-										<li class="m-menu__sub-item">
-											<a href="{{ route('agent.topic.index') }}">Posts</a>
-										</li>
-									@endrole
-									<li class="m-menu__sub-item">
-										 <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();.getElementById('logout-form').submit();">
-										{{ __('Logout') }}
-										</a>
-										<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-											@csrf
-										</form>
-									</li>
-								</ul>
-							</li>
+									</ul>
+								</li>
  
 							@endif
 						</ul>
