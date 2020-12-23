@@ -27,6 +27,9 @@
 		background-color: #5969ff;
 		border-radius: 4px;
 	}
+   .error{
+      color: red;
+   }
 </style>
 @endsection
 @section('content')
