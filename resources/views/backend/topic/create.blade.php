@@ -93,7 +93,7 @@
                         </div> --}}
                         <div class="form-group">
                            <div class="col-md-11 col-sm-11 col-xs-12">
-                              <textarea name="content" id="summernote" class="summernote">{!! !is_null(old('title')) ? html_entity_decode(old('title')) : (isset($blog)?html_entity_decode($blog->content) : '')!!}</textarea>
+                              <textarea name="content" id="summernote" class="summernote">{!! !is_null(old('content')) ? html_entity_decode(old('content')) : (isset($blog)?html_entity_decode($blog->content) : '')!!}</textarea>
                               @error('content')
                                   <div class="error">{{$message}}</div>
                               @enderror

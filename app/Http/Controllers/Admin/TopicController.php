@@ -195,6 +195,46 @@ class TopicController extends Controller
      */
     public function update(Request $request,$id)
     {
+        /* dd($request->all()); */
+        $validator = Validator::make($request->all(), [
+            'topic_category_id' => ['required', 'numeric'],
+            'title' => ['required', 'string'],
+            /* 'meta_title' => ['required', 'string', 'max:191'], */
+            'slug' => ['required', 'string','unique:topics,slug,'.$id],
+            'content' => ['required', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $blog = Topic::findOrFail($id);
+        $destinationPath = 'uploads/'; $filename = null; $path_filename = null;
+        $req = $request->all();
+        $req['content'] = $request->content;
+        if ($request->hasFile('image')) {
+            
+            $file = $request->file('image');
+            $destinationPath = 'uploads/' . $request->page;
+            $f_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $f_extension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $formatfilename = preg_replace('/[^\w]+/', '_', $f_name);
+            $filename = date('Ymd_hisa').'_'.$formatfilename.'.'.$f_extension;
+            $uploadSuccess = $file->move($destinationPath, $filename);
+            $path_filename = 'uploads/'. $request->page . '/' .$filename;
+
+            $req['image'] = $path_filename;
+
+        }
+
+        //$req = collect($req);
+        $blog->user_id=auth()->user()->id;
+        $blog->fill($req);
+        $blog->save();
+
+        return redirect()->back()->with("status", "Topic has been updated.");
     }
 
     /**
