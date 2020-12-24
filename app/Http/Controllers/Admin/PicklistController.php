@@ -188,7 +188,7 @@ class PicklistController extends Controller
 
         $picklist=Picklist::findOrFail($id);
         
-        try {
+        /* try { */
             if ($request->source && $request->source=='text') {
 
                 $recp=$request->talent_recipients;
@@ -231,10 +231,10 @@ class PicklistController extends Controller
 
             return redirect()->back()->with('success', 'Success.');
             
-        } catch (\Throwable $th) {
+        /* } catch (\Throwable $th) {
             
             return redirect()->back()->with('error', 'Something went wrong.');
-        }
+        } */
          
     }
 
