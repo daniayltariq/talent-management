@@ -58,7 +58,12 @@
 											<input data-switch="true" name="status" type="checkbox" data-userid="{{$user->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$user->status==1?"checked=checked":""}}>
 										</td>
 										<td>
-											<input data-switch="true" name="featured" type="checkbox" data-userid="{{$user->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$user->featured==1?"checked=checked":""}}>
+											@if ($user->hasRole('candidate'))
+												<input data-switch="true" name="featured" type="checkbox" data-userid="{{$user->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$user->featured==1?"checked=checked":""}}>
+											@else
+												<em>N/A</em>
+											@endif
+											
 										</td>
 										<td>
 											<a href="{{route('backend.user.edit',$user->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Edit
