@@ -70,6 +70,10 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     color: red;
 }
 
+.valid-feedback{
+    color: rgb(45, 171, 11);
+}
+
     .iti{
         width: 100%;
     }
@@ -158,11 +162,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         <option value="female" {{ old('gender')=='female' ?'selected':''}}>Female</option>
                                         <option value="male" {{ old('gender')=='male' ?'selected':''}}>Male</option>
                                     </select>
-                                    {{-- @error('gender')
+                                    @error('gender')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror --}}
+                                    @enderror
                                  </div>
                             </div>
                             <div class="form-group">
@@ -177,16 +181,19 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                  </div>
                             </div>
                         
-                            <div class="form-group">
+                            <div class="form-group" id="phone-div">
                                 <label for="phone" class="col-sm-4 control-label">Phone <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="tel" maxlength="15"  class="form-control" name="phone" id="phone" value="{{ old('phone') }}">
                                     <input type="tel" class="hide" name="new_phone" id="hiden">
-                                    {{-- @error('phone')
+                                    <span id="valid-msg" class="valid-feedback hide">✓ Valid</span>
+                                    <span id="error-msg" class="invalid-feedback hide"></span>
+                                    
+                                    @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror --}}
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
@@ -297,7 +304,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-4">
-                                    <button type="submit" class="btn btn-default btn__red animation btn-full pull-right">join us</button>
+                                    <button type="submit" class="btn btn-default btn__red animation btn-full pull-right" id="registerSubmitBtn">join us</button>
                                 </div>
                             </div>
                         </div>
@@ -350,12 +357,18 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
         }, false);
 
     </script>
-
+    {{-------------------------}}
     {{-- input phone setting --}}
     <script>
         /* INITIALIZE BOTH INPUTS WITH THE intlTelInput FEATURE*/
 
-        var phone = document.querySelector("#phone");
+        var phone = document.querySelector("#phone"),
+            errorMsg = document.querySelector("#error-msg"),
+            validMsg = document.querySelector("#valid-msg");
+        
+        // here, the index maps to the error code returned from getValidationError - see readme
+        var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
         var iti=window.intlTelInput(phone,{
             initialCountry: "us",
             separateDialCode: true,
@@ -377,8 +390,12 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
         });
 
-        /* var phone = document.querySelector("#phone");
-		var iti =intlTelInput(phone); */
+        var reset = function() {
+            phone.classList.remove("error");
+            errorMsg.innerHTML = "";
+            errorMsg.classList.add("hide");
+            validMsg.classList.add("hide");
+        };
 
         var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
 
@@ -396,9 +413,47 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             document.getElementById("hiden").value = country_data.dialCode;/* $("#phone").val().replace(/\s+/g, '') */;
         });
 
+        // on blur: validate
+        phone.addEventListener('blur', function() {
+        reset();
+        if (phone.value.trim()) {
+            if (iti.isValidNumber()) {
+            validMsg.classList.remove("hide");
+            } else {
+            phone.classList.add("error");
+            var errorCode = iti.getValidationError();
+            errorMsg.innerHTML = errorMap[errorCode];
+            errorMsg.classList.remove("hide");
+            }
+        }
+        });
 
         $('input.hide').parent().hide();
 
+        // on keyup / change flag: reset
+        phone.addEventListener('change', reset);
+        phone.addEventListener('keyup', reset);
+
+    </script>
+    {{-- end input phone setting --}}
+    {{-------------------------}}
+
+    <script>
+        $('#registerSubmitBtn').on('click',function(e){
+            e.preventDefault();
+            if (iti.isValidNumber()) {
+                $('#registerForm').submit();
+            } else {
+                phone.classList.add("error");
+                var errorCode = iti.getValidationError();
+                errorMsg.innerHTML = errorMap[errorCode];
+                errorMsg.classList.remove("hide");
+                $('html, body').animate({
+                    scrollTop: $("#phone-div").position().top
+                }, 800);
+                return false;
+            }
+        })
     </script>
 
     <script>
