@@ -58,7 +58,7 @@ class PicklistController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        /* dd($request->all()); */
         $rules = [
             'name' => ['string','nullable', 'max:50'],
             'description' => ['string','nullable', 'max:191'],
