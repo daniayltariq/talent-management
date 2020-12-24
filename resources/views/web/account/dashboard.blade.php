@@ -2,6 +2,8 @@
 @section('styles')
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
+
 <style type="text/css">
     *{
         font-size: 16px;
@@ -221,6 +223,20 @@
     .mt-4r{
         margin-top:4rem; 
     }
+
+    .invalid-feedback{
+        display: block;
+        color: red;
+    }
+
+    .valid-feedback{
+        display: block;
+        color: rgb(45, 171, 11);
+    }
+
+    .iti{
+        width: 100%;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -294,7 +310,7 @@
                     <!-- Tabs content -->
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade shadow rounded bg-white show active in p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                            <form action="{{route('account.dashboard.profile')}}" method="POST">
+                            <form action="{{route('account.dashboard.profile')}}" id="personal-info-form" method="POST">
                                 @csrf
                                 <div class="row">
                                     <h4 class="font-italic mb-4" style="flex: auto;">Personal information</h4>
@@ -334,9 +350,13 @@
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6" id="phone-div">
                                         <label for="phone" class="form-label mt-3">Phone</label>
-                                        <input class="form-control" type="text" name="phone" id="phone" placeholder="PHONE" value="{{auth()->user()->phone ?? ''}}" />
+                                        <input class="form-control" type="tel" name="phone" id="phone" value="{{auth()->user()->phone ?? ''}}" />
+                                        <input type="tel" class="hide" name="new_phone" id="hiden" value="{{auth()->user()->phone_c_data ?? ''}}">
+                                        <span id="valid-msg" class="valid-feedback hide">✓ Valid</span>
+                                        <span id="error-msg" class="invalid-feedback hide"></span>
+
                                         @error('phone')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -394,7 +414,7 @@
                                 </div>
                                 <div class="row ">
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-primary" id="personalInfoFormBtn">Update</button>
                                     </div>
                                 </div>
                                 
@@ -520,6 +540,109 @@
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.js" integrity="sha512-bZAXvpVfp1+9AUHQzekEZaXclsgSlAeEnMJ6LfFAvjqYUVZfcuVXeQoN5LhD7Uw0Jy4NCY9q3kbdEXbwhZUmUQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js" integrity="sha512-DNeDhsl+FWnx5B1EQzsayHMyP6Xl/Mg+vcnFPXGNjUZrW28hQaa1+A4qL9M+AiOMmkAhKAWYHh1a+t6qxthzUw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
+
+    {{-------------------------}}
+    {{-- input phone setting --}}
+    <script>
+        /* INITIALIZE BOTH INPUTS WITH THE intlTelInput FEATURE*/
+
+        var phone = document.querySelector("#phone"),
+            errorMsg = document.querySelector("#error-msg"),
+            validMsg = document.querySelector("#valid-msg");
+        
+        // here, the index maps to the error code returned from getValidationError - see readme
+        var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+        var iti=window.intlTelInput(phone,{
+            initialCountry: "us",
+            separateDialCode: true,
+            preferredCountries: ["fr", "us", "gb"],
+            geoIpLookup: function (callback) {
+                $.get('https://ipinfo.io', function () {
+                }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+        });
+
+        var hiden_phone = document.querySelector("#hiden");
+        window.intlTelInput(hiden_phone,{
+            initialCountry: "us",
+            dropdownContainer: 'body',
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+        });
+
+        var reset = function() {
+            phone.classList.remove("error");
+            errorMsg.innerHTML = "";
+            errorMsg.classList.add("hide");
+            validMsg.classList.add("hide");
+        };
+
+        var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+
+        $(document).ready(function () {
+            $('#phone').mask(mask1)
+        });
+
+        $("#phone").on("countrychange", function (e, countryData) {
+            $("#phone").val('');
+            var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+            $('#phone').mask(mask1);
+
+            var country_data=iti.getSelectedCountryData();
+            console.log(country_data);
+            document.getElementById("hiden").value = JSON.stringify(country_data);/* $("#phone").val().replace(/\s+/g, '') */;
+        });
+
+        // on blur: validate
+        phone.addEventListener('blur', function() {
+        reset();
+        if (phone.value.trim()) {
+            if (iti.isValidNumber()) {
+            validMsg.classList.remove("hide");
+            } else {
+            phone.classList.add("error");
+            var errorCode = iti.getValidationError();
+            errorMsg.innerHTML = errorMap[errorCode];
+            errorMsg.classList.remove("hide");
+            }
+        }
+        });
+
+        $('input.hide').parent().hide();
+
+        // on keyup / change flag: reset
+        phone.addEventListener('change', reset);
+        phone.addEventListener('keyup', reset);
+
+    </script>
+    {{-- end input phone setting --}}
+    {{-----------------------------}}
+
+    <script>
+        $('#personalInfoFormBtn').on('click',function(e){
+            e.preventDefault();
+            if (iti.isValidNumber()) {
+                $('#personal-info-form').submit();
+            } else {
+                phone.classList.add("error");
+                var errorCode = iti.getValidationError();
+                errorMsg.innerHTML = errorMap[errorCode];
+                errorMsg.classList.remove("hide");
+                $('html, body').animate({
+                    scrollTop: $("#phone-div").position().top
+                }, 800);
+                return false;
+            }
+        })
+    </script>
+
 <script>
     function copyToClipboard() {
         /* Get the text field */

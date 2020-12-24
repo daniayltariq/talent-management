@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -91,12 +92,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         /* dd($data); */
+        $country_data=json_decode($data['new_phone'],true);
         $user = User::create([
             'f_name' => $data['f_name'],
             'l_name' => $data['l_name'],
             'gender' => $data['gender'],
             'dob' => $data['dob'],
-            'phone' =>'+'.$data['new_phone']. $data['phone'],
+            'phone' =>Str::of($data['phone'])->prepend('+'.$country_data['dialCode']),
+            'phone_c_data'=>$data['new_phone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'country' => $data['country'],

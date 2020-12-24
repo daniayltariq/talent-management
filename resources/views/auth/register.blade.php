@@ -408,9 +408,6 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
             $('#phone').mask(mask1);
 
-            var country_data=iti.getSelectedCountryData();
-            console.log(country_data);
-            document.getElementById("hiden").value = country_data.dialCode;/* $("#phone").val().replace(/\s+/g, '') */;
         });
 
         // on blur: validate
@@ -442,6 +439,9 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
         $('#registerSubmitBtn').on('click',function(e){
             e.preventDefault();
             if (iti.isValidNumber()) {
+                var country_data=iti.getSelectedCountryData();
+                console.log(country_data);
+                document.getElementById("hiden").value = JSON.stringify(country_data);
                 $('#registerForm').submit();
             } else {
                 phone.classList.add("error");

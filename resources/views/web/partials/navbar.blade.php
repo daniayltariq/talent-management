@@ -116,7 +116,7 @@
 								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
 									<div style="display: grid">
 										<a href="#" class="ptb-0">{{auth()->user()->f_name ?? ''}}</a>
-										<span class="role-nav">{{auth()->user()->roles->first()->name ?? ''}}</span>
+										<span class="role-nav">{{auth()->user()->roles->first()->alias ?? ''}}</span>
 									</div>
 									<ul class="m-menu__sub">
 

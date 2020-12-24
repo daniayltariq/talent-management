@@ -9,6 +9,7 @@ use App\Models\Plan;
 use App\Models\Attachment;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\File;
+use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
@@ -60,18 +61,22 @@ class DashboardController extends Controller
         }
 
         try {
+            $country_data=json_decode($request->new_phone,true);
+           
             $user=User::findOrFail(auth()->user()->id);
             $user->fill($request->all());
+            $user->phone=Str::of($request->phone)->prepend('+'.$country_data['dialCode']);
+            $user->phone_c_data=$request->new_phone;
             $user->save();
             
             return redirect()->back()->with(array(
                 'message' => 'Data saved !', 
-                'alert_type' => 'success'
+                'alert-type' => 'success'
             ));
         } catch (\Throwable $th) {
             return redirect()->back()->with(array(
                 'message' => 'Something went wrong.', 
-                'alert_type' => 'error'
+                'alert-type' => 'error'
             ));
         }
         
