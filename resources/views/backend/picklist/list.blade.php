@@ -192,7 +192,7 @@
 
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="col-md-3 col-sm-3 col-xs-12">message</label>
+									<label class="col-md-3 col-sm-3 col-xs-12">Message</label>
 									<div class="col-md-12 col-sm-12 col-xs-12">
 										<textarea name="message" class="form-control "></textarea>
 									</div>

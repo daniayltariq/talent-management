@@ -38,6 +38,7 @@
 								   <th>Email</th>
 								   <th>Role</th>
 								   <th>Active</th>
+								   <th>Feature</th>
 								   <th>Operation</th>
 								</tr>
 							</thead>
@@ -49,12 +50,15 @@
 										<td>{{ $user->email ?? '' }}</td>
 										<td>
 											@foreach ($user->roles as $role)
-												{{ $role->name ?? '' }}
+												{{ $role->alias ?? '' }}
 												<br>
 											@endforeach
 										</td>
 										<td>
 											<input data-switch="true" name="status" type="checkbox" data-userid="{{$user->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$user->status==1?"checked=checked":""}}>
+										</td>
+										<td>
+											<input data-switch="true" name="featured" type="checkbox" data-userid="{{$user->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$user->featured==1?"checked=checked":""}}>
 										</td>
 										<td>
 											<a href="{{route('backend.user.edit',$user->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Edit
@@ -132,6 +136,7 @@
 
 $(document).ready(function(){
 	$("[name='status']").bootstrapSwitch();
+	$("[name='featured']").bootstrapSwitch();
 
 	$('[name="userRole"]').click(function(e){
 		$('[name="user_id"]').val($(this).data('user'));
@@ -145,6 +150,25 @@ $(document).ready(function(){
 		{
 			user_id: $(this).data('userid'),
 			status:state==true?1 : 0
+		},
+		function(status){
+			
+			if (status=="success") {
+				$(that).bootstrapSwitch('state', state, true);
+			} else {
+				$(that).bootstrapSwitch('state', !state, true);
+			}
+		});
+		
+	});
+
+	$("[name='featured']").on('switchChange.bootstrapSwitch',function (e, state) {
+		/* console.log($(this).data('userid')); */
+		const that=this;
+		$.get("{{ route('backend.user.markFeatured') }}",
+		{
+			user_id: $(this).data('userid'),
+			feature_status:state==true?1 : 0
 		},
 		function(status){
 			

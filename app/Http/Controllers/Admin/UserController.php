@@ -122,6 +122,27 @@ class UserController extends Controller
         
     }
 
+    public function markFeatured(Request $request)
+    {
+        $status=array(1,0);
+        if ($request['user_id'] && in_array($request['feature_status'],$status)) {
+            $user=User::findOrFail($request['user_id']);
+            $user->featured=$request['feature_status'];
+            $user->save();
+            if ($user) {
+                $status="success";
+            }
+            else{
+                $status="error";
+            }
+        }
+        else{
+            $status="error";
+        }
+        return $status;
+        
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
