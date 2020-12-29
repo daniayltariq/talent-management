@@ -72,7 +72,7 @@
                                 </g>
                             </svg>
                         </span>
-                        <span class="kt-menu__link-text">Blog</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                        <span class="kt-menu__link-text">Forum</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
                     </a>
                     <div class="kt-menu__submenu ">
                         <span class="kt-menu__arrow"></span>

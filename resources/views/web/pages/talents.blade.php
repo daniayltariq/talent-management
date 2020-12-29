@@ -5,90 +5,12 @@
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"> --}}
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('css/tagsinput.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw==" crossorigin="anonymous" />
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw==" crossorigin="anonymous" /> --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.1/assets/owl.carousel.min.css" />
+
 <style type="text/css">
-    button.btn.btn__red.animation.btn-half.pull-right {
-        margin-bottom: 20px;
-    }
-    .btn-half {
-        width: 30%;
-    }
-
-    .btn {
-        text-transform: capitalize;
-        font-size: 14px;
-    }
-
-    span.multiselect-selected-text {
-        font-size: 14px;
-        font-weight: 500;
-        color: #616161;
-    }
-
-    .modal {
-        text-align: left;
-    }
-    .modal-content {
-        border: none;
-        border-radius: 2px;
-        box-shadow: 0 16px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21);
-        width: 100%;
-    }
-    .modal-header{
-        border-bottom: 0;
-        padding-top: 15px;
-        padding-right: 26px;
-        padding-left: 26px;
-        padding-bottom: 0px;
-    }
-    .modal-title {
-        font-size: 28px;
-    }
-    .modal-body{
-        border-bottom: 0;
-        padding-top: 5px;
-        padding-right: 26px;
-        padding-left: 26px;
-        padding-bottom: 10px;
-        font-size: 15px;
-    }
-    .modal-footer {
-        border-top:0;
-        padding-top: 0px;
-        padding-right:26px;
-        padding-bottom:26px;
-        padding-left:26px;
-    }
-    .btn-default,.btn-primary {
-        border: none;
-        border-radius: 2px;
-        display: inline-block;
-        color: #424242;
-        background-color: #FFF;
-        text-align: center;
-        height: 36px;
-        line-height: 36px;
-        outline: 0;
-        padding: 0 2rem; 
-        vertical-align: middle;
-        -webkit-tap-highlight-color: transparent;
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
-        letter-spacing: .5px;
-        transition: .2s ease-out;
-    }
-    .btn-default:hover{
-    background-color: #FFF;
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
-    }
-    .btn-primary {
-    color: #FFF;
-    background-color: #2980B9;
-    }
-    .btn-primary:hover{
-    background-color: #2980B9;
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
-    }
+    
     footer {
     text-align: center;
     margin: 15px;
@@ -99,98 +21,18 @@
         margin: 1.46rem 0 1.168rem; 
     }
 
-    .picklist-btn{
-        position: relative;
-        z-index: 999999;
+    footer{
+        margin: 30px 0px !important;
     }
 
-    .new-picklist{
-        display: none;
+    header.header{
+        background: #000000cf !important;
     }
 
-    .new-search-save{
-        display: none;
-    }
-
-    .bootstrap-tagsinput .badge{
-		margin: 2px 2px;
-		background-color: #f2832c;
-		border-radius: 4px;
-	}
-
-    .bootstrap-tagsinput {
-        line-height: 28px;
-    }
-
-    .bootstrap-tagsinput .badge [data-role="remove"]:after {
-        padding: 0px 5px 1px 5px;
-    }
-
-    .btn-talent{
-        color:#e9862e !important;
-    }
-
-    .pt-0{
-        padding-top: 2% !important;
-    }
-
-    .pb-0{
-        padding-bottom: 0 !important;
-    }
-
-    .mb-0{
-        margin-bottom: 0 !important;
-    }
     
-    .f-r{
-        float: right;
-    }
+/* Slider css */
 
-    .btn-dd{
-        border-radius: 31px;
-        height: 45px;
-    }
-
-    .btn-dd:hover{
-        background-color: #f1a466;
-        color: white;
-    }
-
-    .irs--round .irs-from, .irs--round .irs-to, .irs--round .irs-single {
-        background-color: #ee7322;
-    }
-
-    .irs--round .irs-handle {
-        border: 4px solid #ee7322;
-    }
-
-    .irs--round .irs-from:before, .irs--round .irs-to:before,.irs--round .irs-single:before {
-        border-top-color: #ee7322;
-    }
-
-    .irs--round .irs-bar {
-        background-color: #ee7322;
-    }
-
-    .select2-container{
-        width: 100% !important;
-    }
-
-    .p-5-0{
-        padding: 5px 0px;
-    }
-
-    .dropdown-menu>li>a:hover {
-        border-left: 3px solid #f2832c;
-    }
-
-    .lh-23{
-        line-height: 23px !important;
-    }
-    
-    /* Slider css */
-
-    .slider-custom-container {
+    /* .slider-custom-container {
         overflow: hidden !important;
         position: relative !important;
         width: 100% !important;
@@ -239,7 +81,6 @@
         color: #fff;
         background: none;
         padding: 12px 19px;
-        /* border: 1px solid rgba(255, 255, 255, .3); */
         border: none;
         font-size: 16px;
         border-radius: 50%;
@@ -364,111 +205,244 @@
 
     .btn-td:hover {
         background-color: #f18222 !important;
-    }
-    /* End Slider css */
-
+    } */
+/* End Slider css */
+        .shadow-effect {
+		    background: #fff;
+		    padding: 20px;
+		    border-radius: 4px;
+		    text-align: center;
+	        border:1px solid #ECECEC;
+		    box-shadow: 0 19px 38px rgba(0,0,0,0.10), 0 15px 12px rgba(0,0,0,0.02);
+		}
+		#customers-testimonials .shadow-effect p {
+		    font-family: inherit;
+		    font-size: 17px;
+		    line-height: 1.5;
+		    margin: 0 0 17px 0;
+		    font-weight: 300;
+		}
+		.testimonial-name {
+		    margin: -17px auto 0;
+		    display: table;
+		    width: auto;
+		    background: #3190E7;
+		    padding: 9px 35px;
+		    border-radius: 12px;
+		    text-align: center;
+		    color: #fff;
+		    box-shadow: 0 9px 18px rgba(0,0,0,0.12), 0 5px 7px rgba(0,0,0,0.05);
+		}
+		#customers-testimonials .item {
+		    text-align: center;
+		    padding: 50px;
+				margin-bottom:80px;
+		    opacity: .2;
+		    -webkit-transform: scale3d(0.8, 0.8, 1);
+		    transform: scale3d(0.8, 0.8, 1);
+		    -webkit-transition: all 0.3s ease-in-out;
+		    -moz-transition: all 0.3s ease-in-out;
+		    transition: all 0.3s ease-in-out;
+		}
+		#customers-testimonials .owl-item.active.center .item {
+		    opacity: 1;
+		    -webkit-transform: scale3d(1.0, 1.0, 1);
+		    transform: scale3d(1.0, 1.0, 1);
+		}
+		.owl-carousel .owl-item img {
+		    transform-style: preserve-3d;
+		    max-width: 90px;
+    		margin: 0 auto 17px;
+		}
+		#customers-testimonials.owl-carousel .owl-dots .owl-dot.active span,
+        #customers-testimonials.owl-carousel .owl-dots .owl-dot:hover span {
+                    background: #3190E7;
+                    transform: translate3d(0px, -50%, 0px) scale(0.7);
+                }
+        #customers-testimonials.owl-carousel .owl-dots{
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+        #customers-testimonials.owl-carousel .owl-dots .owl-dot{
+            display: inline-block;
+        }
+		#customers-testimonials.owl-carousel .owl-dots .owl-dot span {
+		    background: #3190E7;
+		    display: inline-block;
+		    height: 20px;
+		    margin: 0 2px 5px;
+		    transform: translate3d(0px, -50%, 0px) scale(0.3);
+		    transform-origin: 50% 50% 0;
+		    transition: all 250ms ease-out 0s;
+		    width: 20px;
+		}
 </style>
 @endsection
 
 @section('content')
-<div class="slider-custom-container">
-<div class="text-slider-wrapper">
-    <div class="text-slider">
-        @foreach ($featured as $talent)
-          <div class="text-slide"><h1>A blessing for <br> every skin.</h1></div>
-        @endforeach
-          {{-- <div class="text-slide"><h1>The perfect mix of <br> old & new.</h1></div>
-          <div class="text-slide"><h1>A journey over borders <br> & generations.</h1></div>
-          <div class="text-slide"><h1>Your are the <br> stylist.</h1></div>
-          <div class="text-slide"><h1>To be on the <br> forerfront.</h1></div> --}}
-    </div>
-</div>
-
-<div class="slider-control slider-search-btn">
-    <a href="{{route('findtalent')}}" class="btn btn-td"> Search Talent</a>
-</div>
-<div class="slider-control">
-    <div class="prev"><button class="slider-btns" type="button"><i class="fas fa-arrow-left"></i></button></div>
-    <div class="next"><button class="slider-btns" type="button"><i class="fas fa-arrow-right"></i></button></div>
-</div>
-
-<div class="blocks">
-    <div class="block-1 dark-blocks"></div>
-    <div class="block-2 dark-blocks"></div>
-    <div class="block-3 dark-blocks"></div>
-</div>
-
-<div class="overlay dark-blocks"></div>
-
-<div class="image-slider">
-    @foreach ($featured as $talent)
-        @php
-            $img=!is_null($talent->profile) ? (!is_null($talent->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$talent->profile->profile_img)? 'storage/uploads/profile/'.$talent->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg';
-        @endphp
-        <div class="image-slide" id="one" style="background: url({{asset($img)}}) no-repeat 50% 50%; background-size: cover;"></div>
-    @endforeach
-    
-    {{-- <div class="image-slide" id="two" style="background: url(https://images.unsplash.com/photo-1509679708047-e0e562d21e44?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60) no-repeat 50% 50%; background-size: cover;"></div>
-    <div class="image-slide" id="three" style="background: url(https://images.unsplash.com/photo-1508215302842-8a015a452a20?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80) no-repeat 50% 50%; background-size: cover;"></div>
-    <div class="image-slide" id="four" style="background: url(https://images.unsplash.com/photo-1537510929030-2ffb7888f379?ixlib=rb-1.2.1&auto=format&fit=crop&w=2378&q=80) no-repeat 50% 50%; background-size: cover;"></div>
-    <div class="image-slide" id="five" style="background: url(https://images.unsplash.com/photo-1552793084-49132af00ff1?ixlib=rb-1.2.1&auto=format&fit=crop&w=2953&q=80) no-repeat 50% 50%; background-size: cover;"></div> --}}
-</div>
-</div>
-    {{-- <section class="page__img" style="background-image: url('{{ asset('web/img/apply_bg.jpg') }}')">
-        <div class="container">
-            <div class="row">
-                <div class="title__wrapp">
-                    <div class="page__subtitle title__grey">Looking for talent ?</div>
-                    <h1 class="page__title">Featured Talent</h1>
-                    
-                </div>
+    {{-- <div class="slider-custom-container">
+        <div class="text-slider-wrapper">
+            <div class="text-slider">
+                @foreach ($featured as $talent)
+                <div class="text-slide"><h1>A blessing for <br> every skin.</h1></div>
+                @endforeach
             </div>
         </div>
-    </section> --}}<!-- Slider Section End -->
+
+        <div class="slider-control slider-search-btn">
+            <a href="{{route('findtalent')}}" class="btn btn-td"> Search Talent</a>
+        </div>
+        <div class="slider-control">
+            <div class="prev"><button class="slider-btns" type="button"><i class="fas fa-arrow-left"></i></button></div>
+            <div class="next"><button class="slider-btns" type="button"><i class="fas fa-arrow-right"></i></button></div>
+        </div>
+
+        <div class="blocks">
+            <div class="block-1 dark-blocks"></div>
+            <div class="block-2 dark-blocks"></div>
+            <div class="block-3 dark-blocks"></div>
+        </div>
+
+        <div class="overlay dark-blocks"></div>
+
+        <div class="image-slider">
+            @foreach ($featured as $talent)
+                @php
+                    $img=!is_null($talent->profile) ? (!is_null($talent->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$talent->profile->profile_img)? 'storage/uploads/profile/'.$talent->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg';
+                @endphp
+                <div class="image-slide" id="one" style="background: url({{asset($img)}}) no-repeat 50% 50%; background-size: cover;"></div>
+            @endforeach
+        </div>
+    </div> --}}
+    <!-- TESTIMONIALS -->
+<section class="testimonials" style="height: 100vh">
+	<div class="container">
+
+      <div class="row">
+        <div class="col-sm-12" style="margin-top: 10rem;">
+          <div id="customers-testimonials" class="owl-carousel">
+
+            <!--TESTIMONIAL 1 -->
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="http://themes.audemedia.com/html/goodgrowth/images/testimonial3.jpg" alt="">
+                <p>Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.</p>
+              </div>
+              <div class="testimonial-name">EMILIANO AQUILANI</div>
+            </div>
+            <!--END OF TESTIMONIAL 1 -->
+            <!--TESTIMONIAL 2 -->
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="http://themes.audemedia.com/html/goodgrowth/images/testimonial3.jpg" alt="">
+                <p>Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.</p>
+              </div>
+              <div class="testimonial-name">ANNA ITURBE</div>
+            </div>
+            <!--END OF TESTIMONIAL 2 -->
+            <!--TESTIMONIAL 3 -->
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="http://themes.audemedia.com/html/goodgrowth/images/testimonial3.jpg" alt="">
+                <p>Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.</p>
+              </div>
+              <div class="testimonial-name">LARA ATKINSON</div>
+            </div>
+            <!--END OF TESTIMONIAL 3 -->
+            <!--TESTIMONIAL 4 -->
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="http://themes.audemedia.com/html/goodgrowth/images/testimonial3.jpg" alt="">
+                <p>Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.</p>
+              </div>
+              <div class="testimonial-name">IAN OWEN</div>
+            </div>
+            <!--END OF TESTIMONIAL 4 -->
+            <!--TESTIMONIAL 5 -->
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="http://themes.audemedia.com/html/goodgrowth/images/testimonial3.jpg" alt="">
+                <p>Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.</p>
+              </div>
+              <div class="testimonial-name">MICHAEL TEDDY</div>
+            </div>
+            <!--END OF TESTIMONIAL 5 -->
+          </div>
+        </div>
+      </div>
+      </div>
+</section>
+    <!-- END OF TESTIMONIALS -->
 
 @endsection
 @section('scripts')
 
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.1/owl.carousel.min.js"></script>
 
 <script type="text/javascript">
-    
+    jQuery(document).ready(function($) {
+        "use strict";
+        //  TESTIMONIALS CAROUSEL HOOK
+        $('#customers-testimonials').owlCarousel({
+            loop: true,
+            center: true,
+            items: 3,
+            margin: 0,
+            autoplay: true,
+            dots:true,
+            autoplayTimeout: 8500,
+            smartSpeed: 450,
+            responsive: {
+                0: {
+                items: 1
+                },
+                768: {
+                items: 2
+                },
+                1170: {
+                items: 3
+                }
+            }
+        });
+    });
 </script>
 
-<script>
+{{-- <script>
     
-var sickPrimary = {
-      autoplay: true,
-      autoplaySpeed: 2400,
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      speed: 1800,
-      cssEase: 'cubic-bezier(.84, 0, .08, .99)',
-      asNavFor: '.text-slider',
-      centerMode: true,
-      prevArrow: $('.prev'),
-      nextArrow: $('.next')
-}
+    var sickPrimary = {
+        autoplay: true,
+        autoplaySpeed: 2400,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        speed: 1800,
+        cssEase: 'cubic-bezier(.84, 0, .08, .99)',
+        asNavFor: '.text-slider',
+        centerMode: true,
+        prevArrow: $('.prev'),
+        nextArrow: $('.next')
+    }
 
-var sickSecondary = {
-      autoplay: true,
-      autoplaySpeed: 2400,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      speed: 1800,
-      cssEase: 'cubic-bezier(.84, 0, .08, .99)',
-      asNavFor: '.image-slider',
-      prevArrow: $('.prev'),
-      nextArrow: $('.next')
-}
+    var sickSecondary = {
+        autoplay: true,
+        autoplaySpeed: 2400,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        speed: 1800,
+        cssEase: 'cubic-bezier(.84, 0, .08, .99)',
+        asNavFor: '.image-slider',
+        prevArrow: $('.prev'),
+        nextArrow: $('.next')
+    }
 
-$('.image-slider').slick(sickPrimary);
-$('.text-slider').slick(sickSecondary);
+    $('.image-slider').slick(sickPrimary);
+    $('.text-slider').slick(sickSecondary);
 
-</script>
+</script> --}}
 
 @endsection

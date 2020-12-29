@@ -305,12 +305,12 @@
                         </div>
                               
                         <div class="row form-block">
-                            <div class="form-group col-sm-6">
+                            {{-- <div class="form-group col-sm-6">
                                 <label for="location" class="col-sm-4 control-label">Location</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="location" id="location" value="{{ (session('old_query')['location']) ?? ''}}">
                                 </div>
-                            </div>
+                            </div> --}}
 
                            <div class="form-group col-sm-6">
                                 <label for="skills" class="col-sm-4 control-label">Skills </label>
@@ -318,15 +318,15 @@
                                     @include('components.multiselect', ['options' => $skills,'option_value'=>'id','option_text'=>'title','name'=>'skills'])
                                     
                                  </div>
-                             </div>
+                            </div>
 
-                            <div class="form-group col-sm-6">
+                            {{-- <div class="form-group col-sm-6">
                                 <label for="unionstatus" class="col-sm-4 control-label">Union Status</label>
                                 <div class="col-sm-8">
                                     @include('components.multiselect', ['options' => ['Yes','No'],'name'=>'union'])
     							
                                 </div>
-                            </div>  
+                            </div>   --}}
 
                             {{-- <div class="form-group col-sm-6">
                                 <label for="assets" class="col-sm-4 control-label">Availible Assets </label>
@@ -366,8 +366,8 @@
                                 <label class="form-check-label" for="hasDrivingLicense">Have Driver's License</label>
                                 <input type="checkbox"  class="form-check-input" id="hasPassport">
                                 <label class="form-check-label" for="hasPassport">Have Passport</label>
-                                <input type="checkbox"  class="form-check-input" id="selfRecord">
-                                <label class="form-check-label" for="selfRecord">Self-record</label>              
+                                {{-- <input type="checkbox"  class="form-check-input" id="selfRecord">
+                                <label class="form-check-label" for="selfRecord">Self-record</label>  --}}             
                             </div>
 
 
