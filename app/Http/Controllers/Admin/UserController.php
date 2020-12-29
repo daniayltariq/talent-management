@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
-
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
-
 use App\Models\User;
 use Illuminate\Http\Request;
+
+use App\Domain\Mail\InviteTalent;
+use Spatie\Permission\Models\Role;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -25,6 +27,7 @@ class UserController extends Controller
             }
         )->with('roles')->get();
         $roles=Role::where('name','<>','superadmin')->get();
+        
         /* dd($user[0]->roles[0]->name); */
         return view('backend.user.list',compact('user','roles'));
         
@@ -202,6 +205,39 @@ class UserController extends Controller
         }
         
         return redirect()->back()->with("status", "User has been Updated.");
+    }
+
+    public function inviteUser(Request $request)
+    {
+        /* dd($request->all()); */
+        $validator = Validator::make($request->all(), [
+            "user_id"    => "required|integer",
+            "subject"    => "required|string",
+            "message"    => "required|string",
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $user=User::findOrFail($request->user_id);
+        
+        try {
+            $data=[
+                "subject"=>$request->subject,
+                "message"=>$request->message,
+            ];
+            
+            Mail::to($user->email)->send(new InviteTalent($data));
+            return redirect()->back()->with('success', 'Invitation Sent.');
+            
+        } catch (\Throwable $th) {
+            
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+         
     }
 
     /**

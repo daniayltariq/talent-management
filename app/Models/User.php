@@ -118,4 +118,33 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Models\SavedSearch','user_id');
     }
+
+    public function hasActiveSubscription()
+    {
+        $subs=$this->subscriptions()->active()->first();
+        
+        if (!is_null($subs) && $subs->count()>0) {
+            $status=true;
+        }
+        else{
+            $status=false;
+        }
+        return $status;
+    }
+
+    public function getActivePlan()
+    {
+        $subs=$this->subscriptions()->active()->first();
+        
+        if (!is_null($subs) && $subs->count()>0) {
+            $plan=Plan::where('stripe_plan',$subs->stripe_plan)->first();
+            
+            $plan=$plan;
+        }
+        else{
+            $plan=null;
+        }
+
+        return $plan;
+    }
 }

@@ -6,6 +6,12 @@
 		.bootstrap-switch-container{
 			width: 160px !important;
 		}
+
+		.name-badge{
+			position: relative;
+    		min-width: 175px;
+			font-size: 13px;
+		}
 	</style>
 @endsection
 
@@ -46,7 +52,12 @@
 								@foreach($user as $key => $user)
 									<tr>
 										<td>{{++$key}}</td>
-										<td>{{ $user->f_name ?? '' }} {{ $user->l_name ?? '' }}</td>
+										<td class="name-badge p-3">{{ $user->f_name ?? '' }} {{ $user->l_name ?? '' }}
+											@if ($user->referal_code()->exists() && $user->referal_code->points>1)
+												<span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--outline kt-badge--pill kt-badge--rounded" style="position: absolute;top: 2%;margin-left: 2%;">Rewarded</span>
+											@endif
+											
+										</td>
 										<td>{{ $user->email ?? '' }}</td>
 										<td>
 											@foreach ($user->roles as $role)
@@ -68,7 +79,11 @@
 										<td>
 											<a href="{{route('backend.user.edit',$user->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Edit
 											</div> </a>
-											{{-- <button data-user="{{$user->id}}" name="userRole" class="btn btn-success btn-sm btn-bg-white" style="color: #5d78ff;" data-toggle="modal" data-target="#role_modal">Role</button> --}}
+											
+											@if ($user->hasActiveSubscription() && $user->getActivePlan()->training_invitation==1)
+												<button data-user="{{$user->id}}" name="userInvite" class="btn btn-success btn-sm btn-bg-white" style="color: #5d78ff;" data-toggle="modal" data-target="#invite_modal">Invite</button>
+											@endif
+											
 
 											<a href="{{route('backend.user.impersonate',$user->id)}}" class="btn btn-success btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Impersonate
 											</div> </a>
@@ -92,14 +107,14 @@
 	</div>
 	<!--end::Portlet-->
 </div>
-{{-- <div class="modal fade" id="role_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="invite_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-			<form action="{{route('backend.user.assignRole')}}" method="POST" id="user-content-form" enctype="multipart/form-data" class="kt-form">
+			<form action="{{route('backend.user.invite')}}" method="GET" enctype="multipart/form-data" class="kt-form">
 				@csrf
 				<input type="hidden" name="user_id" >
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Assign Role</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Invite User</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					</button>
 				</div>
@@ -107,14 +122,24 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="col-md-12">Add Name</label>
-								<div class="col-md-12">
-								<select class="form-control" name="role_id">
-									<option value="">Select Role</option>
-									@foreach ($roles as $role)
-											<option value="{{$role->id}}">{{$role->name}}</option>
-									@endforeach
-								</select>
+								<label class="col-md-3 col-sm-3 col-xs-12">Subject</label>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<input class="form-control " type="text" name="subject">
+									@error('title')
+										<div class="error">{{ $message }}</div>
+									@enderror
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="col-md-3 col-sm-3 col-xs-12">Message</label>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<textarea name="message" class="form-control "></textarea>
+									@error('message')
+										<div class="error">{{ $message }}</div>
+									@enderror
 								</div>
 							</div>
 						</div>
@@ -127,7 +152,7 @@
 			</form>
         </div>
     </div>
-</div> --}}
+</div>
 @endsection
 
 @section('scripts')
@@ -143,7 +168,11 @@ $(document).ready(function(){
 	$("[name='status']").bootstrapSwitch();
 	$("[name='featured']").bootstrapSwitch();
 
-	$('[name="userRole"]').click(function(e){
+	@if ($errors->has('subject') || $errors->has('message'))
+		$('#invite_modal').modal('show');
+	@endif
+
+	$('[name="userInvite"]').click(function(e){
 		$('[name="user_id"]').val($(this).data('user'));
 		
 	});

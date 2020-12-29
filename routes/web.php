@@ -284,6 +284,7 @@ Route::group([
     Route::resource('user', App\Http\Controllers\Admin\UserController::class);
     Route::get('/user_status', [App\Http\Controllers\Admin\UserController::class, 'updateStatus'])->name('user.updateStatus');
     Route::get('/user_featured', [App\Http\Controllers\Admin\UserController::class, 'markFeatured'])->name('user.markFeatured');
+    Route::get('/invite_user', [App\Http\Controllers\Admin\UserController::class, 'inviteUser'])->name('user.invite');
 
     Route::get('/user/impersonate/{id}', [App\Http\Controllers\Admin\UserController::class, 'impersonate'])->name('user.impersonate');
     Route::get('/user_request', [App\Http\Controllers\Admin\UserRequestController::class, 'userRequest'])->name('user.requests');
