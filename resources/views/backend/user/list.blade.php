@@ -26,9 +26,9 @@
 				</h3>
 				
 			</div>
-			{{-- <div class="kt-portlet__head-label" style="float: right">
+			<div class="kt-portlet__head-label" style="float: right">
 				<a href="{{ route('backend.user.create') }}" class="btn btn-info btn-xs"><i class='fa fa-plus'></i> New User</a>
-			</div> --}}
+			</div>
 		</div>
 		<div class="kt-portlet__body">
 			<!--begin::Section-->

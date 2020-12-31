@@ -162,11 +162,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         <option value="female" {{ old('gender')=='female' ?'selected':''}}>Female</option>
                                         <option value="male" {{ old('gender')=='male' ?'selected':''}}>Male</option>
                                     </select>
-                                    @error('gender')
+                                    {{-- @error('gender')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                  </div>
                             </div>
                             <div class="form-group">
@@ -189,11 +189,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     <span id="valid-msg" class="valid-feedback hide">✓ Valid</span>
                                     <span id="error-msg" class="invalid-feedback hide"></span>
                                     
-                                    @error('phone')
+                                    {{-- @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -219,11 +219,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         @endforeach
                                         
                                     </select>
-                                    @error('country')
+                                    {{-- @error('country')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>  
                             <div class="form-group">
@@ -241,11 +241,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <label for="state" class="col-sm-4 control-label">State <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="state" value="{{ old('state') }}" id="state">
-                                    @error('state')
+                                    {{-- @error('state')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="form-group">

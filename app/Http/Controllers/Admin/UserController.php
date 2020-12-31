@@ -5,8 +5,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Domain\Mail\InviteTalent;
-use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -40,8 +41,9 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
+        $countries=DB::table('countries')->select('nicename')->get();
         $roles=Role::where('name','<>','superadmin')->get();
-        return view('backend.user.create',compact('roles'));
+        return view('backend.user.create',compact('roles','countries'));
     }
 
     /**
@@ -52,32 +54,52 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        /* dd($request->all()); */
         $validator = Validator::make($request->all(),[
-            'role_id'  => 'required|integer',
-            'name'  => 'required|string',
-            'email' => 'required|string',
-            'password'  => 'required|string',
-            'password' => 'required|string',
+            'f_name' => ['required', 'string', 'max:255'],
+            'l_name' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'string', 'max:255'],
+            'dob' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'max:255','unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'country' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'state' => ['required', 'string', 'max:255'],
+            'h_adress_1' => ['string', 'max:255','required'],
+            'h_adress_2' => ['max:255'],
+            'zipcode' => ['required', 'string', 'max:255'],
+            'account_type' => ['required', 'string'],
         ]);
         
         if ($validator->fails()) {
-            return $validator->errors();
-            /* return redirect()->back()
-                        ->withErrors($validator)
-                        ->withInput(); */
+            /* return $validator->errors(); */
+            return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
             /* return 'error'; */
         }
 
-        $user = new User;
-        $user->name=$request->name;
-        $user->email=$request->email;
-        if ($request->has('password')) {
-			$user->password =  Hash::make($request->password);
-		}
+        $country_data=json_decode($data->new_phone,true);
+        $user = User::create([
+            'f_name' => $data->f_name,
+            'l_name' => $data->l_name,
+            'gender' => $data->gender,
+            'dob' => $data->dob,
+            'phone' =>Str::of($data->phone)->prepend('+'.$country_data->dialCode),
+            'phone_c_data'=>$data->new_phone,
+            'email' => $data->email,
+            'password' => Hash::make($data->password),
+            'country' => $data->country,
+            'city' => $data->city,
+            'state' => $data->state,
+            'h_adress_1' => $data->h_adress_1,
+            'h_adress_2' => $data->h_adress_2,
+            'zipcode' => $data->zipcode,
+        ]);
         $user->save();
 
-        $role=Role::where('id',$request->role_id)->first();
-        $user->assignRole($role->name);
+        $user->assignRole($data->account_type);
         
         return redirect()->back()->with("status", "User has been Created.");
     }
@@ -157,7 +179,7 @@ class UserController extends Controller
         $user= User::findOrFail($id);
         $skills=\App\Models\Skill::all();
         $roles=Role::where('name','<>','superadmin')->get();
-        return view('backend.user.create',compact('user','roles','skills'));
+        return view('backend.user.edit',compact('user','roles','skills'));
     }
 
     /**
