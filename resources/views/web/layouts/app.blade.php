@@ -115,6 +115,24 @@
 			padding-top:0 !important;
 			padding-bottom:0 !important; 
 		}
+
+		@media only screen and (max-width: 1252px)
+		{
+			.main__menu {
+				display: none;
+				width: 100%;
+				padding: 0;
+				background: black;
+			}
+		}
+			
+		@media only screen and (max-width: 1252px)
+		{
+			.responsive-menu__button {
+				display: block;
+			}
+		}
+		
 	</style>
 </head>
 

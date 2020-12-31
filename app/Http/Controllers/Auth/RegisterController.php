@@ -117,6 +117,9 @@ class RegisterController extends Controller
             {
                 $user->referrer_id=$referal->user_id;
                 $user->save();
+
+                $referal->points=$referrer->points+1;
+                $referal->save();
             }
         }
         $user->assignRole($data['account_type']);
