@@ -7,7 +7,7 @@
     </div>
     
     <div class="col-md-12 mt-5">
-        <h4 class="mb-4 upload-head heading">Your Images</h4>
+        <h4 class="mb-4 upload-head heading">My Images</h4>
     </div>
     
     <div class="col-md-12">

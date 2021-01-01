@@ -16,6 +16,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $data=[
+            'profile'=>auth()->user()->profile,
             'images'=>auth()->user()->attachments->where('type','image'),
             'video'=>auth()->user()->attachments->where('type','video'),
             'audio'=>auth()->user()->attachments->where('type','audio'),
@@ -51,6 +52,7 @@ class DashboardController extends Controller
             'l_name' => ['required', 'string'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email'],
+            'password' => ['nullable','string', 'min:8','confirmed'],
         ]);
         
         if ($validator->fails()) {
@@ -64,9 +66,12 @@ class DashboardController extends Controller
             $country_data=json_decode($request->new_phone,true);
            
             $user=User::findOrFail(auth()->user()->id);
-            $user->fill($request->all());
+            $user->fill(is_null($request->password)?$request->except(['password']):$request->all());
             $user->phone=Str::of($request->phone)->prepend('+'.$country_data['dialCode']);
             $user->phone_c_data=$request->new_phone;
+            if (!is_null($request->password)) {
+                $user->password=Hash::make($request->password);
+            }
             $user->save();
             
             return redirect()->back()->with(array(
@@ -154,6 +159,12 @@ class DashboardController extends Controller
         ];
 
         return view('components.attachments',compact('data'));
+    }
+
+    public function resume()
+    {
+        $profile=auth()->user()->profile;
+        return view('print.resume',compact('profile'));
     }
 
 }

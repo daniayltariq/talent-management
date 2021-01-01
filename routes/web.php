@@ -27,7 +27,6 @@ Auth::routes();
 |
 */
 
-
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 Route::get('/verified_email', function () {
     return view('web.verified');
@@ -182,6 +181,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCand
             Route::put('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
 
             Route::post('/dashboard/social_links', [App\Http\Controllers\Account\DashboardController::class, 'social_links'])->name('dashboard.social_links');
+            Route::get('resume', [App\Http\Controllers\Account\DashboardController::class, 'resume'])->name('resume');
         });
         
         Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
@@ -276,9 +276,13 @@ Route::group([
 	'middleware' => ['isAdmin'],
 ],function(){
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class,'dashboard'])->name('dashboard');
+    Route::get('/profile', [App\Http\Controllers\Admin\DashboardController::class,'profile'])->name('profile');
+    Route::post('/profile', [App\Http\Controllers\Admin\DashboardController::class,'profileUpdate'])->name('profile.update');
     Route::resource('plan', App\Http\Controllers\Admin\PlanController::class);
 
     Route::resource('topic', App\Http\Controllers\Admin\TopicController::class);
+    Route::get('/topic_comments', [App\Http\Controllers\Admin\TopicController::class, 'comments'])->name('topic.comments');
+    Route::get('/approve_comment', [App\Http\Controllers\Admin\TopicController::class, 'approveComment'])->name('topic.approve_comment');
     Route::get('/topic_status', [App\Http\Controllers\Admin\TopicController::class, 'updateStatus'])->name('topic.updateStatus');
 
     Route::resource('user', App\Http\Controllers\Admin\UserController::class);

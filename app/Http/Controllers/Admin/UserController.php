@@ -80,26 +80,26 @@ class UserController extends Controller
             /* return 'error'; */
         }
 
-        $country_data=json_decode($data->new_phone,true);
+        $country_data=json_decode($request->new_phone,true);
         $user = User::create([
-            'f_name' => $data->f_name,
-            'l_name' => $data->l_name,
-            'gender' => $data->gender,
-            'dob' => $data->dob,
-            'phone' =>Str::of($data->phone)->prepend('+'.$country_data->dialCode),
-            'phone_c_data'=>$data->new_phone,
-            'email' => $data->email,
-            'password' => Hash::make($data->password),
-            'country' => $data->country,
-            'city' => $data->city,
-            'state' => $data->state,
-            'h_adress_1' => $data->h_adress_1,
-            'h_adress_2' => $data->h_adress_2,
-            'zipcode' => $data->zipcode,
+            'f_name' => $request->f_name,
+            'l_name' => $request->l_name,
+            'gender' => $request->gender,
+            'dob' => $request->dob,
+            'phone' =>Str::of($request->phone)->prepend('+'.$country_data->dialCode),
+            'phone_c_data'=>$request->new_phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'country' => $request->country,
+            'city' => $request->city,
+            'state' => $request->state,
+            'h_adress_1' => $request->h_adress_1,
+            'h_adress_2' => $request->h_adress_2,
+            'zipcode' => $request->zipcode,
         ]);
         $user->save();
 
-        $user->assignRole($data->account_type);
+        $user->assignRole($request->account_type);
         
         return redirect()->back()->with("status", "User has been Created.");
     }

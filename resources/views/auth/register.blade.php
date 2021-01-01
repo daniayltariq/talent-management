@@ -77,6 +77,10 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     .iti{
         width: 100%;
     }
+
+    select.form-control {
+        background-color: white !important;
+    }
 </style>
 @endsection
 

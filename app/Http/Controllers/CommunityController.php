@@ -37,7 +37,7 @@ class CommunityController extends Controller
 
         $latest=Topic::where('status',1)->latest()->get()->take(4);
         
-        $comments = TopicComment::where('topic_id',$data->id)->where('parent_id',null)->with('childComment')->get()->take(1);
+        $comments = TopicComment::where('topic_id',$data->id)->where('approved',0)->where('parent_id',null)->with('childComment')->get()->take(1);
         /* dD($comments); */
     	if($data){
     		return view('web.pages.single-post',compact('data','comments','latest'));
@@ -123,7 +123,7 @@ class CommunityController extends Controller
 
     public function read_more_comments(Request $request)
     {
-        $comments = TopicComment::where('topic_id',$request->topic)->where('parent_id',null)->with('childComment')->get()->skip($request->skipcount)->take(1);
+        $comments = TopicComment::where('topic_id',$request->topic)->where('approved',0)->where('parent_id',null)->with('childComment')->get()->skip($request->skipcount)->take(1);
         if($comments){
     		return view('web.components.comments',compact('comments'));
     	}

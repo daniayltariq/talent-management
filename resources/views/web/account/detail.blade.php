@@ -88,7 +88,7 @@
                                     <div class="col-sm-12">
                                         <div>
                                             <div class="profile-sec mx-auto ml-5">
-                                                <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'public/web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
+                                                <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
 
                                             </div>
                                             <div class="talent-intro text-center">
@@ -182,12 +182,12 @@
                                             <h4 class="text__quote font-primary">Theater</h4>
                                             <div class="">
                                                 <table class="w-100">
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <th>Name</th>
                                                         <th>Role</th>
                                                         <th>Director or Venue</th>
-                                                    </tr>
-                                                    @if (!is_null($expr))
+                                                    </tr>--}}
+                                                    @if ( !is_null($expr))
                                                         @foreach ($expr as $key => $exp)
                                                             <tr>
                                                                 <td class="w-4">{{$exp->name ?? ''}}</td>
@@ -216,12 +216,11 @@
                                             <h4 class="text__quote font-primary">Films</h4>
                                             <div class="">
                                                 <table class="w-100">
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <th>Name</th>
                                                         <th>Role</th>
                                                         <th>Director or Production Company</th>
-                                                    </tr>
-
+                                                    </tr>--}}
                                                     @if (!is_null($expr))
                                                         @foreach ($expr as $key => $exp)
                                                             <tr>
@@ -251,12 +250,11 @@
                                             <h4 class="text__quote font-primary">Telivision</h4>
                                             <div class="">
                                                 <table class="w-100">
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <th>Name</th>
                                                         <th>Role</th>
                                                         <th>Production</th>
-                                                    </tr>
-
+                                                    </tr>--}}
                                                     @if (!is_null($expr))
                                                         @foreach ($expr as $key => $exp)
                                                             <tr>
@@ -284,13 +282,12 @@
                                             <h4 class="text__quote font-primary">Commercials</h4>
                                             <div class="">
                                                 <table class="w-100">
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <th>Name of Commercial</th>
                                                         <th>Role Played</th>
                                                         <th>Director or Production Company</th>
                                                         
-                                                    </tr>
-
+                                                    </tr>--}}
                                                     @if (!is_null($expr))
                                                         @foreach ($expr as $key => $exp)
                                                             <tr>
@@ -319,13 +316,12 @@
                                             <h4 class="text__quote font-primary">Traning</h4>
                                             <div class="">
                                                 <table class="w-100">
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <th>Training Class</th>
                                                         <th>Instructor</th>
                                                         <th>Training Company</th>
                                                         
-                                                    </tr>
-
+                                                    </tr>--}}
                                                     @if (!is_null($expr))
                                                         @foreach ($expr as $key => $exp)
                                                             <tr>

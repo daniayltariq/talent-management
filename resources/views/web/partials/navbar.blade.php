@@ -92,7 +92,7 @@
 							@if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0))
 								
 									<li class="m-menu__list-item {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}">
-										<a href="{{ route('pricing') }}">Pricing</a>
+										<a href="{{ route('pricing') }}">Plans</a>
 									</li>
 								
 							@endif
@@ -101,7 +101,7 @@
 							@if(Auth::guest()) 
 							
 								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
-									<a href="{{ route('login') }}">Join Now</a>
+									<a href="{{ route('login') }}">Join <span style="color: #df691a;font-weight: 500;">US</span> Now</a>
 									<ul class="m-menu__sub">
 										<li class="m-menu__sub-item">
 											<a href="{{ route('login') }}">Login</a>
@@ -132,6 +132,11 @@
 											
 										@endrole
 										
+										@role('superadmin')
+											<li class="m-menu__sub-item">
+												<a href="{{ route('backend.dashboard') }}">Dashboard</a>
+											</li>
+										@endrole
 
 										@if (\Auth::guest() || auth()->user()->hasRole('candidate'))
 											<li class="m-menu__sub-item">

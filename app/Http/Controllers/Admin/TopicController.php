@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Topic;
-use App\Models\TopicCategory;
+use App\Models\TopicComment;
 use Illuminate\Http\Request;
+use App\Models\TopicCategory;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
@@ -166,6 +167,35 @@ class TopicController extends Controller
         //dd($blog->tags->pluck('tag')->toArray());
         
         return view('backend.topic.create',compact('categories','blog'));
+    }
+
+    public function comments(Request $request)
+    {
+        $topic=Topic::where('id',$request->topic_id)->first();
+        if ($topic) {
+            $comments=$topic->comments->where('approved',0);
+            return view('backend.topic.comments',compact('comments'));
+        } else {
+            return 'error';
+        }
+        
+    }
+
+    public function approveComment(Request $request)
+    {
+        $comm=TopicComment::where('id',$request->comm_id)->first();
+        if ($comm) {
+            $comm->approved=1;
+            $comm->save();
+            if($comm){
+                return 'success';
+            }else{
+                return 'error';
+            }
+        } else {
+            return 'error';
+        }
+        
     }
 
     public function updateStatus(Request $request)

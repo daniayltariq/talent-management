@@ -237,6 +237,12 @@
     .iti{
         width: 100%;
     }
+
+    .single-talent {
+        box-shadow: 0px 6px 12px #61616154 !important;
+    }
+
+
 </style>
 
 <!-- jQuery library -->
@@ -292,18 +298,25 @@
                             <span class="font-weight-bold small text-uppercase">Personal information</span></a>
                         <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
                             <i class="fa fa-user mr-2"></i>
-                            <span class="font-weight-bold small text-uppercase">Profile</span></a>
-                        <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <i class="fa fa-star mr-2"></i>
-                            <span class="font-weight-bold small text-uppercase">Invoices</span></a>
-                        <a class="nav-link mb-3 p-3 shadow" id="v-refer-tab" data-toggle="pill" href="#v-refer" role="tab" aria-controls="v-refer" aria-selected="false">
-                            <i class="fa fa-users mr-2"></i>
-                            <span class="font-weight-bold small text-uppercase">Refer a Friend </span></a>
+                            <span class="font-weight-bold small text-uppercase">My Images</span></a>
                         @if ($data['plan'] && $data['plan']->social_links==1)
                         <a class="nav-link mb-3 p-3 shadow" id="v-social-tab" data-toggle="pill" href="#v-social" role="tab" aria-controls="v-social" aria-selected="false">
                             <i class="fa fa-icons mr-2"></i>
-                            <span class="font-weight-bold small text-uppercase">Social Links</span></a>
+                            <span class="font-weight-bold small text-uppercase">My Social Media Links</span></a>
                         @endif
+                        <a class="nav-link mb-3 p-3 shadow" id="v-resume-tab" data-toggle="pill" href="#v-resume" role="tab" aria-controls="v-resume" aria-selected="false">
+                            <i class="fa fa-star mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">My Resume</span></a>
+                        <a class="nav-link mb-3 p-3 shadow" href="{{ route('account.talent.profile') }}" {{-- id="v-resume-wizard-tab" data-toggle="pill" href="#v-resume-wizard" role="tab" aria-controls="v-resume-wizard" aria-selected="false" --}}>
+                            <i class="fa fa-star mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Resume Wizard</span></a>
+                        {{-- <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <i class="fa fa-star mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Invoices</span></a> --}}
+                        <a class="nav-link mb-3 p-3 shadow" id="v-refer-tab" data-toggle="pill" href="#v-refer" role="tab" aria-controls="v-refer" aria-selected="false">
+                            <i class="fa fa-users mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Refer a Friend </span></a>
+                        
                         </div>
                 </div>
                 <div class="col-md-9">
@@ -411,6 +424,18 @@
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
+
+                                    <div class="col-6">
+                                        <label>Create a Password</label>
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"> 
+                                        @error('password')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Confirm Password</label>
+                                        <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" >
+                                    </div>
                                 </div>
                                 <div class="row ">
                                     <div class="col-12">
@@ -427,7 +452,14 @@
                                 
                             </div>
                         </div>
-                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-resume" role="tabpanel" aria-labelledby="v-resume-tab">
+                            @include('components.resume',['profile'=>$data['profile']])
+                           
+                        </div>
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-resume-wizard" role="tabpanel" aria-labelledby="v-resume-wizard-tab">
+                            Loading...
+                        </div>
+                        {{-- <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                             <h4 class="font-italic mb-4">Invoices</h4>
                             <table class="w-100">
                                 <thead>
@@ -453,7 +485,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> --}}
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-refer" role="tabpanel" aria-labelledby="v-refer-tab">
                             <div class="row">
                                 <div class="col-6">
