@@ -72,7 +72,7 @@
 
                             <div class="row">
                                 <div class="col-sm-12 text-center">
-                                    <button type="submit" class="btn btn-default btn__red animation btn-half pull-right">Sign in</button>
+                                    <button type="submit" class="btn btn-default btn__red {{-- animation --}} btn-half pull-right">Sign in</button>
                                     @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}

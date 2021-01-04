@@ -205,8 +205,8 @@
                                     <div class="row @if (isset($plan) && isset($plan->community_access) && $plan->community_access=='0')invis @endif" id="community_access_perm_div">
                                        <select class="social_limit col-md-4 h-34" name="community_access_perm" id="community_access_perm">
                                           <option value="">Access Level..</option>
-                                          <option value="R" {{$plan->community_access_perm=='R'?'selected' : ''}}>Read Only</option>
-                                          <option value="R/W" {{$plan->community_access_perm=='R/W'?'selected' : ''}}>Read Write</option>
+                                          <option value="R" {{$plan->community_access_perm=='R'?'selected' : ''}}>Read</option>
+                                          <option value="R/W" {{$plan->community_access_perm=='R/W'?'selected' : ''}}>Read and Comment</option>
                                        </select>
                                     </div>
                                  {{-- @endif --}}

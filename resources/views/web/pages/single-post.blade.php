@@ -153,9 +153,11 @@
 			<div class="row">
 				<div class="post-single col-md-7">
 					<article class="post-single__content">
-						<div class="post__thumbnail">
+						{{-- <div class="post__thumbnail">
 							<img class="w-100"  src="{{ asset(isset($data) && $data->image ? $data->image : 'backend-assets/images/rec2.jpg') }}" alt="">
-						</div>
+						</div> --}}
+
+						<h2 class="post__title">{{ $data->title }}</h2>
 						<div class="post__meta post__meta_single">
 							<span class="post__comments">
 								<a href="#comment-form-heading"><i class="mdi mdi-comment-text"></i>{{ count($data->comments) }} comments</a>
@@ -168,8 +170,6 @@
 								<a href="#" class="@if(\Auth::check()) mark_post_like @endif" data-topic="{{ $data->id }}"><i class="mdi mdi-heart"></i>{{ $data->likes_count }} likes</a>
 							</span>
 						</div>
-
-						<h2 class="post__title">{{ $data->title }}</h2>
 						<p class="post__date date">{{ $data->created_at->format('d M Y') }}</p>
 						<div class="post__text">
 							 {!! $data->content !!}

@@ -264,7 +264,7 @@ table.pricing td:nth-child(4) {
     <tr>
       <td>Access to Community Forums.</td>
       @foreach ($plans as $plan)
-        <td><span class="tick"><i class="fa fa-{{$plan->community_access==1 ? 'check' : ''}}"></i> {{$plan->community_access==1?($plan->community_access_perm=='R'? '(Read Only)' : '(Read/Write)') : ''}} </span></td>
+        <td><span class="tick"><i class="fa fa-{{$plan->community_access==1 ? 'check' : ''}}"></i> {{$plan->community_access==1?($plan->community_access_perm=='R'? '(Read)' : '(Read and Comment)') : ''}} </span></td>
       @endforeach
       {{-- <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td>

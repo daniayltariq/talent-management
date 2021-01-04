@@ -117,6 +117,9 @@ Route::get('/403', function () {
 })->name('403');
 // End error routes
 
+Route::get('/user_agreement', function () {
+    return view('web.pages.user_agreement');
+})->name('user_agreement');
 
 Route::get('/denial', function (Request $request) {
     return view('web.pages.denial')->with('message',session('message'));

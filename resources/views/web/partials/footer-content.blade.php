@@ -9,6 +9,7 @@
 						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-facebook"></i></a></li>
 						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-instagram"></i></a></li>
 						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-twitter"></i></a></li>
+						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-youtube-play"></i></a></li>
 					</ul>
 				</div>
 				{{-- <div class="col-md-3 col-sm-6 col-xs-12 footer__adres">

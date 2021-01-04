@@ -2,8 +2,7 @@
 {{-- {{ dd($contents) }} --}}
 @section('styles')
 <!--Third party Styles(used by this page)--> 
-<link href="{{asset('backend-assets/assets/plugins/summernote/summernote.css')}}" rel="stylesheet">
-<link href="{{asset('backend-assets/assets/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('backend-assets/assets/css/tagsinput.css') }}">
 <style>
    .form-group label {
@@ -93,7 +92,7 @@
                         </div> --}}
                         <div class="form-group">
                            <div class="col-md-11 col-sm-11 col-xs-12">
-                              <textarea name="content" id="summernote" class="summernote">{!! !is_null(old('content')) ? html_entity_decode(old('content')) : (isset($blog)?html_entity_decode($blog->content) : '')!!}</textarea>
+                              <textarea name="content" id="summer-desc" class="summernote">{!! !is_null(old('content')) ? html_entity_decode(old('content')) : (isset($blog)?html_entity_decode($blog->content) : '')!!}</textarea>
                               @error('content')
                                   <div class="error">{{$message}}</div>
                               @enderror
@@ -126,7 +125,7 @@
 						</div>
                          --}}
 
-      						<div class="form-group">
+      						{{-- <div class="form-group">
       							<h3 class="col-md-12 col-sm-12 col-xs-12">Image</h3>
       							<div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
       								<div class="row">
@@ -140,7 +139,7 @@
       								<sm><code>Image size should be 720 x 660 Pixels</code></sm>
       							</div>
       							<br>
-      						</div>
+      						</div> --}}
 
                         <div class="ln_solid"></div>
                         <div class="form-group">
@@ -163,15 +162,14 @@
 @endsection
 @section('scripts')
 <!-- Third Party Scripts(used by this page)-->
-<script src="{{asset('backend-assets/assets/plugins/summernote/summernote.min.js')}}"></script>
-<script src="{{asset('backend-assets/assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
-<!--Page Active Scripts(used by this page)-->
-<script src="{{asset('backend-assets/assets/plugins/summernote/summernote.active.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src="{{ asset('backend-assets/assets/js/tagsinput.js') }}"></script>
 
 <script type="text/javascript">
    
    $(document).ready(function(){
+      $('#summer-desc').summernote();
+      
       @if (session('status'))
          toastr.success('{{session('status')}}', "Success");
       @endif
