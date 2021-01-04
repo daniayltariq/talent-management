@@ -136,7 +136,7 @@ table.pricing td:nth-child(4) {
       <div class="row">
         <div class="title__wrapp">
           {{-- <div class="page__subtitle title__grey">Try premiuim</div> --}}
-          <h1 class="page__title">SUBSCRIPTION PLANS</h1>
+          <h1 class="page__title">MEMBERSHIPS</h1>
         </div>
       </div>
     </div>
@@ -262,7 +262,7 @@ table.pricing td:nth-child(4) {
       
     </tr>
     <tr>
-      <td>Access to Community Forums that include our Community Topics.</td>
+      <td>Access to Community Forums.</td>
       @foreach ($plans as $plan)
         <td><span class="tick"><i class="fa fa-{{$plan->community_access==1 ? 'check' : ''}}"></i> {{$plan->community_access==1?($plan->community_access_perm=='R'? '(Read Only)' : '(Read/Write)') : ''}} </span></td>
       @endforeach

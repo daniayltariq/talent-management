@@ -375,6 +375,9 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
         var iti=window.intlTelInput(phone,{
             initialCountry: "us",
+            customPlaceholder: function(selectedCountryPlaceholder, selectedCountryData) {
+                return selectedCountryPlaceholder.replace(/[0-9]/g, 5);
+            },
             separateDialCode: true,
             preferredCountries: ["fr", "us", "gb"],
             geoIpLookup: function (callback) {
