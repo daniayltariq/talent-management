@@ -404,7 +404,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             validMsg.classList.add("hide");
         };
 
-        var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+        var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 5);
 
         $(document).ready(function () {
             $('#phone').mask(mask1)
@@ -412,7 +412,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
         $("#phone").on("countrychange", function (e, countryData) {
             $("#phone").val('');
-            var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+            var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 5);
             $('#phone').mask(mask1);
 
         });
