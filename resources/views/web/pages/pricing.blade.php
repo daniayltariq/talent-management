@@ -121,6 +121,10 @@ table.pricing td:nth-child(4) {
   padding: 9px 7px;
 }
 
+.cd-btn{
+  padding: 9px 35px !important;
+}
+
 </style>
 @endsection
 

@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'isAdmin' => \App\Http\Middleware\isAdmin::class,
         'isAgent' => \App\Http\Middleware\isAgent::class,
         'isCandidate' => \App\Http\Middleware\isCandidate::class,
+        'isAdminOrAgent' => \App\Http\Middleware\isAdminOrAgent::class,
         'isAdminOrAgentOrCandidate' => \App\Http\Middleware\isAdminOrAgentOrCandidate::class,
         'isGuestOrCandidate' => \App\Http\Middleware\isGuestOrCandidate::class,
         'subscription.active' => \App\Http\Middleware\Subscription\RedirectIfNotActive::class,

@@ -62,7 +62,6 @@ class HomeController extends Controller
          }
       )->with('profile')->where('status',1)->where('featured',1)->get();
 
-      /* dd($featured); */
       return view('web.pages.talents',compact('featured'));
     }
 

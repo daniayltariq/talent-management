@@ -32,60 +32,60 @@ ul.testimonal__list.clearfix.testimonial-slider.slick-initialized.slick-slider {
 
 
 <section class="section testimonal bg-grey ">
-		<div class="container">
-			<div class="row">
-				<h2 class="section__title"><span class="line"></span>Our Client Says</h2>
-				<p class="text-center">Simplify and streamline your casting process to find the perfect performers for your project.</p>
-				<ul class="testimonal__list clearfix testimonial-slider">
-					<li class="testimonal__list-item col-md-4">
-						<div class="single-testimonial">
-							<div class="border-1">
-								<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
-								<div class="date testimonal__date">02 Jul 2016</div>
-								<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
-								<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
-								<div class="testimonal__name">Carolyn Potter</div>
-							</div>
+	<div class="container">
+		<div class="row">
+			<h2 class="section__title"><span class="line"></span>Our Clients Say</h2>
+			<p class="text-center">Simplify and streamline your casting process to find the perfect performers for your project.</p>
+			<ul class="testimonal__list clearfix testimonial-slider">
+				<li class="testimonal__list-item col-md-4">
+					<div class="single-testimonial">
+						<div class="border-1">
+							<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
+							<div class="date testimonal__date">02 Jul 2016</div>
+							<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
+							<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
+							<div class="testimonal__name">Carolyn Potter</div>
 						</div>
-					</li>
-					<li class="testimonal__list-item col-md-4">
-						<div class="single-testimonial">
-							<div class="border-1">
-								<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
-								<div class="date testimonal__date">02 Jul 2016</div>
-								<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
-								<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
-								<div class="testimonal__name">Carolyn Potter</div>
-							</div>
+					</div>
+				</li>
+				<li class="testimonal__list-item col-md-4">
+					<div class="single-testimonial">
+						<div class="border-1">
+							<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
+							<div class="date testimonal__date">02 Jul 2016</div>
+							<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
+							<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
+							<div class="testimonal__name">Carolyn Potter</div>
 						</div>
-					</li>
-					<li class="testimonal__list-item col-md-4">
-						<div class="single-testimonial">
-							<div class="border-1">
-								<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
-								<div class="date testimonal__date">02 Jul 2016</div>
-								<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
-								<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
-								<div class="testimonal__name">Carolyn Potter</div>
-							</div>
+					</div>
+				</li>
+				<li class="testimonal__list-item col-md-4">
+					<div class="single-testimonial">
+						<div class="border-1">
+							<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
+							<div class="date testimonal__date">02 Jul 2016</div>
+							<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
+							<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
+							<div class="testimonal__name">Carolyn Potter</div>
 						</div>
-					</li>
-					<li class="testimonal__list-item col-md-4">
-						<div class="single-testimonial">
-							<div class="border-1">
-								<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
-								<div class="date testimonal__date">02 Jul 2016</div>
-								<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
-								<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
-								<div class="testimonal__name">Carolyn Potter</div>
-							</div>
+					</div>
+				</li>
+				<li class="testimonal__list-item col-md-4">
+					<div class="single-testimonial">
+						<div class="border-1">
+							<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
+							<div class="date testimonal__date">02 Jul 2016</div>
+							<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
+							<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
+							<div class="testimonal__name">Carolyn Potter</div>
 						</div>
-					</li>
-					
-				</ul>
-			</div>
+					</div>
+				</li>
+				
+			</ul>
 		</div>
-	</section>
+	</div>
+</section>
 
 @endsection
 

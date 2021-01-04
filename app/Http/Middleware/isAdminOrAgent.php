@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class isActive
+class isAdminOrAgent
 {
     /**
      * Handle an incoming request.
@@ -15,14 +15,13 @@ class isActive
      */
     public function handle($request, Closure $next)
     {
-        if(\Auth::check() && \Auth::user()->status==1 ){
-            
-            return $next($request);
+        if(\Auth::check()){ 
+            if(  \Auth::user()->hasAnyRole("agent|superadmin") ){
+                return $next($request);
+            }
         }else{
-            return redirect()->route('denial')->with(array(
-                'message' => 'Account is Inactive', 
-                'alert-type' => 'error'
-            ));
+            $request->session()->put('url.intended', url()->previous());
+            return redirect()->route('login');
         }
     }
 }

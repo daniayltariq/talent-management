@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -117,7 +118,9 @@ Route::get('/403', function () {
 // End error routes
 
 
-
+Route::get('/denial', function (Request $request) {
+    return view('web.pages.denial')->with('message',session('message'));
+})->name('denial');
 
 Route::get('/magzine', [App\Http\Controllers\HomeController::class, 'magzine'])->name('magzine');
 Route::get('/magzine/single', [App\Http\Controllers\HomeController::class, 'magzinesingle'])->name('magzine-single');
@@ -130,8 +133,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('model/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('model.single');
 });
 
+Route::middleware(['isAdminOrAgent'])->group(function () {
+    Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
+});
 Route::get('/featured-talents', [App\Http\Controllers\HomeController::class, 'featured_talents'])->name('featured_talents');
-Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
 Route::get('/search_talent', [App\Http\Controllers\HomeController::class, 'searchTalent'])->name('search_talent');
 
 
