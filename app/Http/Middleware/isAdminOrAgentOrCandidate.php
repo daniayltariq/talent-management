@@ -19,6 +19,12 @@ class isAdminOrAgentOrCandidate
             if(\Auth::user()->hasRole("superadmin") || ( \Auth::user()->hasAnyRole("agent|candidate") /* && \Auth::user()->status==1 */ ) ){
                 return $next($request);
             }
+            else{
+                return redirect()->route('denial')->with(array(
+                    'message' => 'Access Denied', 
+                    'alert-type' => 'error'
+                ));
+            }
         }else{
             $request->session()->put('url.intended', url()->previous());
             return redirect()->route('login');

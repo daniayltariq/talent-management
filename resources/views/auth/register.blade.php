@@ -102,7 +102,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     <section class="section apply">
         <div class="container">
             <div class="row">
-                <h3 class="text__quote centered">Please provide us with your contact information.</h3>
+                <h3 class="text__quote centered">New membership</h3>
                 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
 
                     @if(count($errors)>0)
