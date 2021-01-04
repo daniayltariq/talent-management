@@ -160,7 +160,7 @@
    <div class="container">
       <div class="row">
          <div class="title__wrapp">
-            <div class="page__subtitle title__grey">Backstage</div>
+            <div class="{{-- page__subtitle --}} title__grey">Backstage</div>
             <h1 class="page__title">Our models</h1>
          </div>
       </div>

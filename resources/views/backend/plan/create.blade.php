@@ -19,6 +19,10 @@
    .h-34{
       height: 34px;
    }
+
+   .invis{
+      display: none;
+   }
 </style>
 @endsection
 
@@ -152,11 +156,11 @@
                                        </label>
                                     </div>
                                  </div>
-                                 @if (isset($plan) && isset($plan->social_links) && $plan->social_links=='1')
-                                    <div class="row">
+                                 {{-- @if (isset($plan) && isset($plan->social_links) && $plan->social_links=='1') --}}
+                                    <div class="row @if (isset($plan) && isset($plan->social_links) && $plan->social_links=='0')invis @endif" id="social_limit_div">
                                        <input type="number" class="social_limit col-md-4" min="1" max="10" name="social_limit" value="{{$plan->social_limit}}" id="social_limit" tabindex="1">
                                     </div>
-                                 @endif
+                                 {{-- @endif --}}
                                  
                               </div>
                               
@@ -197,15 +201,15 @@
                                        </label>
                                     </div>
                                  </div>
-                                 @if (isset($plan) && isset($plan->community_access) && $plan->community_access=='1')
-                                    <div class="row">
+                                 {{-- @if (isset($plan) && isset($plan->community_access) && $plan->community_access=='1') --}}
+                                    <div class="row @if (isset($plan) && isset($plan->community_access) && $plan->community_access=='0')invis @endif" id="community_access_perm_div">
                                        <select class="social_limit col-md-4 h-34" name="community_access_perm" id="community_access_perm">
                                           <option value="">Access Level..</option>
                                           <option value="R" {{$plan->community_access_perm=='R'?'selected' : ''}}>Read Only</option>
                                           <option value="R/W" {{$plan->community_access_perm=='R/W'?'selected' : ''}}>Read Write</option>
                                        </select>
                                     </div>
-                                 @endif
+                                 {{-- @endif --}}
                               </div>
                               
                            </div>
@@ -347,22 +351,22 @@
       $('[name="social_links"]').on('change',function(){
          var social=$('[name="social_links"]:checked').val();
          if (social==1) {
-            $('#social_limit').show();
+            $('#social_limit_div').show();
          }
          else{
             $('#social_limit').val('');
-            $('#social_limit').hide();
+            $('#social_limit_div').hide();
          }
       })
 
       $('[name="community_access"]').on('change',function(){
          var comm_perm=$('[name="community_access"]:checked').val();
          if (comm_perm==1) {
-            $('#community_access_perm').show();
+            $('#community_access_perm_div').show();
          }
          else{
             $('#community_access_perm').val('');
-            $('#community_access_perm').hide();
+            $('#community_access_perm_div').hide();
          }
       })
 

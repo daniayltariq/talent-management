@@ -52,7 +52,7 @@ a.btn.btn-default.btn__grey.animation {
 							</div>
 							<p class="widget-latest__date">RECENT POSTS</p>
 
-							@foreach($comn->topics as $topic)
+							@foreach($comn->topics->take(4) as $topic)
 							<div>
 								<a href="{{ route('single-post',['slug' => $topic->slug]) }}">
 									<h4 class="widget__title height_line" >{{ $topic->title }}</h4>

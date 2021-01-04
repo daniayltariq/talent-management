@@ -69,7 +69,7 @@
                         <div class="form-group">
                            <label class="col-md-3 col-sm-3 col-xs-12">Add Title</label>
                            <div class="col-md-11 col-sm-11 col-xs-12">
-                              <input type="text" class="form-control" name="title" value="{{isset($blog)?$blog->title : ''}}"/>
+                              <input type="text" class="form-control" name="title" value="{{!is_null(old('title')) ? old('title') : (isset($blog)?$blog->title : '')}}"/>
                               @error('title')
                                   <div class="error">{{$message}}</div>
                               @enderror
@@ -78,7 +78,7 @@
                         <div class="form-group">
                            <label class="col-md-3 col-sm-3 col-xs-12">Add Slug</label>
                            <div class="col-md-11 col-sm-11 col-xs-12">
-                              <input type="text" class="form-control" name="slug" value="{{isset($blog)?$blog->slug : ''}}"/>
+                              <input type="text" class="form-control" name="slug" value="{{!is_null(old('slug')) ? old('slug') : (isset($blog)?$blog->slug : '')}}"/>
                               @error('slug')
                                   <div class="error">{{$message}}</div>
                               @enderror
@@ -93,7 +93,7 @@
                         </div> --}}
                         <div class="form-group">
                            <div class="col-md-11 col-sm-11 col-xs-12">
-                              <textarea name="content" id="summernote" class="summernote">{!!isset($blog)?html_entity_decode($blog->content) : ''!!}</textarea>
+                              <textarea name="content" id="summernote" class="summernote">{!! !is_null(old('content')) ? html_entity_decode(old('content')) : (isset($blog)?html_entity_decode($blog->content) : '')!!}</textarea>
                               @error('content')
                                   <div class="error">{{$message}}</div>
                               @enderror
@@ -105,7 +105,7 @@
                      <div class="form-group">
                         <select name="topic_category_id" id="" class="form-control">
                            @foreach($categories as $cat)
-                              <option value="{{ $cat->id }}">{{ $cat->title }}</option>
+                              <option value="{{ $cat->id }}" {{ old('topic_category_id')==$cat->id ?'selected':''}}>{{ $cat->title }}</option>
                            @endforeach
                            
                         </select>

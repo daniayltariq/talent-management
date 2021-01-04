@@ -1,9 +1,9 @@
 <div class="kt-aside  kt-aside--fixed  kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside">
     <!-- begin:: Aside -->
     <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
-        <div class="kt-aside__brand-logo">
-            <a href="demo1/index.html">
-            <img alt="Logo" src="backend-assets/assets/media/logos/logo-light.png"/>
+        <div class="kt-aside__brand-logo mt-4">
+            <a href="{{route('backend.dashboard')}}">
+            <img alt="Logo" src="{{asset('backend-assets/images/TD_and_Words_white.png')}}" style="width: 70%;"/>
             </a>
         </div>
         <div class="kt-aside__brand-tools">
@@ -72,14 +72,14 @@
                                 </g>
                             </svg>
                         </span>
-                        <span class="kt-menu__link-text">Blog</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                        <span class="kt-menu__link-text">Forum</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
                     </a>
                     <div class="kt-menu__submenu ">
                         <span class="kt-menu__arrow"></span>
                         <ul class="kt-menu__subnav">
                           
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Blog list</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.create') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create Blog</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Forum list</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.create') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create topic</span></a></li>
                         </ul>
                     </div>
                 </li>
@@ -192,22 +192,22 @@
                         <span class="kt-menu__link-text">Plan</span>
                     </a>
                 </li>
-                {{-- @if (auth()->user()->hasRole('superadmin')) --}}
-                    {{-- <li class="kt-menu__item" aria-haspopup="true" >
-                        <a  href="{{route('backend.user.index')}}" class="kt-menu__link ">
-                            <span class="kt-menu__link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <polygon id="Shape" points="0 0 24 0 24 24 0 24"/>
-                                        <path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-                                        <path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" id="Mask-Copy" fill="#000000" fill-rule="nonzero"/>
-                                    </g>
-                                </svg>
-                            </span>
-                            <span class="kt-menu__link-text">User Management</span>
-                        </a>
-                    </li> --}}
-                {{-- @endif --}}
+                <hr style="background-color: #434446;width: 80%;">
+                <li class="kt-menu__item mt-3" aria-haspopup="true" >
+                    <a  href="{{route('backend.profile')}}" class="kt-menu__link ">
+                        <span class="kt-menu__link-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                                    <path d="M5,2 L19,2 C20.1045695,2 21,2.8954305 21,4 L21,6 C21,7.1045695 20.1045695,8 19,8 L5,8 C3.8954305,8 3,7.1045695 3,6 L3,4 C3,2.8954305 3.8954305,2 5,2 Z M11,4 C10.4477153,4 10,4.44771525 10,5 C10,5.55228475 10.4477153,6 11,6 L16,6 C16.5522847,6 17,5.55228475 17,5 C17,4.44771525 16.5522847,4 16,4 L11,4 Z M7,6 C7.55228475,6 8,5.55228475 8,5 C8,4.44771525 7.55228475,4 7,4 C6.44771525,4 6,4.44771525 6,5 C6,5.55228475 6.44771525,6 7,6 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+                                    <path d="M5,9 L19,9 C20.1045695,9 21,9.8954305 21,11 L21,13 C21,14.1045695 20.1045695,15 19,15 L5,15 C3.8954305,15 3,14.1045695 3,13 L3,11 C3,9.8954305 3.8954305,9 5,9 Z M11,11 C10.4477153,11 10,11.4477153 10,12 C10,12.5522847 10.4477153,13 11,13 L16,13 C16.5522847,13 17,12.5522847 17,12 C17,11.4477153 16.5522847,11 16,11 L11,11 Z M7,13 C7.55228475,13 8,12.5522847 8,12 C8,11.4477153 7.55228475,11 7,11 C6.44771525,11 6,11.4477153 6,12 C6,12.5522847 6.44771525,13 7,13 Z" id="Combined-Shape-Copy" fill="#000000"></path>
+                                    <path d="M5,16 L19,16 C20.1045695,16 21,16.8954305 21,18 L21,20 C21,21.1045695 20.1045695,22 19,22 L5,22 C3.8954305,22 3,21.1045695 3,20 L3,18 C3,16.8954305 3.8954305,16 5,16 Z M11,18 C10.4477153,18 10,18.4477153 10,19 C10,19.5522847 10.4477153,20 11,20 L16,20 C16.5522847,20 17,19.5522847 17,19 C17,18.4477153 16.5522847,18 16,18 L11,18 Z M7,20 C7.55228475,20 8,19.5522847 8,19 C8,18.4477153 7.55228475,18 7,18 C6.44771525,18 6,18.4477153 6,19 C6,19.5522847 6.44771525,20 7,20 Z" id="Combined-Shape-Copy-2" fill="#000000"></path>
+                                </g>
+                            </svg>
+                        </span>
+                        <span class="kt-menu__link-text">Profile</span>
+                    </a>
+                </li>
 
                 {{-- @if (auth()->user()->hasRole('superadmin')) --}}
                     {{-- <li class="kt-menu__item" aria-haspopup="true" >

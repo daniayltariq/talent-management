@@ -27,7 +27,6 @@ Auth::routes();
 |
 */
 
-
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 Route::get('/verified_email', function () {
     return view('web.verified');
@@ -182,6 +181,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCand
             Route::put('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'store'])->name('talent-profile.store');
 
             Route::post('/dashboard/social_links', [App\Http\Controllers\Account\DashboardController::class, 'social_links'])->name('dashboard.social_links');
+            Route::get('resume', [App\Http\Controllers\Account\DashboardController::class, 'resume'])->name('resume');
         });
         
         Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
@@ -190,6 +190,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCand
     
     Route::get('/talent/detail', [App\Http\Controllers\Account\TalentController::class, 'detail'])->name('talent.detail');
     Route::get('/fetch_attachments', [App\Http\Controllers\Account\DashboardController::class, 'fetchAttachments'])->name('fetch_attachments');
+    Route::get('/get_limit', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('get_limit');
 
     /**
      * Subscription
@@ -275,13 +276,20 @@ Route::group([
 	'middleware' => ['isAdmin'],
 ],function(){
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class,'dashboard'])->name('dashboard');
+    Route::get('/profile', [App\Http\Controllers\Admin\DashboardController::class,'profile'])->name('profile');
+    Route::post('/profile', [App\Http\Controllers\Admin\DashboardController::class,'profileUpdate'])->name('profile.update');
     Route::resource('plan', App\Http\Controllers\Admin\PlanController::class);
 
     Route::resource('topic', App\Http\Controllers\Admin\TopicController::class);
+    Route::get('/topic_comments', [App\Http\Controllers\Admin\TopicController::class, 'comments'])->name('topic.comments');
+    Route::get('/approve_comment', [App\Http\Controllers\Admin\TopicController::class, 'approveComment'])->name('topic.approve_comment');
     Route::get('/topic_status', [App\Http\Controllers\Admin\TopicController::class, 'updateStatus'])->name('topic.updateStatus');
 
     Route::resource('user', App\Http\Controllers\Admin\UserController::class);
     Route::get('/user_status', [App\Http\Controllers\Admin\UserController::class, 'updateStatus'])->name('user.updateStatus');
+    Route::get('/user_featured', [App\Http\Controllers\Admin\UserController::class, 'markFeatured'])->name('user.markFeatured');
+    Route::get('/invite_user', [App\Http\Controllers\Admin\UserController::class, 'inviteUser'])->name('user.invite');
+
     Route::get('/user/impersonate/{id}', [App\Http\Controllers\Admin\UserController::class, 'impersonate'])->name('user.impersonate');
     Route::get('/user_request', [App\Http\Controllers\Admin\UserRequestController::class, 'userRequest'])->name('user.requests');
     Route::put('/user_request/{id}', [App\Http\Controllers\Admin\UserRequestController::class, 'acceptRequest'])->name('user.accept_request');
@@ -290,6 +298,8 @@ Route::group([
     Route::resource('picklist', App\Http\Controllers\Admin\PicklistController::class);
     Route::get('/delete_picklist_item/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'delete_picklist_item'])->name('delete_picklist_item');
     Route::get('/picklist_share/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'picklist_share'])->name('picklist_share');
+
+    Route::get('/text_talent/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'text_talent'])->name('text_talent');
 
     Route::resource('tag', App\Http\Controllers\Admin\TagController::class);
     Route::resource('room', App\Http\Controllers\Admin\RoomController::class);

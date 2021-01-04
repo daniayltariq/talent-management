@@ -9,17 +9,28 @@ use App\Models\Plan;
 use App\Models\Attachment;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\File;
+use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data=[
+            'profile'=>auth()->user()->profile,
             'images'=>auth()->user()->attachments->where('type','image'),
             'video'=>auth()->user()->attachments->where('type','video'),
             'audio'=>auth()->user()->attachments->where('type','audio'),
             'social'=>auth()->user()->social_links()->select('source','link')->get()->toArray()
         ];
+
+        if ($request->query('q') && $request->query('q')=='fetch_limit') {
+            $limit=[
+                'image_limit'=>count($data['images']),
+                'video_limit'=>count($data['video']),
+                'audio_limit'=> count($data['audio'])
+            ];
+            return $limit;
+        }
         
         $subs=auth()->user()->subscriptions()->active()->first();
         
@@ -41,6 +52,7 @@ class DashboardController extends Controller
             'l_name' => ['required', 'string'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email'],
+            'password' => ['nullable','string', 'min:8','confirmed'],
         ]);
         
         if ($validator->fails()) {
@@ -51,18 +63,25 @@ class DashboardController extends Controller
         }
 
         try {
+            $country_data=json_decode($request->new_phone,true);
+           
             $user=User::findOrFail(auth()->user()->id);
-            $user->fill($request->all());
+            $user->fill(is_null($request->password)?$request->except(['password']):$request->all());
+            $user->phone=Str::of($request->phone)->prepend('+'.$country_data['dialCode']);
+            $user->phone_c_data=$request->new_phone;
+            if (!is_null($request->password)) {
+                $user->password=Hash::make($request->password);
+            }
             $user->save();
             
             return redirect()->back()->with(array(
                 'message' => 'Data saved !', 
-                'alert_type' => 'success'
+                'alert-type' => 'success'
             ));
         } catch (\Throwable $th) {
             return redirect()->back()->with(array(
                 'message' => 'Something went wrong.', 
-                'alert_type' => 'error'
+                'alert-type' => 'error'
             ));
         }
         
@@ -140,6 +159,12 @@ class DashboardController extends Controller
         ];
 
         return view('components.attachments',compact('data'));
+    }
+
+    public function resume()
+    {
+        $profile=auth()->user()->profile;
+        return view('print.resume',compact('profile'));
     }
 
 }

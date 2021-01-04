@@ -24,4 +24,12 @@ class Picklist extends Model
         return $this->hasMany('App\Models\PicklistUser','picklist_id');
     }
 
+    public function items_data($col)
+    {
+        $members=$this->items->pluck('user_id');
+        $users=\App\Models\User::whereIn('id',$members)->pluck($col);
+        $users=implode(',',$users->toArray());
+        return $users;
+    }
+
 }

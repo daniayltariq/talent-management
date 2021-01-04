@@ -97,6 +97,42 @@
 			color: red;
 		}
 
+		.role-nav{
+			text-transform: uppercase;
+			color: #ee7322;
+			font-size: 8px;
+			font-weight: 800;
+			font-family: Roboto, Arial, sans-serif;
+		}
+
+		@media only screen and (max-width: 992px) {
+			.role-nav{
+				padding-left: 3rem!important;
+			}
+		}
+
+		.ptb-0{
+			padding-top:0 !important;
+			padding-bottom:0 !important; 
+		}
+
+		@media only screen and (max-width: 1252px)
+		{
+			.main__menu {
+				display: none;
+				width: 100%;
+				padding: 0;
+				background: black;
+			}
+		}
+			
+		@media only screen and (max-width: 1252px)
+		{
+			.responsive-menu__button {
+				display: block;
+			}
+		}
+		
 	</style>
 </head>
 

@@ -37,7 +37,7 @@
                         <button type="button" class="btn btn-clean btn-sm btn-icon-md btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="flaticon-more-1"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
+                        {{-- <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
                             <!--begin::Nav-->
                             <ul class="kt-nav">
                                 <li class="kt-nav__head">
@@ -88,7 +88,7 @@
                                 </li>
                             </ul>
                             <!--end::Nav-->             
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                             <div class="kt-widget3__body">
                                 <h5>{{$request->subject ?? ''}}</h5>
                                 <p class="kt-widget3__text"> 
-                                    {{$request->message ?? ''}}
+                                    {!!$request->message ?? ''!!}
                                 </p>
                             </div>
                         </div>

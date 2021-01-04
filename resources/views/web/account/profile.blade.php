@@ -76,10 +76,26 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     border-bottom-right-radius: 0;
 }
 
+.profile-sec {
+    background: none !important;
+}
+
+.profile-sec img {
+    border-radius: unset;
+}
+
+.font-15{
+    font-size: 15px;
+}
 </style>
 
 <link rel="stylesheet" href="{{ asset('plugins/steps/css/style.css') }}">
-
+<style>
+    
+#wizard .actions {
+    padding: 0px 50px 50px 50px !important;
+}
+</style>
 @endsection
 
 @section('content')
@@ -87,7 +103,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
         <div class="container">
             <div class="row">
                 <div class="title__wrapp">
-                    {{-- <div class="page__subtitle title__grey">Profile</div> --}}
+                    
                     <h1 class="page__title">PROFILE INFORMATION</h1>
                 </div>
             </div>
@@ -116,26 +132,26 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="avartar">
                                                 <a href="#">
                                                 <div class="profile-sec ml-5 mb-4">
-                                                        <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'public/web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" id="preview_img" class="img img-responsive tal-profile">
+                                                        <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" id="preview_img" class="img img-responsive tal-profile">
                                                     </div>
                                                 </a>
                                                 <div class="avartar-picker">
                                                     <input type="file" name="profile_img" id="profile_img" class="inputfile" data-multiple-caption="{count} files selected" multiple/>
                                                     <label for="profile_img">
                                                         <i class="zmdi zmdi-camera"></i>
-                                                        <span>Choose Picture</span>
+                                                        <span>Main Profile Image</span>
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-holder active">
-                                                    <input type="text" placeholder="{{strtoupper('Legal First Name')}}" name="legal_first_name" value="{{$profile->legal_first_name ??''}}" class="form-control required">
+                                                    <input type="text" placeholder="{{strtoupper('Legal First Name')}}" name="legal_first_name" id="legal_first_name" value="{{auth()->user()->f_name ??''}}" class="form-control required" disabled>
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="text" placeholder="{{strtoupper('Legal Last Name')}}" name="legal_last_name" value="{{$profile->legal_last_name?? ''}}" class="form-control required">
+                                                    <input type="text" placeholder="{{strtoupper('Legal Last Name')}}" name="legal_last_name" id="legal_last_name" value="{{auth()->user()->l_name ?? ''}}" class="form-control required" disabled>
                                                 </div>
                                                 <div class="form-holder">
-                                                    <input type="email" placeholder="{{strtoupper('Email')}}" name="email" class="form-control required" value="{{$profile->email ?? ''}}">
+                                                    <input type="email" placeholder="{{strtoupper('Email')}}" name="email" class="form-control required" value="{{auth()->user()->email ?? ''}}" disabled>
                                                 </div>
 
                                                 @if ($custom_url)
@@ -166,6 +182,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
+                                                        <label class="font-15">Height (Feet)</label>
                                                         <select name="feet" class="form-control" placeholder="{{strtoupper('Feet')}}" id="" required>
                                                             <option value="">Select Height in Feet</option>
                                                             <option value="1" {{isset($profile->feet) && $profile->feet==1 ? 'selected' : ''}}>1</option>
@@ -182,6 +199,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
+                                                        <label class="font-15">Height (Inches)</label>
                                                         <select name="height" class="form-control" placeholder="{{strtoupper('Height')}}" id="" required>
                                                             <option value="">Select Height in Inches</option>
                                                             <option value="0" {{isset($profile->height) && $profile->height==0 ? 'selected' : ''}}>0</option>
@@ -199,6 +217,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
+                                                    <label class="font-15">Weight (lbs)</label>
                                                     <div class="form-holder">
                                                         <input type="text" name="weight"  value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control">
                                                     </div>
@@ -206,6 +225,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             </div>
 
                                             <div class="form-holder">
+                                                <label class="font-15">Eyes</label>
                                                 <select name="eyes" class="form-control" placeholder="{{strtoupper('Eye Color')}}" id="" required>
                                                     <option value="brown" {{isset($profile->eyes) && $profile->eyes=="brown" ? 'selected' : ''}}>Brown Eyes</option>
                                                     <option value="blue" {{isset($profile->eyes) && $profile->eyes=="blue" ? 'selected' : ''}}>Blue Eyes </option>
@@ -218,6 +238,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             </div>
 
                                             <div class="form-holder ">
+                                                <label class="font-15">Hair</label>
                                                 <select name="hairs" class="form-control" placeholder="{{strtoupper('Hair Color')}}" id="" required>
                                                     <option value="black" {{isset($profile->hairs) && $profile->hairs=="black" ? 'selected' : ''}}>Black hair</option>
                                                     <option value="brown" {{isset($profile->hairs) && $profile->hairs=="brown" ? 'selected' : ''}}>Brown hair</option>
@@ -233,16 +254,19 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
+                                                        <label class="font-15">Chest</label>
                                                         <input type="text" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
+                                                        <label class="font-15">Neck</label>
                                                         <input type="text" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
+                                                        <label class="font-15">Waist</label>
                                                         <input type="text" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control">
                                                     </div>
                                                 </div>
@@ -251,6 +275,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
+                                                        <label class="font-15">Sleves</label>
                                                         <input type="text" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control">
                                                     </div>
                                                 </div>
@@ -261,6 +286,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </div> --}}
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
+                                                        <label class="font-15">Shoes</label>
                                                         <input type="text" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control">
                                                     </div>
                                                 </div>
@@ -272,7 +298,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                 </section>
 
                                 <!-- SECTION 3 -->
-                                <h4></h4>
+                                {{-- <h4></h4>
                                 <section>
                                     <form method="POST">
                                         <h4 class="text__quote mb-5">Contact & Address</h4>
@@ -312,7 +338,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             </div>
                                         </div>
                                     </form>
-                                </section>
+                                </section> --}}
 
                                 <!-- SECTION 3 -->
                                 <h4></h4>
@@ -744,7 +770,12 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             });
         });
 
-        $('#custom_link').on('keyup',function(){
+        $('#legal_first_name, #legal_last_name').on('keyup',function(){
+            $("#custom_link").val($('#legal_first_name').val()+'_'+$('#legal_last_name').val());
+            $('#custom_link').trigger('change');
+        })
+
+        $('#custom_link').on('keyup change',function(){
             if ($(this).val() !=='') {
                 $.ajax({
                     url: "{{ route('account.talent.checkCustomLink') }}",

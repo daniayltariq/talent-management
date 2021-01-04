@@ -6,7 +6,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="title__wrapp">
-					<div class="page__subtitle title__grey">PRODUCTION HUB</div>
+					<div class="{{-- page__subtitle --}} title__grey">PRODUCTION HUB</div>
 					<h1 class="page__title">Now Hiring</h1>
 				</div>
 			</div>

@@ -7,7 +7,7 @@
 		<div class="kt-portlet__head">
 			<div class="kt-portlet__head-label">
 				<h3 class="kt-portlet__head-title">
-					Blog list
+					Forum list
 				</h3>
 				
 			</div>
@@ -41,7 +41,7 @@
 											 {{ $topic->category ? $topic->category->title : '' }}
 												 
 										</td>
-										<td>{{printTruncated(160, $topic->content, $isUtf8=true)}}</td>
+										<td style="width: 40%">{{printTruncated(160, $topic->content, $isUtf8=true)}}</td>
 										<td>
 											<input data-switch="true" name="status" type="checkbox" data-topicid="{{$topic->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$topic->status==1?"checked=checked":""}}>
 										</td>
@@ -49,6 +49,7 @@
 											<a href="{{route('backend.topic.edit',$topic->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">
 												<i style="color: #5d78ff;" class="fa fa-pencil-alt"></i>
 											</div> </a>
+											<button data-topicid="{{$topic->id}}" name="postComm" class="btn btn-success btn-sm btn-bg-white" style="color: #5d78ff;"><i class="fa fa-comment"></i></button>
 											{{-- <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-view btn-xs" style=" color:white" ><i class="fa fa-folder" ></i> View </a>
 											<a href="{{ route('blog.updateStatus', $blog->id) }}" class="btn btn-pause btn-xs" style=" color:white" ><i class="fa fa-pause" ></i> Pause</a> --}}
 											{{-- <a  href="#" class="btn btn-duplicate btn-xs" style=" color:white" ><i class="fa fa-copy" ></i> Duplicate</a> --}}
@@ -67,6 +68,45 @@
 		<!--end::Form-->
 	</div>
 	<!--end::Portlet-->
+</div>
+
+<div class="modal fade" id="post-comm-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+			<form action="{{route('backend.user.invite')}}" method="GET" enctype="multipart/form-data" class="kt-form">
+				@csrf
+				<input type="hidden" name="user_id" >
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Comments</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="kt-section__content" id="post_comm_div">
+						{{-- <table class="table table-hover">
+						  	<thead>
+						    	<tr>
+						      		<th>User</th>
+						      		<th>Comment</th>
+						      		<th>Action</th>
+						    	</tr>
+						  	</thead>
+						  	<tbody>
+								@foreach ($top as $item)
+									<tr>
+										<td>Jhon</td>
+										<td>Stone</td>
+										<td style="color: #5d78ff"><a href="{{route('post.comment.approve')}}"></a> approve</td>
+									</tr>	
+								@endforeach
+						    	
+						  	</tbody>
+						</table> --}}
+					</div>
+				</div>
+			</form>
+        </div>
+    </div>
 </div>
 
 @endsection
@@ -105,10 +145,6 @@
 	});
 </script>
 <script type="text/javascript">
-
-// $("input[type=file]").change(function(){
-// 	changeImageView(this);
-// });
 
 	function formSubmitWithTextEditor(editorId,fieldToCopyIn,formId)
 	{
@@ -193,6 +229,41 @@
 			})
 			
 		});
+
+		$('[name="postComm"]').click(function(){
+			$.get("{{ route('backend.topic.comments') }}",
+				{
+					topic_id: $(this).data('topicid'),
+				},
+				function(res){
+					
+					if (res=="error") {
+						toastr.error('something went wrong!');
+					} else {
+						$('#post_comm_div').html(res);
+						$('#post-comm-modal').modal('toggle');
+					}
+				});
+		})
+		
+		
 	});
+
+	$(document).on('click','[name="approve_comm"]',function(){
+		var comm_id=$(this).data('commid');
+		$.get("{{route('backend.topic.approve_comment')}}",
+			{
+				comm_id: comm_id,
+			},
+			function(res){
+				
+				if (res=="error") {
+					toastr.error('something went wrong!');
+				} else {
+					toastr.success('approved');
+					$('#post_comm_'+comm_id).remove();
+				}
+			});
+	})
 </script>
 @endsection

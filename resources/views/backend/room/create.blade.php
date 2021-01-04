@@ -27,6 +27,9 @@
 		background-color: #5969ff;
 		border-radius: 4px;
 	}
+   .error{
+      color: red;
+   }
 </style>
 @endsection
 @section('content')
@@ -38,7 +41,7 @@
             <div class="kt-portlet__head">
                <div class="kt-portlet__head-label">
                   <h3 class="kt-portlet__head-title">
-                     Create User
+                     Create Room
                   </h3>
                </div>
             </div>
@@ -73,13 +76,19 @@
                         <div class="form-group">
                            <label class="col-md-3 col-sm-3 col-xs-12">Title</label>
                            <div class="col-md-12 col-sm-12 col-xs-12">
-                              <input type="text" class="form-control" name="title" value="{{isset($room)?$room->title : ''}}"/> 
+                              <input type="text" class="form-control" name="title" value="{{ !is_null(old('title')) ? old('title') : (isset($room)?$room->title : '')}}"/>
+                              @error('title')
+                                  <div class="error">{{$message}}</div>
+                              @enderror
                            </div>
                         </div>
                         <div class="form-group">
                            <label class="col-md-3 col-sm-3 col-xs-12">Slug</label>
                            <div class="col-md-12 col-sm-12 col-xs-12">
-                              <input type="text" class="form-control" name="slug" value="{{isset($room)?$room->slug : ''}}"/> 
+                              <input type="text" class="form-control" name="slug" value="{{ !is_null(old('slug')) ? old('slug') : (isset($room)?$room->slug : '')}}"/>
+                              @error('slug')
+                                 <div class="error">{{$message}}</div>
+                              @enderror
                            </div>
                         </div>
                         

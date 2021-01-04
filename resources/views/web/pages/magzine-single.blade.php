@@ -6,7 +6,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="title__wrapp">
-					<div class="page__subtitle title__grey">From our blog</div>
+					<div class="{{-- page__subtitle --}} title__grey">From our blog</div>
 					<h1 class="page__title">Blog</h1>
 				</div>
 			</div>

@@ -52,11 +52,10 @@ class RoomController extends Controller
         ]);
         
         if ($validator->fails()) {
-            return $validator->errors();
-            /* return redirect()->back()
+            /* return $validator->errors(); */
+            return redirect()->back()
                         ->withErrors($validator)
-                        ->withInput(); */
-            /* return 'error'; */
+                        ->withInput();
         }
 
         $room = new TopicCategory;
@@ -149,9 +148,12 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::findOrFail($id);
-        $user->delete();
-        return redirect()->back();
+        $room=TopicCategory::findOrFail($id);
+        if ($room) {
+            $room->delete();
+            return redirect()->back()->with("success", "Room Deleted.");
+        }
+        
     }
 
 }

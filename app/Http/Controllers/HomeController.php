@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Search\TalentSearch;
-use App\Models\Skill;
-use App\Models\Plan;
-use App\Models\Topic;
 use Carbon\Carbon;
+use App\Models\Plan;
+use App\Models\User;
+use App\Models\Skill;
+use App\Models\Topic;
+use App\Search\TalentSearch;
+
+use Illuminate\Http\Request;
+
+/* use App\Notifications\ClickSendTest;
+use NotificationChannels\ClickSend;
+use Illuminate\Notifications\Notification;
+use NotificationChannels\ClickSend\ClickSendChannel;
+use NotificationChannels\ClickSend\ClickSendMessage; */
 
 class HomeController extends Controller
 {
@@ -29,6 +37,12 @@ class HomeController extends Controller
 
     public function index()
     {
+
+      /* $client = app(ClickSend\ClickSendApi::class)->getClient();
+      $account =  $client->sendSms()->createInboundSms();
+      $countries =  $client->getCountries()->getCountries();
+
+      dd(collect($account)); */
       $models=\App\Models\User::whereHas(
          'roles', function($q){
              $q->whereNotIn('name',['superadmin','agent']);

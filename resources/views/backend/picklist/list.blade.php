@@ -30,6 +30,10 @@
 		.overflow-in{
 			overflow: inherit;
 		}
+
+		.w-100{
+			width: 100%;
+		}
 	</style>
 @endsection
 
@@ -83,9 +87,9 @@
 													<i class="flaticon-more"></i>
 												</button>
 												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="{{route('backend.picklist_share',$list->id)}}?q=talents"><i class="fa fa-paper-plane"></i>Email to all talents</a>
+													<a class="dropdown-item" href="#" name="emailTalents" data-option="email" data-picklistid="{{$list->id}}" data-picklistmembers="{{$list->items_data('email')}}"><i class="fa fa-paper-plane"></i>Email to all talents</a>
+													<a class="dropdown-item" href="#"  name="textTalents" data-option="text" data-picklistid="{{$list->id}}" data-picklistmembers="{{$list->items_data('phone')}}"><i class="far fa-comment-dots"></i></i> Text to talents</a>
 													<a class="dropdown-item" href="#"  name="sharePicklist" data-picklistid="{{$list->id}}"><i class="fa fa-paper-plane"></i> Email to agent</a>
-													<a class="dropdown-item" href="#"  name="sharePicklist" data-picklistid="{{$list->id}}"><i class="fa fa-paper-plane"></i> Text to talents</a>
 												</div>
 											</div>
 										</td>
@@ -145,14 +149,15 @@
 			<form action="#" method="GET" id="share_picklist_form" enctype="multipart/form-data" class="kt-form">
 				@csrf
 				
+				<input type="hidden" name="source">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Share Picklist</h5>
+					<h5 class="modal-title" id="share_modal_header">Share Picklist</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					</button>
 				</div>
 				<div class="modal-body">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-12" id="picklist_recipient_div">
 							<div class="form-group">
 								<label class="col-md-3 col-sm-3 col-xs-12">Recipient</label>
 								<div class="col-md-12 col-sm-12 col-xs-12">
@@ -166,6 +171,35 @@
 								</div>
 							</div>
 						</div>
+						<div class="w-100" id="talent_show">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="col-md-3 col-sm-3 col-xs-12">Recipient</label>
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<input class="form-control taginput" type="text" name="talent_recipients">
+										
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12" id="mail_subj_div">
+								<div class="form-group">
+									<label class="col-md-3 col-sm-3 col-xs-12">Subject</label>
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<input class="form-control " type="text" name="mail_subject">
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="col-md-3 col-sm-3 col-xs-12">Message</label>
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<textarea name="message" class="form-control "></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -180,7 +214,7 @@
 
 @section('scripts')
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js" data-turbolinks-track="true"></script> --}}
-{{-- <script src="{{ asset('js/tagsinput.js') }}"></script> --}}
+<script src="{{ asset('js/tagsinput.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
 
@@ -189,9 +223,15 @@
 // });
 
 $(document).ready(function(){
-	/* $(".taginput").tagsinput({
+	$(".taginput").tagsinput({
 		maxTags: 5,
-	}) */
+	})
+
+	@if($errors->has('recipients') || $errors->has('talent_recipients'))
+		@foreach ($errors->all() as $error)
+			toastr.warning('{{$error}}');
+		@endforeach
+	@endif
 
 	$('.js-example-basic-multiple').select2();
 
@@ -224,13 +264,41 @@ $(document).ready(function(){
 
 	$('[name="sharePicklist"]').click(function(e){
 		var picklist_id=$(this).data('picklistid');
-		console.log(picklist_id);
+		/* console.log(picklist_id); */
 		
+		$('#talent_show').hide();
+
+		$('#share_modal_header').text('Share Picklist');
+		$('[name="talent_recipients"]').val('');
+		$('[name="mail_subject"]').val('');
+		$('[name="message"]').val('');
+		$('#picklist_recipient_div').show();
 		$('#share_picklist_form').attr('action','{{ url('/')}}'+'/backend/picklist_share/'+picklist_id);
 		$('#share_picklist_modal').modal('toggle');
 	});
 
-	
+	$(document).on('click','[name="textTalents"], [name="emailTalents"]',function(e){
+		var picklist_members=$(this).data('picklistmembers');
+		var picklist_id=$(this).data('picklistid');
+		var option=$(this).data('option');
+		/* console.log(option) */
+
+		$('#picklist_recipient_div').hide();
+
+		$('#share_modal_header').text('Send Message');
+		$('[name="talent_recipients"]').tagsinput('add',picklist_members);
+		if (option=='text') {
+			$('#mail_subj_div').hide();
+			$('[name="source"]').val('text');
+		} else if(option=='email') {
+			$('#mail_subj_div').show();
+			$('[name="source"]').val('email');
+		}
+		$('#talent_show').show();
+
+		$('#share_picklist_form').attr('action','{{ url('/')}}'+'/backend/text_talent/'+picklist_id);
+		$('#share_picklist_modal').modal('toggle');
+	});
 });
 </script>
 @endsection

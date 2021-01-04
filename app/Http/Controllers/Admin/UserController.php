@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
-
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
-
 use App\Models\User;
 use Illuminate\Http\Request;
+
+use App\Domain\Mail\InviteTalent;
+use Illuminate\Support\Facades\DB;
+
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -25,6 +28,7 @@ class UserController extends Controller
             }
         )->with('roles')->get();
         $roles=Role::where('name','<>','superadmin')->get();
+        
         /* dd($user[0]->roles[0]->name); */
         return view('backend.user.list',compact('user','roles'));
         
@@ -37,8 +41,9 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
+        $countries=DB::table('countries')->select('nicename')->get();
         $roles=Role::where('name','<>','superadmin')->get();
-        return view('backend.user.create',compact('roles'));
+        return view('backend.user.create',compact('roles','countries'));
     }
 
     /**
@@ -49,32 +54,52 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        /* dd($request->all()); */
         $validator = Validator::make($request->all(),[
-            'role_id'  => 'required|integer',
-            'name'  => 'required|string',
-            'email' => 'required|string',
-            'password'  => 'required|string',
-            'password' => 'required|string',
+            'f_name' => ['required', 'string', 'max:255'],
+            'l_name' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'string', 'max:255'],
+            'dob' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'max:255','unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'country' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'state' => ['required', 'string', 'max:255'],
+            'h_adress_1' => ['string', 'max:255','required'],
+            'h_adress_2' => ['max:255'],
+            'zipcode' => ['required', 'string', 'max:255'],
+            'account_type' => ['required', 'string'],
         ]);
         
         if ($validator->fails()) {
-            return $validator->errors();
-            /* return redirect()->back()
-                        ->withErrors($validator)
-                        ->withInput(); */
+            /* return $validator->errors(); */
+            return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
             /* return 'error'; */
         }
 
-        $user = new User;
-        $user->name=$request->name;
-        $user->email=$request->email;
-        if ($request->has('password')) {
-			$user->password =  Hash::make($request->password);
-		}
+        $country_data=json_decode($request->new_phone,true);
+        $user = User::create([
+            'f_name' => $request->f_name,
+            'l_name' => $request->l_name,
+            'gender' => $request->gender,
+            'dob' => $request->dob,
+            'phone' =>Str::of($request->phone)->prepend('+'.$country_data->dialCode),
+            'phone_c_data'=>$request->new_phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'country' => $request->country,
+            'city' => $request->city,
+            'state' => $request->state,
+            'h_adress_1' => $request->h_adress_1,
+            'h_adress_2' => $request->h_adress_2,
+            'zipcode' => $request->zipcode,
+        ]);
         $user->save();
 
-        $role=Role::where('id',$request->role_id)->first();
-        $user->assignRole($role->name);
+        $user->assignRole($request->account_type);
         
         return redirect()->back()->with("status", "User has been Created.");
     }
@@ -122,6 +147,27 @@ class UserController extends Controller
         
     }
 
+    public function markFeatured(Request $request)
+    {
+        $status=array(1,0);
+        if ($request['user_id'] && in_array($request['feature_status'],$status)) {
+            $user=User::findOrFail($request['user_id']);
+            $user->featured=$request['feature_status'];
+            $user->save();
+            if ($user) {
+                $status="success";
+            }
+            else{
+                $status="error";
+            }
+        }
+        else{
+            $status="error";
+        }
+        return $status;
+        
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -133,7 +179,7 @@ class UserController extends Controller
         $user= User::findOrFail($id);
         $skills=\App\Models\Skill::all();
         $roles=Role::where('name','<>','superadmin')->get();
-        return view('backend.user.create',compact('user','roles','skills'));
+        return view('backend.user.edit',compact('user','roles','skills'));
     }
 
     /**
@@ -181,6 +227,39 @@ class UserController extends Controller
         }
         
         return redirect()->back()->with("status", "User has been Updated.");
+    }
+
+    public function inviteUser(Request $request)
+    {
+        /* dd($request->all()); */
+        $validator = Validator::make($request->all(), [
+            "user_id"    => "required|integer",
+            "subject"    => "required|string",
+            "message"    => "required|string",
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $user=User::findOrFail($request->user_id);
+        
+        try {
+            $data=[
+                "subject"=>$request->subject,
+                "message"=>$request->message,
+            ];
+            
+            Mail::to($user->email)->send(new InviteTalent($data));
+            return redirect()->back()->with('success', 'Invitation Sent.');
+            
+        } catch (\Throwable $th) {
+            
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+         
     }
 
     /**

@@ -116,6 +116,11 @@ table.pricing td:nth-child(4) {
   text-align: left;
 }
 
+.btn-c-p{
+  font-size: 11px;
+  padding: 9px 7px;
+}
+
 </style>
 @endsection
 
@@ -155,23 +160,20 @@ table.pricing td:nth-child(4) {
 <table class="pricing">
   <thead>
     <tr>
-      <th class="bg-pri"></th>
+      <th class="bg-pri text-center"><a href="{{route('how-it-works')}}" class="btn btn-primary btn-c-p">How it works</a></th>
       @foreach ($plans as $plan)
         <th class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
-          {{$plan->name ?? ''}} <hr>
-          <div class="tw-4">{!!$plan->description ?? ''!!}</div>
+          {{$plan->name ?? ''}} {{-- <hr>
+          <div class="tw-4">{!!$plan->description ?? ''!!}</div> --}}
         </th>
         
       @endforeach
-      {{-- <th class="bg-purple">Basic</th>
-      <th class="bg-blue">Standard</th>
-      <th class="bg-green default">Professional</th> --}}
       
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Annual price</td>
+      <td><b>Membership Fee</b><br>Auto-renews annually</td>
       @foreach ($plans as $plan)
         <td><span class="txt-top">&dollar;</span><span class="txt-l">{{$plan->cost ??''}}</span></td>
       @endforeach
@@ -319,6 +321,14 @@ table.pricing td:nth-child(4) {
       {{-- <td><span class="tick"></span></td>
       <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td> --}}
+      
+    </tr>
+    <tr>
+      <td></td>
+      @foreach ($plans as $plan)
+        <td><span class="txt-top">&dollar;</span><span class="txt-l">{{$plan->cost ??''}}</span></td>
+      @endforeach
+      
       
     </tr>
     <tr>

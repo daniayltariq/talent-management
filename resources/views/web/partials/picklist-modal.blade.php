@@ -28,18 +28,18 @@
                     <button type="button" class="btn btn-primary" id="create-picklist-btn">
                         <i class="fa fa-plus"></i> Create new
                     </button>
-                    <input type="hidden" name="member_id">
+                    <input type="hidden" name="member_id" value="{{old('member_id')}}">
                     @if (count(auth()->user()->picklist) > 0 )
                         <div class="form-group" id="picklist-select">
                             <label for="exampleFormControlSelect1">Select Picklist</label>
-                            <select class="form-control" name="picklist_id" id="exampleFormControlSelect1">
-                                <option >Select</option>
+                            <select class="form-control" name="picklist_id" required="required" id="exampleFormControlSelect1">
+                                <option value="" disabled selected>Select</option>
                                 @foreach (auth()->user()->picklist as $picklist)
                                     <option value="{{$picklist->id}}">{{$picklist->title}}</option>
                                 @endforeach
                             </select>
-                            @error('picklist_id')
-                                <div class="error">Talent already exist</div>
+                            @error('member_id')
+                                <div class="error">Talent already exists</div>
                             @enderror
                         </div>
                     @endif
@@ -53,7 +53,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">description</label>
+                            <label for="exampleFormControlInput1">Description</label>
                             <input type="text" class="form-control" name="description" id="exampleFormControlInput1" placeholder="Enter Description">
                             @error('description')
                                 <div class="error">{{ $message }}</div>

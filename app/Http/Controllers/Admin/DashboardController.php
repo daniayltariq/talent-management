@@ -2,17 +2,61 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 
-use Illuminate\Http\Request;
+use App\Models\Skill;
 
 use App\Models\SavedSearch;
 use App\Search\TalentSearch;
+use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
+	public function profile()
+	{
+		return view('backend.profile.update');
+
+	}
+
+	public function profileUpdate(Request $request)
+	{
+		/* dd($request->all()); */
+		$validator = Validator::make($request->all(),[
+            'f_name' => ['required', 'string', 'max:255'],
+            'l_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.auth()->user()->id.',id'],
+            'password' => ['nullable','string', 'min:8','confirmed'],
+        ]);
+        
+        if ($validator->fails()) {
+            return $validator->errors();
+            return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            
+		}
+		/* dd($request->except(['password'])); */
+		$user=User::findOrFail(auth()->user()->id);
+		$user->fill(is_null($request->password)?$request->except(['password']):$request->all());
+		if (!is_null($request->password)) {
+			$user->password=Hash::make($request->password);
+		}
+		
+		$user->save();
+
+		if ($user) {
+			return redirect()->back()->with("status", "Profile Updated.");
+		} else {
+			return redirect()->back()->with('error', 'Something went wrong.');
+		}
+		
+		
+	}
+
 	public function dashboard(){
 
 		return view('backend.index');

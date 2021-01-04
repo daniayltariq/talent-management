@@ -1,8 +1,8 @@
-function render_dropzone() {
+function render_dropzone(store_url) {
     var myDropzoneTheFirst = new Dropzone(
         //id of drop zone element 1
         '#imageDropzone', {
-        url: "{!! route('account.storeMedia') !!}",
+        url: store_url,
         maxFiles: function (file, done) {
             if (validImageTypes.includes(file.type)) {
                 done("No more images!");
@@ -10,7 +10,7 @@ function render_dropzone() {
             else { done(); }
         },
         maxFilesize: 12, // MB
-        acceptedFiles: "image/*",
+        acceptedFiles: "image/jpg,image/jpeg,image/png",
         dictDefaultMessage: "Drop Your Files here.",
         /* autoProcessQueue: false, */
         accept: function (file, done) {
@@ -51,7 +51,7 @@ function render_dropzone() {
             file.previewElement.remove()
             $.ajax({
                 type: 'delete',
-                url: "{!! route('account.fileDestroy') !!}",
+                url: "{{ route('account.fileDestroy') }}",
                 data: {
                     filename: uploadedDocumentMap[file.upload.filename],
                     _method: 'DELETE',
@@ -74,9 +74,9 @@ function render_dropzone() {
         },
         init: function (file) {
 
-            this.on('addedfile', function (file) {
+            /* this.on('addedfile', function (file) {
                 setDropzoneImgLimit(file);
-            });
+            }); */
 
             this.on("maxfilesexceeded", function (file) {
                 alert("No more files please!");

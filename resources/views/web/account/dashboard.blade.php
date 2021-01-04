@@ -2,6 +2,8 @@
 @section('styles')
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
+
 <style type="text/css">
     *{
         font-size: 16px;
@@ -102,7 +104,7 @@
 
     .content {
     position: relative;
-    max-width: 400px;
+    max-width: 130px;
     margin: auto;
     overflow: hidden;
     }
@@ -221,6 +223,26 @@
     .mt-4r{
         margin-top:4rem; 
     }
+
+    .invalid-feedback{
+        display: block;
+        color: red;
+    }
+
+    .valid-feedback{
+        display: block;
+        color: rgb(45, 171, 11);
+    }
+
+    .iti{
+        width: 100%;
+    }
+
+    .single-talent {
+        box-shadow: 0px 6px 12px #61616154 !important;
+    }
+
+
 </style>
 
 <!-- jQuery library -->
@@ -238,7 +260,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="title__wrapp">
-                    {{-- <div class="page__subtitle title__grey">Profile</div> --}}
                     <h1 class="page__title">My Account</h1>
                     <p class="font-italic mb-1 fz-15">You can update your personal details, download reports and download invoice details here.</p>
                 </div>
@@ -277,25 +298,32 @@
                             <span class="font-weight-bold small text-uppercase">Personal information</span></a>
                         <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
                             <i class="fa fa-user mr-2"></i>
-                            <span class="font-weight-bold small text-uppercase">Profile</span></a>
-                        <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <i class="fa fa-star mr-2"></i>
-                            <span class="font-weight-bold small text-uppercase">Invoices</span></a>
-                        <a class="nav-link mb-3 p-3 shadow" id="v-refer-tab" data-toggle="pill" href="#v-refer" role="tab" aria-controls="v-refer" aria-selected="false">
-                            <i class="fa fa-users mr-2"></i>
-                            <span class="font-weight-bold small text-uppercase">Refer a Friend </span></a>
+                            <span class="font-weight-bold small text-uppercase">My Images</span></a>
                         @if ($data['plan'] && $data['plan']->social_links==1)
                         <a class="nav-link mb-3 p-3 shadow" id="v-social-tab" data-toggle="pill" href="#v-social" role="tab" aria-controls="v-social" aria-selected="false">
                             <i class="fa fa-icons mr-2"></i>
-                            <span class="font-weight-bold small text-uppercase">Social Links</span></a>
+                            <span class="font-weight-bold small text-uppercase">My Social Media Links</span></a>
                         @endif
+                        <a class="nav-link mb-3 p-3 shadow" id="v-resume-tab" data-toggle="pill" href="#v-resume" role="tab" aria-controls="v-resume" aria-selected="false">
+                            <i class="fa fa-star mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">My Resume</span></a>
+                        <a class="nav-link mb-3 p-3 shadow" href="{{ route('account.talent.profile') }}" {{-- id="v-resume-wizard-tab" data-toggle="pill" href="#v-resume-wizard" role="tab" aria-controls="v-resume-wizard" aria-selected="false" --}}>
+                            <i class="fa fa-star mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Resume Wizard</span></a>
+                        {{-- <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <i class="fa fa-star mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Invoices</span></a> --}}
+                        <a class="nav-link mb-3 p-3 shadow" id="v-refer-tab" data-toggle="pill" href="#v-refer" role="tab" aria-controls="v-refer" aria-selected="false">
+                            <i class="fa fa-users mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Refer a Friend </span></a>
+                        
                         </div>
                 </div>
                 <div class="col-md-9">
                     <!-- Tabs content -->
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade shadow rounded bg-white show active in p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                            <form action="{{route('account.dashboard.profile')}}" method="POST">
+                            <form action="{{route('account.dashboard.profile')}}" id="personal-info-form" method="POST">
                                 @csrf
                                 <div class="row">
                                     <h4 class="font-italic mb-4" style="flex: auto;">Personal information</h4>
@@ -319,7 +347,11 @@
                                     </div>
                                     <div class="col-6">
                                         <label for="gender" class="form-label mt-3">Gender</label>
-                                        <input class="form-control" type="text" name="gender" id="gender" placeholder="GENDER" value="{{auth()->user()->gender ?? ''}}" />
+                                        <select name="gender" id="gender" name = "gender" class="form-control" required>
+                                            <option label="Select"></option>
+                                            <option value="female" {{ auth()->user()->gender=='female' ?'selected':''}}>Female</option>
+                                            <option value="male" {{ auth()->user()->gender=='male' ?'selected':''}}>Male</option>
+                                        </select>
                                         @error('gender')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -331,9 +363,13 @@
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6" id="phone-div">
                                         <label for="phone" class="form-label mt-3">Phone</label>
-                                        <input class="form-control" type="text" name="phone" id="phone" placeholder="PHONE" value="{{auth()->user()->phone ?? ''}}" />
+                                        <input class="form-control" type="tel" name="phone" id="phone" value="{{auth()->user()->phone ?? ''}}" />
+                                        <input type="tel" class="hide" name="new_phone" id="hiden" value="{{auth()->user()->phone_c_data ?? ''}}">
+                                        <span id="valid-msg" class="valid-feedback hide">✓ Valid</span>
+                                        <span id="error-msg" class="invalid-feedback hide"></span>
+
                                         @error('phone')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -388,10 +424,22 @@
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
+
+                                    <div class="col-6">
+                                        <label>Create a Password</label>
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"> 
+                                        @error('password')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Confirm Password</label>
+                                        <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" >
+                                    </div>
                                 </div>
                                 <div class="row ">
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-primary" id="personalInfoFormBtn">Update</button>
                                     </div>
                                 </div>
                                 
@@ -404,7 +452,14 @@
                                 
                             </div>
                         </div>
-                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-resume" role="tabpanel" aria-labelledby="v-resume-tab">
+                            @include('components.resume',['profile'=>$data['profile']])
+                           
+                        </div>
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-resume-wizard" role="tabpanel" aria-labelledby="v-resume-wizard-tab">
+                            Loading...
+                        </div>
+                        {{-- <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                             <h4 class="font-italic mb-4">Invoices</h4>
                             <table class="w-100">
                                 <thead>
@@ -430,7 +485,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> --}}
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-refer" role="tabpanel" aria-labelledby="v-refer-tab">
                             <div class="row">
                                 <div class="col-6">
@@ -517,6 +572,109 @@
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.js" integrity="sha512-bZAXvpVfp1+9AUHQzekEZaXclsgSlAeEnMJ6LfFAvjqYUVZfcuVXeQoN5LhD7Uw0Jy4NCY9q3kbdEXbwhZUmUQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js" integrity="sha512-DNeDhsl+FWnx5B1EQzsayHMyP6Xl/Mg+vcnFPXGNjUZrW28hQaa1+A4qL9M+AiOMmkAhKAWYHh1a+t6qxthzUw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
+
+    {{-------------------------}}
+    {{-- input phone setting --}}
+    <script>
+        /* INITIALIZE BOTH INPUTS WITH THE intlTelInput FEATURE*/
+
+        var phone = document.querySelector("#phone"),
+            errorMsg = document.querySelector("#error-msg"),
+            validMsg = document.querySelector("#valid-msg");
+        
+        // here, the index maps to the error code returned from getValidationError - see readme
+        var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+        var iti=window.intlTelInput(phone,{
+            initialCountry: "us",
+            separateDialCode: true,
+            preferredCountries: ["fr", "us", "gb"],
+            geoIpLookup: function (callback) {
+                $.get('https://ipinfo.io', function () {
+                }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+        });
+
+        var hiden_phone = document.querySelector("#hiden");
+        window.intlTelInput(hiden_phone,{
+            initialCountry: "us",
+            dropdownContainer: 'body',
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+        });
+
+        var reset = function() {
+            phone.classList.remove("error");
+            errorMsg.innerHTML = "";
+            errorMsg.classList.add("hide");
+            validMsg.classList.add("hide");
+        };
+
+        var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+
+        $(document).ready(function () {
+            $('#phone').mask(mask1)
+        });
+
+        $("#phone").on("countrychange", function (e, countryData) {
+            $("#phone").val('');
+            var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+            $('#phone').mask(mask1);
+
+            var country_data=iti.getSelectedCountryData();
+            console.log(country_data);
+            document.getElementById("hiden").value = JSON.stringify(country_data);/* $("#phone").val().replace(/\s+/g, '') */;
+        });
+
+        // on blur: validate
+        phone.addEventListener('blur', function() {
+        reset();
+        if (phone.value.trim()) {
+            if (iti.isValidNumber()) {
+            validMsg.classList.remove("hide");
+            } else {
+            phone.classList.add("error");
+            var errorCode = iti.getValidationError();
+            errorMsg.innerHTML = errorMap[errorCode];
+            errorMsg.classList.remove("hide");
+            }
+        }
+        });
+
+        $('input.hide').parent().hide();
+
+        // on keyup / change flag: reset
+        phone.addEventListener('change', reset);
+        phone.addEventListener('keyup', reset);
+
+    </script>
+    {{-- end input phone setting --}}
+    {{-----------------------------}}
+
+    <script>
+        $('#personalInfoFormBtn').on('click',function(e){
+            e.preventDefault();
+            if (iti.isValidNumber()) {
+                $('#personal-info-form').submit();
+            } else {
+                phone.classList.add("error");
+                var errorCode = iti.getValidationError();
+                errorMsg.innerHTML = errorMap[errorCode];
+                errorMsg.classList.remove("hide");
+                $('html, body').animate({
+                    scrollTop: $("#phone-div").position().top
+                }, 800);
+                return false;
+            }
+        })
+    </script>
+
 <script>
     function copyToClipboard() {
         /* Get the text field */
@@ -584,12 +742,7 @@
         //id of drop zone element 1
         '#imageDropzone',{
             url: '{{ route('account.storeMedia') }}',
-            maxFiles:function(file, done) {
-                if (validImageTypes.includes(file.type)) {
-                    done("No more images!");
-                }
-                else { done(); }
-            },
+            maxFiles:"{{$data['plan']->pictures}}"-"{{count($data['images'])}}",
             maxFilesize: 12, // MB
             acceptedFiles: "image/*", /* ,.mp4,.mkv,.mov,.wmv,audio */
             dictDefaultMessage:"Drop Your Files here.",
@@ -671,9 +824,9 @@
                     }
                 }); */
 
-                this.on('addedfile', function(file) {
+                /* this.on('addedfile', function(file) {
                     setDropzoneImgLimit(file);
-                });
+                }); */
 
                 this.on("maxfilesexceeded", function(file){
                     alert("No more files please!");
@@ -705,15 +858,12 @@
 		
 	});
 
-    function setDropzoneImgLimit(file)
+    /* function setDropzoneImgLimit(file)
     {
         if ( validImageTypes.includes(file.type)) {
             $('#imageDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->pictures}}"- "{{count($data['images'])}}";
         }
-        /* else{
-            $('#imageDropzone')[0].dropzone.options.maxFiles = 20;
-        } */
-    }
+    } */
 
     /* function sendAudio(file)
     {
@@ -816,12 +966,25 @@
         {
             if (e.target.id === $('a.nav-link.active').attr('id')) {
                 myDropzoneTheFirst.disable();
+
                 $.ajax({
                     url: '{{ route('account.fetch_attachments') }}',
                     type: 'GET',
                     success: function(res) {
                         $('#render_attachments').html(res);
-                        render_dropzone();
+                        
+                        $.get( '{{ route('account.get_limit') }}/?q=fetch_limit', function() {})
+                            .done(function(res) {
+                                
+                                var store_url='{{ route('account.storeMedia') }}';
+                                render_dropzone(store_url);
+                                
+                                $('#imageDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->pictures}}"-res['image_limit'];
+                            })
+                            .fail(function() {
+                                alert( "error" );
+                            });
+                        
                         /* myDropzoneTheFirst.enable(); */
                     },
                     error: function(error) {

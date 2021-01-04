@@ -141,7 +141,7 @@
 			<div class="row">
 				<div class="title__wrapp">
 					{{-- <div class="page__subtitle title__grey">Forum Jobs & Castings</div> --}}
-					<h1 class="page__title">Free acting lessons</h1>
+					<h1 class="page__title">{{ $data->category->title ?? '' }}</h1>
 				</div>
 			</div>
 		</div>

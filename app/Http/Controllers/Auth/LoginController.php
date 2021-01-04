@@ -57,7 +57,11 @@ class LoginController extends Controller
 
     public function logout(Request $request) 
     {
-      Auth::logout();
-      return redirect('/login');
+        if(Auth::check() && auth()->user()->hasRole('candidate'))
+        {
+            session()->forget('url.intended');
+        }
+        Auth::logout();
+        return redirect('/login');
     }
 }

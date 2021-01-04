@@ -50,7 +50,7 @@
                               <td>{!! $plan->description !!}</td>
                               <td>
                                  <a  href="{{route('backend.plan.edit',$plan->slug ?? $plan->id)}}" class="btn btn-primary btn-xs" ><i class="fa fa-pencil-alt" ></i> Edit </a>
-                                 <a  href="#" class="btn btn-secondary btn-xs" ><i class="fa fa-folder" ></i> View </a>
+                                 {{-- <a  href="#" class="btn btn-secondary btn-xs" ><i class="fa fa-folder" ></i> View </a> --}}
                                  {{-- @include('components.form.delete' , ['data' => $plan->id, 'route' => 'superadmin.plan.destroy']) --}}
                               </td>
                            </tr>

@@ -20,10 +20,12 @@
       }
 
       #payment-head h3 {
-          width:43%; 
-          font-size: 17px;
+          width:53%; 
+          font-size: 14px;
           text-align: center;
           margin-bottom: 25px;
+          margin-top: 0;
+          padding: 2px;
           color: #ffffff;
           text-transform: uppercase;
           background: #e77929;

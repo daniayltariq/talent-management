@@ -5,7 +5,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="title__wrapp">
-					<div class="page__subtitle title__grey">from our magznines</div>
+					<div class="{{-- page__subtitle --}} title__grey">from our magznines</div>
 					<h1 class="page__title">Magzine</h1>
 				</div>
 			</div>

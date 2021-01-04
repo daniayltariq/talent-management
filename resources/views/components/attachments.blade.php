@@ -7,7 +7,7 @@
     </div>
     
     <div class="col-md-12 mt-5">
-        <h4 class="mb-4 upload-head heading">Your Images</h4>
+        <h4 class="mb-4 upload-head heading">My Images</h4>
     </div>
     
     <div class="col-md-12">
@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<br><hr class="hr-style">
+{{-- <br><hr class="hr-style">
 
 <div class="row mt-5">
     <div class="col-md-12 mt-5">
@@ -77,4 +77,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

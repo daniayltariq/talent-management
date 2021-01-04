@@ -10,15 +10,13 @@ class TalentSearch
         /* dd($prod_price=explode('-',$filters->prod_price)); */
         $currentquery = $filters->all();
         
-        if (session()->has('old_query')) {
+        /* if (session()->has('old_query')) {
             $allQueries = array_merge( session('old_query'),$currentquery);
-            /* dd($allQueries); */
             session()->put('old_query',$allQueries);
-            /* dd(session('old_query')['farm_id']); */
         }
-        else{
+        else{ */
             session()->put('old_query',$currentquery);
-        }
+        /* } */
         /* dd(session('old_query')); */
         
         session()->forget('old_query._token');
@@ -94,7 +92,7 @@ class TalentSearch
             }
 
             //Search By gender
-            if (session()->has('old_query.gender')) {
+            if (session()->has('old_query.gender')&& session('old_query')['gender'] !==null) {
                 /* dd($user->get()); */
                 $genders=session('old_query')['gender'];
                 $user->where(function($query) use ($genders)
@@ -154,7 +152,7 @@ class TalentSearch
             }
 
             //Search By eye color
-            if (session()->has('old_query.eye_color')) {
+            if (session()->has('old_query.eye_color') && session('old_query')['eye_color'] !==null) {
                 /* dd($user->get()); */
                 $eye_colors=session('old_query')['eye_color'];
                 $user->whereHas('profile', function($q) use ($eye_colors){
@@ -173,7 +171,7 @@ class TalentSearch
             }
 
             //Search By hair color
-            if (session()->has('old_query.hair_color')) {
+            if (session()->has('old_query.hair_color') && session('old_query')['hair_color'] !==null) {
                 /* dd($user->get()); */
                 $hair_colors=session('old_query')['hair_color'];
                 $user->whereHas('profile', function($q) use ($hair_colors){

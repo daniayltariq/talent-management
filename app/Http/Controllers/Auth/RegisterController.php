@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -68,12 +69,12 @@ class RegisterController extends Controller
             'l_name' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
             'dob' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'max:255'],
+            'phone' => ['required', 'max:255','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'country' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
-            /* 'state' => ['required', 'string', 'max:255'], */
+            'state' => ['required', 'string', 'max:255'],
             'h_adress_1' => ['string', 'max:255','required'],
             'h_adress_2' => ['max:255'],
             'zipcode' => ['required', 'string', 'max:255'],
@@ -91,16 +92,19 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         /* dd($data); */
+        $country_data=json_decode($data['new_phone'],true);
         $user = User::create([
             'f_name' => $data['f_name'],
             'l_name' => $data['l_name'],
             'gender' => $data['gender'],
             'dob' => $data['dob'],
-            'phone' => $data['phone'],
+            'phone' =>Str::of($data['phone'])->prepend('+'.$country_data['dialCode']),
+            'phone_c_data'=>$data['new_phone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'country' => $data['country'],
             'city' => $data['city'],
+            'state' => $data['state'],
             'h_adress_1' => $data['h_adress_1'],
             'h_adress_2' => $data['h_adress_2'],
             'zipcode' => $data['zipcode'],
@@ -113,6 +117,10 @@ class RegisterController extends Controller
             {
                 $user->referrer_id=$referal->user_id;
                 $user->save();
+
+                /* $referal->points=$referal->points+1;
+                $referal->save(); */
+
             }
         }
         $user->assignRole($data['account_type']);

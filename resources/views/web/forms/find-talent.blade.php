@@ -246,26 +246,26 @@
                     <form class="apply-form form-horizontal" method="GET" action="{{route('search_talent')}}" id="talent-search-form">
                        @csrf
                         <div class="row form-block pb-0">
-                            {{-- <div class="form-group col-sm-6 mb-0">
+                            <div class="form-group col-sm-6 mb-0">
                                 <label for="f_name" class="col-sm-4 control-label">Search by names</label>
                                  <div class="col-sm-8">
                                    <input class="form-control taginput" name="name" value="{{ (session('old_query')['name']) ?? ''}}" id="form-size" type="text" aria-label="Search">
                                 </div> 
-                            </div> --}}
+                            </div>
 
-                            <div class="form-group col-sm-4 mb-0">
-                                <label for="f_name" class="col-sm-4 lh-23">Search by First Name {{-- <span class="req">*</span> --}}</label>
+                            {{-- <div class="form-group col-sm-4 mb-0">
+                                <label for="f_name" class="col-sm-4 lh-23">Search by First Name </label>
                                  <div class="col-sm-8">
                                    <input class="form-control" name="f_name" value="{{ (session('old_query')['f_name']) ?? ''}}" id="form-size" type="text" aria-label="Search">
                                 </div> 
                             </div>
 
                             <div class="form-group col-sm-4 mb-0">
-                                <label for="f_name" class="col-sm-4 lh-23">Search by Last Name {{-- <span class="req">*</span> --}}</label>
+                                <label for="f_name" class="col-sm-4 lh-23">Search by Last Name </label>
                                  <div class="col-sm-8">
                                    <input class="form-control" name="l_name" value="{{ (session('old_query')['l_name']) ?? ''}}" id="form-size" type="text" aria-label="Search">
                                 </div> 
-                            </div>
+                            </div> --}}
 
                             {{-- <div class="form-group col-sm-6 mb-0">
                                 <label for="state" class="col-sm-4 control-label">Profile Type</label>
@@ -273,7 +273,7 @@
                                     @include('components.multiselect', ['options' => ['Regular','Voiceover'],'name'=>'profile_type'])
                                 </div>
                             </div> --}}
-                            <div class="form-group col-sm-4 mb-0">
+                            <div class="form-group col-sm-6 mb-0">
                                 <label for="gender" class="col-sm-4 lh-23">Gender </label>
                                 <div class="col-sm-8">
 
@@ -305,12 +305,12 @@
                         </div>
                               
                         <div class="row form-block">
-                            <div class="form-group col-sm-6">
+                            {{-- <div class="form-group col-sm-6">
                                 <label for="location" class="col-sm-4 control-label">Location</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="location" id="location" value="{{ (session('old_query')['location']) ?? ''}}">
                                 </div>
-                            </div>
+                            </div> --}}
 
                            <div class="form-group col-sm-6">
                                 <label for="skills" class="col-sm-4 control-label">Skills </label>
@@ -318,15 +318,15 @@
                                     @include('components.multiselect', ['options' => $skills,'option_value'=>'id','option_text'=>'title','name'=>'skills'])
                                     
                                  </div>
-                             </div>
+                            </div>
 
-                            <div class="form-group col-sm-6">
+                            {{-- <div class="form-group col-sm-6">
                                 <label for="unionstatus" class="col-sm-4 control-label">Union Status</label>
                                 <div class="col-sm-8">
                                     @include('components.multiselect', ['options' => ['Yes','No'],'name'=>'union'])
     							
                                 </div>
-                            </div>  
+                            </div>   --}}
 
                             {{-- <div class="form-group col-sm-6">
                                 <label for="assets" class="col-sm-4 control-label">Availible Assets </label>
@@ -366,8 +366,8 @@
                                 <label class="form-check-label" for="hasDrivingLicense">Have Driver's License</label>
                                 <input type="checkbox"  class="form-check-input" id="hasPassport">
                                 <label class="form-check-label" for="hasPassport">Have Passport</label>
-                                <input type="checkbox"  class="form-check-input" id="selfRecord">
-                                <label class="form-check-label" for="selfRecord">Self-record</label>              
+                                {{-- <input type="checkbox"  class="form-check-input" id="selfRecord">
+                                <label class="form-check-label" for="selfRecord">Self-record</label>  --}}             
                             </div>
 
 
@@ -411,8 +411,8 @@
                             <div class="grid-gutter"></div>
 
                             @foreach ($members as $member)
-                                <div class="effect-bubba grid-item grid-item__width2 new-faces women" data-category="women">
-                                    <img class="img-responsive" src="{{ asset(!is_null($member->profile) ? (!is_null($member->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$member->profile->profile_img)? 'storage/uploads/profile/'.$member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }} " alt="sample image">
+                                <div class="effect-bubba grid-item grid-item__width2 new-faces women" style="height: 530px;" data-category="women">
+                                    <img class="img-responsive" style="object-fit: cover;width: 100%;height: 100%;" src="{{ asset(!is_null($member->profile) ? (!is_null($member->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$member->profile->profile_img)? 'storage/uploads/profile/'.$member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }} " alt="sample image">
                                     <div class="grid-item__contant-info">
                                         <div class="grid-item__contant-name">{{!is_null($member->profile) ? $member->profile->legal_first_name.' '.$member->profile->legal_last_name : $member->f_name.' '.$member->l_name}} </div>
                                         <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->address_1 : ''}} {{!is_null($member->profile) ?$member->profile->country : ''}} {{!is_null($member->profile) ?$member->profile->city : ''}}</div>
@@ -612,7 +612,7 @@
             $('#save-search-modal').modal('toggle');
         @endif
 
-        @if($errors->has('picklist_id'))
+        @if($errors->has('member_id') || $errors->has('title') || $errors->has('description') )
             $('#picklist-modal').modal('toggle');
         @endif
 
