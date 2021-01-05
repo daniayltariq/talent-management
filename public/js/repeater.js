@@ -46,6 +46,7 @@ jQuery.fn.extend({
             /* console.log(item.html());
             console.log(itemClone.html()); */
             /* Handling remove btn */
+            var mainRemoveButton = items.find('.remove-btn');
             var removeButton = itemClone.find('.remove-btn');
 
             if (key == 0) {
@@ -54,12 +55,17 @@ jQuery.fn.extend({
                 removeButton.attr('disabled', false);
             }
 
+            mainRemoveButton.removeAttr('data-removeindex');
+            mainRemoveButton.removeAttr('disabled');
+
+            removeButton.attr('disabled', true);
             removeButton.attr('onclick', '$(this).parents(\'.items\').remove()');
 
             var newItem = $("<div class='items' data-group='experience'>" + itemClone.html() + "<div/>");
             newItem.attr('data-index', key)
 
             newItem.appendTo(repeater);
+
         };
 
         /* find elements */
@@ -88,6 +94,7 @@ jQuery.fn.extend({
                     key++;
                 }
             }
+
         });
 
         /* handle click and add items */

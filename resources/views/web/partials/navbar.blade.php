@@ -122,7 +122,7 @@
 
 										@role('candidate')
 											<li class="m-menu__sub-item">
-												<a href="{{ route('account.dashboard') }}">Dashboard</a>
+												<a href="{{ route('account.dashboard') }}">Profile</a>
 											</li>
 											@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 1)
 												<li class="m-menu__sub-item">
@@ -142,14 +142,14 @@
 											<li class="m-menu__sub-item">
 												<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
 											</li>
-											<li class="m-menu__sub-item">
+											{{-- <li class="m-menu__sub-item">
 												<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
-											</li>
+											</li> --}}
 										@endif
 
 										@role('agent')
 											<li class="m-menu__sub-item">
-												<a href="{{ route('agent.picklist.index') }}">Picklist Favorites</a>
+												<a href="{{ route('agent.picklist.index') }}">My saved picklists</a>
 											</li>
 											<li class="m-menu__sub-item">
 												<a href="{{ route('agent.topic.create') }}">Create Post</a>
