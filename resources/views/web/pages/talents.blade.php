@@ -138,6 +138,17 @@
         .btn-td:hover {
             background-color: #f18222 !important;
         }
+
+        .profile-btn{
+            font-size: 17px;
+            line-height: 22px;
+            border-radius: 6px;
+            padding: 6px 14px 7px;
+            color: #000;
+            background-color: #fff;
+            border: 1px solid #000;
+            border-bottom-width: 3px;
+        }
 </style>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
@@ -164,12 +175,16 @@
                         @if ($talent->profile()->exists())
                             <li class="testimonal__list-item col-md-4">
                                 <div class="single-testimonial">
-                                    <div class="border-1">
+                                    <div class="border-1" style="min-height: 434px">
                                         <div class="testimonal__photo profile-sec"><img class="tal-profile" src="{{ !is_null($talent->profile->profile_img) && file_exists(public_path().'/storage/uploads/profile/'.$talent->profile->profile_img) ? ('storage/uploads/profile/'.$talent->profile->profile_img) :'web/img/user.png' }}" alt=""></div>
-                                        <div class="date testimonal__date">{{$talent->created_at->diffForHumans()}}</div>
-                                        <div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
+                                        <div class="date testimonal__date" style="font-size: 15px;background-color: #f6f6f6;">{{$talent->f_name ?? ''}} {{$talent->l_name ?? ''}}</div>
+                                        <div class="text testimonal__text" style="text-align: justify;margin-left: 31%;">
+                                            <p>{{$talent->profile->address_1 ??$talent->profile->address_2 ?? ''}}</p>
+                                            <p><b>Age: </b> {{$talent->getAgeAttribute() ?? ''}}</p>
+                                            <p><b>Height: </b> {{$talent->profile->height ? \Str::finish($talent->profile->height, "'") : ''}} {{$talent->profile->feet ? \Str::finish($talent->profile->feet, "''") : ''}}</p>
+                                            <p><a href="" class="profile-btn">Profile</a></p>
+                                        </div>
                                         <div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
-                                        <div class="testimonal__name">{{$talent->f_name ?? ''}} {{$talent->l_name ?? ''}}</div>
                                     </div>
                                 </div>
                             </li>
