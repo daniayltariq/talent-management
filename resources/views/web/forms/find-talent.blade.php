@@ -361,14 +361,14 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-sm-6">
+                            {{-- <div class="form-group col-sm-6">
                                 <input type="checkbox"  class="form-check-input" id="hasDrivingLicense">
                                 <label class="form-check-label" for="hasDrivingLicense">Have Driver's License</label>
                                 <input type="checkbox"  class="form-check-input" id="hasPassport">
                                 <label class="form-check-label" for="hasPassport">Have Passport</label>
-                                {{-- <input type="checkbox"  class="form-check-input" id="selfRecord">
-                                <label class="form-check-label" for="selfRecord">Self-record</label>  --}}             
-                            </div>
+                                <input type="checkbox"  class="form-check-input" id="selfRecord">
+                                <label class="form-check-label" for="selfRecord">Self-record</label>              
+                            </div> --}}
 
 
                             <div class="col-sm-8 col-sm-offset-4">
