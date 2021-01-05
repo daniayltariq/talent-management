@@ -465,7 +465,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Director or Venue')}}" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger repeater-add-btn btn-small" disabled="disabled">
+                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
                                                     <i class="mdi mdi-close"></i>
                                                 </button>
                                                 </div>
@@ -535,7 +535,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     <input type="text" data-name="production" {{-- name="experience[{{$expr_tele->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Location')}}" class="form-control">
                                                 </div>
                                                 <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger repeater-add-btn btn-small" disabled="disabled">
+                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
                                                     <i class="mdi mdi-close"></i>
                                                 </button>
                                                 </div>
@@ -607,7 +607,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </div>
                                                 
                                                 <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger repeater-add-btn btn-small" disabled="disabled">
+                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
                                                     <i class="mdi mdi-close"></i>
                                                 </button>
                                                 </div>
@@ -678,7 +678,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </div>
                                             
                                                 <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger repeater-add-btn btn-small" disabled="disabled">
+                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
                                                     <i class="mdi mdi-close"></i>
                                                 </button>
                                                 </div>
