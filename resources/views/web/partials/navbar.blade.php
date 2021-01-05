@@ -160,7 +160,11 @@
 										@endrole
 										<li class="m-menu__sub-item">
 											<a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();.getElementById('logout-form').submit();">
-											{{ __('Logout') }}
+												@impersonating($guard = null)
+													Admin Dashboard
+												@else
+													{{ __('Logout') }}
+												@endImpersonating
 											</a>
 											<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
 												@csrf
