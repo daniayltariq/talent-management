@@ -191,7 +191,7 @@
 					  <div class="nav-links row">
 						@foreach ($latest->take(2) as $topic)
 							<figure class="nav-links__{{$loop->index==0?'previous':'next'}} col-sm-6">
-								<span class="pull-left w-30"><a href="{{ route('single-post',['slug' => $topic->slug]) }}"><img src="{{ asset(isset($topic->image) ? $topic->image : 'backend-assets/images/rec2.jpg') }}" alt=""></a></span>
+								{{-- <span class="pull-left w-30"><a href="{{ route('single-post',['slug' => $topic->slug]) }}"><img src="{{ asset(isset($topic->image) ? $topic->image : 'backend-assets/images/rec2.jpg') }}" alt=""></a></span> --}}
 								<figcaption class="widget-latest__content">
 									<a href="{{ route('single-post',['slug' => $topic->slug]) }}" class="widget-latest__title">{{$topic->title}}</a>
 									<p class="widget-latest__date">{{$topic->created_at->diffForHumans()}}</p>
