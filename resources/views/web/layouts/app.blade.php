@@ -143,7 +143,7 @@
 		@media (min-width: 1200px)
 		{
 			.cust-cont {
-				max-width: 1161px !important;
+				max-width:1170px !important;
 			}
 		}
 			
