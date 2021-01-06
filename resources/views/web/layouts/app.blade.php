@@ -150,6 +150,10 @@
 		.single-testimonial{
 			outline: none !important; 
 		}
+
+		.testimonal__list-item{
+			outline: none !important; 
+		}
 			
 	</style>
 </head>
