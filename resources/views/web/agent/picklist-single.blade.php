@@ -217,7 +217,7 @@
 												<div class="talent-intro">
 													<h2>{{$item->member->profile->legal_first_name ?? ''}}
 														{{$item->member->profile->legal_last_name ?? ''}}</h2>
-													<p>{{$item->member->referal_code()->exists() ? url('/').'/register/?referal='.auth()->user()->referal_code->refer_code : ''}}</p>
+													<p>{{$item->member->referal_code()->exists() ? url('/').'/register/?referal='.$item->member->referal_code->refer_code : ''}}</p>
 												</div>
 
 												<div class="talent-skill">

@@ -7356,11 +7356,11 @@ button.close {
                                                 <h4 class="text__quote font-primary">Theater</h4>
                                                 <div class="">
                                                     <table class="w-100">
-                                                        <tr>
+                                                        {{-- <tr>
                                                             <th>Name</th>
                                                             <th>Role</th>
                                                             <th>Director or Venue</th>
-                                                        </tr>
+                                                        </tr> --}}
                                                         @if (!is_null($expr))
                                                             @foreach ($expr as $key => $exp)
                                                                 <tr>
@@ -7390,11 +7390,11 @@ button.close {
                                                 <h4 class="text__quote font-primary">Films</h4>
                                                 <div class="">
                                                     <table class="w-100">
-                                                        <tr>
+                                                        {{-- <tr>
                                                             <th>Name</th>
                                                             <th>Role</th>
                                                             <th>Director or Production Company</th>
-                                                        </tr>
+                                                        </tr> --}}
     
                                                         @if (!is_null($expr))
                                                             @foreach ($expr as $key => $exp)
@@ -7425,11 +7425,11 @@ button.close {
                                                 <h4 class="text__quote font-primary">Telivision</h4>
                                                 <div class="">
                                                     <table class="w-100">
-                                                        <tr>
+                                                        {{-- <tr>
                                                             <th>Name</th>
                                                             <th>Role</th>
                                                             <th>Production</th>
-                                                        </tr>
+                                                        </tr> --}}
     
                                                         @if (!is_null($expr))
                                                             @foreach ($expr as $key => $exp)
@@ -7458,12 +7458,12 @@ button.close {
                                                 <h4 class="text__quote font-primary">Commercials</h4>
                                                 <div class="">
                                                     <table class="w-100">
-                                                        <tr>
+                                                        {{-- <tr>
                                                             <th>Name of Commercial</th>
                                                             <th>Role Played</th>
                                                             <th>Director or Production Company</th>
                                                             
-                                                        </tr>
+                                                        </tr> --}}
     
                                                         @if (!is_null($expr))
                                                             @foreach ($expr as $key => $exp)
@@ -7493,12 +7493,12 @@ button.close {
                                                 <h4 class="text__quote font-primary">Traning</h4>
                                                 <div class="">
                                                     <table class="w-100">
-                                                        <tr>
+                                                        {{-- <tr>
                                                             <th>Training Class</th>
                                                             <th>Instructor</th>
                                                             <th>Training Company</th>
                                                             
-                                                        </tr>
+                                                        </tr> --}}
     
                                                         @if (!is_null($expr))
                                                             @foreach ($expr as $key => $exp)

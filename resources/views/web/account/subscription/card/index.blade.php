@@ -92,6 +92,7 @@
     </style>
 @endsection
 @section('content')
+@include('web.partials.loader')
 <div class="container">
     <div class="row justify-content-center" style="margin: 10rem">
         <div class="col-md-offset-3 col-md-6 mt-5 mb-3">
@@ -247,7 +248,7 @@ function stripeTokenHandler(setupIntent) {
             plan: $('[name="plan"]').val(),
             _token : "{{ csrf_token() }}"
           }, function( res ) {
-            fullPageLoader(true);
+            fullPageLoader(false);
             if (res.status=='success') {
                 toastr.success(res.message)
             } else if(res.status=='error') {
@@ -259,4 +260,5 @@ function stripeTokenHandler(setupIntent) {
     });
   });
 </script>
+
 @endsection
