@@ -427,7 +427,7 @@
 
                                     <div class="col-6">
                                         <label>Update Password</label>
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"> 
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value=""> 
                                         @error('password')
                                             <div class="error">{{ $message }}</div>
                                         @enderror

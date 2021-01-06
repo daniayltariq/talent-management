@@ -57,7 +57,6 @@ class DashboardController extends Controller
         ]);
         
         if ($validator->fails()) {
-            return $validator->errors();
             $request->session()->flash('error', 'Something went wrong !');
             return redirect()->back()
                         ->withErrors($validator)
