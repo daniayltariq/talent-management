@@ -66,11 +66,7 @@ Route::group(['middleware' => ['isAdminOrAgentOrCandidate','isActive','hasCommun
 // Route::get('/single-topic', function () {
 //     return view('web.pages.single-topic');
 // })->name('single-topic');
-
-
-Route::get('/testimonials', function () {
-    return view('web.pages.testimonials');
-})->name('testimonials');
+Route::get('/testimonials', [App\Http\Controllers\HomeController::class, 'testimonials'])->name('testimonials');
 
 
 Route::get('/how-it-works', function () {
@@ -316,6 +312,8 @@ Route::group([
     Route::get('/view_save_search', [App\Http\Controllers\Admin\DashboardController::class, 'viewSaveSearch'])->name('view_save_search');
     Route::get('/apply_saved_search/{id}', [App\Http\Controllers\Admin\DashboardController::class, 'applySaveSearch'])->name('apply_saved_search');
     Route::post('/save_search', [App\Http\Controllers\Admin\DashboardController::class, 'saveSearch'])->name('save_search');
+
+    Route::resource('testimonial', App\Http\Controllers\Admin\TestimonialController::class);
 });
 
 Route::group([

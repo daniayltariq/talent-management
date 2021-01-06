@@ -146,6 +146,13 @@ class HomeController extends Controller
       }
    }
 
+   public function testimonials()
+   {
+      $test=\App\Models\Testimonial::where('status',1)->get();
+      /* dd($test); */
+      return view('web.pages.testimonials',compact('test'));
+   }
+
     public function community()
     {    
        return view('web.pages.community');

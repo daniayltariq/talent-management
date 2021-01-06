@@ -37,50 +37,19 @@ ul.testimonal__list.clearfix.testimonial-slider.slick-initialized.slick-slider {
 			<h2 class="section__title"><span class="line"></span>Our Clients Say</h2>
 			<p class="text-center">Simplify and streamline your casting process to find the perfect performers for your project.</p>
 			<ul class="testimonal__list clearfix testimonial-slider">
-				<li class="testimonal__list-item col-md-4">
-					<div class="single-testimonial">
-						<div class="border-1">
-							<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
-							<div class="date testimonal__date">02 Jul 2016</div>
-							<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
-							<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
-							<div class="testimonal__name">Carolyn Potter</div>
+				@foreach ($test as $testi)
+					<li class="testimonal__list-item col-md-4">
+						<div class="single-testimonial">
+							<div class="border-1">
+								<div class="testimonal__photo"><img src="{{ asset(isset($testi) && $testi->image ? $testi->image : 'backend-assets/images/rec2.jpg') }}" alt=""></div>
+								<div class="date testimonal__date">{{$testi->created_at->diffForHumans()}}</div>
+								<div class="text testimonal__text" style="text-align: justify;padding: 9%;"> {!! $testi->content ?? '' !!}</div>
+								<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
+								<div class="testimonal__name mb-2"> {!! $testi->name ?? '' !!}</div>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li class="testimonal__list-item col-md-4">
-					<div class="single-testimonial">
-						<div class="border-1">
-							<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
-							<div class="date testimonal__date">02 Jul 2016</div>
-							<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
-							<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
-							<div class="testimonal__name">Carolyn Potter</div>
-						</div>
-					</div>
-				</li>
-				<li class="testimonal__list-item col-md-4">
-					<div class="single-testimonial">
-						<div class="border-1">
-							<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
-							<div class="date testimonal__date">02 Jul 2016</div>
-							<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
-							<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
-							<div class="testimonal__name">Carolyn Potter</div>
-						</div>
-					</div>
-				</li>
-				<li class="testimonal__list-item col-md-4">
-					<div class="single-testimonial">
-						<div class="border-1">
-							<div class="testimonal__photo"><img src="{{ asset('web/img/testimonal-photo.png') }}" alt=""></div>
-							<div class="date testimonal__date">02 Jul 2016</div>
-							<div class="text testimonal__text">“ We as a family, rejoice in victories and share the failures of our actors and models! We believe in everyone who is willing to change, grow! ”</div>
-							<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
-							<div class="testimonal__name">Carolyn Potter</div>
-						</div>
-					</div>
-				</li>
+					</li>
+				@endforeach
 				
 			</ul>
 		</div>
