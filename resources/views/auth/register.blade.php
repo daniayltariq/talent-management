@@ -308,13 +308,13 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-sm-offset-4 col-sm-8">
-                                    <input class="form-check-input" type="checkbox" name="user_agreement" required id="user_agreement" {{ old('user_agreement') ? 'checked' : '' }}> I agree to the Backstage <a href="{{route('user_agreement')}}">User Agreement.</a> 
+                                    <input class="form-check-input" type="checkbox" name="user_agreement" required id="user_agreement" {{ old('user_agreement') ? 'checked' : '' }}> I agree to the Backstage <a href="{{route('user_agreement')}}" style="color: #df691a">User Agreement.</a> 
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-4">
-                                    <button type="submit" class="btn btn-default btn__red {{-- animation --}} btn-full pull-right" id="registerSubmitBtn">join us</button>
+                                    <button type="button" class="btn btn-default btn__red {{-- animation --}} btn-full pull-right" id="registerSubmitBtn">join us</button>
                                 </div>
                             </div>
                         </div>
@@ -455,6 +455,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 var country_data=iti.getSelectedCountryData();
                 console.log(country_data);
                 document.getElementById("hiden").value = JSON.stringify(country_data);
+                console.log($('#hiden').val());
                 $('#registerForm').submit();
             } else {
                 phone.classList.add("error");

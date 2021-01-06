@@ -12,7 +12,7 @@
 </div>
 <header class="header" id="header">
 	<div class="header-sticky__wrapp">
-		<div class="container">
+		<div class="container cust-cont">
 			<div class="row">
 				<div class="logo col-md-2 col-sm-4 col-xs-7">
 					<a class="navbar-brand" href="{{ route('/') }}">
@@ -42,6 +42,9 @@
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('about-us') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('about-us') }}">About Us</a>
+							</li>
+							<li class="m-menu__list-item  {{ Request::is('findtalent') ? 'm-menu__list-item_active' : '' }}">
+								<a href="{{ route('findtalent') }}">Find Talent</a>
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('featured_talents') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('featured_talents') }}">Featured Talent</a>

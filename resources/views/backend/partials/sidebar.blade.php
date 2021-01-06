@@ -78,8 +78,10 @@
                         <span class="kt-menu__arrow"></span>
                         <ul class="kt-menu__subnav">
                           
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Forum list</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.create') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create topic</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Post listing</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.create') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create a post</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.room.create')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create Category</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.room.index')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Category List</span></a></li>
                         </ul>
                     </div>
                 </li>
@@ -122,7 +124,7 @@
                     </div>
                 </li>
 
-                <li class="kt-menu__item  kt-menu__item--submenu mt-3" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
+                {{-- <li class="kt-menu__item  kt-menu__item--submenu mt-3" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
                     <a  href="javascript:;" class="kt-menu__link kt-menu__toggle">
                         <span class="kt-menu__link-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -143,7 +145,7 @@
                             <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.room.index')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Room List</span></a></li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="kt-menu__item mt-3" aria-haspopup="true" >
                     <a  href="{{route('backend.picklist.index')}}" class="kt-menu__link ">

@@ -161,7 +161,7 @@
             <div class="title__wrapp">
                 {{-- <div class="page__subtitle title__grey">Looking for talent ?</div> --}}
                 <h1 class="page__title">Featured Talents</h1>
-                <a href="{{route('findtalent')}}" class="btn btn-td"> Search Talent</a>
+                {{-- <a href="{{route('findtalent')}}" class="btn btn-td"> Search Talent</a> --}}
             </div>
         </div>
     </div>

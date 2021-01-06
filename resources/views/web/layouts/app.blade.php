@@ -132,6 +132,13 @@
 				display: block;
 			}
 		}
+
+		@media only screen and (min-width: 1220px)
+		{
+			.cust-cont {
+				width: 1321px;
+			}
+		}
 		
 	</style>
 </head>
