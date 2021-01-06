@@ -7532,7 +7532,7 @@ button.close {
                                                     @if (!is_null($skills))
                                                         @foreach ($skills as $skill)
                                                             @if ($skill->skill()->exists())
-                                                                <span class="label label-default" style="line-height: 30px;">{{$skill->skill->title ?? ''}}</span>
+                                                                <span class="label label-default" style="line-height: 35px;">{{$skill->skill->title ?? ''}}</span>
                                                             @endif
                                                             
                                                         @endforeach
