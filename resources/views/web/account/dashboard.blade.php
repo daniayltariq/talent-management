@@ -327,7 +327,7 @@
                                 @csrf
                                 <div class="row">
                                     <h4 class="font-italic mb-4" style="flex: auto;">Personal information</h4>
-                                    <a href="{{route('account.talent.profile')}}" class="btn btn-primary p-8">My Resume</a>
+                                   {{--  <a href="{{route('account.talent.profile')}}" class="btn btn-primary p-8">My Resume</a> --}}
                                 </div>
                                 
                                 <div class="row mb-5">
