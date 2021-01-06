@@ -58,7 +58,7 @@
 							<div class="border-1">
 								<div class="testimonal__photo profile-sec"><img class="tal-profile" src="{{ asset(isset($testi) && $testi->image ? $testi->image : 'backend-assets/images/rec2.jpg') }}" alt=""></div>
 								<div class="date testimonal__date">{{$testi->created_at->diffForHumans()}}</div>
-								<div class="text testimonal__text" style="text-align: justify;padding: 9%;"> {!! $testi->content ?? '' !!}</div>
+								<div class="text testimonal__text" style="text-align: justify;padding: 7%;"> {!! $testi->content ?? '' !!}</div>
 								<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
 								<div class="testimonal__name mb-2"> {!! $testi->name ?? '' !!}</div>
 							</div>

@@ -146,6 +146,10 @@
 				max-width:1310px !important;
 			}
 		}
+
+		.single-testimonial{
+			outline: none !important; 
+		}
 			
 	</style>
 </head>
