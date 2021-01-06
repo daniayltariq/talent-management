@@ -169,7 +169,7 @@
 									<button class="btn btn-share" pd-popup-open="popupNew"><i class="mdi mdi-message-outline"></i>  Send Message</button>
 								@endif
 								
-								<button class="btn btn-share"><i class="mdi mdi-email-outline"></i>  Share Picklist</button>
+								{{-- <button class="btn btn-share"><i class="mdi mdi-email-outline"></i>  Share Picklist</button> --}}
 							</div>
 						</div>
 					</div>

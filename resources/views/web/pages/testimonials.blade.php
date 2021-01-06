@@ -2,14 +2,29 @@
 
 @section('styles')
 <style type="text/css">
-.slick-slide img {
-    margin: auto;
-    margin-top: -40px;
-}
+	.slick-slide img {
+		margin: auto;
+		margin-top: -40px;
+	}
 
-ul.testimonal__list.clearfix.testimonial-slider.slick-initialized.slick-slider {
-    height: 600px;
-}
+	ul.testimonal__list.clearfix.testimonial-slider.slick-initialized.slick-slider {
+		height: 600px;
+	}
+
+	.profile-sec {
+		display: inline-block;
+		height: 180px;
+		width: 180px;
+		border-radius: 50%;
+		padding: 5px;
+		background: none;
+	}
+
+	.tal-profile{
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
 </style>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
@@ -41,7 +56,7 @@ ul.testimonal__list.clearfix.testimonial-slider.slick-initialized.slick-slider {
 					<li class="testimonal__list-item col-md-4">
 						<div class="single-testimonial">
 							<div class="border-1">
-								<div class="testimonal__photo"><img src="{{ asset(isset($testi) && $testi->image ? $testi->image : 'backend-assets/images/rec2.jpg') }}" alt=""></div>
+								<div class="testimonal__photo profile-sec"><img class="tal-profile" src="{{ asset(isset($testi) && $testi->image ? $testi->image : 'backend-assets/images/rec2.jpg') }}" alt=""></div>
 								<div class="date testimonal__date">{{$testi->created_at->diffForHumans()}}</div>
 								<div class="text testimonal__text" style="text-align: justify;padding: 9%;"> {!! $testi->content ?? '' !!}</div>
 								<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
