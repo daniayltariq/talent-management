@@ -181,7 +181,7 @@
                                         <div class="text testimonal__text" style="text-align: justify;margin-left: 31%;">
                                             <p>{{$talent->profile->address_1 ??$talent->profile->address_2 ?? ''}}</p>
                                             <p><b>Age: </b> {{$talent->getAgeAttribute() ?? ''}}</p>
-                                            <p><b>Height: </b> {{$talent->profile->height ? \Str::finish($talent->profile->height, "'") : ''}} {{$talent->profile->feet ? \Str::finish($talent->profile->feet, "''") : ''}}</p>
+                                            <p><b>Height: </b>{{$talent->profile->feet ? \Str::finish($talent->profile->feet, "'") : ''}} {{$talent->profile->height ? \Str::finish($talent->profile->height,"''") : ''}}</p>
                                             <p><a href="" class="profile-btn">Profile</a></p>
                                         </div>
                                         <div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>

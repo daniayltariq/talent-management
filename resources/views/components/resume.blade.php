@@ -36,7 +36,7 @@
                         <table>
                             <tr>
                                 <th>Height</th>
-                                <td>{{$profile->height  ?? ''}}</td>
+                                <td>{{$profile->feet ? \Str::finish($profile->feet, "'") : ''}} {{$profile->height ? \Str::finish($profile->height,"''") : ''}}</td>
                             </tr>
                             <tr>
                                 <th>Weight</th>
