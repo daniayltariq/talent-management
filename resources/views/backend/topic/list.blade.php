@@ -7,12 +7,12 @@
 		<div class="kt-portlet__head">
 			<div class="kt-portlet__head-label">
 				<h3 class="kt-portlet__head-title">
-					Forum list
+					Post listings
 				</h3>
 				
 			</div>
 			<div class="kt-portlet__head-label" style="float: right">
-				<a href="{{ route('backend.topic.create') }}" style="background-color: #0abb87;" class="btn btn-success btn-xs"><i class='fa fa-plus'></i> New Blog</a>
+				<a href="{{ route('backend.topic.create') }}" style="background-color: #0abb87;" class="btn btn-success btn-xs"><i class='fa fa-plus'></i> Create a Post</a>
 			</div>
 		</div>
 		<div class="kt-portlet__body">
