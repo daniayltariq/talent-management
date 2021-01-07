@@ -129,7 +129,7 @@
 									</button>
 									<ul class="m-menu__sub mt-2">
 										<li class="m-menu__sub-item">
-											<a href="{{ route('login') }}">Login</a>
+											<a href="{{ route('login') }}">Sign In</a>
 										</li>
 									</ul>
 								</li>
