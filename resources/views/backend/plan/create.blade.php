@@ -86,12 +86,12 @@
                            <input type="number" required="required" name="pictures" value="{{$plan->pictures ?? ''}}" class="form-control col-md-12 col-xs-12">
                         </div>
                         <div class="col-md-4">
-                           <label class="control-label " >Pictures<span class="required">*</span>
+                           <label class="control-label " >Audios<span class="required">*</span>
                            </label>
                            <input type="number" required="required" name="audios" value="{{$plan->audios ?? ''}}" class="form-control col-md-12 col-xs-12">
                         </div>
                         <div class="col-md-4">
-                           <label class="control-label " >Pictures<span class="required">*</span>
+                           <label class="control-label " >Videos<span class="required">*</span>
                            </label>
                            <input type="number" required="required" name="videos" value="{{$plan->videos ?? ''}}" class="form-control col-md-12 col-xs-12">
                         </div>
