@@ -123,7 +123,7 @@
 									</ul>
 								</li>
 								<li class="m-menu__list-item menu-item-has-children" style="padding-top: 0;">
-									<button type="button" class="btn-cust btn-warning bg-talent">
+									<button type="button" class="btn-cust btn-warning bg-talent" style="height: unset !important">
 										<span style="left: -3px;background: none;"><i class="fas fa-list"></i></span>
 										<span style="border-radius: 22px;"><i class="fas fa-user"></i></span>
 									</button>

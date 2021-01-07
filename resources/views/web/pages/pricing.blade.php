@@ -219,6 +219,27 @@ table.pricing td:nth-child(4) {
     </tr>
 
     <tr>
+      <td>Audios</td>
+      @foreach ($plans as $plan)
+        <td><span class="tick">{{$plan->audios ?? ''}}</span></td>
+      @endforeach
+      {{-- <td><span class="tick">2</span></td>
+      <td><span class="tick">5</span></td>
+      <td class="default"><span class="tick">15</span></td> --}}
+      
+    </tr>
+    <tr>
+      <td>Videos</td>
+      @foreach ($plans as $plan)
+        <td><span class="tick">{{$plan->videos ?? ''}}</span></td>
+      @endforeach
+      {{-- <td><span class="tick">2</span></td>
+      <td><span class="tick">5</span></td>
+      <td class="default"><span class="tick">15</span></td> --}}
+      
+    </tr>
+
+    <tr>
       <td>Resume Builder Wizard with onscreen formatted resume and generated .pdf resume available for download.</td>
       @foreach ($plans as $plan)
         <td><span class="tick"><i class="fa fa-{{$plan->resume==1 ? 'check' : ''}}"></i> </span></td>
