@@ -552,10 +552,15 @@
                                                 
                                             </div>
                                         </div>
-                                        @if($data['plan'] && ( $data['plan']->social_limit !== count($data["social"])) )
+                                        @if($data['plan'] && ($data['plan']->social_links==1 && $data['plan']->social_limit !== count($data["social"])) )
                                             <input data-repeater-create type="button" class="btn btn-primary" id="repeater-add-btn" value="Add"/>
                                             <hr>
                                             <button type="submit" class="btn btn-secondary">Save</button>
+                                        @else
+                                            <div class="alert alert-primary" role="alert">
+                                                <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
+                                                Your subscription plan does not include this feature.please upgrade.
+                                            </div>
                                         @endif
                                     </form>
                                     
@@ -939,7 +944,8 @@
 
         $('#repeater-add-btn').on('click',function(e){
             e.preventDefault();
-            if ($('.repeater').find('[data-repeater-delete]').length > "{{count($data["social"])}}")
+            console.log({{count($data["social"])}});
+            if ($('.repeater').find('[data-repeater-delete]').length > "{{$data["plan"]->social_limit}}")
             {
                 $('.repeater').find('[data-repeater-delete]').last().click();
                 toastr.warning('Limit exceeded');
@@ -949,7 +955,7 @@
             
         })
 
-        @if(count($data["social"])>0)
+        @if(!is_null($data["social"]) && count($data["social"])>0)
             var social={!!json_encode($data["social"])!!};
             $social_repeater.setList(social);
         @endif
