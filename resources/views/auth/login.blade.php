@@ -3,13 +3,14 @@
 
 @section('styles')
 <style type="text/css">
-.btn-half {
-    width: 50%;
-    float: unset !important;
-    margin: auto;
-    margin-top: 15px !important;
-    padding: 15px 30px;
-}
+    .btn-half {
+        width: 50%;
+        float: unset !important;
+        margin: auto;
+        margin-top: 15px !important;
+        padding: 15px 30px;
+    }
+
 </style>
 @endsection
 @section('content')
@@ -17,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="title__wrapp">
-                <div class="{{-- page__subtitle --}} title__grey">Apply</div>
+                {{-- <div class="page__subtitle title__grey">Apply</div> --}}
                 <h1 class="page__title">Work with us</h1>
             </div>
         </div>

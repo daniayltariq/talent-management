@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<br><hr class="hr-style">
+{{-- <br><hr class="hr-style">
 
 <div class="row mt-5">
     <div class="col-md-12 mt-5">
@@ -77,4 +77,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

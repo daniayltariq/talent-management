@@ -43,9 +43,12 @@
 							<li class="m-menu__list-item  {{ Request::is('about-us') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('about-us') }}">About Us</a>
 							</li>
+
+							@hasanyrole('superadmin|agent')
 							<li class="m-menu__list-item  {{ Request::is('findtalent') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('findtalent') }}">Find Talent</a>
 							</li>
+							@endhasanyrole
 							<li class="m-menu__list-item  {{ Request::is('featured-talents') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('featured_talents') }}">Featured Talent</a>
 							</li>
@@ -92,25 +95,41 @@
 							</li> --}}
 							
 							
-							@if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0))
+							{{-- @if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0))
 								
 									<li class="m-menu__list-item {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}">
 										<a href="{{ route('pricing') }}">Plans</a>
 									</li>
 								
-							@endif
+							@endif --}}
 							
 							
 							@if(Auth::guest()) 
 							
 								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
-									<a href="{{ route('login') }}">Join <span style="color: #df691a;font-weight: 500;">US</span> Now</a>
+									<a href="javascript:;">Join <span style="color: #df691a;font-weight: 500;">US</span> Now</a>
 									<ul class="m-menu__sub">
 										<li class="m-menu__sub-item">
-											<a href="{{ route('login') }}">Login</a>
+											<a href="{{ route('how-it-works') }}">Learn more</a>
 										</li>
+										@if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0))
+											<li class="m-menu__sub-item">
+												<a href="{{ route('pricing') }}">Plans</a>
+											</li>
+										@endif
 										<li class="m-menu__sub-item">
 											<a href="{{ route('register') }}">Join</a>
+										</li>
+									</ul>
+								</li>
+								<li class="m-menu__list-item menu-item-has-children" style="padding-top: 0;">
+									<button type="button" class="btn-cust btn-warning bg-talent">
+										<span style="left: -3px;background: none;"><i class="fas fa-list"></i></span>
+										<span style="border-radius: 22px;"><i class="fas fa-user"></i></span>
+									</button>
+									<ul class="m-menu__sub mt-2">
+										<li class="m-menu__sub-item">
+											<a href="{{ route('login') }}">Login</a>
 										</li>
 									</ul>
 								</li>
