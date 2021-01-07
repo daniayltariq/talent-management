@@ -17,6 +17,8 @@ class Plan extends Model
         'unique_url',
         'contact_info',
         'pictures',
+        'audios',
+        'videos',
         'resume',
         'social_links',
         'email_me',

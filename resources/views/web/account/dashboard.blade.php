@@ -261,7 +261,7 @@
             <div class="col-md-12">
                 <div class="title__wrapp">
                     <h1 class="page__title">My Account</h1>
-                    <p class="font-italic mb-1 fz-15">You can update your personal details, download reports and download invoice details here.</p>
+                    {{-- <p class="font-italic mb-1 fz-15">You can update your personal details, download reports and download invoice details here.</p> --}}
                 </div>
             </div>
             

@@ -154,7 +154,20 @@
 		.testimonal__list-item{
 			outline: none !important; 
 		}
-			
+		
+		.page__img {
+			height: 324px !important;
+		}
+
+		.title__wrapp {
+			text-align: center;
+			margin-top: 16%;
+		}
+
+		.header.sticky {
+			position: fixed;
+			height: 100px;
+		}
 	</style>
 </head>
 

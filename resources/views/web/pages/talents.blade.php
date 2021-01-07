@@ -25,9 +25,9 @@
         margin: 30px 0px !important;
     }
 
-    header.header{
+    /* header.header{
         background: #000000cf !important;
-    }
+    } */
 
         .shadow-effect {
 		    background: #fff;
@@ -111,7 +111,7 @@
         .profile-sec {
             display: inline-block;
             height: 180px;
-            width: 180px;
+            width: 85%;
             border-radius: 50%;
             padding: 5px;
             background: none;
@@ -121,6 +121,8 @@
             height: 100%;
             width: 100%;
             object-fit: cover;
+            border-top: 4px solid #df691a!important;
+            background-color: #ececec;
         }
 
         .btn-td{
@@ -148,6 +150,14 @@
             background-color: #fff;
             border: 1px solid #000;
             border-bottom-width: 3px;
+        }
+
+        .profile-sec img {
+            border-radius: 2%;
+        }
+
+        .middle-testimonial .border-1 {
+            padding: 0;
         }
 </style>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>

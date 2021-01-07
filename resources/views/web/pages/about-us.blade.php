@@ -6,7 +6,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="title__wrapp">
-				<div class="{{-- page__subtitle --}} title__grey">The Talent depot</div>
+				{{-- <div class="page__subtitle title__grey">The Talent depot</div> --}}
 				<h1 class="page__title">About us</h1>
 			</div>
 		</div>

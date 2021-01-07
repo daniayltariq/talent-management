@@ -79,12 +79,23 @@
                            <input type="text" required="required" name="cost" value="{{$plan->cost ?? ''}}" class="form-control col-md-12 col-xs-12">
                         </div>
                      </div>
-                     <div class="form-group">
-                        <label class="control-label col-md-12 col-sm-12 col-xs-12" >Pictures<span class="required">*</span>
-                        </label>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
+                     <div class="d-flex mb-3">
+                        <div class="col-md-4">
+                           <label class="control-label " >Pictures<span class="required">*</span>
+                           </label>
                            <input type="number" required="required" name="pictures" value="{{$plan->pictures ?? ''}}" class="form-control col-md-12 col-xs-12">
                         </div>
+                        <div class="col-md-4">
+                           <label class="control-label " >Pictures<span class="required">*</span>
+                           </label>
+                           <input type="number" required="required" name="audios" value="{{$plan->audios ?? ''}}" class="form-control col-md-12 col-xs-12">
+                        </div>
+                        <div class="col-md-4">
+                           <label class="control-label " >Pictures<span class="required">*</span>
+                           </label>
+                           <input type="number" required="required" name="videos" value="{{$plan->videos ?? ''}}" class="form-control col-md-12 col-xs-12">
+                        </div>
+                       
                      </div>
 
                      <div class="form-group">
@@ -158,7 +169,7 @@
                                  </div>
                                  {{-- @if (isset($plan) && isset($plan->social_links) && $plan->social_links=='1') --}}
                                     <div class="row @if (isset($plan) && isset($plan->social_links) && $plan->social_links=='0')invis @endif" id="social_limit_div">
-                                       <input type="number" class="social_limit col-md-4" min="1" max="10" name="social_limit" value="{{$plan->social_limit}}" id="social_limit" tabindex="1">
+                                       <input type="number" class="social_limit col-md-4" min="1" max="10" name="social_limit" value="{{isset($plan) ? $plan->social_limit : ''}}" id="social_limit" tabindex="1">
                                     </div>
                                  {{-- @endif --}}
                                  
@@ -205,8 +216,8 @@
                                     <div class="row @if (isset($plan) && isset($plan->community_access) && $plan->community_access=='0')invis @endif" id="community_access_perm_div">
                                        <select class="social_limit col-md-4 h-34" name="community_access_perm" id="community_access_perm">
                                           <option value="">Access Level..</option>
-                                          <option value="R" {{$plan->community_access_perm=='R'?'selected' : ''}}>Read</option>
-                                          <option value="R/W" {{$plan->community_access_perm=='R/W'?'selected' : ''}}>Read and Comment</option>
+                                          <option value="R" {{isset($plan) && $plan->community_access_perm=='R'?'selected' : ''}}>Read</option>
+                                          <option value="R/W" {{isset($plan) && $plan->community_access_perm=='R/W'?'selected' : ''}}>Read and Comment</option>
                                        </select>
                                     </div>
                                  {{-- @endif --}}
