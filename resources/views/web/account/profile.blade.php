@@ -95,6 +95,10 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 #wizard .actions {
     padding: 0px 50px 50px 50px !important;
 }
+
+.d-none{
+    display: none;
+}
 </style>
 @endsection
 
@@ -930,6 +934,12 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
         
     })
 
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('.actions ul').append("<li class='d-none' id='finish_btn'><a href='{{route('account.dashboard')}}'>Finish</a></li>");
+    })
 </script>
 
 @endsection

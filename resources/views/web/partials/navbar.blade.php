@@ -108,7 +108,7 @@
 							
 								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
 									<a href="javascript:;">Join <span style="color: #df691a;font-weight: 500;">US</span> Now</a>
-									<ul class="m-menu__sub">
+									<ul class="m-menu__sub d-hide">
 										<li class="m-menu__sub-item">
 											<a href="{{ route('how-it-works') }}">Learn more</a>
 										</li>
@@ -127,7 +127,7 @@
 										<span style="left: -3px;background: none;"><i class="fas fa-list"></i></span>
 										<span style="border-radius: 22px;"><i class="fas fa-user"></i></span>
 									</button>
-									<ul class="m-menu__sub mt-2">
+									<ul class="m-menu__sub mt-2 d-hide">
 										<li class="m-menu__sub-item">
 											<a href="{{ route('login') }}">Sign In</a>
 										</li>

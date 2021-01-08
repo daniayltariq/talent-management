@@ -99,8 +99,8 @@
 
 		.role-nav{
 			text-transform: uppercase;
-			color: #ee7322;
-			font-size: 8px;
+			color: #fff;
+			font-size: 9px;
 			font-weight: 800;
 			font-family: Roboto, Arial, sans-serif;
 		}
@@ -239,16 +239,36 @@
 
 		@media only screen and (max-width: 1220px)
 		{
+			.d-hide{
+				display: none;
+			}
 			.m-menu__list-item {
 				float: none;
 				margin-left: 0;
 				padding: 10px 0 0;
 				border-bottom: 1px solid #fff;
 			}
+
+			.m-menu__sub {
+    			position: static;
+			}
+
+			.m-menu__sub>li {
+				margin-left: 16px !important;
+			}
+
+			.menu-item-has-children:hover ul{
+				display: block;
+			}
 		}
 			
 		.bg-talent{
 			background-color:#df691a !important;
+		}
+
+		.m-menu__list-item a {
+			color: #f37c2c !important;
+			font-weight: 500;
 		}
 			
 	</style>
