@@ -11,8 +11,7 @@
         <div class="container">
             <div class="row">
                 <div class="title__wrapp">
-                    <div class="page__subtitle title__grey">Apply</div>
-                    <h1 class="page__title">Work with us</h1>
+                    <h1 class="page__title">Email Verification</h1>
                 </div>
             </div>
         </div>

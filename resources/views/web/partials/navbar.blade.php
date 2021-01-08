@@ -43,12 +43,6 @@
 							<li class="m-menu__list-item  {{ Request::is('about-us') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('about-us') }}">About Us</a>
 							</li>
-
-							@hasanyrole('superadmin|agent')
-							<li class="m-menu__list-item  {{ Request::is('findtalent') ? 'm-menu__list-item_active' : '' }}">
-								<a href="{{ route('findtalent') }}">Find Talent</a>
-							</li>
-							@endhasanyrole
 							<li class="m-menu__list-item  {{ Request::is('featured-talents') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('featured_talents') }}">Featured Talent</a>
 							</li>
@@ -196,6 +190,12 @@
 								</li>
  
 							@endif
+
+							@hasanyrole('superadmin|agent')
+								<li class="m-menu__list-item  {{ Request::is('findtalent') ? 'm-menu__list-item_active' : '' }}">
+									<a href="{{ route('findtalent') }}" style="color: #fff !important"><i class="fas fa-search"></i></a>
+								</li>
+							@endhasanyrole
 						</ul>
 					</nav>
 				</div>
