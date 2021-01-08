@@ -206,17 +206,17 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     <section id="date-of-birth-example-1">
                                         <fieldset style="display: flex;">
                                           <div class="field-inline-block">
-                                            <label>DD</label>
-                                            <input type="text" name="day" pattern="[0-9]*" maxlength="2" size="2" class="date-field" />
-                                          </div>
-                                          /
-                                          <div class="field-inline-block">
-                                            <label>MM</label>
+                                            <label>Month</label>
                                             <input type="text" name="month" max="12" pattern="[0-9]*" maxlength="2" size="2" class="date-field" />
                                           </div>
                                           /
                                           <div class="field-inline-block">
-                                            <label>YYYY</label>
+                                            <label>Day</label>
+                                            <input type="text" name="day" pattern="[0-9]*" maxlength="2" size="2" class="date-field" />
+                                          </div>
+                                          /
+                                          <div class="field-inline-block">
+                                            <label>Year</label>
                                             <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year" />
                                           </div>
                                         </fieldset>
