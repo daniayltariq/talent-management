@@ -98,6 +98,10 @@ Route::get('/picklist-single', function () {
 |--------------------------------------------------------------------------
 |
 */
+Route::get('/ensura', function () {
+    return view('print.ensura');
+})->name('ensura');
+
 Route::get('/404', function () {
     return view('web.errors.404');
 })->name('404');
