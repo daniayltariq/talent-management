@@ -34,4 +34,37 @@ class Handler extends ExceptionHandler
     {
         //
     }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Throwable
+     */
+    public function render($request, Throwable $exception)
+    {
+       
+        if ($this->isHttpException($exception)) {
+            /* if ($exception->getStatusCode() == 404) {
+                return response()->view('404', compact('view_data'), 404);
+            } */
+             
+
+            if ($exception instanceof TokenMismatchException){
+                return redirect()->route('login');
+            }
+
+        
+            if ($exception->getStatusCode() == 419) {
+                $request->session()->put('url.intended', url()->current());
+                return response()->view('web.pages.419', 419);
+            }
+
+        }
+
+        return parent::render($request, $exception);
+    }
 }

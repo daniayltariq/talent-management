@@ -27,7 +27,7 @@
         <div class="container">
         	<div class="text-center">
         		<h2 class="text-dark">How Talent Depot works for agents</h2>
-        		<p>Simplify and streamline your casting process to find the perfect performers for your project.</p>
+        		{{-- <p>Simplify and streamline your casting process to find the perfect performers for your project.</p> --}}
         	</div>
             <div class="row mt-3">
             	<div class="col-sm-4 text-center">

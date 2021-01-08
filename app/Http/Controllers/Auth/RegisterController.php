@@ -69,7 +69,10 @@ class RegisterController extends Controller
             'f_name' => ['required', 'string', 'max:255'],
             'l_name' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
-            'dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')],
+            /* 'dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')], */
+            'day' => ['required', 'string', 'max:10'],
+            'month' => ['required', 'string', 'max:10'],
+            'year' => ['required', 'string', 'max:10'],
             'phone' => ['required', 'max:255','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -98,7 +101,8 @@ class RegisterController extends Controller
             'f_name' => $data['f_name'],
             'l_name' => $data['l_name'],
             'gender' => $data['gender'],
-            'dob' => $data['dob'],
+            /* 'dob' => $data['dob'], */
+            'dob' => $data['year'].'-'.$data['month'].'-'.$data['day'],
             'phone' =>Str::of($data['phone'])->prepend('+'.$country_data['dialCode']),
             'phone_c_data'=>$data['new_phone'],
             'email' => $data['email'],
