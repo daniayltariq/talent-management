@@ -112,7 +112,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
         <div class="container">
             <div class="row">
                 <div class="title__wrapp">
-                    <div class="{{-- page__subtitle --}} title__grey">Apply</div>
+                    {{-- <div class="page__subtitle title__grey">Apply</div> --}}
                     <h1 class="page__title">Work with us</h1>
                 </div>
             </div>
