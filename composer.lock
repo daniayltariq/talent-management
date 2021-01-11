@@ -49,6 +49,11 @@
                 }
             ],
             "description": "Map nested JSON structures onto PHP classes",
+            "support": {
+                "email": "mehdi.jaffery@apimatic.io",
+                "issues": "https://github.com/apimatic/jsonmapper/issues",
+                "source": "https://github.com/apimatic/jsonmapper/tree/master"
+            },
             "time": "2017-01-24T12:48:47+00:00"
         },
         {
@@ -285,6 +290,10 @@
                 "sms",
                 "voice"
             ],
+            "support": {
+                "issues": "https://github.com/ClickSend/clicksend-php/issues",
+                "source": "https://github.com/ClickSend/clicksend-php/tree/master"
+            },
             "time": "2017-06-06T09:21:46+00:00"
         },
         {
@@ -1514,16 +1523,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.19.0",
+            "version": "v8.20.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f5f331cee60f1bbe672503b7eb9ba5b22b2ceacb"
+                "reference": "b5d8573ab16027867eaa1ac148893833434f9b02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f5f331cee60f1bbe672503b7eb9ba5b22b2ceacb",
-                "reference": "f5f331cee60f1bbe672503b7eb9ba5b22b2ceacb",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b5d8573ab16027867eaa1ac148893833434f9b02",
+                "reference": "b5d8573ab16027867eaa1ac148893833434f9b02",
                 "shasum": ""
             },
             "require": {
@@ -1677,7 +1686,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2020-12-15T16:16:31+00:00"
+            "time": "2020-12-22T21:21:19+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2177,6 +2186,11 @@
                 "https",
                 "rest"
             ],
+            "support": {
+                "email": "opensource@mashape.com",
+                "issues": "https://github.com/Mashape/unirest-php/issues",
+                "source": "https://github.com/Mashape/unirest-php/tree/master"
+            },
             "time": "2016-08-11T17:49:21+00:00"
         },
         {
@@ -3700,6 +3714,9 @@
                 "notifications",
                 "sms"
             ],
+            "support": {
+                "source": "https://github.com/superloop-ltd/laravel-sms-clicksend/tree/4.0.0"
+            },
             "time": "2020-09-08T04:43:01+00:00"
         },
         {
