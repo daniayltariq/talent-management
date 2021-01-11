@@ -7433,6 +7433,38 @@ button.close {
                                               Rose plants branches and lavenders are found 3ft away from the structure at the left side of the backyard </b></h4></th>
                                             <th style="border: 1px solid;"><h4 class="ml-3">5ft area around the structure should be clear</h4></th>
                                           </tr>
+                                          <tr>
+                                            <th style="border: 1px solid;">
+                                              <table>
+                                                <tr>
+                                                  <th style="width: 45%;"><h4 class="ml-3"><b>Presence of Combustible Substance 30ft. area around the structure  </b></h4>
+                                                  </th>
+                                                  <th style="border: 1px solid;">
+                                                    <table>
+                                                      <tr><th><h4 class="ml-3"><b>Logs/ firewood pile</b></h4></th></tr>
+                                                      <tr><th><h4 class="ml-3"><b>Scrape </b></h4></th></tr>
+                                                      <tr><th><h4 class="ml-3"><b>Flammable debris </b></h4></th></tr>
+                                                      <tr><th><h4 class="ml-3"><b>Propane cylinder </b></h4></th></tr>
+                                                      <tr><th><h4 class="ml-3"><b>Wildgrass longer than 6” </b></h4></th></tr>
+                                                      <tr><th><h4 class="ml-3"><b>Presence of low limbed conifer </b></h4></th></tr>
+                                                    </table>
+                                                  </th>
+                                                </tr>
+                                              </table>
+                                            </th>
+                                            
+                                            <th style="border: 1px solid;">
+                                              <table>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">Exposed firewood beside the store </b></h4></th></tr>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">Scrape of rubber tires found beside the outdoor barbeque area </b></h4></th></tr>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">None  </b></h4></th></tr>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">Found </b></h4></th></tr>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">*The length of grass is 5” high from the surface</b></h4></th></tr>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">Few branches of conifer tree in southwest of the structure are 5ft high from the ground </b></h4></th></tr>
+                                              </table>
+                                            </th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3">*/There should not be any 30ft area around <br> */Propane (LPG) tanks should be kept have 10ft away from vegetation </h4></th>
+                                          </tr>
                                         </table>
                                       </div>
                                     </div>

@@ -20,10 +20,34 @@
 		background: none;
 	}
 
+	.profile-sec img {
+		border-radius: 2%;
+	}
+
 	.tal-profile{
 		height: 100%;
 		width: 100%;
 		object-fit: cover;
+		border-top: 4px solid #df691a!important;
+		background-color: #ececec;
+	}
+
+	.testscroll{
+		max-height: 270px;
+		overflow-y: auto;
+	}
+
+	.testscroll::-webkit-scrollbar
+	{
+		width: 4px;
+		background-color: #F5F5F5;
+	}
+
+	.testscroll::-webkit-scrollbar-thumb
+	{
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px #e6e6e6  ;
+		background-color: #e6e6e6;
 	}
 </style>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
@@ -50,7 +74,7 @@
 	<div class="container">
 		<div class="row">
 			<h2 class="section__title"><span class="line"></span>Our Clients Say</h2>
-			<p class="text-center">Simplify and streamline your casting process to find the perfect performers for your project.</p>
+			{{-- <p class="text-center">Simplify and streamline your casting process to find the perfect performers for your project.</p> --}}
 			<ul class="testimonal__list clearfix testimonial-slider">
 				@foreach ($test as $testi)
 					<li class="testimonal__list-item col-md-4">
@@ -58,9 +82,9 @@
 							<div class="border-1">
 								<div class="testimonal__photo profile-sec"><img class="tal-profile" src="{{ asset(isset($testi) && $testi->image ? $testi->image : 'backend-assets/images/rec2.jpg') }}" alt=""></div>
 								<div class="date testimonal__date">{{$testi->created_at->diffForHumans()}}</div>
-								<div class="text testimonal__text" style="text-align: justify;padding: 7%;"> {!! $testi->content ?? '' !!}</div>
+								<div class="text testimonal__text testscroll" style="text-align: justify;padding: 7%;"> {!! $testi->content ?? '' !!}</div>
 								<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
-								<div class="testimonal__name mb-2"> {!! $testi->name ?? '' !!}</div>
+								<div class="testimonal__name mb-2 mt-5"> {!! $testi->name ?? '' !!}</div>
 							</div>
 						</div>
 					</li>
