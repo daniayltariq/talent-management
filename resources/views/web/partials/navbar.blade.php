@@ -132,7 +132,12 @@
 								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
 									<div style="display: grid">
 										<a href="#" class="ptb-0">{{auth()->user()->f_name ?? ''}}</a>
-										<span class="role-nav">{{auth()->user()->roles->first()->alias ?? ''}}</span>
+										@if (auth()->user()->hasRole('candidate') && auth()->user()->hasActiveSubscription())
+											<span class="role-nav">{{auth()->user()->getActivePlan()->name ?? ''}}</span>
+										@else
+											<span class="role-nav">{{auth()->user()->roles->first()->alias ?? ''}}</span>
+										@endif
+										
 									</div>
 									<ul class="m-menu__sub">
 
