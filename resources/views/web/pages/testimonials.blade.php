@@ -14,7 +14,7 @@
 	.profile-sec {
 		display: inline-block;
 		height: 180px;
-		width: 180px;
+		width: 85%;
 		border-radius: 50%;
 		padding: 5px;
 		background: none;
