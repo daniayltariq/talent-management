@@ -347,7 +347,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-sm-offset-4 col-sm-8">
-                                    <input class="form-check-input" type="checkbox" name="user_agreement" required id="user_agreement" {{ old('user_agreement') ? 'checked' : '' }}> I agree to the The Talent Depot <a href="{{route('user_agreement')}}" style="color: #df691a">User Agreement.</a> 
+                                    <input class="form-check-input" type="checkbox" name="user_agreement" required id="user_agreement" {{ old('user_agreement') ? 'checked' : '' }}> I agree to The Talent Depot <a href="{{route('user_agreement')}}" style="color: #df691a" target="_blank">User Agreement.</a> 
                                 </div>
                             </div>
 
