@@ -271,6 +271,13 @@
 			font-weight: 500;
 		}
 			
+.w-100{
+  width: 100%;
+}
+
+.w-25{
+  width: 25%;
+}
 	</style>
 </head>
 

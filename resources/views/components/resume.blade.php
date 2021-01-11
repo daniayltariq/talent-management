@@ -19,28 +19,66 @@
                             <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
 
                         </div>
-                        <div class="talent-intro text-center">
+                        {{-- <div class="talent-intro text-center">
                             <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
                             @if (isset($profile->custom_link))
                                 <p>{{url('/').'/models/'.$profile->custom_link}}</p>
                             @endif
                             
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <table class="w-100">
+                        <tr>
+                          <th class="w-25">Height: </th>
+                          <td class="pb-1 pt-1">{{$profile->feet ? \Str::finish($profile->feet, "'") : ''}} {{$profile->height ? \Str::finish($profile->height,"''") : ''}}</td>
+                        </tr>
+                    </table>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <table class="w-100">
+                        <tr>
+                          <th class="w-25">Hair: </th>
+                          <td class="pb-1 pt-1">{{$profile->hairs ?? ''}}</td>
+                        </tr>
+                    </table>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <table class="w-100">
+                        <tr>
+                          <th class="w-25">Weight: </th>
+                          <td class="pb-1 pt-1">{{$profile->weight ?? ''}}</td>
+                        </tr>
+                    </table>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <table class="w-100">
+                        <tr>
+                          <th class="w-25">Eyes: </th>
+                          <td class="pb-1 pt-1">{{$profile->eyes ?? ''}}</td>
+                        </tr>
+                    </table>
+                  </div>
+                {{-- <div class="col-sm-12">
                     
                     <div class="talent-specs">
                         <table>
                             <tr>
                                 <th>Height</th>
                                 <td>{{$profile->feet ? \Str::finish($profile->feet, "'") : ''}} {{$profile->height ? \Str::finish($profile->height,"''") : ''}}</td>
+
+                                <th>Hair</th>
+                                <td>{{$profile->hairs ?? ''}}</td>
                             </tr>
                             <tr>
                                 <th>Weight</th>
                                 <td>{{$profile->weight ?? ''}}</td>
+
+                                <th>Eyes</th>
+                                <td>{{$profile->eyes ?? ''}}</td>
                             </tr>
                             <tr>
                                 <th>Waist</th>
@@ -95,7 +133,7 @@
                             </tr>
                         </table>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
             <hr class="hr">

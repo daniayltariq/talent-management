@@ -101,7 +101,7 @@
 							@if(Auth::guest()) 
 							
 								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
-									<a href="javascript:;">Join <span style="color: #df691a;font-weight: 500;">US</span> Now</a>
+									<a href="javascript:;">Join {{-- <span style="color: #df691a;font-weight: 500;">US</span> --}} Us</a>
 									<ul class="m-menu__sub d-hide">
 										<li class="m-menu__sub-item">
 											<a href="{{ route('how-it-works') }}">Learn more</a>
@@ -112,7 +112,7 @@
 											</li>
 										@endif
 										<li class="m-menu__sub-item">
-											<a href="{{ route('register') }}">Join</a>
+											<a href="{{ route('register') }}">Join <span style="color: #df691a;font-weight: 500;">US</span> Now</a>
 										</li>
 									</ul>
 								</li>
