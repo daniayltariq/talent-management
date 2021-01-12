@@ -3,6 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Exception;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -32,7 +35,9 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
+        $this->renderable(function(Exception $e, $request) {
+            return $this->handleException($request, $e);
+        });
     }
 
     /**
@@ -44,22 +49,15 @@ class Handler extends ExceptionHandler
      *
      * @throws \Throwable
      */
-    public function render($request, Throwable $exception)
+    public function handleException($request, Throwable $exception)
     {
-       
         if ($this->isHttpException($exception)) {
-            /* if ($exception->getStatusCode() == 404) {
-                return response()->view('404', compact('view_data'), 404);
-            } */
-             
 
-            if ($exception instanceof TokenMismatchException){
+            /* if ($exception instanceof TokenMismatchException){
                 return redirect()->route('login');
-            }
+            } */
 
-        
             if ($exception->getStatusCode() == 419) {
-                $request->session()->put('url.intended', url()->current());
                 return response()->view('web.pages.419', 419);
             }
 
