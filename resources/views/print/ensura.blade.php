@@ -7246,14 +7246,6 @@ button.close {
     display: none !important;
   }
 }
-
-.w-100{
-  width: 100%;
-}
-
-.w-25{
-  width: 25%;
-}
 /*# sourceMappingURL=bootstrap.css.map */
     </style>
 </head>
@@ -7265,148 +7257,231 @@ button.close {
                     <div class="blog__list">
                         <div class="row ">
                             <div class="col-sm-10 col-centered">
-                                <div class="single-talent mb-5">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div>
-                                                <div class="profile-sec mx-auto ml-5">
-                                                    <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
-    
-                                                </div>
-                                                {{-- <div class="talent-intro text-center">
-                                                    <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
-                                                    @if (isset($profile->custom_link))
-                                                        <p>{{url('/').'/models/'.$profile->custom_link}}</p>
-                                                    @endif
-                                                    
-                                                </div> --}}
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="single-talent mb-5" style="font-size: 1.6rem;">
                                     <div class="row">
                                       <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <table class="w-100">
-                                            <tr>
-                                              <th class="w-25">Height: </th>
-                                              <td>{{$profile->feet ? \Str::finish($profile->feet, "'") : ''}} {{$profile->height ? \Str::finish($profile->height,"''") : ''}}</td>
-                                            </tr>
+                                        <table>
+                                          <tr><th>Ensurazone</th></tr>
+                                          <tr><th>401 Ryland St,Suite 100</tr>
+                                          <tr><th>Reno,NV 89502, US</tr>
+                                          <tr><th><i class="fa fa-phone"></i> 775-737-1355</tr>
+                                          <tr><th><a href="#">contact@ensurazone.com</a></tr>
+                                          <tr><th><a href="#">www.ensurazone.aridiantechnologies.com</a></tr>
                                         </table>
                                       </div>
                                       <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <table class="w-100">
-                                            <tr>
-                                              <th class="w-25">Hair: </th>
-                                              <td>{{$profile->hairs ?? ''}}</td>
-                                            </tr>
-                                        </table>
+                                        <img src="{{ asset('web/img/user.png') }}" style="width: 100px;float: right;">
                                       </div>
-                                      <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <table class="w-100">
-                                            <tr>
-                                              <th class="w-25">Weight: </th>
-                                              <td>{{$profile->weight ?? ''}}</td>
-                                            </tr>
-                                        </table>
-                                      </div>
-                                      <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <table class="w-100">
-                                            <tr>
-                                              <th class="w-25">Eyes: </th>
-                                              <td>{{$profile->eyes ?? ''}}</td>
-                                            </tr>
-                                        </table>
-                                      </div>
-                                        {{-- <div class="col-xs-12 col-sm-12 col-md-12">
-                                            
-                                            <div class="talent-specs">
-                                                <table>
-                                                    <tr>
-                                                        <th>Height</th>
-                                                        <td>{{$profile->feet ? \Str::finish($profile->feet, "'") : ''}} {{$profile->height ? \Str::finish($profile->height,"''") : ''}}</td>
-
-                                                        <th>Hair</th>
-                                                        <td>{{$profile->hairs ?? ''}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Weight</th>
-                                                        <td>{{$profile->weight ?? ''}}</td>
-
-                                                        <th>Eyes</th>
-                                                        <td>{{$profile->eyes ?? ''}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Waist</th>
-                                                        <td>{{$profile->waist ?? ''}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Shoe</th>
-                                                        <td>{{$profile->shoes ?? ''}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Hair</th>
-                                                        <td>{{$profile->hairs ?? ''}}</td>
-                                                    </tr> --}}
-                                                    {{-- <tr>
-                                                        <th>Eyes</th>
-                                                        <td>{{$profile->eyes ?? ''}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Neck</th>
-                                                        <td>{{$profile->neck ?? ''}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Sleves</th>
-                                                        <td>{{$profile->sleves ?? ''}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Chest</th>
-                                                        <td>{{$profile->chest ?? ''}}</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        {{-- <div class="col-xs-6 col-sm-6 col-md-6">
-                                            
-                                            <div class="talent-specs">
-                                                <table class="pull-right">
-                                                    <tr>
-                                                        <th class="text-right">{{$profile->address_1 ?? $profile->address_2 ?? auth()->user()->h_adress_1 ?? auth()->user()->h_adress_2 ??''}} {{$profile->city ?? ''}}</th>
-                                                         
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="text-right">{{$profile->state ?? auth()->user()->state ?? ''}}, {{$profile->country ?? auth()->user()->country ?? ''}} {{$profile->zipcode ?? auth()->user()->zipcode ?? ''}}</th>
-                                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="text-right">{{$profile->telephone ?? auth()->user()->phone ?? ''}}</th>
-                                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="text-right">{{$profile->mobile ?? ''}}</th>
-                                                         
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div> --}}
-    
                                     </div>
-                                    <hr class="hr">
+                                    <div class="row mt-5">
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                          <table>
+                                              <tr>
+                                                  <th>Name</th>
+                                                  <td>Ana Frank</td>
+                                              </tr>
+                                          </table>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                          <table>
+                                              <tr>
+                                                  <th>Customer ID</th>
+                                                  <td>1234567</td>
+                                              </tr>
+                                          </table>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                          <table>
+                                              <tr>
+                                                  <th>Assessment Date</th>
+                                                  <td>12/31/0000</td>
+                                              </tr>
+                                          </table>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                          <table>
+                                              <tr>
+                                                  <th>Contact#</th>
+                                                  <td>555 555 555</td>
+                                              </tr>
+                                          </table>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                          <table>
+                                              <tr>
+                                                  <th>Email ID</th>
+                                                  <td><a href="#">anafrank@gmail.com</a></td>
+                                              </tr>
+                                          </table>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                          <table>
+                                              <tr>
+                                                  <th>Address </th>
+                                                  <td>13 Winding street San Diego 98765, CA, US </td>
+                                              </tr>
+                                          </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <h3 style="text-align: center"><b>Remote Assessment Report</b> </h3>
+                                      </div>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <h3>Satellite view of the site </h3>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <img src="{{asset('web/img/sattelite.png')}}" style="width: 100%" alt="">
+                                      </div>
+                                    </div>
+
+                                    <div class="row mt-5">
+                                      <div class="col-md-12">
+                                        <table>
+                                          <tr>
+                                            <th style="width:35%">Zone 1:</th>
+                                            <th>30ft area around the structure  </th>
+                                          </tr>
+                                        </table>
+                                      </div>
+                                    </div>
+
+                                    <div class="row mt-5">
+                                      <div class="col-md-12">
+                                        <table>
+                                          <tr><td><em>Typed information by the SME regarding the <span style="color: red">X</span>  - trees to be removed including the location of the trees </em></td></tr>
+                                          <tr><td><em> Typed information by the SME regarding the <span style="color: green">O</span> - trees to be kept including the location of the trees.  </em></td></tr>
+                                        </table>
+                                      </div>
+                                    </div>
+
+                                    <div class="row mt-5">
+                                      <div class="col-md-12">
+                                        <table>
+                                          <tr>
+                                            <th style="width:35%">Zone 2:</th>
+                                            <th>100ft area around the structure  </th>
+                                          </tr>
+                                        </table>
+                                      </div>
+                                    </div>
+
+                                    <div class="row mt-5">
+                                      <div class="col-md-12">
+                                        <table>
+                                          <tr><td><em>Typed information by the SME regarding the <span style="color: red">X</span>  - trees to be removed including the location of the trees </em></td></tr>
+                                          <tr><td><em> Typed information by the SME regarding the <span style="color: green">O</span> - trees to be kept including the location of the trees.  </em></td></tr>
+                                        </table>
+                                      </div>
+                                    </div>
+
+                                    <div class="row mt-5">
+                                      <div class="col-md-12">
+                                        <table><tr><th><em>  * Please consult ground proof assessment consultant for detailed recommendation  </em></th></tr></table>
+                                      </div>
+                                    </div>
+
+                                    <div class="row mt-5">
+                                      <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <table>
+                                          <tr><th>Ensurazone</th></tr>
+                                          <tr><th>401 Ryland St,Suite 100</tr>
+                                          <tr><th>Reno,NV 89502, US</tr>
+                                          <tr><th><i class="fa fa-phone"></i> 775-737-1355</tr>
+                                          <tr><th><a href="#">contact@ensurazone.com</a></tr>
+                                          <tr><th><a href="#">www.ensurazone.aridiantechnologies.com</a></tr>
+                                        </table>
+                                      </div>
+                                      <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <img src="{{ asset('web/img/user.png') }}" style="width: 100px;float: right;">
+                                      </div>
+                                    </div>
+
+                                    <div class="row mt-5">
+                                      <div class="col-md-12">
+                                        <h3 style="text-align: center"><b>Ground proof Assessment Report</b> </h3>
+                                      </div>
+                                    </div>
+
+                                    <div class="row mt-5">
+                                      <div class="col-md-12">
+                                        <table style="width: 100%">
+                                          <tr style="border: 1px solid;">
+                                            <th><h4 style="text-align: center"><b>Structure Assessment </b></h4></th>
+                                          </tr>
+                                        </table>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <table style="width: 100%">
+                                          <tr>
+                                            <th style="border: 1px solid;"><h4 class="ml-3"><b>Vegetation </b></h4></th>
+                                            <th style="border: 1px solid;"></th>
+                                            <th style="border: 1px solid;"></th>
+                                          </tr>
+                                          <tr>
+                                            <th style="border: 1px solid;"><h4 class="ml-3"><b>Inspected variables </b></h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3"><b>Site findings </b></h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3"><b>Recommendation </b></h4></th>
+                                          </tr>
+                                          <tr>
+                                            <th style="border: 1px solid;"><h4 class="ml-3"><b>Vegetation free area around 5ft from structure  </b></h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3"><b style="color: red">structure   
+                                              Rose plants branches and lavenders are found 3ft away from the structure at the left side of the backyard </b></h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3">5ft area around the structure should be clear</h4></th>
+                                          </tr>
+                                          <tr>
+                                            <th style="border: 1px solid;">
+                                              <table>
+                                                <tr>
+                                                  <th style="width: 45%;"><h4 class="ml-3"><b>Presence of Combustible Substance 30ft. area around the structure  </b></h4>
+                                                  </th>
+                                                  <th style="border: 1px solid;">
+                                                    <table>
+                                                      <tr><th><h4 class="ml-3"><b>Logs/ firewood pile</b></h4></th></tr>
+                                                      <tr><th><h4 class="ml-3"><b>Scrape </b></h4></th></tr>
+                                                      <tr><th><h4 class="ml-3"><b>Flammable debris </b></h4></th></tr>
+                                                      <tr><th><h4 class="ml-3"><b>Propane cylinder </b></h4></th></tr>
+                                                      <tr><th><h4 class="ml-3"><b>Wildgrass longer than 6” </b></h4></th></tr>
+                                                      <tr><th><h4 class="ml-3"><b>Presence of low limbed conifer </b></h4></th></tr>
+                                                    </table>
+                                                  </th>
+                                                </tr>
+                                              </table>
+                                            </th>
+                                            
+                                            <th style="border: 1px solid;">
+                                              <table>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">Exposed firewood beside the store </b></h4></th></tr>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">Scrape of rubber tires found beside the outdoor barbeque area </b></h4></th></tr>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">None  </b></h4></th></tr>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">Found </b></h4></th></tr>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">*The length of grass is 5” high from the surface</b></h4></th></tr>
+                                                <tr><th><h4 class="ml-3"><b style="color: red">Few branches of conifer tree in southwest of the structure are 5ft high from the ground </b></h4></th></tr>
+                                              </table>
+                                            </th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3">*/There should not be any 30ft area around <br> */Propane (LPG) tanks should be kept have 10ft away from vegetation </h4></th>
+                                          </tr>
+                                        </table>
+                                      </div>
+                                    </div>
                                     
-                                    @php
-                                        $expr=array();
-                                        $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','theater') : null):null;
-                                    @endphp
+                                    {{-- <hr class="hr">
+                                    
                                     @if (!is_null($expr)&&  count($expr)>0)
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <h4 class="text__quote font-primary">Theater</h4>
                                                 <div class="">
                                                     <table class="w-100">
-                                                        {{-- <tr>
+                                                        <tr>
                                                             <th>Name</th>
                                                             <th>Role</th>
                                                             <th>Director or Venue</th>
-                                                        </tr> --}}
+                                                        </tr>
                                                         @if (!is_null($expr))
                                                             @foreach ($expr as $key => $exp)
                                                                 <tr>
@@ -7436,11 +7511,11 @@ button.close {
                                                 <h4 class="text__quote font-primary">Films</h4>
                                                 <div class="">
                                                     <table class="w-100">
-                                                        {{-- <tr>
+                                                        <tr>
                                                             <th>Name</th>
                                                             <th>Role</th>
                                                             <th>Director or Production Company</th>
-                                                        </tr> --}}
+                                                        </tr>
     
                                                         @if (!is_null($expr))
                                                             @foreach ($expr as $key => $exp)
@@ -7458,147 +7533,9 @@ button.close {
                                         </div>
     
                                         <hr class="hr">
-                                    @endif
+                                    @endif --}}
                                     
-                                    @php
-                                        $expr=array();
-                                        $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','television') : null):null;
-                                    @endphp
-    
-                                    @if (!is_null($expr)&&  count($expr)>0)
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <h4 class="text__quote font-primary">Telivision</h4>
-                                                <div class="">
-                                                    <table class="w-100">
-                                                        {{-- <tr>
-                                                            <th>Name</th>
-                                                            <th>Role</th>
-                                                            <th>Production</th>
-                                                        </tr> --}}
-    
-                                                        @if (!is_null($expr))
-                                                            @foreach ($expr as $key => $exp)
-                                                                <tr>
-                                                                    <td class="w-4">{{$exp->name ?? ''}}</td>
-                                                                    <td class="w-3">{{$exp->role ?? ''}}</td>
-                                                                    <td class="w-3">{{$exp->production ?? ''}}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endif
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr class="hr">
-                                    @endif
-    
-                                    @php
-                                        $expr=array();
-                                        $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','commercials') : null):null;
-                                    @endphp
-    
-                                    @if (!is_null($expr)&&  count($expr)>0)
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <h4 class="text__quote font-primary">Commercials</h4>
-                                                <div class="">
-                                                    <table class="w-100">
-                                                        {{-- <tr>
-                                                            <th>Name of Commercial</th>
-                                                            <th>Role Played</th>
-                                                            <th>Director or Production Company</th>
-                                                            
-                                                        </tr> --}}
-    
-                                                        @if (!is_null($expr))
-                                                            @foreach ($expr as $key => $exp)
-                                                                <tr>
-                                                                    <td class="w-4">{{$exp->name ?? ''}}</td>
-                                                                    <td class="w-3">{{$exp->role ?? ''}}</td>
-                                                                    <td class="w-3">{{$exp->production ?? ''}}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endif
-                                                    
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr class="hr">
-                                    @endif
-    
-                                    @php
-                                        $expr=array();
-                                        $expr=!is_null($profile) ? ($profile->user->experience()->exists() ? $profile->user->experience->where('type','training') : null):null;
-                                    @endphp
-    
-                                    @if (!is_null($expr) &&  count($expr)>0)
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <h4 class="text__quote font-primary">Traning</h4>
-                                                <div class="">
-                                                    <table class="w-100">
-                                                        {{-- <tr>
-                                                            <th>Training Class</th>
-                                                            <th>Instructor</th>
-                                                            <th>Training Company</th>
-                                                            
-                                                        </tr> --}}
-    
-                                                        @if (!is_null($expr))
-                                                            @foreach ($expr as $key => $exp)
-                                                                <tr>
-                                                                    <td class="w-4">{{$exp->name ?? ''}}</td>
-                                                                    <td class="w-3">{{$exp->role ?? ''}}</td>
-                                                                    <td class="w-3">{{$exp->production ?? ''}}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endif
-                                                    
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-    
-                                        <hr class="hr">
-                                    @endif
-                                    
-                                    @php
-                                        $skills=array();
-                                        $skills=!is_null($profile) ? ($profile->user->skills()->exists() ? $profile->user->skills : null):null;
-                                    @endphp
-    
-                                    @if (!is_null($skills) && count($skills)>0)
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <h4 class="text__quote font-primary">Special Skills</h4>
-                                                <div class="skills">
-                                                    
-                                                    @if (!is_null($skills))
-                                                        @foreach ($skills as $skill)
-                                                            @if ($skill->skill()->exists())
-                                                                <span class="label label-default" style="line-height: 35px;">{{$skill->skill->title ?? ''}}</span>
-                                                            @endif
-                                                            
-                                                        @endforeach
-                                                    @endif
-                                                    
-                                                    {{-- <span class="label label-default">Baseball</span>
-                                                    <span class="label label-default">Golf</span>
-                                                    <span class="label label-default">Rollerblading</span>
-                                                    <span class="label label-default">Juggling</span>
-                                                    <span class="label label-default">Scuba (PADI certified)</span>
-                                                    <span class="label label-default">Valid Driver’s License and U.S. Passport.</span> --}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                    
-    
                                 </div>
-                                 
-                                
                                 
                             </div>
                         </div>
@@ -7625,9 +7562,9 @@ button.close {
         $("#resume_div").printThis({
             importCSS: true,            // import parent page css
             importStyle: true,         // import style tags
-            printDelay: 2000,            // variable print delay
+            printDelay: 3000,            // variable print delay
             header: "<h4 style='float:right'>"+today+"</h4>",               // prefix to html
-            footer: "<h4 style='position: absolute; bottom: 5px;width: 100%;text-align:center'>The Talent Depot</h4>",               // postfix to html
+            /* footer: "<h4 style='position: absolute; bottom: 5px;width: 100%;text-align:center'>The Talent Depot</h4>",   */             // postfix to html
         });
     </script>
 </body>

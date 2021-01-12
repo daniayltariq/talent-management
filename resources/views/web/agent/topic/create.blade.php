@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row">
             <div class="title__wrapp">
-                <div class="{{-- page__subtitle --}} title__grey">Post</div>
+                {{-- <div class="page__subtitle title__grey">Post</div> --}}
                 <h1 class="page__title">Create a Post</h1>
             </div>
         </div>
@@ -89,7 +89,7 @@
                                 
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                             <label for="">Image</label>
                               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                                  <div class="row">
@@ -103,7 +103,7 @@
                                  <sm><code>Image size should be 720 x 660 Pixels</code></sm>
                               </div>
                               <br>
-                           </div>
+                           </div> --}}
 
                             <div class="form-group">
                                     <label for="name" class="control-label">Content<span class="req">*</span></label>

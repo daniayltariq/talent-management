@@ -6,15 +6,28 @@
 	<div class="container">
 		<div class="row">
 			<div class="title__wrapp">
-				<div class="{{-- page__subtitle --}} title__grey">The Talent depot</div>
+				{{-- <div class="page__subtitle title__grey">The Talent depot</div> --}}
 				<h1 class="page__title">About us</h1>
 			</div>
 		</div>
 	</div>
 </section><!-- Slider Section End -->
 
-<!-- Services Section Start -->
 <section class="section services">
+	<div class="container">
+		<div class="row">
+			<div class="services__section clearfix">
+				<div class="col-md-12">
+					<h4 style="text-align: justify;"><em>“Vince Paul, actor, model, casting agent, and talent agent, worked in the film and fashion industries in major cities across the United States.
+						This multi-talented artist has over a decade of experience in the fields of modeling, commercial television, film and theater productions.
+						Vince's expertise and savvy knowledge of all phases of modeling, acting and working on both sides of the camera, brings an added advantage to all actors and models being seeking to launch their careers. In April of 2001 he published "The Talent Guide". As a result of the training seminars along with the reading curriculum of the "The Talent Guide", Vince has placed hundreds of up-in-coming artists in movie and commercial roles.”</em> </h4>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{{-- <section class="section services">
 	<div class="container">
 		<div class="row">
 
@@ -22,7 +35,7 @@
 					<div class="col-md-6 services__content services__content_left">
 						<h3 class="services__title services__title_l">Special events</h3>
 						<div class="services__text">We encourage you to become acquainted including models and photo models also end to-end </div>
-						<a href="#{{-- services.html --}}" class="more animation">Learn More</a>
+						<a href="#" class="more animation">Learn More</a>
 					</div>
 					<div class="col-md-6 services__photo"><img src="{{ asset('web/img/services__photo.jpg') }}" alt=""></div>
 				</div>
@@ -45,9 +58,8 @@
 
 		</div>
 	</div>
-</section><!-- Services Section End -->
+</section>
 
-<!-- WHY US Section Start -->
 <section class="section why-us bg-grey">
 	<div class="container">
 		<div class="row">
@@ -83,7 +95,7 @@
 	</div>
 </section>
 
-<!-- Testimonal Section Start -->
+
 <section class="section testimonal">
 	<div class="container">
 		<div class="row">
@@ -110,7 +122,7 @@
 			</ul>
 		</div>
 	</div>
-</section><!-- Testimonal Section End -->
+</section> --}}
 
 
 <!-- Clients Section Start -->

@@ -30,9 +30,13 @@ class hasCommunityReadAccess
             }
             
         }
-        return redirect()->back()->with(array(
+        return redirect()->route('denial')->with(array(
             'message' => 'Access Denied', 
             'alert-type' => 'error'
         ));
+        /* return view('web.pages.denial')->with(array(
+            'message' => 'Access Denied', 
+            'alert-type' => 'error'
+        )); */
     }
 }

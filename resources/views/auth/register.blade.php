@@ -5,6 +5,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
 {!! htmlScriptTagJsApi([
     'action' => 'homepage',
 ]) !!}
@@ -81,6 +82,26 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     select.form-control {
         background-color: white !important;
     }
+
+    .date-field {
+        width: 100px;
+        text-align: center;
+
+    }
+
+    .field-inline-block {
+        display: inline-block;
+        margin-right: 5px;
+        margin-left: 5px;  
+    }
+
+    .field-inline-block label {
+        text-align: center;
+    }
+
+    /* .ui-datepicker-year{
+        display:none;
+    } */
 </style>
 @endsection
 
@@ -91,7 +112,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
         <div class="container">
             <div class="row">
                 <div class="title__wrapp">
-                    <div class="{{-- page__subtitle --}} title__grey">Apply</div>
+                    {{-- <div class="page__subtitle title__grey">Apply</div> --}}
                     <h1 class="page__title">Work with us</h1>
                 </div>
             </div>
@@ -102,7 +123,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     <section class="section apply">
         <div class="container">
             <div class="row">
-                <h3 class="text__quote centered">Please provide us with your contact information.</h3>
+                <h3 class="text__quote centered">New membership</h3>
                 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
 
                     @if(count($errors)>0)
@@ -176,12 +197,30 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="dob" class="col-sm-4 control-label">Date of birth <span class="req">*</span></label>
                                 <div class="col-sm-8 form-row">
-                                    <input id="dob" type="date" min='1920-01-01' class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
+                                    {{-- <input id="dob" type="date" min='1920-01-01' class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus> --}}
                                     {{-- @error('dob')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror --}}
+                                    <section id="date-of-birth-example-1">
+                                        <fieldset style="display: flex;">
+                                          <div class="field-inline-block">
+                                            <label>Month</label>
+                                            <input type="text" name="month" max="12" pattern="[0-9]*" maxlength="2" size="2" class="date-field" />
+                                          </div>
+                                          /
+                                          <div class="field-inline-block">
+                                            <label>Day</label>
+                                            <input type="text" name="day" pattern="[0-9]*" maxlength="2" size="2" class="date-field" />
+                                          </div>
+                                          /
+                                          <div class="field-inline-block">
+                                            <label>Year</label>
+                                            <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year" />
+                                          </div>
+                                        </fieldset>
+                                    </section>
                                  </div>
                             </div>
                         
@@ -306,9 +345,15 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-sm-offset-4 col-sm-8">
+                                    <input class="form-check-input" type="checkbox" name="user_agreement" required id="user_agreement" {{ old('user_agreement') ? 'checked' : '' }}> I agree to The Talent Depot <a href="{{route('user_agreement')}}" style="color: #df691a" target="_blank">User Agreement.</a> 
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-4">
-                                    <button type="submit" class="btn btn-default btn__red animation btn-full pull-right" id="registerSubmitBtn">join us</button>
+                                    <button type="button" class="btn btn-default btn__red {{-- animation --}} btn-full pull-right" id="registerSubmitBtn">join us</button>
                                 </div>
                             </div>
                         </div>
@@ -375,6 +420,9 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
         var iti=window.intlTelInput(phone,{
             initialCountry: "us",
+            customPlaceholder: function(selectedCountryPlaceholder, selectedCountryData) {
+                return selectedCountryPlaceholder.replace(/[0-9]/g, 5);
+            },
             separateDialCode: true,
             preferredCountries: ["fr", "us", "gb"],
             geoIpLookup: function (callback) {
@@ -446,6 +494,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 var country_data=iti.getSelectedCountryData();
                 console.log(country_data);
                 document.getElementById("hiden").value = JSON.stringify(country_data);
+                console.log($('#hiden').val());
                 $('#registerForm').submit();
             } else {
                 phone.classList.add("error");
@@ -474,5 +523,61 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
         today = yyyy+'-'+mm+'-'+dd;
         document.getElementById("dob").setAttribute("max", today)
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autotab/1.9.2/js/jquery.autotab.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Autotab
+            $('.date-field').autotab('number');
+            
+            $('.date-field').on('focus',function(){
+                
+            })
+
+            /* $( "[name='days']" ).datepicker({dateFormat: 'mm'});
+            $( "[name='month']" ).datepicker({dateFormat: 'dd'});
+            $( "[name='year']" ).datepicker({dateFormat: 'yyyy'}); */
+
+            $("[name='day']").datepicker( {
+                
+                onClose: function(dateText, inst) {
+                    var startDate = new Date(dateText);
+                    var selDay = startDate.getDate();
+                    /* console.log(selDay); */
+                    if (isNaN(selDay)) {
+                        selDay=1;
+                    }
+                    $(this).val(selDay);
+                }
+            });
+
+            $("[name='month']").datepicker( {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'mm',
+                onClose: function(dateText, inst) { 
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).val($.datepicker.formatDate('mm', new Date(year, month, 1)));
+                }
+            });
+
+            $("[name='year']").datepicker( {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'yy',
+                yearRange: "-100:+0",
+                maxDate: '+1D',
+                onClose: function(dateText, inst) { 
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).val($.datepicker.formatDate('yy', new Date(year, month, 1)));
+                }
+            });
+        });
+
     </script>
 @endsection

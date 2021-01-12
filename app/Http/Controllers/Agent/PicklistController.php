@@ -50,8 +50,8 @@ class PicklistController extends Controller
     {
         /* dd($request->all()); */
         $validator = Validator::make($request->all(), [
-            'name' => ['string', 'max:50'],
-            'description' => ['string', 'max:191'],
+            'name' => ['nullable','string', 'max:50'],
+            'description' => ['nullable','string', 'max:191'],
             'member_id' => ['required', 'numeric'],
         ]);
         
@@ -79,10 +79,16 @@ class PicklistController extends Controller
         $picklist_item->save();
 
         if ($picklist_item) {
-            return redirect()->back()->with('success', 'Plan created successfully !');
+            return redirect()->back()->with(array(
+                'message' => 'Picklist saved !', 
+                'alert-type' => 'success'
+            ));
         }
         else{
-            return redirect()->back()->with('error', 'something went wrong !');
+            return redirect()->back()->with(array(
+                'message' => 'Something went wrong.', 
+                'alert-type' => 'error'
+            ));
         }
     }
 

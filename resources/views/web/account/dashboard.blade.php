@@ -261,7 +261,7 @@
             <div class="col-md-12">
                 <div class="title__wrapp">
                     <h1 class="page__title">My Account</h1>
-                    <p class="font-italic mb-1 fz-15">You can update your personal details, download reports and download invoice details here.</p>
+                    {{-- <p class="font-italic mb-1 fz-15">You can update your personal details, download reports and download invoice details here.</p> --}}
                 </div>
             </div>
             
@@ -327,7 +327,7 @@
                                 @csrf
                                 <div class="row">
                                     <h4 class="font-italic mb-4" style="flex: auto;">Personal information</h4>
-                                    <a href="{{route('account.talent.profile')}}" class="btn btn-primary p-8">My Resume</a>
+                                   {{--  <a href="{{route('account.talent.profile')}}" class="btn btn-primary p-8">My Resume</a> --}}
                                 </div>
                                 
                                 <div class="row mb-5">
@@ -426,8 +426,8 @@
                                     </div>
 
                                     <div class="col-6">
-                                        <label>Create a Password</label>
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"> 
+                                        <label>Update Password</label>
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value=""> 
                                         @error('password')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -552,10 +552,15 @@
                                                 
                                             </div>
                                         </div>
-                                        @if($data['plan'] && ( $data['plan']->social_limit !== count($data["social"])) )
+                                        @if($data['plan'] && ($data['plan']->social_links==1 && $data['plan']->social_limit !== count($data["social"])) )
                                             <input data-repeater-create type="button" class="btn btn-primary" id="repeater-add-btn" value="Add"/>
                                             <hr>
                                             <button type="submit" class="btn btn-secondary">Save</button>
+                                        @else
+                                            <div class="alert alert-primary" role="alert">
+                                                <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
+                                                Your subscription plan does not include this feature.please upgrade.
+                                            </div>
                                         @endif
                                     </form>
                                     
@@ -939,7 +944,8 @@
 
         $('#repeater-add-btn').on('click',function(e){
             e.preventDefault();
-            if ($('.repeater').find('[data-repeater-delete]').length > "{{count($data["social"])}}")
+            console.log({{count($data["social"])}});
+            if ($('.repeater').find('[data-repeater-delete]').length > "{{$data["plan"]->social_limit}}")
             {
                 $('.repeater').find('[data-repeater-delete]').last().click();
                 toastr.warning('Limit exceeded');
@@ -949,7 +955,7 @@
             
         })
 
-        @if(count($data["social"])>0)
+        @if(!is_null($data["social"]) && count($data["social"])>0)
             var social={!!json_encode($data["social"])!!};
             $social_repeater.setList(social);
         @endif

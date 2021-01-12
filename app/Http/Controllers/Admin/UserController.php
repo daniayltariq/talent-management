@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Domain\Mail\InviteTalent;
+use App\Domain\Mail\DeactivateUser;
 use Illuminate\Support\Facades\DB;
 
 use Spatie\Permission\Models\Role;
@@ -135,9 +136,24 @@ class UserController extends Controller
         if ($request['user_id'] && in_array($request['status'],$status)) {
             $user=User::findOrFail($request['user_id']);
             $user->status=$request['status'];
-            $user->save();
+            
             if ($user) {
-                $status="success";
+                try {
+                    $data=[
+                        "user"=>$user,
+                    ];
+                    if ($request['status'] == 0) {
+                        Mail::to($user->email)->send(new DeactivateUser($data));
+                    }
+                    
+                    $user->save();
+                    $status="success";
+                    
+                } catch (\Throwable $th) {
+                    
+                    $status="error";
+                }
+                
             }
             else{
                 $status="error";

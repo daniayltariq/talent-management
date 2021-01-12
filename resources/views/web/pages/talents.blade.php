@@ -25,188 +25,10 @@
         margin: 30px 0px !important;
     }
 
-    header.header{
+    /* header.header{
         background: #000000cf !important;
-    }
-
-    
-/* Slider css */
-
-    /* .slider-custom-container {
-        overflow: hidden !important;
-        position: relative !important;
-        width: 100% !important;
-    }
-
-    .dark-blocks {
-        height: 100% !important;
-        position: absolute !important;
-        right: 0 !important;
-        top: 0 !important;
-    }
-
-    .image-slider {
-      z-index: 0;
-      margin: 0 auto;
-      padding: 0;
-      width: 100%;
-      height: 100vh;
-    }
-
-    .image-slide {
-        height: 100vh;
-        margin: 0 auto;
-    }
-
-    .slick-slide.slick-center {
-        transform: scale(1.2);
-        transition: transform .8s 1.4s cubic-bezier(.84, 0, .08, .99);
-    }
-
-    .slick-slide {
-        transition: transform .7s cubic-bezier(.84, 0, .08, .99);
-    }
-
-    .slider-control {
-        margin: 0%;
-        position: absolute;
-        z-index: 2;
-        bottom: 0%;
-        left: 15%;
-        transform: translate(-50%, -50%);
-        display: flex;
-    }
-
-    button.slider-btns {
-        color: #fff;
-        background: none;
-        padding: 12px 19px;
-        border: none;
-        font-size: 16px;
-        border-radius: 50%;
-        margin: .4em;
-        display: inline-block;
-    }
-
-    button.slider-btns:hover {
-        background-color: #f2832c !important;
-        color: #fff !important;
-    }
-
-    button.slider-btns:focus {
-        outline: none;
-    }
-
-    .block-1 {
-        z-index: 1;
-        position: fixed;
-        height: 100vh;
-        width: 5%;
-        left: 0%;
-        background: #0f0f0f;
-    }
-
-    .block-2 {
-        z-index: 1;
-        position: fixed;
-        height: 100vh;
-        width: 25%;
-        left: 25%;
-        background: #0f0f0f;
-    }
-
-    .block-3 {
-        z-index: 1;
-        position: fixed;
-        height: 100vh;
-        width: 5%;
-        right: 0%;
-        background: #0f0f0f;
-    }
-
-    .overlay {
-        z-index: 1;
-        position: fixed;
-        height: 100vh;
-        width: 20%;
-        left: 5%;
-        background: rgba(0, 0, 0, .65);
-    }
-
-    .text-slider-wrapper {
-        z-index: 2;
-        position: absolute;
-        width: 100%;
-        top: 30%;
-    }
-
-    .text-slider {
-        margin: 0%;
-        padding: 0%;
-        height: 100vh;
-    }
-
-    .text-slide h1 {
-        color: #fff;
-        font-size: 36px;
-        font-family: "Cinzel";
-        font-weight: lighter;
-        text-transform: uppercase;
-        padding-left: 10%;
-    }
-
-    @media(max-width: 990px) {
-        .block-2, .overlay {
-                display: none;
-        }
-
-        .block-1 {
-                width: 50%;
-        }
-
-        .block-3 {
-                width: 12%;
-        }
-
-        .slide-slick {
-                display: none !important;
-        }
-
-        .text-slide h1 {
-                font-size: 30px !important;
-        }
-
-        .text-slider-wrapper {
-                position: absolute;
-                top: 50% !important;
-        }
-
-        .slider-control {
-                left: 22.5%;
-        }
-    }
-
-    .slider-search-btn{
-        bottom: 16%;
-        left: 15%;
-    }
-
-    .btn-td{
-        padding: 17px 17px;
-        color: #fff;
-        background-color: #ee7322;
-        transition: all .2s ease;
-        border-radius: 6px;
-        border-bottom-width: 2px;
-        border: none;
-        border-bottom: solid;
-        border-color: #ec650c;
-    }
-
-    .btn-td:hover {
-        background-color: #f18222 !important;
     } */
-/* End Slider css */
+
         .shadow-effect {
 		    background: #fff;
 		    padding: 20px;
@@ -277,46 +99,114 @@
 		    transition: all 250ms ease-out 0s;
 		    width: 20px;
 		}
+        .slick-slide img {
+            margin: auto;
+            margin-top: -40px;
+        }
+
+        ul.testimonal__list.clearfix.testimonial-slider.slick-initialized.slick-slider {
+            height: 600px;
+        }
+
+        .profile-sec {
+            display: inline-block;
+            height: 180px;
+            width: 85%;
+            border-radius: 50%;
+            padding: 5px;
+            background: none;
+        }
+
+        .tal-profile{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-top: 4px solid #df691a!important;
+            background-color: #ececec;
+        }
+
+        .btn-td{
+            padding: 13px 15px;
+            color: #fff;
+            background-color: #ee7322;
+            transition: all .2s ease;
+            border-radius: 6px;
+            border-bottom-width: 2px;
+            border: none;
+            border-bottom: solid;
+            border-color: #ec650c;
+            font-size: 13px;
+        }
+        .btn-td:hover {
+            background-color: #f18222 !important;
+        }
+
+        .profile-btn{
+            font-size: 17px;
+            line-height: 22px;
+            border-radius: 6px;
+            padding: 6px 14px 7px;
+            color: #000;
+            background-color: #fff;
+            border: 1px solid #000;
+            border-bottom-width: 3px;
+        }
+
+        .profile-sec img {
+            border-radius: 2%;
+        }
+
+        .middle-testimonial .border-1 {
+            padding: 0;
+        }
 </style>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 @endsection
 
 @section('content')
-    {{-- <div class="slider-custom-container">
-        <div class="text-slider-wrapper">
-            <div class="text-slider">
-                @foreach ($featured as $talent)
-                <div class="text-slide"><h1>A blessing for <br> every skin.</h1></div>
-                @endforeach
+<section class="page__img" style="background-image: url('{{ asset('web/img/apply_bg.jpg') }}')">
+    <div class="container">
+        <div class="row">
+            <div class="title__wrapp">
+                {{-- <div class="page__subtitle title__grey">Looking for talent ?</div> --}}
+                <h1 class="page__title">Featured Talents</h1>
+                {{-- <a href="{{route('findtalent')}}" class="btn btn-td"> Search Talent</a> --}}
             </div>
         </div>
-
-        <div class="slider-control slider-search-btn">
-            <a href="{{route('findtalent')}}" class="btn btn-td"> Search Talent</a>
-        </div>
-        <div class="slider-control">
-            <div class="prev"><button class="slider-btns" type="button"><i class="fas fa-arrow-left"></i></button></div>
-            <div class="next"><button class="slider-btns" type="button"><i class="fas fa-arrow-right"></i></button></div>
-        </div>
-
-        <div class="blocks">
-            <div class="block-1 dark-blocks"></div>
-            <div class="block-2 dark-blocks"></div>
-            <div class="block-3 dark-blocks"></div>
-        </div>
-
-        <div class="overlay dark-blocks"></div>
-
-        <div class="image-slider">
-            @foreach ($featured as $talent)
-                @php
-                    $img=!is_null($talent->profile) ? (!is_null($talent->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$talent->profile->profile_img)? 'storage/uploads/profile/'.$talent->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg';
-                @endphp
-                <div class="image-slide" id="one" style="background: url({{asset($img)}}) no-repeat 50% 50%; background-size: cover;"></div>
-            @endforeach
-        </div>
-    </div> --}}
+    </div>
+</section>
     <!-- TESTIMONIALS -->
-<section class="testimonials" style="height: 100vh">
+    <section class="section testimonal bg-grey ">
+        <div class="container">
+            <div class="row">
+                <ul class="testimonal__list clearfix testimonial-slider">
+                    @foreach ($featured as $talent)
+                        @if ($talent->profile()->exists())
+                            <li class="testimonal__list-item col-md-4">
+                                <div class="single-testimonial">
+                                    <div class="border-1" style="min-height: 434px">
+                                        <div class="testimonal__photo profile-sec"><img class="tal-profile" src="{{ !is_null($talent->profile->profile_img) && file_exists(public_path().'/storage/uploads/profile/'.$talent->profile->profile_img) ? ('storage/uploads/profile/'.$talent->profile->profile_img) :'web/img/user.png' }}" alt=""></div>
+                                        <div class="date testimonal__date" style="font-size: 15px;background-color: #f6f6f6;">{{$talent->f_name ?? ''}} {{$talent->l_name ?? ''}}</div>
+                                        <div class="text testimonal__text" style="text-align: justify;margin-left: 31%;">
+                                            <p>{{$talent->profile->address_1 ??$talent->profile->address_2 ?? ''}}</p>
+                                            <p><b>Age: </b> {{$talent->getAgeAttribute() ?? ''}}</p>
+                                            <p><b>Height: </b>{{$talent->profile->feet ? \Str::finish($talent->profile->feet, "'") : ''}} {{$talent->profile->height ? \Str::finish($talent->profile->height,"''") : ''}}</p>
+                                            <p><a href="{{route('model.single',$talent->id)}}" class="profile-btn">Profile</a></p>
+                                        </div>
+                                        <div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
+                                    </div>
+                                </div>
+                            </li>
+                        @endif
+                        
+                    @endforeach
+                    
+                </ul>
+            </div>
+        </div>
+    </section>
+{{-- <section class="testimonials" style="height: 100vh">
 	<div class="container">
 
       <div class="row">
@@ -372,7 +262,7 @@
         </div>
       </div>
       </div>
-</section>
+</section> --}}
     <!-- END OF TESTIMONIALS -->
 
 @endsection
@@ -384,11 +274,77 @@
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.1/owl.carousel.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.testimonial-slider').slick({
+        	infinite: true,
+			slidesToShow: 3,
+			// autoplay: true,
+			// autoplaySpeed: 2000,
+			slidesToScroll: 1,
+			speed: 300,
+			arrows: true,
+            responsive: [{
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+              }
+            },
+            {
+	           breakpoint: 400,
+	           settings: {
+	              arrows: true,
+	              slidesToShow: 1,
+	              slidesToScroll: 1
+	           }
+	        },
+	        {
+		      breakpoint: 480,
+		      settings: {
+		        arrows: false,
+		        centerMode: true,
+		        centerPadding: '40px',
+		        slidesToShow: 1
+		      }
+		    }]
+		});
+    });
 
+
+	$(document).ready(function(){
+		$('.slick-current').next().addClass('middle-testimonial');
+	});
+
+	$('.testimonial-slider').on('beforeChange', function (event, slick, direction){
+		console.log(event, slick, direction);
+		$('.testimonal__list-item').removeClass('middle-testimonial');
+		$('.slick-current').next().next().css('opacity', 0);
+	});
+
+	$('.testimonial-slider').on('afterChange', function (){
+		
+		$('.testimonal__list-item').removeClass('middle-testimonial');
+		$('.slick-current').next().addClass('middle-testimonial');
+		setTimeout(function(){ 
+			$('.slick-current').next().animate({'opacity': 1}, 'slow');
+		}, 400);
+
+		$('.slick-active:not(.middle-testimonial)').css('opacity', 1);
+		
+		
+	});
+
+	
+
+	
+
+</script>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         "use strict";
-        //  TESTIMONIALS CAROUSEL HOOK
+        
         $('#customers-testimonials').owlCarousel({
             loop: true,
             center: true,

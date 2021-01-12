@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class isAdminOrAgentOrCandidate
+class isAdminOrAgent
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,8 @@ class isAdminOrAgentOrCandidate
      */
     public function handle($request, Closure $next)
     {
-        if(\Auth::check()){ 
-            if(\Auth::user()->hasRole("superadmin") || ( \Auth::user()->hasAnyRole("agent|candidate") /* && \Auth::user()->status==1 */ ) ){
+        if(\Auth::check()){
+            if( \Auth::user()->hasAnyRole("agent|superadmin") ){
                 return $next($request);
             }
             else{

@@ -59,4 +59,10 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60);
         });
     }
+
+    public function map() {
+        Route::middleware('web')->group(function (Router $router) {
+            $router->impersonate();
+        });
+    }
 }

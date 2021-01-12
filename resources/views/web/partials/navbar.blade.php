@@ -12,7 +12,7 @@
 </div>
 <header class="header" id="header">
 	<div class="header-sticky__wrapp">
-		<div class="container">
+		<div class="container cust-cont">
 			<div class="row">
 				<div class="logo col-md-2 col-sm-4 col-xs-7">
 					<a class="navbar-brand" href="{{ route('/') }}">
@@ -43,7 +43,7 @@
 							<li class="m-menu__list-item  {{ Request::is('about-us') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('about-us') }}">About Us</a>
 							</li>
-							<li class="m-menu__list-item  {{ Request::is('featured_talents') ? 'm-menu__list-item_active' : '' }}">
+							<li class="m-menu__list-item  {{ Request::is('featured-talents') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('featured_talents') }}">Featured Talent</a>
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('community') ? 'm-menu__list-item_active' : '' }}">
@@ -89,25 +89,41 @@
 							</li> --}}
 							
 							
-							@if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0))
+							{{-- @if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0))
 								
 									<li class="m-menu__list-item {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}">
 										<a href="{{ route('pricing') }}">Plans</a>
 									</li>
 								
-							@endif
+							@endif --}}
 							
 							
 							@if(Auth::guest()) 
 							
 								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
-									<a href="{{ route('login') }}">Join <span style="color: #df691a;font-weight: 500;">US</span> Now</a>
-									<ul class="m-menu__sub">
+									<a href="javascript:;">Join {{-- <span style="color: #df691a;font-weight: 500;">US</span> --}} Us</a>
+									<ul class="m-menu__sub d-hide">
 										<li class="m-menu__sub-item">
-											<a href="{{ route('login') }}">Login</a>
+											<a href="{{ route('how-it-works') }}">Learn more</a>
 										</li>
+										@if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0))
+											<li class="m-menu__sub-item">
+												<a href="{{ route('pricing') }}">Plans</a>
+											</li>
+										@endif
 										<li class="m-menu__sub-item">
-											<a href="{{ route('register') }}">Join</a>
+											<a href="{{ route('register') }}">Join <span style="color: #df691a;font-weight: 500;">US</span> Now</a>
+										</li>
+									</ul>
+								</li>
+								<li class="m-menu__list-item menu-item-has-children" style="padding-top: 0;">
+									<button type="button" class="btn-cust btn-warning bg-talent" style="height: unset !important">
+										<span style="left: -3px;background: none;"><i class="fas fa-list"></i></span>
+										<span style="border-radius: 22px;"><i class="fas fa-user"></i></span>
+									</button>
+									<ul class="m-menu__sub mt-2 d-hide">
+										<li class="m-menu__sub-item">
+											<a href="{{ route('login') }}">Sign In</a>
 										</li>
 									</ul>
 								</li>
@@ -116,13 +132,18 @@
 								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
 									<div style="display: grid">
 										<a href="#" class="ptb-0">{{auth()->user()->f_name ?? ''}}</a>
-										<span class="role-nav">{{auth()->user()->roles->first()->alias ?? ''}}</span>
+										@if (auth()->user()->hasRole('candidate') && auth()->user()->hasActiveSubscription())
+											<span class="role-nav">{{auth()->user()->getActivePlan()->name ?? ''}}</span>
+										@else
+											<span class="role-nav">{{auth()->user()->roles->first()->alias ?? ''}}</span>
+										@endif
+										
 									</div>
 									<ul class="m-menu__sub">
 
 										@role('candidate')
 											<li class="m-menu__sub-item">
-												<a href="{{ route('account.dashboard') }}">Dashboard</a>
+												<a href="{{ route('account.dashboard') }}">Profile</a>
 											</li>
 											@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 1)
 												<li class="m-menu__sub-item">
@@ -142,14 +163,14 @@
 											<li class="m-menu__sub-item">
 												<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
 											</li>
-											<li class="m-menu__sub-item">
+											{{-- <li class="m-menu__sub-item">
 												<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
-											</li>
+											</li> --}}
 										@endif
 
 										@role('agent')
 											<li class="m-menu__sub-item">
-												<a href="{{ route('agent.picklist.index') }}">Picklist Favorites</a>
+												<a href="{{ route('agent.picklist.index') }}">My saved picklists</a>
 											</li>
 											<li class="m-menu__sub-item">
 												<a href="{{ route('agent.topic.create') }}">Create Post</a>
@@ -160,7 +181,11 @@
 										@endrole
 										<li class="m-menu__sub-item">
 											<a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();.getElementById('logout-form').submit();">
-											{{ __('Logout') }}
+												@impersonating($guard = null)
+													Admin Dashboard
+												@else
+													{{ __('Logout') }}
+												@endImpersonating
 											</a>
 											<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
 												@csrf
@@ -170,6 +195,12 @@
 								</li>
  
 							@endif
+
+							@hasanyrole('superadmin|agent')
+								<li class="m-menu__list-item  {{ Request::is('findtalent') ? 'm-menu__list-item_active' : '' }}">
+									<a href="{{ route('findtalent') }}" style="color: #fff !important"><i class="fas fa-search"></i></a>
+								</li>
+							@endhasanyrole
 						</ul>
 					</nav>
 				</div>

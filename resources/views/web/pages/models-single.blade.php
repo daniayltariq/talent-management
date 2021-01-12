@@ -160,8 +160,8 @@
    <div class="container">
       <div class="row">
          <div class="title__wrapp">
-            <div class="{{-- page__subtitle --}} title__grey">Backstage</div>
-            <h1 class="page__title">Our models</h1>
+            {{-- <div class="page__subtitle title__grey">Backstage</div> --}}
+            <h1 class="page__title">{{$data['profile']->legal_first_name ?? ''}} {{$data['profile']->legal_last_name ?? ''}}</h1>
          </div>
       </div>
    </div>
@@ -239,13 +239,14 @@
                      </ul>
                   </div>
 
-                  <div class="row">
-                     <div class="col-md-6">
-                        <a href="#" class="btn btn__red animation pad-txt-email" pd-popup-open="popupNew">Book this model</a>
+                  @role('agent')
+                     <div class="row">
+                        <div class="col-md-6">
+                           <a href="#" class="btn btn__red animation pad-txt-email" pd-popup-open="popupNew">Contact</a>
+                        </div>
                      </div>
-                     
-                     
-                  </div>
+                  @endrole
+                  
                   
                   
                   {{-- 
@@ -318,9 +319,9 @@
 
             <p class="text-left mt-5">
                <i class="far fa-address-card color-td"></i>
-               <span class="color-td-2"> {{$data['profile']->address_1 ?? $data['profile']->address_2 ?? ''}} {{$data['profile']->city ?? ''}} {{$data['profile']->state ?? ''}} {{$data['profile']->country ?? ''}}<br>{{$data['profile']->zip ?? ''}} </span> 
+               {{-- <span class="color-td-2"> {{$data['profile']->address_1 ?? $data['profile']->address_2 ?? ''}} {{$data['profile']->city ?? ''}} {{$data['profile']->state ?? ''}} {{$data['profile']->country ?? ''}}<br>{{$data['profile']->zip ?? ''}} </span>  --}}
             </p>
-            <p class="text-left"><i class="fas fa-phone-square color-td"></i><span class="color-td-2"> {{$data['profile']->telephone .',' ?? ''}} {{$data['profile']->mobile.',' ?? ''}} {{$data['profile']->user->phone ?? ''}}</span> </p>
+            <p class="text-left"><i class="fas fa-phone-square color-td"></i><span class="color-td-2"> {{-- {{$data['profile']->telephone .',' ?? ''}} {{$data['profile']->mobile.',' ?? ''}} --}} {{$data['profile']->user->phone ?? ''}}</span> </p>
             <p class="text-left"><i class="fas fa-envelope-open-text color-td"></i> 
                <span class="color-td-2">{{$data['profile']->email ?? $data['profile']->user->email ?? ''}}.</span>
                @if ($data['plan']->agent_contact==1)

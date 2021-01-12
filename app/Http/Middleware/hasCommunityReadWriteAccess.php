@@ -30,7 +30,7 @@ class hasCommunityReadWriteAccess
             }
             
         }
-        return redirect()->back()->with(array(
+        return redirect()->route('denial')->with(array(
             'message' => 'Access Denied', 
             'alert-type' => 'error'
         ));

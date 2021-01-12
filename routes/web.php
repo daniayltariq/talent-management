@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,11 +66,7 @@ Route::group(['middleware' => ['isAdminOrAgentOrCandidate','isActive','hasCommun
 // Route::get('/single-topic', function () {
 //     return view('web.pages.single-topic');
 // })->name('single-topic');
-
-
-Route::get('/testimonials', function () {
-    return view('web.pages.testimonials');
-})->name('testimonials');
+Route::get('/testimonials', [App\Http\Controllers\HomeController::class, 'testimonials'])->name('testimonials');
 
 
 Route::get('/how-it-works', function () {
@@ -101,9 +98,17 @@ Route::get('/picklist-single', function () {
 |--------------------------------------------------------------------------
 |
 */
+Route::get('/ensura', function () {
+    return view('print.ensura');
+})->name('ensura');
+
 Route::get('/404', function () {
     return view('web.errors.404');
 })->name('404');
+
+Route::get('/419', function () {
+    return view('web.pages.419');
+})->name('419');
 
 
 Route::get('/500', function () {
@@ -116,8 +121,13 @@ Route::get('/403', function () {
 })->name('403');
 // End error routes
 
+Route::get('/user_agreement', function () {
+    return view('web.pages.user_agreement');
+})->name('user_agreement');
 
-
+Route::get('/denial', function (Request $request) {
+    return view('web.pages.denial')->with('message',session('message'));
+})->name('denial');
 
 Route::get('/magzine', [App\Http\Controllers\HomeController::class, 'magzine'])->name('magzine');
 Route::get('/magzine/single', [App\Http\Controllers\HomeController::class, 'magzinesingle'])->name('magzine-single');
@@ -130,8 +140,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('model/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('model.single');
 });
 
+Route::middleware(['isAdminOrAgent'])->group(function () {
+    Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
+});
 Route::get('/featured-talents', [App\Http\Controllers\HomeController::class, 'featured_talents'])->name('featured_talents');
-Route::get('/find-talent', [App\Http\Controllers\HomeController::class, 'findtalent'])->name('findtalent');
 Route::get('/search_talent', [App\Http\Controllers\HomeController::class, 'searchTalent'])->name('search_talent');
 
 
@@ -308,6 +320,8 @@ Route::group([
     Route::get('/view_save_search', [App\Http\Controllers\Admin\DashboardController::class, 'viewSaveSearch'])->name('view_save_search');
     Route::get('/apply_saved_search/{id}', [App\Http\Controllers\Admin\DashboardController::class, 'applySaveSearch'])->name('apply_saved_search');
     Route::post('/save_search', [App\Http\Controllers\Admin\DashboardController::class, 'saveSearch'])->name('save_search');
+
+    Route::resource('testimonial', App\Http\Controllers\Admin\TestimonialController::class);
 });
 
 Route::group([

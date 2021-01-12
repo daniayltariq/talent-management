@@ -32,11 +32,13 @@ $(function () {
             if (newIndex === 3 && Number($("#age-2").val()) < 18) {
                 return false;
             }
-
+            console.log(currentIndex, newIndex);
             if (currentIndex < newIndex) {
                 $('.actions ul').addClass('actions-next');
+                $('#finish_btn').css('display', 'block');
             } else {
                 $('.actions ul').removeClass('actions-next');
+                $('#finish_btn').css('display', 'none');
             }
             form = $('#wizard-p-' + currentIndex + ' >form');
             form.validate().settings.ignore = ":disabled,:hidden";
@@ -44,7 +46,7 @@ $(function () {
             return form.valid();
         },
         labels: {
-            finish: "Finish",
+            finish: "Continue",
             next: "Continue",
             notyet: "None yet.  Continue",
             previous: "Back"

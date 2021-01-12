@@ -62,7 +62,6 @@ class HomeController extends Controller
          }
       )->with('profile')->where('status',1)->where('featured',1)->get();
 
-      /* dd($featured); */
       return view('web.pages.talents',compact('featured'));
     }
 
@@ -145,6 +144,13 @@ class HomeController extends Controller
          /* dd( $members); */
          return view('web.forms.find-talent',compact('members','skills'));
       }
+   }
+
+   public function testimonials()
+   {
+      $test=\App\Models\Testimonial::where('status',1)->get();
+      /* dd($test); */
+      return view('web.pages.testimonials',compact('test'));
    }
 
     public function community()

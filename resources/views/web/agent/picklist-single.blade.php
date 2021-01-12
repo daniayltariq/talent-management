@@ -133,6 +133,11 @@
       padding: 28px;
    	}
 
+	.tal-profile{
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
 </style>
 @endsection
 
@@ -169,7 +174,7 @@
 									<button class="btn btn-share" pd-popup-open="popupNew"><i class="mdi mdi-message-outline"></i>  Send Message</button>
 								@endif
 								
-								<button class="btn btn-share"><i class="mdi mdi-email-outline"></i>  Share Picklist</button>
+								{{-- <button class="btn btn-share"><i class="mdi mdi-email-outline"></i>  Share Picklist</button> --}}
 							</div>
 						</div>
 					</div>
@@ -180,59 +185,65 @@
 					<div class="row ">
 						<div class="col-sm-10 col-centered">
 							@forelse ($items as $item)
-								<div class="single-talent mb-5">
-									<div class="row">
-										<div class="col-sm-4">
-											<div class="profile-sec ml-5 mb-4">
-												<img src="{{ asset('web/uploads/profile/talent-1.jpg') }}" class="img img-responsive">
+								@if ($item->member()->exists() && $item->member->profile()->exists())
+									<div class="single-talent mb-5">
+										<div class="row">
+											<div class="col-sm-4">
+												<div class="profile-sec ml-5 mb-4">
+													<img src="{{ asset(is_null($item->member->profile) || is_null($item->member->profile->profile_img) ? 'web/img/user.png': ('storage/uploads/profile/'.$item->member->profile->profile_img)) }}" class="img img-responsive tal-profile">
+												</div>
+												<div class="ml-5 talent-specs">
+													<table>
+														<tr>
+															<th>Height</th>
+															<td>{{$item->member->profile->feet ? \Str::finish($item->member->profile->feet, "'") : ''}} {{$item->member->profile->height ? \Str::finish($item->member->profile->height,"''") : ''}}</td>
+														</tr>
+														<tr>
+															<th>Weight</th>
+															<td>{{$item->member->profile->weight ?? 0}} lbs</td>
+														</tr>
+														<tr>
+															<th>Hair</th>
+															<td>{{$item->member->profile->hairs ?? ''}}</td>
+														</tr>
+														<tr>
+															<th>Eyes</th>
+															<td>{{$item->member->profile->eyes ?? ''}}</td>
+														</tr>
+													</table>
+												</div>
 											</div>
-											<div class="ml-5 talent-specs">
-												<table>
-													<tr>
-														<th>Height</th>
-														<td>5.8</td>
-													</tr>
-													<tr>
-														<th>Weight</th>
-														<td>162 lbs</td>
-													</tr>
-													<tr>
-														<th>Hair</th>
-														<td>Brown</td>
-													</tr>
-													<tr>
-														<th>Eyes</th>
-														<td>Blonde</td>
-													</tr>
-												</table>
-											</div>
-										</div>
-										<div class="col-sm-8">
-											<div class="talent-intro">
-												<h2>{{$item->member->profile->legal_first_name ?? ''}}
-													{{$item->member->profile->legal_last_name ?? ''}}</h2>
-												<p>www.thetalentdepot.com/johnmsmith</p>
-											</div>
+											<div class="col-sm-8">
+												<div class="talent-intro">
+													<h2>{{$item->member->profile->legal_first_name ?? ''}}
+														{{$item->member->profile->legal_last_name ?? ''}}</h2>
+													<p>{{!is_null($item->member->profile->custom_link) ? url('/').'/model/'.$item->member->profile->custom_link : ''}}</p>
+												</div>
 
-											<div class="talent-skill">
-												<p><b>Specials Skills</b></p>
-												{{-- {{dd($item->member->skills)}} --}}
-												@if ($item->member()->exists() && $item->member->skills()->exists())
-													<p>
-														@foreach ($item->member->skills as $skill)
-														<span>{{$skill->skill->title. (!$loop->last ?',':'')}} </span>
-														@endforeach
-													</p>
-												@endif
-												
-												{{-- <p>Basketball, Baseball, Golf, Rollerblading, Juggling, Scuba (PADI certified), Photography</p>
+												<div class="talent-skill">
+													<p><b>Specials Skills</b></p>
+													{{-- {{dd($item->member->skills)}} --}}
+													@if ($item->member()->exists() && $item->member->skills()->exists())
+														<p>
+															@foreach ($item->member->skills as $skill)
+																@if ($skill->skill()->exists())
+																	<span>{{$skill->skill->title. (!$loop->last ?',':'')}} </span>
+																@endif
+															
+															@endforeach
+														</p>
+													@endif
+													
+													{{-- <p>Basketball, Baseball, Golf, Rollerblading, Juggling, Scuba (PADI certified), Photography</p>
 
-												<p>Valid Driver’s License and U.S. Passport.</p> --}}
+													<p>Valid Driver’s License and U.S. Passport.</p> --}}
+												</div>
 											</div>
+											
 										</div>
-										
 									</div>
-								</div>
+								@endif
+								
 							@empty
 								<h4 style="text-align: center">No items!</h4>
 							@endforelse

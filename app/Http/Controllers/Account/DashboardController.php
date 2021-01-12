@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Plan;
-use App\Models\Attachment;
-use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 use Illuminate\Http\File;
+use App\Models\Attachment;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {

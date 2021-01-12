@@ -61,6 +61,14 @@ class LoginController extends Controller
         {
             session()->forget('url.intended');
         }
+
+        $manager = app('impersonate');
+        /* dd($manager->isImpersonating()); */
+        if ($manager->isImpersonating()) {
+            Auth::user()->leaveImpersonation();
+            return redirect()->route('backend.dashboard');
+        }
+        
         Auth::logout();
         return redirect('/login');
     }

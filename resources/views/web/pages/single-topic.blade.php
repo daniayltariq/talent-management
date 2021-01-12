@@ -95,6 +95,11 @@
 		.search .results li:hover .hover-text-clr{
 			color: #fff;
 		}
+
+		.btn__grey:hover {
+			background-color: #F6F6F6;
+			color: #df691a;
+		}
 	</style>
 @endsection
 
@@ -119,12 +124,12 @@
 					<div class="blog__list">
 
 						@foreach($data as $topic)
-							<article class="blog__post">
-								<a href="{{ route('single-post',['slug' => $topic->slug]) }}">
+							<article class="blog__post" style="background-color: #efefef;padding: 3%;">
+								{{-- <a href="{{ route('single-post',['slug' => $topic->slug]) }}">
 									<div class="post__thumbnail">
 										<img src="{{ asset(isset($topic) && $topic->image ? $topic->image : 'backend-assets/images/rec2.jpg') }}" alt="">
 									</div>
-								</a>
+								</a> --}}
 								<div class="post__content">
 									<a href="{{ route('single-post',['slug' => $topic->slug]) }}"><h3 class="post__title">{{ $topic->title }}</h3></a>
 								</div>

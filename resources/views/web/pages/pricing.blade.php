@@ -121,6 +121,10 @@ table.pricing td:nth-child(4) {
   padding: 9px 7px;
 }
 
+.cd-btn{
+  padding: 9px 35px !important;
+}
+
 </style>
 @endsection
 
@@ -132,7 +136,7 @@ table.pricing td:nth-child(4) {
       <div class="row">
         <div class="title__wrapp">
           {{-- <div class="page__subtitle title__grey">Try premiuim</div> --}}
-          <h1 class="page__title">SUBSCRIPTION PLANS</h1>
+          <h1 class="page__title">MEMBERSHIPS</h1>
         </div>
       </div>
     </div>
@@ -215,6 +219,27 @@ table.pricing td:nth-child(4) {
     </tr>
 
     <tr>
+      <td>Audios</td>
+      @foreach ($plans as $plan)
+        <td><span class="tick">{{$plan->audios ?? ''}}</span></td>
+      @endforeach
+      {{-- <td><span class="tick">2</span></td>
+      <td><span class="tick">5</span></td>
+      <td class="default"><span class="tick">15</span></td> --}}
+      
+    </tr>
+    <tr>
+      <td>Videos</td>
+      @foreach ($plans as $plan)
+        <td><span class="tick">{{$plan->videos ?? ''}}</span></td>
+      @endforeach
+      {{-- <td><span class="tick">2</span></td>
+      <td><span class="tick">5</span></td>
+      <td class="default"><span class="tick">15</span></td> --}}
+      
+    </tr>
+
+    <tr>
       <td>Resume Builder Wizard with onscreen formatted resume and generated .pdf resume available for download.</td>
       @foreach ($plans as $plan)
         <td><span class="tick"><i class="fa fa-{{$plan->resume==1 ? 'check' : ''}}"></i> </span></td>
@@ -258,9 +283,9 @@ table.pricing td:nth-child(4) {
       
     </tr>
     <tr>
-      <td>Access to Community Forums that include our Community Topics.</td>
+      <td>Access to Community Forums.</td>
       @foreach ($plans as $plan)
-        <td><span class="tick"><i class="fa fa-{{$plan->community_access==1 ? 'check' : ''}}"></i> {{$plan->community_access==1?($plan->community_access_perm=='R'? '(Read Only)' : '(Read/Write)') : ''}} </span></td>
+        <td><span class="tick"><i class="fa fa-{{$plan->community_access==1 ? 'check' : ''}}"></i> {{$plan->community_access==1?($plan->community_access_perm=='R'? '(Read)' : '(Read and Comment)') : ''}} </span></td>
       @endforeach
       {{-- <td><span class="tick"></span></td>
       <td><span class="tick">&#10004;</span></td>
@@ -334,7 +359,7 @@ table.pricing td:nth-child(4) {
     <tr>
       <td></td>
       @foreach ($plans as $plan)
-        <td><button class="cd-btn btn btn__red secondary"> <a href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}}</a> </button></td>
+        <td><a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a></td>
       @endforeach
       {{-- <td><button class="cd-btn btn btn__red secondary">Subscribe to Basic</button></td>
       <td><button class="cd-btn btn btn__red secondary">Subscribe to Standard</button></td>

@@ -19,7 +19,7 @@ class isActive
             
             return $next($request);
         }else{
-            return redirect()->back()->with(array(
+            return redirect()->route('denial')->with(array(
                 'message' => 'Account is Inactive', 
                 'alert-type' => 'error'
             ));

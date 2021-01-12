@@ -3,6 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Exception;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -32,6 +35,34 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
+        /* $this->renderable(function(Exception $e, $request) {
+            return $this->handleException($request, $e);
+        }); */
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Throwable
+     */
+    public function handleException($request, Throwable $exception)
+    {
+        if ($this->isHttpException($exception)) {
+
+            /* if ($exception instanceof TokenMismatchException){
+                return redirect()->route('login');
+            } */
+
+            if ($exception->getStatusCode() == 419) {
+                return response()->view('web.pages.419', 419);
+            }
+
+        }
+
+        return parent::render($request, $exception);
     }
 }

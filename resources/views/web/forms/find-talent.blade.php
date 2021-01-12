@@ -361,14 +361,14 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-sm-6">
+                            {{-- <div class="form-group col-sm-6">
                                 <input type="checkbox"  class="form-check-input" id="hasDrivingLicense">
                                 <label class="form-check-label" for="hasDrivingLicense">Have Driver's License</label>
                                 <input type="checkbox"  class="form-check-input" id="hasPassport">
                                 <label class="form-check-label" for="hasPassport">Have Passport</label>
-                                {{-- <input type="checkbox"  class="form-check-input" id="selfRecord">
-                                <label class="form-check-label" for="selfRecord">Self-record</label>  --}}             
-                            </div>
+                                <input type="checkbox"  class="form-check-input" id="selfRecord">
+                                <label class="form-check-label" for="selfRecord">Self-record</label>              
+                            </div> --}}
 
 
                             <div class="col-sm-8 col-sm-offset-4">
@@ -414,7 +414,7 @@
                                 <div class="effect-bubba grid-item grid-item__width2 new-faces women" style="height: 530px;" data-category="women">
                                     <img class="img-responsive" style="object-fit: cover;width: 100%;height: 100%;" src="{{ asset(!is_null($member->profile) ? (!is_null($member->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$member->profile->profile_img)? 'storage/uploads/profile/'.$member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }} " alt="sample image">
                                     <div class="grid-item__contant-info">
-                                        <div class="grid-item__contant-name">{{!is_null($member->profile) ? $member->profile->legal_first_name.' '.$member->profile->legal_last_name : $member->f_name.' '.$member->l_name}} </div>
+                                        <div class="grid-item__contant-name">{{$member->profile()->exists() && !is_null($member->profile->legal_first_name) ? ($member->profile->legal_first_name.' '.$member->profile->legal_last_name) : ($member->f_name.' '.$member->l_name)}} </div>
                                         <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->address_1 : ''}} {{!is_null($member->profile) ?$member->profile->country : ''}} {{!is_null($member->profile) ?$member->profile->city : ''}}</div>
                                         <div class="grid-item__contant-place title__grey">AGE: 23</div>
                                         <div class="grid-item__contant-place title__grey">Height: {{!is_null($member->profile) ?$member->profile->height : ''}}</div>

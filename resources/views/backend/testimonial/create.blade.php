@@ -42,24 +42,24 @@
             <div class="kt-portlet__head">
                <div class="kt-portlet__head-label">
                   <h3 class="kt-portlet__head-title">
-                     Create Topic
+                     {{isset($test)?'Update':'Create'}} Testimonial
                   </h3>
                </div>
             </div>
             <!--begin::Form-->
             @php 
-            $route = route('backend.topic.store');
-            if(isset($blog)){
-            $route = route('backend.topic.update',$blog->id);
+            $route = route('backend.testimonial.store');
+            if(isset($test)){
+            $route = route('backend.testimonial.update',$test->id);
             }
             @endphp
             <form action="{{$route}}" method="POST" id="blog-content-form" enctype="multipart/form-data" class="kt-form">
 
                @csrf
-               @if(isset($blog))
+               @if(isset($test))
                {{ method_field('PATCH') }}
                @endif
-               <input type="hidden" name="page" value="blog">
+               
                <div class="kt-portlet__body">
                   
                   <div class="row">
@@ -68,31 +68,16 @@
                         <div class="form-group">
                            <label class="col-md-3 col-sm-3 col-xs-12">Add Title</label>
                            <div class="col-md-11 col-sm-11 col-xs-12">
-                              <input type="text" class="form-control" name="title" value="{{!is_null(old('title')) ? old('title') : (isset($blog)?$blog->title : '')}}"/>
-                              @error('title')
+                              <input type="text" class="form-control" name="name" value="{{!is_null(old('name')) ? old('name') : (isset($test)?$test->name : '')}}"/>
+                              @error('name')
                                   <div class="error">{{$message}}</div>
                               @enderror
                            </div>
                         </div>
-                        <div class="form-group">
-                           <label class="col-md-3 col-sm-3 col-xs-12">Add Slug</label>
-                           <div class="col-md-11 col-sm-11 col-xs-12">
-                              <input type="text" class="form-control" name="slug" value="{{!is_null(old('slug')) ? old('slug') : (isset($blog)?$blog->slug : '')}}"/>
-                              @error('slug')
-                                  <div class="error">{{$message}}</div>
-                              @enderror
-                           </div>
-                        </div>
-                     
-                        {{-- <div class="form-group">
-                           <label class="col-md-3 col-sm-3 col-xs-12">Add Video Link</label>
-                           <div class="col-md-11 col-sm-11 col-xs-12">
-                              <input type="url" class="form-control">
-                           </div>
-                        </div> --}}
+
                         <div class="form-group">
                            <div class="col-md-11 col-sm-11 col-xs-12">
-                              <textarea name="content" id="summer-desc" class="summernote">{!! !is_null(old('content')) ? html_entity_decode(old('content')) : (isset($blog)?html_entity_decode($blog->content) : '')!!}</textarea>
+                              <textarea name="content" id="summer-desc" class="summernote">{!! !is_null(old('content')) ? html_entity_decode(old('content')) : (isset($test)?html_entity_decode($test->content) : '')!!}</textarea>
                               @error('content')
                                   <div class="error">{{$message}}</div>
                               @enderror
@@ -101,37 +86,22 @@
                      </div>
                      <div class="col-md-3 col-sm-12 col-xs-12">
                         
-                     <div class="form-group">
-                        <select name="topic_category_id" id="" class="form-control">
-                           @foreach($categories as $cat)
-                              <option value="{{ $cat->id }}" {{ old('topic_category_id')==$cat->id ?'selected':''}}>{{ $cat->title }}</option>
-                           @endforeach
-                           
-                        </select>
-                     </div>
-						{{-- <div class="form-group">
-							<h3 class="col-md-12 col-sm-3 col-xs-12">Seo Tags</h3>
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								@php
-								$tags="";
-								if (isset($blog)) {
-								$tags=$blog->tags->pluck('tag')->toArray();
-								$tags=implode(",",$tags);
-								}
-								@endphp
-								<input type="text" name="blog_tags" class="taginput form-control" value="{{isset($blog)? $tags : ''}}" />
-								<div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
-							</div>
-						</div>
-                         --}}
+                       {{--  <div class="form-group">
+                           <select name="topic_category_id" id="" class="form-control">
+                              @foreach($categories as $cat)
+                                 <option value="{{ $cat->id }}" {{ old('topic_category_id')==$cat->id ?'selected':''}}>{{ $cat->title }}</option>
+                              @endforeach
+                              
+                           </select>
+                        </div> --}}
 
-      						{{-- <div class="form-group">
+      						<div class="form-group">
       							<h3 class="col-md-12 col-sm-12 col-xs-12">Image</h3>
       							<div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
       								<div class="row">
       									<div class="col-xs-12 col-md-12">
       										<a href="#" class="thumbnail">
-      										<img width="250" src="{{ asset(isset($blog) && $blog->image ? $blog->image : 'backend-assets/images/rec2.jpg') }}" id="cat_image" alt="...">
+      										<img width="250" src="{{ asset(isset($test) && $test->image ? $test->image : 'backend-assets/images/rec2.jpg') }}" id="cat_image" alt="...">
       										</a>
       									</div>
       								</div>
@@ -139,7 +109,7 @@
       								<sm><code>Image size should be 720 x 660 Pixels</code></sm>
       							</div>
       							<br>
-      						</div> --}}
+      						</div>
 
                         <div class="ln_solid"></div>
                         <div class="form-group">
@@ -205,17 +175,6 @@
 		})
 		
 	})
-   
-   function formSubmitWithTextEditor(editorId,fieldToCopyIn,formId)
-   {
-   	console.log($('#'+editorId).html() );
-   	if ($('#'+editorId).html() !=='') {
-   		$('[name='+fieldToCopyIn+']').val($('#'+editorId).html());
-   		$('#'+formId).submit();
-   	} else {
-   		$('#'+formId).submit();
-   	}
-   }
    
 function changeImageView(input, id,max_size) {
    
