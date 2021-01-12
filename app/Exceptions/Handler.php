@@ -35,9 +35,9 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->renderable(function(Exception $e, $request) {
+        /* $this->renderable(function(Exception $e, $request) {
             return $this->handleException($request, $e);
-        });
+        }); */
     }
 
     /**
