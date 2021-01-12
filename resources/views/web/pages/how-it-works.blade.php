@@ -15,7 +15,7 @@
         <div class="row">
             <div class="title__wrapp">
                 {{-- <div class="page__subtitle title__grey">Looking for talent ?</div> --}}
-                <h1 class="page__title">HOW IT WORKS</h1>
+                <h1 class="page__title">How It Works</h1>
             </div>
         </div>
     </div>
