@@ -403,7 +403,7 @@
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-6">
+                                    {{-- <div class="col-6">
                                         <label for="h_adress_1" class="form-label mt-3">Address 1</label>
                                         <input class="form-control" type="h_adress_1" name="h_adress_1" id="h_adress_1" placeholder="HOME ADDRESS 1" value="{{auth()->user()->h_adress_1 ?? ''}}" />
                                         @error('h_adress_1')
@@ -416,7 +416,7 @@
                                         @error('h_adress_2')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
-                                    </div>
+                                    </div> --}}
                                     <div class="col-6">
                                         <label for="zipcode" class="form-label mt-3">Zipcode</label>
                                         <input class="form-control" type="zipcode" name="zipcode" id="zipcode" placeholder="ZIPCODE" value="{{auth()->user()->zipcode ?? ''}}" />
