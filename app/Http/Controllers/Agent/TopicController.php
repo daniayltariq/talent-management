@@ -132,7 +132,7 @@ class TopicController extends Controller
         // }
 
         return redirect()->back()->with([
-            "message" => "Topic has been created.",
+            "message" => "Topic created, waiting for approval.",
             "alert-type" => "success",
         ]);
         

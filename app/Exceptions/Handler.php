@@ -35,9 +35,10 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        /* $this->renderable(function(Exception $e, $request) {
+        $this->renderable(function(Exception $e, $request) {
             return $this->handleException($request, $e);
-        }); */
+        });
+
     }
 
     /**
@@ -51,18 +52,17 @@ class Handler extends ExceptionHandler
      */
     public function handleException($request, Throwable $exception)
     {
+        /* dd($this->isHttpException($exception)); */
         if ($this->isHttpException($exception)) {
-
-            /* if ($exception instanceof TokenMismatchException){
+            if ($exception instanceof TokenMismatchException){
                 return redirect()->route('login');
-            } */
+            }
 
             if ($exception->getStatusCode() == 419) {
-                return response()->view('web.pages.419', 419);
+                return response()->view('web.pages.419', [],419);
             }
 
         }
 
-        return parent::render($request, $exception);
     }
 }
