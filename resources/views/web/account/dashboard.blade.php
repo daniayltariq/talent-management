@@ -491,7 +491,7 @@
                                 <div class="col-6">
                                     @if (auth()->user()->referal_code()->exists())
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="refer_link" value="{{url('/').'/register/?referal='.auth()->user()->referal_code->refer_code}}" placeholder="Refer url" aria-label="Refer url" aria-describedby="basic-addon2">
+                                            <input type="text" class="form-control" id="refer_link" value="{{url('/').'/signup/?referal='.auth()->user()->referal_code->refer_code}}" placeholder="Refer url" aria-label="Refer url" aria-describedby="basic-addon2">
                                             <div class="input-group-append">
                                             <button class="btn btn-outline-secondary copy-btn" onclick="copyToClipboard()" type="button">Copy</button>
                                             </div>

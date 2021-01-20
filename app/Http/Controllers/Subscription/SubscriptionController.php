@@ -52,7 +52,9 @@ class SubscriptionController extends Controller
                     $referal->save();
                 }
             }
-            return redirect()->route('account.talent.detail')
+            /* return redirect()->route('account.talent.detail') //old flow
+                            ->with('success', 'Thanks for becoming a subscriber'); */
+            return redirect()->route('account.signup')
                             ->with('success', 'Thanks for becoming a subscriber');
         }
 

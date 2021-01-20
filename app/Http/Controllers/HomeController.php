@@ -153,6 +153,15 @@ class HomeController extends Controller
       return view('web.pages.testimonials',compact('test'));
    }
 
+   public function showSignUp(Request $request)
+   {
+      if ($request->query() && $request->query('referal')) {
+         session()->put('referal',$request->referal);
+      }
+      
+      return view('web.pages.how-it-works');
+   }
+
     public function community()
     {    
        return view('web.pages.community');

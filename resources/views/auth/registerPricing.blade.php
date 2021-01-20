@@ -29,60 +29,48 @@
 <section class="section apply">                    
         <div class="container">
             <div class="row">
-                <h3 class="text__quote centered">Sign in</h3>
+                <h3 class="text__quote centered">Sign Up</h3>
+                @if(count($errors)>0)
+                    <div class="alert alert-danger mt-4">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
-                    <form class="apply-form form-horizontal" method="POST" action="{{ route('login') }}" >
+                    <form class="apply-form form-horizontal" method="POST" id="register_form" action="{{ route('register') }}" >
                         @csrf
+                        <input type="hidden" name="account_type" value="candidate">
                         <div class="form-block">
                             <div class="form-group">
                                 <label for="name" class="col-sm-4 control-label">E-Mail Address <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="password" class="col-sm-4 control-label">Password <span class="req">*</span></label>
+                                <label for="password" class="col-sm-4 control-label">Create Password <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                        <label class="form-check-label" for="remember">
-                                            {{ __('Remember Me') }}
-                                        </label>
-                                    </div>
+                            <div class="form-group">
+                                <label for="password-confirm" class="col-sm-4 control-label">Confirm Password <span class="req">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-12 text-center">
-                                    <button type="submit" class="btn btn-default btn__red {{-- animation --}} btn-half pull-right">Sign in</button>
-                                    @if (Route::has('password.request'))
-                                    <a class="btn btn-link pb-1" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a><br>
-                                    <p>or</p>
-                                    <a class="btn btn-link pt-1" href="{{ route('register') }}">
-                                        Sign Up
-                                    </a>
-                                @endif
+                                    <button type="button" id="register_btn" class="btn btn-default btn__red {{-- animation --}} btn-half pull-right">Sign Up</button>
+                                    
                                 </div>
                             </div>
                       
@@ -97,4 +85,14 @@
         </div>
     </section>
 
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            $('#register_btn').click(function(){
+                $('#register_form').submit();
+            })
+        })
+    </script>
 @endsection

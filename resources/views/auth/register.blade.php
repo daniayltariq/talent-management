@@ -139,11 +139,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                     
                     <form class="apply-form form-horizontal" method="POST" id="registerForm" action="{{ route('register') }}">
                        @csrf
-                        <input type="hidden" name="account_type" value="candidate">
+                        <input type="hidden" name="account_type" value="agent">
                         @if (\Request::query('referal'))
                             <input type="hidden" name="referal" value="{{\Request::query('referal')}}">
                         @endif
-                        <div class="form-block">
+                        {{-- <div class="form-block">
                             <div class="tg-btn-sp m-b-20">
                                 <div class="switch-button">
                                     <span class="active"></span>
@@ -151,7 +151,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     <span class="switch-button-case right active-case">Creative</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         
                         <div class="form-block">
                             <div class="form-group">

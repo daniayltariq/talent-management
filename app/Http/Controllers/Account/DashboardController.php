@@ -8,6 +8,7 @@ use Illuminate\Http\File;
 use App\Models\Attachment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -166,6 +167,12 @@ class DashboardController extends Controller
     {
         $profile=auth()->user()->profile;
         return view('print.resume',compact('profile'));
+    }
+
+    public function signup()
+    {
+        $countries=DB::table('countries')->select('nicename')->get();
+        return view('web.account.signup', compact('countries'));
     }
 
 }

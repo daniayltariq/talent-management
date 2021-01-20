@@ -15,6 +15,7 @@ class PlanController extends Controller
     public function index(Request $request)
     {
         /* dd($request->all()); */
+        session()->put('minor',$request->minor);
         $plans=Plan::orderBy('cost','asc')->get();
         return view('web.pages.pricing',compact('plans'));
     }
