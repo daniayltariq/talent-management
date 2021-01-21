@@ -81,7 +81,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 }
 
 .profile-sec img {
-    /* border-radius: unset; */
+    border-radius: unset;
 }
 
 .font-15{

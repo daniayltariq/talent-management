@@ -19,6 +19,10 @@
                             <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
 
                         </div>
+                        <div class="talent-intro text-center">
+                            <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
+                            
+                        </div> 
                         {{-- <div class="talent-intro text-center">
                             <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
                             @if (isset($profile->custom_link))

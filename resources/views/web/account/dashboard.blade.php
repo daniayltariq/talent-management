@@ -242,7 +242,17 @@
         box-shadow: 0px 6px 12px #61616154 !important;
     }
 
+    .profile-sec {
+        height: 150px;
+        width: 150px;
+        /* border-radius: 50%; */
+        padding: 7px;
+        /* background: #f8b248; */
+    }
 
+    .profile-sec img {
+        /* border-radius: 50%; */
+    }
 </style>
 
 <!-- jQuery library -->
