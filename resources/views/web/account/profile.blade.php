@@ -99,6 +99,15 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 .d-none{
     display: none;
 }
+
+#link_suggestion{
+    display: none;
+}
+
+#suggestion{
+    color: #f37c2c;
+    font-weight: 600;
+}
 </style>
 @endsection
 
@@ -167,6 +176,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                             <input type="text" class="form-control" name="custom_link" value="{{$profile->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3">
                                                         </div>
                                                         <small id="link_error" style="color: red"></small>
+                                                        <p id="link_suggestion">Suggestions: <span id="suggestion"></span></p>
                                                     </div>
                                                 @endif
                                                 
@@ -780,6 +790,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
         })
 
         $('#custom_link').on('keyup change',function(){
+            $('#link_suggestion').hide();
             if ($(this).val() !=='') {
                 $.ajax({
                     url: "{{ route('account.talent.checkCustomLink') }}",
@@ -795,6 +806,12 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                             
                             $('#link_error').html(res.message);
                             $('#link_error').show();
+
+                            $('#suggestion').html('');
+                            res.suggestions.forEach(val => {
+                                $('#suggestion').append(val+'<br>');
+                            });
+                            $('#link_suggestion').show();
                         }
                     },
                     error: function(error) {

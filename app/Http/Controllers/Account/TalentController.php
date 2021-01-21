@@ -97,7 +97,23 @@ class TalentController extends Controller
     {
         $profile=Profile::where('custom_link',$request->link)->first();
         if ($profile && $profile->user_id !==auth()->user()->id) {
+            $suggestions=array();
+            $first_name=auth()->user()->f_name;
+            $last_name=auth()->user()->l_name;
+
+            for ($i=0; $i < 4; ) { 
+                $user_name=$this->randName($first_name,$last_name);
+                $profile=Profile::where('custom_link',$user_name)->first();
+                if (($profile && $profile->user_id !==auth()->user()->id) || in_array($user_name, $suggestions)) {
+                    
+                }
+                else{
+                    $suggestions[$i]=$user_name;
+                    ++$i;
+                }
+            }
             $status = array(
+                'suggestions'=>$suggestions,
                 'message' => 'link already assigned!', 
                 'alert_type' => 'error'
             );
@@ -110,5 +126,25 @@ class TalentController extends Controller
         }
         return $status;
 
+    }
+
+    public function randName($fname,$lname)
+    {
+        $nameList = [$fname,$lname,$this->randomSpecialChar(),rand(1,100)]; 
+
+        $finalName = $nameList[floor(((float)rand() / (float)getrandmax()) * count($nameList) )];
+        $finalName =$finalName. $nameList[floor(((float)rand() / (float)getrandmax()) * count($nameList) )];
+        if (rand() > 0.5 ) {
+            $finalName =$finalName. $nameList[floor(((float)rand() / (float)getrandmax()) * count($nameList) )];
+        }
+        return $finalName;
+    }
+      
+    public function randomSpecialChar () {
+        // example set of special chars as a string in no particular order
+        $s = "!\"$%/()\{}";
+    
+        // generating a random index into the string and extracting the character at that position
+        return substr($s,floor(strlen($s)*((float)rand() / (float)getrandmax())),1);
     }
 }

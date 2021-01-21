@@ -168,6 +168,10 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     #guardian_section{
         display: none
     }
+
+    #custom_gender{
+        display: none;
+    }
 </style>
 @endsection
 
@@ -431,7 +435,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         <option value="Rather not say" {{ old('gender')=='Rather not say' ?'selected':''}}>Rather not say</option>
                                         <option value="custom" {{ old('gender')=='custom' ?'selected':''}}>Custom</option>
                                     </select>
-                                    <input id="custom_gender" type="hidden" name="custom_gender">
+                                    <input class="form-control" id="custom_gender" type="text" name="custom_gender">
                                  </div>
                             </div>
 
@@ -518,6 +522,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-sm-offset-4 col-sm-8">
                                     <input class="form-check-input" type="checkbox" name="user_agreement" required id="user_agreement" {{ old('user_agreement') ? 'checked' : '' }}> I agree to The Talent Depot <a href="{{route('user_agreement')}}" style="color: #df691a" target="_blank">User Agreement.</a> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-sm-offset-4 col-sm-8">
+                                    <input class="form-check-input" type="checkbox" name="license_agreement" required id="license_agreement" {{ old('license_agreement') ? 'checked' : '' }}> I agree to The Talent Depot <a href="{{route('license_agreement')}}" style="color: #df691a" target="_blank">User License.</a> 
                                 </div>
                             </div>
 

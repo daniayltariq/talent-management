@@ -30,6 +30,7 @@ Route::post('logout',  [App\Http\Controllers\Auth\LoginController::class,'logout
 Route::get('register',  [App\Http\Controllers\Auth\RegisterController::class,'showRegistrationForm'])->name('register');
 Route::post('register', [App\Http\Controllers\Auth\RegisterController::class,'register']);
 Route::get('agent_register',  [App\Http\Controllers\Auth\AgentRegisterController::class,'showAgentForm'])->name('agent_register');
+Route::post('agent_register',  [App\Http\Controllers\Auth\AgentRegisterController::class,'validateAgentForm'])->name('agent_register');
 
 // Password Reset Routes...
 Route::get('password/reset', [App\Http\Controllers\Auth\ForgotPasswordController::class,'showLinkRequestForm'])->name('password.request');
@@ -150,6 +151,10 @@ Route::get('/403', function () {
 Route::get('/user_agreement', function () {
     return view('web.pages.user_agreement');
 })->name('user_agreement');
+
+Route::get('/license_agreement', function () {
+    return view('web.pages.license_agreement');
+})->name('license_agreement');
 
 Route::get('/denial', function (Request $request) {
     return view('web.pages.denial')->with('message',session('message'));

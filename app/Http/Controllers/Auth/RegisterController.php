@@ -54,7 +54,13 @@ class RegisterController extends Controller
         $countries=DB::table('countries')->select('nicename')->get();
         
         /* return view('auth.register', compact('countries')); */ // old register view
-        return view('auth.registerPricing', compact('countries'));
+        if (session()->has('minor')) {
+            return view('auth.registerPricing', compact('countries'));
+        }
+        else{
+            return redirect()->route('how-it-works');
+        }
+        
     }
 
     /**
@@ -161,7 +167,7 @@ class RegisterController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $validator->errors();
+            /* return $validator->errors(); */
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class AgentRegisterController extends Controller
 {
@@ -63,29 +63,78 @@ class AgentRegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validateAgentForm(Request $request)
     {
-        /* dd($data); */
-        return Validator::make($data, [
+        /* dd($request->all()); */
+        $validator=  Validator::make($request->all(), [
             'f_name' => ['required', 'string', 'max:255'],
             'l_name' => ['required', 'string', 'max:255'],
-            'gender' => ['required', 'string', 'max:255'],
+            'b_name' => ['nullable', 'string', 'max:255'],
+            'about_business' => ['nullable', 'string', 'max:1000'],
             /* 'dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')], */
-            'day' => ['required', 'string', 'max:10'],
-            'month' => ['required', 'string', 'max:10'],
-            'year' => ['required', 'string', 'max:10'],
+            'landline' => ['nullable','string', 'max:12','unique:users'],
             'phone' => ['required', 'max:255','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'country' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'state' => ['required', 'string', 'max:255'],
-            'h_adress_1' => ['string', 'max:255','required'],
-            'h_adress_2' => ['max:255'],
-            'zipcode' => ['required', 'string', 'max:255'],
-            'account_type' => ['required', 'string'],
-            'user_agreement'=>['required']
+            'h_adress_1' => ['string', 'max:255'],
+            "provider_type"    => ['required','array'],
+            "provider_type.*"  => ['required','string','distinct'],
+            'account_type' => ['required', 'string', 'in:agent'],
+            'user_agreement'=>['required', 'string', 'in:on'],
+            'license_agreement'=>['required', 'string', 'in:on']
         ]);
+        
+        if ($validator->fails()) {
+            /* return $validator->errors(); */
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        
+
+        $country_data=json_decode($request['new_phone'],true);
+        $user = User::create([
+            'f_name' => $request['f_name'],
+            'l_name' => $request['l_name'],
+            'b_name' => $request['b_name'],
+            'about_business' => $request['about_business'],
+            'phone' =>Str::of($request['phone'])->prepend('+'.$country_data['dialCode']),
+            'phone_c_data'=>$request['new_phone'],
+            'landline'=>$request['landline'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'country' => $request['country'],
+            'city' => $request['city'],
+            'state' => $request['state'],
+            'h_adress_1' => $request['h_adress_1'],
+            'provider_type' => implode(';',array_filter($request->provider_type, fn($value) => !is_null($value) && $value !== 'Other')),
+        ]);
+        
+        $user->save();
+        if (/* isset($request['referal']) */ session()->has('referal') && !is_null(session('referal'))) 
+        {
+            $referal=\App\Models\Referal::where('refer_code',session('referal'))->first(); 
+            if ($referal) 
+            {
+                $user->referrer_id=$referal->user_id;
+
+                /* $referal->points=$referal->points+1;
+                $referal->save(); */
+
+            }
+        }
+        $user->assignRole($request['account_type']);
+        /* dd($user); */
+        if ($user) {
+            return redirect()->route('/');
+        }
+        else{
+            abort(404);
+        }
+        
     }
 
     /**
@@ -97,40 +146,7 @@ class AgentRegisterController extends Controller
     protected function create(array $data)
     {
         /* dd($data); */
-        $country_data=json_decode($data['new_phone'],true);
-        $user = User::create([
-            'f_name' => $data['f_name'],
-            'l_name' => $data['l_name'],
-            'gender' => $data['gender'],
-            /* 'dob' => $data['dob'], */
-            'dob' => $data['year'].'-'.$data['month'].'-'.$data['day'],
-            'phone' =>Str::of($data['phone'])->prepend('+'.$country_data['dialCode']),
-            'phone_c_data'=>$data['new_phone'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'country' => $data['country'],
-            'city' => $data['city'],
-            'state' => $data['state'],
-            'h_adress_1' => $data['h_adress_1'],
-            'h_adress_2' => $data['h_adress_2'],
-            'zipcode' => $data['zipcode'],
-        ]);
         
-        if (/* isset($data['referal']) */ session()->has('referal') && !is_null(session('referal'))) 
-        {
-            $referal=\App\Models\Referal::where('refer_code',session('referal'))->first(); 
-            if ($referal) 
-            {
-                $user->referrer_id=$referal->user_id;
-                $user->save();
-
-                /* $referal->points=$referal->points+1;
-                $referal->save(); */
-
-            }
-        }
-        $user->assignRole($data['account_type']);
-        return $user;
     }
 
     protected function registered()

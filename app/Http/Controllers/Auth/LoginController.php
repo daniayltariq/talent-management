@@ -57,7 +57,8 @@ class LoginController extends Controller
 
     public function logout(Request $request) 
     {
-        if(Auth::check() && auth()->user()->hasRole('candidate'))
+        session()->forget('minor');
+        if(Auth::check() && auth()->user()->hasanyrole('candidate|agent'))
         {
             session()->forget('url.intended');
         }
