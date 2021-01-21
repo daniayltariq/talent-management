@@ -247,7 +247,7 @@
         width: 150px;
         /* border-radius: 50%; */
         padding: 7px;
-        /* background: #f8b248; */
+        background: none !important;
     }
 
     .profile-sec img {
