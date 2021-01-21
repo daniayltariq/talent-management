@@ -314,13 +314,13 @@
         .profile-sec {
             height: 150px;
             width: 150px;
-            border-radius: 50%;
+            /* border-radius: 50%; */
             padding: 7px;
-            background: #f8b248;
+            /* background: #f8b248; */
         }
 
         .profile-sec img {
-            border-radius: 50%;
+            /* border-radius: 50%; */
         }
 
         .single-talent {
@@ -7272,6 +7272,11 @@ button.close {
                                                 <div class="profile-sec mx-auto ml-5">
                                                     <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
     
+                                                </div>
+                                                <div class="talent-intro text-center">
+                                                    <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
+                                                    
+                                                    
                                                 </div>
                                                 {{-- <div class="talent-intro text-center">
                                                     <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
