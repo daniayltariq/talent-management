@@ -320,7 +320,7 @@
         }
 
         .profile-sec img {
-            /* border-radius: 50%; */
+            border-radius: 0;
         }
 
         .single-talent {
