@@ -316,7 +316,7 @@
             width: 150px;
             /* border-radius: 50%; */
             padding: 7px;
-            /* background: #f8b248; */
+            background: none !important;
         }
 
         .profile-sec img {
@@ -7288,7 +7288,7 @@ button.close {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row mt-5">
                                       <div class="col-xs-6 col-sm-6 col-md-6">
                                         <table class="w-100">
                                             <tr>
