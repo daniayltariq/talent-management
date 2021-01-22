@@ -271,17 +271,176 @@
 			font-weight: 500;
 		}
 			
-.w-100{
-  width: 100%;
-}
+		.w-100{
+		width: 100%;
+		}
 
-.w-25{
-  width: 25%;
-}
+		.w-25{
+		width: 25%;
+		}
 
-.m-menu__sub {
-    padding: 20px 0 0;
-}
+		.m-menu__sub {
+			padding: 20px 0 0;
+		}
+
+		/* Book talent modal */
+		.popup {
+      
+		overflow-x: hidden;
+		overflow-y: auto;
+		font-family: "Google Sans",Roboto,Arial,sans-serif;
+		width: 100%;
+		height: 100%;
+		display: none;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		background: rgba(0, 0, 0, 0.75);
+		}
+
+		.popup {
+			z-index: 999999;
+			text-align: center;
+		}
+
+		.popup:before {
+		content: '';
+		display: inline-block;
+		height: 100%;
+		margin-right: -4px;
+		vertical-align: middle;
+		}
+
+		.popup-header {
+			color: white;
+			font-family: "Google Sans",Roboto,Arial,sans-serif;
+			width: fit-content;
+			background-color: #e77826;
+			border-radius: 0px 0px 6px 6px;
+			margin-top: 0;
+			padding: 0px 11px;
+		}
+
+		.popup-inner {
+		display: inline-block;
+		text-align: left;
+		vertical-align: middle;
+		position: relative;
+		max-width: 700px;
+		width: 90%;
+		padding: 40px;
+		box-shadow: 0px 2px 6px rgba(0, 0, 0, 1);
+		border-radius: 3px;
+		background: #fff;
+		text-align: center;
+		}
+
+		.popup-inner h1 {
+		font-family: 'Roboto Slab', serif;
+		font-weight: 700;
+		}
+
+		.popup-inner p {
+			padding: 0px 27px;
+		font-size: 19px;
+		font-weight: 400;
+		}
+
+		.popup-contact-wrapper{
+			border-radius: 8px;
+			border: 2px solid #dadce0;
+			border-top: 4px solid #e77826;
+		}
+
+		.popup-close {
+		width: 34px;
+		height: 34px;
+		padding-top: 4px;
+		display: inline-block;
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		-webkit-transform: translate(50%, -50%);
+		transform: translate(50%, -50%);
+		border-radius: 100%;
+		background: transparent;
+		border: solid 4px #808080;
+		}
+
+		.popup-close:after,
+		.popup-close:before {
+		content: "";
+		position: absolute;
+		top: 11px;
+		left: 5px;
+		height: 4px;
+		width: 16px;
+		border-radius: 30px;
+		background: #808080;
+		-webkit-transform: rotate(45deg);
+		transform: rotate(45deg);
+		}
+
+		.popup-close:after {
+		-webkit-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+		}
+
+		.popup-close:hover {
+		-webkit-transform: translate(50%, -50%) rotate(180deg);
+		transform: translate(50%, -50%) rotate(180deg);
+		background: #f00;
+		text-decoration: none;
+		border-color: #f00;
+		}
+
+		.popup-close:hover:after,
+		.popup-close:hover:before {
+		background: #fff;
+		}
+
+		.color-td{
+			color: #e77826;
+		}
+
+		.color-td-2{
+			color: rgb(9, 51, 83);
+			font-weight: 550;
+		}
+
+		.text-left{
+			text-align: left;
+		}
+
+		#send_mail:hover{
+			color: #404040;
+			text-decoration: underline;
+		}
+
+		.d-none{
+			display: none;
+		}
+		.popup-form{
+			text-align: left;
+			padding: 28px;
+		}
+		/* End book talent modal */
+
+		.refer__div{
+			display: none;
+		}
+
+		.p-10-13{
+			padding: 10px 13px;
+		}
+
+		.d-flex{
+			display: flex;
+		}
+
+		.h-43{
+			height: 43px;
+		}
 	</style>
 </head>
 
@@ -295,6 +454,7 @@
 
 	@auth
 		@include('web.partials.picklist-modal')
+		@include('web.partials.referal-modal')
 	@endauth
 
 </body>
@@ -328,7 +488,77 @@
 			  });
 
  		 }
- 		
- 	</script>
+		
+		$(function() {
+			//----- OPEN
+			$('[pd-popup-open]').on('click', function(e)  {
+				var targeted_popup_class = jQuery(this).attr('pd-popup-open');
+				$('[pd-popup="' + targeted_popup_class + '"]').fadeIn(100);
+		
+				e.preventDefault();
+			});
+		
+			//----- CLOSE
+			$('[pd-popup-close]').on('click', function(e)  {
+				var targeted_popup_class = jQuery(this).attr('pd-popup-close');
+				$('[pd-popup="' + targeted_popup_class + '"]').fadeOut(200);
+		
+				e.preventDefault();
+			});
+		});
+		
+	 </script>
+	 <script>
+		function copyToClipboard() {
+			/* Get the text field */
+			var copyText = document.getElementById("refer_link");
+	
+			/* Select the text field */
+			copyText.select();
+			copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+	
+			/* Copy the text inside the text field */
+			document.execCommand("copy");
+	
+			/* Alert the copied text */
+			$('.copy-btn').html('Copied');
+			setTimeout(function() { 
+			  $('.copy-btn').text("copy"); 
+		   }, 1000);
+		}
+	
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+	
+		$(document).on('click','#refer-btn',function(e){
+			
+			@if(\Auth::guest())
+				window.location.replace("{{route('login')}}");
+			@else
+				$.ajax({
+					url: "{{ route('agent.generate_referal') }}",
+					
+					type: 'get',
+					success: function(res) {
+						console.log(res);
+						$('[name="refer_link"]').val(res);
+						$('.refer__div').show();
+						/* if (res.alert_type) {
+							toastr.success(res.message);
+						} else {
+							toastr.error(res.message);
+						} */
+					},
+					error: function(error) {
+					}
+				});
+			@endif
+	
+			
+		});
+	</script>
 
 </html>

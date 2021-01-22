@@ -368,6 +368,9 @@ Route::group([
     Route::post('mail_talent',[App\Http\Controllers\Agent\DashboardController::class, 'mailTalent'])->name('mail_talent');
 
     Route::post('send_text',[App\Http\Controllers\Agent\PicklistController::class, 'sendText'])->name('send_text');
+
+    Route::get('/generate_referal', [App\Http\Controllers\Agent\ReferalController::class, 'index'])->name('generate_referal');
+    Route::get('/reward', [App\Http\Controllers\Agent\ReferalController::class, 'reward'])->name('reward');
 });
 
 

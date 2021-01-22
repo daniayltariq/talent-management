@@ -176,6 +176,9 @@
 												<a href="{{ route('agent.topic.create') }}">Create Post</a>
 											</li>
 											<li class="m-menu__sub-item">
+												<a href="#" pd-popup-open="popupReferal">Refer a friend</a>
+											</li>
+											<li class="m-menu__sub-item">
 												<a href="{{ route('agent.topic.index') }}">Posts</a>
 											</li>
 										@endrole
