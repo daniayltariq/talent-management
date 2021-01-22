@@ -180,17 +180,17 @@ class RegisterController extends Controller
         
         $user = User::findOrFail(auth()->user()->id);
         
-          $user->guardian= $request['guardian'];
-          $user->g_f_name= $request['g_f_name'];
-          $user->g_l_name= $request['g_l_name'];
-          $user->gender= $request['gender'];
-          $user->g_dob= $request['g_year'].'-'.$request['g_month'].'-'.$request['g_day'];
+          $user->guardian= $request['guardian']?? null;
+          $user->g_f_name= $request['g_f_name']?? null;
+          $user->g_l_name= $request['g_l_name']?? null;
+          $user->gender= $request['gender']?? null;
+          $user->g_dob= isset($request['g_year'], $request['g_month'], $request['g_day']) ? ($request['g_year'].'-'.$request['g_month'].'-'.$request['g_day']) : null;
           $user->g_phone=!is_null($request['g_new_phone']) ? Str::of($request['g_phone'])->prepend('+'.$g_country_data['dialCode']) : null;
-          $user->g_phone_c_data=$request['g_new_phone'];
-          $user->g_landline=$request['g_landline'];
-          $user->g_country= $request['g_country'];
-          $user->g_city= $request['g_city'];
-          $user->g_state= $request['g_state'];
+          $user->g_phone_c_data=$request['g_new_phone']?? null;
+          $user->g_landline=$request['g_landline']?? null;
+          $user->g_country= $request['g_country']?? null;
+          $user->g_city= $request['g_city']?? null;
+          $user->g_state= $request['g_state']?? null;
           $user->g_h_adress_1 = !is_null($request['g_h_adress_1']) ? $request['g_h_adress_1'] : null;
             /* 'dob= $request['dob']; */
           $user->f_name= $request['f_name'];
@@ -202,7 +202,7 @@ class RegisterController extends Controller
           $user->country= $request['country'];
           $user->city= $request['city'];
           $user->state= $request['state'];
-          $user->h_adress_1= $request['h_adress_1'];
+          $user->h_adress_1= $request['h_adress_1']?? null;
           $user->ethnicity= $request['ethnicity'];
           $user->union= $request['union'];
           $user->passport= $request['passport'];
