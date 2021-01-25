@@ -300,7 +300,7 @@
                             <div class="form-group col-sm-6 mb-0">
                                 <label for="age" class="col-sm-4 control-label">Age </label>
                                 <div class="col-sm-8">
-                                    <div class="d-flex justify-content-center mb-4">
+                                    <div class="justify-content-center mb-4">
                                         <input type="text" id="age" name="age" value="{{ (session('old_query')['new_age']) ?? ''}}" class="form-control js-range-slider" data-type="double" data-min="0">
                                         <input type="hidden" name="new_age" value="{{ (session('old_query')['new_age']) ?? ''}}">
     							    </div>

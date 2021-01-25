@@ -304,6 +304,17 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                         <input type="text" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-holder">
+                                                        <label class="font-15">Body Type</label>
+                                                        <select name="body_type" class="form-control" placeholder="{{strtoupper('Hair Color')}}" id="" required>
+                                                            <option value="average" {{isset($profile->body_type) && $profile->body_type=="average" ? 'selected' : ''}}>Average</option>
+                                                            <option value="slim" {{isset($profile->body_type) && $profile->body_type=="slim" ? 'selected' : ''}}>Slim</option>
+                                                            <option value="muscular" {{isset($profile->body_type) && $profile->body_type=="muscular" ? 'selected' : ''}}>Muscular</option>
+                                                            <option value="curvy" {{isset($profile->body_type) && $profile->body_type=="curvy" ? 'selected' : ''}}>Curvy</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             

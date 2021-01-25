@@ -26,6 +26,7 @@ class Profile extends Model
         'sleves',
         'chest',
         'shoes',
+        'body_type',
         'address_1',
         'address_2',
         'zip',
