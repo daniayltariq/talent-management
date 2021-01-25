@@ -368,7 +368,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div> --}}
 
-                            <h4 class="head_div">Member Details (under 18)</h4>
+                            <h4 class="head_div">Member Details (<span id="member_age_text">above</span> 18)</h4>
 
                             <div class="form-group">
                                 <label for="f_name" class="col-sm-4 control-label">First Name <span class="req">*</span></label>
@@ -828,12 +828,14 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
         $(document).ready(function(){
             $('[name="guardian"]').on('click',function(){
                 if ($('[name="guardian"]:checked').val()=='guardian') {
+                    $('#member_age_text').text('under');
                     $('#guardian_section').slideDown();
 
                 }else{
                     $('#guardian_section *').filter(':input').each(function () {
                         $(this).val('');
                     });
+                    $('#member_age_text').text('above');
                     $('#guardian_section').slideUp();
                 }
                 

@@ -139,8 +139,8 @@ class RegisterController extends Controller
             'g_day' => ['nullable', 'string', 'max:10'],
             'g_month' => ['nullable', 'string', 'max:10'],
             'g_year' => ['nullable', 'string', 'max:10'],
-            'g_phone' => ['nullable', 'max:255','unique:users'],
-            'g_landline' => ['nullable', 'max:255','unique:users'],
+            'g_phone' => ['nullable', 'max:255','unique:users,g_phone,'.auth()->user()->id],
+            'g_landline' => ['nullable', 'max:255','unique:users,g_landline,'.auth()->user()->id],
             'g_country' => ['nullable', 'string', 'max:255'],
             'g_city' => ['nullable', 'string', 'max:255'],
             'g_state' => ['nullable', 'string', 'max:255'],
@@ -152,8 +152,8 @@ class RegisterController extends Controller
             'day' => ['required', 'string', 'max:10'],
             'month' => ['required', 'string', 'max:10'],
             'year' => ['required', 'string', 'max:10'],
-            'phone' => ['required', 'max:255','unique:users'],
-            'landline' => ['required', 'max:255','unique:users'],
+            'phone' => ['required', 'max:255','unique:users,phone,'.auth()->user()->id],
+            'landline' => ['required', 'max:255','unique:users,landline,'.auth()->user()->id],
             /* 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'], */
             'ethnicity' => ['required', 'string', 'max:255'],
@@ -163,7 +163,8 @@ class RegisterController extends Controller
             'union' => ['required', 'string', 'max:255'],
             'passport' => ['required', 'string', 'max:255'],
             'driver_license' => ['required', 'string', 'max:255'],
-            'user_agreement'=>['required']
+            'user_agreement'=>['required'],
+            'license_agreement'=>['required']
         ]);
 
         if ($validator->fails()) {
@@ -172,7 +173,7 @@ class RegisterController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-
+        /* dd($request->all()); */
         $country_data=json_decode($request['new_phone'],true);
         if ($request['g_new_phone'] && !is_null($request['g_new_phone'])) {
            $g_country_data=json_decode($request['g_new_phone'],true);
@@ -180,10 +181,11 @@ class RegisterController extends Controller
         
         $user = User::findOrFail(auth()->user()->id);
         
-          $user->guardian= $request['guardian']?? null;
+          $user->guardian= !is_null($request['guardian']) ? 1 : 0;
           $user->g_f_name= $request['g_f_name']?? null;
           $user->g_l_name= $request['g_l_name']?? null;
           $user->gender= $request['gender']?? null;
+          $user->custom_gender= $request['custom_gender']?? null;
           $user->g_dob= isset($request['g_year'], $request['g_month'], $request['g_day']) ? ($request['g_year'].'-'.$request['g_month'].'-'.$request['g_day']) : null;
           $user->g_phone=!is_null($request['g_new_phone']) ? Str::of($request['g_phone'])->prepend('+'.$g_country_data['dialCode']) : null;
           $user->g_phone_c_data=$request['g_new_phone']?? null;

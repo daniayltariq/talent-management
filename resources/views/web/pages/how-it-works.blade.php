@@ -47,8 +47,8 @@
 					</p>
 					<p class="text-justify">Is the member a minor?</p>
 					<div class="text-justify" style="width: 100%;display: flex">
-						<div style="margin: 0px 20px;"><a href="{{route('pricing',['minor'=>true])}}"><input type="radio" name="member_minor" value="yes" id=""><span> Yes</span></a></div>
-						<div><a href="{{route('pricing',['minor'=>false])}}"><input type="radio" name="member_minor" value="no" id=""><span> No</span></a></div>
+						<div style="margin: 0px 20px;"><input type="radio" onclick="window.location='{{route('pricing',['minor'=>true])}}';" name="member_minor" value="yes" id=""><span> Yes</span></div>
+						<div><input type="radio" onclick="window.location='{{route('pricing',['minor'=>false])}}';" name="member_minor" value="no" id=""><span> No</span></div>
 					</div>
             	</div>
             	<div class="col-sm-4 text-center">
