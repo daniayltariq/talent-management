@@ -100,7 +100,7 @@
 		.role-nav{
 			text-transform: uppercase;
 			color: #fff;
-			font-size: 9px;
+			font-size: 11px;
 			font-weight: 800;
 			font-family: Roboto, Arial, sans-serif;
 		}
