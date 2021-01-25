@@ -225,8 +225,8 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                         
                         <div class="form-block">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">I am<span class="req">*</span></label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-12">
+                                    <h4 class="control-label">I am<span class="req">*</span></h4>
                                     <div style="display: flex">
                                         <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="guardian" >
                                         <label for="guardian">The parent or legal guardian of the member (if under 18)</label>
