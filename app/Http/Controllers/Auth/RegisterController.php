@@ -153,7 +153,7 @@ class RegisterController extends Controller
             'month' => ['required', 'string', 'max:10'],
             'year' => ['required', 'string', 'max:10'],
             'phone' => ['required', 'max:255','unique:users,phone,'.auth()->user()->id],
-            'landline' => ['required', 'max:255','unique:users,landline,'.auth()->user()->id],
+            'landline' => ['nullable', 'max:255','unique:users,landline,'.auth()->user()->id],
             /* 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'], */
             'ethnicity' => ['required', 'string', 'max:255'],

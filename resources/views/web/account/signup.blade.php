@@ -292,14 +292,14 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
 
                                 <div class="form-group" >
-                                    <label for="g_landline" class="col-sm-4 control-label">Landline <span class="req">*</span></label>
+                                    <label for="g_landline" class="col-sm-4 control-label">Landline</label>
                                     <div class="col-sm-8">
                                         <input type="text" maxlength="15"  class="form-control" name="g_landline" id="g_landline" value="{{ old('g_landline') }}">
                                     </div>
                                 </div>
 
                                 <div class="form-group" id="phone-div">
-                                    <label for="g_phone" class="col-sm-4 control-label">Phone <span class="req">*</span></label>
+                                    <label for="g_phone" class="col-sm-4 control-label">Cell Phone <span class="req">*</span></label>
                                     <div class="col-sm-8">
                                         <input type="tel" maxlength="15"  class="form-control" name="g_phone" id="g_phone" value="{{ old('g_phone') }}">
                                         <input type="tel" class="hide" name="g_new_phone" id="g_hiden">
@@ -409,14 +409,14 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             </div>
                             
                             <div class="form-group" >
-                                <label for="landline" class="col-sm-4 control-label">Landline <span class="req">*</span></label>
+                                <label for="landline" class="col-sm-4 control-label">Landline</label>
                                 <div class="col-sm-8">
                                     <input type="text" maxlength="15"  class="form-control" name="landline" id="landline" value="{{ old('landline') }}">
                                 </div>
                             </div>
 
                             <div class="form-group" id="phone-div">
-                                <label for="phone" class="col-sm-4 control-label">Phone <span class="req">*</span></label>
+                                <label for="phone" class="col-sm-4 control-label">Cell Phone <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="tel" maxlength="15"  class="form-control" name="phone" id="phone" value="{{ old('phone') }}">
                                     <input type="tel" class="hide" name="new_phone" id="hiden">
