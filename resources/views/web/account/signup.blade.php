@@ -708,13 +708,13 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
         g_phone.addEventListener('blur', function() {
         reset();
         if (g_phone.value.trim()) {
-            if (iti.isValidNumber()) {
+            if (g_iti.isValidNumber()) {
             g_validMsg.classList.remove("hide");
             } else {
             g_phone.classList.add("error");
-            var errorCode = iti.getValidationError();
-            errorMsg.innerHTML = errorMap[errorCode];
-            errorMsg.classList.remove("hide");
+            var g_errorCode = g_iti.getValidationError();
+            g_errorMsg.innerHTML = errorMap[g_errorCode];
+            g_errorMsg.classList.remove("hide");
             }
         }
         });
