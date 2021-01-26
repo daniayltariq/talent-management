@@ -228,11 +228,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="col-sm-12">
                                     <h4 class="control-label">I am<span class="req">*</span></h4>
                                     <div style="display: flex">
-                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="guardian" >
+                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="guardian" {{old('guardian')=='guardian'?'checked' : ''}}>
                                         <label for="guardian">The parent or legal guardian of the member (if under 18)</label>
                                     </div>
                                     <div style="display: flex">
-                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="member" >
+                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="member" {{old('guardian')=='member'?'checked' : ''}}>
                                         <label for="member">The member (if 18 or older)</label for="guardian"> 
                                     </div>
                                     
@@ -274,17 +274,17 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                             <fieldset style="display: flex;">
                                             <div class="field-inline-block">
                                                 <label>Month</label>
-                                                <input type="text" name="g_month" max="12" pattern="[0-9]*" maxlength="2" size="2" class="date-field" />
+                                                <input type="text" name="g_month" max="12" pattern="[0-9]*" maxlength="2" size="2" class="date-field"  value="{{ old('g_month') }}"/>
                                             </div>
                                             /
                                             <div class="field-inline-block">
                                                 <label>Day</label>
-                                                <input type="text" name="g_day" pattern="[0-9]*" maxlength="2" size="2" class="date-field" />
+                                                <input type="text" name="g_month" pattern="[0-9]*" maxlength="2" size="2" class="date-field"  value="{{ old('g_month') }}"/>
                                             </div>
                                             /
                                             <div class="field-inline-block">
                                                 <label>Year</label>
-                                                <input type="text" name="g_year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year" />
+                                                <input type="text" name="g_year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year"  value="{{ old('g_year') }}"/>
                                             </div>
                                             </fieldset>
                                         </section>
@@ -391,17 +391,17 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         <fieldset style="display: flex;">
                                           <div class="field-inline-block">
                                             <label>Month</label>
-                                            <input type="text" name="month" max="12" pattern="[0-9]*" maxlength="2" size="2" class="date-field" />
+                                            <input type="text" name="month" max="12" pattern="[0-9]*" maxlength="2" size="2" class="date-field" value="{{ old('month') }}"/>
                                           </div>
                                           /
                                           <div class="field-inline-block">
                                             <label>Day</label>
-                                            <input type="text" name="day" pattern="[0-9]*" maxlength="2" size="2" class="date-field" />
+                                            <input type="text" name="day" pattern="[0-9]*" maxlength="2" size="2" class="date-field" value="{{ old('day') }}" />
                                           </div>
                                           /
                                           <div class="field-inline-block">
                                             <label>Year</label>
-                                            <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year" />
+                                            <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year" value="{{ old('year') }}" />
                                           </div>
                                         </fieldset>
                                     </section>
@@ -826,6 +826,12 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
     <script>
         $(document).ready(function(){
+            if ($('[name="guardian"]').is(':checked') && $('[name="guardian"]:checked').val()=='guardian')
+            {
+                $('#member_age_text').text('under');
+                $('#guardian_section').slideDown();
+            }
+
             $('[name="guardian"]').on('click',function(){
                 if ($('[name="guardian"]:checked').val()=='guardian') {
                     $('#member_age_text').text('under');
