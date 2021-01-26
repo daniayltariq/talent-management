@@ -645,6 +645,7 @@
         var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
 
         var iti=window.intlTelInput(phone,{
+            allowDropdown: false,
             initialCountry: "us",
             separateDialCode: true,
             preferredCountries: ["fr", "us", "gb"],

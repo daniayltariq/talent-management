@@ -48,7 +48,7 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {
-        /* dd($request->all()); */
+        dd($request->all());
         $validator = Validator::make($request->all(), [
             'f_name' => ['required', 'string'],
             'l_name' => ['required', 'string'],
@@ -69,7 +69,7 @@ class DashboardController extends Controller
            
             $user=User::findOrFail(auth()->user()->id);
             $user->fill(is_null($request->password)?$request->except(['password','dob']):$request->all());
-            if($request->dob){
+            if($request->year && $request->month && $request->day){
                 $user->dob=$request->year.'-'.$request->month.'-'.$request->day;
             }
             
