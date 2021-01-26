@@ -38,7 +38,7 @@
                     <table class="w-100">
                         <tr>
                           <th class="w-25">Height: </th>
-                          <td class="pb-1 pt-1">{{$profile->feet ? \Str::finish($profile->feet, "'") : ''}} {{$profile->height ? \Str::finish($profile->height,"''") : ''}}</td>
+                          <td class="pb-1 pt-1">{{!is_null($profile) && $profile->feet ? \Str::finish($profile->feet, "'") : ''}} {{!is_null($profile) && $profile->height ? \Str::finish($profile->height,"''") : ''}}</td>
                         </tr>
                     </table>
                   </div>
@@ -46,7 +46,7 @@
                     <table class="w-100">
                         <tr>
                           <th class="w-25">Hair: </th>
-                          <td class="pb-1 pt-1">{{$profile->hairs ?? ''}}</td>
+                          <td class="pb-1 pt-1">{{!is_null($profile) && $profile->hairs ?? ''}}</td>
                         </tr>
                     </table>
                   </div>
@@ -54,7 +54,7 @@
                     <table class="w-100">
                         <tr>
                           <th class="w-25">Weight: </th>
-                          <td class="pb-1 pt-1">{{$profile->weight ?? ''}}</td>
+                          <td class="pb-1 pt-1">{{!is_null($profile) && $profile->weight ?? ''}}</td>
                         </tr>
                     </table>
                   </div>
@@ -62,7 +62,7 @@
                     <table class="w-100">
                         <tr>
                           <th class="w-25">Eyes: </th>
-                          <td class="pb-1 pt-1">{{$profile->eyes ?? ''}}</td>
+                          <td class="pb-1 pt-1">{{!is_null($profile) && $profile->eyes ?? ''}}</td>
                         </tr>
                     </table>
                   </div>
