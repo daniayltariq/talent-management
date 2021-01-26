@@ -218,8 +218,10 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'
         Route::middleware(['hasNoData'])->group(function () {
             Route::get('/signup', [App\Http\Controllers\Account\DashboardController::class, 'signup'])->name('signup');
             Route::post('/signup', [App\Http\Controllers\Auth\RegisterController::class,'candidateSignup'])->name('candidate_signup');
-            Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
+            
         });
+        
+        Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
 
         Route::middleware(['isActive'])->group(function () {
             Route::post('/dashboard/profile', [App\Http\Controllers\Account\DashboardController::class, 'store'])->name('dashboard.profile');

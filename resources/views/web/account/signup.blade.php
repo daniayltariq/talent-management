@@ -804,6 +804,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 changeYear: true,
                 showButtonPanel: true,
                 dateFormat: 'mm',
+                maxDate: '-1M',
                 onClose: function(dateText, inst) { 
                     var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
                     var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
