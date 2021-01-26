@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
-
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
 <style type="text/css">
     *{
         font-size: 16px;
@@ -253,6 +253,26 @@
     .profile-sec img {
         border-radius: 0;
     }
+
+    .field-inline-block {
+        display: inline-block;
+        margin-right: 5px;
+        margin-left: 5px;  
+    }
+
+    .field-inline-block label {
+        text-align: center;
+    }
+
+    .date-field {
+        width: 112px;
+        text-align: center;
+
+    }
+
+    .ui-datepicker {
+    width: 25em !important;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -366,9 +386,30 @@
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-6">
-                                        <label for="dob" class="form-label mt-3">DOB</label>
-                                        <input class="form-control" type="date" name="dob" id="dob" placeholder="DATE OF BIRTH" value="{{auth()->user()->dob ?? ''}}" />
+                                    <div class="col-6 form-row">
+                                        <label for="dob" class="form-label mt-2"></label>
+                                        {{-- <input class="form-control" type="date" name="dob" id="dob" placeholder="DATE OF BIRTH" value="{{auth()->user()->dob ?? ''}}" /> --}}
+                                        @php
+                                            $dob=explode('-',auth()->user()->dob);
+                                        @endphp
+                                        <section id="date-of-birth-example-1">
+                                            <fieldset style="display: flex;">
+                                              <div class="field-inline-block">
+                                                <label>Month</label>
+                                                <input type="text" name="month" max="12" pattern="[0-9]*" maxlength="2" size="2" class="date-field form-control" value="{{$dob[1]??'' }}"/>
+                                              </div>
+                                              /
+                                              <div class="field-inline-block">
+                                                <label>Day</label>
+                                                <input type="text" name="day" pattern="[0-9]*" maxlength="2" size="2" class="date-field form-control" value="{{$dob[2]??'' }}" />
+                                              </div>
+                                              /
+                                              <div class="field-inline-block">
+                                                <label>Year</label>
+                                                <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field form-control date-field--year" value="{{$dob[0]??'' }}" />
+                                              </div>
+                                            </fieldset>
+                                        </section>
                                         @error('dob')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -392,21 +433,21 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label for="country" class="form-label mt-3">Country</label>
-                                        <input class="form-control" type="text" name="country" id="country" placeholder="COUNTRY" value="{{auth()->user()->country ?? ''}}" />
+                                        <input class="form-control" type="text" name="country" id="country" placeholder="COUNTRY" value="{{auth()->user()->country ?? ''}}" disabled/>
                                         @error('country')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label for="city" class="form-label mt-3">City</label>
                                         <input class="form-control" type="text" name="city" id="city" placeholder="CITY" value="{{auth()->user()->city ?? ''}}" />
                                         @error('city')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label for="state" class="form-label mt-3">State</label>
                                         <input class="form-control" type="text" name="state" id="state" placeholder="STATE" value="{{auth()->user()->state ?? ''}}" />
                                         @error('state')
@@ -426,14 +467,14 @@
                                         @error('h_adress_2')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
-                                    </div> --}}
+                                    </div>
                                     <div class="col-6">
                                         <label for="zipcode" class="form-label mt-3">Zipcode</label>
                                         <input class="form-control" type="zipcode" name="zipcode" id="zipcode" placeholder="ZIPCODE" value="{{auth()->user()->zipcode ?? ''}}" />
                                         @error('zipcode')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-6">
                                         <label>Update Password</label>
@@ -1013,5 +1054,61 @@
         
     })
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autotab/1.9.2/js/jquery.autotab.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Autotab
+            $('.date-field').autotab('number');
+            
+            $('.date-field').on('focus',function(){
+                
+            })
 
+            /* $( "[name='days']" ).datepicker({dateFormat: 'mm'});
+            $( "[name='month']" ).datepicker({dateFormat: 'dd'});
+            $( "[name='year']" ).datepicker({dateFormat: 'yyyy'}); */
+
+            $("[name='day'], [name='g_day']").datepicker( {
+                
+                onClose: function(dateText, inst) {
+                    var startDate = new Date(dateText);
+                    var selDay = startDate.getDate();
+                    /* console.log(selDay); */
+                    if (isNaN(selDay)) {
+                        selDay=1;
+                    }
+                    $(this).val(selDay);
+                }
+            });
+
+            $("[name='month'], [name='g_month']").datepicker( {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'mm',
+                maxDate: '-1M',
+                onClose: function(dateText, inst) { 
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).val($.datepicker.formatDate('mm', new Date(year, month, 1)));
+                }
+            });
+
+            $("[name='year'], [name='g_year']").datepicker( {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'yy',
+                yearRange: "-100:+0",
+                maxDate: '+1D',
+                onClose: function(dateText, inst) { 
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).val($.datepicker.formatDate('yy', new Date(year, month, 1)));
+                }
+            });
+        });
+
+    </script>
 @endsection

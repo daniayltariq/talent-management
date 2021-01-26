@@ -68,7 +68,11 @@ class DashboardController extends Controller
             $country_data=json_decode($request->new_phone,true);
            
             $user=User::findOrFail(auth()->user()->id);
-            $user->fill(is_null($request->password)?$request->except(['password']):$request->all());
+            $user->fill(is_null($request->password)?$request->except(['password','dob']):$request->all());
+            if($request->dob){
+                $user->dob=$request->year.'-'.$request->month.'-'.$request->day;
+            }
+            
             $user->phone=Str::of($request->phone)->prepend('+'.$country_data['dialCode']);
             $user->phone_c_data=$request->new_phone;
             if (!is_null($request->password)) {
