@@ -45,8 +45,8 @@
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <table class="w-100">
                         <tr>
-                          <th class="w-25">Hair: </th>
-                          <td class="pb-1 pt-1">{{!is_null($profile) && $profile->hairs ?? ''}}</td>
+                          <th class="w-25" style="text-align: end">Hair: </th>
+                          <td class="pb-1 pt-1" style="width: 5%">{{!is_null($profile) && $profile->hairs ?? ''}}</td>
                         </tr>
                     </table>
                   </div>
@@ -61,8 +61,8 @@
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <table class="w-100">
                         <tr>
-                          <th class="w-25">Eyes: </th>
-                          <td class="pb-1 pt-1">{{!is_null($profile) && $profile->eyes ?? ''}}</td>
+                          <th class="w-25" style="text-align: end">Eyes: </th>
+                          <td class="pb-1 pt-1" style="width: 5%">{{!is_null($profile) && $profile->eyes ?? ''}}</td>
                         </tr>
                     </table>
                   </div>
