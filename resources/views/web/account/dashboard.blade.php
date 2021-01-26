@@ -273,6 +273,14 @@
     .ui-datepicker {
     width: 25em !important;
     }
+
+    .w-4{
+        width: 40%;
+    }
+
+    .w-3{
+        width: 30%;
+    }
 </style>
 
 <!-- jQuery library -->
