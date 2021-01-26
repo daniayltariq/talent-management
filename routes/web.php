@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout' );
-Auth::routes(['verify' => true]);
+Auth::routes(/* ['verify' => true] */);
 /* Auth::routes(); */
 
 Route::get('signup',  [App\Http\Controllers\HomeController::class,'showSignUp'])->name('signup');
@@ -201,22 +201,25 @@ Route::group(['namespace' => 'Subscription\Controllers'], function () {
      * Subscription Resource Routes
      */
 
-    Route::middleware(['auth'])->group(function () {
+    /* Route::middleware(['auth'])->group(function () { */
         Route::get('/subscription/{plan}', [App\Http\Controllers\Subscription\SubscriptionController::class, 'index'])->name('subscription.index');
         Route::post('/subscription', [App\Http\Controllers\Subscription\SubscriptionController::class, 'store'])->name('subscription.store');
-
-    });
+        Route::get('/sendOtp', [App\Http\Controllers\Subscription\SubscriptionController::class, 'sendOtp'])->name('subscription.sendOtp');
+        Route::get('/verifyOtp', [App\Http\Controllers\Subscription\SubscriptionController::class, 'verifyOtp'])->name('subscription.verifyOtp');
+    /* }); */
 });
 
-Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
+Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
 
     /**
      * Profile
      */
     Route::middleware(['subscription.customer','subscription.active'])->group(function () {
-        Route::get('/signup', [App\Http\Controllers\Account\DashboardController::class, 'signup'])->name('signup');
-        Route::post('/signup', [App\Http\Controllers\Auth\RegisterController::class,'candidateSignup'])->name('candidate_signup');
-        Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
+        Route::middleware(['hasNoData'])->group(function () {
+            Route::get('/signup', [App\Http\Controllers\Account\DashboardController::class, 'signup'])->name('signup');
+            Route::post('/signup', [App\Http\Controllers\Auth\RegisterController::class,'candidateSignup'])->name('candidate_signup');
+            Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
+        });
 
         Route::middleware(['isActive'])->group(function () {
             Route::post('/dashboard/profile', [App\Http\Controllers\Account\DashboardController::class, 'store'])->name('dashboard.profile');

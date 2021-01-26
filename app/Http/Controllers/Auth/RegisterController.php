@@ -106,7 +106,7 @@ class RegisterController extends Controller
 
             }
         }
-        $user->assignRole($data['account_type']);
+        /* $user->assignRole($data['account_type']); */
         session()->forget('referal');
         return $user;
     }

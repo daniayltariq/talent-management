@@ -89,6 +89,52 @@
       .header {
         background: #000000cf;
       }
+
+     /*  otp modal */
+
+    .digit-group{
+      padding: 1.2rem;
+    }
+
+    .digit-group input {
+      width: 30px;
+      height: 50px;
+      background-color: white;
+      border: 2px solid;
+      /* box-shadow: 0px 1px 4px 0px #4e9fe4; */
+      line-height: 50px;
+      text-align: center;
+      font-size: 24px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      color: #777373;
+      margin: 0 2px;
+    }
+    .digit-group .splitter {
+      padding: 0 5px;
+      color: #404040;
+      font-size: 24px;
+    }
+
+    .digit-group input:focus{
+      box-shadow: 0px 1px 4px 0px #4e9fe4;
+    }
+    .prompt {
+      margin-bottom: 20px;
+      font-size: 20px;
+      padding: 1.5rem;
+      color: #404040;
+    }
+ 
+    .bg-disabled{
+      background: #eae7e7 !important;
+    }
+
+    .otp__tries{
+      text-align: left;
+      padding: 1rem 17rem !important;
+    }
+    /*  end otp modal */
     </style>
 @endsection
 @section('content')
@@ -98,6 +144,7 @@
         <div class="col-md-offset-3 col-md-6 mt-5 mb-3">
             <div class="">
                 <p>You will be charged ${{ number_format($plan->cost, 2) }} for {{ $plan->name }} Plan</p>
+                <a href="#" pd-popup-open="popupOTP"></a>
             </div>
             <div class="card" style="box-shadow: 0 0 0 1px #e3e8ee;">
               <div class="row">
@@ -107,7 +154,7 @@
                         <div class="card-header" style="text-align: center;background: #fafcfe;">
                           <img src="{{asset('images/stripe2.png')}}" style="width: 11%" alt="">
                         </div>
-                        @if (count($paymentMethods) > 0)
+                        {{-- @if (count($paymentMethods) > 0)
                           <div class="pay-tabs">
                             <div id="payment-head"><h3 class="mx-auto">Select Payment Method</h3></div> 
                               <ul class="row resp-tabs-list">
@@ -116,7 +163,7 @@
                                 @endforeach
                               </ul>	
                           </div>
-                        @endif
+                        @endif --}}
                       </div>
                     </div>
                   
@@ -127,7 +174,8 @@
                             <div class="form-group">
                                 <div class="card-body">
                                 <div class="form-group">
-                                    <input class="form-control" id="card-holder-name" placeholder="Card Holder name" type="text">
+                                    {{-- <input class="form-control" id="card-holder-name" placeholder="Card Holder name" type="text"> --}}
+                                    <input class="form-control" id="card-holder-email" name="card_holder_email" placeholder="Card Holder email" type="email">
                                 </div>
                                 
                                     <div id="card-element" class="form-control">
@@ -152,93 +200,131 @@
         </div>
     </div>
 </div>
+<div class="popup" pd-popup="popupOTP">
+  <div class="popup-inner">
+     <div class="popup-contact-wrapper">
+        {{-- <h4 class="popup-header mx-auto">dw dwwd</h4> --}}
+
+          <div class="row">
+              <div class="col-md-12">
+                <div class="prompt">
+                  Enter the OTP sent on your email.
+                </div>
+                
+                <form method="get" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+                  <input type="text" id="digit-1" name="digit-1" data-next="digit-2" />
+                  <input type="text" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" />
+                  <input type="text" id="digit-3" name="digit-3" data-next="digit-4" data-previous="digit-2" />
+                  <span class="splitter">&ndash;</span>
+                  <input type="text" id="digit-4" name="digit-4" data-next="digit-5" data-previous="digit-3" />
+                  <input type="text" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" />
+                  <input type="text" id="digit-6" name="digit-6" data-previous="digit-5" />
+                  <br>
+                  <p class="otp__tries">Limit: <span id="otp_tries">3</span></p>
+                </form>
+              </div>
+          </div>
+        <a class="popup-close" pd-popup-close="popupOTP" href="#"> </a>
+     </div>
+     
+  </div>
+</div>
+
 @endsection
 @section('scripts')
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     // Create a Stripe client.
-var stripe = Stripe('{{config('app.STRIPE_KEY')}}');
-console.log(stripe);
-// Create an instance of Elements.
-var elements = stripe.elements();
-// Custom styling can be passed to options when creating an Element.
-// (Note that this demo uses a wider set of styles than the guide below.)
-var style = {
-  base: {
-    color: '#32325d',
-    lineHeight: '18px',
-    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-    fontSmoothing: 'antialiased',
-    fontSize: '16px',
-    '::placeholder': {
-      color: '#aab7c4'
-    }
-  },
-  invalid: {
-    color: '#fa755a',
-    iconColor: '#fa755a'
-  }
-};
-// Create an instance of the card Element.
-var card = elements.create('card', {style: style});
-// Add an instance of the card Element into the `card-element` <div>.
-card.mount('#card-element');
-// Handle real-time validation errors from the card Element.
-card.addEventListener('change', function(event) {
-  var displayError = document.getElementById('card-errors');
-  if (event.error) {
-    displayError.textContent = event.error.message;
-  } else {
-    displayError.textContent = '';
-  }
-});
-// Handle form submission.
-var form = document.getElementById('payment-form');
-const cardHolderName = document.getElementById('card-holder-name');
-const cardButton = document.getElementById('card-button');
-const clientSecret = cardButton.dataset.secret;
-cardButton.addEventListener('click', async (e) => {
-  event.preventDefault();
-  const { setupIntent, error } = await stripe.confirmCardSetup(
-        clientSecret, {
-            payment_method: {
-                card: card,
-                billing_details: { name: cardHolderName.value }
-            }
+    var stripe = Stripe('{{config('app.STRIPE_KEY')}}');
+    console.log(stripe);
+    // Create an instance of Elements.
+    var elements = stripe.elements();
+    // Custom styling can be passed to options when creating an Element.
+    // (Note that this demo uses a wider set of styles than the guide below.)
+    var style = {
+      base: {
+        color: '#32325d',
+        lineHeight: '18px',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#aab7c4'
         }
-    );
-	  if (error) {
-        var errorElement = document.getElementById('card-errors');
-      errorElement.textContent = result.error.message;
-    } else {
-        stripeTokenHandler(setupIntent);
-    }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+      }
+    };
+    // Create an instance of the card Element.
+    var card = elements.create('card', {style: style});
+    // Add an instance of the card Element into the `card-element` <div>.
+    card.mount('#card-element');
+    // Handle real-time validation errors from the card Element.
+    card.addEventListener('change', function(event) {
+      var displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+    // Handle form submission.
+    var form = document.getElementById('payment-form');
+    const cardHolderName = document.getElementById('card-holder-email');
+    const cardButton = document.getElementById('card-button');
+    const clientSecret = cardButton.dataset.secret;
+    cardButton.addEventListener('click', async (e) => {
+      event.preventDefault();
+      fullPageLoader(true);
+      const { setupIntent, error } = await stripe.confirmCardSetup(
+            clientSecret, {
+                payment_method: {
+                    card: card,
+                    billing_details: { name: cardHolderName.value }
+                }
+            }
+        );
+        if (error) {
+            var errorElement = document.getElementById('card-errors');
+            if (error.code=='parameter_invalid_empty') {
+              toastr.error('email not valid');
+            } else {
+              errorElement.textContent = error.message;
+            }
+            
+        } else {
+            stripeTokenHandler(setupIntent);
+        }
 
-	/* stripe.createToken(card).then(function(result) {
-		if (result.error) {
-		// Inform the user if there was an error.
-		var errorElement = document.getElementById('card-errors');
-		errorElement.textContent = result.error.message;
-		} else {
-		// Send the token to your server.
-		stripeTokenHandler(setupIntent);
-		}
-	}); */
-});
-// Submit the form with the token ID.
-function stripeTokenHandler(setupIntent) {
-  // Insert the token ID into the form so it gets submitted to the server
-  var form = document.getElementById('payment-form');
-  var hiddenInput = document.createElement('input');
-  hiddenInput.setAttribute('type', 'hidden');
-  hiddenInput.setAttribute('name', 'paymentMethod');
-  hiddenInput.setAttribute('value', setupIntent.payment_method);
-  form.appendChild(hiddenInput);
-  // Submit the form
-  form.submit();
-}
+      /* stripe.createToken(card).then(function(result) {
+        if (result.error) {
+        // Inform the user if there was an error.
+        var errorElement = document.getElementById('card-errors');
+        errorElement.textContent = result.error.message;
+        } else {
+        // Send the token to your server.
+        stripeTokenHandler(setupIntent);
+        }
+      }); */
+    });
+    // Submit the form with the token ID.
+    function stripeTokenHandler(setupIntent) {
+      // Insert the token ID into the form so it gets submitted to the server
+      var form = document.getElementById('payment-form');
+      var hiddenInput = document.createElement('input');
+      hiddenInput.setAttribute('type', 'hidden');
+      hiddenInput.setAttribute('name', 'paymentMethod');
+      hiddenInput.setAttribute('value', setupIntent.payment_method);
+      form.appendChild(hiddenInput);
+      // Submit the form
+      /* form.submit(); */
+      sendOtpOnEmail();
+    }
 </script>
 
+{{-- GET paymentMethods --}}
 <script>
   $(document).on('click','#payment-option', function () {
     /* alert($(this).data('paymentid')); */
@@ -260,5 +346,107 @@ function stripeTokenHandler(setupIntent) {
     });
   });
 </script>
+{{-- End GET paymentMethods --}}
 
+{{-- OTP modal --}}
+<script>
+  $('.digit-group').find('input').each(function() {
+    $(this).attr('maxlength', 1);
+    $(this).on('keyup', function(e) {
+      var parent = $($(this).parent());
+      
+      if(e.keyCode === 8 || e.keyCode === 37) {
+        var prev = parent.find('input#' + $(this).data('previous'));
+        console.log('if');
+        if(prev.length) {
+          $(prev).select();
+        }
+      } 
+      else if((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode === 39) {
+        var next = parent.find('input#' + $(this).data('next'));
+        console.log('elseif');
+        if(next.length) {
+          console.log('elseif if');
+          $(next).select();
+        } else {
+          console.log('elseif else');
+          $(".digit-group input[type=text]").each(function() {
+              $(this).prop('disabled',true);
+              $(this).addClass('bg-disabled');
+          });
+          verifyOtp();
+          /* if(parent.data('autosubmit')) {
+            console.log('elseif else if');
+            parent.submit();
+          } */
+        }
+      }
+    });
+  });
+</script>
+{{-- End OTP modal --}}
+
+{{-- Send OTP --}}
+<script>
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+ function sendOtpOnEmail()
+ {
+   if (validateEmail($('#card-holder-email').val())) {
+     $.get( "{{ route('subscription.sendOtp') }}",{
+        email: $('#card-holder-email').val(),
+        _token : "{{ csrf_token() }}"
+      }, function( res ) {
+        fullPageLoader(false);
+        if (res=='success') {
+            toastr.success('Otp has been sent on your email.')
+            $('[pd-popup-open]').click();
+        } else if(res=='error') {
+            toastr.error(res)
+        }
+      });
+   }
+   else{
+    toastr.error('email not valid');
+   }
+  
+ }
+</script>
+{{-- End Send OTP --}}
+
+{{-- Verify OTP --}}
+<script>
+  function verifyOtp()
+  {
+    var otp='';
+    $(".digit-group input[type=text]").each(function() {
+        otp=otp+$(this).val();
+    });
+    console.log(otp);
+    
+    $.get( "{{ route('subscription.verifyOtp') }}",{
+      otp: otp,
+      _token : "{{ csrf_token() }}"
+    }, function( res ) {
+      if (res.status=='success') {
+        console.log('form submit');
+        form.submit();
+      } else if(res.status=='error') {
+        toastr.error(res.message)
+        if (res.tries && res.tries >0) {
+          $('#otp_tries').text(res.tries);
+        }
+        
+        $(".digit-group input[type=text]").each(function() {
+            $(this).prop('disabled',false);
+            $(this).removeClass('bg-disabled');
+        });
+      }
+    });
+    
+  }
+</script>
+{{-- End Verify OTP --}}
 @endsection
