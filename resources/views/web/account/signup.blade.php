@@ -279,7 +279,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                             /
                                             <div class="field-inline-block">
                                                 <label>Day</label>
-                                                <input type="text" name="g_month" pattern="[0-9]*" maxlength="2" size="2" class="date-field"  value="{{ old('g_month') }}"/>
+                                                <input type="text" name="g_day" pattern="[0-9]*" maxlength="2" size="2" class="date-field"  value="{{ old('g_day') }}"/>
                                             </div>
                                             /
                                             <div class="field-inline-block">
@@ -318,13 +318,14 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="form-group">
                                     <label for="g_country" class="col-sm-4 control-label">Country <span class="req">*</span></label>
                                     <div class="col-sm-8">
-                                        <select name="g_country" id="g_country" class="form-control">
+                                        <input type="text"  name="g_country" id="g_country" class="form-control" value="United States" disabled>
+                                        {{-- <select name="g_country" id="g_country" class="form-control">
                                             <option value="">Select</option>
                                             @foreach ($countries as $country)
                                                 <option value="{{$country->nicename}}" {{ !is_null(old('g_country')) ? (old('g_country')==$country->nicename ?'selected':''): ($country->nicename=="United States" ? 'selected' : '')}}>{{$country->nicename}}</option>
                                             @endforeach
                                             
-                                        </select>
+                                        </select> --}}
                                     </div>
                                 </div>  
                                 <div class="form-group">
@@ -457,13 +458,14 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="country" class="col-sm-4 control-label">Country <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <select name="country" id="country" class="form-control">
+                                    <input type="text"  name="country" id="country" class="form-control" value="United States" disabled>
+                                    {{-- <select name="country" id="country" class="form-control">
                                         <option value="">Select</option>
                                         @foreach ($countries as $country)
                                             <option value="{{$country->nicename}}" {{ !is_null(old('country')) ? (old('country')==$country->nicename ?'selected':''): ($country->nicename=="United States" ? 'selected' : '')}}>{{$country->nicename}}</option>
                                         @endforeach
                                         
-                                    </select>
+                                    </select> --}}
                                 </div>
                             </div>  
                             <div class="form-group">
@@ -602,6 +604,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
         var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
 
         var iti=window.intlTelInput(phone,{
+            allowDropdown: false,
             initialCountry: "us",
             customPlaceholder: function(selectedCountryPlaceholder, selectedCountryData) {
                 return selectedCountryPlaceholder.replace(/[0-9]/g, 5);
@@ -619,6 +622,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
         });
 
         var g_iti=window.intlTelInput(g_phone,{
+            allowDropdown: false,
             initialCountry: "us",
             customPlaceholder: function(selectedCountryPlaceholder, selectedCountryData) {
                 return selectedCountryPlaceholder.replace(/[0-9]/g, 5);
