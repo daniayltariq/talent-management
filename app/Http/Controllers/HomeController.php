@@ -92,6 +92,14 @@ class HomeController extends Controller
                'audio'=>$user->attachments->where('type','audio')
             ];
 
+            $subs=$user->subscriptions()->active()->first();
+         
+            if ($subs->count()>0) {
+               $plan=Plan::select('name','description','agent_contact')->where('stripe_plan',$subs->stripe_plan)->first();
+               
+               $data["plan"]=$plan;
+            }
+            
             return view('web.pages.models-single',compact('data'));
          }
          else{
@@ -126,7 +134,7 @@ class HomeController extends Controller
             
             $data["plan"]=$plan;
          }
-         dd( $data);
+
          return view('web.pages.models-single',compact('data'));
       }
       else{
