@@ -219,23 +219,23 @@
                   <div class="s-model__info clearfix">
                      <ul class="s-model__list s-model__list_l">
                         <li class="s-model__list-item">Height <span></span></li>
-                        <li class="s-model__list-item">Bust</li>
+                        {{-- <li class="s-model__list-item">Bust</li> --}}
                         <li class="s-model__list-item">Waist</li>
-                        <li class="s-model__list-item">Hips</li>
+                        {{-- <li class="s-model__list-item">Hips</li> --}}
                         <li class="s-model__list-item">Dress</li>
-                        <li class="s-model__list-item">Shoe W</li>
+                        <li class="s-model__list-item">Shoe </li>
                         <li class="s-model__list-item">Hair colour</li>
                         <li class="s-model__list-item">Eyes</li>
                      </ul>
                      <ul class="s-model__list s-model__list_r">
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->height ?? 'Nil'}}</li>
-                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->bust ?? 'Nil'}}</li>
+                        {{-- <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->bust ?? 'Nil'}}</li> --}}
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->waist ?? 'Nil'}}</li>
-                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->hips ?? 'Nil'}}</li>
+                        {{-- <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->hips ?? 'Nil'}}</li> --}}
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->dress ?? 'Nil'}}</li>
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->shoes ?? 'Nil'}}</li>
-                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->hairs ?? 'Nil'}}</li>
-                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->eyes ?? 'Nil'}}</li>
+                        <li class="s-model__list-item s-model__list-item_r">{{\Str::ucfirst($data['profile']->hairs ?? 'Nil')}}</li>
+                        <li class="s-model__list-item s-model__list-item_r">{{\Str::ucfirst($data['profile']->eyes ?? 'Nil')}}</li>
                      </ul>
                   </div>
 
