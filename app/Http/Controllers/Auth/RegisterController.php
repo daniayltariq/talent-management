@@ -144,8 +144,8 @@ class RegisterController extends Controller
             'g_country' => ['nullable', 'string', 'max:255'],
             'g_city' => ['nullable', 'string', 'max:255'],
             'g_state' => ['nullable', 'string', 'max:255'],
-            'g_h_adress_1' => ['string', 'max:255','nullable'],
-            'h_adress_1' => ['string', 'max:255','nullable'],
+            /* 'g_h_adress_1' => ['string', 'max:255','nullable'],
+            'h_adress_1' => ['string', 'max:255','nullable'], */
             /* 'dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')], */
             'f_name' => ['required', 'string', 'max:255'],
             'l_name' => ['required', 'string', 'max:255'],
@@ -193,7 +193,7 @@ class RegisterController extends Controller
           $user->g_country= $request['g_country']?? null;
           $user->g_city= $request['g_city']?? null;
           $user->g_state= $request['g_state']?? null;
-          $user->g_h_adress_1 = !is_null($request['g_h_adress_1']) ? $request['g_h_adress_1'] : null;
+          /* $user->g_h_adress_1 = !is_null($request['g_h_adress_1']) ? $request['g_h_adress_1'] : null; */
             /* 'dob= $request['dob']; */
           $user->f_name= $request['f_name'];
           $user->l_name= $request['l_name'];
@@ -204,7 +204,7 @@ class RegisterController extends Controller
           $user->country= $request['country'];
           $user->city= $request['city'];
           $user->state= $request['state'];
-          $user->h_adress_1= $request['h_adress_1']?? null;
+          /* $user->h_adress_1= $request['h_adress_1']?? null; */
           $user->ethnicity= $request['ethnicity'];
           $user->union= $request['union'];
           $user->passport= $request['passport'];

@@ -340,12 +340,12 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         <input type="text" class="form-control" name="g_state" value="{{ old('g_state') }}" id="g_state">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="g_address" class="col-sm-4 control-label">Custom</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="g_h_adress_1" value="{{ old('g_h_adress_1') }}" id="g_h_adress_1" required>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             
                             {{-- <div class="form-group">
@@ -480,12 +480,12 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     <input type="text" class="form-control" name="state" value="{{ old('state') }}" id="state">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="address" class="col-sm-4 control-label">Custom</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="h_adress_1" value="{{ old('h_adress_1') }}" id="h_adress_1" required>
                                 </div>
-                            </div>
+                            </div> --}}
                            
                             <div class="form-group">
                                 <label for="union" class="col-sm-4 control-label">Union</label>
