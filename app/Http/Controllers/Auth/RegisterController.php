@@ -157,7 +157,7 @@ class RegisterController extends Controller
             /* 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'], */
             'ethnicity' => ['required', 'string', 'max:255'],
-            'country' => ['required', 'string', 'max:255'],
+            'country' => ['nullable', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'state' => ['required', 'string', 'max:255'],
             'union' => ['required', 'string', 'max:255'],
@@ -201,7 +201,7 @@ class RegisterController extends Controller
           $user->phone=Str::of($request['phone'])->prepend('+'.$country_data['dialCode']);
           $user->phone_c_data=$request['new_phone'];
           $user->landline=$request['landline'];
-          $user->country= $request['country'];
+          $user->country= /* $request['country'] */"United States";
           $user->city= $request['city'];
           $user->state= $request['state'];
           /* $user->h_adress_1= $request['h_adress_1']?? null; */
