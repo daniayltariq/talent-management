@@ -48,7 +48,7 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        /* dd($request->all()); */
         $validator = Validator::make($request->all(), [
             'f_name' => ['required', 'string'],
             'l_name' => ['required', 'string'],

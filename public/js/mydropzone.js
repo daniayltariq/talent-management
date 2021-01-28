@@ -5,7 +5,7 @@ function render_dropzone(store_url) {
         url: store_url,
         maxFiles: function (file, done) {
             if (validImageTypes.includes(file.type)) {
-                done("No more images!");
+                done("No more images");
             }
             else { done(); }
         },
@@ -79,7 +79,7 @@ function render_dropzone(store_url) {
             }); */
 
             this.on("maxfilesexceeded", function (file) {
-                alert("No more files please!");
+                toastr.error("No more files please!");
             });
 
         }

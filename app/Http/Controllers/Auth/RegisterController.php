@@ -211,7 +211,7 @@ class RegisterController extends Controller
           $user->driver_license= $request['driver_license'];
         $user->save();
 
-        return redirect()->route('account.talent.profile');
+        return redirect()->route('account.dashboard');
     }
 
 }

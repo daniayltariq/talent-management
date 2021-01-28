@@ -281,6 +281,15 @@
     .w-3{
         width: 30%;
     }
+
+    .dropzone .dz-preview .dz-error-message {
+        top: 140px;     /* move the tooltip below the "Remove" link */
+    }
+    .dropzone .dz-preview .dz-error-message:after {
+        left: 20px;     /* move the tooltip's arrow to the left of the "Remove" link */
+        top: -18px;
+        border-bottom-width: 18px;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -598,7 +607,12 @@
                                             <div data-repeater-item>
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <input class="form-control" type="text" name="source" id="source" placeholder="Title" />
+                                                        <select name="source" id="source" class="form-control">
+                                                            <option value="facebook"> Facebook</option>
+                                                            <option value="instagram">Instagram</option>
+                                                            <option value="twitter">Twitter</option>
+                                                            <option value="linkedIn">LinkedIn</option>
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <input class="form-control" type="text" name="link" id="link" placeholder="Link" />

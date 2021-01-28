@@ -108,6 +108,14 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     color: #f37c2c;
     font-weight: 600;
 }
+
+.profile__img__label{
+    padding: 1rem;
+    background-color: #e2752c;
+    color: white !important;
+    border-radius: 25px;
+    margin: 0 2.4rem;
+}
 </style>
 @endsection
 
@@ -140,7 +148,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                 <section>
                                     
                                     <form method="POST" id="profile_form">
-                                        <h4 class="text__quote mb-5">Basic</h4>
+                                        {{-- <h4 class="text__quote mb-5">Basic</h4> --}}
                                         <div class="form-header">
                                             <div class="avartar">
                                                 <a href="#">
@@ -150,7 +158,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </a>
                                                 <div class="avartar-picker">
                                                     <input type="file" name="profile_img" id="profile_img" class="inputfile" data-multiple-caption="{count} files selected" multiple/>
-                                                    <label for="profile_img">
+                                                    <label class="profile__img__label" for="profile_img">
                                                         <i class="zmdi zmdi-camera"></i>
                                                         <span>Main Profile Image</span>
                                                     </label>
@@ -171,7 +179,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     <div class="form-holder">
                                                         <div class="input-group-bs mb-3">
                                                             <div class="input-group-prepend">
-                                                            <span class="input-group-text-bs" id="basic-addon3">{{url('/').'/model/'}}</span>
+                                                            <span class="input-group-text-bs" id="basic-addon3">{{url('/').'/member/'}}</span>
                                                             </div>
                                                             <input type="text" class="form-control" name="custom_link" value="{{$profile->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3">
                                                         </div>
@@ -966,7 +974,12 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
 <script>
     $(document).ready(function(){
-        $('.actions ul').append("<li class='d-none' id='finish_btn'><a href='{{route('account.dashboard')}}'>Finish</a></li>");
+        $('.actions ul').append("<li class='d-none' id='finish_btn'><a href='javascript:;'>Finish</a></li>");
+    })
+
+    $(document).on('click','#finish_btn',function(){
+        $('a[href="#next"]').click();
+        window.location='{{route('account.dashboard')}}';
     })
 </script>
 

@@ -100,8 +100,8 @@
 							
 							@if(Auth::guest()) 
 							
-								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
-									<a href="javascript:;">Join {{-- <span style="color: #df691a;font-weight: 500;">US</span> --}} Us</a>
+								{{-- <li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
+									<a href="javascript:;">Join <span style="color: #df691a;font-weight: 500;">US</span> Us</a>
 									<ul class="m-menu__sub d-hide">
 										<li class="m-menu__sub-item">
 											<a href="{{ route('how-it-works') }}">Learn more</a>
@@ -115,6 +115,9 @@
 											<a href="{{ route('how-it-works') }}">Join <span style="color: #df691a;font-weight: 500;">US</a>
 										</li>
 									</ul>
+								</li> --}}
+								<li class="m-menu__list-item  {{ Request::is('how-it-works') ? 'm-menu__list-item_active' : '' }}">
+									<a href="{{ route('how-it-works') }}">Join Us</a>
 								</li>
 								<li class="m-menu__list-item menu-item-has-children" style="padding-top: 0;">
 									<button type="button" class="btn-cust btn-warning bg-talent" style="height: unset !important">
