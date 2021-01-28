@@ -69,8 +69,8 @@ class DashboardController extends Controller
            
             $user=User::findOrFail(auth()->user()->id);
             $user->fill(is_null($request->password)?$request->except(['password','dob']):$request->all());
-            if($request->year && $request->month && $request->day){
-                $user->dob=$request->year.'-'.$request->month.'-'.$request->day;
+            if($request->date_){
+                $user->dob=$request->date_['year'].'-'.$request->date_['month'].'-'.$request->date_['day'];
             }
             
             $user->phone=Str::of($request->phone)->prepend('+'.$country_data['dialCode']);

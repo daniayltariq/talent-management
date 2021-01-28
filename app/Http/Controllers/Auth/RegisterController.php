@@ -136,9 +136,11 @@ class RegisterController extends Controller
             'g_f_name' => ['nullable', 'string', 'max:255'],
             'g_l_name' => ['nullable', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
-            'g_day' => ['nullable', 'string', 'max:10'],
+            /* 'g_day' => ['nullable', 'string', 'max:10'],
             'g_month' => ['nullable', 'string', 'max:10'],
-            'g_year' => ['nullable', 'string', 'max:10'],
+            'g_year' => ['nullable', 'string', 'max:10'], */
+            "g_date_"    => "required|array|min:3",
+            "g_date_.*"  => "required|string",
             'g_phone' => ['nullable', 'max:255','unique:users,g_phone,'.auth()->user()->id],
             'g_landline' => ['nullable', 'max:255','unique:users,g_landline,'.auth()->user()->id],
             'g_country' => ['nullable', 'string', 'max:255'],
@@ -149,9 +151,11 @@ class RegisterController extends Controller
             /* 'dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')], */
             'f_name' => ['required', 'string', 'max:255'],
             'l_name' => ['required', 'string', 'max:255'],
-            'day' => ['required', 'string', 'max:10'],
+            /* 'day' => ['required', 'string', 'max:10'],
             'month' => ['required', 'string', 'max:10'],
-            'year' => ['required', 'string', 'max:10'],
+            'year' => ['required', 'string', 'max:10'], */
+            "date_"    => "required|array|min:3",
+            "date_.*"  => "required|string",
             'phone' => ['required', 'max:255','unique:users,phone,'.auth()->user()->id],
             'landline' => ['nullable', 'max:255','unique:users,landline,'.auth()->user()->id],
             /* 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -186,7 +190,7 @@ class RegisterController extends Controller
           $user->g_l_name= $request['g_l_name']?? null;
           $user->gender= $request['gender']?? null;
           $user->custom_gender= $request['custom_gender']?? null;
-          $user->g_dob= isset($request['g_year'], $request['g_month'], $request['g_day']) ? ($request['g_year'].'-'.$request['g_month'].'-'.$request['g_day']) : null;
+          $user->g_dob= isset($request->g_date_['year'], $request->g_date_['month'], $request->g_date_['day']) ? ($request->g_date_['year'].'-'.$request->g_date_['month'].'-'.$request->g_date_['day']) : null;
           $user->g_phone=!is_null($request['g_new_phone']) ? Str::of($request['g_phone'])->prepend('+'.$g_country_data['dialCode']) : null;
           $user->g_phone_c_data=$request['g_new_phone']?? null;
           $user->g_landline=$request['g_landline']?? null;
@@ -197,7 +201,7 @@ class RegisterController extends Controller
             /* 'dob= $request['dob']; */
           $user->f_name= $request['f_name'];
           $user->l_name= $request['l_name'];
-          $user->dob= $request['year'].'-'.$request['month'].'-'.$request['day'];
+          $user->dob= $request->date_['year'].'-'.$request->date_['month'].'-'.$request->date_['day'];
           $user->phone=Str::of($request['phone'])->prepend('+'.$country_data['dialCode']);
           $user->phone_c_data=$request['new_phone'];
           $user->landline=$request['landline'];

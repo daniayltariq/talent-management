@@ -265,7 +265,7 @@
     }
 
     .date-field {
-        width: 112px;
+        width: 124px;
         text-align: center;
 
     }
@@ -413,17 +413,16 @@
                                         @enderror
                                     </div>
                                     <div class="col-6 form-row">
-                                        <label for="dob" class="form-label mt-2"></label>
-                                        {{-- <input class="form-control" type="date" name="dob" id="dob" placeholder="DATE OF BIRTH" value="{{auth()->user()->dob ?? ''}}" /> --}}
+                                        <label for="dob" class="form-label mt-2">DOB</label>
                                         @php
                                             $dob=explode('-',auth()->user()->dob);
                                         @endphp
                                         <section id="date-of-birth-example-1">
-                                            <fieldset style="display: flex;">
+                                            {{-- <fieldset style="display: flex;">
                                               <div class="field-inline-block">
-                                                <label>Month</label>
-                                                <input type="text" name="month" max="12" pattern="[0-9]*" maxlength="2" size="2" class="date-field form-control" value="{{$dob[1]??'' }}"/>
-                                              </div>
+                                                <label>Month</label> --}}
+                                                <input type="hidden" name="day_hidden" class="date-field form-control" />
+                                              {{-- </div>
                                               /
                                               <div class="field-inline-block">
                                                 <label>Day</label>
@@ -433,7 +432,7 @@
                                               <div class="field-inline-block">
                                                 <label>Year</label>
                                                 <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field form-control date-field--year" value="{{$dob[0]??'' }}" />
-                                              </div>
+                                              </div> --}}
                                             </fieldset>
                                         </section>
                                         @error('dob')
@@ -458,7 +457,7 @@
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-
+                                    
                                     <div class="col-4">
                                         <label for="country" class="form-label mt-3">Country</label>
                                         <input class="form-control" type="text" name="country" id="country" placeholder="COUNTRY" value="{{auth()->user()->country ?? ''}}" disabled/>
@@ -1173,61 +1172,92 @@
         
     })
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autotab/1.9.2/js/jquery.autotab.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Autotab
-            $('.date-field').autotab('number');
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autotab/1.9.2/js/jquery.autotab.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function() {
+        // Autotab
+        $('.date-field').autotab('number');
+        
+        $('.date-field').on('focus',function(){
             
-            $('.date-field').on('focus',function(){
-                
-            })
+        })
 
-            /* $( "[name='days']" ).datepicker({dateFormat: 'mm'});
-            $( "[name='month']" ).datepicker({dateFormat: 'dd'});
-            $( "[name='year']" ).datepicker({dateFormat: 'yyyy'}); */
+        /* $( "[name='days']" ).datepicker({dateFormat: 'mm'});
+        $( "[name='month']" ).datepicker({dateFormat: 'dd'});
+        $( "[name='year']" ).datepicker({dateFormat: 'yyyy'}); */
 
-            $("[name='day'], [name='g_day']").datepicker( {
-                
-                onClose: function(dateText, inst) {
-                    var startDate = new Date(dateText);
-                    var selDay = startDate.getDate();
-                    /* console.log(selDay); */
-                    if (isNaN(selDay)) {
-                        selDay=1;
-                    }
-                    $(this).val(selDay);
+        $("[name='day'], [name='g_day']").datepicker( {
+            
+            onClose: function(dateText, inst) {
+                var startDate = new Date(dateText);
+                var selDay = startDate.getDate();
+                /* console.log(selDay); */
+                if (isNaN(selDay)) {
+                    selDay=1;
                 }
-            });
-
-            $("[name='month'], [name='g_month']").datepicker( {
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'mm',
-                maxDate: '-1M',
-                onClose: function(dateText, inst) { 
-                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                    $(this).val($.datepicker.formatDate('mm', new Date(year, month, 1)));
-                }
-            });
-
-            $("[name='year'], [name='g_year']").datepicker( {
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'yy',
-                yearRange: "-100:+0",
-                maxDate: '+1D',
-                onClose: function(dateText, inst) { 
-                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                    $(this).val($.datepicker.formatDate('yy', new Date(year, month, 1)));
-                }
-            });
+                $(this).val(selDay);
+            }
         });
 
+        $("[name='month'], [name='g_month']").datepicker( {
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'mm',
+            maxDate: '-1M',
+            onClose: function(dateText, inst) { 
+                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).val($.datepicker.formatDate('mm', new Date(year, month, 1)));
+            }
+        });
+
+        $("[name='year'], [name='g_year']").datepicker( {
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'yy',
+            yearRange: "-100:+0",
+            maxDate: '+1D',
+            onClose: function(dateText, inst) { 
+                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).val($.datepicker.formatDate('yy', new Date(year, month, 1)));
+            }
+        });
+    });
+
+</script> --}}
+<script src="https://cdn.jsdelivr.net/npm/jquery-dropdown-datepicker@1.3.0/dist/jquery-dropdown-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                    dd='0'+dd
+                } 
+                if(mm<10){
+                    mm='0'+mm
+                } 
+
+            /* today = yyyy+'-'+mm+'-'+dd; */
+            var max_limit = new Date();
+            max_limit.setDate(today.getDate() - 31);
+            $("[name='day_hidden']").dropdownDatepicker({
+                defaultDate: "{{ auth()->user()->dob ?? ''}}",
+                maxDate: max_limit,
+                required: true,
+                wrapperClass:'d-flex',
+                dropdownClass:'date-field form-control',
+                /* displayFormat: 'ymd', */
+                monthFormat: 'short',
+                /* minYear: 1920,
+                maxYear: yyyy-1 */
+            });
+            
+        })
     </script>
 @endsection

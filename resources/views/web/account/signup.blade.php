@@ -84,7 +84,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     }
 
     .date-field {
-        width: 145px;
+        width: 157px;
         text-align: center;
 
     }
@@ -271,11 +271,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                             </span>
                                         @enderror --}}
                                         <section id="date-of-birth-example-1">
-                                            <fieldset style="display: flex;">
+                                            {{-- <fieldset style="display: flex;">
                                             <div class="field-inline-block">
-                                                <label>Month</label>
-                                                <input type="text" name="g_month" max="12" pattern="[0-9]*" maxlength="2" size="2" class="date-field"  value="{{ old('g_month') }}"/>
-                                            </div>
+                                                <label>Month</label> --}}
+                                                <input type="hidden" name="g_day_hidden"class="date-field"{{--   value="{{ old('g_month') }}" --}}/>
+                                            {{-- </div>
                                             /
                                             <div class="field-inline-block">
                                                 <label>Day</label>
@@ -286,7 +286,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                                 <label>Year</label>
                                                 <input type="text" name="g_year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year"  value="{{ old('g_year') }}"/>
                                             </div>
-                                            </fieldset>
+                                            </fieldset> --}}
                                         </section>
                                     </div>
                                 </div>
@@ -389,11 +389,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <label for="dob" class="col-sm-4 control-label">Date of birth <span class="req">*</span></label>
                                 <div class="col-sm-8 form-row">
                                     <section id="date-of-birth-example-1">
-                                        <fieldset style="display: flex;">
+                                        {{-- <fieldset style="display: flex;">
                                           <div class="field-inline-block">
-                                            <label>Month</label>
-                                            <input type="text" name="month" max="12" pattern="[0-9]*" maxlength="2" size="2" class="date-field" value="{{ old('month') }}"/>
-                                          </div>
+                                            <label>Month</label> --}}
+                                            <input type="hidden" name="day_hidden" class="date-field"{{--  value="{{ old('month') }}" --}}/>
+                                          {{-- </div>
                                           /
                                           <div class="field-inline-block">
                                             <label>Day</label>
@@ -404,7 +404,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                             <label>Year</label>
                                             <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year" value="{{ old('year') }}" />
                                           </div>
-                                        </fieldset>
+                                        </fieldset> --}}
                                     </section>
                                  </div>
                             </div>
@@ -768,30 +768,24 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 mm='0'+mm
             } 
 
-        today = yyyy+'-'+mm+'-'+dd;
+        /* today = yyyy+'-'+mm+'-'+dd; */
         document.getElementById("dob").setAttribute("max", today)
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autotab/1.9.2/js/jquery.autotab.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autotab/1.9.2/js/jquery.autotab.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(document).ready(function() {
-            // Autotab
             $('.date-field').autotab('number');
             
             $('.date-field').on('focus',function(){
                 
             })
 
-            /* $( "[name='days']" ).datepicker({dateFormat: 'mm'});
-            $( "[name='month']" ).datepicker({dateFormat: 'dd'});
-            $( "[name='year']" ).datepicker({dateFormat: 'yyyy'}); */
-
             $("[name='day'], [name='g_day']").datepicker( {
                 
                 onClose: function(dateText, inst) {
                     var startDate = new Date(dateText);
                     var selDay = startDate.getDate();
-                    /* console.log(selDay); */
                     if (isNaN(selDay)) {
                         selDay=1;
                     }
@@ -827,6 +821,39 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             });
         });
 
+    </script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/jquery-dropdown-datepicker@1.3.0/dist/jquery-dropdown-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var max_limit = new Date();
+            max_limit.setDate(today.getDate() - 31);
+
+            $(" [name='g_day_hidden']").dropdownDatepicker({
+                /* defaultDate: "{{ auth()->user()->dob ?? ''}}", */
+                maxDate: max_limit,
+                required: true,
+                wrapperClass:'d-flex',
+                dropdownClass:'date-field form-control',
+                /* displayFormat: 'ymd', */
+                monthFormat: 'short',
+            });
+
+            $('[name="date_[day]"]').attr('name',"g_date_[day]");
+            $('[name="date_[month]"]').attr('name',"g_date_[month]");
+            $('[name="date_[year]"]').attr('name',"g_date_[year]");
+
+            $("[name='day_hidden']").dropdownDatepicker({
+                /* defaultDate: "{{ auth()->user()->dob ?? ''}}", */
+                maxDate: max_limit,
+                required: true,
+                wrapperClass:'d-flex',
+                dropdownClass:'date-field form-control',
+                /* displayFormat: 'ymd', */
+                monthFormat: 'short',
+            });
+
+            
+        })
     </script>
 
     <script>
