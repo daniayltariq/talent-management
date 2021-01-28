@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'hasCommunityReadAccess' => \App\Http\Middleware\hasCommunityReadAccess::class,
         'hasCommunityReadWriteAccess' => \App\Http\Middleware\hasCommunityReadWriteAccess::class,
+        'hasNoData' => \App\Http\Middleware\hasNoData::class,
         'isActive' => \App\Http\Middleware\isActive::class,
         'isAdmin' => \App\Http\Middleware\isAdmin::class,
         'isAgent' => \App\Http\Middleware\isAgent::class,

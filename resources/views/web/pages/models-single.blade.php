@@ -204,7 +204,7 @@
 								<span class="line"></span>Model Photos
 							</h2>
 							@foreach ($data['images'] as $img)
-								<img class="sp-thumbnail"  alt="thumb1" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"/>
+								<img class="sp-thumbnail" style="object-fit: cover;"  alt="thumb1" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"/>
 							@endforeach
 						</div>
 					@else
@@ -219,23 +219,23 @@
                   <div class="s-model__info clearfix">
                      <ul class="s-model__list s-model__list_l">
                         <li class="s-model__list-item">Height <span></span></li>
-                        <li class="s-model__list-item">Bust</li>
+                        {{-- <li class="s-model__list-item">Bust</li> --}}
                         <li class="s-model__list-item">Waist</li>
-                        <li class="s-model__list-item">Hips</li>
+                        {{-- <li class="s-model__list-item">Hips</li> --}}
                         <li class="s-model__list-item">Dress</li>
-                        <li class="s-model__list-item">Shoe W</li>
+                        <li class="s-model__list-item">Shoe </li>
                         <li class="s-model__list-item">Hair colour</li>
                         <li class="s-model__list-item">Eyes</li>
                      </ul>
                      <ul class="s-model__list s-model__list_r">
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->height ?? 'Nil'}}</li>
-                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->bust ?? 'Nil'}}</li>
+                        {{-- <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->bust ?? 'Nil'}}</li> --}}
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->waist ?? 'Nil'}}</li>
-                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->hips ?? 'Nil'}}</li>
+                        {{-- <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->hips ?? 'Nil'}}</li> --}}
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->dress ?? 'Nil'}}</li>
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->shoes ?? 'Nil'}}</li>
-                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->hairs ?? 'Nil'}}</li>
-                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->eyes ?? 'Nil'}}</li>
+                        <li class="s-model__list-item s-model__list-item_r">{{\Str::ucfirst($data['profile']->hairs ?? 'Nil')}}</li>
+                        <li class="s-model__list-item s-model__list-item_r">{{\Str::ucfirst($data['profile']->eyes ?? 'Nil')}}</li>
                      </ul>
                   </div>
 
@@ -317,10 +317,10 @@
          <div class="popup-contact-wrapper">
             <h4 class="popup-header mx-auto">{{$data['profile']->legal_first_name ?? ''}} {{$data['profile']->legal_last_name ?? ''}}</h4>
 
-            <p class="text-left mt-5">
+            {{-- <p class="text-left mt-5">
                <i class="far fa-address-card color-td"></i>
-               {{-- <span class="color-td-2"> {{$data['profile']->address_1 ?? $data['profile']->address_2 ?? ''}} {{$data['profile']->city ?? ''}} {{$data['profile']->state ?? ''}} {{$data['profile']->country ?? ''}}<br>{{$data['profile']->zip ?? ''}} </span>  --}}
-            </p>
+               <span class="color-td-2"> {{$data['profile']->address_1 ?? $data['profile']->address_2 ?? ''}} {{$data['profile']->city ?? ''}} {{$data['profile']->state ?? ''}} {{$data['profile']->country ?? ''}}<br>{{$data['profile']->zip ?? ''}} </span> 
+            </p> --}}
             <p class="text-left"><i class="fas fa-phone-square color-td"></i><span class="color-td-2"> {{-- {{$data['profile']->telephone .',' ?? ''}} {{$data['profile']->mobile.',' ?? ''}} --}} {{$data['profile']->user->phone ?? ''}}</span> </p>
             <p class="text-left"><i class="fas fa-envelope-open-text color-td"></i> 
                <span class="color-td-2">{{$data['profile']->email ?? $data['profile']->user->email ?? ''}}.</span>

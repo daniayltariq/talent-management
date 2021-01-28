@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
-
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
 <style type="text/css">
     *{
         font-size: 16px;
@@ -242,7 +242,54 @@
         box-shadow: 0px 6px 12px #61616154 !important;
     }
 
+    .profile-sec {
+        height: 150px;
+        width: 150px;
+        /* border-radius: 50%; */
+        padding: 7px;
+        background: none !important;
+    }
 
+    .profile-sec img {
+        border-radius: 0;
+    }
+
+    .field-inline-block {
+        display: inline-block;
+        margin-right: 5px;
+        margin-left: 5px;  
+    }
+
+    .field-inline-block label {
+        text-align: center;
+    }
+
+    .date-field {
+        width: 124px;
+        text-align: center;
+
+    }
+
+    .ui-datepicker {
+    width: 25em !important;
+    }
+
+    .w-4{
+        width: 40%;
+    }
+
+    .w-3{
+        width: 30%;
+    }
+
+    .dropzone .dz-preview .dz-error-message {
+        top: 140px;     /* move the tooltip below the "Remove" link */
+    }
+    .dropzone .dz-preview .dz-error-message:after {
+        left: 20px;     /* move the tooltip's arrow to the left of the "Remove" link */
+        top: -18px;
+        border-bottom-width: 18px;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -298,7 +345,16 @@
                             <span class="font-weight-bold small text-uppercase">Personal information</span></a>
                         <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
                             <i class="fa fa-user mr-2"></i>
-                            <span class="font-weight-bold small text-uppercase">My Images</span></a>
+                            <span class="font-weight-bold small text-uppercase">My Images</span>
+                        </a>
+                        <a class="nav-link mb-3 p-3 shadow" id="v-pills-video-tab" data-toggle="pill" href="#v-pills-video" role="tab" aria-controls="v-pills-video" aria-selected="false">
+                            <i class="fa fa-user mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">My Videos</span>
+                        </a>
+                        <a class="nav-link mb-3 p-3 shadow" id="v-pills-audio-tab" data-toggle="pill" href="#v-pills-audio" role="tab" aria-controls="v-pills-audio" aria-selected="false">
+                            <i class="fa fa-user mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">My Audios</span>
+                        </a>
                         @if ($data['plan'] && $data['plan']->social_links==1)
                         <a class="nav-link mb-3 p-3 shadow" id="v-social-tab" data-toggle="pill" href="#v-social" role="tab" aria-controls="v-social" aria-selected="false">
                             <i class="fa fa-icons mr-2"></i>
@@ -356,9 +412,29 @@
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-6">
-                                        <label for="dob" class="form-label mt-3">DOB</label>
-                                        <input class="form-control" type="date" name="dob" id="dob" placeholder="DATE OF BIRTH" value="{{auth()->user()->dob ?? ''}}" />
+                                    <div class="col-6 form-row">
+                                        <label for="dob" class="form-label mt-2">DOB</label>
+                                        @php
+                                            $dob=explode('-',auth()->user()->dob);
+                                        @endphp
+                                        <section id="date-of-birth-example-1">
+                                            {{-- <fieldset style="display: flex;">
+                                              <div class="field-inline-block">
+                                                <label>Month</label> --}}
+                                                <input type="hidden" name="day_hidden" class="date-field form-control" />
+                                              {{-- </div>
+                                              /
+                                              <div class="field-inline-block">
+                                                <label>Day</label>
+                                                <input type="text" name="day" pattern="[0-9]*" maxlength="2" size="2" class="date-field form-control" value="{{$dob[2]??'' }}" />
+                                              </div>
+                                              /
+                                              <div class="field-inline-block">
+                                                <label>Year</label>
+                                                <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field form-control date-field--year" value="{{$dob[0]??'' }}" />
+                                              </div> --}}
+                                            </fieldset>
+                                        </section>
                                         @error('dob')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -381,22 +457,22 @@
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-
-                                    <div class="col-6">
+                                    
+                                    <div class="col-4">
                                         <label for="country" class="form-label mt-3">Country</label>
-                                        <input class="form-control" type="text" name="country" id="country" placeholder="COUNTRY" value="{{auth()->user()->country ?? ''}}" />
+                                        <input class="form-control" type="text" name="country" id="country" placeholder="COUNTRY" value="{{auth()->user()->country ?? ''}}" disabled/>
                                         @error('country')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label for="city" class="form-label mt-3">City</label>
                                         <input class="form-control" type="text" name="city" id="city" placeholder="CITY" value="{{auth()->user()->city ?? ''}}" />
                                         @error('city')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label for="state" class="form-label mt-3">State</label>
                                         <input class="form-control" type="text" name="state" id="state" placeholder="STATE" value="{{auth()->user()->state ?? ''}}" />
                                         @error('state')
@@ -416,14 +492,14 @@
                                         @error('h_adress_2')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
-                                    </div> --}}
+                                    </div>
                                     <div class="col-6">
                                         <label for="zipcode" class="form-label mt-3">Zipcode</label>
                                         <input class="form-control" type="zipcode" name="zipcode" id="zipcode" placeholder="ZIPCODE" value="{{auth()->user()->zipcode ?? ''}}" />
                                         @error('zipcode')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-6">
                                         <label>Update Password</label>
@@ -449,6 +525,20 @@
                             
                             <div id="render_attachments">
                                 @include('components.attachments',['data'=>$data])
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-audio" role="tabpanel" aria-labelledby="v-pills-audio-tab">
+                            
+                            <div id="render_audios">
+                                @include('components.audios',['data'=>$data])
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-video" role="tabpanel" aria-labelledby="v-pills-video-tab">
+                            
+                            <div id="render_videos">
+                                @include('components.videos',['data'=>$data])
                                 
                             </div>
                         </div>
@@ -491,7 +581,7 @@
                                 <div class="col-6">
                                     @if (auth()->user()->referal_code()->exists())
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="refer_link" value="{{url('/').'/register/?referal='.auth()->user()->referal_code->refer_code}}" placeholder="Refer url" aria-label="Refer url" aria-describedby="basic-addon2">
+                                            <input type="text" class="form-control" id="refer_link" value="{{url('/').'/signup/?referal='.auth()->user()->referal_code->refer_code}}" placeholder="Refer url" aria-label="Refer url" aria-describedby="basic-addon2">
                                             <div class="input-group-append">
                                             <button class="btn btn-outline-secondary copy-btn" onclick="copyToClipboard()" type="button">Copy</button>
                                             </div>
@@ -539,7 +629,12 @@
                                             <div data-repeater-item>
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <input class="form-control" type="text" name="source" id="source" placeholder="Title" />
+                                                        <select name="source" id="source" class="form-control">
+                                                            <option value="facebook"> Facebook</option>
+                                                            <option value="instagram">Instagram</option>
+                                                            <option value="twitter">Twitter</option>
+                                                            <option value="linkedIn">LinkedIn</option>
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <input class="form-control" type="text" name="link" id="link" placeholder="Link" />
@@ -594,6 +689,7 @@
         var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
 
         var iti=window.intlTelInput(phone,{
+            allowDropdown: false,
             initialCountry: "us",
             separateDialCode: true,
             preferredCountries: ["fr", "us", "gb"],
@@ -870,11 +966,12 @@
         }
     } */
 
-    /* function sendAudio(file)
+    function sendAudio(file)
     {
         console.log(file);
         var audiofile=new FormData($('#imageDropzone')[0]);
-        audiofile.append('audio',file);
+        audiofile.append('file',file);
+        audiofile.append('type','audio');
         $.ajax({
             url: '{{ route('account.storeMedia') }}',
             contentType: false,
@@ -890,10 +987,12 @@
                 toastr.error('something went wrong!');
             }
         });
-    } */
+    }
 </script>
 
 <script src="{{asset('js/mydropzone.js')}}"></script>
+<script src="{{asset('js/audioDropzone.js')}}"></script>
+<script src="{{asset('js/videoDropzone.js')}}"></script>
 <script>
     $(document).ready(function () {
         var $social_repeater = $('.repeater').repeater({
@@ -970,12 +1069,16 @@
         
         if ( $('div#v-pills-tab').find(e.target).length) 
         {
-            if (e.target.id === $('a.nav-link.active').attr('id')) {
+            //if images tab
+            if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-profile-tab') {
                 myDropzoneTheFirst.disable();
-
+                console.log(e.target.id);
                 $.ajax({
                     url: '{{ route('account.fetch_attachments') }}',
                     type: 'GET',
+                    data:{
+                        media_key:'image'
+                    },
                     success: function(res) {
                         $('#render_attachments').html(res);
                         
@@ -998,10 +1101,163 @@
                     }
                 });
             }
+
+            //if audio tab
+            else if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-audio-tab') {
+                /* myDropzoneTheFirst.disable(); */
+                console.log(e.target.id);
+                $.ajax({
+                    url: '{{ route('account.fetch_attachments') }}',
+                    type: 'GET',
+                    data:{
+                        media_key:'audio'
+                    },
+                    success: function(res) {
+                        $('#render_audios').html(res);
+                        
+                        $.get( '{{ route('account.get_limit') }}/?q=fetch_limit', function() {})
+                            .done(function(res) {
+                                
+                                var store_url='{{ route('account.storeMedia') }}';
+                                render_audiodropzone(store_url);
+                                console.log("{{$data['plan']->audios}}");
+                                $('#audioDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->audios}}"-res['audio_limit'];
+                            })
+                            .fail(function() {
+                                alert( "error" );
+                            });
+                        
+                        /* myDropzoneTheFirst.enable(); */
+                    },
+                    error: function(error) {
+                        $('#render_audios').html("<h4>No Attachments Found</h4>");
+                    }
+                });
+            }
+
+            //if video tab
+            else if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-video-tab') {
+                /* myDropzoneTheFirst.disable(); */
+                console.log(e.target.id);
+                $.ajax({
+                    url: '{{ route('account.fetch_attachments') }}',
+                    type: 'GET',
+                    data:{
+                        media_key:'video'
+                    },
+                    success: function(res) {
+                        $('#render_videos').html(res);
+                        
+                        $.get( '{{ route('account.get_limit') }}/?q=fetch_limit', function() {})
+                            .done(function(res) {
+                                
+                                var store_url='{{ route('account.storeMedia') }}';
+                                render_videodropzone(store_url);
+                                console.log("{{$data['plan']->videos}}");
+                                $('#videoDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->videos}}"-res['video_limit'];
+                            })
+                            .fail(function() {
+                                alert( "error" );
+                            });
+                        
+                        /* myDropzoneTheFirst.enable(); */
+                    },
+                    error: function(error) {
+                        $('#render_videos').html("<h4>No Attachments Found</h4>");
+                    }
+                });
+            }
         }
         
         
     })
 </script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autotab/1.9.2/js/jquery.autotab.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function() {
+        // Autotab
+        $('.date-field').autotab('number');
+        
+        $('.date-field').on('focus',function(){
+            
+        })
 
+        /* $( "[name='days']" ).datepicker({dateFormat: 'mm'});
+        $( "[name='month']" ).datepicker({dateFormat: 'dd'});
+        $( "[name='year']" ).datepicker({dateFormat: 'yyyy'}); */
+
+        $("[name='day'], [name='g_day']").datepicker( {
+            
+            onClose: function(dateText, inst) {
+                var startDate = new Date(dateText);
+                var selDay = startDate.getDate();
+                /* console.log(selDay); */
+                if (isNaN(selDay)) {
+                    selDay=1;
+                }
+                $(this).val(selDay);
+            }
+        });
+
+        $("[name='month'], [name='g_month']").datepicker( {
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'mm',
+            maxDate: '-1M',
+            onClose: function(dateText, inst) { 
+                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).val($.datepicker.formatDate('mm', new Date(year, month, 1)));
+            }
+        });
+
+        $("[name='year'], [name='g_year']").datepicker( {
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'yy',
+            yearRange: "-100:+0",
+            maxDate: '+1D',
+            onClose: function(dateText, inst) { 
+                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).val($.datepicker.formatDate('yy', new Date(year, month, 1)));
+            }
+        });
+    });
+
+</script> --}}
+<script src="https://cdn.jsdelivr.net/npm/jquery-dropdown-datepicker@1.3.0/dist/jquery-dropdown-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                    dd='0'+dd
+                } 
+                if(mm<10){
+                    mm='0'+mm
+                } 
+
+            /* today = yyyy+'-'+mm+'-'+dd; */
+            var max_limit = new Date();
+            max_limit.setDate(today.getDate() - 31);
+            $("[name='day_hidden']").dropdownDatepicker({
+                defaultDate: "{{ auth()->user()->dob ?? ''}}",
+                maxDate: max_limit,
+                required: true,
+                wrapperClass:'d-flex',
+                dropdownClass:'date-field form-control',
+                /* displayFormat: 'ymd', */
+                monthFormat: 'short',
+                /* minYear: 1920,
+                maxYear: yyyy-1 */
+            });
+            
+        })
+    </script>
 @endsection

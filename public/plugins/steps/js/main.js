@@ -47,7 +47,7 @@ $(function () {
         },
         labels: {
             finish: "Continue",
-            next: "Continue",
+            next: "Next",
             notyet: "None yet.  Continue",
             previous: "Back"
         }

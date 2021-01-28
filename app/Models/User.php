@@ -11,7 +11,7 @@ use Lab404\Impersonate\Models\Impersonate;
 use Spatie\Permission\Traits\HasRoles;
 use Carbon\Carbon;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable /* implements MustVerifyEmail */
 {
     use HasFactory, Notifiable;
     use HasRoles;
@@ -23,7 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-    'f_name', 'l_name', 'gender', 'dob', 'phone', 'phone_c_data', 'email', 'password', 'country', 'city', 'state', 'h_adress_1', 'h_adress_2', 'zipcode',
+    'f_name', 'l_name', 'b_name','about_business','provider_type','gender', 'dob', 'phone', 'landline', 'phone_c_data', 'email', 'password', 'country', 'city', 'state', 'h_adress_1', 'h_adress_2', 'zipcode',
     ];
 
     /**
@@ -72,6 +72,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasStripeId()
     {
         return $this->stripe_id;
+    }
+
+    public function hasNoData()
+    {
+        if(!is_null(auth()->user()->f_name) && !is_null(auth()->user()->l_name))
+        {
+            return false;
+        }else{
+            return true;
+        }
+        
     }
 
     public function picklist()

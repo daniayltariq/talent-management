@@ -4,8 +4,17 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 <style type="text/css">
+	.max-127 {
+		max-width: 127px;
+	}
 
+	.text-justify{
+		text-align: justify;
+	}
 
+	.btn-pad{
+		padding: 9px 21px;
+	}
 </style>
 @endsection
 
@@ -21,13 +30,56 @@
     </div>
 </section>
 
-
 <section>
     <div class="section how-it-works">
         <div class="container">
         	<div class="text-center">
-        		<h2 class="text-dark">How Talent Depot works for agents</h2>
+        		<h2 class="text-dark">How Talent Depot works</h2>
         		{{-- <p>Simplify and streamline your casting process to find the perfect performers for your project.</p> --}}
+        	</div>
+            <div class="row mt-3">
+            	<div class="col-sm-4 text-center">
+            		<img class="max-127" src="{{ asset('web/img/vector_users.png') }}">
+            		<h3>Become A Member</h3>
+            		<p class="text-justify">As a member, The Talent Depot provides access and resources to promote talented individuals in a sleek, professional manner.
+					</p>
+					<p class="text-justify">A unique URL can be emailed, texted, or posted to anyone around the world looking for talent.Is the member a minor?
+					</p>
+					<p class="text-justify">Is the member a minor?</p>
+					<div class="text-justify" style="width: 100%;display: flex">
+						<div style="margin: 0px 20px;"><input type="radio" onclick="window.location='{{route('pricing',['minor'=>true])}}';" name="member_minor" value="yes" id=""><span> Yes</span></div>
+						<div><input type="radio" onclick="window.location='{{route('pricing',['minor'=>false])}}';" name="member_minor" value="no" id=""><span> No</span></div>
+					</div>
+            	</div>
+            	<div class="col-sm-4 text-center">
+            		<img class="max-127" src="{{ asset('web/img/handshake.png') }}">
+            		<h3>Become A Provider</h3>
+            		<p class="text-justify">Are you looking for talented individuals for a gig, for a job, or for a project?</p>
+					<p class="text-justify">To give our diverse pool of talent a host of opportunities, we offer providers a free account to search for and contact talent, as well as post job opportunities on our community forum.</p>
+					<a href="{{route('agent_register')}}" class="btn btn-primary btn-pad">Sign Up</a>
+            	</div>
+            	<div class="col-sm-4 text-center">
+            		<img class="max-127" src="{{ asset('web/img/wallet.png') }}">
+            		<h3>Become an Affiliate</h3>
+					<p class="text-justify">Do you have a keen eye or a keen ear to spot talent from all walks of life?  Are you the type of person that likes to see others reach their dreams of becoming an actor, model, musician and more?</p>
+					<p class="text-justify">Becoming a Talent Depot affiliate allows you to be our eyes and ears in real life or online.</p>
+					<a href="#" class="btn btn-primary btn-pad">Learn more</a>
+            	</div>
+            	
+            </div>
+
+            {{-- <div class="text-center mt-5">
+            	<a href="{{route('register')}}" class="btn btn__red animation">Join now</a>
+            </div> --}}
+        </div>
+    </div>
+</section>
+
+{{-- <section>
+    <div class="section how-it-works">
+        <div class="container">
+        	<div class="text-center">
+        		<h2 class="text-dark">How Talent Depot works for agents</h2>
         	</div>
             <div class="row mt-3">
             	<div class="col-sm-4 text-center">
@@ -72,7 +124,7 @@
 			</div>
 		</div>
 	</div>      
-</section>
+</section> --}}
 
 
 @endsection

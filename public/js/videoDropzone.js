@@ -1,18 +1,11 @@
-function render_dropzone(store_url) {
-    var myDropzoneTheFirst = new Dropzone(
+function render_videodropzone(store_url) {
+    var video_dropzone = new Dropzone(
         //id of drop zone element 1
-        '#imageDropzone', {
+        '#videoDropzone', {
         url: store_url,
         maxFilesize: 12, // MB
-        acceptedFiles: "image/jpg,image/jpeg,image/png",
+        acceptedFiles: "video/mp4,video/mkv,video/mov,video/wmv",
         dictDefaultMessage: "Drop Your Files here.",
-        /* maxFiles: function (file, done) {
-            if (validImageTypes.includes(file.type)) {
-                done("No more images");
-            }
-            else { done(); }
-        }, */
-        /* autoProcessQueue: false, */
         accept: function (file, done) {
             console.log("uploaded");
             done();
@@ -28,16 +21,16 @@ function render_dropzone(store_url) {
         },
         sending: function (file, xhr, formData) {
             const fileType = file.type;
-            /* console.log(fileType); */
+            console.log(fileType);
 
-            if (validImageTypes.includes(fileType)) {
-                formData.append('type', 'image');
+            if (validVideoTypes.includes(fileType)) {
+                formData.append('type', 'video');
             }
         },
         success: function (file, response) {
             console.log(file);
             if (response.name !== null) {
-                $('#imageDropzone').append('<input type="hidden" name="document[]" value="' + response.name + '">')
+                $('#videoDropzone').append('<input type="hidden" name="document[]" value="' + response.name + '">')
                 uploadedDocumentMap[file.upload.filename] = response.name
                 toastr.success('file uploaded');
             }
@@ -63,7 +56,7 @@ function render_dropzone(store_url) {
                     } else {
                         name = uploadedDocumentMap[file.upload.filename]
                     }
-                    $('#imageDropzone').find('input[name="document[]"][value="' + name + '"]').remove()
+                    $('#videoDropzone').find('input[name="document[]"][value="' + name + '"]').remove()
                 },
                 error: function (e) {
                     console.log(e);

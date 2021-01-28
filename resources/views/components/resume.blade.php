@@ -19,6 +19,10 @@
                             <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
 
                         </div>
+                        <div class="talent-intro text-center">
+                            <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
+                            
+                        </div> 
                         {{-- <div class="talent-intro text-center">
                             <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
                             @if (isset($profile->custom_link))
@@ -29,20 +33,20 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <table class="w-100">
                         <tr>
                           <th class="w-25">Height: </th>
-                          <td class="pb-1 pt-1">{{$profile->feet ? \Str::finish($profile->feet, "'") : ''}} {{$profile->height ? \Str::finish($profile->height,"''") : ''}}</td>
+                          <td class="pb-1 pt-1">{{!is_null($profile) && $profile->feet ? \Str::finish($profile->feet, "'") : ''}} {{!is_null($profile) && $profile->height ? \Str::finish($profile->height,"''") : ''}}</td>
                         </tr>
                     </table>
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <table class="w-100">
                         <tr>
-                          <th class="w-25">Hair: </th>
-                          <td class="pb-1 pt-1">{{$profile->hairs ?? ''}}</td>
+                          <th class="w-25" style="text-align: end">Hair: </th>
+                          <td class="pb-1 pt-1" style="width: 5%">{{!is_null($profile) && $profile->hairs ?? ''}}</td>
                         </tr>
                     </table>
                   </div>
@@ -50,15 +54,15 @@
                     <table class="w-100">
                         <tr>
                           <th class="w-25">Weight: </th>
-                          <td class="pb-1 pt-1">{{$profile->weight ?? ''}}</td>
+                          <td class="pb-1 pt-1">{{!is_null($profile) && $profile->weight ?? ''}}</td>
                         </tr>
                     </table>
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <table class="w-100">
                         <tr>
-                          <th class="w-25">Eyes: </th>
-                          <td class="pb-1 pt-1">{{$profile->eyes ?? ''}}</td>
+                          <th class="w-25" style="text-align: end">Eyes: </th>
+                          <td class="pb-1 pt-1" style="width: 5%">{{!is_null($profile) && $profile->eyes ?? ''}}</td>
                         </tr>
                     </table>
                   </div>

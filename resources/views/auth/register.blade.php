@@ -5,7 +5,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
-<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
 {!! htmlScriptTagJsApi([
     'action' => 'homepage',
 ]) !!}
@@ -102,6 +102,58 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     /* .ui-datepicker-year{
         display:none;
     } */
+
+    .head_div{
+        border-bottom: 2px solid #ef7b2c;
+        background-color: gainsboro;
+    }
+
+    .switch-field {
+        overflow: hidden;
+    }
+
+    .switch-field input {
+        position: absolute !important;
+        clip: rect(0, 0, 0, 0);
+        height: 1px;
+        width: 1px;
+        border: 0;
+        overflow: hidden;
+    }
+
+    .switch-field label {
+        background-color: #e4e4e4;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 14px;
+        line-height: 1;
+        text-align: center;
+        padding: 8px 16px;
+        margin-right: -1px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+        transition: all 0.1s ease-in-out;
+    }
+
+    .switch-field label:hover {
+        cursor: pointer;
+    }
+
+    .switch-field input:checked + label {
+        background-color: #df691ad1;
+        box-shadow: none;
+    }
+
+    .switch-field label:first-of-type {
+        border-radius: 4px 0 0 4px;
+    }
+
+    .switch-field label:last-of-type {
+        border-radius: 0 4px 4px 0;
+    }
+
+    #other_type_input{
+        display: none;
+    }
 </style>
 @endsection
 
@@ -124,7 +176,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
         <div class="container">
             <div class="row">
                 <h3 class="text__quote centered">New membership</h3>
-                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
 
                     @if(count($errors)>0)
                         <div class="alert alert-danger mt-4">
@@ -137,13 +189,13 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                         </div>
                     @endif
                     
-                    <form class="apply-form form-horizontal" method="POST" id="registerForm" action="{{ route('register') }}">
+                    <form class="apply-form form-horizontal" method="POST" id="registerForm" action="{{ route('agent_register') }}">
                        @csrf
-                        <input type="hidden" name="account_type" value="candidate">
+                        <input type="hidden" name="account_type" value="agent">
                         @if (\Request::query('referal'))
                             <input type="hidden" name="referal" value="{{\Request::query('referal')}}">
                         @endif
-                        <div class="form-block">
+                        {{-- <div class="form-block">
                             <div class="tg-btn-sp m-b-20">
                                 <div class="switch-button">
                                     <span class="active"></span>
@@ -151,9 +203,41 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     <span class="switch-button-case right active-case">Creative</span>
                                 </div>
                             </div>
-                        </div>
-                        
+                        </div> --}}
+
                         <div class="form-block">
+                            <h4 class="head_div">Login Details</h4>
+                            <div class="form-group">
+                                <label for="email" class="col-sm-4 control-label">Email <span class="req">*</span></label>
+                                <div class="col-md-8">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                    {{-- @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror --}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-4 control-label">Create a Password <span class="req">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                </div>
+                                {{-- @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror --}}
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="password-confirm" class="col-sm-4 control-label">Confirm Password <span class="req">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                </div>
+                            </div>
+                            <h4 class="head_div">Personal Information</h4>
                             <div class="form-group">
                                 <label for="f_name" class="col-sm-4 control-label">First Name <span class="req">*</span></label>
                                 <div class="col-sm-8">
@@ -168,18 +252,58 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             </div> 
                             <div class="form-group">
                                 <label for="l_name" class="col-sm-4 control-label">Last Name <span class="req">*</span></label>
-                                 <div class="col-sm-8">
-                                <input id="l_name" type="text" class="form-control @error('l_name') is-invalid @enderror" name="l_name" value="{{ old('l_name') }}" required autocomplete="l_name" autofocus>
+                                <div class="col-sm-8">
+                                    <input id="l_name" type="text" class="form-control @error('l_name') is-invalid @enderror" name="l_name" value="{{ old('l_name') }}" required autocomplete="l_name" autofocus>
 
-                               {{--  @error('f_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror --}}
+                                {{--  @error('f_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror --}}
+                                </div>
                             </div>
+                            <div class="form-group">
+                                <label for="b_name" class="col-sm-4 control-label">Business Name</label>
+                                <div class="col-sm-8">
+                                    <input id="b_name" type="text" class="form-control @error('b_name') is-invalid @enderror" name="b_name" value="{{ old('b_name') }}" autocomplete="b_name" autofocus>
+
+                                {{--  @error('f_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror --}}
+                                </div>
+                            </div>
+                            <div class="form-group" id="phone-div">
+                                <label for="phone" class="col-sm-4 control-label">Cell Phone <span class="req">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="tel" maxlength="15"  class="form-control" name="phone" id="phone" value="{{ old('phone') }}" required>
+                                    <input type="tel" class="hide" name="new_phone" id="hiden">
+                                    <span id="valid-msg" class="valid-feedback hide">✓ Valid</span>
+                                    <span id="error-msg" class="invalid-feedback hide"></span>
+                                    
+                                    {{-- @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror --}}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="landline" class="col-sm-4 control-label">Office Phone</label>
+                                <div class="col-sm-8">
+                                    <input type="tel" maxlength="15"  class="form-control" name="landline" id="landline" value="{{ old('landline') }}">
+                                    
+                                    {{-- @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror --}}
+                                </div>
                             </div>
                           
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="gender" class="col-sm-4 control-label">Gender <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <select name="gender" id="gender" name = "gender" class="form-control" required>
@@ -187,22 +311,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         <option value="female" {{ old('gender')=='female' ?'selected':''}}>Female</option>
                                         <option value="male" {{ old('gender')=='male' ?'selected':''}}>Male</option>
                                     </select>
-                                    {{-- @error('gender')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror --}}
                                  </div>
                             </div>
                             <div class="form-group">
                                 <label for="dob" class="col-sm-4 control-label">Date of birth <span class="req">*</span></label>
                                 <div class="col-sm-8 form-row">
-                                    {{-- <input id="dob" type="date" min='1920-01-01' class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus> --}}
-                                    {{-- @error('dob')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror --}}
                                     <section id="date-of-birth-example-1">
                                         <fieldset style="display: flex;">
                                           <div class="field-inline-block">
@@ -222,57 +335,24 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         </fieldset>
                                     </section>
                                  </div>
-                            </div>
+                            </div> --}}
                         
-                            <div class="form-group" id="phone-div">
-                                <label for="phone" class="col-sm-4 control-label">Phone <span class="req">*</span></label>
-                                <div class="col-sm-8">
-                                    <input type="tel" maxlength="15"  class="form-control" name="phone" id="phone" value="{{ old('phone') }}">
-                                    <input type="tel" class="hide" name="new_phone" id="hiden">
-                                    <span id="valid-msg" class="valid-feedback hide">✓ Valid</span>
-                                    <span id="error-msg" class="invalid-feedback hide"></span>
-                                    
-                                    {{-- @error('phone')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror --}}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="col-sm-4 control-label">Email <span class="req">*</span></label>
-                                <div class="col-md-8">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                {{-- @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror --}}
-                            </div>
-                            </div>
-                            
                             <div class="form-group">
                                 <label for="country" class="col-sm-4 control-label">Country <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <select name="country" id="country" class="form-control">
+                                    <select name="country" id="country" class="form-control" required>
                                         <option value="">Select</option>
                                         @foreach ($countries as $country)
                                             <option value="{{$country->nicename}}" {{ !is_null(old('country')) ? (old('country')==$country->nicename ?'selected':''): ($country->nicename=="United States" ? 'selected' : '')}}>{{$country->nicename}}</option>
                                         @endforeach
                                         
                                     </select>
-                                    {{-- @error('country')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror --}}
                                 </div>
                             </div>  
                             <div class="form-group">
                                 <label for="city" class="col-sm-4 control-label">City <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="city" value="{{ old('city') }}" id="city">
+                                    <input type="text" class="form-control" name="city" value="{{ old('city') }}" id="city" required>
                                     {{-- @error('city')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -283,7 +363,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="state" class="col-sm-4 control-label">State <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="state" value="{{ old('state') }}" id="state">
+                                    <input type="text" class="form-control" name="state" value="{{ old('state') }}" id="state" required>
                                     {{-- @error('state')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -292,62 +372,62 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="address" class="col-sm-4 control-label">Home Address 1 <span class="req">*</span></label>
+                                <label for="address" class="col-sm-4 control-label">Custom</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="h_adress_1" value="{{ old('h_adress_1') }}" id="h_adress_1" required>
-                                   {{--  @error('h_adress_1')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror --}}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="h_adress_2" class="col-sm-4 control-label">Home Address 2</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="h_adress_2" value="{{ old('h_adress_2') }}" name="h_adress_2">
-                                    {{-- @error('h_adress_2')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror --}}
-                                </div>
-                            </div>
-                        
-                            <div class="form-group">
-                                <label for="zipcode" class="col-sm-4 control-label">Zip Code <span class="req">*</span></label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" value="{{ old('zipcode') }}" name="zipcode" id="zipcode">
-                                    {{-- @error('zipcode')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror --}}
-                                </div>
-                            </div>
-                             
-                            <div class="form-group">
-                                <label for="password" class="col-sm-4 control-label">Create a Password <span class="req">*</span></label>
-                                <div class="col-sm-8">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                </div>
-                                {{-- @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror --}}
-                            </div>
-                           
-                            <div class="form-group">
-                                <label for="password-confirm" class="col-sm-4 control-label">Confirm Password <span class="req">*</span></label>
-                                <div class="col-sm-8">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                   
                                 </div>
                             </div>
 
                             <div class="form-group">
+                                <label for="password-confirm" class="col-sm-4 control-label">Provider Type(s)</label>
+                                <div class="col-sm-8">
+                                    <div class="switch-field">
+                                        <input type="checkbox" id="Casting Agent" name="provider_type[]" value="Casting Agent"/>
+                                        <label class="mr-3" for="Casting Agent">Casting Agent</label>
+                                        <input type="checkbox" id="Fashion Designer" name="provider_type[]" value="Fashion Designer" />
+                                        <label class="mr-3" for="Fashion Designer">Fashion Designer</label>
+                                        <input type="checkbox" id="Manager" name="provider_type[]" value="Manager" />
+                                        <label class="mr-3" for="Manager">Manager</label>
+                                        <input type="checkbox" id="Photographer" name="provider_type[]" value="Photographer" />
+                                        <label class="mr-3" for="Photographer">Photographer</label>
+                                        <input type="checkbox" id="Talent Agent" name="provider_type[]" value="Talent Agent" />
+                                        <label class="mr-3" for="Talent Agent">Talent Agent</label>
+                                        <input type="checkbox" id="Theatrical producer" name="provider_type[]" value="Theatrical producer" />
+                                        <label class="mr-3" for="Theatrical producer">Theatrical producer</label>
+                                        <input type="checkbox" id="Casting Director" name="provider_type[]" value="Casting Director" />
+                                        <label class="mr-3" for="Casting Director">Casting Director</label>
+                                        <input type="checkbox" id="Music producer" name="provider_type[]" value="Music producer" />
+                                        <label class="mr-3" for="Music producer">Music producer</label>
+                                        <input type="checkbox" id="Music director" name="provider_type[]" value="Music director" />
+                                        <label class="mr-3" for="Music director">Music director</label>
+                                        <input type="checkbox" id="Producer" name="provider_type[]" value="Producer" />
+                                        <label class="mr-3" for="Producer">Producer</label>
+                                        <input type="checkbox" id="Talent Scout" name="provider_type[]" value="Talent Scout" />
+                                        <label class="mr-3" for="Talent Scout">Talent Scout</label>
+                                        <input type="checkbox" id="Other" name="provider_type[]" value="Other" />
+                                        <label for="Other">Other:</label>
+                                    </div>
+                                    <input class="form-control" id="other_type_input" type="text" name="provider_type[]">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address" class="col-sm-4 control-label">Tell us more about your business </label>
+                                <div class="col-sm-8">
+                                    <textarea name="about_business" class="form-control" name="about_business" value="{{ old('about_business') }}" id="about_business" cols="30" rows="3"></textarea>
+                                   
+                                </div>
+                            </div>
+                             
+                            <div class="form-group">
                                 <div class="col-md-offset-4 col-sm-offset-4 col-sm-8">
                                     <input class="form-check-input" type="checkbox" name="user_agreement" required id="user_agreement" {{ old('user_agreement') ? 'checked' : '' }}> I agree to The Talent Depot <a href="{{route('user_agreement')}}" style="color: #df691a" target="_blank">User Agreement.</a> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-sm-offset-4 col-sm-8">
+                                    <input class="form-check-input" type="checkbox" name="license_agreement" required id="license_agreement" {{ old('license_agreement') ? 'checked' : '' }}> I agree to The Talent Depot <a href="{{route('license_agreement')}}" style="color: #df691a" target="_blank">User License.</a> 
                                 </div>
                             </div>
 
@@ -371,6 +451,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js" integrity="sha512-DNeDhsl+FWnx5B1EQzsayHMyP6Xl/Mg+vcnFPXGNjUZrW28hQaa1+A4qL9M+AiOMmkAhKAWYHh1a+t6qxthzUw==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
         var user_type = 'agent';
@@ -528,6 +609,23 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(document).ready(function() {
+            $('#landline').inputmask({"mask": "999-999-9999"});
+
+            $('input[type="checkbox"][name="provider_type[]"]').change(function() {
+                $('[name="provider_type[]"]:checked').each(function () {
+                    console.log($(this).val());
+                    if ($(this).val()=='Other') {
+                        $('#other_type_input').show();
+                        return false;
+                    }
+                    else{
+                        $('#other_type_input').val('');
+                        $('#other_type_input').hide();
+                    }
+                });
+            });
+            
+
             // Autotab
             $('.date-field').autotab('number');
             

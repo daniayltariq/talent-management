@@ -40,17 +40,17 @@
 							<li class="m-menu__list-item  {{ Request::is('how-it-works') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('how-it-works') }}">How it works</a>
 							</li>
-							<li class="m-menu__list-item  {{ Request::is('about-us') ? 'm-menu__list-item_active' : '' }}">
-								<a href="{{ route('about-us') }}">About Us</a>
-							</li>
 							<li class="m-menu__list-item  {{ Request::is('featured-talents') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('featured_talents') }}">Featured Talent</a>
+							</li>
+							<li class="m-menu__list-item  {{ Request::is('testimonials') ? 'm-menu__list-item_active' : '' }}">
+								<a href="{{ route('testimonials') }}">Testimonials</a>
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('community') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('community') }}">Community</a>
 							</li>
-							<li class="m-menu__list-item  {{ Request::is('testimonials') ? 'm-menu__list-item_active' : '' }}">
-								<a href="{{ route('testimonials') }}">Testimonials</a>
+							<li class="m-menu__list-item  {{ Request::is('about-us') ? 'm-menu__list-item_active' : '' }}">
+								<a href="{{ route('about-us') }}">About Us</a>
 							</li>
 
 							{{-- <li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
@@ -100,21 +100,24 @@
 							
 							@if(Auth::guest()) 
 							
-								<li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
-									<a href="javascript:;">Join {{-- <span style="color: #df691a;font-weight: 500;">US</span> --}} Us</a>
+								{{-- <li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
+									<a href="javascript:;">Join <span style="color: #df691a;font-weight: 500;">US</span> Us</a>
 									<ul class="m-menu__sub d-hide">
 										<li class="m-menu__sub-item">
 											<a href="{{ route('how-it-works') }}">Learn more</a>
 										</li>
 										@if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0))
 											<li class="m-menu__sub-item">
-												<a href="{{ route('pricing') }}">Plans</a>
+												<a href="{{ route('pricing') }}">Membership Plans</a>
 											</li>
 										@endif
 										<li class="m-menu__sub-item">
-											<a href="{{ route('register') }}">Join <span style="color: #df691a;font-weight: 500;">US</span> Now</a>
+											<a href="{{ route('how-it-works') }}">Join <span style="color: #df691a;font-weight: 500;">US</a>
 										</li>
 									</ul>
+								</li> --}}
+								<li class="m-menu__list-item  {{ Request::is('how-it-works') ? 'm-menu__list-item_active' : '' }}">
+									<a href="{{ route('how-it-works') }}">Join Us</a>
 								</li>
 								<li class="m-menu__list-item menu-item-has-children" style="padding-top: 0;">
 									<button type="button" class="btn-cust btn-warning bg-talent" style="height: unset !important">
@@ -174,6 +177,9 @@
 											</li>
 											<li class="m-menu__sub-item">
 												<a href="{{ route('agent.topic.create') }}">Create Post</a>
+											</li>
+											<li class="m-menu__sub-item">
+												<a href="#" pd-popup-open="popupReferal">Refer a friend</a>
 											</li>
 											<li class="m-menu__sub-item">
 												<a href="{{ route('agent.topic.index') }}">Posts</a>

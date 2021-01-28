@@ -8,6 +8,7 @@ use Illuminate\Http\File;
 use App\Models\Attachment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -36,11 +37,11 @@ class DashboardController extends Controller
         $subs=auth()->user()->subscriptions()->active()->first();
         
         if (!is_null($subs) && $subs->count()>0) {
-            $plan=Plan::select('name','description','pictures','social_links','social_limit')->where('stripe_plan',$subs->stripe_plan)->first();
+            $plan=Plan::select('name','description','pictures','audios','videos','social_links','social_limit')->where('stripe_plan',$subs->stripe_plan)->first();
             
             $data["plan"]=$plan;
         }
-        /* dd($data['social'][0]); */
+        /* dd($data['plan']); */
         return view('web.account.dashboard',compact('data'));
 
     }
@@ -67,7 +68,11 @@ class DashboardController extends Controller
             $country_data=json_decode($request->new_phone,true);
            
             $user=User::findOrFail(auth()->user()->id);
-            $user->fill(is_null($request->password)?$request->except(['password']):$request->all());
+            $user->fill(is_null($request->password)?$request->except(['password','dob']):$request->all());
+            if($request->date_){
+                $user->dob=$request->date_['year'].'-'.$request->date_['month'].'-'.$request->date_['day'];
+            }
+            
             $user->phone=Str::of($request->phone)->prepend('+'.$country_data['dialCode']);
             $user->phone_c_data=$request->new_phone;
             if (!is_null($request->password)) {
@@ -151,21 +156,36 @@ class DashboardController extends Controller
         return $filename;  
     }
 
-    public function fetchAttachments()
+    public function fetchAttachments(Request $request)
     {
         $data=[
             'images'=>auth()->user()->attachments->where('type','image'),
             'video'=>auth()->user()->attachments->where('type','video'),
             'audio'=>auth()->user()->attachments->where('type','audio')
         ];
-
-        return view('components.attachments',compact('data'));
+        $media_key=$request->media_key;
+        if ($media_key=='image') {
+            return view('components.attachments',compact('data'));
+        }
+        elseif($media_key=='audio'){
+            return view('components.audios',compact('data'));
+        }
+        elseif($media_key=='video'){
+            return view('components.videos',compact('data'));
+        }
+        
     }
 
     public function resume()
     {
         $profile=auth()->user()->profile;
         return view('print.resume',compact('profile'));
+    }
+
+    public function signup()
+    {
+        $countries=DB::table('countries')->select('nicename')->get();
+        return view('web.account.signup', compact('countries'));
     }
 
 }

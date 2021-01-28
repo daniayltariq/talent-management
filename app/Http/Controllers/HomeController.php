@@ -92,6 +92,14 @@ class HomeController extends Controller
                'audio'=>$user->attachments->where('type','audio')
             ];
 
+            $subs=$user->subscriptions()->active()->first();
+         
+            if ($subs->count()>0) {
+               $plan=Plan::select('name','description','agent_contact')->where('stripe_plan',$subs->stripe_plan)->first();
+               
+               $data["plan"]=$plan;
+            }
+            
             return view('web.pages.models-single',compact('data'));
          }
          else{
@@ -151,6 +159,15 @@ class HomeController extends Controller
       $test=\App\Models\Testimonial::where('status',1)->get();
       /* dd($test); */
       return view('web.pages.testimonials',compact('test'));
+   }
+
+   public function showSignUp(Request $request)
+   {
+      if ($request->query() && $request->query('referal')) {
+         session()->put('referal',$request->referal);
+      }
+      
+      return view('web.pages.how-it-works');
    }
 
     public function community()

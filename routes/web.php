@@ -17,9 +17,36 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout' );
-Auth::routes(['verify' => true]);
-Auth::routes();
+Auth::routes(/* ['verify' => true] */);
+/* Auth::routes(); */
 
+Route::get('signup',  [App\Http\Controllers\HomeController::class,'showSignUp'])->name('signup');
+// Authentication Routes...
+Route::get('login',  [App\Http\Controllers\Auth\LoginController::class,'showLoginForm'])->name('login');
+Route::post('login',  [App\Http\Controllers\Auth\LoginController::class,'login']);
+Route::post('logout',  [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
+
+// Registration Routes...
+Route::get('register',  [App\Http\Controllers\Auth\RegisterController::class,'showRegistrationForm'])->name('register');
+Route::post('register', [App\Http\Controllers\Auth\RegisterController::class,'register']);
+Route::get('agent_register',  [App\Http\Controllers\Auth\AgentRegisterController::class,'showAgentForm'])->name('agent_register');
+Route::post('agent_register',  [App\Http\Controllers\Auth\AgentRegisterController::class,'validateAgentForm'])->name('agent_register');
+
+// Password Reset Routes...
+Route::get('password/reset', [App\Http\Controllers\Auth\ForgotPasswordController::class,'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [App\Http\Controllers\Auth\ForgotPasswordController::class,'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class,'showResetForm'])->name('password.reset');
+Route::post('password/reset', [App\Http\Controllers\Auth\ResetPasswordController::class,'reset'])->name('password.update');
+
+// Confirm Password (added in v6.2)
+Route::get('password/confirm', [App\Http\Controllers\Auth\ConfirmPasswordController::class,'showConfirmForm'])->name('password.confirm');
+Route::post('password/confirm', [App\Http\Controllers\Auth\ConfirmPasswordController::class,'confirm']);
+
+// Email Verification Routes...
+Route::get('email/verify', [App\Http\Controllers\Auth\VerificationController::class,'show'])->name('verification.notice');
+Route::get('email/verify/{id}/{hash}', [App\Http\Controllers\Auth\VerificationController::class,'verify'])->name('verification.verify'); // v6.x
+/* Route::get('email/verify/{id}', [App\Http\Controllers\Auth\VerificationController::class,verify')->name('verification.verify'); // v5.x */
+Route::get('email/resend', [App\Http\Controllers\Auth\VerificationController::class,'resend'])->name('verification.resend');
 
 /*
 |--------------------------------------------------------------------------
@@ -125,6 +152,10 @@ Route::get('/user_agreement', function () {
     return view('web.pages.user_agreement');
 })->name('user_agreement');
 
+Route::get('/license_agreement', function () {
+    return view('web.pages.license_agreement');
+})->name('license_agreement');
+
 Route::get('/denial', function (Request $request) {
     return view('web.pages.denial')->with('message',session('message'));
 })->name('denial');
@@ -134,7 +165,7 @@ Route::get('/magzine/single', [App\Http\Controllers\HomeController::class, 'magz
 
 Route::get('/models', [App\Http\Controllers\HomeController::class, 'models'])->name('models');
 Route::get('models/grid', [App\Http\Controllers\HomeController::class, 'modelsgrid'])->name('models.grid');
-Route::get('model/{link}', [App\Http\Controllers\HomeController::class, 'models'])->name('model');
+Route::get('member/{link}', [App\Http\Controllers\HomeController::class, 'models'])->name('model');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('model/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('model.single');
@@ -170,19 +201,26 @@ Route::group(['namespace' => 'Subscription\Controllers'], function () {
      * Subscription Resource Routes
      */
 
-    Route::middleware(['auth'])->group(function () {
+    /* Route::middleware(['auth'])->group(function () { */
         Route::get('/subscription/{plan}', [App\Http\Controllers\Subscription\SubscriptionController::class, 'index'])->name('subscription.index');
         Route::post('/subscription', [App\Http\Controllers\Subscription\SubscriptionController::class, 'store'])->name('subscription.store');
-
-    });
+        Route::get('/sendOtp', [App\Http\Controllers\Subscription\SubscriptionController::class, 'sendOtp'])->name('subscription.sendOtp');
+        Route::get('/verifyOtp', [App\Http\Controllers\Subscription\SubscriptionController::class, 'verifyOtp'])->name('subscription.verifyOtp');
+    /* }); */
 });
 
-Route::group(['prefix' => '/account', 'middleware' => ['auth','verified','isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
+Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'isCandidate'], 'namespace' => 'Account', 'as' => 'account.'], function () {
 
     /**
      * Profile
      */
     Route::middleware(['subscription.customer','subscription.active'])->group(function () {
+        Route::middleware(['hasNoData'])->group(function () {
+            Route::get('/signup', [App\Http\Controllers\Account\DashboardController::class, 'signup'])->name('signup');
+            Route::post('/signup', [App\Http\Controllers\Auth\RegisterController::class,'candidateSignup'])->name('candidate_signup');
+            
+        });
+        
         Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
 
         Route::middleware(['isActive'])->group(function () {
@@ -335,6 +373,9 @@ Route::group([
     Route::post('mail_talent',[App\Http\Controllers\Agent\DashboardController::class, 'mailTalent'])->name('mail_talent');
 
     Route::post('send_text',[App\Http\Controllers\Agent\PicklistController::class, 'sendText'])->name('send_text');
+
+    Route::get('/generate_referal', [App\Http\Controllers\Agent\ReferalController::class, 'index'])->name('generate_referal');
+    Route::get('/reward', [App\Http\Controllers\Agent\ReferalController::class, 'reward'])->name('reward');
 });
 
 

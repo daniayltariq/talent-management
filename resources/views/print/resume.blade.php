@@ -314,13 +314,13 @@
         .profile-sec {
             height: 150px;
             width: 150px;
-            border-radius: 50%;
+            /* border-radius: 50%; */
             padding: 7px;
-            background: #f8b248;
+            background: none !important;
         }
 
         .profile-sec img {
-            border-radius: 50%;
+            border-radius: 0;
         }
 
         .single-talent {
@@ -7273,6 +7273,11 @@ button.close {
                                                     <img src="{{ asset(is_null($profile) || is_null($profile->profile_img) ? 'web/img/user.png': ('storage/uploads/profile/'.$profile->profile_img)) }}" class="img img-responsive tal-profile">
     
                                                 </div>
+                                                <div class="talent-intro text-center">
+                                                    <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
+                                                    
+                                                    
+                                                </div>
                                                 {{-- <div class="talent-intro text-center">
                                                     <h2 class="mb-0">{{$profile->legal_first_name ?? ''}} {{$profile->legal_last_name ?? ''}}</h2>
                                                     @if (isset($profile->custom_link))
@@ -7283,7 +7288,7 @@ button.close {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row mt-5">
                                       <div class="col-xs-6 col-sm-6 col-md-6">
                                         <table class="w-100">
                                             <tr>

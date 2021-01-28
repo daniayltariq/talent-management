@@ -1,17 +1,11 @@
-function render_dropzone(store_url) {
-    var myDropzoneTheFirst = new Dropzone(
+function render_audiodropzone(store_url) {
+    var audio_dropzone = new Dropzone(
         //id of drop zone element 1
-        '#imageDropzone', {
+        '#audioDropzone', {
         url: store_url,
         maxFilesize: 12, // MB
-        acceptedFiles: "image/jpg,image/jpeg,image/png",
+        acceptedFiles: 'audio/mp3,audio/mpeg,audio/wav',
         dictDefaultMessage: "Drop Your Files here.",
-        /* maxFiles: function (file, done) {
-            if (validImageTypes.includes(file.type)) {
-                done("No more images");
-            }
-            else { done(); }
-        }, */
         /* autoProcessQueue: false, */
         accept: function (file, done) {
             console.log("uploaded");
@@ -30,14 +24,14 @@ function render_dropzone(store_url) {
             const fileType = file.type;
             /* console.log(fileType); */
 
-            if (validImageTypes.includes(fileType)) {
-                formData.append('type', 'image');
+            if (validAudioTypes.includes(fileType)) {
+                formData.append('type', 'audio');
             }
         },
         success: function (file, response) {
             console.log(file);
             if (response.name !== null) {
-                $('#imageDropzone').append('<input type="hidden" name="document[]" value="' + response.name + '">')
+                $('#audioDropzone').append('<input type="hidden" name="document[]" value="' + response.name + '">')
                 uploadedDocumentMap[file.upload.filename] = response.name
                 toastr.success('file uploaded');
             }
@@ -63,7 +57,7 @@ function render_dropzone(store_url) {
                     } else {
                         name = uploadedDocumentMap[file.upload.filename]
                     }
-                    $('#imageDropzone').find('input[name="document[]"][value="' + name + '"]').remove()
+                    $('#audioDropzone').find('input[name="document[]"][value="' + name + '"]').remove()
                 },
                 error: function (e) {
                     console.log(e);
@@ -74,13 +68,19 @@ function render_dropzone(store_url) {
         },
         init: function (file) {
 
-            /* this.on('addedfile', function (file) {
-                setDropzoneImgLimit(file);
-            }); */
+            var myDropzone = this;
+            const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
 
             this.on("maxfilesexceeded", function (file) {
                 toastr.error("No more files please!");
             });
+            /* this.on('addedfile', function (file) {
+                console.log($('#audioDropzone')[0].dropzone.options.maxFiles);
+                if (validAudioTypes.includes(file.type)) {
+                    sendAudio(file);
+                }
+            }); */
+
 
         }
     }
