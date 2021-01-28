@@ -345,7 +345,16 @@
                             <span class="font-weight-bold small text-uppercase">Personal information</span></a>
                         <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
                             <i class="fa fa-user mr-2"></i>
-                            <span class="font-weight-bold small text-uppercase">My Images</span></a>
+                            <span class="font-weight-bold small text-uppercase">My Images</span>
+                        </a>
+                        <a class="nav-link mb-3 p-3 shadow" id="v-pills-video-tab" data-toggle="pill" href="#v-pills-video" role="tab" aria-controls="v-pills-video" aria-selected="false">
+                            <i class="fa fa-user mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">My Videos</span>
+                        </a>
+                        <a class="nav-link mb-3 p-3 shadow" id="v-pills-audio-tab" data-toggle="pill" href="#v-pills-audio" role="tab" aria-controls="v-pills-audio" aria-selected="false">
+                            <i class="fa fa-user mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">My Audios</span>
+                        </a>
                         @if ($data['plan'] && $data['plan']->social_links==1)
                         <a class="nav-link mb-3 p-3 shadow" id="v-social-tab" data-toggle="pill" href="#v-social" role="tab" aria-controls="v-social" aria-selected="false">
                             <i class="fa fa-icons mr-2"></i>
@@ -517,6 +526,20 @@
                             
                             <div id="render_attachments">
                                 @include('components.attachments',['data'=>$data])
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-audio" role="tabpanel" aria-labelledby="v-pills-audio-tab">
+                            
+                            <div id="render_audios">
+                                @include('components.audios',['data'=>$data])
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-video" role="tabpanel" aria-labelledby="v-pills-video-tab">
+                            
+                            <div id="render_videos">
+                                @include('components.videos',['data'=>$data])
                                 
                             </div>
                         </div>
@@ -944,11 +967,12 @@
         }
     } */
 
-    /* function sendAudio(file)
+    function sendAudio(file)
     {
         console.log(file);
         var audiofile=new FormData($('#imageDropzone')[0]);
-        audiofile.append('audio',file);
+        audiofile.append('file',file);
+        audiofile.append('type','audio');
         $.ajax({
             url: '{{ route('account.storeMedia') }}',
             contentType: false,
@@ -964,10 +988,12 @@
                 toastr.error('something went wrong!');
             }
         });
-    } */
+    }
 </script>
 
 <script src="{{asset('js/mydropzone.js')}}"></script>
+<script src="{{asset('js/audioDropzone.js')}}"></script>
+<script src="{{asset('js/videoDropzone.js')}}"></script>
 <script>
     $(document).ready(function () {
         var $social_repeater = $('.repeater').repeater({
@@ -1044,12 +1070,16 @@
         
         if ( $('div#v-pills-tab').find(e.target).length) 
         {
-            if (e.target.id === $('a.nav-link.active').attr('id')) {
+            //if images tab
+            if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-profile-tab') {
                 myDropzoneTheFirst.disable();
-
+                console.log(e.target.id);
                 $.ajax({
                     url: '{{ route('account.fetch_attachments') }}',
                     type: 'GET',
+                    data:{
+                        media_key:'image'
+                    },
                     success: function(res) {
                         $('#render_attachments').html(res);
                         
@@ -1069,6 +1099,72 @@
                     },
                     error: function(error) {
                         $('#render_attachments').html("<h4>No Attachments Found</h4>");
+                    }
+                });
+            }
+
+            //if audio tab
+            else if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-audio-tab') {
+                /* myDropzoneTheFirst.disable(); */
+                console.log(e.target.id);
+                $.ajax({
+                    url: '{{ route('account.fetch_attachments') }}',
+                    type: 'GET',
+                    data:{
+                        media_key:'audio'
+                    },
+                    success: function(res) {
+                        $('#render_audios').html(res);
+                        
+                        $.get( '{{ route('account.get_limit') }}/?q=fetch_limit', function() {})
+                            .done(function(res) {
+                                
+                                var store_url='{{ route('account.storeMedia') }}';
+                                render_audiodropzone(store_url);
+                                console.log("{{$data['plan']->audios}}");
+                                $('#audioDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->audios}}"-res['audio_limit'];
+                            })
+                            .fail(function() {
+                                alert( "error" );
+                            });
+                        
+                        /* myDropzoneTheFirst.enable(); */
+                    },
+                    error: function(error) {
+                        $('#render_audios').html("<h4>No Attachments Found</h4>");
+                    }
+                });
+            }
+
+            //if video tab
+            else if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-video-tab') {
+                /* myDropzoneTheFirst.disable(); */
+                console.log(e.target.id);
+                $.ajax({
+                    url: '{{ route('account.fetch_attachments') }}',
+                    type: 'GET',
+                    data:{
+                        media_key:'video'
+                    },
+                    success: function(res) {
+                        $('#render_videos').html(res);
+                        
+                        $.get( '{{ route('account.get_limit') }}/?q=fetch_limit', function() {})
+                            .done(function(res) {
+                                
+                                var store_url='{{ route('account.storeMedia') }}';
+                                render_videodropzone(store_url);
+                                console.log("{{$data['plan']->videos}}");
+                                $('#videoDropzone')[0].dropzone.options.maxFiles = "{{$data['plan']->videos}}"-res['video_limit'];
+                            })
+                            .fail(function() {
+                                alert( "error" );
+                            });
+                        
+                        /* myDropzoneTheFirst.enable(); */
+                    },
+                    error: function(error) {
+                        $('#render_videos').html("<h4>No Attachments Found</h4>");
                     }
                 });
             }

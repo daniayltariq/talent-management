@@ -37,11 +37,11 @@ class DashboardController extends Controller
         $subs=auth()->user()->subscriptions()->active()->first();
         
         if (!is_null($subs) && $subs->count()>0) {
-            $plan=Plan::select('name','description','pictures','social_links','social_limit')->where('stripe_plan',$subs->stripe_plan)->first();
+            $plan=Plan::select('name','description','pictures','audios','videos','social_links','social_limit')->where('stripe_plan',$subs->stripe_plan)->first();
             
             $data["plan"]=$plan;
         }
-        /* dd($data['social'][0]); */
+        /* dd($data['plan']); */
         return view('web.account.dashboard',compact('data'));
 
     }
@@ -156,15 +156,24 @@ class DashboardController extends Controller
         return $filename;  
     }
 
-    public function fetchAttachments()
+    public function fetchAttachments(Request $request)
     {
         $data=[
             'images'=>auth()->user()->attachments->where('type','image'),
             'video'=>auth()->user()->attachments->where('type','video'),
             'audio'=>auth()->user()->attachments->where('type','audio')
         ];
-
-        return view('components.attachments',compact('data'));
+        $media_key=$request->media_key;
+        if ($media_key=='image') {
+            return view('components.attachments',compact('data'));
+        }
+        elseif($media_key=='audio'){
+            return view('components.audios',compact('data'));
+        }
+        elseif($media_key=='video'){
+            return view('components.videos',compact('data'));
+        }
+        
     }
 
     public function resume()
