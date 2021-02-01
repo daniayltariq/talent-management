@@ -340,13 +340,14 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="country" class="col-sm-4 control-label">Country <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <select name="country" id="country" class="form-control" required>
+                                    <input type="text"  name="country" id="country" class="form-control" value="United States" disabled>
+                                    {{-- <select name="country" id="country" class="form-control" required>
                                         <option value="">Select</option>
                                         @foreach ($countries as $country)
                                             <option value="{{$country->nicename}}" {{ !is_null(old('country')) ? (old('country')==$country->nicename ?'selected':''): ($country->nicename=="United States" ? 'selected' : '')}}>{{$country->nicename}}</option>
                                         @endforeach
                                         
-                                    </select>
+                                    </select> --}}
                                 </div>
                             </div>  
                             <div class="form-group">

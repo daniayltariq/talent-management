@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
 class AgentRegisterController extends Controller
 {
@@ -76,12 +77,12 @@ class AgentRegisterController extends Controller
             'phone' => ['required', 'max:255','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'country' => ['required', 'string', 'max:255'],
+            'country' => ['nullable', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'state' => ['required', 'string', 'max:255'],
-            'h_adress_1' => ['string', 'max:255'],
+            'h_adress_1' => ['nullable','string', 'max:255'],
             "provider_type"    => ['required','array'],
-            "provider_type.*"  => ['required','string','distinct'],
+            "provider_type.*"  => ['nullable','string','distinct'],
             'account_type' => ['required', 'string', 'in:agent'],
             'user_agreement'=>['required', 'string', 'in:on'],
             'license_agreement'=>['required', 'string', 'in:on']
@@ -93,8 +94,8 @@ class AgentRegisterController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        
-
+        /* dd($request->all()); */
+        $prov_types=array_filter($request->provider_type, fn($value) => !is_null($value) && $value !== 'Other');
         $country_data=json_decode($request['new_phone'],true);
         $user = User::create([
             'f_name' => $request['f_name'],
@@ -106,11 +107,11 @@ class AgentRegisterController extends Controller
             'landline'=>$request['landline'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'country' => $request['country'],
+            'country' => /* $request['country'] */"United States",
             'city' => $request['city'],
             'state' => $request['state'],
             'h_adress_1' => $request['h_adress_1'],
-            'provider_type' => implode(';',array_filter($request->provider_type, (fn($value) => (!is_null($value) && $value !== 'Other')))),
+            'provider_type' => implode(';',$prov_types),
         ]);
         
         $user->save();
@@ -129,6 +130,7 @@ class AgentRegisterController extends Controller
         $user->assignRole($request['account_type']);
         /* dd($user); */
         if ($user) {
+            Auth::login($user);
             return redirect()->route('/');
         }
         else{
