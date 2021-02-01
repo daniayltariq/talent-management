@@ -26,10 +26,11 @@ class PicklistController extends Controller
      */
     public function index(Request $request)
     {
-        $picklist=Picklist::where('user_id',auth()->user()->id)->paginate(5);
-        dd($picklist[0]->whereHas('items', function($q){
-            $q->member;
-        })->get());
+        $picklist=Picklist::where('user_id',auth()->user()->id)->whereHas('items', function($q){
+            $q->has('member');
+        })->paginate(5);
+        
+        /* dd($picklist->get()); */
         return view('web.agent.picklist',compact('picklist'));
     }
 
