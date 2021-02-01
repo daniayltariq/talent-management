@@ -179,7 +179,7 @@
 		<div class="row">
 			<div class="blog__posts col-md-12">
 				<div class="blog__list">
-					<h4 class="widget__title">{{$picklist->title}}.</h4>
+					<h4 class="widget__title">{{$picklist->title}}</h4>
 
 					{{-- <a href="">
 
