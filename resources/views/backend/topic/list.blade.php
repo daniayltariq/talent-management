@@ -61,6 +61,7 @@
 							</tbody>
 						</table>
 					</div>
+					{!!$blog->render()!!}
 				</div>
 			</div>
 			<!--end::Section-->
