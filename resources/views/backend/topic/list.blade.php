@@ -3,13 +3,16 @@
 @section('styles')
 	<style>
 		.pagination li{
-			padding: 0.5rem;
+			padding: 0.5rem 1rem;
 			font-size: 15px;
 			font-weight: 400;
 			border: 1px solid #5d78ff;
 			border-radius: 6px;
 		}
 
+		.pagination li:not(:last-child){
+			margin-right: 1.5rem !important;
+		}
 		.disabled{
 			pointer-events: none;
 		}
