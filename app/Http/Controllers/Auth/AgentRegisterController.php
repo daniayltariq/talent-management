@@ -95,7 +95,8 @@ class AgentRegisterController extends Controller
                         ->withInput();
         }
         /* dd($request->all()); */
-        $prov_types=array_filter($request->provider_type, fn($value) => !is_null($value) && $value !== 'Other');
+        $filtered=fn($value) => !is_null($value) && $value !== 'Other';
+        $prov_types=array_filter($request->provider_type, $filtered);
         $country_data=json_decode($request['new_phone'],true);
         $user = User::create([
             'f_name' => $request['f_name'],
