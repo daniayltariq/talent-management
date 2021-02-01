@@ -223,15 +223,15 @@
 														</tr>
 														<tr>
 															<th>Weight</th>
-															<td>{{$item->member->profile->weight ?? 0}} lbs</td>
+															<td>{{\Str::ucFirst($item->member->profile->weight ?? 0)}} lbs</td>
 														</tr>
 														<tr>
 															<th>Hair</th>
-															<td>{{$item->member->profile->hairs ?? ''}}</td>
+															<td>{{\Str::ucFirst($item->member->profile->hairs ?? '')}}</td>
 														</tr>
 														<tr>
 															<th>Eyes</th>
-															<td>{{$item->member->profile->eyes ?? ''}}</td>
+															<td>{{\Str::ucFirst($item->member->profile->eyes ?? '')}}</td>
 														</tr>
 													</table>
 												</div>
@@ -247,13 +247,13 @@
 												</div>
 
 												<div class="talent-skill">
-													<p><b>Specials Skills</b></p>
+													<p><b>Special Skills</b></p>
 													{{-- {{dd($item->member->skills)}} --}}
 													@if ($item->member()->exists() && $item->member->skills()->exists())
 														<p>
 															@foreach ($item->member->skills as $skill)
 																@if ($skill->skill()->exists())
-																	<span>{{$skill->skill->title. (!$loop->last ?',':'')}} </span>
+																	<span>{{\Str::ucFirst($skill->skill->title). (!$loop->last ?',':'')}} </span>
 																@endif
 															
 															@endforeach
