@@ -157,6 +157,10 @@
 	.d-inline{
 		display: inline;
 	}
+
+	.select2-drop-active{
+		z-index: 99999999 !important;
+	}
 </style>
 @endsection
 
@@ -414,7 +418,6 @@
 				<label for="recipient-name" class="col-form-label">Select Recipient:</label><br>
 				<input type="checkbox" id="select_all_btn" > Select All
 				<select class="form-control" name="recipient[]" id="recipient" multiple="multiple">
-					<option value="all_talents">all talents</option>
 					@forelse ($items as $item)
 						@if ($item->member()->exists())
 							<option value="{{$item->member->phone ?? '' }}">{{$item->member->profile->legal_first_name ?? ''}}
@@ -448,7 +451,20 @@
 <script>
 
 	$(document).ready(function() {
-		$('#recipient').select2();
+		$('#recipient').select2({closeOnSelect:false});
+		$("#select_all_btn").click(function(){
+			if($("#select_all_btn").is(':checked') ){
+				$("#recipient > option").prop("selected","selected");
+				$("#recipient").trigger("change");
+			}else{
+				$("#recipient > option").removeAttr("selected");
+				$("#recipient").trigger("change");
+			}
+		});
+
+		$("#button").click(function(){
+			alert($("#recipient").val());
+		});
 	});
 
 	$(function() {

@@ -115,12 +115,12 @@ class PicklistController extends Controller
     public function sendText(Request $request)
     {
         /* dd($request->all()); */
-        if($request->recipient=='all_talents')
-        {
+        /* if($request->recipient=='all_talents')
+        { */
             $talents=PicklistUser::where('picklist_id',$request->picklist_id)->get();
             try {
-                foreach ($talents as $key => $talent) {
-                    $user = User::find($talent->member->id);
+                foreach (/* $talents */$request->recipient as $key => $talent) {
+                    $user = User::where('phone',$talent/* ->member->id */)->first();
                     if ($user) {
                         $content=[
                             "message"=>$request->message,
@@ -150,7 +150,7 @@ class PicklistController extends Controller
                 );
                 
             }
-        }
+        /* }
         else{
             try {
                 $user = User::where('phone',$request->recipient)->first();
@@ -162,11 +162,7 @@ class PicklistController extends Controller
                     ];
                     $user->notify(new ClickSendNotify($content));
                 } 
-                /* Nexmo::message()->send([
-                    'to'   => $request->recipient,
-                    'from' => '16105552344',
-                    'text' => $request->message
-                ]); */
+                
 
                 $status=array(
                     'message' => 'message sent !', 
@@ -179,7 +175,7 @@ class PicklistController extends Controller
                 );
             }
             
-        }
+        } */
 
         return redirect()->back()->with($status);
     }
