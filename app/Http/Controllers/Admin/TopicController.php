@@ -53,7 +53,6 @@ class TopicController extends Controller
         if ($request->ajax()) {
             return $blog;
         } else {
-            dd($blog);
             return view('backend.topic.list',compact('blog'));
         }
         
