@@ -61,7 +61,34 @@
 							</tbody>
 						</table>
 					</div>
-					{!!$blog->render()!!}
+					@if ($blog->lastPage() > 1)
+					    <ul class="pagination">
+					        <li class="{{ ($blog->currentPage() == 1) ? ' disabled' : '' }}">
+					            <a href="{{ $blog->url(1) }}">First</a>
+					         </li>
+					        @for ($i = 1; $i <= $blog->lastPage(); $i++)
+					            <?php
+					            $half_total_links = floor(5 / 2);
+					            $from = $blog->currentPage() - $half_total_links;
+					            $to = $blog->currentPage() + $half_total_links;
+					            if ($blog->currentPage() < $half_total_links) {
+					               $to += $half_total_links - $blog->currentPage();
+					            }
+					            if ($blog->lastPage() - $blog->currentPage() < $half_total_links) {
+					                $from -= $half_total_links - ($blog->lastPage() - $blog->currentPage()) - 1;
+					            }
+					            ?>
+					            @if ($from < $i && $i < $to)
+					                <li class="{{ ($blog->currentPage() == $i) ? ' active' : '' }}">
+					                    <a href="{{ $blog->url($i) }}">{{ $i }}</a>
+					                </li>
+					            @endif
+					        @endfor
+					        <li class="{{ ($blog->currentPage() == $blog->lastPage()) ? ' disabled' : '' }}">
+					            <a href="{{ $blog->url($blog->lastPage()) }}">Last</a>
+					        </li>
+					    </ul>
+					@endif
 				</div>
 			</div>
 			<!--end::Section-->
