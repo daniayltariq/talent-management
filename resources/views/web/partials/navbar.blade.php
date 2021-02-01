@@ -50,7 +50,7 @@
 								<a href="{{ route('community') }}">Community</a>
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('about-us') ? 'm-menu__list-item_active' : '' }}">
-								<a href="{{ route('about-us') }}">About Us</a>
+								<a href="{{ route('about-us') }}">About</a>
 							</li>
 
 							{{-- <li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >

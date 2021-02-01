@@ -217,7 +217,7 @@
 												<div class="talent-intro">
 													<h2>{{$item->member->profile->legal_first_name ?? ''}}
 														{{$item->member->profile->legal_last_name ?? ''}}</h2>
-													<p>{{!is_null($item->member->profile->custom_link) ? url('/').'/model/'.$item->member->profile->custom_link : ''}}</p>
+													<a target="_blank" href="{{!is_null($item->member->profile->custom_link) ? url('/').'/member/'.$item->member->profile->custom_link : '#'}}"><p>{{!is_null($item->member->profile->custom_link) ? url('/').'/member/'.$item->member->profile->custom_link : ''}}</p></a>
 												</div>
 
 												<div class="talent-skill">

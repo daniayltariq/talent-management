@@ -170,7 +170,7 @@
         <div class="row">
             <div class="title__wrapp">
                 {{-- <div class="page__subtitle title__grey">Looking for talent ?</div> --}}
-                <h1 class="page__title">Featured Talents</h1>
+                <h1 class="page__title">Featured Talent</h1>
                 {{-- <a href="{{route('findtalent')}}" class="btn btn-td"> Search Talent</a> --}}
             </div>
         </div>
@@ -189,7 +189,7 @@
                                         <div class="testimonal__photo profile-sec"><img class="tal-profile" src="{{ !is_null($talent->profile->profile_img) && file_exists(public_path().'/storage/uploads/profile/'.$talent->profile->profile_img) ? ('storage/uploads/profile/'.$talent->profile->profile_img) :'web/img/user.png' }}" alt=""></div>
                                         <div class="date testimonal__date" style="font-size: 15px;background-color: #f6f6f6;">{{$talent->f_name ?? ''}} {{$talent->l_name ?? ''}}</div>
                                         <div class="text testimonal__text" style="text-align: justify;margin-left: 31%;">
-                                            <p>{{$talent->profile->address_1 ??$talent->profile->address_2 ?? ''}}</p>
+                                            {{-- <p>{{$talent->profile->address_1 ??$talent->profile->address_2 ?? ''}}</p> --}}
                                             <p><b>Age: </b> {{$talent->getAgeAttribute() ?? ''}}</p>
                                             <p><b>Height: </b>{{$talent->profile->feet ? \Str::finish($talent->profile->feet, "'") : ''}} {{$talent->profile->height ? \Str::finish($talent->profile->height,"''") : ''}}</p>
                                             <p><a href="{{route('model.single',$talent->id)}}" class="profile-btn">Profile</a></p>

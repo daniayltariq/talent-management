@@ -132,7 +132,7 @@ class TopicController extends Controller
         // }
 
         return redirect()->back()->with([
-            "message" => "Topic created, waiting for approval.",
+            "message" => "Pending approval.",
             "alert-type" => "success",
         ]);
         
@@ -208,7 +208,7 @@ class TopicController extends Controller
         $blog->save();
 
         return redirect()->back()->with([
-            "message" => "Topic has been updated.",
+            "message" => "Pending approval.",
             "alert-type" => "success",
         ]);
 

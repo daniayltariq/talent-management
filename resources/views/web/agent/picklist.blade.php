@@ -65,7 +65,7 @@
 							<div class="col-sm-12">
 								<a href="{{ route('agent.picklist.show',$item->id) }}">
 									<div class="pick-item">
-										<h3>{{$item->title}}. ({{count($item->items)}})</h3>
+										<h3>{{$item->title}} ({{count($item->items)}})</h3>
 										<p>{{$item->description}}</p>
 									</div>
 								</a>

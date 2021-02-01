@@ -115,7 +115,7 @@ class CommunityController extends Controller
         }
         /* dd(123); */
         return redirect()->back()->with([
-            "message" => "Comment has been posted.",
+            "message" => "Pending approval.",
             "alert-type" => "success",
         ]);
 

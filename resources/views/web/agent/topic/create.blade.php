@@ -78,7 +78,7 @@
 
                             <div class="form-group">
                              
-                                 <label for="name" class="control-label">Slug<span class="req">*</span></label>
+                                 <label for="name" class="control-label">URL<span class="req">*</span></label>
                                  <input id="slug" type="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{isset($blog)?$blog->slug : ''}}" required autocomplete="slug" autofocus>
 
                                 @error('slug')
