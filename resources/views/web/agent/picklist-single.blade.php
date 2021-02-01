@@ -420,8 +420,8 @@
 				<select class="form-control" name="recipient[]" id="recipient" multiple="multiple">
 					@forelse ($items as $item)
 						@if ($item->member()->exists())
-							<option value="{{$item->member->phone ?? '' }}">{{$item->member->profile->legal_first_name ?? ''}}
-							{{$item->member->profile->legal_last_name ?? ''}}</option>
+							<option value="{{$item->member->phone ?? '' }}">{{$item->member->profile->legal_first_name ?? $item->member->f_name}}
+							{{$item->member->profile->legal_last_name ?? $item->member->l_name}}</option>
 						@endif
 						
 					@endforeach
