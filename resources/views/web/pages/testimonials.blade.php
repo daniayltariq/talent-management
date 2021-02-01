@@ -33,8 +33,13 @@
 	}
 
 	.testscroll{
-		max-height: 270px;
-		overflow-y: auto;
+		max-height: 150px !important;
+		overflow-y: /* auto */ hidden;
+		display: inline-block;
+	}
+
+	.text__fullHeight{
+		max-height: 100%;
 	}
 
 	.testscroll::-webkit-scrollbar
@@ -49,6 +54,19 @@
 		-webkit-box-shadow: inset 0 0 6px #e6e6e6  ;
 		background-color: #e6e6e6;
 	}
+
+	.slick-list {
+		overflow: unset !important;
+	}
+
+	.testimonal__text {
+		margin: 20px 0 0px !important;
+	}
+
+	.tstm_readmore_btn{
+		cursor: pointer;
+	}
+
 </style>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
@@ -82,7 +100,8 @@
 							<div class="border-1">
 								<div class="testimonal__photo profile-sec"><img class="tal-profile" src="{{ asset(isset($testi) && $testi->image ? $testi->image : 'backend-assets/images/rec2.jpg') }}" alt=""></div>
 								<div class="date testimonal__date">{{$testi->created_at->diffForHumans()}}</div>
-								<div class="text testimonal__text testscroll" style="text-align: justify;padding: 7%;"> {!! $testi->content ?? '' !!}</div>
+								<div class="text testimonal__text testscroll read_more text__fullHeight" style="text-align: justify;padding: 7%;"> {!! $testi->content ?? '' !!}</div>
+								<div class="mb-4" name="tstm_readmore_btn">Read more »</div>
 								<div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
 								<div class="testimonal__name mb-2 mt-5"> {!! $testi->name ?? '' !!}</div>
 							</div>
@@ -164,7 +183,10 @@
 		
 	});
 
-	
+	$('[name="tstm_readmore_btn"]').on('click',function(){
+		/* console.log($(this).siblings( ".testimonal__text" )); */
+		$(this).siblings( ".testimonal__text" ).toggleClass('testscroll');
+	})
 
 	
 
