@@ -1,5 +1,21 @@
 @extends('backend.layouts.app')
 
+@section('styles')
+	<style>
+		.pagination li{
+			padding: 0.5rem;
+			font-size: 15px;
+			font-weight: 400;
+			border: 1px solid #5d78ff;
+			border-radius: 6px;
+		}
+
+		.disabled{
+			pointer-events: none;
+		}
+	</style>
+@endsection
+
 @section('content')
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 	<!--begin::Portlet-->
