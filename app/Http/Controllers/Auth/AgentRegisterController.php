@@ -110,7 +110,7 @@ class AgentRegisterController extends Controller
             'city' => $request['city'],
             'state' => $request['state'],
             'h_adress_1' => $request['h_adress_1'],
-            'provider_type' => implode(';',array_filter($request->provider_type, fn($value) => (!is_null($value) && $value !== 'Other'))),
+            'provider_type' => implode(';',array_filter($request->provider_type, (fn($value) => !is_null($value) && $value !== 'Other'))),
         ]);
         
         $user->save();
