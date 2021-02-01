@@ -2,7 +2,7 @@
 
 
 @section('styles')
-<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />
 <style type="text/css">
 	.btn-share {
 		padding: 16px 32px;
@@ -447,7 +447,7 @@
 @endsection
 
 @section('scripts')
-<script src="http://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.min.js"></script>
 <script>
 
 	$(document).ready(function() {
