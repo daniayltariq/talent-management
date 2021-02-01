@@ -55,9 +55,9 @@
 		background-color: #e6e6e6;
 	}
 
-	.slick-list {
+	/* .slick-list {
 		overflow: unset !important;
-	}
+	} */
 
 	.testimonal__text {
 		margin: 20px 0 0px !important;
@@ -65,6 +65,10 @@
 
 	.tstm_readmore_btn{
 		cursor: pointer;
+	}
+
+	body{
+		background-color: #f6f6f6;
 	}
 
 </style>
