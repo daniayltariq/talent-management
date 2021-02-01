@@ -234,8 +234,8 @@
 											</div>
 											<div class="col-sm-8">
 												<div class="talent-intro">
-													<h2 class="d-inline">{{$item->member->profile->legal_first_name ?? ''}}
-														{{$item->member->profile->legal_last_name ?? ''}}</h2>
+													<h2 class="d-inline">{{$item->member->profile->legal_first_name ?? $item->member->f_name }}
+														{{$item->member->profile->legal_last_name ?? $item->member->l_name}}</h2>
 													
 													<a class="del_pl" href="{{route('agent.delete_picklist_user',$item->id)}}"><i class="fa fa-trash text-red"></i></a>
 													
