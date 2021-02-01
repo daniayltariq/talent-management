@@ -207,13 +207,23 @@ class PicklistController extends Controller
      * @param  \App\Farm  $farm
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $plan)
+    public function delete_picklist( Request $request,$id)
     {
-        $plan=Plan::findOrFail($plan);
-        /* dd($plan); */
-        if ($plan) {
-            $plan->delete();
-            return redirect()->back()->with('success', 'Plan deleted successfully !');
+        $picklist=Picklist::findOrFail($id);
+        /* dd($picklist); */
+        if ($picklist && $picklist->user_id == auth()->user()->id) {
+            $picklist->delete();
+            return redirect()->back()->with('success', 'picklist deleted successfully !');
+        }
+    }
+
+    public function delete_picklist_user( Request $request,$id)
+    {
+        $member=PicklistUser::findOrFail($id);
+        /* dd($picklist); */
+        if ($member) {
+            $member->delete();
+            return redirect()->back()->with('success', 'member removed successfully !');
         }
     }
 }

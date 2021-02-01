@@ -31,6 +31,18 @@
     box-shadow: 0px 10px 14px #61616142
 }
 
+.text-red{
+	color: red;
+}
+
+.del_pl{
+	padding: 2px 10px;
+}
+
+.del_pl:hover{
+    border: 1px solid #f75959;
+    border-radius: 7px;
+}
 </style>
 @endsection
 
@@ -63,12 +75,19 @@
 					<div class="row">
 						@forelse ($picklist as $item)
 							<div class="col-sm-12">
-								<a href="{{ route('agent.picklist.show',$item->id) }}">
-									<div class="pick-item">
-										<h3>{{$item->title}} ({{count($item->items)}})</h3>
-										<p>{{$item->description}}</p>
+								<div class="row pick-item">
+									<div class="col-md-11">
+											<div class="">
+												<a href="{{ route('agent.picklist.show',$item->id) }}"><h3>{{$item->title}} ({{count($item->items)}})</h3>
+												</a>
+												<p>{{$item->description}}</p>
+											</div>
 									</div>
-								</a>
+									
+									<div class="col-sm-1">
+										<a class="del_pl" href="{{route('agent.delete_picklist',$item->id)}}"><i class="fa fa-trash text-red"></i></a>
+									</div>
+								</div>
 							</div>
 						@empty
 						<div class="col-sm-12">

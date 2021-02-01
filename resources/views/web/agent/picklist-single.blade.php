@@ -2,12 +2,13 @@
 
 
 @section('styles')
+<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />
 <style type="text/css">
-.btn-share {
-    padding: 16px 32px;
-    font-size: 15px;
-    margin-left: 10px;
-}
+	.btn-share {
+		padding: 16px 32px;
+		font-size: 15px;
+		margin-left: 10px;
+	}
 
 	/* Book talent modal */
 	.popup {
@@ -138,6 +139,24 @@
 		width: 100%;
 		object-fit: cover;
 	}
+
+	.text-red{
+		color: red;
+	}
+
+	.del_pl{
+		float: right;
+		padding: 2px 10px;
+	}
+
+	.del_pl:hover{
+		border: 1px solid #f75959;
+		border-radius: 7px;
+	}
+
+	.d-inline{
+		display: inline;
+	}
 </style>
 @endsection
 
@@ -215,8 +234,11 @@
 											</div>
 											<div class="col-sm-8">
 												<div class="talent-intro">
-													<h2>{{$item->member->profile->legal_first_name ?? ''}}
+													<h2 class="d-inline">{{$item->member->profile->legal_first_name ?? ''}}
 														{{$item->member->profile->legal_last_name ?? ''}}</h2>
+													
+													<a class="del_pl" href="{{route('agent.delete_picklist_user',$item->id)}}"><i class="fa fa-trash text-red"></i></a>
+													
 													<a target="_blank" href="{{!is_null($item->member->profile->custom_link) ? url('/').'/member/'.$item->member->profile->custom_link : '#'}}"><p>{{!is_null($item->member->profile->custom_link) ? url('/').'/member/'.$item->member->profile->custom_link : ''}}</p></a>
 												</div>
 
@@ -389,12 +411,16 @@
 			 @csrf
 			 <input type="hidden" name="picklist_id" value="{{$picklist->id}}">
 			 <div class="form-group">
-				<label for="recipient-name" class="col-form-label">Select Recipient:</label>
-				<select class="form-control" name="recipient" >
+				<label for="recipient-name" class="col-form-label">Select Recipient:</label><br>
+				<input type="checkbox" id="select_all_btn" > Select All
+				<select class="form-control" name="recipient[]" id="recipient" multiple="multiple">
 					<option value="all_talents">all talents</option>
 					@forelse ($items as $item)
-						<option value="{{$item->member->phone ?? '' }}">{{$item->member->profile->legal_first_name ?? ''}}
+						@if ($item->member()->exists())
+							<option value="{{$item->member->phone ?? '' }}">{{$item->member->profile->legal_first_name ?? ''}}
 							{{$item->member->profile->legal_last_name ?? ''}}</option>
+						@endif
+						
 					@endforeach
 					
 				</select>
@@ -418,7 +444,13 @@
 @endsection
 
 @section('scripts')
+<script src="http://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.min.js"></script>
 <script>
+
+	$(document).ready(function() {
+		$('#recipient').select2();
+	});
+
 	$(function() {
 	 //----- OPEN
 	   $('[pd-popup-open]').on('click', function(e)  {

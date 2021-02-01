@@ -368,7 +368,10 @@ Route::group([
 	'middleware' => ['isAgent','verified'],
 ],function(){
     /* Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard'); */
-    Route::resource('picklist', App\Http\Controllers\Agent\PicklistController::class);
+    Route::resource('picklist', App\Http\Controllers\Agent\PicklistController::class)->except(['destroy']);
+    Route::get('/delete_picklist/{id}', [App\Http\Controllers\Agent\PicklistController::class, 'delete_picklist'])->name('delete_picklist');
+    Route::get('/delete_picklist_user/{id}', [App\Http\Controllers\Agent\PicklistController::class, 'delete_picklist_user'])->name('delete_picklist_user');
+
     Route::resource('topic', App\Http\Controllers\Agent\TopicController::class);
     Route::post('mail_talent',[App\Http\Controllers\Agent\DashboardController::class, 'mailTalent'])->name('mail_talent');
 
