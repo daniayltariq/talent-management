@@ -106,7 +106,7 @@ class SubscriptionController extends Controller
     {
         /* dd($request->all()); */
         
-        try {
+        /* try { */
             $six_digit_random_number = mt_rand(100000, 999999);
             Cookie::queue(Cookie::make('otp', $six_digit_random_number,5));
 
@@ -117,9 +117,9 @@ class SubscriptionController extends Controller
             Cookie::queue(Cookie::make('otp_tries', 3,5));
             return 'success';
 
-        } catch (\Throwable $th) {
+        /* } catch (\Throwable $th) {
             return 'error';
-        }
+        } */
     }
 
     public function verifyOtp(Request $request)
