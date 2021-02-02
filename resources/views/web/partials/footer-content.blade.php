@@ -1,4 +1,4 @@
-<footer class="footer" style="margin: 15px 0px;">
+<footer class="footer" style="margin: 15px 0px 0px 0px;">
 	<div class="container">
 		<div class="row">
 			<div class="footer__widgets clearfix">
