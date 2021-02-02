@@ -143,7 +143,7 @@ class UserController extends Controller
                         "user"=>$user,
                     ];
                     if ($request['status'] == 0) {
-                        Mail::to($user->email)->send(new DeactivateUser($data));
+                        Mail::to($user->email) ->cc(['admin@thetalentdepot.com'])->send(new DeactivateUser($data));
                     }
                     
                     $user->save();

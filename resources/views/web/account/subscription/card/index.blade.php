@@ -287,6 +287,8 @@
             }
         );
         if (error) {
+          
+          fullPageLoader(false);
             var errorElement = document.getElementById('card-errors');
             if (error.code=='parameter_invalid_empty') {
               toastr.error('email not valid');

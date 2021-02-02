@@ -290,6 +290,10 @@
         top: -18px;
         border-bottom-width: 18px;
     }
+
+    .t-clr{
+        color: #e77929;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -617,6 +621,9 @@
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-social" role="tabpanel" aria-labelledby="v-social-tab">
                             <div class="row">
                                 <div class="col-md-12">
+                                    @if($data['plan'] && ($data['plan']->social_links==1) )
+                                        <p><em>*Your membership allows you to add of <span class="t-clr" style="font-weight: 600">{{count($data["social"])}}</span> social media links</em></p>
+                                    @endif
                                     <form class="repeater" action="{{route('account.dashboard.social_links')}}" method="POST">
                                         <!--
                                             The value given to the data-repeater-list attribute will be used as the
@@ -633,7 +640,10 @@
                                                             <option value="facebook"> Facebook</option>
                                                             <option value="instagram">Instagram</option>
                                                             <option value="twitter">Twitter</option>
-                                                            <option value="linkedIn">LinkedIn</option>
+                                                            <option value="youtube">Youtube</option>
+                                                            <option value="soundcloud">SoundCloud</option>
+                                                            <option value="flickr">Flickr</option>
+                                                            <option value="other">Other..</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-4">

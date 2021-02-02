@@ -23,7 +23,7 @@ class User extends Authenticatable /* implements MustVerifyEmail */
      * @var array
      */
     protected $fillable = [
-    'f_name', 'l_name', 'b_name','about_business','provider_type','gender', 'dob', 'phone', 'landline', 'phone_c_data', 'email', 'password', 'country', 'city', 'state', 'h_adress_1', 'h_adress_2', 'zipcode',
+    'f_name', 'l_name', 'b_name','about_business','provider_type','interest_type','gender', 'dob', 'phone', 'landline', 'phone_c_data', 'email', 'password', 'country', 'city', 'state', 'h_adress_1', 'h_adress_2', 'zipcode',
     ];
 
     /**

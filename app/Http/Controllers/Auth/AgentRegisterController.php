@@ -72,17 +72,20 @@ class AgentRegisterController extends Controller
             'l_name' => ['required', 'string', 'max:255'],
             'b_name' => ['nullable', 'string', 'max:255'],
             'about_business' => ['nullable', 'string', 'max:1000'],
+            'website' => ['nullable', 'string', 'max:100'],
             /* 'dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')], */
             'landline' => ['nullable','string', 'max:12','unique:users'],
             'phone' => ['required', 'max:255','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'country' => ['nullable', 'string', 'max:255'],
-            'city' => ['required', 'string', 'max:255'],
-            'state' => ['required', 'string', 'max:255'],
+            'city' => ['nullable', 'string', 'max:255'],
+            'state' => ['nullable', 'string', 'max:255'],
             'h_adress_1' => ['nullable','string', 'max:255'],
-            "provider_type"    => ['required','array'],
-            "provider_type.*"  => ['nullable','string','distinct'],
+            /* "provider_type"    => ['required','array'],
+            "provider_type.*"  => ['nullable','string','distinct'], */
+            "interest"    => ['required','array'],
+            "interest.*"  => ['nullable','string','distinct'],
             'account_type' => ['required', 'string', 'in:agent'],
             'user_agreement'=>['required', 'string', 'in:on'],
             'license_agreement'=>['required', 'string', 'in:on']
@@ -95,14 +98,18 @@ class AgentRegisterController extends Controller
                         ->withInput();
         }
         /* dd($request->all()); */
+        /* $filtered=fn($value) => !is_null($value) && $value !== 'Other';
+        $prov_types=array_filter($request->provider_type, $filtered); */
         $filtered=fn($value) => !is_null($value) && $value !== 'Other';
-        $prov_types=array_filter($request->provider_type, $filtered);
+        $interest_types=array_filter($request->interest, $filtered);
+        
         $country_data=json_decode($request['new_phone'],true);
         $user = User::create([
             'f_name' => $request['f_name'],
             'l_name' => $request['l_name'],
             'b_name' => $request['b_name'],
             'about_business' => $request['about_business'],
+            'website' => $request['website'],
             'phone' =>Str::of($request['phone'])->prepend('+'.$country_data['dialCode']),
             'phone_c_data'=>$request['new_phone'],
             'landline'=>$request['landline'],
@@ -112,7 +119,8 @@ class AgentRegisterController extends Controller
             'city' => $request['city'],
             'state' => $request['state'],
             'h_adress_1' => $request['h_adress_1'],
-            'provider_type' => implode(';',$prov_types),
+            /* 'provider_type' => implode(';',$prov_types), */
+            'interest_type' => implode(';',$interest_types),
         ]);
         
         $user->save();

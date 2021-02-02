@@ -302,6 +302,19 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     @enderror --}}
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="website" class="col-sm-4 control-label">Website</label>
+                                <div class="col-sm-8">
+                                    <input id="website" type="text" class="form-control @error('website') is-invalid @enderror" name="website" value="{{ old('website') }}" autocomplete="website" autofocus>
+
+                                {{--  @error('f_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror --}}
+                                </div>
+                            </div>
                           
                             {{-- <div class="form-group">
                                 <label for="gender" class="col-sm-4 control-label">Gender <span class="req">*</span></label>
@@ -337,39 +350,22 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                  </div>
                             </div> --}}
                         
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="country" class="col-sm-4 control-label">Country <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text"  name="country" id="country" class="form-control" value="United States" disabled>
-                                    {{-- <select name="country" id="country" class="form-control" required>
-                                        <option value="">Select</option>
-                                        @foreach ($countries as $country)
-                                            <option value="{{$country->nicename}}" {{ !is_null(old('country')) ? (old('country')==$country->nicename ?'selected':''): ($country->nicename=="United States" ? 'selected' : '')}}>{{$country->nicename}}</option>
-                                        @endforeach
-                                        
-                                    </select> --}}
                                 </div>
                             </div>  
                             <div class="form-group">
                                 <label for="city" class="col-sm-4 control-label">City <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="city" value="{{ old('city') }}" id="city" required>
-                                    {{-- @error('city')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="state" class="col-sm-4 control-label">State <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="state" value="{{ old('state') }}" id="state" required>
-                                    {{-- @error('state')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -378,9 +374,9 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     <input type="text" class="form-control" name="h_adress_1" value="{{ old('h_adress_1') }}" id="h_adress_1" required>
                                    
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="password-confirm" class="col-sm-4 control-label">Provider Type(s)</label>
                                 <div class="col-sm-8">
                                     <div class="switch-field">
@@ -411,6 +407,31 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     </div>
                                     <input class="form-control" id="other_type_input" type="text" name="provider_type[]">
                                 </div>
+                            </div> --}}
+
+                            <div class="form-group">
+                                <label for="password-confirm" class="col-sm-4 control-label">Interest(s)</label>
+                                <div class="col-sm-8">
+                                    <div class="switch-field">
+                                        <input type="checkbox" id="Actors" name="interest[]" value="Actors"/>
+                                        <label class="mr-3" for="Actors">Actors</label>
+                                        <input type="checkbox" id="Models" name="interest[]" value="Models" />
+                                        <label class="mr-3" for="Models">Models</label>
+                                        <input type="checkbox" id="Entertainers" name="interest[]" value="Entertainers" />
+                                        <label class="mr-3" for="Entertainers">Entertainers</label>
+                                        <input type="checkbox" id="Musicians" name="interest[]" value="Musicians" />
+                                        <label class="mr-3" for="Musicians">Musicians</label>
+                                        <input type="checkbox" id="Promotional models" name="interest[]" value="Promotional models" />
+                                        <label class="mr-3" for="Promotional models">Promotional models</label>
+                                        <input type="checkbox" id="Hair Stylists" name="interest[]" value="Hair Stylists" />
+                                        <label class="mr-3" for="Hair Stylists">Hair Stylists</label>
+                                        <input type="checkbox" id="Makeup Artists" name="interest[]" value="Makeup Artists" />
+                                        <label class="mr-3" for="Makeup Artists">Makeup Artists</label>
+                                        <input type="checkbox" id="Other" name="interest[]" value="Other" />
+                                        <label for="Other">Other:</label>
+                                    </div>
+                                    <input class="form-control" id="other_type_input" type="text" name="interest[]">
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -428,7 +449,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-sm-offset-4 col-sm-8">
-                                    <input class="form-check-input" type="checkbox" name="license_agreement" required id="license_agreement" {{ old('license_agreement') ? 'checked' : '' }}> I agree to The Talent Depot <a href="{{route('license_agreement')}}" style="color: #df691a" target="_blank">User License.</a> 
+                                    <input class="form-check-input" type="checkbox" name="license_agreement" required id="license_agreement" {{ old('license_agreement') ? 'checked' : '' }}> I agree to The Talent Depot <a href="{{route('license_agreement')}}" style="color: #df691a" target="_blank">License Agreement.</a> 
                                 </div>
                             </div>
 
@@ -612,8 +633,22 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
         $(document).ready(function() {
             $('#landline').inputmask({"mask": "999-999-9999"});
 
-            $('input[type="checkbox"][name="provider_type[]"]').change(function() {
+            /* $('input[type="checkbox"][name="provider_type[]"]').change(function() {
                 $('[name="provider_type[]"]:checked').each(function () {
+                    console.log($(this).val());
+                    if ($(this).val()=='Other') {
+                        $('#other_type_input').show();
+                        return false;
+                    }
+                    else{
+                        $('#other_type_input').val('');
+                        $('#other_type_input').hide();
+                    }
+                });
+            }); */
+
+            $('input[type="checkbox"][name="interest[]"]').change(function() {
+                $('[name="interest[]"]:checked').each(function () {
                     console.log($(this).val());
                     if ($(this).val()=='Other') {
                         $('#other_type_input').show();

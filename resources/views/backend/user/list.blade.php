@@ -43,6 +43,7 @@
 								   <th>Name</th>
 								   <th>Email</th>
 								   <th>Role</th>
+								   <th>Membership</th>
 								   <th>Active</th>
 								   <th>Feature</th>
 								   <th>Operation</th>
@@ -64,6 +65,13 @@
 												{{ $role->alias ?? '' }}
 												<br>
 											@endforeach
+										</td>
+										<td>
+											@if ($user->hasRole('candidate') && $user->hasActiveSubscription())
+												<span>{{$user->getActivePlan()->name ?? ''}}</span>
+											@else
+												<em>N/A</em>
+											@endif
 										</td>
 										<td>
 											<input data-switch="true" name="status" type="checkbox" data-userid="{{$user->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$user->status==1?"checked=checked":""}}>
