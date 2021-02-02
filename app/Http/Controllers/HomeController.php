@@ -81,6 +81,7 @@ class HomeController extends Controller
   
     public function models($link)
     {
+
       $pro=\App\Models\Profile::where('custom_link',$link)->orWhere('id',$link)->first();
       if ($pro) {
          $user=\App\Models\User::findOrFail($pro->user_id);
@@ -123,6 +124,7 @@ class HomeController extends Controller
       if ($user->attachments()->exists()) {
          $data=[
             'profile'=>$user->profile,
+            'social_links'=>$user->social_links,
             'images'=>$user->attachments->where('type','image'),
             'video'=>$user->attachments->where('type','video'),
             'audio'=>$user->attachments->where('type','audio')
