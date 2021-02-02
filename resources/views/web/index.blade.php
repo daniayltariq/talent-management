@@ -12,18 +12,21 @@
 			display: flex;
 		}
 	</style>
-	<script type="text/javascript">
-		var email = "{{auth()->user()->email}}";
-		var uid = {{auth()->user()->id}};
-		if (window.$FPROM){
-		  $FPROM.trackSignup({email: email,uid: uid});
-		} else {
-		  _fprom=window._fprom||[];window._fprom=_fprom;
-		  _fprom.push(["event","signup"]);
-		  _fprom.push(["email",email]);
-		  _fprom.push(["uid",uid]);
-		}
-	</script>
+	@if (\Auth::check())
+		<script type="text/javascript">
+			var email = "{{auth()->user()->email}}";
+			var uid = {{auth()->user()->id}};
+			if (window.$FPROM){
+			$FPROM.trackSignup({email: email,uid: uid});
+			} else {
+			_fprom=window._fprom||[];window._fprom=_fprom;
+			_fprom.push(["event","signup"]);
+			_fprom.push(["email",email]);
+			_fprom.push(["uid",uid]);
+			}
+		</script>
+	@endif
+	
 @endsection
 
 @section('content')

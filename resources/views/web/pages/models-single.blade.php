@@ -237,9 +237,12 @@
                   </h2>
                   <div class="s-model__info clearfix">
                      <ul class="social_links">
-                        @foreach ($data['social_links'] as $item)
-                           <li><a href="{{$item->link}}" target="_blank"><i class="fab fa-{{$item->source}}"></i></a></li>
-                        @endforeach
+                        @if (!is_null($data['social_links']))
+                            @foreach ($data['social_links'] as $item)
+                              <li><a href="{{$item->link}}" target="_blank"><i class="fab fa-{{$item->source}}"></i></a></li>
+                           @endforeach
+                        @endif
+                        
                         
                      </ul>
                      <ul class="s-model__list s-model__list_l">
