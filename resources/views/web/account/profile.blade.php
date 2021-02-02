@@ -297,7 +297,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <label class="font-15">Sleves</label>
+                                                        <label class="font-15">Sleeves</label>
                                                         <input type="text" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control">
                                                     </div>
                                                 </div>
@@ -308,7 +308,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </div> --}}
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <label class="font-15">Shoes</label>
+                                                        <label class="font-15">Shoe</label>
                                                         <input type="text" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control">
                                                     </div>
                                                 </div>
