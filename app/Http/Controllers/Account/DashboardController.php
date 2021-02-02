@@ -119,8 +119,11 @@ class DashboardController extends Controller
     public function social_links(Request $request)
     {
         /* dd($request->social); */
-        if ($request->social && count($request->social)>0) {
+        if (auth()->user()->social_links()->exists()) {
             auth()->user()->social_links()->delete();
+        }
+            
+        if (!is_null($request->social) && count($request->social)>0) {
             foreach($request->social as $key =>$link)
             {
                 $social=new \App\Models\SocialLink;
@@ -131,11 +134,10 @@ class DashboardController extends Controller
             }
             if ($social) {
                 return redirect()->back()->with(array(
-                    'message' => 'Data saved !', 
+                    'message' => 'Successfully Saved !', 
                     'alert_type' => 'success'
                 ));
             }
-            
         }
         
         return redirect()->back()->with(array(

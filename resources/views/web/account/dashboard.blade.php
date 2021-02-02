@@ -622,7 +622,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     @if($data['plan'] && ($data['plan']->social_links==1) )
-                                        <p><em>*Your membership allows you to add of <span class="t-clr" style="font-weight: 600">{{count($data["social"])}}</span> social media links</em></p>
+                                        <p><em>*Your membership allows you to add of <span class="t-clr" style="font-weight: 600">{{$data['plan']->social_limit}}</span> social media links</em></p>
                                     @endif
                                     <form class="repeater" action="{{route('account.dashboard.social_links')}}" method="POST">
                                         <!--
@@ -1254,6 +1254,7 @@
                 } 
 
             /* today = yyyy+'-'+mm+'-'+dd; */
+            var max_limit = new Date();
             var min_limit = new Date();
             max_limit.setDate(today.getDate() - 31);
             min_limit.setDate(today.getDate() - (365*100));

@@ -12,10 +12,10 @@
 			display: flex;
 		}
 	</style>
-	@if (\Auth::check())
+	@if (\Auth::check() && auth()->user()->hasRole('candidate'))
 		<script type="text/javascript">
 			var email = "{{auth()->user()->email}}";
-			var uid = {{auth()->user()->id}};
+			var uid = {{auth()->user()->stripe_id}};
 			if (window.$FPROM){
 			$FPROM.trackSignup({email: email,uid: uid});
 			} else {
