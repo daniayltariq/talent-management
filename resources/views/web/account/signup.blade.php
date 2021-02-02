@@ -826,11 +826,14 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     <script>
         $(document).ready(function(){
             var max_limit = new Date();
+            var min_limit = new Date();
             max_limit.setDate(today.getDate() - 31);
+            min_limit.setDate(today.getDate() - (365*100));
 
             $(" [name='g_day_hidden']").dropdownDatepicker({
                 /* defaultDate: "{{ auth()->user()->dob ?? ''}}", */
                 maxDate: max_limit,
+                minDate: min_limit,
                 required: true,
                 wrapperClass:'d-flex',
                 dropdownClass:'date-field form-control',
@@ -845,6 +848,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             $("[name='day_hidden']").dropdownDatepicker({
                 /* defaultDate: "{{ auth()->user()->dob ?? ''}}", */
                 maxDate: max_limit,
+                minDate: min_limit,
                 required: true,
                 wrapperClass:'d-flex',
                 dropdownClass:'date-field form-control',
