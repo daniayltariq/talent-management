@@ -60,7 +60,7 @@ Route::get('/verified_email', function () {
     return view('web.verified');
 })->name('verified_email');
 
-Route::get('/about-us', function () {
+Route::get('/about', function () {
     return view('web.pages.about-us');
 })->name('about-us');
 

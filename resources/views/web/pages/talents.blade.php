@@ -192,7 +192,7 @@
                                             {{-- <p>{{$talent->profile->address_1 ??$talent->profile->address_2 ?? ''}}</p> --}}
                                             <p><b>Age: </b> {{$talent->getAgeAttribute() ?? ''}}</p>
                                             <p><b>Height: </b>{{$talent->profile->feet ? \Str::finish($talent->profile->feet, "'") : ''}} {{$talent->profile->height ? \Str::finish($talent->profile->height,"''") : ''}}</p>
-                                            <p><a href="{{route('model.single',$talent->id)}}" class="profile-btn">Profile</a></p>
+                                            <p><a href="{{-- {{route('model.single',$talent->id)}} --}}{{route('model',$talent->profile->custom_link ?? $talent->profile->id)}}" class="profile-btn">Profile</a></p>
                                         </div>
                                         <div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
                                     </div>

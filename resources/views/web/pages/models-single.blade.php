@@ -151,6 +151,25 @@
       text-align: left;
       padding: 28px;
    }
+
+   .social_links{
+      padding-left: 0;
+      display: flex
+   }
+
+   .social_links li{
+      list-style: none;
+      font-size: 3rem;
+   }
+
+   .social_links li:hover{
+      color: #e77826;
+   }
+
+   .social_links li:not(:last-child){
+      margin-right: 16px;
+      list-style: none;
+   }
    /* End book talent modal */
 </style>
 @endsection
@@ -217,6 +236,12 @@
                      <span class="line"></span>{{$data['profile']->legal_first_name ?? ''}} {{$data['profile']->legal_last_name ?? ''}}
                   </h2>
                   <div class="s-model__info clearfix">
+                     <ul class="social_links">
+                        @foreach ($data['social_links'] as $item)
+                           <li><a href="{{$item->link}}" target="_blank"><i class="fab fa-{{$item->source}}"></i></a></li>
+                        @endforeach
+                        
+                     </ul>
                      <ul class="s-model__list s-model__list_l">
                         <li class="s-model__list-item">Height <span></span></li>
                         {{-- <li class="s-model__list-item">Bust</li> --}}
