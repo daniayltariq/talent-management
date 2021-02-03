@@ -97,8 +97,31 @@ class TalentController extends Controller
     {
         $profile=Profile::where('custom_link',$request->link)->first();
         if ($profile && $profile->user_id !==auth()->user()->id) {
-            $suggestions=array();
-            $first_name=auth()->user()->f_name;
+            $suggestions=array(
+                        auth()->user()->profile->legal_first_name.'-'.auth()->user()->profile->legal_last_name,
+                        auth()->user()->profile->legal_first_name[0].'-'.auth()->user()->profile->legal_last_name,
+                        auth()->user()->profile->legal_first_name.'-'.auth()->user()->profile->legal_last_name[0],
+                        auth()->user()->profile->legal_first_name.''.auth()->user()->profile->legal_last_name,
+                        auth()->user()->profile->legal_first_name[0].''.auth()->user()->profile->legal_last_name
+                    );
+            for ($i=0; $i < 5; ) {
+                $profile=Profile::where('custom_link',$suggestions[$i])->first();
+                if ($profile && $profile->user_id !==auth()->user()->id) {
+                    $suggest_update=$suggestions[$i].rand(1,100);
+                    $recheck_profile=Profile::where('custom_link',$suggest_update)->first();
+                    if ($recheck_profile && $recheck_profile->user_id !==auth()->user()->id) {
+                        
+                    }
+                    else{
+                        $suggestions[$i]=$suggest_update;
+                        ++$i;
+                    }
+                }
+                else{
+                    ++$i;
+                }
+            }
+            /* $first_name=auth()->user()->f_name;
             $last_name=auth()->user()->l_name;
 
             for ($i=0; $i < 4; ) { 
@@ -111,7 +134,7 @@ class TalentController extends Controller
                     $suggestions[$i]=$user_name;
                     ++$i;
                 }
-            }
+            } */
             $status = array(
                 'suggestions'=>$suggestions,
                 'message' => 'link already assigned!', 
