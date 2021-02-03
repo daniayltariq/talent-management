@@ -121,30 +121,39 @@ class HomeController extends Controller
     public function modelsingle($id)
     { 
       $user=\App\Models\User::findOrFail($id);
-      if ($user->attachments()->exists()) {
-         $data=[
-            'profile'=>$user->profile,
-            'social_links'=>$user->social_links,
-            'images'=>$user->attachments->where('type','image'),
-            'video'=>$user->attachments->where('type','video'),
-            'audio'=>$user->attachments->where('type','audio')
-         ];
-
-         $subs=$user->subscriptions()->active()->first();
-         
-         if ($subs->count()>0) {
-            $plan=Plan::select('name','description','agent_contact')->where('stripe_plan',$subs->stripe_plan)->first();
-            
-            $data["plan"]=$plan;
-         }
-
-         return view('web.pages.models-single',compact('data'));
+      if ($user->profile()->exists()) {
+         $custom_link=$user->profile->custom_link?$user->profile->custom_link :$user->profile->id;
+         /* dd( $custom_link); */
+         return redirect()->route('model',$custom_link);
       }
       else{
          return view('web.errors.404')->with('text','Profile not setup yet, What needs to do here ?');
       }
+      //old flow
+      // if ($user->attachments()->exists()) {
+      //    $data=[
+      //       'profile'=>$user->profile,
+      //       'social_links'=>$user->social_links,
+      //       'images'=>$user->attachments->where('type','image'),
+      //       'video'=>$user->attachments->where('type','video'),
+      //       'audio'=>$user->attachments->where('type','audio')
+      //    ];
+
+      //    $subs=$user->subscriptions()->active()->first();
+         
+      //    if ($subs->count()>0) {
+      //       $plan=Plan::select('name','description','agent_contact')->where('stripe_plan',$subs->stripe_plan)->first();
+            
+      //       $data["plan"]=$plan;
+      //    }
+
+      //    return view('web.pages.models-single',compact('data'));
+      // }
+      // else{
+      //    return view('web.errors.404')->with('text','Profile not setup yet, What needs to do here ?');
+      // }
       
-    }
+   }
 
    public function searchTalent(Request $request)
    {    
