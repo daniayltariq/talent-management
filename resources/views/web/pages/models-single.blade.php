@@ -250,17 +250,17 @@
                         {{-- <li class="s-model__list-item">Bust</li> --}}
                         <li class="s-model__list-item">Waist</li>
                         {{-- <li class="s-model__list-item">Hips</li> --}}
-                        <li class="s-model__list-item">Dress</li>
+                        {{-- <li class="s-model__list-item">Dress</li> --}}
                         <li class="s-model__list-item">Shoe </li>
                         <li class="s-model__list-item">Hair colour</li>
                         <li class="s-model__list-item">Eyes</li>
                      </ul>
                      <ul class="s-model__list s-model__list_r">
-                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->height ?? 'Nil'}}</li>
+                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->feet ? \Str::finish($data['profile']->feet, "'") : ''}} {{$data['profile']->height ? \Str::finish($data['profile']->height,"''") : ''}}</li>
                         {{-- <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->bust ?? 'Nil'}}</li> --}}
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->waist ?? 'Nil'}}</li>
                         {{-- <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->hips ?? 'Nil'}}</li> --}}
-                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->dress ?? 'Nil'}}</li>
+                        {{-- <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->dress ?? 'Nil'}}</li> --}}
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->shoes ?? 'Nil'}}</li>
                         <li class="s-model__list-item s-model__list-item_r">{{\Str::ucfirst($data['profile']->hairs ?? 'Nil')}}</li>
                         <li class="s-model__list-item s-model__list-item_r">{{\Str::ucfirst($data['profile']->eyes ?? 'Nil')}}</li>

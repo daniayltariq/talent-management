@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'hasCommunityReadAccess' => \App\Http\Middleware\hasCommunityReadAccess::class,
         'hasCommunityReadWriteAccess' => \App\Http\Middleware\hasCommunityReadWriteAccess::class,
         'hasNoData' => \App\Http\Middleware\hasNoData::class,
+        'hasData' => \App\Http\Middleware\hasData::class,
         'isActive' => \App\Http\Middleware\isActive::class,
         'isAdmin' => \App\Http\Middleware\isAdmin::class,
         'isAgent' => \App\Http\Middleware\isAgent::class,

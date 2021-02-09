@@ -223,7 +223,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'
         
         Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
 
-        Route::middleware(['isActive'])->group(function () {
+        Route::middleware(['isActive','hasData'])->group(function () {
             Route::post('/dashboard/profile', [App\Http\Controllers\Account\DashboardController::class, 'store'])->name('dashboard.profile');
             Route::post('/storeMedia', [App\Http\Controllers\Account\DashboardController::class, 'storeMedia'])->name('storeMedia');
             Route::delete('/fileDestroy', [App\Http\Controllers\Account\DashboardController::class, 'fileDestroy'])->name('fileDestroy');
@@ -234,13 +234,17 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'
             Route::get('resume', [App\Http\Controllers\Account\DashboardController::class, 'resume'])->name('resume');
         });
         
-        Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
-        Route::get('/talent/checkCustomLink', [App\Http\Controllers\Account\TalentController::class, 'checkCustomLink'])->name('talent.checkCustomLink');
+        Route::middleware(['hasData'])->group(function () {
+            Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
+            Route::get('/talent/checkCustomLink', [App\Http\Controllers\Account\TalentController::class, 'checkCustomLink'])->name('talent.checkCustomLink');
+        });
     });
     
-    Route::get('/talent/detail', [App\Http\Controllers\Account\TalentController::class, 'detail'])->name('talent.detail');
-    Route::get('/fetch_attachments', [App\Http\Controllers\Account\DashboardController::class, 'fetchAttachments'])->name('fetch_attachments');
-    Route::get('/get_limit', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('get_limit');
+    Route::middleware(['hasData'])->group(function () {
+        Route::get('/talent/detail', [App\Http\Controllers\Account\TalentController::class, 'detail'])->name('talent.detail');
+        Route::get('/fetch_attachments', [App\Http\Controllers\Account\DashboardController::class, 'fetchAttachments'])->name('fetch_attachments');
+        Route::get('/get_limit', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('get_limit');
+    });
 
     /**
      * Subscription
