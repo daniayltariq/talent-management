@@ -228,11 +228,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="col-sm-12">
                                     <h4 class="control-label">I am<span class="req">*</span></h4>
                                     <div style="display: flex">
-                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="guardian" {{old('guardian')=='guardian'?'checked' : ''}}>
+                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="guardian" {{old('guardian')=='guardian'?'checked' : ''}} required>
                                         <label for="guardian">The parent or legal guardian of the member (if under 18)</label>
                                     </div>
                                     <div style="display: flex">
-                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="member" {{old('guardian')=='member'?'checked' : ''}}>
+                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="member" {{old('guardian')=='member'?'checked' : ''}} required>
                                         <label for="member">The member (if 18 or older)</label for="guardian"> 
                                     </div>
                                     

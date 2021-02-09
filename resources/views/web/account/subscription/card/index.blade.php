@@ -411,6 +411,7 @@
       });
    }
    else{
+    fullPageLoader(false);
     toastr.error('email not valid');
    }
   
