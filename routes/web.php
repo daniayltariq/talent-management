@@ -221,7 +221,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'
             
         });
         
-        Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
+        
 
         Route::middleware(['isActive','hasData'])->group(function () {
             Route::post('/dashboard/profile', [App\Http\Controllers\Account\DashboardController::class, 'store'])->name('dashboard.profile');
@@ -235,6 +235,7 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'
         });
         
         Route::middleware(['hasData'])->group(function () {
+            Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
             Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
             Route::get('/talent/checkCustomLink', [App\Http\Controllers\Account\TalentController::class, 'checkCustomLink'])->name('talent.checkCustomLink');
         });
