@@ -420,8 +420,8 @@
                                     <div class="grid-item__contant-info">
                                         <div class="grid-item__contant-name picklist-btn"><a class="color-t" href="{{route('model.single',$member->id)}}">{{$member->profile()->exists() && !is_null($member->profile->legal_first_name) ? ($member->profile->legal_first_name.' '.$member->profile->legal_last_name) : ($member->f_name.' '.$member->l_name)}} </a></div>
                                         <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->address_1 : ''}} {{!is_null($member->profile) ?$member->profile->country : ''}} {{!is_null($member->profile) ?$member->profile->city : ''}}</div>
-                                        <div class="grid-item__contant-place title__grey">AGE: 23</div>
-                                        <div class="grid-item__contant-place title__grey">Height: {{!is_null($member->profile) ?$member->profile->height : ''}}</div>
+                                        <div class="grid-item__contant-place title__grey">AGE: {{$member->getAgeAttribute() ?? ''}}</div>
+                                        <div class="grid-item__contant-place title__grey">Height: {{!is_null($member->profile) ?($member->profile->feet ? \Str::finish($member->profile->feet, "'") : '') : ''}} {{!is_null($member->profile) ?($member->profile->height ? \Str::finish($member->profile->height,"''") : ''): ''}}</div>
                                         <a href="{{route('model.single',$member->id)}}" class="picklist-btn"><i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i></a>
                                         {{-- <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
                                         <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i> --}}
