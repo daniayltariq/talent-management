@@ -480,6 +480,19 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     <input type="text" class="form-control" name="state" value="{{ old('state') }}" id="state">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-4 control-label">Create a Password <span class="req">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="password-confirm" class="col-sm-4 control-label">Confirm Password <span class="req">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                </div>
+                            </div>
                             {{-- <div class="form-group">
                                 <label for="address" class="col-sm-4 control-label">Custom</label>
                                 <div class="col-sm-8">

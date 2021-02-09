@@ -132,6 +132,7 @@ class RegisterController extends Controller
     {
         /* dd($request->all()); */
         $validator= Validator::make($request->all(), [
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
             'guardian' => ['required', 'string', 'max:255'],
             'g_f_name' => ['nullable', 'string', 'max:255'],
             'g_l_name' => ['nullable', 'string', 'max:255'],
@@ -184,7 +185,7 @@ class RegisterController extends Controller
         }
         
         $user = User::findOrFail(auth()->user()->id);
-        
+        $user->password = Hash::make($request['password']);
           $user->guardian= !is_null($request['guardian']) ? 1 : 0;
           $user->g_f_name= $request['g_f_name']?? null;
           $user->g_l_name= $request['g_l_name']?? null;
