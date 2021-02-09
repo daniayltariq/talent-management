@@ -139,8 +139,8 @@ class RegisterController extends Controller
             /* 'g_day' => ['nullable', 'string', 'max:10'],
             'g_month' => ['nullable', 'string', 'max:10'],
             'g_year' => ['nullable', 'string', 'max:10'], */
-            "g_date_"    => "required|array|min:3",
-            "g_date_.*"  => "required|string",
+            "g_date_"    => "nullable|array|min:3",
+            "g_date_.*"  => "nullable|string",
             'g_phone' => ['nullable', 'max:255','unique:users,g_phone,'.auth()->user()->id],
             'g_landline' => ['nullable', 'max:255','unique:users,g_landline,'.auth()->user()->id],
             'g_country' => ['nullable', 'string', 'max:255'],

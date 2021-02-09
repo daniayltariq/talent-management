@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
+use Illuminate\Http\Request;
 use App\Domain\Mail\InviteTalent;
-use App\Domain\Mail\DeactivateUser;
 use Illuminate\Support\Facades\DB;
 
 use Spatie\Permission\Models\Role;
+use App\Domain\Mail\DeactivateUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;

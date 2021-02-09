@@ -6,6 +6,10 @@
 		.bootstrap-switch-container{
 			width: 160px !important;
 		}
+
+		.btn-primary:hover,.btn-danger:hover{
+			color: #fff !important;
+		}
 	</style>
 @endsection
 

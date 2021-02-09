@@ -16,6 +16,10 @@
 		.disabled{
 			pointer-events: none;
 		}
+
+		.btn-primary:hover,.btn-success:hover,.btn-danger:hover{
+			color: #fff !important;
+		}
 	</style>
 @endsection
 
@@ -66,7 +70,7 @@
 										</td>
 										<td>
 											<a href="{{route('backend.topic.edit',$topic->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">
-												<i style="color: #5d78ff;" class="fa fa-pencil-alt"></i>
+												<i class="fa fa-pencil-alt"></i>
 											</div> </a>
 											<button data-topicid="{{$topic->id}}" name="postComm" class="btn btn-success btn-sm btn-bg-white" style="color: #5d78ff;"><i class="fa fa-comment"></i></button>
 											{{-- <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-view btn-xs" style=" color:white" ><i class="fa fa-folder" ></i> View </a>

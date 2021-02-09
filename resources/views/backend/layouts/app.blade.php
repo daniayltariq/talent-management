@@ -9,6 +9,10 @@
             .btn-bg-white{
                 background-color: #ffffff;
             }
+
+            .btn-primary:hover,.btn-danger:hover{
+			color: #fff !important;
+		}
         </style>
         @yield('styles') 
         
