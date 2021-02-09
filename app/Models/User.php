@@ -85,6 +85,17 @@ class User extends Authenticatable /* implements MustVerifyEmail */
         
     }
 
+    public function hasData()
+    {
+        if(!is_null(auth()->user()->f_name) && !is_null(auth()->user()->l_name))
+        {
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+
     public function picklist()
     {
         return $this->hasMany('App\Models\Picklist','user_id');

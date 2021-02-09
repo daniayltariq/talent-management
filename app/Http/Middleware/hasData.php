@@ -15,7 +15,7 @@ class hasData
      */
     public function handle($request, Closure $next)
     {
-        if(\Auth::check() && !\Auth::user()->hasNoData() ){
+        if(\Auth::check() && \Auth::user()->hasData() ){
             return $next($request);
         }
         return redirect()->route('account.signup')->with(array(
