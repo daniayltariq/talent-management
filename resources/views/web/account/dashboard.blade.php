@@ -624,6 +624,19 @@
                                     @if($data['plan'] && ($data['plan']->social_links==1) )
                                         <p><em>*Your membership allows you to add of <span class="t-clr" style="font-weight: 600">{{$data['plan']->social_limit}}</span> social media links</em></p>
                                     @endif
+
+                                    @if (count($errors) > 0)
+                                        @if($errors->has('social.*.source') || $errors->has('social.*.link'))
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        
+                                    @endif
                                     <form class="repeater" action="{{route('account.dashboard.social_links')}}" method="POST">
                                         <!--
                                             The value given to the data-repeater-list attribute will be used as the
@@ -636,14 +649,14 @@
                                             <div data-repeater-item>
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <select name="source" id="source" class="form-control">
+                                                        <select name="source" id="source" class="form-control" required>
                                                             <option value="facebook"> Facebook</option>
                                                             <option value="instagram">Instagram</option>
                                                             <option value="twitter">Twitter</option>
                                                             <option value="youtube">Youtube</option>
                                                             <option value="soundcloud">SoundCloud</option>
                                                             <option value="flickr">Flickr</option>
-                                                            <option value="other">Other..</option>
+                                                            {{-- <option value="other">Other..</option> --}}
                                                         </select>
                                                     </div>
                                                     <div class="col-md-4">

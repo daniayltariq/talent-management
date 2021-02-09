@@ -119,6 +119,20 @@ class DashboardController extends Controller
     public function social_links(Request $request)
     {
         /* dd($request->social); */
+        $validator= Validator::make($request->all(), [
+            "social"    => "required|array",
+            "social.*"  => "required|array",
+            "social.*.source"  => "required|string",
+            "social.*.link"  => "required|string",
+        ]);
+
+        if ($validator->fails()) {
+            /* return $validator->errors(); */
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        /* dd($request->social); */
         if (auth()->user()->social_links()->exists()) {
             auth()->user()->social_links()->delete();
         }
