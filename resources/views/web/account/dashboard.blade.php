@@ -591,7 +591,7 @@
                                             </div>
                                         </div>
                                     @else
-                                        <button class="btn btn-primary" id="refer-btn">Generate Referal link</button>
+                                        <button class="btn btn-primary" id="refer-friend-btn">Generate Referal link</button>
                                         <div class="refer_code_div">
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control" id="refer_link" name="refer_link" placeholder="Refer url" aria-label="Refer url" aria-describedby="basic-addon2">
@@ -824,7 +824,7 @@
 		}
 	});
 
-	$(document).on('click','#refer-btn',function(e){
+	$(document).on('click','#refer-friend-btn',function(e){
 		
 		@if(\Auth::guest())
 			window.location.replace("{{route('login')}}");
