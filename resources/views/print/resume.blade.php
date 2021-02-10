@@ -7300,8 +7300,8 @@ button.close {
                                       <div class="col-xs-6 col-sm-6 col-md-6">
                                         <table class="w-100">
                                             <tr>
-                                              <th class="w-25">Hair: </th>
-                                              <td>{{$profile->hairs ?? ''}}</td>
+                                              <th class="w-25" style="text-align: end">Hair: </th>
+                                              <td style="width: 5%;text-align: end">{{\Str::ucFirst($profile->hairs ?? '')}}</td>
                                             </tr>
                                         </table>
                                       </div>
@@ -7316,8 +7316,8 @@ button.close {
                                       <div class="col-xs-6 col-sm-6 col-md-6">
                                         <table class="w-100">
                                             <tr>
-                                              <th class="w-25">Eyes: </th>
-                                              <td>{{$profile->eyes ?? ''}}</td>
+                                              <th class="w-25" style="text-align: end">Eyes: </th>
+                                              <td style="width: 5%;text-align: end">{{\Str::ucFirst($profile->eyes ?? '')}}</td>
                                             </tr>
                                         </table>
                                       </div>
