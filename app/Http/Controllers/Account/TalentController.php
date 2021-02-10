@@ -96,7 +96,7 @@ class TalentController extends Controller
     public function checkCustomLink(Request $request)
     {
         $profile=Profile::where('custom_link',$request->link)->first();
-        if ($profile && $profile->user_id !==auth()->user()->id) {
+        if ($profile && $profile->user_id != auth()->user()->id) {
             $suggestions=array(
                         auth()->user()->profile->legal_first_name.'-'.auth()->user()->profile->legal_last_name,
                         auth()->user()->profile->legal_first_name[0].'-'.auth()->user()->profile->legal_last_name,
