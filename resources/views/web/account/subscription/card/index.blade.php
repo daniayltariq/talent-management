@@ -134,6 +134,10 @@
       text-align: left;
       padding: 1rem 17rem !important;
     }
+
+    #card-errors{
+      color: red !important;
+    }
     /*  end otp modal */
     </style>
 @endsection
@@ -402,11 +406,11 @@
         _token : "{{ csrf_token() }}"
       }, function( res ) {
         fullPageLoader(false);
-        if (res=='success') {
-            toastr.success('Otp has been sent on your email.')
+        if (res.status=='success') {
+            toastr.success(res.message)
             $('[pd-popup-open]').click();
-        } else if(res=='error') {
-            toastr.error(res)
+        } else if(res.status=='error') {
+            toastr.error(res.message)
         }
       });
    }

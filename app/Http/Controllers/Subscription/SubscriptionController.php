@@ -106,16 +106,32 @@ class SubscriptionController extends Controller
     {
         /* dd($request->all()); */
         
+        //first validate email if it is already taken
         /* try { */
-            $six_digit_random_number = mt_rand(100000, 999999);
-            Cookie::queue(Cookie::make('otp', $six_digit_random_number,5));
+            $user=\App\Models\User::where('email',$request->email)->first();
+            if ($user) {
+                $data=array(
+                    "status"=>'error',
+                    "message"=>'email already taken'
+                );
+            }
+            else{
+                $six_digit_random_number = mt_rand(100000, 999999);
+                Cookie::queue(Cookie::make('otp', $six_digit_random_number,5));
 
-            $data=[
-                "otp"=>$six_digit_random_number,
-            ];
-            Mail::to($request->email)->send(new EmailOtp($data));
-            Cookie::queue(Cookie::make('otp_tries', 3,5));
-            return 'success';
+                $data=[
+                    "otp"=>$six_digit_random_number,
+                ];
+                Mail::to($request->email)->send(new EmailOtp($data));
+                Cookie::queue(Cookie::make('otp_tries', 3,5));
+
+                $data=array(
+                    "status"=>'success',
+                    "message"=>'Otp has been sent on your email'
+                );
+            }
+            
+            return $data;
 
         /* } catch (\Throwable $th) {
             return 'error';
