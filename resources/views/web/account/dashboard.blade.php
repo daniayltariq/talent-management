@@ -1092,8 +1092,9 @@
         
         if ( $('div#v-pills-tab').find(e.target).length) 
         {
+            var target = $(e.target);
             //if images tab
-            if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-profile-tab') {
+            if ( target.parent('a#v-pills-profile-tab').length ||(e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-profile-tab')) {
                 myDropzoneTheFirst.disable();
                 console.log(e.target.id);
                 $.ajax({
@@ -1126,7 +1127,7 @@
             }
 
             //if audio tab
-            else if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-audio-tab') {
+            else if ( target.parent('a#v-pills-audio-tab').length ||(e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-audio-tab')) {
                 /* myDropzoneTheFirst.disable(); */
                 console.log(e.target.id);
                 $.ajax({
@@ -1159,7 +1160,7 @@
             }
 
             //if video tab
-            else if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-video-tab') {
+            else if ( target.parent('a#v-pills-video-tab').length || (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-video-tab')) {
                 /* myDropzoneTheFirst.disable(); */
                 console.log(e.target.id);
                 $.ajax({
