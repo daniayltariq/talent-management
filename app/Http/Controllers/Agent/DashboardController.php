@@ -40,7 +40,7 @@ class DashboardController extends Controller
             Mail::to($request->recipient)->send(new ContactTalent($data));
 
             return redirect()->back()->with(array(
-                'message' => 'Data saved !', 
+                'message' => 'Successfully updated', 
                 'alert_type' => 'success'
             ));
             

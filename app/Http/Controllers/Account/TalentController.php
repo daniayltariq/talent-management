@@ -72,7 +72,7 @@ class TalentController extends Controller
                 \App\Models\CandidateSkill::insert($skills);
             }
 
-            $status ['message']= 'Data saved !'; 
+            $status ['message']= 'Successfully updated'; 
             $status ['alert_type']= 'success';
 
         } catch (\Throwable $th) {
