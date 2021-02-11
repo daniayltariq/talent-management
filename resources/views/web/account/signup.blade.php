@@ -232,7 +232,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                         <label for="guardian">The parent or legal guardian of the member (if under 18)</label>
                                     </div>
                                     <div style="display: flex">
-                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="member" {{old('guardian')=='member'?'checked' : ''}} id="member" required>
+                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="member" {{old('guardian')=='member'?'checked' : ''}} id="member">
                                         <label for="member">The member (if 18 or older)</label for="guardian"> 
                                     </div>
                                     
