@@ -133,7 +133,7 @@ class RegisterController extends Controller
         /* dd($request->all()); */
         $validator= Validator::make($request->all(), [
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'guardian' => ['required', 'string', 'max:255'],
+            'guardian' => ['required', 'string', 'in:guardian,member'],
             'g_f_name' => ['nullable', 'string', 'max:255'],
             'g_l_name' => ['nullable', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],

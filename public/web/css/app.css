@@ -423,3 +423,7 @@ background: #fff;
 .h-43{
 	height: 43px;
 }
+
+span.invalid-feedback {
+    font-size: 13px;
+}
