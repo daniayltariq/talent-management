@@ -97,7 +97,7 @@
     }
 
     .digit-group input {
-      width: 30px;
+      width: 50px;
       height: 50px;
       background-color: white;
       border: 2px solid;
@@ -131,32 +131,44 @@
     }
 
     .otp__tries{
-      text-align: left;
+      text-align: center;
       padding: 1rem 17rem !important;
+      margin-top: 2rem;
     }
 
     #card-errors{
       color: red !important;
     }
+    .popup-contact-wrapper {
+        border-radius: 8px;
+        border: unset !important;
+        border-top: unset !important;
+    }
+
+    .popup-close:hover {
+          background: #df691a !important;
+          border-color: #ffffff !important;
+      }
+      .popup-close {
+          border: solid 4px #ffffff !important;
+      }
     /*  end otp modal */
     </style>
 @endsection
 @section('content')
 @include('web.partials.loader')
 <div class="container">
-    <div class="row justify-content-center" style="margin: 10rem">
-        <div class="col-md-offset-3 col-md-6 mt-5 mb-3">
-            <div class="">
-                <p>You will be charged ${{ number_format($plan->cost, 2) }} for {{ $plan->name }} Plan</p>
-                <a href="#" pd-popup-open="popupOTP"></a>
-            </div>
-            <div class="card" style="box-shadow: 0 0 0 1px #e3e8ee;">
+    <div class="row justify-content-center" style="margin-top: 20rem;margin-bottom: 15rem">
+        <div class="col-md-offset-3 col-md-6 mt-5 mb-3 pt-5">
+            
+            <div class="card" style="box-shadow: 0 0 0 1px #e3e8ee; padding: 3rem">
               <div class="row">
                 <div class="col-md-12">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="card-header" style="text-align: center;background: #fafcfe;">
-                          <img src="{{asset('images/stripe2.png')}}" style="width: 11%" alt="">
+                         <p>You will be charged ${{ number_format($plan->cost, 2) }} for {{ $plan->name }} Plan</p>
+                          <a href="#" pd-popup-open="popupOTP"></a>
                         </div>
                         {{-- @if (count($paymentMethods) > 0)
                           <div class="pay-tabs">

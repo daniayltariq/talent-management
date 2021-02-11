@@ -38,4 +38,5 @@
 
 
 <link href="{{ asset('web/css/custom.css') }}" rel="stylesheet">
+<link href="{{ asset('web/css/app.css') }}" rel="stylesheet">
 
