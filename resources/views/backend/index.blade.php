@@ -1,7 +1,14 @@
 @extends('backend.layouts.app')
 
 @section('styles')
-
+ <style>
+     .post__cat{
+        width: fit-content;
+        background-color: #d7dbf0;
+        border-radius: 17px;
+        padding: 3px 10px;
+     }
+ </style>
 @endsection
 
 @section('content')
@@ -56,8 +63,8 @@
                                                     <a href="#" class="kt-widget5__title">
                                                         {{ $item->title ?? '' }}
                                                     </a>
-                                                    <div class="kt-widget5__desc d-flex">
-                                                        {{printTruncated(80, $item->content, $isUtf8=true)}}
+                                                    <div class="kt-widget5__desc">
+                                                        {{-- {{printTruncated(80, $item->content, $isUtf8=true)}} --}}  <p class="post__cat">{{$item->category->title ?? ''}}</p>
                                                     </div>
                                                     <div class="kt-widget5__info">
                                                         <span>Author:</span>
@@ -95,7 +102,7 @@
                                                         {{ $item->title ?? '' }}
                                                     </a>
                                                     <div class="kt-widget5__desc d-flex">
-                                                        {{printTruncated(80, $item->content, $isUtf8=true)}}
+                                                        {{-- {{printTruncated(80, $item->content, $isUtf8=true)}} --}}  <p class="post__cat">{{$item->category->title ?? ''}}</p>
                                                     </div>
                                                     <div class="kt-widget5__info">
                                                         <span>Author:</span>
@@ -131,8 +138,8 @@
                                                     <a href="#" class="kt-widget5__title">
                                                         {{ $item->title ?? '' }}
                                                     </a>
-                                                    <div class="kt-widget5__desc d-flex">
-                                                        {{printTruncated(80, $item->content, $isUtf8=true)}}
+                                                    <div class="kt-widget5__desc">
+                                                        {{-- {{printTruncated(80, $item->content, $isUtf8=true)}} --}} <p class="post__cat">{{$item->category->title ?? ''}}</p>
                                                     </div>
                                                     <div class="kt-widget5__info">
                                                         <span>Author:</span>

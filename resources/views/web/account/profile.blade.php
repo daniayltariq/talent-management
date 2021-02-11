@@ -804,38 +804,47 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
         });
 
         $('#legal_first_name, #legal_last_name').on('keyup',function(){
-            $("#custom_link").val($('#legal_first_name').val()+'_'+$('#legal_last_name').val());
+            $("#custom_link").val($('#legal_first_name').val()+'-'+$('#legal_last_name').val());
             $('#custom_link').trigger('change');
         })
 
-        $('#custom_link').on('keyup change',function(){
+        $('#custom_link').on('keyup change',function(e){
             $('#link_suggestion').hide();
+            
             if ($(this).val() !=='') {
-                $.ajax({
-                    url: "{{ route('account.talent.checkCustomLink') }}",
-                    type: 'GET',
-                    data:{
-                        'link':$(this).val()
-                    },
-                    success: function(res) {
-                        console.log(res);
-                        if (res.alert_type=='success') {
-                            $('#link_error').hide();
-                        } else {
-                            
-                            $('#link_error').html(res.message);
-                            $('#link_error').show();
+                if(e.keyCode == 189)
+                {
+                   var textValue =$(this).val().replace(/_/g,"-");
+                    $(this).val(textValue);
+                }
+                else{
+                    $.ajax({
+                        url: "{{ route('account.talent.checkCustomLink') }}",
+                        type: 'GET',
+                        data:{
+                            'link':$(this).val()
+                        },
+                        success: function(res) {
+                            console.log(res);
+                            if (res.alert_type=='success') {
+                                $('#link_error').hide();
+                            } else {
+                                
+                                $('#link_error').html(res.message);
+                                $('#link_error').show();
 
-                            $('#suggestion').html('');
-                            res.suggestions.forEach(val => {
-                                $('#suggestion').append(val+'<br>');
-                            });
-                            $('#link_suggestion').show();
+                                $('#suggestion').html('');
+                                res.suggestions.forEach(val => {
+                                    $('#suggestion').append(val+'<br>');
+                                });
+                                $('#link_suggestion').show();
+                            }
+                        },
+                        error: function(error) {
                         }
-                    },
-                    error: function(error) {
-                    }
-                });
+                    });
+                }
+                
             }
         })
 
