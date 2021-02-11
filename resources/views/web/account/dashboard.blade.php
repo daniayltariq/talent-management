@@ -960,7 +960,7 @@
         }
     );
 
-    $(document).on('click','#remove-img-btn',function(e){
+    $('#remove-img-btn').click(function(e){
 		
         $.ajax({
             type: 'delete',
@@ -971,7 +971,7 @@
             },
             success: function(res) {
                 toastr.success('File removed successfully');
-                $('#remove-img-btn').parent().parent().remove()
+                $(this).parent().parent().remove()
                 // window.location.reload();
             },
             error: function(error) {
