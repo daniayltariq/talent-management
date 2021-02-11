@@ -971,6 +971,7 @@
             },
             success: function(res) {
                 toastr.success('File removed successfully');
+                $(this).parent().parent().remove();
                 // window.location.reload();
             },
             error: function(error) {
