@@ -93,6 +93,24 @@ td.default {
   td+td, th+th {
     width: auto;
   }
+
+
+  .ul-pricing {
+      display: flex;
+      width: 100%;
+      padding-left: 0;
+  }
+
+}
+
+
+@media (max-width: 640px) {
+  .ul-pricing {
+      display: flex;
+      width: 100%;
+      padding-left: 0;
+  }
+
 }
 
 .btn {
@@ -122,7 +140,7 @@ table.pricing td:nth-child(4) {
 }
 
 .cd-btn{
-  padding: 9px 35px !important;
+  padding: 9px 25px !important;
 }
 
 </style>
@@ -405,5 +423,22 @@ $( "ul" ).on( "click", "li", function() {
   
   // On load
   doSomething(mediaQuery);
+
+
+
+  $(document).ready(function () {    
+      var width = $(window).width();
+      $(window).resize(function () {
+          if (width <= '720') {
+              $('.bg-purple').click();
+              $('article').addClass('p-3');
+          }
+      });
+
+      if (width <= '720') {
+          $('.bg-purple').click();
+          $('article').addClass('p-3');
+      }
+  })
 </script>
 @endsection

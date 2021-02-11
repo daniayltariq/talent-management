@@ -547,7 +547,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-4">
-                                    <button type="button" class="btn btn-default btn__red {{-- animation --}} btn-full pull-right" id="registerSubmitBtn">join us</button>
+                                    <button type="button" class="btn btn-default btn__red {{-- animation --}} btn-full pull-right mb-5" id="registerSubmitBtn">join us</button>
                                 </div>
                             </div>
                         </div>
