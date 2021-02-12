@@ -437,7 +437,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="address" class="col-sm-4 control-label">Tell us more about your business </label>
                                 <div class="col-sm-8">
-                                    <textarea name="about_business" class="form-control" name="about_business" value="{{ old('about_business') }}" id="about_business" cols="30" rows="3"></textarea>
+                                    <textarea name="about_business" class="form-control" name="about_business" id="about_business" cols="30" rows="3">{{ old('about_business') }}</textarea>
                                    
                                 </div>
                             </div>

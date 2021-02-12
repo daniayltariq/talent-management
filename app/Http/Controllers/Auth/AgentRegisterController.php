@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Validator;
+use App\Services\FPService;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AgentRegisterController extends Controller
 {
@@ -50,12 +52,19 @@ class AgentRegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showAgentForm()
+    public function showAgentForm(Request $request)
     {
         session()->forget('minor');
         $countries=DB::table('countries')->select('nicename')->get();
         /* dd(session()->all()); */
+
+        if($request->query('_go')){
+            return view('auth.register', compact('countries'))->withCookie('firstPromotorRefID',$request->query('_go') , 45);
+        }
+
         return view('auth.register', compact('countries'));
+
+        
     }
 
     /**
@@ -66,6 +75,8 @@ class AgentRegisterController extends Controller
      */
     protected function validateAgentForm(Request $request)
     {
+
+ 
         /* dd($request->all()); */
         $validator=  Validator::make($request->all(), [
             'f_name' => ['required', 'string', 'max:255'],
@@ -137,7 +148,11 @@ class AgentRegisterController extends Controller
             }
         }
         $user->assignRole($request['account_type']);
-        /* dd($user); */
+
+        if($c = $request->cookie('firstPromotorRefID')){
+          FPService::trackSigup($user->email,$c);
+        }
+        
         if ($user) {
             Auth::login($user);
             return redirect()->route('/');
@@ -162,6 +177,11 @@ class AgentRegisterController extends Controller
 
     protected function registered()
     {
+
+        if($c = Cookie::get('firstPromotorRefID') !== null){
+          FPService::trackSigup($user->email,$c);
+        }
+
         if(\Auth::check() && auth()->user()->hasRole('candidate')) {
             return redirect()->route('account.talent.profile');
             // return redirect()->route('superadmin.home');

@@ -49,8 +49,13 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showRegistrationForm()
+    public function showRegistrationForm(Request $request)
     {
+
+        // if($request->query('_go')){
+        //   $request->cookie();
+        // }
+
         $countries=DB::table('countries')->select('nicename')->get();
         
         /* return view('auth.register', compact('countries')); */ // old register view
@@ -58,6 +63,7 @@ class RegisterController extends Controller
             return view('auth.registerPricing', compact('countries'));
         }
         else{
+
             return redirect()->route('how-it-works');
         }
         
@@ -111,14 +117,15 @@ class RegisterController extends Controller
         return $user;
     }
 
-    protected function registered()
-    {
+    protected function registered(Request $request, $user)
+    { 
+
+ 
         if(\Auth::check() && auth()->user()->hasRole('candidate')) {
             return redirect()->route('account.talent.profile');
             // return redirect()->route('superadmin.home');
         } elseif(\Auth::check() && auth()->user()->hasRole('agent')) {
             return redirect()->route('/');
-            
         }
     }
 
