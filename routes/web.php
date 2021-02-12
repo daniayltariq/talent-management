@@ -224,6 +224,8 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'
         
 
         Route::middleware(['isActive','hasData'])->group(function () {
+            Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
+            Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
             Route::post('/dashboard/profile', [App\Http\Controllers\Account\DashboardController::class, 'store'])->name('dashboard.profile');
             Route::post('/storeMedia', [App\Http\Controllers\Account\DashboardController::class, 'storeMedia'])->name('storeMedia');
             Route::delete('/fileDestroy', [App\Http\Controllers\Account\DashboardController::class, 'fileDestroy'])->name('fileDestroy');
@@ -235,8 +237,8 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'
         });
         
         Route::middleware(['hasData'])->group(function () {
-            Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
-            Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
+            
+            
             Route::get('/talent/checkCustomLink', [App\Http\Controllers\Account\TalentController::class, 'checkCustomLink'])->name('talent.checkCustomLink');
         });
     });
