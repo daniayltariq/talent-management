@@ -308,6 +308,7 @@
             var errorElement = document.getElementById('card-errors');
             if (error.code=='parameter_invalid_empty') {
               toastr.error('email not valid');
+              location.reload();
             }
             else if (error.code=='setup_intent_unexpected_state') {
               toastr.error('email not valid');
@@ -433,6 +434,7 @@
    else{
     fullPageLoader(false);
     toastr.error('email not valid');
+    location.reload();
    }
   
  }
