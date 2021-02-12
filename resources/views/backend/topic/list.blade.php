@@ -50,7 +50,7 @@
 								   <th>blog Title</th>
 								   <th>blog Image</th>
 								   <th>Categories</th>
-								   <th>Details</th>
+								   {{-- <th>Details</th> --}}
 								   <th>Active</th>
 								   <th>Operation</th>
 								</tr>

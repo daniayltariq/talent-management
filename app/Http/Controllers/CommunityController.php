@@ -34,18 +34,26 @@ class CommunityController extends Controller
         $data = Topic::where('slug',$slug)->with('user')->with(['comments'=>function($q){
             $q->where('approved',1);
         }])->withCount('likes')->first();
-        $data->views =  $data->views + 1;
-        $data->save();
-
-        $latest=Topic::where('status',1)->latest()->get()->take(4);
         
-        $comments = TopicComment::where('topic_id',$data->id)->where('approved',1)->where('parent_id',null)->with(['childComment'=> function ($q) {
-            $q->where('approved',1);
-        }])->get()->take(1);
-        /* dD($data); */
+        
     	if($data){
+
+            $data->views =  $data->views + 1;
+            $data->save();
+
+            $latest=Topic::where('status',1)->latest()->get()->take(4);
+            
+            $comments = TopicComment::where('topic_id',$data->id)->where('approved',1)->where('parent_id',null)->with(['childComment'=> function ($q) {
+                $q->where('approved',1);
+            }])->get()->take(1);
+
+
     		return view('web.pages.single-post',compact('data','comments','latest'));
     	}
+        else
+        {
+            abort(404);
+        }
     	 
     }
 
