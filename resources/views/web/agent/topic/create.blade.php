@@ -41,10 +41,10 @@
                 <h3 class="text__quote centered">Post Form</h3>
                 <div class="col-lg-12 col-md-12 ">
 
-                   @php 
-                  $route = route('agent.topic.store');
+                  @php 
+                    $route = route('agent.topic.store');
                   if(isset($blog)){
-                  $route = route('agent.topic.update',$blog->id);
+                    $route = route('agent.topic.update',$blog->id);
                   }
                   @endphp
 
@@ -56,34 +56,34 @@
                         <div class="form-block p-5">
                             <div class="form-group">
                              
-                                    <label for="name" class="control-label">Category<span class="req">*</span></label>
-                                    <input id="topic_category_id" readonly="" type="topic_category_id" class="form-control @error('topic_category_id') is-invalid @enderror readonly_normal" name="topic_category_id" value="Jobs & Castings" required autocomplete="topic_category_id" autofocus>
+                              <label for="name" class="control-label">Category<span class="req">*</span></label>
+                              <input id="topic_category_id" readonly="" type="topic_category_id" class="form-control @error('topic_category_id') is-invalid @enderror readonly_normal" name="topic_category_id" value="Jobs & Castings" required autocomplete="topic_category_id" autofocus>
 
-                                   @error('topic_category_id')
-                                       <span class="invalid-feedback" role="alert">
-                                           <strong>{{ $message }}</strong>
-                                       </span>
-                                   @enderror
+                             @error('topic_category_id')
+                                 <span class="invalid-feedback" role="alert">
+                                     <strong>{{ $message }}</strong>
+                                 </span>
+                             @enderror
                                 
                             </div>
 
                             <div class="form-group">
                              
-                                    <label for="name" class="control-label">Title<span class="req">*</span></label>
-                                    <input id="title" type="title" class="form-control @error('title') is-invalid @enderror" name="title" value="{{old('title')?? ''}}" required autocomplete="title" autofocus>
+                              <label for="name" class="control-label">Title<span class="req">*</span></label>
+                              <input id="title" type="title" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') ?? $blog->title ?? '' }}" required autocomplete="title" autofocus>
 
-                                   @error('title')
-                                       <span class="invalid-feedback" role="alert">
-                                           <strong>{{ $message }}</strong>
-                                       </span>
-                                   @enderror
+                             @error('title')
+                                 <span class="invalid-feedback" role="alert">
+                                     <strong>{{ $message }}</strong>
+                                 </span>
+                             @enderror
                                 
                             </div>
 
                             <div class="form-group">
                              
                                  <label for="name" class="control-label">URL<span class="req">*</span></label>
-                                 <input id="slug" type="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{old('slug')?? ''}}" required autocomplete="slug" autofocus>
+                                 <input id="slug" type="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') ?? $blog->slug ''}}" required autocomplete="slug" autofocus>
 
                                 @error('slug')
                                     <span class="invalid-feedback" role="alert">
@@ -116,7 +116,7 @@
                                            <strong>{{ $message }}</strong>
                                        </span>
                                     @enderror
-                                    <textarea name="content" id="summernote" class="summernote">{!!old('content')?? ''!!}</textarea>
+                                    <textarea name="content" id="summernote" class="summernote">{!! old('content') ?? html_entity_decode($blog->content ?? '') ?? ''!!}</textarea>
                                     
                               </div>
                           
