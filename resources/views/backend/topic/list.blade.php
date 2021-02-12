@@ -48,7 +48,7 @@
 							<thead>
 								<tr>
 								   <th>blog Title</th>
-								   <th>blog Image</th>
+								   {{-- <th>blog Image</th> --}}
 								   <th>Categories</th>
 								   {{-- <th>Details</th> --}}
 								   <th>Active</th>
@@ -59,12 +59,14 @@
 								@foreach($blog as $topic)
 									<tr>
 										<td>{{ $topic->title ?? '' }}</td>
-										<td><img class="kt-media" style="max-width: 100px;height: 40px;" src="{{asset($topic->image ?? '')}}" alt=""></td>
+										{{-- <td>
+											<img class="kt-media" style="max-width: 100px;height: 40px;" src="{{asset($topic->image ?? '')}}" alt="">
+										</td> --}}
 										<td>
 											 {{ $topic->category ? $topic->category->title : '' }}
 												 
 										</td>
-										<td style="width: 40%">{{printTruncated(160, $topic->content, $isUtf8=true)}}</td>
+										{{-- <td style="width: 40%">{{printTruncated(160, $topic->content, $isUtf8=true)}}</td> --}}
 										<td>
 											<input data-switch="true" name="status" type="checkbox" data-topicid="{{$topic->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$topic->status==1?"checked=checked":""}}>
 										</td>
@@ -73,8 +75,8 @@
 												<i class="fa fa-pencil-alt"></i>
 											</div> </a>
 											<button data-topicid="{{$topic->id}}" name="postComm" class="btn btn-success btn-sm btn-bg-white" style="color: #5d78ff;"><i class="fa fa-comment"></i></button>
-											{{-- <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-view btn-xs" style=" color:white" ><i class="fa fa-folder" ></i> View </a>
-											<a href="{{ route('blog.updateStatus', $blog->id) }}" class="btn btn-pause btn-xs" style=" color:white" ><i class="fa fa-pause" ></i> Pause</a> --}}
+											<a href="{{ route('backend.topic.show', $topic->slug ?? $topic->id) }}" class="btn btn-secondary btn-sm btn-xs"><i class="fa fa-eye" ></i></a>
+											{{-- <a href="{{ route('blog.updateStatus', $blog->id) }}" class="btn btn-pause btn-xs" style=" color:white" ><i class="fa fa-pause" ></i> Pause</a> --}}
 											{{-- <a  href="#" class="btn btn-duplicate btn-xs" style=" color:white" ><i class="fa fa-copy" ></i> Duplicate</a> --}}
 											{{-- <a  href="#" class="btn btn-pause btn-xs" style=" color:white" ><i class="fa fa-archive" ></i> Achive </a> --}}
 											@include('components.delete' , ['data' => $topic->id, 'route' => 'backend.topic.destroy'])
@@ -181,9 +183,9 @@
 				topic_id: $(this).data('topicid'),
 				status:state==true?1 : 0
 			},
-			function(status){
+			function(res){
 				
-				if (status=="success") {
+				if (res.status=="success") {
 					$(that).bootstrapSwitch('state', state, true);
 				} else {
 					$(that).bootstrapSwitch('state', !state, true);

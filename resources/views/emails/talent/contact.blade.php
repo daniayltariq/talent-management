@@ -410,6 +410,12 @@
               </tr> --}}
               <tr>
                 <td>
+                  <p style="margin-left: 1.7rem">New message from : {{$data['agent'] ?? ''}}</p>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
                   <p style="margin-left: 1.7rem">{{$data['message'] ?? ''}}</p>
                 </td>
               </tr>
@@ -480,7 +486,7 @@
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="text-align: left; padding-right: 10px;">
-                        <p>&copy; 2020 Talent Depot. All Rights Reserved</p>
+                        <p>&copy; 2021 Talent Depot. All Rights Reserved</p>
                       </td>
                     </tr>
                   </table>

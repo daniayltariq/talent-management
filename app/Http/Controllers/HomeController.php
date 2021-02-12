@@ -109,7 +109,7 @@ class HomeController extends Controller
             return view('web.errors.404')->with('text','Profile not found');
          }
       }
-      abort(404);
+      return view('web.errors.404')->with('text','Profile not found');
       
     }
   

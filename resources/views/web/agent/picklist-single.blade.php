@@ -73,11 +73,7 @@
    font-weight: 400;
    }
 
-   .popup-contact-wrapper{
-      border-radius: 8px;
-      border: 2px solid #dadce0;
-      border-top: 4px solid #e77826;
-   }
+   
 
    .popup-close {
    width: 34px;
@@ -114,11 +110,9 @@
    }
 
    .popup-close:hover {
-   -webkit-transform: translate(50%, -50%) rotate(180deg);
-   transform: translate(50%, -50%) rotate(180deg);
-   background: #f00;
-   text-decoration: none;
-   border-color: #f00;
+	   -webkit-transform: translate(50%, -50%) rotate(180deg);
+	   transform: translate(50%, -50%) rotate(180deg);
+	   text-decoration: none;
    }
 
    .popup-close:hover:after,
