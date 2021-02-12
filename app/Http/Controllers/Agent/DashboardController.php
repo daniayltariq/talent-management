@@ -34,7 +34,7 @@ class DashboardController extends Controller
 		try {
 
 			$data = [
-				"subj"=>$request->recipient,
+				"subj"=>$request->subj,
 				"message"=>$request->message,
 			];
             Mail::to($request->recipient)->send(new ContactTalent($data));

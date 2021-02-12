@@ -369,11 +369,11 @@
                <input type="hidden" name="recipient" value="{{$data['profile']->email ?? $data['profile']->user->email ?? ''}}">
                <div class="form-group">
                   <label for="recipient-name" class="col-form-label">Subject:</label>
-                  <input type="text" class="form-control" name="subj">
+                  <input type="text" class="form-control" name="subj" required>
                </div>
                <div class="form-group">
                   <label for="message-text" class="col-form-label">Message:</label>
-                  <textarea class="form-control" name="message"></textarea>
+                  <textarea class="form-control" name="message" required></textarea>
                </div>
                <div class="form-group">
                   <button type="submit" class="btn btn-primary btn-sm" style="padding: 7px 22px;"><i class="fas fa-paper-plane"></i></button>
