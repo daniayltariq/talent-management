@@ -311,7 +311,7 @@
               location.reload();
             }
             else if (error.code=='setup_intent_unexpected_state') {
-              toastr.error('email not valid');
+              toastr.error('Please try again');
               location.reload();
             } else {
               errorElement.textContent = error.message;
