@@ -165,7 +165,8 @@ class TopicController extends Controller
     {
         $blog = Topic::findOrFail($id);
         $categories = self::topic_categories(['no_paginate' => true]);
-        //dd($blog->tags->pluck('tag')->toArray());
+        
+        dd($blog,$categories);
         
         return view('web.agent.topic.create',compact('categories','blog'));
     }
