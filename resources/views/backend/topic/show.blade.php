@@ -38,7 +38,7 @@
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="dropdown dropdown-inline">
-                        <button type="button" id="status" data-status="{{$blog->status==1 ? 0 : 1}}" class="btn btn-primary btn-sm text-white">
+                        <button type="button" id="status" data-status="{{$blog->status==1 ? 0 : 1}}" class="btn {{$blog->status==1 ? 'btn-success' : 'btn-danger'}} btn-sm text-white">
                          {{$blog->status ==1 ? 'Active' : 'Inactive'}}
                         </button>
                     </div>
@@ -78,9 +78,9 @@
                     status:$(that).attr('data-status')
                 },
                 function(res){
-                    console.log(res.blog_status);
                     if (res.status=="success") {
                         $(that).text(res.blog_status ==1?' Active' : ' Inactive');
+                        $(that).removeClasee('btn-success').removeClasee('btn-danger').addClass(res.blog_status ==1?' btn-success' : ' btn-danger');
                         $(that).attr('data-status',res.blog_status);
                     } else {
                         toastr.error('Something went wrong');
