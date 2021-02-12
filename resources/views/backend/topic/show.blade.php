@@ -80,7 +80,7 @@
                 function(res){
                     if (res.status=="success") {
                         $(that).text(res.blog_status ==1?' Active' : ' Inactive');
-                        $(that).removeClasee('btn-success').removeClasee('btn-danger').addClass(res.blog_status ==1?' btn-success' : ' btn-danger');
+                        $(that).removeClass('btn-success').removeClass('btn-danger').addClass(res.blog_status ==1?' btn-success' : ' btn-danger');
                         $(that).attr('data-status',res.blog_status);
                     } else {
                         toastr.error('Something went wrong');
