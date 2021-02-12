@@ -16,7 +16,6 @@
   box-sizing: border-box; }
 
 body {
-  font-family: "Poppins-Regular";
   font-size: 13px;
   color: #808080;
   margin: 0;
@@ -29,7 +28,6 @@ textarea {
   resize: none; }
 
 input, textarea, select, button {
-  font-family: "Poppins-Regular";
   font-size: 13px;
   color: #333; }
 
