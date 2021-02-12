@@ -192,6 +192,10 @@
         color:#f37c2c;
     }
 
+    .grid-item:hover{
+        z-index: 0 !important;
+    }
+
 </style>
 @endsection
 
