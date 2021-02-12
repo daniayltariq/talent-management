@@ -48,9 +48,9 @@
                   }
                   @endphp
 
-                    <form class="apply-form form-horizontal" method="POST" action="{{ $route }}" enctype="multipart/form-data">
-                        @csrf 
-                        @if(isset($blog))
+                  <form class="apply-form form-horizontal" method="POST" action="{{ $route }}" enctype="multipart/form-data">
+                  @csrf 
+                  @if(isset($blog))
                   {{ method_field('PATCH') }}
                   @endif
                         <div class="form-block p-5">
@@ -116,7 +116,7 @@
                                            <strong>{{ $message }}</strong>
                                        </span>
                                     @enderror
-                                    <textarea name="content" id="summernote" class="summernote">{!! old('content') ?? html_entity_decode($blog->content ?? '') ?? ''!!}</textarea>
+                                    {{-- <textarea name="content" id="summernote" class="summernote">{!! old('content') ?? html_entity_decode($blog->content ?? '') ?? ''!!}</textarea> --}}
                                     
                               </div>
                           
