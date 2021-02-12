@@ -17,7 +17,7 @@ class DashboardController extends Controller
 	}
 	public function mailTalent(Request $request)
 	{
-		dd(auth()->user()->email);
+		// dd(auth()->user()->email);
 		$rules = [
 			'recipient' => ['required','email'],
             'subj' => ['required','string', 'max:191'],
