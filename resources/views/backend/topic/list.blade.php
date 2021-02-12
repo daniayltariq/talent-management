@@ -48,7 +48,7 @@
 							<thead>
 								<tr>
 								   <th>blog Title</th>
-								   <th>blog Image</th>
+								   {{-- <th>blog Image</th> --}}
 								   <th>Categories</th>
 								   {{-- <th>Details</th> --}}
 								   <th>Active</th>
@@ -59,7 +59,9 @@
 								@foreach($blog as $topic)
 									<tr>
 										<td>{{ $topic->title ?? '' }}</td>
-										<td><img class="kt-media" style="max-width: 100px;height: 40px;" src="{{asset($topic->image ?? '')}}" alt=""></td>
+										{{-- <td>
+											<img class="kt-media" style="max-width: 100px;height: 40px;" src="{{asset($topic->image ?? '')}}" alt="">
+										</td> --}}
 										<td>
 											 {{ $topic->category ? $topic->category->title : '' }}
 												 
