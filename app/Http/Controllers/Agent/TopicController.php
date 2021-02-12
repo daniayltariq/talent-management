@@ -208,7 +208,7 @@ class TopicController extends Controller
         $blog->save();
 
         return redirect()->back()->with([
-            "message" => "Pending approval.",
+            "message" => "Updated successfully.",
             "alert-type" => "success",
         ]);
 

@@ -145,12 +145,12 @@ class TopicController extends Controller
      */
     public function show($slug)
     {
-        $portfolio = Portfolio::where('slug',$slug)->first();
-        if ($portfolio) {
-            return view('backend.portfolio.show',compact('portfolio'));
+        $blog=Topic::where('slug',$slug)->orWhere('id',$slug)->first();
+        if ($blog) {
+            return view('backend.topic.show',compact('blog'));
         }
         else{
-            return 'error';
+            return redirect()->back()->with("error", "Topic not found.");
         }
     }
 
@@ -206,12 +206,19 @@ class TopicController extends Controller
             $topic->status=$request['status'];
             $topic->save();
             if ($topic) {
+                $data=[
+                    "status"=>"success",
+                    "blog_status"=>$topic->status==1?0:1
+                ];
                 $status="success";
             }
             else{
-                $status="error";
+                $data=[
+                    "status"=>"error",
+                    "blog_status"=>$topic->status
+                ];
             }
-            return $status;
+            return $data;
         }
         
     }

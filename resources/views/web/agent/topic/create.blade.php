@@ -14,6 +14,10 @@
 .note-toolbar .btn{
    padding:10px 10px ; 
 }
+
+.invalid-feedback{
+    color: red;
+}
 </style>
 
 <link href="{{asset('backend-assets/assets/plugins/summernote/summernote.css')}}" rel="stylesheet">
@@ -66,7 +70,7 @@
                             <div class="form-group">
                              
                                     <label for="name" class="control-label">Title<span class="req">*</span></label>
-                                    <input id="title" type="title" class="form-control @error('title') is-invalid @enderror" name="title" value="{{isset($blog)?$blog->title : ''}}" required autocomplete="title" autofocus>
+                                    <input id="title" type="title" class="form-control @error('title') is-invalid @enderror" name="title" value="{{old('title')?? ''}}" required autocomplete="title" autofocus>
 
                                    @error('title')
                                        <span class="invalid-feedback" role="alert">
@@ -79,7 +83,7 @@
                             <div class="form-group">
                              
                                  <label for="name" class="control-label">URL<span class="req">*</span></label>
-                                 <input id="slug" type="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{isset($blog)?$blog->slug : ''}}" required autocomplete="slug" autofocus>
+                                 <input id="slug" type="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{old('slug')?? ''}}" required autocomplete="slug" autofocus>
 
                                 @error('slug')
                                     <span class="invalid-feedback" role="alert">
@@ -112,7 +116,7 @@
                                            <strong>{{ $message }}</strong>
                                        </span>
                                     @enderror
-                                    <textarea name="content" id="summernote" class="summernote">{!!isset($blog)?html_entity_decode($blog->content) : ''!!}</textarea>
+                                    <textarea name="content" id="summernote" class="summernote">{!!old('content')?? ''!!}</textarea>
                                     
                               </div>
                           
