@@ -73,7 +73,7 @@
 												<i class="fa fa-pencil-alt"></i>
 											</div> </a>
 											<button data-topicid="{{$topic->id}}" name="postComm" class="btn btn-success btn-sm btn-bg-white" style="color: #5d78ff;"><i class="fa fa-comment"></i></button>
-											<a href="{{ route('backend.topic.show', $topic->slug ?? $topic->id) }}" class="btn btn-secondary btn-sm btn-xs"><i class="fa fa-eye" ></i> View </a>
+											<a href="{{ route('backend.topic.show', $topic->slug ?? $topic->id) }}" class="btn btn-secondary btn-sm btn-xs"><i class="fa fa-eye" ></i></a>
 											{{-- <a href="{{ route('blog.updateStatus', $blog->id) }}" class="btn btn-pause btn-xs" style=" color:white" ><i class="fa fa-pause" ></i> Pause</a> --}}
 											{{-- <a  href="#" class="btn btn-duplicate btn-xs" style=" color:white" ><i class="fa fa-copy" ></i> Duplicate</a> --}}
 											{{-- <a  href="#" class="btn btn-pause btn-xs" style=" color:white" ><i class="fa fa-archive" ></i> Achive </a> --}}
