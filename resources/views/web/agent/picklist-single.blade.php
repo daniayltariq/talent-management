@@ -73,11 +73,7 @@
    font-weight: 400;
    }
 
-   .popup-contact-wrapper{
-      border-radius: 8px;
-      border: 2px solid #dadce0;
-      border-top: 4px solid #e77826;
-   }
+   
 
    .popup-close {
    width: 34px;

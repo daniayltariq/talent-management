@@ -139,11 +139,11 @@
     #card-errors{
       color: red !important;
     }
-    .popup-contact-wrapper {
+    /*.popup-contact-wrapper {
         border-radius: 8px;
         border: unset !important;
         border-top: unset !important;
-    }
+    }*/
 
     .popup-close:hover {
           background: #df691a !important;
