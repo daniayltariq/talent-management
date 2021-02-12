@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Skill;
 use App\Models\Topic;
 use App\Search\TalentSearch;
+use App\Models\Profile;
 
 use Illuminate\Http\Request;
 
@@ -43,7 +44,7 @@ class HomeController extends Controller
       $countries =  $client->getCountries()->getCountries();
 
       dd(collect($account)); */
-      $models=\App\Models\User::whereHas(
+      $models = User::whereHas(
          'roles', function($q){
              $q->whereNotIn('name',['superadmin','agent']);
          }
@@ -56,7 +57,7 @@ class HomeController extends Controller
 
     public function featured_talents()
     {
-      $featured=\App\Models\User::whereHas(
+      $featured = User::whereHas(
          'roles', function($q){
              $q->whereNotIn('name',['superadmin','agent']);
          }
@@ -67,7 +68,7 @@ class HomeController extends Controller
 
     public function findtalent()
     {
-      $members=\App\Models\User::whereHas(
+      $members = User::whereHas(
          'roles', function($q){
              $q->whereNotIn('name',['superadmin','agent']);
          }
@@ -82,9 +83,9 @@ class HomeController extends Controller
     public function models($link)
     {
 
-      $pro=\App\Models\Profile::where('custom_link',$link)->orWhere('id',$link)->first();
+      $pro = Profile::where('custom_link',$link)->orWhere('id',$link)->first();
       if ($pro) {
-         $user=\App\Models\User::findOrFail($pro->user_id);
+         $user= User::findOrFail($pro->user_id);
          if ($user->attachments()->exists()) {
             $data=[
                'profile'=>$user->profile,
@@ -115,16 +116,16 @@ class HomeController extends Controller
 
     public function modelsgrid()
     {    
-       return view('web.pages.models-grid');
+      return view('web.pages.models-grid');
     }
 
     public function modelsingle($id)
-    { 
-      $user=\App\Models\User::findOrFail($id);
+    {
+      $user= User::findOrFail($id);
       if ($user->profile()->exists()) {
-         $custom_link=$user->profile->custom_link?$user->profile->custom_link :$user->profile->id;
-         /* dd( $custom_link); */
-         return redirect()->route('model',$custom_link);
+        $custom_link=$user->profile->custom_link?$user->profile->custom_link :$user->profile->id;
+         
+        return redirect()->route('model',$custom_link);
       }
       else{
          return view('web.errors.404')->with('text','Profile not setup yet, What needs to do here ?');
@@ -157,11 +158,9 @@ class HomeController extends Controller
 
    public function searchTalent(Request $request)
    {    
-      /* dd( $request->all()); */
-      $skills=Skill::all();
+      $skills = Skill::all();
       if($request->query()){
          $members=TalentSearch::apply($request);
-         /* dd( $members); */
          return view('web.forms.find-talent',compact('members','skills'));
       }
    }
@@ -169,7 +168,6 @@ class HomeController extends Controller
    public function testimonials()
    {
       $test=\App\Models\Testimonial::where('status',1)->get();
-      /* dd($test); */
       return view('web.pages.testimonials',compact('test'));
    }
 

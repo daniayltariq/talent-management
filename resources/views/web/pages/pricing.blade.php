@@ -66,6 +66,7 @@ td.default {
 }
 .bg-green {
   border-top:10px solid #00c1a1;
+  border-right: 1px solid #dddddd;
 }
 .sep {
   background:#F5F5F5;

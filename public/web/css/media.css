@@ -654,7 +654,7 @@
     left: 50%;
     right: 50%;
     height: 1px;
-    background: #ec0008;
+    background: #eb792c;
     transition: all ease 0.1s;
 	}
 	.m-menu__list-item a:hover:after {

@@ -970,8 +970,7 @@
                 _method: 'DELETE',
             },
             success: function(res) {
-                console.log(res);
-                toastr.success('file uploaded');
+                toastr.success('File removed successfully');
                 window.location.reload();
             },
             error: function(error) {

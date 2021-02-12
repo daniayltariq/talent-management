@@ -7,7 +7,7 @@
 	height: 100%;
 	display: none;
 	z-index: 9999;
-	background: #272727c9;
+	background: #000000eb;
 }
 
 .fullpage-loader .loader-wrapper{
@@ -422,4 +422,8 @@ background: #fff;
 
 .h-43{
 	height: 43px;
+}
+
+span.invalid-feedback {
+    font-size: 13px;
 }

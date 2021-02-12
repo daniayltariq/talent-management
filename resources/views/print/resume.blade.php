@@ -12,6 +12,9 @@
         html{
             overflow-x: hidden
         }
+        @page { 
+            margin: 0;
+        }
         .header {
             padding-top: 30px;
         }

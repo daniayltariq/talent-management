@@ -81,9 +81,10 @@ class DashboardController extends Controller
             $user->save();
             
             return redirect()->back()->with(array(
-                'message' => 'Data saved !', 
+                'message' => 'Successfully updated', 
                 'alert-type' => 'success'
             ));
+            
         } catch (\Throwable $th) {
             return redirect()->back()->with(array(
                 'message' => 'Something went wrong.', 

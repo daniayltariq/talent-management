@@ -12,6 +12,9 @@
     		min-width: 175px;
 			font-size: 13px;
 		}
+		.btn-primary{
+			color: #5d78ff;
+		}
 	</style>
 @endsection
 
@@ -85,15 +88,15 @@
 											
 										</td>
 										<td>
-											<a href="{{route('backend.user.edit',$user->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Edit
+											<a href="{{route('backend.user.edit',$user->id)}}" class="btn btn-primary btn-sm btn-bg-white" ><div class="kt-demo-icon__preview">Edit
 											</div> </a>
 											
 											@if ($user->hasActiveSubscription() && $user->getActivePlan()->training_invitation==1)
-												<button data-user="{{$user->id}}" name="userInvite" class="btn btn-success btn-sm btn-bg-white" style="color: #5d78ff;" data-toggle="modal" data-target="#invite_modal">Invite</button>
+												<button data-user="{{$user->id}}" name="userInvite" class="btn btn-primary btn-sm btn-bg-white" data-toggle="modal" data-target="#invite_modal">Invite</button>
 											@endif
 											
 
-											<a href="{{route('backend.user.impersonate',$user->id)}}" class="btn btn-success btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Impersonate
+											<a href="{{route('backend.user.impersonate',$user->id)}}" class="btn btn-primary btn-sm btn-bg-white" ><div class="kt-demo-icon__preview">Impersonate
 											</div> </a>
 
 											{{-- <a href="{{ route('user.show', $user->id) }}" class="btn btn-view btn-xs" style=" color:white" ><i class="fa fa-folder" ></i> View </a>

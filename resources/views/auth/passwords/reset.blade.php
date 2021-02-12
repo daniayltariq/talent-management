@@ -11,7 +11,7 @@
         }
 
         .mt-14{
-            margin-top: 14rem;
+            margin-top: 22rem;
         }
 
         .card {
