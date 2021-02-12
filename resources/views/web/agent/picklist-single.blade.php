@@ -110,11 +110,9 @@
    }
 
    .popup-close:hover {
-   -webkit-transform: translate(50%, -50%) rotate(180deg);
-   transform: translate(50%, -50%) rotate(180deg);
-   background: #f00;
-   text-decoration: none;
-   border-color: #f00;
+	   -webkit-transform: translate(50%, -50%) rotate(180deg);
+	   transform: translate(50%, -50%) rotate(180deg);
+	   text-decoration: none;
    }
 
    .popup-close:hover:after,
