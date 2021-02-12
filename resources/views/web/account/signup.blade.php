@@ -318,7 +318,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="form-group">
                                     <label for="g_country" class="col-sm-4 control-label">Country <span class="req">*</span></label>
                                     <div class="col-sm-8">
-                                        <input type="text"  name="g_country" id="g_country" class="form-control" value="United States" disabled>
+                                        <input type="text"  name="g_country" id="" class="form-control" value="United States" disabled>
                                         {{-- <select name="g_country" id="g_country" class="form-control">
                                             <option value="">Select</option>
                                             @foreach ($countries as $country)
