@@ -410,6 +410,12 @@
               </tr> --}}
               <tr>
                 <td>
+                  <p style="margin-left: 1.7rem">New message from : {{$data['agent'] ?? ''}}</p>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
                   <p style="margin-left: 1.7rem">{{$data['message'] ?? ''}}</p>
                 </td>
               </tr>
