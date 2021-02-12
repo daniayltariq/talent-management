@@ -17,7 +17,7 @@ class DashboardController extends Controller
 	}
 	public function mailTalent(Request $request)
 	{
-		dd(auth()->user->email);
+		dd(auth()->user()->email);
 		$rules = [
 			'recipient' => ['required','email'],
             'subj' => ['required','string', 'max:191'],
@@ -36,7 +36,7 @@ class DashboardController extends Controller
 
 			$data = [
 				"subj" => $request->subj,
-				"agent" => auth()->user->email,
+				"agent" => auth()->user()->email,
 				"message" => $request->message,
 			];
             Mail::to($request->recipient)->send(new ContactTalent($data));
