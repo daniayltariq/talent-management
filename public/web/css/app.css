@@ -329,9 +329,9 @@ font-weight: 400;
 }
 
 .popup-contact-wrapper{
-	border-radius: 8px;
+	/*border-radius: 8px;
 	border: 2px solid #dadce0;
-	border-top: 4px solid #e77826;
+	border-top: 4px solid #e77826;*/
 }
 
 .popup-close {
@@ -426,4 +426,10 @@ background: #fff;
 
 span.invalid-feedback {
     font-size: 13px;
+}
+
+
+.note-toolbar {
+    position: relative;
+    z-index: 1 !important;
 }
