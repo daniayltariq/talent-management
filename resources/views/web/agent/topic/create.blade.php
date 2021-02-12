@@ -83,7 +83,7 @@
                             <div class="form-group">
                              
                                  <label for="name" class="control-label">URL<span class="req">*</span></label>
-                                 <input id="slug" type="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') ?? $blog->slug ''}}" required autocomplete="slug" autofocus>
+                                 <input id="slug" type="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') ?? $blog->slug ?? ''}}" required autocomplete="slug" autofocus>
 
                                 @error('slug')
                                     <span class="invalid-feedback" role="alert">
@@ -116,7 +116,7 @@
                                            <strong>{{ $message }}</strong>
                                        </span>
                                     @enderror
-                                    {{-- <textarea name="content" id="summernote" class="summernote">{!! old('content') ?? html_entity_decode($blog->content ?? '') ?? ''!!}</textarea> --}}
+                                    <textarea name="content" id="summernote" class="summernote">{!! old('content') ?? html_entity_decode($blog->content ?? '') ?? ''!!}</textarea>
                                     
                               </div>
                           
