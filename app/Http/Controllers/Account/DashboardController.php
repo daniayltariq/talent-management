@@ -44,7 +44,7 @@ class DashboardController extends Controller
 
         $custom_url = $plan->unique_url == 1?true:false;
 
-        dd($custom_url);
+        dd($custom_url, $plan->unique_url, $plan);
 
         return view('web.account.dashboard',compact('data','custom_url'));
 
