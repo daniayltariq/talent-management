@@ -294,6 +294,12 @@
     .t-clr{
         color: #e77929;
     }
+    .input-group-bs {
+        background: #e9ecef;
+        padding-left: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 3px;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -395,9 +401,9 @@
                                     <div class="col-12">
                                         <label for="f_name" class="form-label mt-3">Profile URL</label>
                                         <div class="form-holder">
-                                            <div class="input-group-bs mb-3">
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text-bs" id="basic-addon3">{{url('/').'/member/'}}</span>
+                                            <div class="input-group-bs mb-3 d-flex">
+                                                <div class="input-group-prepend pr-4">
+                                                <span class="input-group-text-bs" id="basic-addon3" style="    line-height: 2;">{{url('/').'/member/'}}</span>
                                                 </div>
                                                 <input type="text" class="form-control" name="custom_link" value="{{$profile->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3">
                                             </div>
