@@ -299,6 +299,11 @@
         padding-left: 10px;
         border: 1px solid #ced4da;
         border-radius: 3px;
+        height: 33px;
+    }
+
+    .input-group-bs input {
+        border: unset;
     }
 </style>
 
