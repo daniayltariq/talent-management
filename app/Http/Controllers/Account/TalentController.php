@@ -13,12 +13,13 @@ class TalentController extends Controller
 {
     public function profile()
     {
-        $profile=auth()->user()->profile;
-        $skills=Skill::all();
+        $profile = auth()->user()->profile;
+        $skills  = Skill::all();
         
-        $sub=auth()->user()->subscriptions()->active()->first();
-        $plan=Plan::where('stripe_plan',$sub->stripe_plan)->first();
-        $custom_url=$plan->unique_url==1?true:false;
+        $sub  = auth()->user()->subscriptions()->active()->first();
+        $plan = Plan::where('stripe_plan',$sub->stripe_plan)->first();
+        $custom_url = $plan->unique_url == 1?true:false;
+
         
     	return view('web.account.profile',compact('profile','skills','custom_url'));
 
@@ -26,26 +27,32 @@ class TalentController extends Controller
 
     public function store(Request $request)
     {
-        /* dd($request->all()); */
+        
         try {
-            if($request['method']=='PUT'){
-                $profile=Profile::where('user_id',auth()->user()->id/* $request['profile_id'] */)->first();
-            }else{
-                $profile=new Profile ;
-                $status['method']='PUT';
+            if($request['method'] == 'PUT'){
+                $profile = Profile::where('user_id',auth()->user()->id/* $request['profile_id'] */)->first();
             }
+            else
+            {
+                $profile = new Profile ;
+                $status['method'] = 'PUT';
+            }
+
             $profile->fill($request->all());
-            if ($request->custom_link) {
-                $profile->custom_link=Str::slug(Str::lower($request->custom_link),'_');
+
+            if ($request->custom_link) 
+            {
+                $profile->custom_link = Str::slug(Str::lower($request->custom_link),'-');
             }
             
             $profile->user_id=auth()->user()->id;
             $profile->save();
 
 
-            if (isset($request['experience']) ) {
+            if (isset($request['experience']) ) 
+            {
                 auth()->user()->experience()->where('type',$request['type'])->delete();
-                /* auth()->user()->experience()->delete(); */
+                
                 foreach($request['experience'] as $exp){
                     if ($exp['name'] !== '' || $exp['role'] !=='' || $exp['production'] !=='') {
                         $experience[] = ['candidate_id' => auth()->user()->id,'type' => $request['type'],'name' => $exp['name'],'role' => $exp['role'],'production' => $exp['production']];
@@ -55,7 +62,8 @@ class TalentController extends Controller
                 \App\Models\Experience::insert($experience);
             }
 
-            if (isset($request['profile_img'])) {
+            if (isset($request['profile_img'])) 
+            {
                 $destinationPath = 'uploads/profile';
                 $img = custom_file_upload($request['profile_img'],'public',$destinationPath,null,null,null,null);
 
@@ -64,7 +72,8 @@ class TalentController extends Controller
             }
 
             
-            if (isset($request['skills']) ) {
+            if (isset($request['skills']) ) 
+            {
                 auth()->user()->skills()->delete();
                 foreach($request['skills'] as $skill){
                     $skills[] = ['candidate_id' => auth()->user()->id,'skill_id' => $skill];
@@ -77,7 +86,7 @@ class TalentController extends Controller
 
         } catch (\Throwable $th) {
             $status = array(
-                'message' => 'something went wrong!', 
+                'message' => 'Something went wrong!', 
                 'alert_type' => 'error'
             );
         }
@@ -95,7 +104,7 @@ class TalentController extends Controller
 
     public function checkCustomLink(Request $request)
     {
-        $profile=Profile::where('custom_link',$request->link)->first();
+        $profile = Profile::where('custom_link',$request->link)->first();
         if ($profile && $profile->user_id != auth()->user()->id) {
             $suggestions=array(
                         auth()->user()->f_name.'-'.auth()->user()->l_name,

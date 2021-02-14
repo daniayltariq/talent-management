@@ -175,7 +175,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     <input type="email" placeholder="{{strtoupper('Email')}}" name="email" class="form-control required" value="{{auth()->user()->email ?? ''}}" disabled>
                                                 </div>
 
-                                                @if ($custom_url)
+                                                {{-- @if ($custom_url)
                                                     <div class="form-holder">
                                                         <div class="input-group-bs mb-3">
                                                             <div class="input-group-prepend">
@@ -186,7 +186,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                         <small id="link_error" style="color: red"></small>
                                                         <p id="link_suggestion">Suggestions: <span id="suggestion"></span></p>
                                                     </div>
-                                                @endif
+                                                @endif --}}
                                                 
                                                 
                                             </div>
@@ -808,45 +808,45 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             $('#custom_link').trigger('change');
         })
 
-        $('#custom_link').on('keyup change',function(e){
-            $('#link_suggestion').hide();
+        // $('#custom_link').on('keyup change',function(e){
+        //     $('#link_suggestion').hide();
             
-            if ($(this).val() !=='') {
-                if(e.keyCode == 189)
-                {
-                   var textValue =$(this).val().replace(/_/g,"-");
-                    $(this).val(textValue);
-                }
-                else{
-                    $.ajax({
-                        url: "{{ route('account.talent.checkCustomLink') }}",
-                        type: 'GET',
-                        data:{
-                            'link':$(this).val()
-                        },
-                        success: function(res) {
-                            console.log(res);
-                            if (res.alert_type=='success') {
-                                $('#link_error').hide();
-                            } else {
+        //     if ($(this).val() !=='') {
+        //         if(e.keyCode == 189)
+        //         {
+        //            var textValue =$(this).val().replace(/_/g,"-");
+        //             $(this).val(textValue);
+        //         }
+        //         else{
+        //             $.ajax({
+        {{-- //                 url: "{{ route('account.talent.checkCustomLink') }}", --}}
+        //                 type: 'GET',
+        //                 data:{
+        //                     'link':$(this).val()
+        //                 },
+        //                 success: function(res) {
+        //                     console.log(res);
+        //                     if (res.alert_type=='success') {
+        //                         $('#link_error').hide();
+        //                     } else {
                                 
-                                $('#link_error').html(res.message);
-                                $('#link_error').show();
+        //                         $('#link_error').html(res.message);
+        //                         $('#link_error').show();
 
-                                $('#suggestion').html('');
-                                res.suggestions.forEach(val => {
-                                    $('#suggestion').append(val+'<br>');
-                                });
-                                $('#link_suggestion').show();
-                            }
-                        },
-                        error: function(error) {
-                        }
-                    });
-                }
+        //                         $('#suggestion').html('');
+        //                         res.suggestions.forEach(val => {
+        //                             $('#suggestion').append(val+'<br>');
+        //                         });
+        //                         $('#link_suggestion').show();
+        //                     }
+        //                 },
+        //                 error: function(error) {
+        //                 }
+        //             });
+        //         }
                 
-            }
-        })
+        //     }
+        // })
 
     });
 
