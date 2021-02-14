@@ -46,7 +46,7 @@ $(function () {
             return form.valid();
         },
         labels: {
-            finish: "Continue",
+            finish: "Next",
             next: "Next",
             notyet: "None yet.  Continue",
             previous: "Back"

@@ -20,8 +20,7 @@ class TalentController extends Controller
         $plan = Plan::where('stripe_plan',$sub->stripe_plan)->first();
         $custom_url = $plan->unique_url == 1?true:false;
 
-        
-    	return view('web.account.profile',compact('profile','skills','custom_url'));
+        return view('web.account.profile',compact('profile','skills','custom_url'));
 
     }
 
