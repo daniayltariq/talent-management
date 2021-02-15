@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Models\Plan;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\File;
 use App\Models\Attachment;
 use Illuminate\Support\Str;
@@ -44,11 +45,54 @@ class DashboardController extends Controller
 
         $custom_url = $plan->unique_url == 1?true:false;
 
+        $data["custom_link"] = self::getCustomUrl();
+        dd( $data["custom_link"]);
         // dd($custom_url, $plan->unique_url, $plan);
 
         return view('web.account.dashboard',compact('data','custom_url'));
 
     }
+
+    private static function getCustomUrl()
+    {
+        $suggestions=array(
+            auth()->user()->f_name.'-'.auth()->user()->l_name,
+            auth()->user()->f_name[0].'-'.auth()->user()->l_name,
+            auth()->user()->f_name.'-'.auth()->user()->l_name[0],
+            auth()->user()->f_name.''.auth()->user()->l_name,
+            auth()->user()->f_name[0].''.auth()->user()->l_name
+        );
+
+        foreach ($suggestions as $key => $suggestion) {
+            
+            $profile=Profile::where('custom_link',$suggestion)->first();
+
+            if ($profile && $profile->user_id !==auth()->user()->id) {
+                if ($key == (count($suggestions)-1)) {
+                    for($i=0;$i<2;){
+                        $suggest_update=$suggestions[0].rand(1,100);
+                        $profile=Profile::where('custom_link',$suggest_update)->first();
+                        if ($profile) {
+                            
+                        }else{
+                            $link=$suggest_update;
+                            break;
+                        }
+                    }
+                }
+                else{
+                    continue;
+                }
+                
+            }
+            else{
+                $link=$suggestion;
+                break;
+            }
+        }
+
+        return $link;
+    } 
 
     public function store(Request $request)
     {

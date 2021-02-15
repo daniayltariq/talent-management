@@ -412,8 +412,8 @@
                                                 </div>
                                                 <input type="text" class="form-control" name="custom_link" value="{{$profile->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3">
                                             </div>
-                                            <small id="link_error" style="color: red"></small>
-                                            <p id="link_suggestion">Suggestions: <span id="suggestion"></span></p>
+                                            {{-- <small id="link_error" style="color: red"></small>
+                                            <p id="link_suggestion">Suggestions: <span id="suggestion"></span></p> --}}
                                         </div>
                                     </div>
                                     @endif
