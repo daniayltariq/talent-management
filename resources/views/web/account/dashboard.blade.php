@@ -407,7 +407,7 @@
                                         <label for="f_name" class="form-label mt-3">Profile URL</label>
                                         <div class="form-holder">
                                             <div class="input-group-bs mb-3 d-flex">
-                                                <div class="input-group-prepend pr-4">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text-bs" id="basic-addon3" style="    line-height: 2;">{{url('/').'/member/'}}</span>
                                                 </div>
                                                 <input type="text" class="form-control" name="custom_link" value="{{$data['profile']->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3" disabled>
