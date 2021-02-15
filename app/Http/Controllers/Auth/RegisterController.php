@@ -226,13 +226,13 @@ class RegisterController extends Controller
 
         $profile = new Profile ;
         $profile->user_id=$user->id;
-        $profile->custom_link=self::getCustomUrl();
+        $profile->custom_link=self::getCustomUrl($user);
         $profile->save();
 
         return redirect()->route('account.dashboard');
     }
 
-    private static function getCustomUrl()
+    private static function getCustomUrl($user)
     {
         $suggestions=array(
             $user->f_name.'-'.$user->l_name,
