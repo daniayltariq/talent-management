@@ -301,7 +301,7 @@
       </div>
       <br>
       {{-- Vedio Elements --}}
-      {{-- <div class="row">
+      <div class="row">
          <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
             <div class="row">
                <div id="model-slider" class="s-model__photos col-md-6">
@@ -320,10 +320,10 @@
                </div>
             </div>
          </div>
-      </div> --}}
+      </div>
       <br>
       {{-- Voiceovers --}}
-      {{-- <div class="row">
+      <div class="row">
          <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
             <div class="row">
                <div id="model-slider" class="s-model__photos col-md-6">
@@ -342,7 +342,7 @@
                </div>
             </div>
          </div>
-      </div> --}}
+      </div>
    </div>
 
    <div class="popup" pd-popup="popupNew">
