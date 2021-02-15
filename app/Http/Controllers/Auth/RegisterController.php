@@ -235,11 +235,11 @@ class RegisterController extends Controller
     private static function getCustomUrl()
     {
         $suggestions=array(
-            auth()->user()->f_name.'-'.auth()->user()->l_name,
-            auth()->user()->f_name[0].'-'.auth()->user()->l_name,
-            auth()->user()->f_name.'-'.auth()->user()->l_name[0],
-            auth()->user()->f_name.''.auth()->user()->l_name,
-            auth()->user()->f_name[0].''.auth()->user()->l_name
+            $user->f_name.'-'.$user->l_name,
+            $user->f_name[0].'-'.$user->l_name,
+            $user->f_name.'-'.$user->l_name[0],
+            $user->f_name.''.$user->l_name,
+            $user->f_name[0].''.$user->l_name
         );
 
         foreach ($suggestions as $key => $suggestion) {
