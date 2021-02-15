@@ -16,7 +16,7 @@ class isSuperAgentSubscribedMember
     public function handle($request, Closure $next)
     {
         if(\Auth::check()){
-            if (auth()->user()->hasAnyRole("agent|superadmin") || (auth()->user()->hasRole('candidate') && auth()->user()->hasSubscription()) ) {
+            if (auth()->user()->hasAnyRole("agent|superadmin") || (auth()->user()->hasRole('candidate') && auth()->user()->hasActiveSubscription()) ) {
                return $next($request);
             } 
             
