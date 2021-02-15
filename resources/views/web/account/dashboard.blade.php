@@ -410,7 +410,7 @@
                                                 <div class="input-group-prepend pr-4">
                                                 <span class="input-group-text-bs" id="basic-addon3" style="    line-height: 2;">{{url('/').'/member/'}}</span>
                                                 </div>
-                                                <input type="text" class="form-control" name="custom_link" value="{{$profile->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3">
+                                                <input type="text" class="form-control" name="custom_link" value="{{$profile->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3" disabled>
                                             </div>
                                             {{-- <small id="link_error" style="color: red"></small>
                                             <p id="link_suggestion">Suggestions: <span id="suggestion"></span></p> --}}

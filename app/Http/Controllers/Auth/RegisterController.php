@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -223,7 +224,53 @@ class RegisterController extends Controller
           $user->driver_license= $request['driver_license'];
         $user->save();
 
+        $profile = new Profile ;
+        $profile->user_id=$user->id;
+        $profile->custom_link=self::getCustomUrl();
+        $profile->save();
+
         return redirect()->route('account.dashboard');
     }
+
+    private static function getCustomUrl()
+    {
+        $suggestions=array(
+            auth()->user()->f_name.'-'.auth()->user()->l_name,
+            auth()->user()->f_name[0].'-'.auth()->user()->l_name,
+            auth()->user()->f_name.'-'.auth()->user()->l_name[0],
+            auth()->user()->f_name.''.auth()->user()->l_name,
+            auth()->user()->f_name[0].''.auth()->user()->l_name
+        );
+
+        foreach ($suggestions as $key => $suggestion) {
+            
+            $profile=Profile::where('custom_link',$suggestion)->first();
+
+            if ($profile && $profile->user_id !==auth()->user()->id) {
+                if ($key == (count($suggestions)-1)) {
+                    for($i=0;$i<2;){
+                        $suggest_update=$suggestions[0].rand(1,100);
+                        $profile=Profile::where('custom_link',$suggest_update)->first();
+                        if ($profile) {
+                            
+                        }else{
+                            $link=$suggest_update;
+                            break;
+                        }
+                    }
+                }
+                else{
+                    continue;
+                }
+                
+            }
+            else{
+                $link=$suggestion;
+                break;
+            }
+        }
+
+        return $link;
+    } 
 
 }
