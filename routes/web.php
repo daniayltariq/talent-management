@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -394,3 +395,7 @@ Route::group([
 
 //postjob controller
 Route::resource('postjob',App\Http\Controllers\PostJobController::class);
+
+Route::get('test',function(Request $request){
+    return $request->cookie('firstPromotorRefID');
+});

@@ -233,7 +233,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     </div>
                                     <div style="display: flex">
                                         <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="member" {{old('guardian')=='member'?'checked' : ''}} id="member">
-                                        <label for="member">The member (if 18 or older)</label for="guardian"> 
+                                        <label for="member">The member (if 18 or older)</label for="member"> 
                                     </div>
                                     
                                     
@@ -838,6 +838,14 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     <script src="https://cdn.jsdelivr.net/npm/jquery-dropdown-datepicker@1.3.0/dist/jquery-dropdown-datepicker.min.js"></script>
     <script>
         $(document).ready(function(){
+
+
+            $('#guardian').click(function(){
+                $('#g_country').val('United States');
+            })
+
+
+
             var max_limit = new Date();
             var min_limit = new Date();
             max_limit.setDate(today.getDate() - 31);

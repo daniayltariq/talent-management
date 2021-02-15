@@ -294,6 +294,17 @@
     .t-clr{
         color: #e77929;
     }
+    .input-group-bs {
+        background: #e9ecef;
+        padding-left: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 3px;
+        height: 33px;
+    }
+
+    .input-group-bs input {
+        border: unset;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -391,6 +402,22 @@
                                 </div>
                                 
                                 <div class="row mb-5">
+                                    @if ($custom_url)
+                                    <div class="col-12">
+                                        <label for="f_name" class="form-label mt-3">Profile URL</label>
+                                        <div class="form-holder">
+                                            <div class="input-group-bs mb-3 d-flex">
+                                                <div class="input-group-prepend pr-4">
+                                                <span class="input-group-text-bs" id="basic-addon3" style="    line-height: 2;">{{url('/').'/member/'}}</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="custom_link" value="{{$profile->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3">
+                                            </div>
+                                            <small id="link_error" style="color: red"></small>
+                                            <p id="link_suggestion">Suggestions: <span id="suggestion"></span></p>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    
                                     <div class="col-6">
                                         <label for="f_name" class="form-label mt-3">First Name</label>
                                         <input class="form-control" type="text" name="f_name" id="f_name" placeholder="FIRST NAME" value="{{auth()->user()->f_name ?? ''}}" />

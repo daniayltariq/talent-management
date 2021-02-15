@@ -43,6 +43,10 @@
     border: 1px solid #f75959;
     border-radius: 7px;
 }
+
+h3{
+    font-family: 'Source Sans Pro' !important;
+}
 </style>
 @endsection
 

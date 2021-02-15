@@ -34,15 +34,19 @@ class DashboardController extends Controller
             return $limit;
         }
         
-        $subs=auth()->user()->subscriptions()->active()->first();
+        $subs = auth()->user()->subscriptions()->active()->first();
         
         if (!is_null($subs) && $subs->count()>0) {
-            $plan=Plan::select('name','description','pictures','audios','videos','social_links','social_limit')->where('stripe_plan',$subs->stripe_plan)->first();
+            $plan = Plan::select('name','description','pictures','audios','videos','social_links','social_limit','unique_url')->where('stripe_plan',$subs->stripe_plan)->first();
             
-            $data["plan"]=$plan;
+            $data["plan"] = $plan;
         }
-        /* dd($data['plan']); */
-        return view('web.account.dashboard',compact('data'));
+
+        $custom_url = $plan->unique_url == 1?true:false;
+
+        // dd($custom_url, $plan->unique_url, $plan);
+
+        return view('web.account.dashboard',compact('data','custom_url'));
 
     }
 

@@ -139,11 +139,11 @@
     #card-errors{
       color: red !important;
     }
-    .popup-contact-wrapper {
+    /*.popup-contact-wrapper {
         border-radius: 8px;
         border: unset !important;
         border-top: unset !important;
-    }
+    }*/
 
     .popup-close:hover {
           background: #df691a !important;
@@ -308,6 +308,11 @@
             var errorElement = document.getElementById('card-errors');
             if (error.code=='parameter_invalid_empty') {
               toastr.error('email not valid');
+              location.reload();
+            }
+            else if (error.code=='setup_intent_unexpected_state') {
+              toastr.error('Please try again');
+              location.reload();
             } else {
               errorElement.textContent = error.message;
             }
@@ -429,6 +434,7 @@
    else{
     fullPageLoader(false);
     toastr.error('email not valid');
+    location.reload();
    }
   
  }

@@ -371,9 +371,9 @@ transform: rotate(-45deg);
 .popup-close:hover {
 -webkit-transform: translate(50%, -50%) rotate(180deg);
 transform: translate(50%, -50%) rotate(180deg);
-background: #f00;
+background: #df691a;
 text-decoration: none;
-border-color: #f00;
+border-color: #df691a;
 }
 
 .popup-close:hover:after,
