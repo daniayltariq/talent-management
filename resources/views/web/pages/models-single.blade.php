@@ -183,7 +183,7 @@
       <div class="row">
          <div class="title__wrapp">
             {{-- <div class="page__subtitle title__grey">Backstage</div> --}}
-            <h1 class="page__title">{{$data['profile']->legal_first_name ?? ''}} {{$data['profile']->legal_last_name ?? ''}}</h1>
+            <h1 class="page__title">{{$data['profile']->legal_first_name ?? $data['profile']->user->f_name}} {{$data['profile']->legal_last_name ?? $data['profile']->user->l_name}}</h1>
          </div>
       </div>
    </div>
