@@ -47,10 +47,10 @@ class TalentController extends Controller
             $profile->user_id=auth()->user()->id;
             $profile->save();
 
-
+            auth()->user()->experience()->where('type',$request['type'])->delete();
             if (isset($request['experience']) ) 
             {
-                auth()->user()->experience()->where('type',$request['type'])->delete();
+                /* auth()->user()->experience()->where('type',$request['type'])->delete(); */
                 
                 foreach($request['experience'] as $exp){
                     if ($exp['name'] !== '' || $exp['role'] !=='' || $exp['production'] !=='') {

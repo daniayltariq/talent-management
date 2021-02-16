@@ -100,10 +100,37 @@ jQuery.fn.extend({
         /* handle click and add items */
         addButton.on("click", function () {
             items = repeater.find(".items");
-            /* console.log(itemToClone, $(items).last().html()); */
-            addItem($(items).last(), key);
+            if (items.length > 1) {
+                var child = $(items).children().eq(items.length - 1);
+                console.log(child);
+                var row_inputs = $(child).find('input,select,textarea');
+                console.log(row_inputs);
 
-            key++;
+                var emptyFields = row_inputs.filter(function () {
+                    return $(this).val() === "";
+                }).length;
+
+                console.log(emptyFields);
+
+                if (emptyFields === 0) {
+                    addItem($(items).last(), key);
+
+                    key++;
+                } else {
+                    toastr.error('input can not be empty');
+                }
+
+                /* row_inputs.each(function (index, el) {
+                    if ($(el).attr('value') == '') {
+                        toastr.error('input can not be empty');
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }); */
+            }
+            /* console.log(itemToClone, $(items).last().html()); */
+
         });
     }
 });
