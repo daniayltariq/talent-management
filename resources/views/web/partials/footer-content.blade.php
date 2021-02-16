@@ -29,7 +29,9 @@
 					</div>
 				</div> --}}
 			</div>
-			<div class="footer__copyrite">© 2019 The Talent Agency. All Rights Reserved.</div>
+			<div class="footer__copyrite">© 2019 The Talent Depot. All Rights Reserved. <br>
+				<a href="#" class="text-white">Terms & Conditions</a> . <a href="#" class="text-white">Privacy Policy</a>
+			</div>
 		</div>
 	</div>
 </footer><!-- Footer End -->

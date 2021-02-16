@@ -356,7 +356,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="eyecolor" class="col-sm-4 control-label">Select Eye Color</label>
                                 <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray'],'name'=>'eye_color'])
+                                    @include('components.multiselect', ['options' => ['Brown','Blue','Amber','Hazel','Gray','Green'],'name'=>'eye_color'])
                                     
                                  </div>
                             </div>  

@@ -174,6 +174,89 @@
       list-style: none;
    }
    /* End book talent modal */
+
+   .modal {
+        text-align: left;
+    }
+    .modal-content {
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 16px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21);
+        width: 100%;
+    }
+    .modal-header{
+        border-bottom: 0;
+        padding-top: 15px;
+        padding-right: 26px;
+        padding-left: 26px;
+        padding-bottom: 0px;
+    }
+    .modal-title {
+        font-size: 28px;
+    }
+    .modal-body{
+        border-bottom: 0;
+        padding-top: 5px;
+        padding-right: 26px;
+        padding-left: 26px;
+        padding-bottom: 10px;
+        font-size: 15px;
+    }
+    .modal-footer {
+        border-top:0;
+        padding-top: 0px;
+        padding-right:26px;
+        padding-bottom:26px;
+        padding-left:26px;
+    }
+
+    .btn-default,.btn-primary {
+        border: none;
+        border-radius: 2px;
+        display: inline-block;
+        color: #424242;
+        background-color: #FFF;
+        text-align: center;
+        height: 36px;
+        line-height: 36px;
+        outline: 0;
+        padding: 0 2rem; 
+        vertical-align: middle;
+        -webkit-tap-highlight-color: transparent;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        letter-spacing: .5px;
+        transition: .2s ease-out;
+    }
+    .btn-default:hover{
+    background-color: #FFF;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    }
+    .btn-primary {
+    color: #FFF;
+    background-color: #2980B9;
+    }
+    .btn-primary:hover{
+    background-color: #2980B9;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    }
+    footer {
+    text-align: center;
+    margin: 15px;
+    }
+    footer h4{
+    font-size: 2.92rem;
+    font-weight:100;
+        margin: 1.46rem 0 1.168rem; 
+    }
+
+    .picklist-btn{
+        position: relative;
+        z-index: 999999;
+    }
+
+    .new-picklist{
+        display: none;
+    }
 </style>
 @endsection
 @section('content')
@@ -274,6 +357,9 @@
                      <div class="row">
                         <div class="col-md-6">
                            <a href="#" class="btn btn__red animation pad-txt-email" pd-popup-open="popupNew">Contact</a>
+                        </div>
+                        <div class="col-md-6">
+                           <a href="#picklist-modal" data-memberid="{{$data['profile']->user->id}}" role="button" data-toggle="modal" class="btn btn__red animation pad-txt-email picklist-btn">Add to Picklist</a>
                         </div>
                      </div>
                   @endrole
@@ -400,6 +486,9 @@
 <!-- Materialdesignicons CSS (icon) -->
 <link rel="stylesheet" href="{{ asset('web/libs/icons/materialdesignicons.css') }}" type="text/css" />
 <link rel="stylesheet" href="{{ asset('web/libs/icons/flaticon.css') }}">
+
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script>
 <script>
    $.ajaxSetup({
    	headers: {

@@ -484,15 +484,15 @@ ul.social li{
     	<!-- BEGIN BODY -->
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
       	<tr>
-          <td valign="top" class="bg_light" style="padding: .5em 2.5em 1em 2.5em;">
-          	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-          		<tr>
-          			<td class="logo" style="text-align: center;">
-			            <h1 style="text-align: center;"><a href="{{route('/')}}">Talent Depot</a></h1>
-			          </td>
-          		</tr>
-          	</table>
-          </td>
+			<td valign="top" style="background:black">
+				<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td class="logo" style="text-align: center;">
+					<img src="{{asset('web/img/logo/TD_and_Words_white.png')}}" style="text-align: center;width: 25%" alt="">
+						</td>
+					</tr>
+				</table>
+			</td>
 	      </tr><!-- end tr -->
 	      <tr>
           <td class="bg_white email-section">

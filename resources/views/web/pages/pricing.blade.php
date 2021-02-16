@@ -165,11 +165,11 @@ table.pricing td:nth-child(4) {
 <article class="mt-5">
 
 <ul class="ul-pricing">
-  @foreach ($plans as $plan)
+  {{-- @foreach ($plans as $plan)
     <li class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
       <button>{{$plan->name}}</button>
     </li>
-  @endforeach
+  @endforeach --}}
   
   {{-- <li class="bg-blue">
     <button>Standard </button>

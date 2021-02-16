@@ -55,19 +55,26 @@ class PicklistController extends Controller
     public function store(Request $request)
     {
         /* dd($request->all()); */
-        $validator = Validator::make($request->all(), [
-            'name' => ['nullable','string', 'max:50'],
-            'description' => ['nullable','string', 'max:191'],
+        $rules = [
+            'name' => ['string','nullable', 'max:50'],
+            'description' => ['string','nullable', 'max:191'],
             'member_id' => ['required', 'numeric'],
-        ]);
+        ];
+
+        if ($request->picklist_id) {
+            $rules['member_id'] = ['integer','unique:picklist_user,user_id,NULL,id,picklist_id,'.$request->picklist_id];
+        }
+
+        $validator = Validator::make($request->all(), $rules);
         
         if ($validator->fails()) {
+            /* return $validator->errors(); */
             $request->session()->flash('error', 'Something went wrong !');
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
         }
-
+        /* dd($request->all());  */
         if ($request->picklist_id) {
             $picklist = \App\Models\Picklist::findOrFail($request->picklist_id);
         } else {
