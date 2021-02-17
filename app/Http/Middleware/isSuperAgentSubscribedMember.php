@@ -22,9 +22,10 @@ class isSuperAgentSubscribedMember
             
         }
 
-        return redirect()->route('denial')->with(array(
+        /* return redirect()->route('denial')->with(array(
             'message' => 'Access Denied', 
             'alert-type' => 'error'
-        ));
+        )); */
+        return redirect()->route('401');
     }
 }

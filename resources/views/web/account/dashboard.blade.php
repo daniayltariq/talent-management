@@ -609,7 +609,7 @@
                         </div> --}}
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-refer" role="tabpanel" aria-labelledby="v-refer-tab">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-12">
                                     @if (auth()->user()->referal_code()->exists())
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="refer_link" value="{{url('/').'/signup/?referal='.auth()->user()->referal_code->refer_code}}" placeholder="Refer url" aria-label="Refer url" aria-describedby="basic-addon2">

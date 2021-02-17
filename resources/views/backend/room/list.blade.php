@@ -54,10 +54,10 @@
 											<input data-switch="true" name="status" type="checkbox" data-roomid="{{$room->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$room->status==1?"checked=checked":""}}>
 										</td>
 										<td>
-											<a href="{{route('backend.room.edit',$room->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Edit
+											<a href="{{route('backend.category.edit',$room->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Edit
 											</div> </a>
 											
-											@include('components.delete' , ['data' => $room->id, 'route' => 'backend.room.destroy'])
+											@include('components.delete' , ['data' => $room->id, 'route' => 'backend.category.destroy'])
 										</td>
 									</tr>
 								@endforeach
@@ -130,7 +130,7 @@ $(document).ready(function(){
 	$("[name='status']").on('switchChange.bootstrapSwitch',function (e, state) {
 		/* console.log($(this).data('userid')); */
 		const that=this;
-		$.get("{{ route('backend.room.updateStatus') }}",
+		$.get("{{ route('backend.category.updateStatus') }}",
 		{
 			room_id: $(this).data('roomid'),
 			status:state==true?1 : 0

@@ -858,7 +858,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 required: true,
                 wrapperClass:'d-flex',
                 dropdownClass:'date-field form-control',
-                /* displayFormat: 'ymd', */
+                displayFormat: 'mdy',
                 monthFormat: 'short',
             });
 
@@ -873,7 +873,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 required: true,
                 wrapperClass:'d-flex',
                 dropdownClass:'date-field form-control',
-                /* displayFormat: 'ymd', */
+                displayFormat: 'mdy',
                 monthFormat: 'short',
             });
 

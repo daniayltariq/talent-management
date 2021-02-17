@@ -410,15 +410,15 @@
               </tr> --}}
               <tr>
                 <td>
-                  <h4>Dear ALFA User,</h4>
-                  <p>Here is your OTAC: {{$data['otp'] ?? ''}}</p>
-                  <p>Please enter the OTAC in the relevant fields to complete the transaction.</p>
+                  <h4>Dear User,</h4>
+                  <p>Your One-Time verification code is <b>{{$data['otp'] ?? ''}}</b></p>
+                  <p>Return to the Talent Link verification page and enter <b>{{$data['otp'] ?? ''}}</b> into the 6 boxes..</p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p>Regards,</p>
-                  <p>Talent Depot</p>
+                  <p>Thank you and welcome!</p>
+                  <p>The Talent Depot Membership Team</p>
                 </td>
               </tr>
             </table>

@@ -3,9 +3,7 @@
 
 @section('styles')
 <style type="text/css">
-.section.blog{
-	background: #f9fafc;
-}
+
 </style>
 @endsection
 
@@ -16,7 +14,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="title__wrapp">
-				<h1 class="page__title">404</h1>
+				<h1 class="page__title">401</h1>
 			</div>
 		</div>
 	</div>
@@ -28,8 +26,8 @@
 		<div class="row">
 			<div class="blog__posts col-md-12">
 				<div class="text-center">
-					<h4>Opps. {{$text ?? 'Resource not found'}}</h4>
-					<img style="margin: auto;width: 25%" src="{{ asset('web/img/errors/404.jpeg') }}" class="img img-responsive img-fluid">
+					<h4>Opps.  Looks like you don’t have access to this page</h4>
+					<img style="margin: auto;width: 25%" src="{{ asset('web/img/errors/401.jpeg') }}" class="img img-responsive img-fluid">
 				</div>
 				
 			</div>

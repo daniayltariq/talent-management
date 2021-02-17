@@ -184,13 +184,13 @@
 												<a href="{{ route('agent.picklist.index') }}">My saved picklists</a>
 											</li>
 											<li class="m-menu__sub-item">
-												<a href="{{ route('agent.topic.create') }}">Create Post</a>
+												<a href="{{ route('agent.topic.create') }}">Create Topic</a>
 											</li>
 											<li class="m-menu__sub-item">
 												<a href="#" pd-popup-open="popupReferal">Refer a friend</a>
 											</li>
 											<li class="m-menu__sub-item">
-												<a href="{{ route('agent.topic.index') }}">Posts</a>
+												<a href="{{ route('agent.topic.index') }}">Topics</a>
 											</li>
 										@endrole
 										<li class="m-menu__sub-item">

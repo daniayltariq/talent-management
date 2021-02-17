@@ -261,7 +261,7 @@
                                                 <a href="#picklist-modal" class="profile-btn picklist-btn" data-memberid="{{$talent->id}}" role="button" data-toggle="modal"><i class="grid-item__contant-arrow mdi mdi-account-plus mdi-24px" ></i></a>
                                             </p>
                                         </div>
-                                        <div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div>
+                                        {{-- <div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div> --}}
                                     </div>
                                 </div>
                             </li>
