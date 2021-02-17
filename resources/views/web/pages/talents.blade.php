@@ -286,6 +286,7 @@
     $(document).ready(function(){
         $('.testimonial-slider').slick({
         	infinite: true,
+            fade:true,
 			slidesToShow: 3,
 			// autoplay: true,
 			// autoplaySpeed: 2000,
