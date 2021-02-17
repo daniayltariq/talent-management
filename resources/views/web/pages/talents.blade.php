@@ -324,7 +324,7 @@
 		$('.slick-current').next().addClass('middle-testimonial');
 	});
 
-	$('.testimonial-slider').on('beforeChange', function (event, slick, direction){
+	/* $('.testimonial-slider').on('beforeChange', function (event, slick, direction){
 		console.log(event, slick, direction);
 		$('.testimonal__list-item').removeClass('middle-testimonial');
 		$('.slick-current').next().next().css('opacity', 0);
@@ -341,7 +341,7 @@
 		$('.slick-active:not(.middle-testimonial)').css('opacity', 1);
 		
 		
-	});
+	}); */
 
 	
 
