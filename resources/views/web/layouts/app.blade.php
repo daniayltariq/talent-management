@@ -21,10 +21,28 @@
 			}
 		}
 
+		@media only screen and (max-width: 1220px)
+		{
+			.role-nav {
+				padding: 0 0 10px 30px;
+			}
+		}
+
 		@media only screen and (min-width: 768px)
 		{
 			.main__menu {
-				width: 100%;
+				width: 100% !important;
+			}
+		}
+			
+		@media only screen and (max-width: 1220px)
+		{
+			.m-menu__sub {
+				display: none;
+				position: static;
+				visibility: visible;
+				opacity: 1;
+				background: #0f0f0f;
 			}
 		}
 			
