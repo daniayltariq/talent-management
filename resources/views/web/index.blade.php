@@ -161,7 +161,7 @@
 							<div class="lp__content-wrapp">
 								<div class="date">{{$topic->created_at->diffForHumans()}}</div>
 								<h4 class="lp__title"><a href="#0" class="animation">{{$topic->title}}</a></h4>
-								<div class="text lp__text d-flex overflow__wrap_aw">{!!\Str::words(strip_tags($topic->content,150)) !!}</div>
+								<div class="text lp__text d-flex overflow__wrap_aw">{!!\Str::words(strip_tags($topic->content,100)) !!}</div>
 								<a href="{{ route('single-post',['slug' => $topic->slug]) }}" class="more animation">read more</a>
 							</div>
 						</div>
