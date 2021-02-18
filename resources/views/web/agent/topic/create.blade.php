@@ -209,4 +209,10 @@
    
 </script>
 
+<script>
+    $(document).ready(function(){
+        $('.btn-fullscreen').hide();
+    })
+</script>
+
 @endsection
