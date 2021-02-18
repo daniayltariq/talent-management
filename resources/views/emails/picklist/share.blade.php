@@ -512,11 +512,11 @@ ul.social li{
 									@foreach ($items as $item)
 										<div class="topic">
 											<div class="img">
-												<img src="images/person_1.jpg" alt="" style="width: 100%; max-width: 600px; height: auto; margin: auto; margin-bottom: 20px; display: block;">
+												<img src="{{ !is_null($item->member->profile->profile_img) && file_exists(public_path().'/storage/uploads/profile/'.$item->member->profile->profile_img) ? ('storage/uploads/profile/'.$item->member->profile->profile_img) :'web/img/user.png' }}" alt="" style="width: 100%; max-width: 600px; height: auto; margin: auto; margin-bottom: 20px; display: block;">
 											</div>
 											<div class="text">
 												<h3>{{$item->member->profile->legal_first_name ?? ''}} {{$item->member->profile->legal_last_name ?? ''}}</h3>
-												<p class="meta"><span>{{$item->member->getAgeAttribute() ?? ''}}</span></p>
+												<p class="meta"><span>Age :{{$item->member->getAgeAttribute() ?? 'Nil'}}</span></p>
 												<a href="{{route('model.single',$item->member->id)}}" target="_blank">view profile</a>
 											</div>
 										</div>
