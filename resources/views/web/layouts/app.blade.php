@@ -19,6 +19,10 @@
 			.main__menu {
 				width: 200%;
 			}
+
+			.cd-hero-slider{
+				height: 500px;
+			}
 		}
 
 		@media only screen and (max-width: 1220px)
