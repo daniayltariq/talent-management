@@ -410,7 +410,7 @@
               </tr> --}}
               <tr>
                 <td>
-                  <h4>Dear User,</h4>
+                  <h4>Dear Talent,</h4>
                   <p>Your One-Time verification code is <b>{{$data['otp'] ?? ''}}</b></p>
                   <p>Return to the Talent Link verification page and enter <b>{{$data['otp'] ?? ''}}</b> into the 6 boxes..</p>
                 </td>
