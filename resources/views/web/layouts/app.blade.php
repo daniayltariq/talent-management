@@ -28,7 +28,7 @@
 			}
 		}
 
-		@media only screen and (min-width: 768px)
+		@media only screen and (min-width: 768px) and (max-width: 1220px)
 		{
 			.main__menu {
 				width: 100% !important;
