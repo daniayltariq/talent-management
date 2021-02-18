@@ -138,7 +138,7 @@
                     {{-- <span class="kt-header__topbar-username kt-hidden-mobile">{{ strtoupper(auth()->user()->name) }}</span> --}}
                     <img class="kt-hidden" alt="Pic" src="{{ asset('backend-assets/assets/media/users/300_25.jpg') }}" />
                     {{-- use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it)  --}}
-                    <span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">Admin</span>
+                    <span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold w-auto">Admin</span>
                 </div>
             </div>
             <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">

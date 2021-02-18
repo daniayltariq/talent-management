@@ -33,7 +33,7 @@
 	}
 
 	.testscroll{
-		max-height: 150px !important;
+		max-height: 148px !important;
 		overflow-y: /* auto */ hidden;
 		display: inline-block;
 	}
@@ -63,19 +63,26 @@
 		margin: 20px 0 0px !important;
 		text-align: center;
 		font-style: italic;
+		position: relative;
 	}
 
-	.testimonal__text:before {
+	.testimonal__name:before {
 		content: '“';
 		display: flex;
     	color: #df691a;
+		font-weight: 600;
     	font-size: 30px;
+		margin-left: 2%;
 	}
 
 	.testimonal__text:after {
 		content: '”';
+		position: absolute;
+    	right: 5px;
+    	bottom: -12px;
 		float: right;
     	color: #df691a;
+		font-weight: 600;
     	font-size: 30px;
 	}
 
