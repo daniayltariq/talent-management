@@ -358,11 +358,11 @@
                   </div>
 
                   @role('agent')
-                     <div class="row">
-                        <div class="col-md-6">
+                     <div class="row d-flex">
+                        <div class="m-3">
                            <a href="#" class="btn btn__red animation pad-txt-email" pd-popup-open="popupNew">Contact</a>
                         </div>
-                        <div class="col-md-6">
+                        <div class="m-3">
                            <a href="#picklist-modal" data-memberid="{{$data['profile']->user->id}}" role="button" data-toggle="modal" class="btn btn__red animation pad-txt-email picklist-btn z-0">Add to Picklist</a>
                         </div>
                      </div>
@@ -530,7 +530,7 @@
 	$(document).ready(function(){
 		setTimeout(function() { 
           fullPageLoader(false);
-       }, 1500);
+       }, 2000);
 	})
 </script>
 
