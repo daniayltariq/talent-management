@@ -68,6 +68,10 @@
 		.new-picklist{
 			display: none;
 		}
+
+		.error{
+			color: red;
+		}
 	</style>
 @endsection
 
@@ -153,7 +157,7 @@
 											</div> </a>
 											
 											@if ($user->hasRole('candidate'))
-												<button data-target="#picklist-modal" class="profile-btn picklist-btn btn btn-warning btn-sm btn-bg-white" data-memberid="{{$user->id}}" role="button" data-toggle="modal"><i class="fas fa-plus" ></i></button>
+												<button data-target="#picklist-modal" class="profile-btn picklist-btn btn btn-primary btn-sm btn-bg-white" data-memberid="{{$user->id}}" role="button" data-toggle="modal" title="Add to picklist"><i class="fas fa-plus" ></i></button>
 											@endif
 											
 											{{-- <a href="{{ route('user.show', $user->id) }}" class="btn btn-view btn-xs" style=" color:white" ><i class="fa fa-folder" ></i> View </a>
@@ -327,7 +331,7 @@
 @endsection
 
 @section('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js" data-turbolinks-track="true"></script>
 <script type="text/javascript">
 
@@ -387,7 +391,7 @@ $(document).ready(function(){
 	});
 
 	@if($errors->has('member_id') || $errors->has('title') || $errors->has('description') )
-		$('#picklist-modal').modal('toggle');
+		$('#picklist-modal').modal('show');
 	@endif
 	
 });
