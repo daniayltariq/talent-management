@@ -21,7 +21,11 @@
 			}
 
 			.cd-hero-slider{
-				height: 500px;
+				height: 500px !important;
+			}
+
+			.cd-full__contant {
+				padding-left: 0;
 			}
 		}
 
