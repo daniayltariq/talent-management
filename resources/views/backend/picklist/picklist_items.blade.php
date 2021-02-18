@@ -5,6 +5,54 @@
 	 .kt-widget5 .kt-widget5__item .kt-widget5__content .kt-widget5__pic img {
     	max-width: 4.5rem !important;
 	 }
+
+	 .pagination {
+			display: inline-block;
+			padding-left: 0;
+			margin: 20px 0;
+			border-radius: 4px;
+		}
+
+		.pagination>li {
+			display: inline;
+		}
+
+		.blog__pagination {
+			margin: 0;
+			text-align: center;
+		}
+
+		.blog__pagination .pagination {
+			padding: 60px 0 0;
+			margin: 0;
+			border-top: 1px solid #ddd;
+		}
+
+		.pagination>li:last-child>a, .pagination>li:last-child>span, .pagination>li:first-child>a, .pagination>li:first-child>span, .pagination>li>a, .pagination>li>span {
+			border-radius: 0;
+		}
+
+		.pagination>li>a, .pagination>li>span {
+			position: relative;
+			float: left;
+			padding: 6px 12px;
+			margin-left: -1px;
+			line-height: 1.42857143;
+			color: #337ab7;
+			text-decoration: none;
+			background-color: #fff;
+			border: 1px solid #ddd;
+		}
+		.pagination>li>a, .pagination>li>span {
+			border: none;
+			color: #3a3a54;
+			font-weight: 600;
+			text-transform: uppercase;
+			background: #F6F6F6;
+			margin-left: 17px;
+			font-size: 15px;
+			padding: 8px 16px;
+		}
  </style>
 @endsection
 
@@ -76,9 +124,38 @@
 								@endforeach
 								
 							</div>
-							{{$items->render()}}
 						</div>
 					</div>
+					<nav class="blog__pagination">
+						@if ($items->lastPage() > 1)
+						 <ul class="pagination">
+							 <li class="{{ ($items->currentPage() == 1) ? ' disabled' : '' }}">
+								 <a href="{{ $items->url(1) }}">First</a>
+							  </li>
+							 @for ($i = 1; $i <= $items->lastPage(); $i++)
+								 <?php
+								 $half_total_links = floor(5 / 2);
+								 $from = $items->currentPage() - $half_total_links;
+								 $to = $items->currentPage() + $half_total_links;
+								 if ($items->currentPage() < $half_total_links) {
+									$to += $half_total_links - $items->currentPage();
+								 }
+								 if ($items->lastPage() - $items->currentPage() < $half_total_links) {
+									 $from -= $half_total_links - ($items->lastPage() - $items->currentPage()) - 1;
+								 }
+								 ?>
+								 @if ($from < $i && $i < $to)
+									 <li class="{{ ($items->currentPage() == $i) ? ' active' : '' }}">
+										 <a href="{{ $items->url($i) }}">{{ $i }}</a>
+									 </li>
+								 @endif
+							 @endfor
+							 <li class="{{ ($items->currentPage() == $items->lastPage()) ? ' disabled' : '' }}">
+								 <a href="{{ $items->url($items->lastPage()) }}">Last</a>
+							 </li>
+						 </ul>
+					 @endif
+					 </nav>
 				</div>
 			</div>
 			<!--end:: Widgets/Best Sellers-->

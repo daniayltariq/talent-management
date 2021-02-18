@@ -15,6 +15,54 @@
 		.btn-primary{
 			color: #5d78ff;
 		}
+
+		.pagination {
+			display: inline-block;
+			padding-left: 0;
+			margin: 20px 0;
+			border-radius: 4px;
+		}
+
+		.pagination>li {
+			display: inline;
+		}
+
+		.blog__pagination {
+			margin: 0;
+			text-align: center;
+		}
+
+		.blog__pagination .pagination {
+			padding: 60px 0 0;
+			margin: 0;
+			border-top: 1px solid #ddd;
+		}
+
+		.pagination>li:last-child>a, .pagination>li:last-child>span, .pagination>li:first-child>a, .pagination>li:first-child>span, .pagination>li>a, .pagination>li>span {
+			border-radius: 0;
+		}
+
+		.pagination>li>a, .pagination>li>span {
+			position: relative;
+			float: left;
+			padding: 6px 12px;
+			margin-left: -1px;
+			line-height: 1.42857143;
+			color: #337ab7;
+			text-decoration: none;
+			background-color: #fff;
+			border: 1px solid #ddd;
+		}
+		.pagination>li>a, .pagination>li>span {
+			border: none;
+			color: #3a3a54;
+			font-weight: 600;
+			text-transform: uppercase;
+			background: #F6F6F6;
+			margin-left: 17px;
+			font-size: 15px;
+			padding: 8px 16px;
+		}
 	</style>
 @endsection
 
@@ -53,7 +101,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($user as $key => $user)
+								@foreach($users as $key => $user)
 									<tr>
 										<td>{{++$key}}</td>
 										<td class="name-badge p-3">{{ $user->f_name ?? '' }} {{ $user->l_name ?? '' }}
@@ -112,6 +160,37 @@
 					</div>
 				</div>
 			</div>
+
+			<nav class="blog__pagination">
+				@if ($users->lastPage() > 1)
+				 <ul class="pagination">
+					 <li class="{{ ($users->currentPage() == 1) ? ' disabled' : '' }}">
+						 <a href="{{ $users->url(1) }}">First</a>
+					  </li>
+					 @for ($i = 1; $i <= $users->lastPage(); $i++)
+						 <?php
+						 $half_total_links = floor(5 / 2);
+						 $from = $users->currentPage() - $half_total_links;
+						 $to = $users->currentPage() + $half_total_links;
+						 if ($users->currentPage() < $half_total_links) {
+							$to += $half_total_links - $users->currentPage();
+						 }
+						 if ($users->lastPage() - $users->currentPage() < $half_total_links) {
+							 $from -= $half_total_links - ($users->lastPage() - $users->currentPage()) - 1;
+						 }
+						 ?>
+						 @if ($from < $i && $i < $to)
+							 <li class="{{ ($users->currentPage() == $i) ? ' active' : '' }}">
+								 <a href="{{ $users->url($i) }}">{{ $i }}</a>
+							 </li>
+						 @endif
+					 @endfor
+					 <li class="{{ ($users->currentPage() == $users->lastPage()) ? ' disabled' : '' }}">
+						 <a href="{{ $users->url($users->lastPage()) }}">Last</a>
+					 </li>
+				 </ul>
+			 @endif
+			 </nav>
 			<!--end::Section-->
 		</div>
 		<!--end::Form-->

@@ -116,7 +116,7 @@ class PicklistController extends Controller
     public function show( Request $request,Picklist $picklist)
     {
         /* dd($picklist); */
-        $items=$picklist->items()->paginate(5);
+        $items=$picklist->items()->paginate(2);
         
         return view('backend.picklist.picklist_items',compact('picklist','items'));
     }
