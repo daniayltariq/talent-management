@@ -225,6 +225,8 @@ class RegisterController extends Controller
         $user->save();
 
         $profile = new Profile ;
+        $profile->legal_first_name=$request['f_name'];
+        $profile->legal_last_name=$request['l_name'];
         $profile->user_id=$user->id;
         $profile->custom_link=self::getCustomUrl($user);
         $profile->save();
