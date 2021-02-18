@@ -13,6 +13,21 @@
 	<meta content="" name="description" />
 	<style>
 		.text-white{color: white;}
+
+		@media only screen and (max-width: 767px)
+		{
+			.main__menu {
+				width: 200%;
+			}
+		}
+
+		@media only screen and (min-width: 768px)
+		{
+			.main__menu {
+				width: 100%;
+			}
+		}
+			
 	</style>
   @include('web.partials.header')
   <script type="text/javascript">

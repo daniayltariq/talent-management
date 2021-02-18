@@ -17,7 +17,7 @@
 				<div class="logo col-md-2 col-sm-4 col-xs-7">
 					<a class="navbar-brand" href="{{ route('/') }}">
 					{{-- <span class="logo__text">Talent DB</span> --}}
-					<img src="{{ asset('web/img/logo/TD_and_Words_white.png') }}" class="logo img img-fluid">
+					<img src="{{ asset('web/img/logo/generic_logo_banner_orange.png') }}" class="logo img img-fluid">
 					</a>
 				</div>
 				<div class="main__menu-wrap col-md-10 col-sm-8 col-xs-5">

@@ -488,7 +488,7 @@ ul.social li{
 				<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td class="logo" style="text-align: center;">
-					<img src="{{asset('web/img/logo/TD_and_Words_white.png')}}" style="text-align: center;width: 25%" alt="">
+					<img src="{{asset('web/img/logo/generic_logo_banner_orange.png')}}" style="text-align: center;width: 25%" alt="">
 						</td>
 					</tr>
 				</table>
