@@ -257,6 +257,10 @@
     .new-picklist{
         display: none;
     }
+
+    .z-0{
+       z-index: 0;
+    }
 </style>
 @endsection
 @section('content')
@@ -359,7 +363,7 @@
                            <a href="#" class="btn btn__red animation pad-txt-email" pd-popup-open="popupNew">Contact</a>
                         </div>
                         <div class="col-md-6">
-                           <a href="#picklist-modal" data-memberid="{{$data['profile']->user->id}}" role="button" data-toggle="modal" class="btn btn__red animation pad-txt-email picklist-btn">Add to Picklist</a>
+                           <a href="#picklist-modal" data-memberid="{{$data['profile']->user->id}}" role="button" data-toggle="modal" class="btn btn__red animation pad-txt-email picklist-btn z-0">Add to Picklist</a>
                         </div>
                      </div>
                   @endrole
@@ -552,6 +556,14 @@
          $('.popup-form').toggleClass( "d-none" );
       });
    });
+</script>
+
+<script>
+   $(document).ready(function() {
+        @if($errors->has('member_id') || $errors->has('title') || $errors->has('description') )
+            $('#picklist-modal').modal('toggle');
+        @endif
+    });
 </script>
 
 @endsection
