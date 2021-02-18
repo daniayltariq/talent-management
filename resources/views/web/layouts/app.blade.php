@@ -53,6 +53,14 @@
 				background: #0f0f0f;
 			}
 		}
+
+		@media (min-width: 992px)
+		{
+			.col-md-10 {
+				width: 77.333333% !important;
+			}
+		}
+			
 			
 	</style>
   @include('web.partials.header')
