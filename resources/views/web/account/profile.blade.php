@@ -242,7 +242,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <label class="font-15">Weight (lbs)</label>
                                                     <div class="form-holder">
-                                                        <input type="number" name="weight" id="weight" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control">
+                                                        <input type="number" name="weight" id="weight" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control" onkeydown="limit(this);" onkeyup="limit(this);">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1019,6 +1019,15 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             }
             });
         });
+    }
+
+    function limit(element)
+    {
+        var max_chars = 3;
+
+        if(element.value.length > max_chars) {
+            element.value = element.value.substr(0, max_chars);
+        }
     }
 
     $(document).ready(function(){
