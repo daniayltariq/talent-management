@@ -1,4 +1,7 @@
 @extends('web.layouts.app')
+@section('loader')
+@include('web.partials.loader',['show'=> true])
+@endsection
 @section('styles')
 <style>
    .refer_code_div{
@@ -264,7 +267,7 @@
 </style>
 @endsection
 @section('content')
-@include('web.partials.loader')
+
 <section class="page__img" style="background-image: url('{{asset('web/img/page-img.jpg')}}">
    <div class="container">
       <div class="row">
@@ -480,10 +483,7 @@
 <!-- Call To Action Section Start -->
 @endsection
 @section('scripts')
-
-<script>
-	fullPageLoader(true);
-</script>
+ 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slider-pro/1.5.0/js/jquery.sliderPro.js" integrity="sha512-hPizGLCamPr5++t42ujZBs6RwziPxMDb40fcuSG8b2lnJLRPdAvcPTMy563keCr/lxPNBXgAuPmDL1WQ5FNRKg==" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="{{ asset('web/libs/model-slider/model-slider.css') }}" type="text/css" />
@@ -555,9 +555,10 @@
    });
    
 	$(document).ready(function(){
-		setTimeout(function() { 
-          fullPageLoader(false);
-       }, 2000);
+    fullPageLoader(false);
+		// setTimeout(function() { 
+  //         fullPageLoader(false);
+  //      }, 2000);
 	})
 </script>
 
