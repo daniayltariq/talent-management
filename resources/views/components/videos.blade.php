@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <div class="alert alert-primary" role="alert">
             <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
-            You are allowed to add #<span id="allowed_pics">{{$data['plan']->videos}}</span> Images
+            You are allowed to add #<span id="allowed_pics">{{$data['plan']->videos}}</span> Videos
         </div>
     </div> 
     <div class="col-md-12 mt-5">
