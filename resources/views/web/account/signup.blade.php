@@ -875,6 +875,10 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 dropdownClass:'date-field form-control',
                 displayFormat: 'mdy',
                 monthFormat: 'short',
+
+                onYearChange: function(day, month, year){
+                    console.log(day, month, year);
+                }
             });
 
             
