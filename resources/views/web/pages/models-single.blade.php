@@ -282,20 +282,21 @@
       <div class="row">
          <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
             <div class="row">
-               <div id="model-slider" class="s-model__photos col-md-6">
-				   @if (count($data['images'])>0)
-					   <div class="sp-slides">
-							@foreach ($data['images'] as $img)
-								<div class="sp-slide">
-									<img class="sp-image" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-									alt="single1"
-									data-src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-									data-small="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-									data-medium="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-									data-large="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-									data-retina="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-									style="object-fit: cover;"/>
-								</div>
+              <div class="element-loading"></div>
+               <div id="model-slider-single" class="s-model__photos col-md-6">
+    				   @if (count($data['images'])>0)
+    					   <div class="sp-slides">
+    							@foreach ($data['images'] as $img)
+    								<div class="sp-slide">
+    									<img class="sp-image" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+    									alt="single1"
+    									data-src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+    									data-small="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+    									data-medium="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+    									data-large="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+    									data-retina="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+    									style="object-fit: cover;"/>
+    								</div>
 							@endforeach
 							
 								{{-- <div class="sp-slide">
@@ -493,6 +494,32 @@
 
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script>
+
+<script>
+  
+  $(document).ready(function() {
+  // model slider
+    if ($("div").is("#model-slider-single")){
+        $( '#model-slider-single' ).sliderPro({
+        width: 500,
+        height: 760,
+        fade: true,
+        arrows: true,
+        buttons: false,
+        fullScreen: true,
+        shuffle: true,
+        smallSize: 500,
+        mediumSize: 1000,
+        largeSize: 3000,
+        thumbnailArrows: true,
+        autoplay: false
+      });
+    }
+    $('.element-loading').remove();
+  });
+
+</script>
+
 <script>
    $.ajaxSetup({
    	headers: {
