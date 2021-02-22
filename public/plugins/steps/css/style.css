@@ -372,6 +372,27 @@ select.form-control{
     align-items: flex-end; }
 
   .steps {
-    display: none; } }
+    display: none; } 
+}
 
 /*# sourceMappingURL=style.css.map */
+
+
+input { 
+    text-transform: capitalize;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    text-transform: capitalize;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    text-transform: capitalize;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    text-transform: capitalize;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    text-transform: capitalize;
+}
+::placeholder { /* Recent browsers */
+    text-transform: capitalize;
+}
