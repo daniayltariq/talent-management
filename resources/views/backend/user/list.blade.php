@@ -122,7 +122,7 @@
 										<td>{{ $user->email ?? '' }}</td>
 										<td>
 											@foreach ($user->roles as $role)
-												{{ ucfirst($role->alias ?? '') }}
+												{{ ucfirst('') }}
 												<br>
 											@endforeach
 										</td>
