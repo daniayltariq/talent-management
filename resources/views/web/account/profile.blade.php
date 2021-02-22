@@ -135,7 +135,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     <section class="section apply">
         <div class="container">
             <div class="row">
-                <h3 class="text__quote centered">Complete your profile form</h3>
+                {{-- <h3 class="text__quote centered">Complete your profile form</h3> --}}
                 <div class="col-lg-12 col-md-12 ">
 
                         @if ($profile)
