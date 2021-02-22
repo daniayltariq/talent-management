@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Agent;
 
+use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use App\Models\Referal;
+use App\Services\FPService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 
 class ReferalController extends Controller
@@ -19,10 +20,16 @@ class ReferalController extends Controller
         else{
             $referal=new Referal;
             $referal->user_id=auth()->user()->id;
-            $code= unique_string('referal','refer_code', 20);
+            $code= strtolower(unique_string('referal','refer_code', 20));
 
             $referal->refer_code=$code;
             $referal->save();
+
+            // add referal to first promotor
+            $first_promoter = FPService::createPromotor(auth()->user()->email,$code);
+            if($first_promoter){
+                auth()->user()->first_promoter_id = $first_promoter['id'];
+            }
         }
 
         $code=url('/').'/register/?referal='.$code;

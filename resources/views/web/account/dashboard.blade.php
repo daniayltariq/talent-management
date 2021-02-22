@@ -1001,8 +1001,9 @@
         }
     );
 
-    $(document).on('click','#remove-img-btn',function(e){
-		
+    $(document).on('click','.remove-img-btn',function(e){
+		var ele = $(this);
+      
         $.ajax({
             type: 'delete',
             url: '{{ route('account.fileDestroy') }}',
@@ -1011,8 +1012,9 @@
                 _method: 'DELETE',
             },
             success: function(res) {
+                ele.closest('.content').remove();
                 toastr.success('File removed successfully');
-                window.location.reload();
+                // window.location.reload();
             },
             error: function(error) {
                 toastr.error('something went wrong!');

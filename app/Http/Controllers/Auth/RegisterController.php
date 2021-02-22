@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use App\Models\Profile;
-use Illuminate\Support\Str;
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
+use App\Services\FPService;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -64,7 +65,9 @@ class RegisterController extends Controller
             return view('auth.registerPricing', compact('countries'));
         }
         else{
-
+            if($request->query('referal')){
+                return redirect()->route('how-it-works',['referal' => $request->query('referal')])->withCookie('firstPromotorRefID',$request->query('referal') , 45);
+            }
             return redirect()->route('how-it-works');
         }
         
@@ -224,12 +227,18 @@ class RegisterController extends Controller
           $user->driver_license= $request['driver_license'];
         $user->save();
 
+        if($c = $request->cookie('firstPromotorRefID')){
+          FPService::trackSigup($user->email,$c);
+        }
+
         $profile = new Profile ;
         $profile->legal_first_name=$request['f_name'];
         $profile->legal_last_name=$request['l_name'];
         $profile->user_id=$user->id;
         $profile->custom_link=self::getCustomUrl($user);
         $profile->save();
+
+
 
         return redirect()->route('account.dashboard');
     }

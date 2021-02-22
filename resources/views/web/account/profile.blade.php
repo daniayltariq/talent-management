@@ -242,7 +242,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <label class="font-15">Weight (lbs)</label>
                                                     <div class="form-holder">
-                                                        <input type="number" name="weight" id="weight" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control">
+                                                        <input type="number" name="weight" id="weight" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control" onkeydown="limit(this);" onkeyup="limit(this);">
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,19 +280,19 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Chest</label>
-                                                        <input type="number" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control">
+                                                        <input type="number" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control" min="0" max="124">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Neck</label>
-                                                        <input type="number" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control">
+                                                        <input type="number" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control" min="0" max="50">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Waist</label>
-                                                        <input type="number" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control">
+                                                        <input type="number" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control" min="0" max="100">
                                                     </div>
                                                 </div>
                                             </div>
@@ -301,7 +301,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Sleeves</label>
-                                                        <input type="number" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control">
+                                                        <input type="number" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control" min="0" max="50">
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-md-4">
@@ -312,7 +312,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Shoe</label>
-                                                        <input type="number" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control">
+                                                        <input type="number" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control" min="0" max="100">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -770,6 +770,8 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 @section('scripts')
 <script>
     window.currentStep = 0;
+    window.changeDetected = false;
+ 
     function nextCallback(addBtn,currentStep){
 
         if(addBtn == true){
@@ -794,27 +796,33 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                 $('#custom_link').val('');
             }
 
-            $.ajax({
-                url: "{{ route('account.talent-profile.store') }}",
-                contentType: false,
-                processData: false,
-                
-                type: 'POST',
-                data:formDataa,
-                success: function(res) {
-                    console.log(res);
-                    if (res.alert_type=='success') {
-                        toastr.success(res.message);
-                        if (res.method) {
-                            $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
+            if(window.changeDetected){
+                $.ajax({
+                    url: "{{ route('account.talent-profile.store') }}",
+                    contentType: false,
+                    processData: false,
+                    
+                    type: 'POST',
+                    data:formDataa,
+                    success: function(res) {
+                        console.log(res);
+                        if (res.alert_type=='success') {
+                            toastr.success(res.message);
+                            if (res.method) {
+                                $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
+                            }
+                        } else {
+                            toastr.error(res.message);
                         }
-                    } else {
-                        toastr.error(res.message);
+                    },
+                    error: function(error) {
                     }
-                },
-                error: function(error) {
-                }
-            });
+                });
+
+                window.changeDetected = false;
+            }
+
+            
         }
     }
 </script>
@@ -826,12 +834,15 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 
 <script type="text/javascript">
+
     $.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		}
 	});
     $(document).ready(function() {
+
+       
        $("#Films").createRepeater({showItemsToDefault: true,showItemsToDefault: true,startIndex:$("#Films").data('start')});
        $("#Theater").createRepeater({showItemsToDefault: true,startIndex:$("#Theater").data('start')});
        $("#Commercials").createRepeater({showItemsToDefault: true,startIndex:$("#Commercials").data('start')});
@@ -839,6 +850,11 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
        $("#Training").createRepeater({showItemsToDefault: true,startIndex:$("#Training").data('start')});
        /* $('.repeater-add-btn').trigger('click'); */
 
+
+         $('#wizard form').find('input,select,textarea').change(function(){
+            console.log('changed', $(this));
+            window.changeDetected = true;
+        });
 
        $('.repeater-add-btn').click(function(){
             $(this).siblings('.btn').hide();
@@ -1019,6 +1035,15 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             }
             });
         });
+    }
+
+    function limit(element)
+    {
+        var max_chars = 3;
+
+        if(element.value.length > max_chars) {
+            element.value = element.value.substr(0, max_chars);
+        }
     }
 
     $(document).ready(function(){

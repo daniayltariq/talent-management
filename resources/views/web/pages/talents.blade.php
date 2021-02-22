@@ -260,7 +260,11 @@
                                             <p><b>Height: </b>{{$talent->profile->feet ? \Str::finish($talent->profile->feet, "'") : ''}} {{$talent->profile->height ? \Str::finish($talent->profile->height,"''") : ''}}</p>
                                             <p>
                                                 <a href="{{-- {{route('model.single',$talent->id)}} --}}{{route('model',$talent->profile->custom_link ?? $talent->profile->id)}}" class="profile-btn">Profile</a>
+                                              
+                                                @if(\Auth::check() && (\Auth::user()->hasAnyRole(['superadmin','agent'])))
                                                 <a href="#picklist-modal" class="profile-btn picklist-btn" data-memberid="{{$talent->id}}" role="button" data-toggle="modal"><i class="grid-item__contant-arrow mdi mdi-account-plus mdi-24px" ></i></a>
+                                                @endif
+
                                             </p>
                                         </div>
                                         {{-- <div class="testimonal__photo"><img src="img/testimonal-photo.png" alt=""></div> --}}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\FPService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
@@ -401,5 +402,7 @@ Route::group([
 Route::resource('postjob',App\Http\Controllers\PostJobController::class);
 
 Route::get('test',function(Request $request){
-    return $request->cookie('firstPromotorRefID');
+    // return $request->cookie('firstPromotorRefID');
+
+    dd(FPService::trackSigup('customemasdail007@asdasgmail.com','dKGDULm5m8p624a0iVzT'));
 });

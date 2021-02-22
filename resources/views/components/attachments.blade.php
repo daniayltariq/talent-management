@@ -24,7 +24,7 @@
                         <div class="content-overlay"></div>
                         <img class="content-image" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}">
                         <div class="content-details fadeIn-bottom">
-                            <a type="button" class="content-title" data-img="{{$img->file}}" id="remove-img-btn">Remove</a>
+                            <a type="button" class="content-title remove-img-btn" data-img="{{$img->file}}" >Remove</a>
                         </div>
                     </div>
                 @empty
