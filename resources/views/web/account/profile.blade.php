@@ -34,6 +34,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: 100% 15%;
 }
 
 .input-group-bs{
