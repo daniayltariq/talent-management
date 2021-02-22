@@ -94,33 +94,36 @@
 						<div class="tab-pane active" id="kt_widget5_tab1_content" aria-expanded="true">
 							<div class="kt-widget5">
 								@foreach ($items as $item)
-									<div class="kt-widget5__item">
-										<div class="kt-widget5__content">
-											<div class="kt-widget5__pic">
-												<img class="kt-widget7__img" src="{{ asset(!is_null($item->member->profile) ? (!is_null($item->member->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$item->member->profile->profile_img)? 'storage/uploads/profile/'.$item->member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }}" alt="">
-											</div>
-											<div class="kt-widget5__section">
-												<a href="#" class="kt-widget5__title">
-												{{$item->member->profile->legal_first_name?? $item->member->f_name ?? ''}} {{$item->member->profile->legal_last_name?? $item->member->l_name ?? ''}}
-												</a>
-												<p class="kt-widget5__desc">
-													Gender: {{ $item->member->gender ?? ''}}
-												</p>
-												<p class="kt-widget5__desc">
-													Age: {{ $item->member->age.' yrs'?? ''}}
-												</p>
-												<div class="kt-widget5__info">
-													<span>Email:</span>
-													<span class="kt-font-info">{{$item->member->profile->email ?? ''}}</span>
-													<span>Phone:</span>
-													<span class="kt-font-info">{{$item->member->profile->telephone ?? ''}}</span>
+									@if ($item->member()->exists())
+										<div class="kt-widget5__item">
+											<div class="kt-widget5__content">
+												<div class="kt-widget5__pic">
+													<img class="kt-widget7__img" src="{{ asset(!is_null($item->member->profile) ? (!is_null($item->member->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$item->member->profile->profile_img)? 'storage/uploads/profile/'.$item->member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }}" alt="">
+												</div>
+												<div class="kt-widget5__section">
+													<a href="#" class="kt-widget5__title">
+													{{$item->member->profile->legal_first_name?? $item->member->f_name ?? ''}} {{$item->member->profile->legal_last_name?? $item->member->l_name ?? ''}}
+													</a>
+													<p class="kt-widget5__desc">
+														Gender: {{ $item->member->gender ?? ''}}
+													</p>
+													<p class="kt-widget5__desc">
+														Age: {{ $item->member->age.' yrs'?? ''}}
+													</p>
+													<div class="kt-widget5__info">
+														<span>Email:</span>
+														<span class="kt-font-info">{{$item->member->profile->email ?? ''}}</span>
+														<span>Phone:</span>
+														<span class="kt-font-info">{{$item->member->profile->telephone ?? ''}}</span>
+													</div>
 												</div>
 											</div>
+											<div class="kt-widget5__content">
+												<a href="{{route('backend.delete_picklist_item',$item->id)}}" class="btn btn-sm btn-label-danger btn-bold">Delete</a>
+											</div>
 										</div>
-										<div class="kt-widget5__content">
-											<a href="{{route('backend.delete_picklist_item',$item->id)}}" class="btn btn-sm btn-label-danger btn-bold">Delete</a>
-										</div>
-									</div>
+									@endif
+									
 								@endforeach
 								
 							</div>
