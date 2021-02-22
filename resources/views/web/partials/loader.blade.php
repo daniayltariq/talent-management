@@ -14,7 +14,8 @@
 </div> --}}
 
 <!--  3 DOT LOADER  -->
-<div class="fullpage-loader" id="fullpage-loader">
+
+<div class="fullpage-loader" id="fullpage-loader" @if(isset($show)) style="display: block" @endif>
     <div class="loader-wrapper">
         <div>
              <img src="{{ asset('web/img/logo/generic_logo_banner_orange.png') }}" alt="" style="max-width: 180px">

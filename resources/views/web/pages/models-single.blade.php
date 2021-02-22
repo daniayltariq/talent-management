@@ -1,4 +1,7 @@
 @extends('web.layouts.app')
+@section('loader')
+@include('web.partials.loader',['show'=> true])
+@endsection
 @section('styles')
 <style>
    .refer_code_div{
@@ -264,7 +267,7 @@
 </style>
 @endsection
 @section('content')
-@include('web.partials.loader')
+
 <section class="page__img" style="background-image: url('{{asset('web/img/page-img.jpg')}}">
    <div class="container">
       <div class="row">
@@ -390,34 +393,39 @@
       </div>
       <br>
       {{-- Vedio Elements --}}
-      <div class="row">
+      @if(count($data['video']) > 0)
+      <div>
+        <div class="row">
          <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
             <div class="row">
                <div id="model-slider" class="s-model__photos col-md-6">
                   <h2 class="s-model__name">
-                     <span class="line"></span>Model Videos
+                     <span class="line"></span>Videos
                   </h2>
                   <div class="sp-thumbnails">
-					@forelse ($data['video'] as $vid)
-						<video width="320" height="240" controls>
-							<source src="{{ asset('storage/uploads/uploadData/' . $vid->file ?? '') }}" type="video/mp4">
-						</video>
-					@empty
-						<h4 class="text-center">No videos found</h4>
-					@endforelse
-                  </div>
-               </div>
-            </div>
-         </div>
+                  @forelse ($data['video'] as $vid)
+                    <video width="320" height="240" controls>
+                      <source src="{{ asset('storage/uploads/uploadData/' . $vid->file ?? '') }}" type="video/mp4">
+                    </video>
+                  @empty
+                    <h4 class="text-center">No videos found</h4>
+                  @endforelse
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+        <br>
       </div>
-      <br>
+      @endif
       {{-- Voiceovers --}}
+      @if(count($data['audio']) > 0)
       <div class="row">
          <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
             <div class="row">
                <div id="model-slider" class="s-model__photos col-md-6">
                   <h2 class="s-model__name">
-                     <span class="line"></span>Model Voice
+                     <span class="line"></span>Audios
                   </h2>
                   <div class="sp-thumbnails">
 					@forelse ($data['audio'] as $audio)
@@ -432,6 +440,7 @@
             </div>
          </div>
       </div>
+      @endif
    </div>
 
    <div class="popup" pd-popup="popupNew">
@@ -480,10 +489,7 @@
 <!-- Call To Action Section Start -->
 @endsection
 @section('scripts')
-
-<script>
-	fullPageLoader(true);
-</script>
+ 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slider-pro/1.5.0/js/jquery.sliderPro.js" integrity="sha512-hPizGLCamPr5++t42ujZBs6RwziPxMDb40fcuSG8b2lnJLRPdAvcPTMy563keCr/lxPNBXgAuPmDL1WQ5FNRKg==" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="{{ asset('web/libs/model-slider/model-slider.css') }}" type="text/css" />
@@ -555,9 +561,10 @@
    });
    
 	$(document).ready(function(){
-		setTimeout(function() { 
-          fullPageLoader(false);
-       }, 2000);
+    fullPageLoader(false);
+		// setTimeout(function() { 
+  //         fullPageLoader(false);
+  //      }, 2000);
 	})
 </script>
 
