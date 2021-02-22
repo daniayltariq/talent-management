@@ -58,8 +58,8 @@ class AgentRegisterController extends Controller
         $countries=DB::table('countries')->select('nicename')->get();
         /* dd(session()->all()); */
 
-        if($request->query('_go')){
-            return view('auth.register', compact('countries'))->withCookie('firstPromotorRefID',$request->query('_go') , 45);
+        if($request->query('referal')){
+            return view('auth.register', compact('countries'))->withCookie('firstPromotorRefID',$request->query('referal') , 45);
         }
 
         return view('auth.register', compact('countries'));
@@ -150,6 +150,7 @@ class AgentRegisterController extends Controller
         $user->assignRole($request['account_type']);
 
         if($c = $request->cookie('firstPromotorRefID')){
+      
           FPService::trackSigup($user->email,$c);
         }
         
