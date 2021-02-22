@@ -242,7 +242,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <label class="font-15">Weight (lbs)</label>
                                                     <div class="form-holder">
-                                                        <input type="number" name="weight" id="weight" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control" onkeydown="limit(this);" onkeyup="limit(this);">
+                                                        <input type="number" name="weight" id="weight" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control" onkeydown="limit(this,400);" onkeyup="limit(this,400);">
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,19 +280,19 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Chest</label>
-                                                        <input type="number" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control" min="0" max="124">
+                                                        <input type="number" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control" min="0"  onkeydown="limit(this,124);" onkeyup="limit(this,124);">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Neck</label>
-                                                        <input type="number" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control" min="0" max="50">
+                                                        <input type="number" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control" min="0" onkeydown="limit(this,50);" onkeyup="limit(this,50);">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Waist</label>
-                                                        <input type="number" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control" min="0" max="100">
+                                                        <input type="number" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control" min="0" onkeydown="limit(this,100);" onkeyup="limit(this,100);">
                                                     </div>
                                                 </div>
                                             </div>
@@ -301,7 +301,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Sleeves</label>
-                                                        <input type="number" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control" min="0" max="50">
+                                                        <input type="number" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control" min="0" onkeydown="limit(this,50);" onkeyup="limit(this,50);">
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-md-4">
@@ -312,7 +312,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Shoe</label>
-                                                        <input type="number" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control" min="0" max="100">
+                                                        <input type="number" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control" min="0" onkeydown="limit(this,100);" onkeyup="limit(this,100);">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -1021,12 +1021,11 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
         });
     }
 
-    function limit(element)
+    function limit(element,max_limit)
     {
-        var max_chars = 3;
 
-        if(element.value.length > max_chars) {
-            element.value = element.value.substr(0, max_chars);
+        if(element.value > max_limit) {
+            element.value = element.value.substr(0, element.value.length-1);
         }
     }
 
