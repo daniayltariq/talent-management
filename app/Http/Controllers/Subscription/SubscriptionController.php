@@ -127,7 +127,7 @@ class SubscriptionController extends Controller
 
                 $data=array(
                     "status"=>'success',
-                    "message"=>'Otp has been sent on your email'
+                    "message"=>'Verification code has been sent on your email'
                 );
             }
             
@@ -148,7 +148,7 @@ class SubscriptionController extends Controller
             Cookie::queue(Cookie::make('otp_tries', $tries-1,5));
             $data=array(
                 "status"=>'error',
-                "message"=>'maximum limit achieved,please reload!',
+                "message"=>'Verification code attempts exceeded.',
                 "tries"=>$tries-1
             );
         }
@@ -156,21 +156,21 @@ class SubscriptionController extends Controller
             Cookie::queue(Cookie::make('otp_tries', $tries-1,5));
             $data=array(
                 "status"=>'error',
-                "message"=>'OTP has expired please reload!',
+                "message"=>'Verification code has expired please reload!',
                 "tries"=>$tries-1
             );
         }
         elseif ($request->otp == $value) {
             $data=array(
                 "status"=>'success',
-                "message"=>'OTP is valid'
+                "message"=>'Verification success.'
             );
         }
         else{
             Cookie::queue(Cookie::make('otp_tries', $tries-1,5));
             $data=array(
                 "status"=>'error',
-                "message"=>'OTP is not valid',
+                "message"=>'Verification code is incorrect. Please try again',
                 "tries"=>$tries-1
             );
         }

@@ -1,5 +1,11 @@
 
 <div class="row mt-5">
+    <div class="col-md-12">
+        <div class="alert alert-primary" role="alert">
+            <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
+            You are allowed to add #<span id="allowed_pics">{{$data['plan']->audios}}</span> Images
+        </div>
+    </div> 
     <div class="col-md-12 mt-5">
         <form method="post" action="{{url('image/upload/store')}}" enctype="multipart/form-data" class="dropzone" id="audioDropzone">
             @csrf

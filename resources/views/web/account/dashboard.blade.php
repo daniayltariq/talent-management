@@ -896,7 +896,7 @@
             maxFiles:"{{$data['plan']->pictures}}"-"{{count($data['images'])}}",
             maxFilesize: 12, // MB
             acceptedFiles: "image/*", /* ,.mp4,.mkv,.mov,.wmv,audio */
-            dictDefaultMessage:"Drop Your Files here.",
+            dictDefaultMessage:"Drop Your Files here.<br> i.e .jpg .jpeg .png",
             /* autoProcessQueue: false, */
             accept: function(file, done) {
                 console.log("uploaded");
