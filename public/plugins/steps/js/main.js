@@ -9,14 +9,15 @@ $(function () {
             }
         }
     });
-
-    $("#wizard").steps({
+    window.currentStep = 0;
+    window.profileWizard = $("#wizard").steps({
         headerTag: "h4",
         bodyTag: "section",
         transitionEffect: "fade",
         enableAllSteps: true,
         transitionEffectSpeed: 500,
         onStepChanging: function (event, currentIndex, newIndex) {
+            window.currentStep = newIndex;
             /* console.log($('#wizard-p-' + currentIndex + ' >form')); */
             /*  if (newIndex >= 1) {
                  $('.actions ul').addClass('actions-next');
@@ -32,7 +33,7 @@ $(function () {
             if (newIndex === 3 && Number($("#age-2").val()) < 18) {
                 return false;
             }
-            console.log(currentIndex, newIndex);
+          
             if (currentIndex < newIndex) {
                 $('.actions ul').addClass('actions-next');
                 $('#finish_btn').css('display', 'block');
