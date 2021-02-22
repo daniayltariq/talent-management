@@ -33,23 +33,23 @@ $(function () {
             if (newIndex === 3 && Number($("#age-2").val()) < 18) {
                 return false;
             }
-          
+
             if (currentIndex < newIndex) {
                 $('.actions ul').addClass('actions-next');
-                $('#finish_btn').css('display', 'block');
+                /* $('#finish_btn').css('display', 'block'); */
             } else {
                 $('.actions ul').removeClass('actions-next');
-                $('#finish_btn').css('display', 'none');
+                /* $('#finish_btn').css('display', 'none'); */
             }
             form = $('#wizard-p-' + currentIndex + ' >form');
             form.validate().settings.ignore = ":disabled,:hidden";
 
-            repeater = $('#wizard-p-'+currentIndex);
-            items = $('#wizard-p-'+currentIndex).find(".items");
+            repeater = $('#wizard-p-' + currentIndex);
+            items = $('#wizard-p-' + currentIndex).find(".items");
             var triggerAddBtn = false;
             if (items.length > 0) {
                 var child = items.eq(items.length - 1);
-  
+
                 var row_inputs = $(child).find('input,select,textarea');
                 /* console.log(row_inputs); */
                 var emptyFields = row_inputs.filter(function () {
@@ -61,11 +61,11 @@ $(function () {
                 if (emptyFields === 0) {
                     triggerAddBtn = true;
                 } else {
-                    if(emptyFields < row_inputs.length){
+                    if (emptyFields < row_inputs.length) {
                         toastr.error('input can not be empty');
                         return false;
                     }
-                    
+
                 }
 
                 /* row_inputs.each(function (index, el) {
@@ -77,7 +77,7 @@ $(function () {
                     }
                 }); */
             }
-            nextCallback(triggerAddBtn,currentIndex);
+            nextCallback(triggerAddBtn, currentIndex);
             return form.valid();
         },
         labels: {
