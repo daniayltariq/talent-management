@@ -878,10 +878,11 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 monthFormat: 'short',
 
                 onChange: function(day, month, year){
-                    if(day!=null && month!=null && year!=null){
                     console.log(day, month, year);
+                    if((day!=null && day!='') && (month!=null && month != '') && (year!=null && year!='')){
                         minDate = year+'-'+month+'-'+day;
                         minDate = new Date(minDate);
+                        console.log(minDate);
                         minDate.setDate(minDate.getDate());
                         minDate = minDate.getFullYear()+'-'+(minDate.getMonth()+1)+'-'+minDate.getDate();
                         maxDate = new Date(minDate);
