@@ -770,6 +770,8 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 @section('scripts')
 <script>
     window.currentStep = 0;
+    window.changeDetected = false;
+ 
     function nextCallback(addBtn,currentStep){
 
         if(addBtn == true){
@@ -794,27 +796,33 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                 $('#custom_link').val('');
             }
 
-            $.ajax({
-                url: "{{ route('account.talent-profile.store') }}",
-                contentType: false,
-                processData: false,
-                
-                type: 'POST',
-                data:formDataa,
-                success: function(res) {
-                    console.log(res);
-                    if (res.alert_type=='success') {
-                        toastr.success(res.message);
-                        if (res.method) {
-                            $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
+            if(window.changeDetected){
+                $.ajax({
+                    url: "{{ route('account.talent-profile.store') }}",
+                    contentType: false,
+                    processData: false,
+                    
+                    type: 'POST',
+                    data:formDataa,
+                    success: function(res) {
+                        console.log(res);
+                        if (res.alert_type=='success') {
+                            toastr.success(res.message);
+                            if (res.method) {
+                                $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
+                            }
+                        } else {
+                            toastr.error(res.message);
                         }
-                    } else {
-                        toastr.error(res.message);
+                    },
+                    error: function(error) {
                     }
-                },
-                error: function(error) {
-                }
-            });
+                });
+
+                window.changeDetected = false;
+            }
+
+            
         }
     }
 </script>
@@ -826,12 +834,15 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 
 <script type="text/javascript">
+
     $.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		}
 	});
     $(document).ready(function() {
+
+       
        $("#Films").createRepeater({showItemsToDefault: true,showItemsToDefault: true,startIndex:$("#Films").data('start')});
        $("#Theater").createRepeater({showItemsToDefault: true,startIndex:$("#Theater").data('start')});
        $("#Commercials").createRepeater({showItemsToDefault: true,startIndex:$("#Commercials").data('start')});
@@ -839,6 +850,11 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
        $("#Training").createRepeater({showItemsToDefault: true,startIndex:$("#Training").data('start')});
        /* $('.repeater-add-btn').trigger('click'); */
 
+
+         $('#wizard form').find('input,select,textarea').change(function(){
+            console.log('changed', $(this));
+            window.changeDetected = true;
+        });
 
        $('.repeater-add-btn').click(function(){
             $(this).siblings('.btn').hide();
