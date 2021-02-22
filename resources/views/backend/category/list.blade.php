@@ -20,7 +20,7 @@
 		<div class="kt-portlet__head">
 			<div class="kt-portlet__head-label">
 				<h3 class="kt-portlet__head-title">
-					Room list
+					Categories
 				</h3>
 				
 			</div>
@@ -38,7 +38,7 @@
 							<thead>
 								<tr>
 									<th>#</th>
-								   <th>Room</th>
+								   <th>Category</th>
 								   <th>Slug</th>
 								   <th>Active</th>
 								   <th>Operation</th>
