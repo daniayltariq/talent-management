@@ -1742,3 +1742,8 @@ a.widget-latest__title{
 	color: #fff;
 	margin-bottom: 25px;
 }
+
+
+.toast-message{
+	text-transform: capitalize !important;
+}
