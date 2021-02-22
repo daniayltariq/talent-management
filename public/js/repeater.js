@@ -100,8 +100,9 @@ jQuery.fn.extend({
         /* handle click and add items */
         addButton.on("click", function () {
             items = repeater.find(".items");
-            if (items.length > 1) {
-                var child = $(items).children().eq(items.length - 1);
+            if (items.length > 0) {
+                var child = repeater.children(".items").eq(items.length - 1);
+                console.log("rows: " + items.length);
                 console.log(child);
                 var row_inputs = $(child).find('input,select,textarea');
                 console.log(row_inputs);
