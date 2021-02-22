@@ -34,6 +34,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: 100% 15%;
 }
 
 .input-group-bs{
@@ -135,7 +136,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     <section class="section apply">
         <div class="container">
             <div class="row">
-                <h3 class="text__quote centered">Complete your profile form</h3>
+                {{-- <h3 class="text__quote centered">Complete your profile form</h3> --}}
                 <div class="col-lg-12 col-md-12 ">
 
                         @if ($profile)
@@ -241,7 +242,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <label class="font-15">Weight (lbs)</label>
                                                     <div class="form-holder">
-                                                        <input type="text" name="weight" id="weight" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control">
+                                                        <input type="number" name="weight" id="weight" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -279,19 +280,19 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Chest</label>
-                                                        <input type="text" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control">
+                                                        <input type="number" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Neck</label>
-                                                        <input type="text" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control">
+                                                        <input type="number" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Waist</label>
-                                                        <input type="text" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control">
+                                                        <input type="number" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -300,7 +301,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Sleeves</label>
-                                                        <input type="text" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control">
+                                                        <input type="number" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control">
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-md-4">
@@ -311,7 +312,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Shoe</label>
-                                                        <input type="text" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control">
+                                                        <input type="number" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -972,7 +973,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                     console.log(res);
                     if (res.alert_type=='success') {
                         toastr.success(res.message);
-                        window.location.reload();
+                        window.location='{{route('account.dashboard')}}';
                     } else {
                         toastr.error(res.message);
                     }

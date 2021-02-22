@@ -305,6 +305,13 @@
     .input-group-bs input {
         border: unset;
     }
+
+    .tal-profile {
+        height: 100%;
+        width: 100%;
+        object-fit: cover !important;
+        object-position: 100% 15%;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -903,7 +910,7 @@
             maxFiles:"{{$data['plan']->pictures}}"-"{{count($data['images'])}}",
             maxFilesize: 12, // MB
             acceptedFiles: "image/*", /* ,.mp4,.mkv,.mov,.wmv,audio */
-            dictDefaultMessage:"Drop Your Files here.<br> i.e .jpg .jpeg .png",
+            dictDefaultMessage:"Drag & Drop Your File(s) Here or click to upload.<br> i.e .jpg .jpeg .png",
             /* autoProcessQueue: false, */
             accept: function(file, done) {
                 console.log("uploaded");
