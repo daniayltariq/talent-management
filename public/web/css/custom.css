@@ -466,6 +466,15 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.element-loading{
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 99;
+
 .line {
    background-color: transparent !important;
 }
