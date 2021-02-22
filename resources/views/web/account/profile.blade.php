@@ -280,19 +280,19 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Chest</label>
-                                                        <input type="number" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control">
+                                                        <input type="number" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control" min="0" max="124">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Neck</label>
-                                                        <input type="number" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control">
+                                                        <input type="number" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control" min="0" max="50">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Waist</label>
-                                                        <input type="number" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control">
+                                                        <input type="number" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control" min="0" max="100">
                                                     </div>
                                                 </div>
                                             </div>
@@ -301,7 +301,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Sleeves</label>
-                                                        <input type="number" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control">
+                                                        <input type="number" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control" min="0" max="50">
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-md-4">
@@ -312,7 +312,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Shoe</label>
-                                                        <input type="number" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control">
+                                                        <input type="number" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control" min="0" max="100">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
