@@ -680,7 +680,7 @@
                                                             <option value="facebook"> Facebook</option>
                                                             <option value="instagram">Instagram</option>
                                                             <option value="twitter">Twitter</option>
-                                                            <option value="youtube">Youtube</option>
+                                                            <option value="youtube">YouTube</option>
                                                             <option value="soundcloud">SoundCloud</option>
                                                             <option value="flickr">Flickr</option>
                                                             {{-- <option value="other">Other..</option> --}}
