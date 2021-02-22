@@ -419,7 +419,7 @@ div.effect-bubba:hover .grid-item__contant-place {
 	width: 1px;
 	height: 235px;
 	z-index: -1;
-	background-color: #df691a;
+	background-color: transparent;
 	-ms-transform: rotate(45deg); /* IE 9 */
 	-webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
 	transform: rotate(45deg);
