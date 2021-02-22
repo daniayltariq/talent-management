@@ -1306,7 +1306,7 @@
                 required: true,
                 wrapperClass:'d-flex',
                 dropdownClass:'date-field form-control',
-                /* displayFormat: 'ymd', */
+                 displayFormat: 'mdy', 
                 monthFormat: 'short',
                 /* minYear: 1920,
                 maxYear: yyyy-1 */
