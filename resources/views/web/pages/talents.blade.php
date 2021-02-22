@@ -135,6 +135,8 @@
 
     .profile-sec img {
         border-radius: 2%;
+        object-position: 100% 15%;
+        object-fit: cover;
     }
 
     .middle-testimonial .border-1 {
