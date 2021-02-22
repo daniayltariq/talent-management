@@ -484,15 +484,15 @@ ul.social li{
     	<!-- BEGIN BODY -->
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
       	<tr>
-          <td valign="top" class="bg_light" style="padding: .5em 2.5em 1em 2.5em;">
-          	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-          		<tr>
-          			<td class="logo" style="text-align: center;">
-			            <h1 style="text-align: center;"><a href="{{route('/')}}">Talent Depot</a></h1>
-			          </td>
-          		</tr>
-          	</table>
-          </td>
+			<td valign="top" style="background:black">
+				<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td class="logo" style="text-align: center;">
+					<img src="{{asset('web/img/logo/generic_logo_banner_orange.png')}}" style="text-align: center;width: 25%" alt="">
+						</td>
+					</tr>
+				</table>
+			</td>
 	      </tr><!-- end tr -->
 	      <tr>
           <td class="bg_white email-section">
@@ -512,12 +512,12 @@ ul.social li{
 									@foreach ($items as $item)
 										<div class="topic">
 											<div class="img">
-												<img src="images/person_1.jpg" alt="" style="width: 100%; max-width: 600px; height: auto; margin: auto; margin-bottom: 20px; display: block;">
+												<img src="{{ !is_null($item->member->profile->profile_img) && file_exists(public_path().'/storage/uploads/profile/'.$item->member->profile->profile_img) ? url('/').('/storage/uploads/profile/'.$item->member->profile->profile_img) :'web/img/user.png' }}" alt="" style="width: 100%; max-width: 600px; height: auto; margin: auto; margin-bottom: 20px; display: block;">
 											</div>
 											<div class="text">
 												<h3>{{$item->member->profile->legal_first_name ?? ''}} {{$item->member->profile->legal_last_name ?? ''}}</h3>
-												<p class="meta"><span>{{$item->member->getAgeAttribute() ?? ''}}</span></p>
-												<a href="{{route('model.single',$item->member->id)}}" target="_blank">view profile</a>
+												<p class="meta"><span>Age :{{$item->member->getAgeAttribute() ?? 'Nil'}}</span></p>
+												<a href="{{route('model',$item->member->profile->custom_link ?? $item->member->profile->id)}}" target="_blank">view profile</a>
 											</div>
 										</div>
 									@endforeach

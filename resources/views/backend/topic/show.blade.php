@@ -38,7 +38,7 @@
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="dropdown dropdown-inline">
-                        <button type="button" id="status" data-status="{{$blog->status==1 ? 0 : 1}}" class="btn {{$blog->status==1 ? 'btn-success' : 'btn-danger'}} btn-sm text-white">
+                        <button type="button" id="status" data-status="{{$blog->status==1 ? 0 : 1}}" class="btn btn-{{$blog->status==1 ? 'success' : 'warning'}} btn-sm text-white">
                          {{$blog->status ==1 ? 'Active' : 'Inactive'}}
                         </button>
                     </div>
@@ -79,8 +79,19 @@
                 },
                 function(res){
                     if (res.status=="success") {
+<<<<<<< HEAD
+                        $(that).text(res.blog_status ==1?' Inactive' : ' Active');
+                        if (res.blog_status ==0) {
+                            $(that).removeClass('btn-warning').addClass('btn-success');
+                        }
+                        else{
+                            $(that).addClass('btn-warning').removeClass('btn-success');
+                        }
+                        
+=======
                         $(that).text(res.blog_status ==1?' Active' : ' Inactive');
                         $(that).removeClass('btn-success').removeClass('btn-danger').addClass(res.blog_status ==1?' btn-success' : ' btn-danger');
+>>>>>>> 19650b0695d018070a44d78ba428092df81d7932
                         $(that).attr('data-status',res.blog_status);
                     } else {
                         toastr.error('Something went wrong');

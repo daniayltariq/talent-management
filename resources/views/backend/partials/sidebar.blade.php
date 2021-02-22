@@ -3,7 +3,7 @@
     <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
         <div class="kt-aside__brand-logo mt-4">
             <a href="{{route('backend.dashboard')}}">
-            <img alt="Logo" src="{{asset('backend-assets/images/TD_and_Words_white.png')}}" style="width: 70%;"/>
+            <img alt="Logo" src="{{asset('backend-assets/images/generic_logo_banner_orange.png')}}" style="width: 70%;"/>
             </a>
         </div>
         <div class="kt-aside__brand-tools">
@@ -72,16 +72,16 @@
                                 </g>
                             </svg>
                         </span>
-                        <span class="kt-menu__link-text">Forum</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                        <span class="kt-menu__link-text">Community</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
                     </a>
                     <div class="kt-menu__submenu ">
                         <span class="kt-menu__arrow"></span>
                         <ul class="kt-menu__subnav">
                           
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Post listing</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.create') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create a post</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.room.create')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create Category</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.room.index')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Category List</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Topic listing</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.create') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create a topic</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.category.create')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create Category</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.category.index')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Category List</span></a></li>
                         </ul>
                     </div>
                 </li>
@@ -141,8 +141,8 @@
                         <span class="kt-menu__arrow"></span>
                         <ul class="kt-menu__subnav">
                             <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true" ><span class="kt-menu__link"><span class="kt-menu__link-text">Utils</span></span></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.room.create')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create Room</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.room.index')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Room List</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.category.create')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create Room</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.category.index')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Room List</span></a></li>
                         </ul>
                     </div>
                 </li> --}}

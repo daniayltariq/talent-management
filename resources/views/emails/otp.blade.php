@@ -387,11 +387,11 @@
       <!-- BEGIN BODY -->
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
       	<tr>
-          <td valign="top" class="bg_white" style="padding: 1em 2.5em 0 2.5em;">
+          <td valign="top" style="background:black">
           	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
           		<tr>
-          			<td class="logo">
-			            <h1 style="text-align: center"><a href="#" style="text-align: center">Talent Depot</a></h1>
+          			<td class="logo" style="text-align: center;">
+                  <img src="{{asset('web/img/logo/generic_logo_banner_orange.png')}}" style="text-align: center;width: 25%" alt="">
 			          </td>
           		</tr>
           	</table>
@@ -410,15 +410,15 @@
               </tr> --}}
               <tr>
                 <td>
-                  <h4>Dear ALFA User,</h4>
-                  <p>Here is your OTAC: {{$data['otp'] ?? ''}}</p>
-                  <p>Please enter the OTAC in the relevant fields to complete the transaction.</p>
+                  <h4>Dear Talent,</h4>
+                  <p>Your One-Time verification code is <b>{{$data['otp'] ?? ''}}</b></p>
+                  <p>Return to the Talent Link verification page and enter <b>{{$data['otp'] ?? ''}}</b> into the 6 boxes..</p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p>Regards,</p>
-                  <p>Talent Depot</p>
+                  <p>Thank you and welcome!</p>
+                  <p>The Talent Depot Membership Team</p>
                 </td>
               </tr>
             </table>
@@ -488,7 +488,7 @@
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="text-align: left; padding-right: 10px;">
-                        <p>&copy; 2021 Talent Depot. All Rights Reserved</p>
+                        <p>&copy; 2021 The Talent Depot. All Rights Reserved</p>
                       </td>
                     </tr>
                   </table>

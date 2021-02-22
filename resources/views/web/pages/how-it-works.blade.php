@@ -34,7 +34,7 @@
     <div class="section how-it-works">
         <div class="container">
         	<div class="text-center">
-        		<h2 class="text-dark">How Talent Depot works</h2>
+        		<h2 class="text-dark">How The Talent Depot Works</h2>
         		{{-- <p>Simplify and streamline your casting process to find the perfect performers for your project.</p> --}}
         	</div>
             <div class="row mt-3">

@@ -17,7 +17,7 @@
 				<div class="logo col-md-2 col-sm-4 col-xs-7">
 					<a class="navbar-brand" href="{{ route('/') }}">
 					{{-- <span class="logo__text">Talent DB</span> --}}
-					<img src="{{ asset('web/img/logo/TD_and_Words_white.png') }}" class="logo img img-fluid">
+					<img src="{{ asset('web/img/logo/generic_logo_banner_orange.png') }}" class="logo img img-fluid">
 					</a>
 				</div>
 				<div class="main__menu-wrap col-md-10 col-sm-8 col-xs-5">
@@ -146,13 +146,21 @@
 
 										@role('candidate')
 											<li class="m-menu__sub-item">
-												<a href="{{ route('account.dashboard') }}">Profile</a>
+												<a href="{{ route('account.dashboard') }}">My Account</a>
 											</li>
+											
+											@if (auth()->user()->profile()->exists() && auth()->user()->profile->custom_link)
+												<li class="m-menu__sub-item">
+													<a href="{{route('model',auth()->user()->profile->custom_link)}}">My Profile</a>
+												</li>
+											@endif
+
 											@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 1)
 												<li class="m-menu__sub-item">
 													<a href="{{ url('/') }}/account/reward">Reward</a>
 												</li>
 											@endif
+
 											
 										@endrole
 										
@@ -163,9 +171,9 @@
 										@endrole
 
 										@if (\Auth::guest() || auth()->user()->hasRole('candidate'))
-											<li class="m-menu__sub-item">
+											{{-- <li class="m-menu__sub-item">
 												<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
-											</li>
+											</li> --}}
 											{{-- <li class="m-menu__sub-item">
 												<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
 											</li> --}}
@@ -176,13 +184,13 @@
 												<a href="{{ route('agent.picklist.index') }}">My saved picklists</a>
 											</li>
 											<li class="m-menu__sub-item">
-												<a href="{{ route('agent.topic.create') }}">Create Post</a>
+												<a href="{{ route('agent.topic.create') }}">Create Topic</a>
 											</li>
 											<li class="m-menu__sub-item">
 												<a href="#" pd-popup-open="popupReferal">Refer a friend</a>
 											</li>
 											<li class="m-menu__sub-item">
-												<a href="{{ route('agent.topic.index') }}">Posts</a>
+												<a href="{{ route('agent.topic.index') }}">Topics</a>
 											</li>
 										@endrole
 										<li class="m-menu__sub-item">

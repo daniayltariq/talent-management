@@ -18,6 +18,26 @@
 .invalid-feedback{
     color: red;
 }
+
+.z-0{
+    z-index: 0;
+}
+
+.modal-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    border-top-left-radius: .3rem;
+    border-top-right-radius: .3rem;
+}
 </style>
 
 <link href="{{asset('backend-assets/assets/plugins/summernote/summernote.css')}}" rel="stylesheet">
@@ -29,7 +49,7 @@
         <div class="row">
             <div class="title__wrapp">
                 {{-- <div class="page__subtitle title__grey">Post</div> --}}
-                <h1 class="page__title">Create a Post</h1>
+                <h1 class="page__title">Create a Topic</h1>
             </div>
         </div>
     </div>
@@ -38,7 +58,7 @@
 <section class="section apply">                    
         <div class="container">
             <div class="row">
-                <h3 class="text__quote centered">Post Form</h3>
+                <h3 class="text__quote centered">Topic Form</h3>
                 <div class="col-lg-12 col-md-12 ">
 
                   @php 
@@ -123,7 +143,7 @@
                         
                             <div class="row">
                                 <div class="col-sm-12 text-center">
-                                    <button type="submit" class="btn btn-default btn__red animation btn-half pull-right">{{ isset($blog) ? 'Update' : 'Create' }}</button>
+                                    <button type="submit" class="btn btn-default btn__red animation btn-half pull-right z-0">{{ isset($blog) ? 'Update' : 'Create' }}</button>
                                 </div>
                             </div>
                       
@@ -187,6 +207,12 @@
    }
       
    
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('.btn-fullscreen').hide();
+    })
 </script>
 
 @endsection

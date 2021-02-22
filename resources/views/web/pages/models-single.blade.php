@@ -174,6 +174,93 @@
       list-style: none;
    }
    /* End book talent modal */
+
+   .modal {
+        text-align: left;
+    }
+    .modal-content {
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 16px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21);
+        width: 100%;
+    }
+    .modal-header{
+        border-bottom: 0;
+        padding-top: 15px;
+        padding-right: 26px;
+        padding-left: 26px;
+        padding-bottom: 0px;
+    }
+    .modal-title {
+        font-size: 28px;
+    }
+    .modal-body{
+        border-bottom: 0;
+        padding-top: 5px;
+        padding-right: 26px;
+        padding-left: 26px;
+        padding-bottom: 10px;
+        font-size: 15px;
+    }
+    .modal-footer {
+        border-top:0;
+        padding-top: 0px;
+        padding-right:26px;
+        padding-bottom:26px;
+        padding-left:26px;
+    }
+
+    .btn-default,.btn-primary {
+        border: none;
+        border-radius: 2px;
+        display: inline-block;
+        color: #424242;
+        background-color: #FFF;
+        text-align: center;
+        height: 36px;
+        line-height: 36px;
+        outline: 0;
+        padding: 0 2rem; 
+        vertical-align: middle;
+        -webkit-tap-highlight-color: transparent;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        letter-spacing: .5px;
+        transition: .2s ease-out;
+    }
+    .btn-default:hover{
+    background-color: #FFF;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    }
+    .btn-primary {
+    color: #FFF;
+    background-color: #2980B9;
+    }
+    .btn-primary:hover{
+    background-color: #2980B9;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    }
+    footer {
+    text-align: center;
+    margin: 15px;
+    }
+    footer h4{
+    font-size: 2.92rem;
+    font-weight:100;
+        margin: 1.46rem 0 1.168rem; 
+    }
+
+    .picklist-btn{
+        position: relative;
+        z-index: 999999;
+    }
+
+    .new-picklist{
+        display: none;
+    }
+
+    .z-0{
+       z-index: 0;
+    }
 </style>
 @endsection
 @section('content')
@@ -183,7 +270,7 @@
       <div class="row">
          <div class="title__wrapp">
             {{-- <div class="page__subtitle title__grey">Backstage</div> --}}
-            <h1 class="page__title">{{$data['profile']->legal_first_name ?? ''}} {{$data['profile']->legal_last_name ?? ''}}</h1>
+            <h1 class="page__title">{{$data['profile']->legal_first_name ?? $data['profile']->user->f_name}} {{$data['profile']->legal_last_name ?? $data['profile']->user->l_name}}</h1>
          </div>
       </div>
    </div>
@@ -271,9 +358,12 @@
                   </div>
 
                   @role('agent')
-                     <div class="row">
-                        <div class="col-md-6">
+                     <div class="row d-flex">
+                        <div class="m-3">
                            <a href="#" class="btn btn__red animation pad-txt-email" pd-popup-open="popupNew">Contact</a>
+                        </div>
+                        <div class="m-3">
+                           <a href="#picklist-modal" data-memberid="{{$data['profile']->user->id}}" role="button" data-toggle="modal" class="btn btn__red animation pad-txt-email picklist-btn z-0">Add to Picklist</a>
                         </div>
                      </div>
                   @endrole
@@ -299,7 +389,7 @@
       </div>
       <br>
       {{-- Vedio Elements --}}
-      {{-- <div class="row">
+      <div class="row">
          <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
             <div class="row">
                <div id="model-slider" class="s-model__photos col-md-6">
@@ -318,10 +408,10 @@
                </div>
             </div>
          </div>
-      </div> --}}
+      </div>
       <br>
       {{-- Voiceovers --}}
-      {{-- <div class="row">
+      <div class="row">
          <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
             <div class="row">
                <div id="model-slider" class="s-model__photos col-md-6">
@@ -340,7 +430,7 @@
                </div>
             </div>
          </div>
-      </div> --}}
+      </div>
    </div>
 
    <div class="popup" pd-popup="popupNew">
@@ -400,6 +490,9 @@
 <!-- Materialdesignicons CSS (icon) -->
 <link rel="stylesheet" href="{{ asset('web/libs/icons/materialdesignicons.css') }}" type="text/css" />
 <link rel="stylesheet" href="{{ asset('web/libs/icons/flaticon.css') }}">
+
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script>
 <script>
    $.ajaxSetup({
    	headers: {
@@ -437,7 +530,7 @@
 	$(document).ready(function(){
 		setTimeout(function() { 
           fullPageLoader(false);
-       }, 1500);
+       }, 2000);
 	})
 </script>
 
@@ -463,6 +556,14 @@
          $('.popup-form').toggleClass( "d-none" );
       });
    });
+</script>
+
+<script>
+   $(document).ready(function() {
+        @if($errors->has('member_id') || $errors->has('title') || $errors->has('description') )
+            $('#picklist-modal').modal('toggle');
+        @endif
+    });
 </script>
 
 @endsection

@@ -387,11 +387,11 @@
       <!-- BEGIN BODY -->
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
       	<tr>
-          <td valign="top" class="bg_white" style="padding: 1em 2.5em 0 2.5em;">
+          <td valign="top" style="background:black">
           	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
           		<tr>
-          			<td class="logo">
-			            <h1 style="text-align: center"><a href="#" style="text-align: center">Talent Depot</a></h1>
+          			<td class="logo" style="text-align: center;">
+                  <img src="{{asset('web/img/logo/generic_logo_banner_orange.png')}}" style="text-align: center;width: 25%" alt="">
 			          </td>
           		</tr>
           	</table>
@@ -480,7 +480,7 @@
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="text-align: left; padding-right: 10px;">
-                        <p>&copy; 2021 Talent Depot. All Rights Reserved</p>
+                        <p>&copy; 2021 The Talent Depot. All Rights Reserved</p>
                       </td>
                     </tr>
                   </table>

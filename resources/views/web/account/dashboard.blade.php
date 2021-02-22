@@ -407,13 +407,13 @@
                                         <label for="f_name" class="form-label mt-3">Profile URL</label>
                                         <div class="form-holder">
                                             <div class="input-group-bs mb-3 d-flex">
-                                                <div class="input-group-prepend pr-4">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text-bs" id="basic-addon3" style="    line-height: 2;">{{url('/').'/member/'}}</span>
                                                 </div>
-                                                <input type="text" class="form-control" name="custom_link" value="{{$profile->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3">
+                                                <input type="text" class="form-control" name="custom_link" value="{{$data['profile']->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3" disabled>
                                             </div>
-                                            <small id="link_error" style="color: red"></small>
-                                            <p id="link_suggestion">Suggestions: <span id="suggestion"></span></p>
+                                            {{-- <small id="link_error" style="color: red"></small>
+                                            <p id="link_suggestion">Suggestions: <span id="suggestion"></span></p> --}}
                                         </div>
                                     </div>
                                     @endif
@@ -609,7 +609,7 @@
                         </div> --}}
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-refer" role="tabpanel" aria-labelledby="v-refer-tab">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-12">
                                     @if (auth()->user()->referal_code()->exists())
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="refer_link" value="{{url('/').'/signup/?referal='.auth()->user()->referal_code->refer_code}}" placeholder="Refer url" aria-label="Refer url" aria-describedby="basic-addon2">

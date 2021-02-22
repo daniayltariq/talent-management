@@ -13,6 +13,10 @@
             .btn-primary:hover,.btn-danger:hover{
 			color: #fff !important;
 		}
+
+        .w-auto{
+            width: auto !important;
+        }
         </style>
         @yield('styles') 
         

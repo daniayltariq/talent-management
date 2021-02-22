@@ -127,7 +127,7 @@ Route::get('/picklist-single', function () {
 |
 */
 Route::get('/ensura', function () {
-    return view('print.ensura');
+    abort(404);
 })->name('ensura');
 
 Route::get('/404', function () {
@@ -147,6 +147,10 @@ Route::get('/500', function () {
 Route::get('/403', function () {
     return view('web.errors.403');
 })->name('403');
+
+Route::get('/401', function () {
+    return view('web.errors.401');
+})->name('401');
 // End error routes
 
 Route::get('/user_agreement', function () {
@@ -166,7 +170,10 @@ Route::get('/magzine/single', [App\Http\Controllers\HomeController::class, 'magz
 
 Route::get('/models', [App\Http\Controllers\HomeController::class, 'models'])->name('models');
 Route::get('models/grid', [App\Http\Controllers\HomeController::class, 'modelsgrid'])->name('models.grid');
-Route::get('member/{link}', [App\Http\Controllers\HomeController::class, 'models'])->name('model');
+
+Route::middleware(['isSuperAgentSubscribedMember'])->group(function () {
+    Route::get('member/{link}', [App\Http\Controllers\HomeController::class, 'models'])->name('model');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('model/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('model.single');
@@ -360,8 +367,8 @@ Route::group([
     Route::get('/text_talent/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'text_talent'])->name('text_talent');
 
     Route::resource('tag', App\Http\Controllers\Admin\TagController::class);
-    Route::resource('room', App\Http\Controllers\Admin\RoomController::class);
-    Route::get('/room_status', [App\Http\Controllers\Admin\RoomController::class, 'updateStatus'])->name('room.updateStatus');
+    Route::resource('category', App\Http\Controllers\Admin\RoomController::class);
+    Route::get('/room_status', [App\Http\Controllers\Admin\RoomController::class, 'updateStatus'])->name('category.updateStatus');
 
     Route::get('/view_save_search', [App\Http\Controllers\Admin\DashboardController::class, 'viewSaveSearch'])->name('view_save_search');
     Route::get('/apply_saved_search/{id}', [App\Http\Controllers\Admin\DashboardController::class, 'applySaveSearch'])->name('apply_saved_search');

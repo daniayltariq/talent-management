@@ -435,7 +435,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             </div>
 
                             <div class="form-group">
-                                <label for="address" class="col-sm-4 control-label">Tell us more about your business </label>
+                                <label for="address" class="col-sm-4 control-label">Tell us more about your business ( <span id="charNum">200</span> /200 )</label>
                                 <div class="col-sm-8">
                                     <textarea name="about_business" class="form-control" name="about_business" id="about_business" cols="30" rows="3">{{ old('about_business') }}</textarea>
                                    
@@ -713,5 +713,17 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             });
         });
 
+    </script>
+
+    <script>
+        $('[name="about_business"]').on("input", function(){
+            var len = $(this).val().length;
+            if (len >= 200) {
+                $('#charNum').text(0);
+                $(this).val($(this).val().substring(0, 200));
+            } else {
+                $('#charNum').text(200 - len);
+            }
+        });
     </script>
 @endsection

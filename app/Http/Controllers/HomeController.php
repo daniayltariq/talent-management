@@ -106,6 +106,9 @@ class HomeController extends Controller
             return view('web.pages.models-single',compact('data'));
          }
          else{
+            if(auth()->user()->id==$user->id){
+               return view('web.errors.404')->with('text','Your Profile not setup yet!');
+            }
             return view('web.errors.404')->with('text','Profile not found');
          }
       }

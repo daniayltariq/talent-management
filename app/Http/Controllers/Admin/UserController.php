@@ -24,15 +24,15 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $user = User::whereHas(
+        $users = User::whereHas(
             'roles', function($q){
                 $q->where('name','<>','superadmin');
             }
-        )->with('roles')->get();
+        )->with('roles')->paginate(10);
         $roles=Role::where('name','<>','superadmin')->get();
         
-        /* dd($user[0]->roles[0]->name); */
-        return view('backend.user.list',compact('user','roles'));
+        /* dd($user); */
+        return view('backend.user.list',compact('users','roles'));
         
     }
 

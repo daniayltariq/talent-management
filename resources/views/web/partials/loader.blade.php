@@ -17,7 +17,7 @@
 <div class="fullpage-loader" id="fullpage-loader">
     <div class="loader-wrapper">
         <div>
-             <img src="{{ asset('web/img/logo/TD_and_Words_white.png') }}" alt="" style="max-width: 180px">
+             <img src="{{ asset('web/img/logo/generic_logo_banner_orange.png') }}" alt="" style="max-width: 180px">
         </div>
        <div>
             <svg style="width: 100px" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

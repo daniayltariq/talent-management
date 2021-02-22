@@ -165,11 +165,11 @@ table.pricing td:nth-child(4) {
 <article class="mt-5">
 
 <ul class="ul-pricing">
-  @foreach ($plans as $plan)
+  {{-- @foreach ($plans as $plan)
     <li class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
       <button>{{$plan->name}}</button>
     </li>
-  @endforeach
+  @endforeach --}}
   
   {{-- <li class="bg-blue">
     <button>Standard </button>
@@ -184,12 +184,14 @@ table.pricing td:nth-child(4) {
   <thead>
     <tr>
       <th class="bg-pri text-center"><a href="{{route('how-it-works')}}" class="btn btn-primary btn-c-p">How it works</a></th>
-      @foreach ($plans as $plan)
+      {{-- @foreach ($plans as $plan)
         <th class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
-          {{$plan->name ?? ''}} {{-- <hr>
-          <div class="tw-4">{!!$plan->description ?? ''!!}</div> --}}
+          {{$plan->name ?? ''}} 
         </th>
         
+      @endforeach --}}
+      @foreach ($plans as $plan)
+        <th class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}"><a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a></th>
       @endforeach
       
     </tr>

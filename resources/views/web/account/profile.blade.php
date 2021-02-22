@@ -819,7 +819,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
         //         }
         //         else{
         //             $.ajax({
-        {{-- //                 url: "{{ route('account.talent.checkCustomLink') }}", --}}
+        //                 url: "{{ route('account.talent.checkCustomLink') }}", --}}
         //                 type: 'GET',
         //                 data:{
         //                     'link':$(this).val()

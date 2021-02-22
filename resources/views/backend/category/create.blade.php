@@ -47,9 +47,9 @@
             </div>
             <!--begin::Form-->
             @php 
-            $route = route('backend.room.store');
+            $route = route('backend.category.store');
             if(isset($room)){
-            $route = route('backend.room.update',$room->id);
+            $route = route('backend.category.update',$room->id);
             }
             @endphp
             <form action="{{$route}}" method="POST" id="room-content-form" enctype="multipart/form-data" class="kt-form">

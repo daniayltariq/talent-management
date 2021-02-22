@@ -62,6 +62,10 @@ class Handler extends ExceptionHandler
                 return response()->view('web.pages.419', [],419);
             }
 
+            if ($exception->getStatusCode() == 404) {
+                return response()->view('web.errors.404', [],404);
+            }
+
         }
 
     }

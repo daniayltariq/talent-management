@@ -15,7 +15,7 @@
                     @else
                         <button class="btn btn-primary p-10-13" id="refer-btn">Generate Referal link</button>
                         <div class="refer__div">
-                            <div class="input-group mb-3">
+                            <div class="input-group d-flex p-4 mb-3">
                                 <input type="text" class="form-control h-43" id="refer_link" name="refer_link" placeholder="Refer url" aria-label="Refer url" aria-describedby="basic-addon2">
                                 <div >
                                 <button class="btn btn-outline-secondary p-10-13 copy-btn" onclick="copyToClipboard()" type="button">Copy</button>

@@ -24,7 +24,7 @@ class RoomController extends Controller
 
         $categories = TopicCategory::all();
         
-        return view('backend.room.list',compact('categories'));
+        return view('backend.category.list',compact('categories'));
         
     }
 
@@ -35,7 +35,7 @@ class RoomController extends Controller
      */
     public function create(Request $request)
     {
-        return view('backend.room.create');
+        return view('backend.category.create');
     }
 
     /**
@@ -106,7 +106,7 @@ class RoomController extends Controller
     {
         $room= TopicCategory::findOrFail($id);
         
-        return view('backend.room.create',compact('room'));
+        return view('backend.category.create',compact('room'));
     }
 
     /**

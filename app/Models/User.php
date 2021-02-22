@@ -136,6 +136,17 @@ class User extends Authenticatable /* implements MustVerifyEmail */
         return $this->hasMany('App\Models\Attachment','user_id');
     }
 
+    public function attachmentImage()
+    {
+        $attachment=$this->attachments->where('type','image')->first();
+        if ($attachment) {
+            return $attachment->file;
+        }
+        else{
+            return null;
+        }
+    }
+
     public function saved_search()
     {
         return $this->hasMany('App\Models\SavedSearch','user_id');

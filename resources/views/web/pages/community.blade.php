@@ -73,7 +73,7 @@ a.btn.btn-default.btn__grey.animation {
 								{{$comn->topics_sum_views ?? 0}} views
 								</span>
 								<span class="post__likes">
-								<a href="#"><i class="mdi mdi-heart"></i>{{$comn->likes_coun ?? 0}} likes</a>
+								<a href="#"><i class="mdi mdi-heart"></i>{{$comn->likes_count ?? 0}} likes</a>
 								</span>
 							</div>
 							<a href="{{ route('community.category',['slug' => $comn->slug]) }}" class="btn btn-default btn__grey animation">{{ $comn->topics_count }} Conversation</a>

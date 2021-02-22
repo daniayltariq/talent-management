@@ -15,6 +15,63 @@
 		.btn-primary{
 			color: #5d78ff;
 		}
+
+		.pagination {
+			display: inline-block;
+			padding-left: 0;
+			margin: 20px 0;
+			border-radius: 4px;
+		}
+
+		.pagination>li {
+			display: inline;
+		}
+
+		.blog__pagination {
+			margin: 0;
+			text-align: center;
+		}
+
+		.blog__pagination .pagination {
+			padding: 60px 0 0;
+			margin: 0;
+			border-top: 1px solid #ddd;
+		}
+
+		.pagination>li:last-child>a, .pagination>li:last-child>span, .pagination>li:first-child>a, .pagination>li:first-child>span, .pagination>li>a, .pagination>li>span {
+			border-radius: 0;
+		}
+
+		.pagination>li>a, .pagination>li>span {
+			position: relative;
+			float: left;
+			padding: 6px 12px;
+			margin-left: -1px;
+			line-height: 1.42857143;
+			color: #337ab7;
+			text-decoration: none;
+			background-color: #fff;
+			border: 1px solid #ddd;
+		}
+		.pagination>li>a, .pagination>li>span {
+			border: none;
+			color: #3a3a54;
+			font-weight: 600;
+			text-transform: uppercase;
+			background: #F6F6F6;
+			margin-left: 17px;
+			font-size: 15px;
+			padding: 8px 16px;
+		}
+
+
+		.new-picklist{
+			display: none;
+		}
+
+		.error{
+			color: red;
+		}
 	</style>
 @endsection
 
@@ -29,9 +86,9 @@
 				</h3>
 				
 			</div>
-			<div class="kt-portlet__head-label" style="float: right">
+			{{-- <div class="kt-portlet__head-label" style="float: right">
 				<a href="{{ route('backend.user.create') }}" class="btn btn-info btn-xs"><i class='fa fa-plus'></i> New User</a>
-			</div>
+			</div> --}}
 		</div>
 		<div class="kt-portlet__body">
 			<!--begin::Section-->
@@ -53,7 +110,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($user as $key => $user)
+								@foreach($users as $key => $user)
 									<tr>
 										<td>{{++$key}}</td>
 										<td class="name-badge p-3">{{ $user->f_name ?? '' }} {{ $user->l_name ?? '' }}
@@ -98,7 +155,11 @@
 
 											<a href="{{route('backend.user.impersonate',$user->id)}}" class="btn btn-primary btn-sm btn-bg-white" ><div class="kt-demo-icon__preview">Impersonate
 											</div> </a>
-
+											
+											@if ($user->hasRole('candidate'))
+												<button data-target="#picklist-modal" class="profile-btn picklist-btn btn btn-primary btn-sm btn-bg-white" data-memberid="{{$user->id}}" role="button" data-toggle="modal" title="Add to picklist"><i class="fas fa-plus" ></i></button>
+											@endif
+											
 											{{-- <a href="{{ route('user.show', $user->id) }}" class="btn btn-view btn-xs" style=" color:white" ><i class="fa fa-folder" ></i> View </a>
 											<a href="{{ route('user.updateStatus', $user->id) }}" class="btn btn-pause btn-xs" style=" color:white" ><i class="fa fa-pause" ></i> Pause</a> --}}
 											{{-- <a  href="#" class="btn btn-duplicate btn-xs" style=" color:white" ><i class="fa fa-copy" ></i> Duplicate</a> --}}
@@ -112,6 +173,37 @@
 					</div>
 				</div>
 			</div>
+
+			<nav class="blog__pagination">
+				@if ($users->lastPage() > 1)
+				 <ul class="pagination">
+					 <li class="{{ ($users->currentPage() == 1) ? ' disabled' : '' }}">
+						 <a href="{{ $users->url(1) }}">First</a>
+					  </li>
+					 @for ($i = 1; $i <= $users->lastPage(); $i++)
+						 <?php
+						 $half_total_links = floor(5 / 2);
+						 $from = $users->currentPage() - $half_total_links;
+						 $to = $users->currentPage() + $half_total_links;
+						 if ($users->currentPage() < $half_total_links) {
+							$to += $half_total_links - $users->currentPage();
+						 }
+						 if ($users->lastPage() - $users->currentPage() < $half_total_links) {
+							 $from -= $half_total_links - ($users->lastPage() - $users->currentPage()) - 1;
+						 }
+						 ?>
+						 @if ($from < $i && $i < $to)
+							 <li class="{{ ($users->currentPage() == $i) ? ' active' : '' }}">
+								 <a href="{{ $users->url($i) }}">{{ $i }}</a>
+							 </li>
+						 @endif
+					 @endfor
+					 <li class="{{ ($users->currentPage() == $users->lastPage()) ? ' disabled' : '' }}">
+						 <a href="{{ $users->url($users->lastPage()) }}">Last</a>
+					 </li>
+				 </ul>
+			 @endif
+			 </nav>
 			<!--end::Section-->
 		</div>
 		<!--end::Form-->
@@ -164,10 +256,82 @@
         </div>
     </div>
 </div>
+
+<div id="picklist-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="picklist-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Add to Picklist</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+            </div>
+            @php
+                $route="#";
+                if (\Auth::check() && auth()->user()->hasRole('superadmin')) {
+                    $route=route('backend.picklist.store');
+                } 
+                elseif(\Auth::check() && auth()->user()->hasRole('agent')) {
+                    $route=route('agent.picklist.store');
+                }
+                
+            @endphp
+            
+            <form action="{{$route}}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <button type="button" class="btn btn-primary btn-sm btn-bg-white" id="create-picklist-btn">
+                        <i class="fa fa-plus"></i> Create new
+                    </button>
+					<hr>
+                    <input type="hidden" name="member_id" value="{{old('member_id')}}">
+                    @if (count(auth()->user()->picklist) > 0 )
+                        <div class="form-group" id="picklist-select">
+                            <label for="exampleFormControlSelect1">Select Picklist</label>
+                            <select class="form-control" name="picklist_id" required="required" id="exampleFormControlSelect1">
+                                <option value="" disabled selected>Select</option>
+                                @foreach (auth()->user()->picklist as $picklist)
+                                    <option value="{{$picklist->id}}">{{$picklist->title}}</option>
+                                @endforeach
+                            </select>
+                            @error('member_id')
+                                <div class="error">Talent already exists</div>
+                            @enderror
+                        </div>
+                    @endif
+                    
+                    <div id="new-picklist" class="new-picklist">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Title</label>
+                            <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="Enter Title">
+                            @error('title')
+                                <div class="error">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Description</label>
+                            <input type="text" class="form-control" name="description" id="exampleFormControlInput1" placeholder="Enter Description">
+                            @error('description')
+                                <div class="error">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
+                        Close
+                    </button>
+                    <button class="btn btn-primary btn-sm btn-bg-white" type="submit">
+                        Save changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js" data-turbolinks-track="true"></script>
 <script type="text/javascript">
 
@@ -226,7 +390,37 @@ $(document).ready(function(){
 		
 	});
 
+	@if($errors->has('member_id') || $errors->has('title') || $errors->has('description') )
+		$('#picklist-modal').modal('show');
+	@endif
 	
 });
+</script>
+
+<script>
+	$(document).on('click','#create-picklist-btn',function(){
+		$('[name="picklist_id"]').val('');
+
+		if ($('[name="picklist_id"]').prop('required')==true) {
+			$('[name="picklist_id"]').prop('required',false);
+
+			$('[name="title"]').prop('required',true);
+			$('[name="description"]').prop('required',true);
+		} else {
+			$('[name="picklist_id"]').prop('required',true);
+			$('[name="title"]').prop('required',false);
+			$('[name="description"]').prop('required',false);
+		}
+		
+		$('div#picklist-select').toggleClass('new-picklist');
+
+		$('div#new-picklist').toggleClass('new-picklist');
+		/* $(this).text('Add to picklist'); */
+	})
+
+	$(document).on('click','.picklist-btn',function(){
+		var member=$(this).data('memberid');
+		$('[name="member_id"]').val(member);
+	})
 </script>
 @endsection

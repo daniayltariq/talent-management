@@ -245,7 +245,7 @@ $(document).ready(function(){
 	$("[name='status']").on('switchChange.bootstrapSwitch',function (e, state) {
 		console.log($(this).data('userid'));
 		const that=this;
-		$.get("{{ route('backend.room.updateStatus') }}",
+		$.get("{{ route('backend.category.updateStatus') }}",
 		{
 			room_id: $(this).data('roomid'),
 			status:state==true?1 : 0

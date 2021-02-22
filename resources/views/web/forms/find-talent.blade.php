@@ -348,7 +348,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="haircolor" class="col-sm-4 control-label">Select Hair Color</label>
                                 <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray'],'name'=>'hair_color'])
+                                    @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray','White'],'name'=>'hair_color'])
                                     
                                 </div>
                             </div>  
@@ -356,7 +356,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="eyecolor" class="col-sm-4 control-label">Select Eye Color</label>
                                 <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray'],'name'=>'eye_color'])
+                                    @include('components.multiselect', ['options' => ['Brown','Blue','Amber','Hazel','Gray','Green'],'name'=>'eye_color'])
                                     
                                  </div>
                             </div>  
@@ -417,8 +417,8 @@
                         <div class="grid">
                             <div class="grid-sizer"></div>
                             <div class="grid-gutter"></div>
-
-                            @foreach ($members as $member)
+                            
+                            @forelse ($members as $member)
                                 <div class="effect-bubba grid-item grid-item__width2 new-faces women" style="height: 530px;" data-category="women">
                                     <img class="img-responsive" style="object-fit: cover;width: 100%;height: 100%;" src="{{ asset(!is_null($member->profile) ? (!is_null($member->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$member->profile->profile_img)? 'storage/uploads/profile/'.$member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }} " alt="sample image">
                                     <div class="grid-item__contant-info">
@@ -442,7 +442,9 @@
                                         </a>
                                     </div>
                                 </div>
-                            @endforeach
+                            @empty
+                                <h4 class="text-center">No matches found</h4>
+                            @endforelse
                             
                             
                         </div>

@@ -152,6 +152,10 @@
       .popup-close {
           border: solid 4px #ffffff !important;
       }
+
+    .popup-inner{
+      max-width: 744px;
+    }
     /*  end otp modal */
     </style>
 @endsection
@@ -224,7 +228,8 @@
           <div class="row">
               <div class="col-md-12">
                 <div class="prompt">
-                  Enter the OTP sent on your email.
+                  A One-Time verification code was sent to <span><b id="otp_mail"></b></span>. <br>
+                  Please enter the One-Time verification code to validate and activate your account.
                 </div>
                 
                 <form method="get" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
@@ -236,7 +241,7 @@
                   <input type="text" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" />
                   <input type="text" id="digit-6" name="digit-6" data-previous="digit-5" />
                   <br>
-                  <p class="otp__tries">Limit: <span id="otp_tries">3</span></p>
+                  <p class="otp__tries">Please enter the 6 digit code here. <br>There is a limit of <span id="otp_tries">3</span> attempts.</p>
                 </form>
               </div>
           </div>
@@ -425,6 +430,7 @@
         fullPageLoader(false);
         if (res.status=='success') {
             toastr.success(res.message)
+            $('#otp_mail').text($('#card-holder-email').val());
             $('[pd-popup-open]').click();
         } else if(res.status=='error') {
             toastr.error(res.message)

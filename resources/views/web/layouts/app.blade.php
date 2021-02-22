@@ -11,7 +11,58 @@
 	<!--Meta Tegs-->
 	<title>{{ config('app.name', 'Laravel') }}</title>
 	<meta content="" name="description" />
+	<style>
+		.text-white{color: white;}
 
+		@media only screen and (max-width: 767px)
+		{
+			.main__menu {
+				width: 200%;
+			}
+
+			.cd-hero-slider{
+				height: 500px !important;
+			}
+
+			.cd-full__contant {
+				padding-left: 0;
+			}
+		}
+
+		@media only screen and (max-width: 1220px)
+		{
+			.role-nav {
+				padding: 0 0 10px 30px;
+			}
+		}
+
+		@media only screen and (min-width: 768px) and (max-width: 1220px)
+		{
+			.main__menu {
+				width: 100% !important;
+			}
+		}
+			
+		@media only screen and (max-width: 1220px)
+		{
+			.m-menu__sub {
+				display: none;
+				position: static;
+				visibility: visible;
+				opacity: 1;
+				background: #0f0f0f;
+			}
+		}
+
+		@media (min-width: 992px)
+		{
+			.col-md-10 {
+				width: 77.333333% !important;
+			}
+		}
+			
+			
+	</style>
   @include('web.partials.header')
   <script type="text/javascript">
 	(function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://cdn.firstpromoter.com/fprom.js',t.onload=t.onreadystatechange=function(){var t=this.readyState;if(!t||"complete"==t||"loaded"==t)try{$FPROM.init("lye8vetq",".thetalentdepot.com")}catch(t){}};var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)})();</script>
