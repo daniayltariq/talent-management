@@ -769,6 +769,53 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 @section('scripts')
 <script>
     window.currentStep = 0;
+    function nextCallback(addBtn,currentStep){
+
+        if(addBtn == true){
+            if($('#wizard-p-'+currentStep+' .repeater-add-btn:not(.btn-danger)')){
+                $('#wizard-p-'+currentStep+' .repeater-add-btn:not(.btn-danger)').click();
+            }
+        }
+
+         if ($("#profile_form").valid()) 
+        {
+
+            var formDataa=new FormData($('section[aria-hidden="false"] > form')[0]);
+            console.log($('section[aria-hidden="false"] > form')[0]);
+            console.log('next callback running');
+            @if ($profile)
+                formDataa.append('method', 'PUT');
+                formDataa.append('profile_id', "{{$profile->id}}");
+            @endif
+            
+            /* console.log(params); */
+            if ($('#link_error').is(":visible")) {
+                $('#custom_link').val('');
+            }
+
+            $.ajax({
+                url: "{{ route('account.talent-profile.store') }}",
+                contentType: false,
+                processData: false,
+                
+                type: 'POST',
+                data:formDataa,
+                success: function(res) {
+                    console.log(res);
+                    if (res.alert_type=='success') {
+                        toastr.success(res.message);
+                        if (res.method) {
+                            $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
+                        }
+                    } else {
+                        toastr.error(res.message);
+                    }
+                },
+                error: function(error) {
+                }
+            });
+        }
+    }
 </script>
 <script src="{{ asset('plugins/steps/js/jquery.steps.js') }}"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
@@ -900,54 +947,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 <script type="text/javascript">
 
 
-    $(document).on('click','a[href="#next"]',function(e){
-        if ($("#profile_form").valid()) 
-        {
 
-            /* $('section[aria-hidden="false"] *').filter(':input').each(function () {
-                if( $(this).val().length !== 0 ) {
-                    console.log($(this).attr('name')+' => '+ $(this).val());
-                    params[$(this).attr('name')]=$(this).val();
-                }
-            }); */
-            var formDataa=new FormData($('section[aria-hidden="false"] > form')[0]);
-            console.log($('section[aria-hidden="false"] > form')[0]);
-
-            @if ($profile)
-                formDataa.append('method', 'PUT');
-                formDataa.append('profile_id', "{{$profile->id}}");
-            @endif
-            
-            /* console.log(params); */
-            if ($('#link_error').is(":visible")) {
-                $('#custom_link').val('');
-            }
-
-            $.ajax({
-                url: "{{ route('account.talent-profile.store') }}",
-                contentType: false,
-                processData: false,
-                
-                type: 'POST',
-                data:formDataa,
-                success: function(res) {
-                    console.log(res);
-                    if (res.alert_type=='success') {
-                        toastr.success(res.message);
-                        if (res.method) {
-                            $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
-                        }
-                    } else {
-                        toastr.error(res.message);
-                    }
-                },
-                error: function(error) {
-                }
-            });
-        }
-        
-        
-    })
 
     $(document).on('click','a[href="#finish"]',function(e){
         if ($("#profile_form").valid()) 
