@@ -340,24 +340,35 @@
                         
                      </ul>
                      <ul class="s-model__list s-model__list_l">
-                        <li class="s-model__list-item">Height <span></span></li>
+                       @if($data['profile']->feet) <li class="s-model__list-item">Height <span></span></li>@endif
                         {{-- <li class="s-model__list-item">Bust</li> --}}
-                        <li class="s-model__list-item">Waist</li>
+                        @if($data['profile']->waist)<li class="s-model__list-item">Waist</li>@endif
                         {{-- <li class="s-model__list-item">Hips</li> --}}
                         {{-- <li class="s-model__list-item">Dress</li> --}}
-                        <li class="s-model__list-item">Shoe </li>
-                        <li class="s-model__list-item">Hair colour</li>
-                        <li class="s-model__list-item">Eyes</li>
+                       @if($data['profile']->shoes) <li class="s-model__list-item">Shoe </li>@endif
+                        @if($data['profile']->hairs)<li class="s-model__list-item">Hair colour</li>@endif
+                        @if($data['profile']->eyes)<li class="s-model__list-item">Eyes</li>@endif
                      </ul>
                      <ul class="s-model__list s-model__list_r">
-                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->feet ? \Str::finish($data['profile']->feet, "'") : ''}} {{$data['profile']->height ? \Str::finish($data['profile']->height,"''") : ''}}</li>
+                        @if($data['profile']->feet)
+                        <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->feet ? \Str::finish($data['profile']->feet, "'") : ''}} @if($data['profile']->height) {{$data['profile']->height ? \Str::finish($data['profile']->height,"''") : ''}} @endif </li>
+                        @endif
                         {{-- <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->bust ?? 'Nil'}}</li> --}}
+                        @if($data['profile']->waist)
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->waist ?? 'Nil'}}</li>
+                        @endif
+                        
                         {{-- <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->hips ?? 'Nil'}}</li> --}}
                         {{-- <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->dress ?? 'Nil'}}</li> --}}
+                        @if($data['profile']->shoes)
                         <li class="s-model__list-item s-model__list-item_r">{{$data['profile']->shoes ?? 'Nil'}}</li>
+                        @endif
+                        @if($data['profile']->hairs)
                         <li class="s-model__list-item s-model__list-item_r">{{\Str::ucfirst($data['profile']->hairs ?? 'Nil')}}</li>
+                        @endif
+                        @if($data['profile']->eyes)
                         <li class="s-model__list-item s-model__list-item_r">{{\Str::ucfirst($data['profile']->eyes ?? 'Nil')}}</li>
+                        @endif
                      </ul>
                   </div>
 
