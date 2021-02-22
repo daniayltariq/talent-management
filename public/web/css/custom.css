@@ -474,4 +474,7 @@ input[type=number] {
     height: 100%;
     background: #fff;
     z-index: 99;
+
+.line {
+   background-color: transparent !important;
 }
