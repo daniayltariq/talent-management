@@ -87,7 +87,7 @@
 
 </body>
 
-	
+	@yield('loader')
 	@include('web.partials.footer') 
  	@yield('scripts') 
 
