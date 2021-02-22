@@ -102,16 +102,16 @@ jQuery.fn.extend({
             items = repeater.find(".items");
             if (items.length > 0) {
                 var child = repeater.children(".items").eq(items.length - 1);
-                console.log("rows: " + items.length);
-                console.log(child);
+                /* console.log("rows: " + items.length);
+                console.log(child); */
                 var row_inputs = $(child).find('input,select,textarea');
-                console.log(row_inputs);
+                /* console.log(row_inputs); */
 
                 var emptyFields = row_inputs.filter(function () {
                     return $(this).val() === "";
                 }).length;
 
-                console.log(emptyFields);
+                /* console.log(emptyFields); */
 
                 if (emptyFields === 0) {
                     addItem($(items).last(), key);
