@@ -767,6 +767,9 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     
 @endsection
 @section('scripts')
+<script>
+    window.currentStep = 0;
+</script>
 <script src="{{ asset('plugins/steps/js/jquery.steps.js') }}"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="{{ asset('plugins/steps/js/main.js') }}"></script>
@@ -990,6 +993,10 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     })
 
     $(document).on('click','#finish_btn',function(){
+       
+        if($('#wizard-p-'+window.currentStep+' .repeater-add-btn:not(.btn-danger)')){
+            $('#wizard-p-'+window.currentStep+' .repeater-add-btn:not(.btn-danger)').click();
+        }
         $('a[href="#next"]').click();
         window.location='{{route('account.dashboard')}}';
     })
