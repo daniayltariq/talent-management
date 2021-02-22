@@ -866,6 +866,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             $('[name="date_[month]"]').attr('name',"g_date_[month]");
             $('[name="date_[year]"]').attr('name',"g_date_[year]");
 
+            var maxDate = null, minDate = null,days=100;
             $("[name='day_hidden']").dropdownDatepicker({
                 /* defaultDate: "{{ auth()->user()->dob ?? ''}}", */
                 maxDate: max_limit,
@@ -875,9 +876,21 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 dropdownClass:'date-field form-control',
                 displayFormat: 'mdy',
                 monthFormat: 'short',
+
+                onChange: function(day, month, year){
+                    if(day!=null && month!=null && year!=null){
+                    console.log(day, month, year);
+                        minDate = year+'-'+month+'-'+day;
+                        minDate = new Date(minDate);
+                        minDate.setDate(minDate.getDate());
+                        minDate = minDate.getFullYear()+'-'+(minDate.getMonth()+1)+'-'+minDate.getDate();
+                        maxDate = new Date(minDate);
+                        maxDate.setDate(maxDate.getDate()+days);
+                        maxDate = maxDate.getFullYear()+'-'+(maxDate.getMonth()+1)+'-'+maxDate.getDate();
+                    }
+                }
             });
 
-            
         })
     </script>
 

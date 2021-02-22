@@ -44,6 +44,40 @@ $(function () {
             form = $('#wizard-p-' + currentIndex + ' >form');
             form.validate().settings.ignore = ":disabled,:hidden";
 
+            repeater = $('#wizard-p-'+currentIndex);
+            items = $('#wizard-p-'+currentIndex).find(".items");
+            var triggerAddBtn = false;
+            if (items.length > 0) {
+                var child = items.eq(items.length - 1);
+  
+                var row_inputs = $(child).find('input,select,textarea');
+                /* console.log(row_inputs); */
+                var emptyFields = row_inputs.filter(function () {
+                    return $(this).val() === "";
+                }).length;
+
+                /* console.log(emptyFields); */
+
+                if (emptyFields === 0) {
+                    triggerAddBtn = true;
+                } else {
+                    if(emptyFields < row_inputs.length){
+                        toastr.error('input can not be empty');
+                        return false;
+                    }
+                    
+                }
+
+                /* row_inputs.each(function (index, el) {
+                    if ($(el).attr('value') == '') {
+                        toastr.error('input can not be empty');
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }); */
+            }
+            nextCallback(triggerAddBtn,currentIndex);
             return form.valid();
         },
         labels: {

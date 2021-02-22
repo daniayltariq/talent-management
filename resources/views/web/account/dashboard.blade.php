@@ -375,6 +375,10 @@
                             <i class="fa fa-icons mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">My Social Media Links</span></a>
                         @endif
+                        <a class="nav-link mb-3 p-3 shadow" href="{{route('model',$data['profile']->custom_link ?? $data['profile']->id)}}" target="_blank" {{-- id="v-resume-wizard-tab" data-toggle="pill" href="#v-resume-wizard" role="tab" aria-controls="v-resume-wizard" aria-selected="false" --}}>
+                            <i class="fa fa-star mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">My Profile</span>
+                        </a>
                         <a class="nav-link mb-3 p-3 shadow" id="v-resume-tab" data-toggle="pill" href="#v-resume" role="tab" aria-controls="v-resume" aria-selected="false">
                             <i class="fa fa-star mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">My Resume</span></a>
@@ -572,6 +576,9 @@
                                 @include('components.videos',['data'=>$data])
                                 
                             </div>
+                        </div>
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-profile-wizard" role="tabpanel" aria-labelledby="v-profile-wizard-tab">
+                            Loading...
                         </div>
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-resume" role="tabpanel" aria-labelledby="v-resume-tab">
                             @include('components.resume',['profile'=>$data['profile']])
@@ -896,7 +903,7 @@
             maxFiles:"{{$data['plan']->pictures}}"-"{{count($data['images'])}}",
             maxFilesize: 12, // MB
             acceptedFiles: "image/*", /* ,.mp4,.mkv,.mov,.wmv,audio */
-            dictDefaultMessage:"Drop Your Files here.",
+            dictDefaultMessage:"Drop Your Files here.<br> i.e .jpg .jpeg .png",
             /* autoProcessQueue: false, */
             accept: function(file, done) {
                 console.log("uploaded");

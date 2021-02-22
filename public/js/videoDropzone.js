@@ -5,7 +5,7 @@ function render_videodropzone(store_url) {
         url: store_url,
         maxFilesize: 12, // MB
         acceptedFiles: "video/mp4,video/mkv,video/mov,video/wmv",
-        dictDefaultMessage: "Drop Your Files here.",
+        dictDefaultMessage: "Drag & Drop Your File(s) Here or click to upload.<br> i.e .mp4 .mkv .wmv",
         accept: function (file, done) {
             console.log("uploaded");
             done();
