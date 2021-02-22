@@ -12,26 +12,50 @@ class FPService{
 
 	public static function trackSigup($email,$ref_id){
 		
-		$response = Http::withHeaders([
-			'x-api-key' => self::$api_key
-		])->post(self::$base_url_api.'/track/signup', [
-		    'email' => $email,
-		    'ref_id' => $ref_id,
-		]);
+		try {
+			$response = Http::withHeaders([
+				'x-api-key' => self::$api_key
+			])->post(self::$base_url_api.'/track/signup', [
+			    'email' => $email,
+			    'ref_id' => $ref_id,
+			]);
+			
+			$response =  $response->body();
 
-		return $response->body();
+			if(is_array($response) && array_key_exists('id', $response)){
+				return $response;
+			}
+		} catch (Exception $e) {
+			
+		}
+
+		return false;
+		
 	}
 
 	public static function createPromotor($email,$ref_id = null){
 		
-		$response = Http::withHeaders([
-			'x-api-key' => self::$api_key
-		])->post(self::$base_url_api.'/promoters/create', [
-		    'email' => $email,
-		    'ref_id' => $ref_id,
-		]);
+		
 
-		return $response;
+		try {
+			$response = Http::withHeaders([
+				'x-api-key' => self::$api_key
+			])->post(self::$base_url_api.'/promoters/create', [
+			    'email' => $email,
+			    'ref_id' => $ref_id,
+			]);
+
+			$response =  $response->body();
+
+			if(is_array($response) && array_key_exists('id', $response)){
+				return $response;
+			}
+		} catch (Exception $e) {
+			
+		}
+
+		return false;
+ 
 	}
 
 }
