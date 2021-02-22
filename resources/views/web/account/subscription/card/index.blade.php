@@ -163,6 +163,12 @@
     .popup-inner{
       max-width: 744px;
     }
+
+    .td-color{
+      color: #df691a;
+      border-bottom: 1px solid;
+      cursor: pointer;
+    }
     /*  end otp modal */
     </style>
 @endsection
@@ -235,8 +241,8 @@
           <div class="row">
               <div class="col-md-12">
                 <div class="prompt">
-                  A One-Time verification code was sent to <span><b id="otp_mail"></b></span>. <br>
-                  Please enter the One-Time verification code to validate and activate your account.
+                  A verification code was sent to <span><b id="otp_mail"></b></span>. <br>
+                  Please enter the verification code to validate and activate your account.
                 </div>
                 <div class="success_otp" id="success_otp">
                   Please wait while we build your account.
@@ -251,6 +257,7 @@
                   <input type="text" id="digit-6" name="digit-6" data-previous="digit-5" />
                   <br>
                   <p class="otp__tries">Please enter the 6 digit code here. <br>There is a limit of <span id="otp_tries">3</span> attempts.</p>
+                  <p>Not recieved ?<a class="td-color" id="resend_email" onclick="resendOtp()">Resend email</a></p>
                 </form>
               </div>
           </div>
@@ -430,6 +437,8 @@
 
 {{-- Send OTP --}}
 <script>
+  var otpSent=false;
+
   function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -446,6 +455,13 @@
             toastr.success(res.message)
             $('#otp_mail').text($('#card-holder-email').val());
             $('[pd-popup-open]').click();
+
+            if (otpSent) {
+              $(".digit-group input[type=text]").each(function() {
+                $(this).prop('disabled',false);
+                $(this).removeClass('bg-disabled');
+              });
+            }
         } else if(res.status=='error') {
             toastr.error(res.message)
         }
@@ -495,4 +511,19 @@
   }
 </script>
 {{-- End Verify OTP --}}
+
+{{-- resend OTP --}}
+<script>
+  function resendOtp()
+  {
+    $(".digit-group input[type=text]").each(function() {
+      $(this).prop('disabled',true);
+      $(this).addClass('bg-disabled');
+    });
+    otpSent=true;
+    sendOtpOnEmail();
+    
+  }
+</script>
+{{-- End R esend OTP --}}
 @endsection

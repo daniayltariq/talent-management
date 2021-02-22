@@ -5,7 +5,7 @@ function render_dropzone(store_url) {
         url: store_url,
         maxFilesize: 12, // MB
         acceptedFiles: "image/jpg,image/jpeg,image/png",
-        dictDefaultMessage: "Drop Your Files here.",
+        dictDefaultMessage: "Drop Your Files here.<br> i.e .jpg .jpeg .png",
         /* maxFiles: function (file, done) {
             if (validImageTypes.includes(file.type)) {
                 done("No more images");
