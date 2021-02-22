@@ -78,10 +78,10 @@
                         <span class="kt-menu__arrow"></span>
                         <ul class="kt-menu__subnav">
                           
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Topic listing</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Topics </span></a></li>
                             <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.topic.create') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create a topic</span></a></li>
                             <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.category.create')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Create Category</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.category.index')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Category List</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{route('backend.category.index')}}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Categories</span></a></li>
                         </ul>
                     </div>
                 </li>
