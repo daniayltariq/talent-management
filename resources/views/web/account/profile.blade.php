@@ -973,7 +973,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                     console.log(res);
                     if (res.alert_type=='success') {
                         toastr.success(res.message);
-                        window.location.reload();
+                        window.location='{{route('account.dashboard')}}';
                     } else {
                         toastr.error(res.message);
                     }
