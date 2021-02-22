@@ -30,12 +30,12 @@
 		<div class="kt-portlet__head">
 			<div class="kt-portlet__head-label">
 				<h3 class="kt-portlet__head-title">
-					Post listings
+					Topics
 				</h3>
 				
 			</div>
 			<div class="kt-portlet__head-label" style="float: right">
-				<a href="{{ route('backend.topic.create') }}" style="background-color: #0abb87;" class="btn btn-success btn-xs"><i class='fa fa-plus'></i> Create a Post</a>
+				<a href="{{ route('backend.topic.create') }}" style="background-color: #0abb87;" class="btn btn-success btn-xs"><i class='fa fa-plus'></i> Create Topic</a>
 			</div>
 		</div>
 		<div class="kt-portlet__body">
@@ -47,7 +47,7 @@
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-								   <th>blog Title</th>
+								   <th>Topic Title</th>
 								   {{-- <th>blog Image</th> --}}
 								   <th>Categories</th>
 								   {{-- <th>Details</th> --}}

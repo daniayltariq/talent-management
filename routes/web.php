@@ -66,6 +66,18 @@ Route::get('/about', function () {
     return view('web.pages.about-us');
 })->name('about-us');
 
+Route::get('/become-provider', function () {
+    return view('web.pages.become-provider');
+})->name('become-provider');
+
+Route::get('/become-an-affiliate', function () {
+    return view('web.pages.become-an-affiliate');
+})->name('become-an-affiliate');
+
+Route::get('/welcome-to-the-talent-depot', function () {
+    return view('web.pages.welcome-to-the-talent-depot');
+})->name('welcome-to-the-talent-depot');
+
 
 Route::get('/forum', function () {
     return view('web.pages.forum');
