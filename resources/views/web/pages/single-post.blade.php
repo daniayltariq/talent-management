@@ -271,7 +271,7 @@
 						<div class="stage">
 							<a href="#" id="read-more-btn" data-skipcount="{{count($comments)}}">Read More <i class="fas fa-arrow-down"></i></a>
 						</div>
-   						@if(\Auth::check() && (\Auth::user()->getActivePlan() && (\Auth::user()->getActivePlan()->community_access==1 && \Auth::user()->getActivePlan()->community_access_perm=='R/W') )) )
+   						@if(\Auth::check() && (\Auth::user()->getActivePlan() && (\Auth::user()->getActivePlan()->community_access==1 && \Auth::user()->getActivePlan()->community_access_perm=='R/W') ))
 	   						<div class="comment__respond">
 		   						<h3 id="comment-form-heading">Leave your comment</h3>
 
