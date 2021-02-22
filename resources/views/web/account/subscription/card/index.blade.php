@@ -125,6 +125,13 @@
       padding: 1.5rem;
       color: #404040;
     }
+
+    .success_otp{
+      margin-bottom: 20px;
+      font-size: 20px;
+      padding: 1.5rem;
+      color: #df691a;
+    }
  
     .bg-disabled{
       background: #eae7e7 !important;
@@ -231,7 +238,9 @@
                   A One-Time verification code was sent to <span><b id="otp_mail"></b></span>. <br>
                   Please enter the One-Time verification code to validate and activate your account.
                 </div>
-                
+                <div class="success_otp" id="success_otp">
+                  Please wait while we build your account.
+                </div>
                 <form method="get" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
                   <input type="text" id="digit-1" name="digit-1" data-next="digit-2" />
                   <input type="text" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" />
@@ -254,6 +263,11 @@
 @endsection
 @section('scripts')
 <script src="https://js.stripe.com/v3/"></script>
+<script>
+  $(document).ready(function(){
+    $('#success_otp').hide();
+  })
+</script>
 <script>
     // Create a Stripe client.
     var stripe = Stripe('{{config('app.STRIPE_KEY')}}');
@@ -463,6 +477,7 @@
     }, function( res ) {
       if (res.status=='success') {
         console.log('form submit');
+        $('#success_otp').show();
         form.submit();
       } else if(res.status=='error') {
         toastr.error(res.message)
