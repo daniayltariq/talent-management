@@ -8,6 +8,10 @@
         border-radius: 17px;
         padding: 3px 10px;
      }
+
+     .p_event_none{
+         pointer-events: none !important;
+     }
  </style>
 @endsection
 
@@ -60,7 +64,7 @@
                                                     <img class="kt-widget7__img" src="{{asset($item->image ?? '')}}" alt="">
                                                 </div>
                                                 <div class="kt-widget5__section">
-                                                    <a href="#" class="kt-widget5__title">
+                                                    <a href="{{ route('single-post',['slug' => $item->slug]) }}" target="_blank" class="kt-widget5__title">
                                                         {{ $item->title ?? '' }}
                                                     </a>
                                                     <div class="kt-widget5__desc">
@@ -98,7 +102,7 @@
                                                     <img class="kt-widget7__img" src="{{asset($item->image ?? '')}}" alt="">
                                                 </div>
                                                 <div class="kt-widget5__section">
-                                                    <a href="#" class="kt-widget5__title">
+                                                    <a href="{{ route('single-post',['slug' => $item->slug]) }}" target="_blank" class="kt-widget5__title">
                                                         {{ $item->title ?? '' }}
                                                     </a>
                                                     <div class="kt-widget5__desc d-flex">
@@ -135,7 +139,7 @@
                                                     <img class="kt-widget7__img" src="{{asset($item->image ?? '')}}" alt="">
                                                 </div>
                                                 <div class="kt-widget5__section">
-                                                    <a href="#" class="kt-widget5__title">
+                                                    <a href="{{ route('single-post',['slug' => $item->slug]) }}" target="_blank" class="kt-widget5__title">
                                                         {{ $item->title ?? '' }}
                                                     </a>
                                                     <div class="kt-widget5__desc">
@@ -202,15 +206,15 @@
                                                 <img src="{{ $item->profile()->exists() && !is_null($item->profile->profile_img) && file_exists(public_path().'/storage/uploads/profile/'.$item->profile->profile_img) ? ('storage/uploads/profile/'.$item->profile->profile_img) :'web/img/user.png' }}" alt="">   
                                             </div>
                                             <div class="kt-widget4__info">
-                                                <a href="#" class="kt-widget4__username">
+                                                <a href="{{ $item->hasRole('candidate') && $item->profile()->exists() ? route('model',$item->profile->custom_link ?? $item->profile->id) : '#' }}" class="kt-widget4__username">
                                                 {{$item->f_name ?? ''}} {{$item->l_name ?? ''}}
                                                 </a>
                                                 <p class="kt-widget4__text">
-                                                    {{$item->gender ?? ''}}
+                                                    {{$item->gender ?? $item->custom_gender ?? ''}}
                                                 </p>
                                             </div>
                                             
-                                            <a href="#" class="btn btn-sm btn-label-{{$item->roles[0]->alias=='provider' ? 'brand' : 'success'}} btn-bold">
+                                            <a href="#" class="btn btn-sm btn-label-{{$item->roles[0]->alias=='provider' ? 'brand' : 'success'}} btn-bold p_event_none">
                                                 @foreach ($item->roles as $role)
                                                     {{ $role->alias ?? '' }}
                                                     <br>

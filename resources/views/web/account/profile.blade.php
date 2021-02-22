@@ -34,6 +34,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: 100% 15%;
 }
 
 .input-group-bs{
@@ -972,7 +973,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                     console.log(res);
                     if (res.alert_type=='success') {
                         toastr.success(res.message);
-                        window.location.reload();
+                        window.location='{{route('account.dashboard')}}';
                     } else {
                         toastr.error(res.message);
                     }
