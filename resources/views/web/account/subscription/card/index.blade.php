@@ -455,7 +455,7 @@
             toastr.success(res.message)
             $('#otp_mail').text($('#card-holder-email').val());
             $('[pd-popup-open]').click();
-
+            $('#otp_tries').text(3);
             if (otpSent) {
               $(".digit-group input[type=text]").each(function() {
                 $(this).prop('disabled',false);
@@ -502,6 +502,7 @@
         }
         
         $(".digit-group input[type=text]").each(function() {
+            $(this).val('');
             $(this).prop('disabled',false);
             $(this).removeClass('bg-disabled');
         });
@@ -517,6 +518,7 @@
   function resendOtp()
   {
     $(".digit-group input[type=text]").each(function() {
+      $(this).val('');
       $(this).prop('disabled',true);
       $(this).addClass('bg-disabled');
     });
