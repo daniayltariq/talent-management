@@ -7645,28 +7645,31 @@ button.close {
 
 
         function generatePdf() {
-
-            var p2 = new Promise(function (resolve, reject) {
-                    
-                    resolve(1);
+           
+            html2pdf(document.body, {
+                pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+                filename:  'Resume.pdf',
             });
-
-            p2.then(function (value) {
-                html2pdf(document.body, {
-                    pagebreak: { mode: 'avoid-all' , before: '#table-break', },
-                    filename:  'Resume.pdf',
-                });
-            }).then(function (value) {
-                window.close();
-            });
-
-
+            myResolve(1);
+        
         }
 
 
-        $(document).ready(function(){
-            generatePdf()
+
+        let myPromise = new Promise(function(myResolve, myReject) {
+            generatePdf();
+
+            myResolve(1); // when successful
+            myReject();  // when error
         });
+
+
+        myPromise.then(
+          function(value) { window.close(); },
+          function(error) { /* code if some error */ }
+        );
+        
+
 
     </script>
 </body>
