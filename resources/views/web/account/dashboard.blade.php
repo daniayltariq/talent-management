@@ -456,8 +456,11 @@
                                             <option value="custom" {{ old('gender',auth()->user()->gender)=='custom' ?'selected':''}}>Custom</option>
 
                                         </select>
-                                        <input @if(auth()->user()->gender == 'custom') style="display: block;" @endif class="form-control" id="custom_gender" type="text" name="custom_gender" value="{{old('custom_gender',auth()->user()->custom_gender)}}">
+                                        <input @if(old('gender',auth()->user()->gender) == 'custom' ) style="display: block;" @endif class="form-control" id="custom_gender" type="text" name="custom_gender" value="{{old('custom_gender',auth()->user()->custom_gender)}}">
                                         @error('gender')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                        @error('custom_gender')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>

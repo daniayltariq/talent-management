@@ -52,7 +52,7 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {
-        /* dd($request->all()); */
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'f_name' => ['required', 'string'],
             'l_name' => ['required', 'string'],
@@ -60,7 +60,7 @@ class DashboardController extends Controller
             'email' => ['required', 'email'],
             'password' => ['nullable','string', 'min:8','confirmed'],
             'gender' => ['required','string'],
-            'custom_gender' => ['required_if:gender,=,custom','string'],
+            'custom_gender' => ['required_if:gender,=,custom'],
         ]);
         
         if ($validator->fails()) {
