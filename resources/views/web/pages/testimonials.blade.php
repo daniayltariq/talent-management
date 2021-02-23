@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@section('title', 'Testimonials')
 @section('styles')
 <style type="text/css">
 	.slick-slide img {

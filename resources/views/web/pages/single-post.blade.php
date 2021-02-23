@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@section('title', $data->title?? '' )
 @section('styles')
 	<style>
 		.stage {

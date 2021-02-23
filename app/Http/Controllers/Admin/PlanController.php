@@ -20,7 +20,7 @@ class PlanController extends Controller
     public function index(Request $request)
     {
         /* dd(123); */
-        $plans=Plan::all();
+        $plans=Plan::orderBy('cost')->get();
         return view('backend.plan.index',compact('plans'));
     }
 
