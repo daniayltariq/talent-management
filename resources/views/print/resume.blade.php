@@ -7644,18 +7644,20 @@ button.close {
         // });
 
 
+        function generatePdf() {        
+            return $q(function (resolve, reject) {
+                        html2pdf(document.body, {
+                            pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+                            filename:  'Resume.pdf',
+                        });
+                        resolve(1);
+                    })
+        }
 
-        $(document).ready(function(){
-            html2pdf(document.body, {
-                pagebreak: { mode: 'avoid-all' , before: '#table-break', },
-                filename:  'Resume.pdf',
-            });                 
+
+        generatePdf().then(function(result){
+            window.close();
         });
-
-
-        setTimeout(function() {
-            // window.close();
-        },1000);
 
     </script>
 </body>
