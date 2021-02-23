@@ -47,6 +47,10 @@
 h3{
     font-family: 'Source Sans Pro' !important;
 }
+
+.p-1{
+	padding: 1rem;
+}
 </style>
 @endsection
 
@@ -173,4 +177,22 @@ h3{
 
 
 <!-- Blog Section End -->
+@endsection
+
+@section('scripts')
+	<script>
+		$('.del_pl').on('click',function(e){
+			var that=$(this);
+			e.preventDefault();
+			toastr.success("<button type='button' id='confirmationRevertYes' class='btn clear p-1'>Yes</button>",'delete item?',
+				{
+					onShown: function (toast) {
+						$("#confirmationRevertYes").click(function(){
+							window.location.href=that.attr('href');
+							console.log('clicked yes');
+						});
+					}
+				});
+		})
+	</script>
 @endsection
