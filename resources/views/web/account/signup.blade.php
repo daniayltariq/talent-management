@@ -183,7 +183,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             <div class="row">
                 <div class="title__wrapp">
                     {{-- <div class="page__subtitle title__grey">Apply</div> --}}
-                    <h1 class="page__title">Work with us</h1>
+                    <h1 class="page__title">New Membership</h1>
                 </div>
             </div>
         </div>
@@ -193,7 +193,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     <section class="section apply">
         <div class="container">
             <div class="row">
-                <h3 class="text__quote centered">New membership</h3>
+                {{-- <h3 class="text__quote centered">New membership</h3> --}}
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
 
                     @if(count($errors)>0)

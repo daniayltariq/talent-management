@@ -416,29 +416,32 @@ li.testimonal__list-item.slick-slide.slick-active:nth-child(1) {
     /*display: none !important;*/
 }
 
-.middle-testimonial .border-1 {
+/*.middle-testimonial .border-1 {
     min-height: 410px;
     padding: 0 42px;
-}
-.middle-testimonial .single-testimonial {
+}*/
+/*.middle-testimonial .single-testimonial {
     transition: padding 0.5s;
     padding-top: 42px;
-   
+    transform: translateY(-42px);
 }
-
+*/
 .border-1 {
     border: 1px solid gainsboro;
     min-height: 320px;
     background:#ffffff;
 }
 .single-testimonial {
-    padding-top: 40px !important;
+    /*padding-top: 40px !important;*/
+     /*transform: translateY(-42px);*/
+      /*padding: 30px;*/
+       padding-top: 38px;
 }
 
 
 .slick-active:not(.middle-testimonial) .single-testimonial{
-    padding: 30px;
-    margin-top: 45px;
+   
+    /*margin-top: 45px;*/
 }
 
 

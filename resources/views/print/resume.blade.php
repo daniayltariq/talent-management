@@ -7623,6 +7623,9 @@ button.close {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js" integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg==" crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+    
     <script>
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
@@ -7631,13 +7634,18 @@ button.close {
 
         today = mm + '/' + dd + '/' + yyyy;
 
-        $("#resume_div").printThis({
-            importCSS: true,            // import parent page css
-            importStyle: true,         // import style tags
-            printDelay: 2000,            // variable print delay
-            /* header: "<h4 style='float:right'>"+today+"</h4>",               // prefix to html
-            footer: "<h4 style='position: absolute; bottom: 5px;width: 100%;text-align:center'>The Talent Depot</h4>",   */             // postfix to html
+        
+
+        $(document).ready(function(){
+         setTimeout(
+             function() {
+                 html2pdf(document.body).set({
+                   pagebreak: { mode: 'avoid-all' , before: '#table-break', }
+                 });
+             },
+         500);
         });
+
     </script>
 </body>
 </html>

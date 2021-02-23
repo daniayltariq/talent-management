@@ -11,7 +11,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700,900' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700' rel='stylesheet' type='text/css'>
 
-<link rel="icon" href="{{ asset('web/img/logo/TD_only.svg') }}" type="image/gif" sizes="16x16">
+<link rel="icon" href="{{ asset('web/img/logo/favicon.png') }}" type="image/gif" sizes="16x16">
 <link rel="stylesheet" href="{{ asset('web/libs/bootstrap/css/bootstrap.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('web/libs/animate/animate.css') }}" />
 <link rel="stylesheet" href="{{ asset('web/libs/icons/materialdesignicons.css') }}" type="text/css" />
