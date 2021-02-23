@@ -2055,7 +2055,7 @@ code {
   padding: 2px 4px;
   font-size: 90%;
   color: #c7254e;
-  background-color: #f9f2f4;
+  background-color: #ffffff;
   border-radius: 4px;
 }
 kbd {
@@ -7650,7 +7650,7 @@ button.close {
         });
 
         setTimeout(function() {
-            window.close();
+            // window.close();
         },1000);
 
     </script>
