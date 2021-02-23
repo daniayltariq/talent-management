@@ -258,7 +258,7 @@ label{
                                             <div class="form-holder">
                                                 <label class="font-15">Eyes</label>
                                                 <select name="eyes" class="form-control" placeholder="{{strtoupper('Eye Color')}}" id="" required>
-                                                    <option>Select Eye Color</option>
+                                                    <option value="">Select Eye Color</option>
                                                     <option value="brown" {{isset($profile->eyes) && $profile->eyes=="brown" ? 'selected' : ''}}>Brown Eyes</option>
                                                     <option value="blue" {{isset($profile->eyes) && $profile->eyes=="blue" ? 'selected' : ''}}>Blue Eyes </option>
                                                     <option value="hazel" {{isset($profile->eyes) && $profile->eyes=="hazel" ? 'selected' : ''}}>Hazel Eyes </option>
@@ -272,7 +272,7 @@ label{
                                             <div class="form-holder ">
                                                 <label class="font-15">Hair</label>
                                                 <select name="hairs" class="form-control" placeholder="{{strtoupper('Hair Color')}}" id="" required>
-                                                    <option>Select Hair Color</option>
+                                                    <option value="">Select Hair Color</option>
                                                     <option value="black" {{isset($profile->hairs) && $profile->hairs=="black" ? 'selected' : ''}}>Black hair</option>
                                                     <option value="brown" {{isset($profile->hairs) && $profile->hairs=="brown" ? 'selected' : ''}}>Brown hair</option>
                                                     <option value="red" {{isset($profile->hairs) && $profile->hairs=="red" ? 'selected' : ''}}>Red hair</option>
@@ -1057,9 +1057,9 @@ label{
 
 <script>
     $(document).ready(function(){
-        $('.actions ul').append("<li class='mr-auto' id='finish_btn'><a href='javascript:;'>Finish</a></li>");
-        $('a[href="#next"]').parent().addClass('mx-auto');
-        $('a[href="#finish"]').parent().addClass('mx-auto');
+        $('.actions ul').append("<li class='ml-auto' id='finish_btn'><a href='javascript:;'>Finish</a></li>");
+        $('a[href="#next"]').parent().addClass('ml-auto');
+        $('a[href="#finish"]').parent().addClass('ml-auto');
     })
 
     $(document).on('click','#finish_btn',function(){
