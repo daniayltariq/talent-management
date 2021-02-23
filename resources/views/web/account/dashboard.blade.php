@@ -317,7 +317,7 @@
     }
 
     .dz-error-mark > svg g g{
-        fill: #e77929 !important;
+        fill: #a92222 !important;
     }
 </style>
 
