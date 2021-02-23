@@ -842,8 +842,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
        $("#Television").createRepeater({showItemsToDefault: true,startIndex:$("#Television").data('start')});
        $("#Training").createRepeater({showItemsToDefault: true,startIndex:$("#Training").data('start')});
        /* $('.repeater-add-btn').trigger('click'); */
-
-
+        
        $('.repeater-add-btn').click(function(){
             $(this).siblings('.btn').hide();
         });
@@ -994,7 +993,9 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
 <script>
     $(document).ready(function(){
-        $('.actions ul').append("<li class='ml-auto' id='finish_btn'><a href='javascript:;'>Finish</a></li>");
+        $('.actions ul').append("<li class='mr-auto' id='finish_btn'><a href='javascript:;'>Finish</a></li>");
+        $('a[href="#next"]').parent().addClass('mx-auto');
+        $('a[href="#finish"]').parent().addClass('mx-auto');
     })
 
     $(document).on('click','#finish_btn',function(){

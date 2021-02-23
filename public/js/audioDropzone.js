@@ -4,8 +4,8 @@ function render_audiodropzone(store_url) {
         '#audioDropzone', {
         url: store_url,
         maxFilesize: 12, // MB
-        acceptedFiles: 'audio/mp3,audio/mpeg,audio/wav',
-        dictDefaultMessage: "Drag & Drop Your File(s) Here or click to upload.<br> i.e .mp3 .mpeg .wav",
+        acceptedFiles: '.mp3,.wma,.wav',
+        dictDefaultMessage: "Drag & Drop Your File(s) Here or click to upload.<br> i.e .mp3 .wav",
         /* autoProcessQueue: false, */
         accept: function (file, done) {
             console.log("uploaded");
