@@ -488,7 +488,7 @@
     
         .single-talent {
             padding: 40px;
-            background: #f7f7f7;
+            background: #ffffff;
         }
     
         .profile-sec {
@@ -2055,7 +2055,7 @@ code {
   padding: 2px 4px;
   font-size: 90%;
   color: #c7254e;
-  background-color: #f9f2f4;
+  background-color: #ffffff;
   border-radius: 4px;
 }
 kbd {
@@ -7268,7 +7268,7 @@ button.close {
                 <div class="blog__posts col-md-12">
                     <div class="blog__list">
                         <div class="row ">
-                            <div class="col-sm-10 col-centered">
+                            <div class="col-sm-12 col-centered">
                                 <div class="single-talent mb-5">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -7635,16 +7635,27 @@ button.close {
         today = mm + '/' + dd + '/' + yyyy;
 
         
+        // $("#resume_div").printThis({
+        //     importCSS: true,            // import parent page css
+        //     importStyle: true,         // import style tags
+        //     printDelay: 2000,            // variable print delay
+        //     header: "<h4 style='float:right'>"+today+"</h4>",               // prefix to html
+        //     footer: "<h4 style='position: absolute; bottom: 5px;width: 100%;text-align:center'>The Talent Depot</h4>",                // postfix to html
+        // });
+
+
 
         $(document).ready(function(){
-         setTimeout(
-             function() {
-                 html2pdf(document.body).set({
-                   pagebreak: { mode: 'avoid-all' , before: '#table-break', }
-                 });
-             },
-         500);
+            html2pdf(document.body, {
+                pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+                filename:  'Resume.pdf',
+            });                 
         });
+
+
+        setTimeout(function() {
+            // window.close();
+        },1000);
 
     </script>
 </body>
