@@ -406,27 +406,27 @@
       {{-- Vedio Elements --}}
       @if(count($data['video']) > 0)
       <div>
-        <div class="row">
-         <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
-            <div class="row">
-               <div id="model-slider" class="s-model__photos col-md-6">
-                  <h2 class="s-model__name">
-                     <span class="line"></span>Videos
-                  </h2>
-                  <div class="sp-thumbnails">
-                  @forelse ($data['video'] as $vid)
-                    <video width="320" height="240" controls>
-                      <source src="{{ asset('storage/uploads/uploadData/' . $vid->file ?? '') }}" type="video/mp4">
-                    </video>
-                  @empty
-                    <h4 class="text-center">No videos found</h4>
-                  @endforelse
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-        <br>
+         <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
+               <div class="row">
+                  <div {{-- id="model-slider" --}} class="s-model__photos col-md-6">
+                     <h2 class="s-model__name">
+                        <span class="line"></span>Videos
+                     </h2>
+                     <div class="sp-thumbnails">
+                        @forelse ($data['video'] as $vid)
+                        <video width="320" height="240" controls>
+                           <source src="{{ asset('storage/uploads/uploadData/' . $vid->file ?? '') }}" type="video/mp4">
+                        </video>
+                        @empty
+                        <h4 class="text-center">No videos found</h4>
+                        @endforelse
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <br>
       </div>
       @endif
       {{-- Voiceovers --}}
