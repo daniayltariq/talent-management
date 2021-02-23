@@ -7650,7 +7650,7 @@ button.close {
             html2pdf(document.body, {
                 pagebreak: { mode: 'avoid-all' , before: '#table-break', },
                 filename:  'Resume.pdf',
-            })+;                 
+            });                 
         });
 
 
