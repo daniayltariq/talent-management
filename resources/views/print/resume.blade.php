@@ -7644,31 +7644,19 @@ button.close {
         // });
 
 
-        function generatePdf() {
-           
+
+
+        $(document).ready(function(){
             html2pdf(document.body, {
                 pagebreak: { mode: 'avoid-all' , before: '#table-break', },
                 filename:  'Resume.pdf',
-            });
-        
-        }
-
-
-
-        let myPromise = new Promise(function(myResolve, myReject) {
-            generatePdf();
-
-            myResolve(); // when successful
-            myReject();  // when error
+            })+;                 
         });
 
 
-        myPromise.then(
-            function() {  },
-            function() { /* code if some error */ }
-        );
-        
-
+        setTimeout(function() {
+            window.close();
+        },1000);
 
     </script>
 </body>
