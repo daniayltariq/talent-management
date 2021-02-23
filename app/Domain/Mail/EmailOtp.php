@@ -30,6 +30,6 @@ class EmailOtp extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('Your Talent Link verification code.')->markdown('emails.otp');
+        return $this->subject('Your Talent Link verification code')->markdown('emails.otp');
     }
 }

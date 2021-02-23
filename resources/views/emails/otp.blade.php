@@ -411,7 +411,7 @@
               <tr>
                 <td>
                   <h4 style="color: #000000">Dear Talent,</h4>
-                  <p style="color: #000000">Your One-Time verification code is <b>{{$data['otp'] ?? ''}}</b></p>
+                  <p style="color: #000000">Your One-Time verification code is <b>{{$data['otp'] ?? ''}}</b>.</p>
                   <p style="color: #000000">Return to the Talent Link verification page and enter <b>{{$data['otp'] ?? ''}}</b> into the 6 boxes.</p>
                 </td>
               </tr>

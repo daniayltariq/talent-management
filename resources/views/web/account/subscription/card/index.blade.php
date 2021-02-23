@@ -258,7 +258,7 @@
                   <input type="text" id="digit-6" name="digit-6" data-previous="digit-5" />
                   <br>
                   <p class="otp__tries">Please enter the 6 digit code here. <br>There is a limit of <span id="otp_tries">3</span> attempts.</p>
-                  <p>Not recieved ?<a class="td-color" id="resend_email" onclick="resendOtp()">Resend email</a></p>
+                  <p>Not recieved? <a class="td-color" id="resend_email" onclick="resendOtp()">Resend email.</a></p>
                 </form>
               </div>
           </div>
