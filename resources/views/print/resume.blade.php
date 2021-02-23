@@ -7268,7 +7268,7 @@ button.close {
                 <div class="blog__posts col-md-12">
                     <div class="blog__list">
                         <div class="row ">
-                            <div class="col-sm-10 col-centered">
+                            <div class="col-sm-12 col-centered">
                                 <div class="single-talent mb-5">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -7639,9 +7639,13 @@ button.close {
         $(document).ready(function(){
          setTimeout(
              function() {
-                 html2pdf(document.body).set({
-                   pagebreak: { mode: 'avoid-all' , before: '#table-break', }
+                 html2pdf(document.body, {
+                   pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+                   filename:  'Resume.pdf',
+                   
                  });
+
+                 window.close();
              },
          500);
         });
