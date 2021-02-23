@@ -312,6 +312,9 @@
         object-fit: cover !important;
         object-position: 100% 15%;
     }
+    #custom_gender{
+        display: none;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -433,24 +436,31 @@
                                         <label for="f_name" class="form-label mt-3">First Name</label>
                                         <input class="form-control" type="text" name="f_name" id="f_name" placeholder="FIRST NAME" value="{{auth()->user()->f_name ?? ''}}" />
                                         @error('f_name')
-                                            <div class="error">{{ $message }}</div>
+                                            <div class="error">{{\Str::replaceFirst('f name', 'First Name', $message) }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="l_name" class="form-label mt-3">Last Name</label>
                                         <input class="form-control" type="text" name="l_name" id="l_name" placeholder="LAST NAME" value="{{auth()->user()->l_name ?? ''}}" />
                                         @error('l_name')
-                                            <div class="error">{{ $message }}</div>
+                                            <div class="error">{{\Str::replaceFirst('l name', 'Last Name', $message) }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="gender" class="form-label mt-3">Gender</label>
                                         <select name="gender" id="gender" name = "gender" class="form-control" required>
                                             <option label="Select"></option>
-                                            <option value="female" {{ auth()->user()->gender=='female' ?'selected':''}}>Female</option>
-                                            <option value="male" {{ auth()->user()->gender=='male' ?'selected':''}}>Male</option>
+                                            <option value="female" {{ old('gender',auth()->user()->gender)=='female' ?'selected':''}}>Female</option>
+                                            <option value="male" {{ old('gender',auth()->user()->gender)=='male' ?'selected':''}}>Male</option>
+                                            <option value="Rather not say" {{ old('gender',auth()->user()->gender)=='Rather not say' ?'selected':''}}>Rather not say</option>
+                                            <option value="custom" {{ old('gender',auth()->user()->gender)=='custom' ?'selected':''}}>Custom</option>
+
                                         </select>
+                                        <input @if(old('gender',auth()->user()->gender) == 'custom' ) style="display: block;" @endif class="form-control" id="custom_gender" type="text" name="custom_gender" value="{{old('custom_gender',auth()->user()->custom_gender)}}">
                                         @error('gender')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                        @error('custom_gender')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -955,7 +965,7 @@
 <script type="text/javascript">
 
     const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
-    const validVideoTypes = ['video/mp4', 'video/mkv', 'video/mov', 'video/wmv'];
+    const validVideoTypes = ['video/mp4', 'video/x-ms-wmv', 'video/mov', 'video/wmv'];
     const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
 
     var uploadedDocumentMap = {};
@@ -1384,6 +1394,15 @@
                 /* minYear: 1920,
                 maxYear: yyyy-1 */
             });
+
+            $('[name="gender"]').on('change',function(){
+                if ($(this).val()=='custom') {
+                    $('[name="custom_gender"]').show();
+                }else{
+                    $('[name="custom_gender"]').val('');
+                    $('[name="custom_gender"]').hide();
+                }
+            })
             
         })
     </script>

@@ -479,3 +479,7 @@ input[type=number] {
 .line {
    background-color: transparent !important;
 }
+
+.repeater .form-holder:before{
+    top: 70%;
+}
