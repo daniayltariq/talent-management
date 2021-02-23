@@ -774,6 +774,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 @section('scripts')
 <script>
     window.currentStep = 0;
+    window.changeDetected = false;
     function nextCallback(addBtn,currentStep){
 
         if(addBtn == true){
@@ -798,27 +799,30 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                 $('#custom_link').val('');
             }
 
-            $.ajax({
-                url: "{{ route('account.talent-profile.store') }}",
-                contentType: false,
-                processData: false,
-                
-                type: 'POST',
-                data:formDataa,
-                success: function(res) {
-                    console.log(res);
-                    if (res.alert_type=='success') {
-                        toastr.success(res.message);
-                        if (res.method) {
-                            $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
+            if(window.changeDetected){
+                $.ajax({
+                    url: "{{ route('account.talent-profile.store') }}",
+                    contentType: false,
+                    processData: false,
+                    
+                    type: 'POST',
+                    data:formDataa,
+                    success: function(res) {
+                       
+                        if (res.alert_type=='success') {
+                            toastr.success(res.message);
+                            if (res.method) {
+                                $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
+                            }
+                        } else {
+                            toastr.error(res.message);
                         }
-                    } else {
-                        toastr.error(res.message);
+                    },
+                    error: function(error) {
                     }
-                },
-                error: function(error) {
-                }
-            });
+                });
+            }
+            window.changeDetected = false;
         }
     }
 </script>
@@ -836,12 +840,18 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 		}
 	});
     $(document).ready(function() {
+
        $("#Films").createRepeater({showItemsToDefault: true,showItemsToDefault: true,startIndex:$("#Films").data('start')});
        $("#Theater").createRepeater({showItemsToDefault: true,startIndex:$("#Theater").data('start')});
        $("#Commercials").createRepeater({showItemsToDefault: true,startIndex:$("#Commercials").data('start')});
        $("#Television").createRepeater({showItemsToDefault: true,startIndex:$("#Television").data('start')});
        $("#Training").createRepeater({showItemsToDefault: true,startIndex:$("#Training").data('start')});
        /* $('.repeater-add-btn').trigger('click'); */
+
+       $('#wizard form').find('input,select,textarea').change(function(){
+            
+            window.changeDetected = true;
+        });
         
        $('.repeater-add-btn').click(function(){
             $(this).siblings('.btn').hide();
