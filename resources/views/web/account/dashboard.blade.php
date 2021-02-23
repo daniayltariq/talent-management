@@ -320,6 +320,9 @@
     .dz-error-mark > svg g g{
         fill: #a92222 !important;
     }
+    .error {
+        font-size: 13px;
+    }
 </style>
 
 <!-- jQuery library -->
