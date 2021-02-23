@@ -1,5 +1,8 @@
 @extends('web.layouts.app')
+@section('title', $data['profile']->legal_first_name ?? $data['profile']->user->f_name )
+
 @section('loader')
+
 @include('web.partials.loader',['show'=> true])
 @endsection
 @section('styles')

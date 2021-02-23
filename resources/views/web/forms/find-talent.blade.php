@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@section('title', 'Find Talent')
 @section('styles')
 
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"> --}}

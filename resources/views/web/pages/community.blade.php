@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 
-
+@section('title', 'Community')
 @section('styles')
 <style type="text/css">
 h4.widget__title.height_line {

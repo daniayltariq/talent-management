@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@section('title', 'My Resume')
 @section('styles')
 
  

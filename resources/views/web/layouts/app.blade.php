@@ -9,7 +9,7 @@
 	<meta charset="utf-8" />
 
 	<!--Meta Tegs-->
-	<title>{{ config('app.name', 'Laravel') }}</title>
+	<title>{{ config('app.name', 'Laravel') }}-@yield('title')</title>
 	<meta content="" name="description" />
 	<style>
 		.text-white{color: white;}

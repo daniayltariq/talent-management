@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 
-
+@section('title', 'Topics')
 @section('styles')
 <style type="text/css">
 

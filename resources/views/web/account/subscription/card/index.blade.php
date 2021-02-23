@@ -1,4 +1,5 @@
 @extends('web.layouts.app')
+@section('title', 'Subscription')
 @section('styles')
     <style>
       .btn-stripe{

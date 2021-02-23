@@ -127,7 +127,7 @@ class SubscriptionController extends Controller
 
                 $data=array(
                     "status"=>'success',
-                    "message"=>'Verification code has been sent on your email'
+                    "message"=>'Verification sent'
                 );
             }
             

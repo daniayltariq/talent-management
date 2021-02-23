@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@section('title', 'About Us')
 @section('content')
 
 <section class="page__img" style="background-image: url('{{ asset('web/img/page-img.jpg') }}')">

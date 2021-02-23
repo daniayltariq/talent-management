@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 
-
+@section('title', 'Picklist Items')
 @section('styles')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />
 <style type="text/css">
