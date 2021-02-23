@@ -1003,9 +1003,9 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
 <script>
     $(document).ready(function(){
-        $('.actions ul').append("<li class='mr-auto' id='finish_btn'><a href='javascript:;'>Finish</a></li>");
-        $('a[href="#next"]').parent().addClass('mx-auto');
-        $('a[href="#finish"]').parent().addClass('mx-auto');
+        $('.actions ul').append("<li class='ml-auto' id='finish_btn'><a href='javascript:;'>Finish</a></li>");
+        $('a[href="#next"]').parent().addClass('ml-auto');
+        $('a[href="#finish"]').parent().addClass('ml-auto');
     })
 
     $(document).on('click','#finish_btn',function(){
