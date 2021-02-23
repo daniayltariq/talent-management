@@ -7650,7 +7650,6 @@ button.close {
                 pagebreak: { mode: 'avoid-all' , before: '#table-break', },
                 filename:  'Resume.pdf',
             });
-            myResolve(1);
         
         }
 
@@ -7659,14 +7658,14 @@ button.close {
         let myPromise = new Promise(function(myResolve, myReject) {
             generatePdf();
 
-            myResolve(1); // when successful
+            myResolve(); // when successful
             myReject();  // when error
         });
 
 
         myPromise.then(
-          function(value) { window.close(); },
-          function(error) { /* code if some error */ }
+            function() { window.close(); },
+            function() { /* code if some error */ }
         );
         
 
