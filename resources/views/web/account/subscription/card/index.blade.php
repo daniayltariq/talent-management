@@ -497,14 +497,21 @@
         form.submit();
       } else if(res.status=='error') {
         toastr.error(res.message)
-        if (res.tries && res.tries >0) {
+        if (res.tries !=null && res.tries >=0) {
           $('#otp_tries').text(res.tries);
         }
         
         $(".digit-group input[type=text]").each(function() {
             $(this).val('');
-            $(this).prop('disabled',false);
-            $(this).removeClass('bg-disabled');
+            if (res.tries !=null && res.tries <=0) {
+              $(this).prop('disabled', true);
+              $(this).addClass('bg-disabled');
+            }
+            else{
+              $(this).prop('disabled', false);
+              $(this).removeClass('bg-disabled');
+            }
+            
         });
       }
     });
