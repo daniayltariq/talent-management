@@ -7664,7 +7664,7 @@ button.close {
 
 
         myPromise.then(
-            function() { window.close(); },
+            function() {  },
             function() { /* code if some error */ }
         );
         
