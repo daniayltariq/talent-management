@@ -7647,16 +7647,15 @@ button.close {
         function generatePdf() {
 
             var p2 = new Promise(function (resolve, reject) {
-                    html2pdf(document.body, {
-                        pagebreak: { mode: 'avoid-all' , before: '#table-break', },
-                        filename:  'Resume.pdf',
-                    });
+                    
                     resolve(1);
             });
 
             p2.then(function (value) {
-                alert(value); // 1
-                return value + 1;
+                html2pdf(document.body, {
+                    pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+                    filename:  'Resume.pdf',
+                });
             }).then(function (value) {
                 window.close();
             });
