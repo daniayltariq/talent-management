@@ -7644,17 +7644,29 @@ button.close {
         // });
 
 
-        function generatePdf() {        
-            return  html2pdf(document.body, {
+        function generatePdf() {
+
+            var p2 = new Promise(function (resolve, reject) {
+                    html2pdf(document.body, {
                         pagebreak: { mode: 'avoid-all' , before: '#table-break', },
                         filename:  'Resume.pdf',
                     });
                     resolve(1);
+            });
+
+            p2.then(function (value) {
+                alert(value); // 1
+                return value + 1;
+            }).then(function (value) {
+                window.close();
+            });
+
+
         }
 
 
-        generatePdf().then(function(result){
-            window.close();
+        $(document).ready(function(){
+            generatePdf()
         });
 
     </script>
