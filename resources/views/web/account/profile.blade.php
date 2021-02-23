@@ -254,7 +254,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="form-holder">
                                                 <label class="font-15">Eyes</label>
                                                 <select name="eyes" class="form-control" placeholder="{{strtoupper('Eye Color')}}" id="" required>
-                                                    <option>Select Eye Color</option>
+                                                    <option value="">Select Eye Color</option>
                                                     <option value="brown" {{isset($profile->eyes) && $profile->eyes=="brown" ? 'selected' : ''}}>Brown Eyes</option>
                                                     <option value="blue" {{isset($profile->eyes) && $profile->eyes=="blue" ? 'selected' : ''}}>Blue Eyes </option>
                                                     <option value="hazel" {{isset($profile->eyes) && $profile->eyes=="hazel" ? 'selected' : ''}}>Hazel Eyes </option>
@@ -268,7 +268,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="form-holder ">
                                                 <label class="font-15">Hair</label>
                                                 <select name="hairs" class="form-control" placeholder="{{strtoupper('Hair Color')}}" id="" required>
-                                                    <option>Select Hair Color</option>
+                                                    <option value="">Select Hair Color</option>
                                                     <option value="black" {{isset($profile->hairs) && $profile->hairs=="black" ? 'selected' : ''}}>Black hair</option>
                                                     <option value="brown" {{isset($profile->hairs) && $profile->hairs=="brown" ? 'selected' : ''}}>Brown hair</option>
                                                     <option value="red" {{isset($profile->hairs) && $profile->hairs=="red" ? 'selected' : ''}}>Red hair</option>
