@@ -315,6 +315,10 @@
     #custom_gender{
         display: none;
     }
+
+    .dz-error-mark > svg g g{
+        fill: #e77929 !important;
+    }
 </style>
 
 <!-- jQuery library -->
