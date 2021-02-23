@@ -88,6 +88,10 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 .font-15{
     font-size: 15px;
 }
+label{
+    font-weight: 500;
+    color: #979797;
+}
 </style>
 
 <link rel="stylesheet" href="{{ asset('plugins/steps/css/style.css') }}">
@@ -401,19 +405,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     <div class="items" data-group="experience">
                                                         
                                                         <div class="form-row">
-                                                            <div class="form-holder" >
-                                                                <input type="text" placeholder="{{strtoupper('Name')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$key}}][name]" class="form-control">
+                                                            <div class="form-holder" style="flex:1">
+                                                                <label for="">{{strtoupper('Name')}}</label>
+                                                                <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$key}}][name]" class="form-control">
                                                             </div>
-                                                            <div class="form-holder">
-                                                                <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$key}}][role]" placeholder="{{strtoupper('Role')}}" class="form-control">
+                                                            <div class="form-holder" style="flex:1">
+                                                                <label for="">{{strtoupper('Role')}}</label>
+                                                                <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$key}}][role]" placeholder="" class="form-control">
                                                             </div>
-                                                            <div class="form-holder">
-                                                                <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$key}}][production]" placeholder="{{strtoupper('Director or Production Company')}}" class="form-control">
+                                                            <div class="form-holder" style="flex:2">
+                                                                <label for="">{{strtoupper('Director or Production Company')}}</label>
+                                                                <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$key}}][production]" placeholder="" class="form-control">
                                                             </div>
-                                                            <div class="form-holder">
-                                                                <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                                <i class="mdi mdi-close"></i>
-                                                            </button>
+                                                            <div class="form-holder" style="flex:1">
+                                                                      <label for="" style="display:block">&nbsp;</label>
+                                                                        <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                            <i class="mdi mdi-close"></i>
+                                                                        </button>
+                                                                    
                                                             </div>
                                                         </div>
                                                     </div>
@@ -423,19 +432,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="items" data-group="experience">
                                                 
                                                 <div class="form-row">
-                                                    <div class="form-holder" >
-                                                        <input type="text" placeholder="{{strtoupper('NAME')}}" data-name="name" {{-- name="experience[{{$expr->count() ?? 0}}][name]" --}} class="form-control">
+                                                    <div class="form-holder"  style="flex:1">
+                                                        <label for="">{{strtoupper('NAME')}}</label>
+                                                        <input type="text" placeholder="" data-name="name" {{-- name="experience[{{$expr->count() ?? 0}}][name]" --}} class="form-control">
                                                     </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="role" placeholder="{{strtoupper('ROLE')}}"{{--  name="experience[{{$expr->count() ?? 0}}][role]" --}} class="form-control">
+                                                    <div class="form-holder" style="flex:1">
+                                                        <label for="">{{strtoupper('ROLE')}}</label>
+                                                        <input type="text" data-name="role" placeholder=""{{--  name="experience[{{$expr->count() ?? 0}}][role]" --}} class="form-control">
                                                     </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="production" placeholder="{{strtoupper('DIRECTOR or PRODUCTION COMPANY')}}"{{--  name="experience[{{$expr->count() ?? 0}}][production]" --}} class="form-control">
+                                                    <div class="form-holder" style="flex:2">
+                                                        <label for="">{{strtoupper('DIRECTOR or PRODUCTION COMPANY')}}</label>
+                                                        <input type="text" data-name="production" placeholder=""{{--  name="experience[{{$expr->count() ?? 0}}][production]" --}} class="form-control">
                                                     </div>
-                                                    <div class="form-holder">
-                                                        <button onclick="$(this).parents('.items').remove()" data-removeindex="0" type="button" class="btn btn-danger remove-btn btn-small" disabled="disabled">
-                                                        <i class="mdi mdi-close"></i>
-                                                    </button>
+                                                    <div class="form-holder" style="flex:1">
+                                                           <label for="" style="display:block">&nbsp;</label>
+                                                            <button onclick="$(this).parents('.items').remove()" data-removeindex="0" type="button" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -474,19 +488,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="items" data-group="experience">
                                                     
                                                     <div class="form-row">
-                                                        <div class="form-holder" >
-                                                            <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                        <div class="form-holder"  style="flex:1">
+                                                            <label for="">Name</label>
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="Role" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">Role</label>
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="Production" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">Production</label>
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                            <i class="mdi mdi-close"></i>
-                                                        </button>
+                                                        <div class="form-holder" style="flex:1">
+                                                               <label for="" style="display:block">&nbsp;</label>
+                                                                <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                    <i class="mdi mdi-close"></i>
+                                                                </button>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -496,19 +515,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <div class="items" data-group="experience">
 
                                             <div class="form-row">
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="name"{{--  name="experience[{{$expr_theater->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Name of the Production')}}" class="form-control">
+                                                <div class="form-holder" style="flex:2">
+                                                    <label for="">{{strtoupper('Name of the Production')}}</label>
+                                                    <input type="text" data-name="name"{{--  name="experience[{{$expr_theater->count() ?? 0}}][name]" --}} placeholder="" class="form-control">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_theater->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Role Played')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Role Played')}}</label>
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_theater->count() ?? 0}}][role]" --}} placeholder="" class="form-control">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Director or Venue')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Director or Venue')}}</label>
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="" class="form-control">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
-                                                    <i class="mdi mdi-close"></i>
-                                                </button>
+                                                <div class="form-holder" style="flex:1">
+                                                       <label for="" style="display:block">&nbsp;</label>
+                                                        <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                  
                                                 </div>
                                             </div>
                                         </div>
@@ -544,19 +568,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="items" data-group="experience">
                                                     
                                                     <div class="form-row">
-                                                        <div class="form-holder" >
-                                                            <input type="text" placeholder="{{strtoupper('Name')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                        <div class="form-holder"  style="flex:1">
+                                                            <label for="">{{strtoupper('Name')}}</label>
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="{{strtoupper('Role')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Role')}}</label>
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="{{strtoupper('Production')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Production')}}</label>
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                            <i class="mdi mdi-close"></i>
-                                                        </button>
+                                                        <div class="form-holder" style="flex:1">
+                                                               <label for="" style="display:block">&nbsp;</label>
+                                                                <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                    <i class="mdi mdi-close"></i>
+                                                                </button>
+                                                             
                                                         </div>
                                                     </div>
                                                 </div>
@@ -566,19 +595,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <div class="items" data-group="experience">
 
                                             <div class="form-row">
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_tele->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Name')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Name')}}</label>
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_tele->count() ?? 0}}][name]" --}} placeholder="" class="form-control">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_tele->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Role')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Role')}}</label>
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_tele->count() ?? 0}}][role]" --}} placeholder="" class="form-control">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_tele->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Location')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Location')}}</label>
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_tele->count() ?? 0}}][production]" --}} placeholder="" class="form-control">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
-                                                    <i class="mdi mdi-close"></i>
-                                                </button>
+                                                <div class="form-holder" style="flex:1">
+                                                       <label for="" style="display:block">&nbsp;</label>
+                                                        <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -613,19 +647,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="items" data-group="experience">
                                                     
                                                     <div class="form-row">
-                                                        <div class="form-holder" >
-                                                            <input type="text" placeholder="{{strtoupper('Name of Commercial')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Name of Commercial')}}</label>
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="{{strtoupper('Role Played')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Role Played')}}</label>
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="{{strtoupper('Director or Production Company')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:2">
+                                                            <label for="">{{strtoupper('Director or Production Company')}}</label>
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                            <i class="mdi mdi-close"></i>
-                                                        </button>
+                                                        <div class="form-holder" style="flex:1">
+                                                               <label for="" style="display:block">&nbsp;</label>
+                                                                <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                <i class="mdi mdi-close"></i>
+                                                            </button>
+                                                             
                                                         </div>
                                                     </div>
                                                 </div>
@@ -636,21 +675,26 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <div class="items" data-group="experience">
 
                                             <div class="form-row">
-                                                <div class="form-holder">                     
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_comm->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Commercial')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                <label for="">{{strtoupper('Commercial')}}</label>                     
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_comm->count() ?? 0}}][name]" --}} placeholder="" class="form-control">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_comm->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Role')}}" class="form-control">
-                                                </div>
-                                                
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_comm->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Production Company or Director')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Role')}}</label>
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_comm->count() ?? 0}}][role]" --}} placeholder="" class="form-control">
                                                 </div>
                                                 
-                                                <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
-                                                    <i class="mdi mdi-close"></i>
-                                                </button>
+                                                <div class="form-holder" style="flex:2">
+                                                    <label for="">{{strtoupper('Production Company or Director')}}</label>
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_comm->count() ?? 0}}][production]" --}} placeholder="" class="form-control">
+                                                </div>
+                                                
+                                                <div class="form-holder" style="flex:1">
+                                                       <label for="" style="display:block">&nbsp;</label>
+                                                        <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -685,19 +729,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="items" data-group="experience">
                                                     
                                                     <div class="form-row">
-                                                        <div class="form-holder" >
-                                                            <input type="text" placeholder="{{strtoupper('Training Class')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                        <div class="form-holder"  style="flex:1">
+                                                            <label for="">{{strtoupper('Training Class')}}</label>
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="{{strtoupper('Instructor')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Instructor')}}</label>
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="{{strtoupper('Training Company')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Training Company')}}</label>
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                            <i class="mdi mdi-close"></i>
-                                                        </button>
+                                                        <div class="form-holder" style="flex:1">
+                                                               <label for="" style="display:block">&nbsp;</label>
+                                                                <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                    <i class="mdi mdi-close"></i>
+                                                                </button>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -708,20 +757,25 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <div class="items" data-group="experience">
 
                                             <div class="form-row">              
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_train->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Training Class')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Training Class')}}</label>
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_train->count() ?? 0}}][name]" --}} placeholder="" class="form-control">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_train->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Instructor')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Instructor')}}</label>
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_train->count() ?? 0}}][role]" --}} placeholder="" class="form-control">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_train->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Training Company')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Training Company')}}</label>
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_train->count() ?? 0}}][production]" --}} placeholder="" class="form-control">
                                                 </div>
                                             
-                                                <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
-                                                    <i class="mdi mdi-close"></i>
-                                                </button>
+                                                <div class="form-holder" style="flex:1">
+                                                       <label for="" style="display:block">&nbsp;</label>
+                                                        <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                     
                                                 </div>
                                             </div>
                                         </div>
