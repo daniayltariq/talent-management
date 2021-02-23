@@ -323,8 +323,7 @@
         }
 
         .profile-sec img {
-            /*border-radius: 0;*/
-            object-position: -center;
+            border-radius: 0;
         }
 
         .single-talent {
@@ -493,12 +492,11 @@
         }
     
         .profile-sec {
-            overflow: hidden;
             height: 180px;
             width: 180px;
-            border-radius: 50% !important;
-            padding: 0px;
-            border: 6px solid #f8b248 !important;
+            border-radius: 50%;
+            padding: 5px;
+            background: #f8b248;
         }
     
         .skills .label-default {
@@ -508,11 +506,11 @@
             font-size: 15px;
         }
     
-        .tal-profile{
-            height: 100%;
+        .tal-profile {
+            height: 100% !important;
             width: 100%;
-            object-fit: cover;
-            /*object-position: 100% 15%;*/
+            object-fit: cover !important;
+            object-position: 100% 15%;
         }
     
         .w-4{
@@ -7646,18 +7644,30 @@ button.close {
         // });
 
 
+        function generatePdf() {
+
+            var p2 = new Promise(function (resolve, reject) {
+                    html2pdf(document.body, {
+                        pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+                        filename:  'Resume.pdf',
+                    });
+                    resolve(1);
+            });
+
+            p2.then(function (value) {
+                alert(value); // 1
+                return value + 1;
+            }).then(function (value) {
+                window.close();
+            });
+
+
+        }
+
 
         $(document).ready(function(){
-            html2pdf(document.body, {
-                pagebreak: { mode: 'avoid-all' , before: '#table-break', },
-                filename:  'Resume.pdf',
-            });                 
+            generatePdf()
         });
-
-
-        setTimeout(function() {
-            // window.close();
-        },1000);
 
     </script>
 </body>
