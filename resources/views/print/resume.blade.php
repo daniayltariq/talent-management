@@ -332,7 +332,7 @@
             background: #efefef;
             border-radius: 0px;
             transition: all 0.3s ease;
-            box-shadow: 0px 6px 22px #61616154;
+            /*box-shadow: 0px 6px 22px #61616154;*/
         }
 
         .talent-specs th{
@@ -717,7 +717,7 @@ th {
   *:after {
     background: transparent !important;
     color: #000 !important;
-    box-shadow: none !important;
+    /*box-shadow: none !important;*/
     text-shadow: none !important;
   }
   a,
@@ -2064,13 +2064,13 @@ kbd {
   color: #fff;
   background-color: #333;
   border-radius: 3px;
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+  /*box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);*/
 }
 kbd kbd {
   padding: 0;
   font-size: 100%;
   font-weight: bold;
-  box-shadow: none;
+  /*box-shadow: none;*/
 }
 pre {
   display: block;
@@ -3074,17 +3074,17 @@ output {
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
+  /*-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;*/
+  /*-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;*/
+  /*transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;*/
 }
 .form-control:focus {
   border-color: #66afe9;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);*/
+  /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);*/
 }
 .form-control::-moz-placeholder {
   color: #999;
@@ -3340,13 +3340,13 @@ select[multiple].input-lg {
 }
 .has-success .form-control {
   border-color: #3c763d;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
 }
 .has-success .form-control:focus {
   border-color: #2b542c;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;*/
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;*/
 }
 .has-success .input-group-addon {
   color: #3c763d;
@@ -3370,13 +3370,13 @@ select[multiple].input-lg {
 }
 .has-warning .form-control {
   border-color: #8a6d3b;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
 }
 .has-warning .form-control:focus {
   border-color: #66512c;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;*/
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;*/
 }
 .has-warning .input-group-addon {
   color: #8a6d3b;
@@ -3400,13 +3400,13 @@ select[multiple].input-lg {
 }
 .has-error .form-control {
   border-color: #a94442;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
 }
 .has-error .form-control:focus {
   border-color: #843534;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;*/
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;*/
 }
 .has-error .input-group-addon {
   color: #a94442;
@@ -3555,8 +3555,8 @@ select[multiple].input-lg {
 .btn.active {
   outline: 0;
   background-image: none;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  /*-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);*/
+  /*box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);*/
 }
 .btn.disabled,
 .btn[disabled],
@@ -3564,8 +3564,8 @@ fieldset[disabled] .btn {
   cursor: not-allowed;
   opacity: 0.65;
   filter: alpha(opacity=65);
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  /*-webkit-box-shadow: none;*/
+  /*box-shadow: none;*/
 }
 a.btn.disabled,
 fieldset[disabled] a.btn {
@@ -3924,8 +3924,8 @@ fieldset[disabled] .btn-danger.focus {
 .btn-link[disabled],
 fieldset[disabled] .btn-link {
   background-color: transparent;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  /*-webkit-box-shadow: none;*/
+  /*box-shadow: none;*/
 }
 .btn-link,
 .btn-link:hover,
@@ -4046,8 +4046,8 @@ tbody.collapse.in {
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  /*-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);*/
+  /*box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);*/
   background-clip: padding-box;
 }
 .dropdown-menu.pull-right {
@@ -4236,12 +4236,12 @@ tbody.collapse.in {
   padding-right: 12px;
 }
 .btn-group.open .dropdown-toggle {
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  /*-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);*/
+  /*box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);*/
 }
 .btn-group.open .dropdown-toggle.btn-link {
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  /*-webkit-box-shadow: none;*/
+  /*box-shadow: none;*/
 }
 .btn .caret {
   margin-left: 0;
@@ -4695,7 +4695,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding-right: 15px;
   padding-left: 15px;
   border-top: 1px solid transparent;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  /*box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);*/
   -webkit-overflow-scrolling: touch;
 }
 .navbar-collapse.in {
@@ -4705,7 +4705,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar-collapse {
     width: auto;
     border-top: 0;
-    box-shadow: none;
+    /*box-shadow: none;*/
   }
   .navbar-collapse.collapse {
     display: block !important;
@@ -4845,7 +4845,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-top: 0;
     background-color: transparent;
     border: 0;
-    box-shadow: none;
+    /*box-shadow: none;*/
   }
   .navbar-nav .open .dropdown-menu > li > a,
   .navbar-nav .open .dropdown-menu .dropdown-header {
@@ -4878,8 +4878,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding: 10px 15px;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
+  /*-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);*/
+  /*box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);*/
   margin-top: 8px;
   margin-bottom: 8px;
 }
@@ -4949,8 +4949,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-right: 0;
     padding-top: 0;
     padding-bottom: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    /*-webkit-box-shadow: none;*/
+    /*box-shadow: none;*/
   }
 }
 .navbar-nav > li > .dropdown-menu {
@@ -5629,8 +5629,8 @@ a.thumbnail.active {
   margin-bottom: 20px;
   background-color: #f5f5f5;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  /*-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);*/
+  /*box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);*/
 }
 .progress-bar {
   float: left;
@@ -5641,8 +5641,8 @@ a.thumbnail.active {
   color: #fff;
   text-align: center;
   background-color: #337ab7;
-  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  /*-webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);*/
+  /*box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);*/
   -webkit-transition: width 0.6s ease;
   -o-transition: width 0.6s ease;
   transition: width 0.6s ease;
@@ -5951,8 +5951,8 @@ button.list-group-item-danger.active:focus {
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  /*-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);*/
+  /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);*/
 }
 .panel-body {
   padding: 15px;
@@ -6322,8 +6322,8 @@ button.list-group-item-danger.active:focus {
   background-color: #f5f5f5;
   border: 1px solid #e3e3e3;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);*/
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);*/
 }
 .well blockquote {
   border-color: #ddd;
@@ -6408,8 +6408,8 @@ button.close {
   border: 1px solid #999;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  /*-webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);*/
+  /*box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);*/
   background-clip: padding-box;
   outline: 0;
 }
@@ -6473,8 +6473,8 @@ button.close {
     margin: 30px auto;
   }
   .modal-content {
-    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    /*-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);*/
+    /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);*/
   }
   .modal-sm {
     width: 300px;
@@ -6628,8 +6628,8 @@ button.close {
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  /*-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
+  /*box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
 }
 .popover.top {
   margin-top: -10px;
@@ -7263,7 +7263,7 @@ button.close {
 </head>
 <body>
     <div class="section blog picklist" id="resume_div">
-        <div class="container">
+        <div class="">
             <div class="row">
                 <div class="blog__posts col-md-12">
                     <div class="blog__list">
@@ -7622,10 +7622,10 @@ button.close {
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js" integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg==" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js" integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg==" crossorigin="anonymous"></script> --}}
 
-    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.1/html2pdf.bundle.min.js" integrity="sha512-vDKWohFHe2vkVWXHp3tKvIxxXg0pJxeid5eo+UjdjME3DBFBn2F8yWOE0XmiFcFbXxrEOR1JriWEno5Ckpn15A==" crossorigin="anonymous"></script>
+
     <script>
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
