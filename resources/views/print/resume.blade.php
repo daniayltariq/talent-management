@@ -488,7 +488,7 @@
     
         .single-talent {
             padding: 40px;
-            background: #f7f7f7;
+            background: #ffffff;
         }
     
         .profile-sec {
@@ -7650,7 +7650,7 @@ button.close {
         });
 
         setTimeout(function() {
-            // window.close();
+            window.close();
         },1000);
 
     </script>
