@@ -52,13 +52,15 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {
-        /* dd($request->all()); */
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'f_name' => ['required', 'string'],
             'l_name' => ['required', 'string'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email'],
             'password' => ['nullable','string', 'min:8','confirmed'],
+            'gender' => ['required','string'],
+            'custom_gender' => ['required_if:gender,=,custom'],
         ]);
         
         if ($validator->fails()) {
@@ -82,6 +84,10 @@ class DashboardController extends Controller
             if (!is_null($request->password)) {
                 $user->password=Hash::make($request->password);
             }
+
+            // store gender
+            $user->gender = $request->gender;
+            $user->custom_gender = $request->custom_gender;
             $user->save();
 
             $user->profile()->update([
@@ -115,14 +121,11 @@ class DashboardController extends Controller
             $attach->type=$request->type;
             $attach->file=$img;
             $attach->save();
-
             $notify=array('name'=>$img,'original_name' => $request->file('file')->getClientOriginalName());
         }
         else{
             $notify=array('name'=>null,'original_name' => null);
         }
-        
-
         return response()->json($notify);
     }
     

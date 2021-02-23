@@ -312,6 +312,9 @@
         object-fit: cover !important;
         object-position: 100% 15%;
     }
+    #custom_gender{
+        display: none;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -447,10 +450,17 @@
                                         <label for="gender" class="form-label mt-3">Gender</label>
                                         <select name="gender" id="gender" name = "gender" class="form-control" required>
                                             <option label="Select"></option>
-                                            <option value="female" {{ auth()->user()->gender=='female' ?'selected':''}}>Female</option>
-                                            <option value="male" {{ auth()->user()->gender=='male' ?'selected':''}}>Male</option>
+                                            <option value="female" {{ old('gender',auth()->user()->gender)=='female' ?'selected':''}}>Female</option>
+                                            <option value="male" {{ old('gender',auth()->user()->gender)=='male' ?'selected':''}}>Male</option>
+                                            <option value="Rather not say" {{ old('gender',auth()->user()->gender)=='Rather not say' ?'selected':''}}>Rather not say</option>
+                                            <option value="custom" {{ old('gender',auth()->user()->gender)=='custom' ?'selected':''}}>Custom</option>
+
                                         </select>
+                                        <input @if(old('gender',auth()->user()->gender) == 'custom' ) style="display: block;" @endif class="form-control" id="custom_gender" type="text" name="custom_gender" value="{{old('custom_gender',auth()->user()->custom_gender)}}">
                                         @error('gender')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                        @error('custom_gender')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -1384,6 +1394,15 @@
                 /* minYear: 1920,
                 maxYear: yyyy-1 */
             });
+
+            $('[name="gender"]').on('change',function(){
+                if ($(this).val()=='custom') {
+                    $('[name="custom_gender"]').show();
+                }else{
+                    $('[name="custom_gender"]').val('');
+                    $('[name="custom_gender"]').hide();
+                }
+            })
             
         })
     </script>
