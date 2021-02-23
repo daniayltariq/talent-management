@@ -323,7 +323,8 @@
         }
 
         .profile-sec img {
-            border-radius: 0;
+            /*border-radius: 0;*/
+            object-position: -center;
         }
 
         .single-talent {
@@ -492,11 +493,12 @@
         }
     
         .profile-sec {
+            overflow: hidden;
             height: 180px;
             width: 180px;
-            border-radius: 50%;
-            padding: 5px;
-            background: #f8b248;
+            border-radius: 50% !important;
+            padding: 0px;
+            border: 6px solid #f8b248 !important;
         }
     
         .skills .label-default {
@@ -510,7 +512,7 @@
             height: 100%;
             width: 100%;
             object-fit: cover;
-            object-position: 100% 15%;
+            /*object-position: 100% 15%;*/
         }
     
         .w-4{
