@@ -7637,8 +7637,7 @@ button.close {
         
 
         $(document).ready(function(){
-         setTimeout(
-             function() {
+         // setTimeout(function() {
                  html2pdf(document.body, {
                    pagebreak: { mode: 'avoid-all' , before: '#table-break', },
                    filename:  'Resume.pdf',
@@ -7646,9 +7645,13 @@ button.close {
                  });
 
                  window.close();
-             },
-         500);
+             // },
+         // 500);
         });
+
+        setTimeout(function() {
+            window.close();
+        },1000);
 
     </script>
 </body>
