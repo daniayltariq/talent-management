@@ -57,19 +57,20 @@ class DashboardController extends Controller
             'f_name' => ['required', 'string'],
             'l_name' => ['required', 'string'],
             'phone' => ['required', 'string'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email','unique:users,email,'.auth()->user()->id],
             'password' => ['nullable','string', 'min:8','confirmed'],
             'gender' => ['required','string'],
             'custom_gender' => ['required_if:gender,=,custom'],
         ]);
         
         if ($validator->fails()) {
-            $request->session()->flash('error', 'Something went wrong !');
+            /* $request->session()->flash('error', 'Something went wrong !'); */
+           /*  return $validator->errors(); */
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
         }
-
+        
         try {
             $country_data=json_decode($request->new_phone,true);
            
