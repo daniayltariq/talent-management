@@ -89,6 +89,11 @@ class DashboardController extends Controller
             $user->gender = $request->gender;
             $user->custom_gender = $request->custom_gender;
             $user->save();
+
+            $user->profile()->update([
+                'legal_first_name'=> $request->f_name,
+                'legal_last_name'=> $request->l_name,
+            ]);
             
             return redirect()->back()->with(array(
                 'message' => 'Successfully updated', 

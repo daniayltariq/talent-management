@@ -117,6 +117,10 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     border-radius: 25px;
     margin: 0 2.4rem;
 }
+
+.ml-auto{
+    margin-left: auto;
+}
 </style>
 @endsection
 
@@ -242,7 +246,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <label class="font-15">Weight (lbs)</label>
                                                     <div class="form-holder">
-                                                        <input type="number" name="weight" id="weight" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control" onkeydown="limit(this);" onkeyup="limit(this);">
+                                                        <input type="number" name="weight" id="weight" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control" min="0" max="400">
                                                     </div>
                                                 </div>
                                             </div>
@@ -770,8 +774,6 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 @section('scripts')
 <script>
     window.currentStep = 0;
-    window.changeDetected = false;
- 
     function nextCallback(addBtn,currentStep){
 
         if(addBtn == true){
@@ -780,7 +782,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             }
         }
 
-         if ($("#profile_form").valid()) 
+         if ($('#wizard-p-' + currentStep + ' >form').valid()) 
         {
 
             var formDataa=new FormData($('section[aria-hidden="false"] > form')[0]);
@@ -796,33 +798,27 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                 $('#custom_link').val('');
             }
 
-            if(window.changeDetected){
-                $.ajax({
-                    url: "{{ route('account.talent-profile.store') }}",
-                    contentType: false,
-                    processData: false,
-                    
-                    type: 'POST',
-                    data:formDataa,
-                    success: function(res) {
-                        console.log(res);
-                        if (res.alert_type=='success') {
-                            toastr.success(res.message);
-                            if (res.method) {
-                                $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
-                            }
-                        } else {
-                            toastr.error(res.message);
+            $.ajax({
+                url: "{{ route('account.talent-profile.store') }}",
+                contentType: false,
+                processData: false,
+                
+                type: 'POST',
+                data:formDataa,
+                success: function(res) {
+                    console.log(res);
+                    if (res.alert_type=='success') {
+                        toastr.success(res.message);
+                        if (res.method) {
+                            $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
                         }
-                    },
-                    error: function(error) {
+                    } else {
+                        toastr.error(res.message);
                     }
-                });
-
-                window.changeDetected = false;
-            }
-
-            
+                },
+                error: function(error) {
+                }
+            });
         }
     }
 </script>
@@ -834,28 +830,19 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 
 <script type="text/javascript">
-
     $.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		}
 	});
     $(document).ready(function() {
-
-       
        $("#Films").createRepeater({showItemsToDefault: true,showItemsToDefault: true,startIndex:$("#Films").data('start')});
        $("#Theater").createRepeater({showItemsToDefault: true,startIndex:$("#Theater").data('start')});
        $("#Commercials").createRepeater({showItemsToDefault: true,startIndex:$("#Commercials").data('start')});
        $("#Television").createRepeater({showItemsToDefault: true,startIndex:$("#Television").data('start')});
        $("#Training").createRepeater({showItemsToDefault: true,startIndex:$("#Training").data('start')});
        /* $('.repeater-add-btn').trigger('click'); */
-
-
-         $('#wizard form').find('input,select,textarea').change(function(){
-            console.log('changed', $(this));
-            window.changeDetected = true;
-        });
-
+        
        $('.repeater-add-btn').click(function(){
             $(this).siblings('.btn').hide();
         });
@@ -1006,7 +993,9 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
 <script>
     $(document).ready(function(){
-        $('.actions ul').append("<li class='d-none' id='finish_btn'><a href='javascript:;'>Finish</a></li>");
+        $('.actions ul').append("<li class='mr-auto' id='finish_btn'><a href='javascript:;'>Finish</a></li>");
+        $('a[href="#next"]').parent().addClass('mx-auto');
+        $('a[href="#finish"]').parent().addClass('mx-auto');
     })
 
     $(document).on('click','#finish_btn',function(){

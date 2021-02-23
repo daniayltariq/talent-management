@@ -523,7 +523,64 @@
                                     </div>
                                     <div class="col-4">
                                         <label for="state" class="form-label mt-3">State</label>
-                                        <input class="form-control" type="text" name="state" id="state" placeholder="STATE" value="{{auth()->user()->state ?? ''}}" />
+                                        <select id="state" class="form-control" name="state">
+                                            <option label="Select"></option>
+                                            <option value="Alabama" {{ auth()->user()->state=='Alabama' ?'selected':''}}>Alabama</option>
+                                            <option value="Alaska" {{ auth()->user()->state=='Alaska' ?'selected':''}}>Alaska</option>
+                                            <option value="Arizona" {{ auth()->user()->state=='Arizona' ?'selected':''}}>Arizona</option>
+                                            <option value="Arkansas" {{ auth()->user()->state=='Arkansas' ?'selected':''}}>Arkansas</option>
+                                            <option value="California" {{ auth()->user()->state=='California' ?'selected':''}}>California</option>
+                                            <option value="Colorado" {{ auth()->user()->state=='Colorado' ?'selected':''}}>Colorado</option>
+                                            <option value="Connecticut" {{ auth()->user()->state=='Connecticut' ?'selected':''}}>Connecticut</option>
+                                            <option value="Delaware" {{ auth()->user()->state=='Delaware' ?'selected':''}}>Delaware</option>
+                                            <option value="District of Columbia" {{ auth()->user()->state=='District of Columbia' ?'selected':''}}>District of Columbia</option>
+                                            <option value="Florida" {{ auth()->user()->state=='Florida' ?'selected':''}}>Florida</option>
+                                            <option value="Georgia" {{ auth()->user()->state=='Georgia' ?'selected':''}}>Georgia</option>
+                                            <option value="Guam" {{ auth()->user()->state=='Guam' ?'selected':''}}>Guam</option>
+                                            <option value="Hawaii" {{ auth()->user()->state=='Hawaii' ?'selected':''}}>Hawaii</option>
+                                            <option value="Idaho" {{ auth()->user()->state=='Idaho' ?'selected':''}}>Idaho</option>
+                                            <option value="Illinois" {{ auth()->user()->state=='Illinois' ?'selected':''}}>Illinois</option>
+                                            <option value="Indiana" {{ auth()->user()->state=='Indiana' ?'selected':''}}>Indiana</option>
+                                            <option value="Iowa" {{ auth()->user()->state=='Iowa' ?'selected':''}}>Iowa</option>
+                                            <option value="Kansas" {{ auth()->user()->state=='Kansas' ?'selected':''}}>Kansas</option>
+                                            <option value="Kentucky" {{ auth()->user()->state=='Kentucky' ?'selected':''}}>Kentucky</option>
+                                            <option value="Louisiana" {{ auth()->user()->state=='Louisiana' ?'selected':''}}>Louisiana</option>
+                                            <option value="Maine" {{ auth()->user()->state=='Maine' ?'selected':''}}>Maine</option>
+                                            <option value="Maryland" {{ auth()->user()->state=='Maryland' ?'selected':''}}>Maryland</option>
+                                            <option value="Massachusetts" {{ auth()->user()->state=='Massachusetts' ?'selected':''}}>Massachusetts</option>
+                                            <option value="Michigan" {{ auth()->user()->state=='Michigan' ?'selected':''}}>Michigan</option>
+                                            <option value="Minnesota" {{ auth()->user()->state=='Minnesota' ?'selected':''}}>Minnesota</option>
+                                            <option value="Mississippi" {{ auth()->user()->state=='Mississippi' ?'selected':''}}>Mississippi</option>
+                                            <option value="Missouri" {{ auth()->user()->state=='Missouri' ?'selected':''}}>Missouri</option>
+                                            <option value="Montana" {{ auth()->user()->state=='Montana' ?'selected':''}}>Montana</option>
+                                            <option value="Nebraska" {{ auth()->user()->state=='Nebraska' ?'selected':''}}>Nebraska</option>
+                                            <option value="Nevada" {{ auth()->user()->state=='Nevada' ?'selected':''}}>Nevada</option>
+                                            <option value="New Hampshire" {{ auth()->user()->state=='New Hampshire' ?'selected':''}}>New Hampshire</option>
+                                            <option value="New Jersey" {{ auth()->user()->state=='New Jersey' ?'selected':''}}>New Jersey</option>
+                                            <option value="New Mexico" {{ auth()->user()->state=='New Mexico' ?'selected':''}}>New Mexico</option>
+                                            <option value="New York" {{ auth()->user()->state=='New York' ?'selected':''}}>New York</option>
+                                            <option value="North Carolina" {{ auth()->user()->state=='North Carolina' ?'selected':''}}>North Carolina</option>
+                                            <option value="North Dakota" {{ auth()->user()->state=='North Dakota' ?'selected':''}}>North Dakota</option>
+                                            <option value="Northern Marianas Islands" {{ auth()->user()->state=='Northern Marianas Islands' ?'selected':''}}>Northern Marianas Islands</option>
+                                            <option value="Ohio" {{ auth()->user()->state=='Ohio' ?'selected':''}}>Ohio</option>
+                                            <option value="Oklahoma" {{ auth()->user()->state=='Oklahoma' ?'selected':''}}>Oklahoma</option>
+                                            <option value="Oregon" {{ auth()->user()->state=='Oregon' ?'selected':''}}>Oregon</option>
+                                            <option value="Pennsylvania" {{ auth()->user()->state=='Pennsylvania' ?'selected':''}}>Pennsylvania</option>
+                                            <option value="Puerto Rico" {{ auth()->user()->state=='Puerto Rico' ?'selected':''}}>Puerto Rico</option>
+                                            <option value="Rhode Island" {{ auth()->user()->state=='Rhode Island' ?'selected':''}}>Rhode Island</option>
+                                            <option value="South Carolina" {{ auth()->user()->state=='South Carolina' ?'selected':''}}>South Carolina</option>
+                                            <option value="South Dakota" {{ auth()->user()->state=='South Dakota' ?'selected':''}}>South Dakota</option>
+                                            <option value="Tennessee" {{ auth()->user()->state=='Tennessee' ?'selected':''}}>Tennessee</option>
+                                            <option value="Texas" {{ auth()->user()->state=='Texas' ?'selected':''}}>Texas</option>
+                                            <option value="Utah" {{ auth()->user()->state=='Utah' ?'selected':''}}>Utah</option>
+                                            <option value="Vermont" {{ auth()->user()->state=='Vermont' ?'selected':''}}>Vermont</option>
+                                            <option value="Virginia" {{ auth()->user()->state=='Virginia' ?'selected':''}}>Virginia</option>
+                                            <option value="Virgin Islands" {{ auth()->user()->state=='Virgin Islands' ?'selected':''}}>Virgin Islands</option>
+                                            <option value="Washington" {{ auth()->user()->state=='Washington' ?'selected':''}}>Washington</option>
+                                            <option value="West Virginia" {{ auth()->user()->state=='West Virginia' ?'selected':''}}>West Virginia</option>
+                                            <option value="Wisconsin" {{ auth()->user()->state=='Wisconsin' ?'selected':''}}>Wisconsin</option>
+                                            <option value="Wyoming" {{ auth()->user()->state=='Wyoming' ?'selected':''}}>Wyoming</option>
+                                        </select>
                                         @error('state')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -905,7 +962,7 @@
 <script type="text/javascript">
 
     const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
-    const validVideoTypes = ['video/mp4', 'video/mkv', 'video/mov', 'video/wmv'];
+    const validVideoTypes = ['video/mp4', 'video/x-ms-wmv', 'video/mov', 'video/wmv'];
     const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
 
     var uploadedDocumentMap = {};
