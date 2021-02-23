@@ -410,15 +410,15 @@
               </tr> --}}
               <tr>
                 <td>
-                  <h4>Dear Talent,</h4>
-                  <p>Your One-Time verification code is <b>{{$data['otp'] ?? ''}}</b></p>
-                  <p>Return to the Talent Link verification page and enter <b>{{$data['otp'] ?? ''}}</b> into the 6 boxes.</p>
+                  <h4 style="color: #000000">Dear Talent,</h4>
+                  <p style="color: #000000">Your One-Time verification code is <b>{{$data['otp'] ?? ''}}</b></p>
+                  <p style="color: #000000">Return to the Talent Link verification page and enter <b>{{$data['otp'] ?? ''}}</b> into the 6 boxes.</p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p>Thank you and welcome!</p>
-                  <p>The Talent Depot Membership Team</p>
+                  <p style="color: #000000">Thank you and welcome!</p>
+                  <p style="color: #000000">The Talent Depot Membership Team</p>
                 </td>
               </tr>
             </table>
@@ -428,51 +428,6 @@
         </tr><!-- end tr -->
         <tr>
           <td class="bg_white">
-            {{-- <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-              <tr>
-                <td class="bg_white email-section">
-                  <div class="heading-section" style="text-align: justify; padding: 0 30px;">
-                    
-                    <p style="font-weight: 600;">If you did not intend to register an account, someone may have registered with your information by mistake. Please contact Customer Support using the contact details found at:<span><a href="{{url('/')}}">TalentDepot</a></span></p>
-                  </div>
-                  <hr>
-                  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                    
-                    <tr>
-                      <td valign="top" width="50%">
-                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                          <tr>
-                            <td style="box-sizing: border-box;
-                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-                            position: relative;
-                            line-height: 1.5em;
-                            margin-top: 0;
-                            text-align: left;
-                            font-size: 14px;">
-                              If you’re having trouble clicking the "Verify Email Address" button, copy and paste the URL below into your web browser: <br>
-                              <span style="word-break: break-all;"><a target="_blank" rel="noopener noreferrer" href="{{$url}}">{{$url}}</a></span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="padding: 0 30px;;text-align: center">
-                              <a href="{{url('/').'/privacy-policy'}}" style="padding-right: 5px;
-                              border-right: 2px solid grey;">Privacy Policy</a>
-                              <a href="{{url('/').'/terms-of-service'}}" style="padding-right: 5px;
-                              border-right: 2px solid grey;">Terms of Services</a>
-                              <a href="{{url('/').'/terms-of-use'}}">Terms of Use</a>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-
-
-
-                    </tr>
-                  </table>
-                </td>
-              </tr><!-- end: tr -->
-
-            </table> --}}
 
           </td>
         </tr><!-- end:tr -->
