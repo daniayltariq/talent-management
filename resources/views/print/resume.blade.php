@@ -7644,7 +7644,7 @@ button.close {
                    
                  });
 
-                 window.close();
+                 // window.close();
              // },
          // 500);
         });
