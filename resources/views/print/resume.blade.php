@@ -7645,13 +7645,11 @@ button.close {
 
 
         function generatePdf() {        
-            return $q(function (resolve, reject) {
-                        html2pdf(document.body, {
-                            pagebreak: { mode: 'avoid-all' , before: '#table-break', },
-                            filename:  'Resume.pdf',
-                        });
-                        resolve(1);
-                    })
+            return  html2pdf(document.body, {
+                        pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+                        filename:  'Resume.pdf',
+                    });
+                    resolve(1);
         }
 
 
