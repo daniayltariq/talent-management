@@ -506,10 +506,10 @@
             font-size: 15px;
         }
     
-        .tal-profile{
-            height: 100%;
+        .tal-profile {
+            height: 100% !important;
             width: 100%;
-            object-fit: cover;
+            object-fit: cover !important;
             object-position: 100% 15%;
         }
     
