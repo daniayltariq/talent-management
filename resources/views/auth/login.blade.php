@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 
-
+@section('title', 'Login')
 @section('styles')
 <style type="text/css">
     .btn-half {

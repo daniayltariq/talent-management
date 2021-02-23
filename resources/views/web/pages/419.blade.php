@@ -1,5 +1,6 @@
 @extends('web.layouts.app')
 
+@section('title', '419')
 @section('styles')
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">

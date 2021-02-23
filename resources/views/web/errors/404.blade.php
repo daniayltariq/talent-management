@@ -1,6 +1,7 @@
 @extends('web.layouts.app')
 
 
+@section('title', '404')
 @section('styles')
 <style type="text/css">
 .section.blog{

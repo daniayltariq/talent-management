@@ -1,5 +1,6 @@
 @extends('web.layouts.app')
 
+@section('title', 'Reset Password')
 @section('styles')
     <style>
         .header {

@@ -1,6 +1,7 @@
 @extends('web.layouts.app')
 
 
+@section('title', '403')
 @section('styles')
 <style type="text/css">
 
