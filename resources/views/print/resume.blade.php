@@ -7646,20 +7646,15 @@ button.close {
 
 
         $(document).ready(function(){
-         // setTimeout(function() {
-                 html2pdf(document.body, {
-                   pagebreak: { mode: 'avoid-all' , before: '#table-break', },
-                   filename:  'Resume.pdf',
-                   
-                 });
-
-                 // window.close();
-             // },
-         // 500);
+            html2pdf(document.body, {
+                pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+                filename:  'Resume.pdf',
+            });                 
         });
 
+
         setTimeout(function() {
-            window.close();
+            // window.close();
         },1000);
 
     </script>
