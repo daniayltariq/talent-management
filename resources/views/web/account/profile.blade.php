@@ -91,6 +91,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 label{
     font-weight: 500;
     color: #979797;
+    font-size: 14px;
 }
 </style>
 
@@ -419,7 +420,7 @@ label{
                                                             </div>
                                                             <div class="form-holder" style="flex:1">
                                                                       <label for="" style="display:block">&nbsp;</label>
-                                                                        <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                        <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" class="btn btn-danger repeater-add-btn btn-small">
                                                                             <i class="mdi mdi-close"></i>
                                                                         </button>
                                                                     
@@ -446,7 +447,7 @@ label{
                                                     </div>
                                                     <div class="form-holder" style="flex:1">
                                                            <label for="" style="display:block">&nbsp;</label>
-                                                            <button onclick="$(this).parents('.items').remove()" data-removeindex="0" type="button" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                            <button onclick="$(this).parents('.items').remove();window.changeDetected = true" data-removeindex="0" type="button" class="btn btn-danger remove-btn btn-small" disabled="disabled">
                                                             <i class="mdi mdi-close"></i>
                                                         </button>
                                                         
@@ -502,7 +503,7 @@ label{
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                                <label for="" style="display:block">&nbsp;</label>
-                                                                <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" class="btn btn-danger repeater-add-btn btn-small">
                                                                     <i class="mdi mdi-close"></i>
                                                                 </button>
                                                             
@@ -515,21 +516,21 @@ label{
                                         <div class="items" data-group="experience">
 
                                             <div class="form-row">
-                                                <div class="form-holder" style="flex:2">
-                                                    <label for="">{{strtoupper('Name of the Production')}}</label>
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">Name</label>
                                                     <input type="text" data-name="name"{{--  name="experience[{{$expr_theater->count() ?? 0}}][name]" --}} placeholder="" class="form-control">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
-                                                    <label for="">{{strtoupper('Role Played')}}</label>
+                                                    <label for="">Role</label>
                                                     <input type="text" data-name="role" {{-- name="experience[{{$expr_theater->count() ?? 0}}][role]" --}} placeholder="" class="form-control">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
-                                                    <label for="">{{strtoupper('Director or Venue')}}</label>
+                                                    <label for="">Production</label>
                                                     <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="" class="form-control">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
                                                        <label for="" style="display:block">&nbsp;</label>
-                                                        <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                        <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
                                                             <i class="mdi mdi-close"></i>
                                                         </button>
                                                   
@@ -582,7 +583,7 @@ label{
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                                <label for="" style="display:block">&nbsp;</label>
-                                                                <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" class="btn btn-danger repeater-add-btn btn-small">
                                                                     <i class="mdi mdi-close"></i>
                                                                 </button>
                                                              
@@ -609,7 +610,7 @@ label{
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
                                                        <label for="" style="display:block">&nbsp;</label>
-                                                        <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                        <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
                                                             <i class="mdi mdi-close"></i>
                                                         </button>
                                                     
@@ -661,7 +662,7 @@ label{
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                                <label for="" style="display:block">&nbsp;</label>
-                                                                <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" class="btn btn-danger repeater-add-btn btn-small">
                                                                 <i class="mdi mdi-close"></i>
                                                             </button>
                                                              
@@ -676,22 +677,22 @@ label{
 
                                             <div class="form-row">
                                                 <div class="form-holder" style="flex:1">
-                                                <label for="">{{strtoupper('Commercial')}}</label>                     
+                                                <label for="">{{strtoupper('Name of Commercial')}}</label>                     
                                                     <input type="text" data-name="name" {{-- name="experience[{{$expr_comm->count() ?? 0}}][name]" --}} placeholder="" class="form-control">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
-                                                    <label for="">{{strtoupper('Role')}}</label>
+                                                    <label for="">{{strtoupper('Role Played')}}</label>
                                                     <input type="text" data-name="role" {{-- name="experience[{{$expr_comm->count() ?? 0}}][role]" --}} placeholder="" class="form-control">
                                                 </div>
                                                 
                                                 <div class="form-holder" style="flex:2">
-                                                    <label for="">{{strtoupper('Production Company or Director')}}</label>
+                                                    <label for="">{{strtoupper('Director or Production Company')}}</label>
                                                     <input type="text" data-name="production" {{-- name="experience[{{$expr_comm->count() ?? 0}}][production]" --}} placeholder="" class="form-control">
                                                 </div>
                                                 
                                                 <div class="form-holder" style="flex:1">
                                                        <label for="" style="display:block">&nbsp;</label>
-                                                        <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                        <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
                                                             <i class="mdi mdi-close"></i>
                                                         </button>
                                                     
@@ -743,7 +744,7 @@ label{
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                                <label for="" style="display:block">&nbsp;</label>
-                                                                <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" class="btn btn-danger repeater-add-btn btn-small">
                                                                     <i class="mdi mdi-close"></i>
                                                                 </button>
                                                             
@@ -772,7 +773,7 @@ label{
                                             
                                                 <div class="form-holder" style="flex:1">
                                                        <label for="" style="display:block">&nbsp;</label>
-                                                        <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                        <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
                                                             <i class="mdi mdi-close"></i>
                                                         </button>
                                                      
