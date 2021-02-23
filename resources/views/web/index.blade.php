@@ -1,5 +1,7 @@
 @extends('web.layouts.app')
 
+@section('title', 'Home')
+
 @section('styles')
 	<style>
 		.view__all {
