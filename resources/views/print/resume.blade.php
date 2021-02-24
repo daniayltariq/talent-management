@@ -7650,7 +7650,7 @@ button.close {
         //     html2pdf(document.body, {
         //         pagebreak: { mode: 'avoid-all' , before: '#table-break', },
         //         filename:  'Resume.pdf',
-        //     });                 
+        //     });
         // });
 
 
@@ -7661,26 +7661,24 @@ button.close {
 
 
 
-        function generatePdf() {        
-            return function (resolve, reject) {
-                        var element = document.getElementByTagName('body');
-                        var opt = {
-                                    pagebreak: { mode: 'avoid-all' , before: '#table-break', },
-                                    filename:  'Resume.pdf',
-                                }
+        var generatePdf = function () {
+                return html2pdf(document.body, {
+                            pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+                            filename:  'Resume.pdf',
+                        });
+                };
 
-                        html2pdf().from(element).set(opt).toPdf().get('pdf').then(function (pdf) {
-                           
-                            
-                        }).save();
-                        resolve(1);
-                    }
-            }
+                    
+                    
+        $(document).ready(function(){
+            $.when( generatePdf() ).done(function() {
+                setTimeout(function() {
+                    window.close();
+                },1000);
+            });
+        });
 
-
-        generatePdf().then(function(result){
-            window.close();
-        })
+        
 
     </script>
 </body>
