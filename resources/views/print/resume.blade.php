@@ -7662,7 +7662,7 @@ button.close {
 
 
         var generatePdf = function () {
-                    var element = document.getElementByTagName('body');
+                    var element = $('body');
                     var opt = {
                             pagebreak: { mode: 'avoid-all' , before: '#table-break', },
                             filename:  'Resume.pdf',
