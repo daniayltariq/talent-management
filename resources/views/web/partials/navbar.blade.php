@@ -89,13 +89,13 @@
 							</li> --}}
 							
 							
-							{{-- @if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0))
+							{{-- @if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0)) --}}
 								
 									<li class="m-menu__list-item {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}">
 										<a href="{{ route('pricing') }}">Plans</a>
 									</li>
 								
-							@endif --}}
+							{{-- @endif --}}
 							
 							
 							@if(Auth::guest()) 

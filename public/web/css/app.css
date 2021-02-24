@@ -125,7 +125,7 @@ animation: 1.2s grow ease-in-out infinite 0.3s;
 @media (min-width: 1200px)
 {
 	.cust-cont {
-		max-width:1310px !important;
+		max-width:1360px !important;
 	}
 }
 

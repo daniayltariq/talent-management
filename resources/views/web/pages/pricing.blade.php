@@ -191,7 +191,12 @@ table.pricing td:nth-child(4) {
         
       @endforeach --}}
       @foreach ($plans as $plan)
-        <th class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}"><a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a></th>
+        <th class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
+          @if (url()->previous()== route('how-it-works'))
+              <a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a>
+          @endif
+          
+        </th>
       @endforeach
       
     </tr>
@@ -380,7 +385,9 @@ table.pricing td:nth-child(4) {
     <tr>
       <td></td>
       @foreach ($plans as $plan)
-        <td><a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a></td>
+        @if (url()->previous()== route('how-it-works'))
+            <a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a>
+        @endif
       @endforeach
       {{-- <td><button class="cd-btn btn btn__red secondary">Subscribe to Basic</button></td>
       <td><button class="cd-btn btn btn__red secondary">Subscribe to Standard</button></td>

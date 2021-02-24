@@ -57,10 +57,22 @@
 		@media (min-width: 992px)
 		{
 			.col-md-10 {
-				width: 77.333333% !important;
+				width: 75.333333% !important;
 			}
 		}
-			
+		
+		@media (min-width: 1200px)
+		{
+			.cust-cont {
+				max-width: 1360px !important;
+			}
+		}
+		@media only screen and (min-width: 1220px)
+		{
+			.cust-cont {
+				width: 1360px !important;
+			}
+		}
 			
 	</style>
   @include('web.partials.header')
