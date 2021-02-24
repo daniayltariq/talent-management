@@ -9,6 +9,18 @@
                 <h4 class="modal-title">
                     Add to Picklist
                 </h4>
+                @if($errors->any())
+                <div class="row">
+                    <div class="col-md-12">
+                        @foreach ($errors->all() as $error)
+                            @if($errors->has('member_id')||$errors->has('title')||$errors->has('description'))
+                                <div class="error">{{ $error }}</div>
+                            @endif
+                        @endforeach
+                        
+                    </div>
+                </div>
+                @endif
             </div>
             @php
                 $route="#";
@@ -38,9 +50,9 @@
                                     <option value="{{$picklist->id}}">{{$picklist->title}}</option>
                                 @endforeach
                             </select>
-                            @error('member_id')
+                            {{-- @error('member_id')
                                 <div class="error">Talent already exists</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     @endif
                     
@@ -48,16 +60,16 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Title</label>
                             <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="Enter Title">
-                            @error('title')
+                            {{-- @error('title')
                                 <div class="error">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Description</label>
                             <input type="text" class="form-control" name="description" id="exampleFormControlInput1" placeholder="Enter Description">
-                            @error('description')
+                            {{-- @error('description')
                                 <div class="error">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
                 </div>

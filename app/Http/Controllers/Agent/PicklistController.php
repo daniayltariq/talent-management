@@ -65,6 +65,7 @@ class PicklistController extends Controller
         $messages = [
             'title.required_if' => 'The :attribute field is required.',
             'description.required_if' => 'The :attribute field is required.',
+            'member_id.unique' => 'Talent already exists.',
         ];
 
         if ($request->picklist_id) {
