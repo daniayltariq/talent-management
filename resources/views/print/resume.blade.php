@@ -7675,7 +7675,7 @@ button.close {
                 setTimeout(function() {
                     $('body').html('')
                     // window.close();
-                },1500);
+                },2000);
             });
         });
 
