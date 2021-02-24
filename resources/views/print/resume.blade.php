@@ -7646,17 +7646,41 @@ button.close {
 
 
 
-        $(document).ready(function(){
-            html2pdf(document.body, {
-                pagebreak: { mode: 'avoid-all' , before: '#table-break', },
-                filename:  'Resume.pdf',
-            });                 
-        });
+        // $(document).ready(function(){
+        //     html2pdf(document.body, {
+        //         pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+        //         filename:  'Resume.pdf',
+        //     });                 
+        // });
 
 
-        setTimeout(function() {
+        // setTimeout(function() {
+        //     window.close();
+        // },1000);
+
+
+
+
+        function generatePdf() {        
+            return var $q = (function (resolve, reject) {
+                        var element = document.getElementByTagName('body');
+                        var opt = {
+                                    pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+                                    filename:  'Resume.pdf',
+                                }
+
+                        html2pdf().from(element).set(opt).toPdf().get('pdf').then(function (pdf) {
+                           
+                            
+                        }).save();
+                        resolve(1);
+                    })
+            }
+
+
+        generatePdf().then(function(result){
             window.close();
-        },1000);
+        })
 
     </script>
 </body>
