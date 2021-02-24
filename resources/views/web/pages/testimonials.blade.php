@@ -66,7 +66,7 @@
 		position: relative;
 	}
 
-	.testimonal__name:before {
+	.testimonal__text:before {
 		content: '“';
 		display: flex;
     	color: #df691a;

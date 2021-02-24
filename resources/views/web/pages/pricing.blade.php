@@ -387,7 +387,7 @@ table.pricing td:nth-child(4) {
       <td></td>
       @foreach ($plans as $plan)
         
-            <a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a>
+         <td><a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a></td>
         
       @endforeach
       
