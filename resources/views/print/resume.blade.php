@@ -7661,26 +7661,25 @@ button.close {
 
 
 
-        function generatePdf() {        
-            return function (resolve, reject) {
-                        var element = document.getElementByTagName('body');
-                        var opt = {
-                                    pagebreak: { mode: 'avoid-all' , before: '#table-break', },
-                                    filename:  'Resume.pdf',
-                                }
-
-                        html2pdf().from(element).set(opt).toPdf().get('pdf').then(function (pdf) {
-                           
-                            
-                        }).save();
-                        resolve(1);
+        var generatePdf = function () {
+                    var element = document.getElementByTagName('body');
+                    var opt = {
+                            pagebreak: { mode: 'avoid-all' , before: '#table-break', },
+                            filename:  'Resume.pdf',
                     }
-            }
+                    return html2pdf().set(opt).from(element).save();
+                };
 
+                    
+                    
+        $(document).ready(function(){
+            console.log('started');
+            $.when( generatePdf() ).done(function() {
+                window.close();
+            });
+        });
 
-        generatePdf().then(function(result){
-            window.close();
-        })
+        
 
     </script>
 </body>
