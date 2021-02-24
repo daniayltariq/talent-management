@@ -3,6 +3,7 @@
 @section('title', 'My Picklist')
 @section('styles')
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,900">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.css" integrity="sha512-WfDqlW1EF2lMNxzzSID+Tp1TTEHeZ2DK+IHFzbbCHqLJGf2RyIjNFgQCRNuIa8tzHka19sUJYBO+qyvX8YBYEg==" crossorigin="anonymous" />
 <style type="text/css">
 
 #picklist-modal {
@@ -50,6 +51,18 @@ h3{
 
 .p-1{
 	padding: 1rem;
+}
+
+.swal2-styled.swal2-confirm {
+	font-size: 1.625em !important;
+}
+
+.swal2-styled.swal2-cancel {
+	font-size: 1.625em !important;
+}
+
+.swal2-popup {
+	width: 37em !important;
 }
 </style>
 @endsection
@@ -180,19 +193,30 @@ h3{
 @endsection
 
 @section('scripts')
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.js" integrity="sha512-+uGHdpCaEymD6EqvUR4H/PBuwqm3JTZmRh3gT0Lq52VGDAlywdXPBEiLiZUg6D1ViLonuNSUFdbL2tH9djAP8g==" crossorigin="anonymous"></script>
 	<script>
 		$('.del_pl').on('click',function(e){
 			var that=$(this);
 			e.preventDefault();
-			toastr.success("<button type='button' id='confirmationRevertYes' class='btn clear p-1'>Yes</button>",'delete item?',
-				{
-					onShown: function (toast) {
-						$("#confirmationRevertYes").click(function(){
-							window.location.href=that.attr('href');
-							console.log('clicked yes');
-						});
-					}
-				});
+			
+			
+			Swal.fire({
+				title: 'Are you sure?',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes'
+				}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire(
+					'Deleted!',
+					'Picklist deleted.',
+					'success'
+					)
+					window.location.href=that.attr('href');
+				}
+			})
 		})
 	</script>
 @endsection

@@ -3,6 +3,7 @@
 @section('title', 'Picklist Items')
 @section('styles')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.css" integrity="sha512-WfDqlW1EF2lMNxzzSID+Tp1TTEHeZ2DK+IHFzbbCHqLJGf2RyIjNFgQCRNuIa8tzHka19sUJYBO+qyvX8YBYEg==" crossorigin="anonymous" />
 <style type="text/css">
 	.btn-share {
 		padding: 16px 32px;
@@ -155,6 +156,18 @@
 	.select2-drop-active{
 		z-index: 99999999 !important;
 	}
+
+	.swal2-styled.swal2-confirm {
+		font-size: 1.625em !important;
+	}
+
+	.swal2-styled.swal2-cancel {
+		font-size: 1.625em !important;
+	}
+
+	.swal2-popup {
+		width: 37em !important;
+	}
 </style>
 @endsection
 
@@ -235,7 +248,7 @@
 													<h2 class="d-inline">{{$item->member->profile->legal_first_name ?? $item->member->f_name }}
 														{{$item->member->profile->legal_last_name ?? $item->member->l_name}}</h2>
 													
-													<a class="del_pl" href="{{route('agent.delete_picklist_user',$item->id)}}"><i class="fa fa-trash text-red"></i></a>
+													<a class="del_pl" type="button" href="{{route('agent.delete_picklist_user',$item->id)}}"><i class="fa fa-trash text-red"></i></a>
 													
 													<a target="_blank" href="{{!is_null($item->member->profile->custom_link) ? url('/').'/member/'.$item->member->profile->custom_link : '#'}}"><p>{{!is_null($item->member->profile->custom_link) ? url('/').'/member/'.$item->member->profile->custom_link : ''}}</p></a>
 												</div>
@@ -483,5 +496,31 @@
 	   });
 	});
  </script>
-	
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.js" integrity="sha512-+uGHdpCaEymD6EqvUR4H/PBuwqm3JTZmRh3gT0Lq52VGDAlywdXPBEiLiZUg6D1ViLonuNSUFdbL2tH9djAP8g==" crossorigin="anonymous"></script>
+	<script>
+		$('.del_pl').on('click',function(e){
+			var that=$(this);
+			e.preventDefault();
+			
+			
+			Swal.fire({
+				title: 'Are you sure?',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes'
+				}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire(
+					'Deleted!',
+					'Picklist deleted.',
+					'success'
+					)
+					window.location.href=that.attr('href');
+				}
+			})
+		})
+	</script>
 @endsection
