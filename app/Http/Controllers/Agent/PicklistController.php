@@ -56,16 +56,22 @@ class PicklistController extends Controller
     {
         /* dd($request->all()); */
         $rules = [
-            'name' => ['string','nullable', 'max:50'],
-            'description' => ['string','nullable', 'max:191'],
+            'description' => ['required_if:picklist_id,null','string','nullable', 'max:191'],
+            'picklist_id' => ['nullable'],
             'member_id' => ['required', 'numeric'],
+            'title' => ['required_if:picklist_id,null','string','nullable', 'max:50'],
+        ];
+
+        $messages = [
+            'title.required_if' => 'The :attribute field is required.',
+            'description.required_if' => 'The :attribute field is required.',
         ];
 
         if ($request->picklist_id) {
             $rules['member_id'] = ['integer','unique:picklist_user,user_id,NULL,id,picklist_id,'.$request->picklist_id];
         }
 
-        $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $rules,$messages);
         
         if ($validator->fails()) {
             /* return $validator->errors(); */
