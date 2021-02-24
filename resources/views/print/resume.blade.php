@@ -7671,9 +7671,10 @@ button.close {
                     
                     
         $(document).ready(function(){
-            console.log('started');
             $.when( generatePdf() ).done(function() {
-                window.close();
+                setTimeout(function() {
+                    window.close();
+                },1000);
             });
         });
 
