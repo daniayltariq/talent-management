@@ -13,7 +13,7 @@
     </div>
     
     <div class="col-md-12 mt-5">
-        <h4 class="mb-4 upload-head heading">Your Videos</h4>
+        <h4 class="mb-4 upload-head heading">My Videos</h4>
     </div>
     <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
         <div class="row">
