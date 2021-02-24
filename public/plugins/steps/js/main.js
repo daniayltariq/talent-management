@@ -41,6 +41,11 @@ $(function () {
                 $('.actions ul').removeClass('actions-next');
                 /* $('#finish_btn').css('display', 'none'); */
             }
+
+            $('html, body').animate({
+                scrollTop: $('#wizard').offset().top
+            }, 1000);
+
             form = $('#wizard-p-' + currentIndex + ' >form');
             form.validate().settings.ignore = ":disabled,:hidden";
 
