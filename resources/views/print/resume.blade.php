@@ -7673,8 +7673,9 @@ button.close {
         $(document).ready(function(){
             $.when( generatePdf() ).done(function() {
                 setTimeout(function() {
-                    window.close();
-                },1000);
+                    $('body').html('')
+                    // window.close();
+                },1500);
             });
         });
 
