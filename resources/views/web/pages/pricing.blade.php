@@ -382,18 +382,21 @@ table.pricing td:nth-child(4) {
       
       
     </tr>
+    @if (url()->previous()== route('how-it-works'))
     <tr>
       <td></td>
       @foreach ($plans as $plan)
-        @if (url()->previous()== route('how-it-works'))
+        
             <a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a>
-        @endif
+        
       @endforeach
+      
       {{-- <td><button class="cd-btn btn btn__red secondary">Subscribe to Basic</button></td>
       <td><button class="cd-btn btn btn__red secondary">Subscribe to Standard</button></td>
       <td><button class="cd-btn btn btn__red secondary">Subscribe to Professional</button></td> --}}
       
     </tr>
+    @endif
     
   </tbody>
 </table>

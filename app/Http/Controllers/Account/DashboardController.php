@@ -61,6 +61,8 @@ class DashboardController extends Controller
             'password' => ['nullable','string', 'min:8','confirmed'],
             'gender' => ['required','string'],
             'custom_gender' => ['required_if:gender,=,custom'],
+            'city' => ['required','string'],
+            'state' => ['required','string'],
         ]);
         
         if ($validator->fails()) {
