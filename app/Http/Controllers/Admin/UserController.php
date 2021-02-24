@@ -28,7 +28,7 @@ class UserController extends Controller
             'roles', function($q){
                 $q->where('name','<>','superadmin');
             }
-        )->with('roles')->paginate(10);
+        )->with('roles')->paginate(25);
         $roles=Role::where('name','<>','superadmin')->get();
         
         /* dd($user); */
