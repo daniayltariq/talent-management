@@ -408,15 +408,15 @@ label{
                                                         <div class="form-row">
                                                             <div class="form-holder" style="flex:1">
                                                                 <label for="">{{strtoupper('Name')}}</label>
-                                                                <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$key}}][name]" class="form-control">
+                                                                <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$key}}][name]" class="form-control limit_char">
                                                             </div>
                                                             <div class="form-holder" style="flex:1">
                                                                 <label for="">{{strtoupper('Role')}}</label>
-                                                                <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$key}}][role]" placeholder="" class="form-control">
+                                                                <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$key}}][role]" placeholder="" class="form-control limit_char">
                                                             </div>
                                                             <div class="form-holder" style="flex:2">
                                                                 <label for="">{{strtoupper('Director or Production Company')}}</label>
-                                                                <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$key}}][production]" placeholder="" class="form-control">
+                                                                <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$key}}][production]" placeholder="" class="form-control limit_char">
                                                             </div>
                                                             <div class="form-holder" style="flex:1">
                                                                       <label for="" style="display:block">&nbsp;</label>
@@ -435,15 +435,15 @@ label{
                                                 <div class="form-row">
                                                     <div class="form-holder"  style="flex:1">
                                                         <label for="">{{strtoupper('NAME')}}</label>
-                                                        <input type="text" placeholder="" data-name="name" {{-- name="experience[{{$expr->count() ?? 0}}][name]" --}} class="form-control">
+                                                        <input type="text" placeholder="" data-name="name" {{-- name="experience[{{$expr->count() ?? 0}}][name]" --}} class="form-control limit_char">
                                                     </div>
                                                     <div class="form-holder" style="flex:1">
                                                         <label for="">{{strtoupper('ROLE')}}</label>
-                                                        <input type="text" data-name="role" placeholder=""{{--  name="experience[{{$expr->count() ?? 0}}][role]" --}} class="form-control">
+                                                        <input type="text" data-name="role" placeholder=""{{--  name="experience[{{$expr->count() ?? 0}}][role]" --}} class="form-control limit_char">
                                                     </div>
                                                     <div class="form-holder" style="flex:2">
                                                         <label for="">{{strtoupper('DIRECTOR or PRODUCTION COMPANY')}}</label>
-                                                        <input type="text" data-name="production" placeholder=""{{--  name="experience[{{$expr->count() ?? 0}}][production]" --}} class="form-control">
+                                                        <input type="text" data-name="production" placeholder=""{{--  name="experience[{{$expr->count() ?? 0}}][production]" --}} class="form-control limit_char">
                                                     </div>
                                                     <div class="form-holder" style="flex:1">
                                                            <label for="" style="display:block">&nbsp;</label>
@@ -491,15 +491,15 @@ label{
                                                     <div class="form-row">
                                                         <div class="form-holder"  style="flex:1">
                                                             <label for="">Name</label>
-                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                             <label for="">Role</label>
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control">
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                             <label for="">Production</label>
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control">
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                                <label for="" style="display:block">&nbsp;</label>
@@ -518,15 +518,15 @@ label{
                                             <div class="form-row">
                                                 <div class="form-holder" style="flex:1">
                                                     <label for="">Name</label>
-                                                    <input type="text" data-name="name"{{--  name="experience[{{$expr_theater->count() ?? 0}}][name]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="name"{{--  name="experience[{{$expr_theater->count() ?? 0}}][name]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
                                                     <label for="">Role</label>
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_theater->count() ?? 0}}][role]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_theater->count() ?? 0}}][role]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
                                                     <label for="">Production</label>
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
                                                        <label for="" style="display:block">&nbsp;</label>
@@ -571,15 +571,15 @@ label{
                                                     <div class="form-row">
                                                         <div class="form-holder"  style="flex:1">
                                                             <label for="">{{strtoupper('Name')}}</label>
-                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                             <label for="">{{strtoupper('Role')}}</label>
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control">
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                             <label for="">{{strtoupper('Production')}}</label>
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control">
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                                <label for="" style="display:block">&nbsp;</label>
@@ -598,15 +598,15 @@ label{
                                             <div class="form-row">
                                                 <div class="form-holder" style="flex:1">
                                                     <label for="">{{strtoupper('Name')}}</label>
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_tele->count() ?? 0}}][name]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_tele->count() ?? 0}}][name]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
                                                     <label for="">{{strtoupper('Role')}}</label>
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_tele->count() ?? 0}}][role]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_tele->count() ?? 0}}][role]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
                                                     <label for="">{{strtoupper('Location')}}</label>
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_tele->count() ?? 0}}][production]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_tele->count() ?? 0}}][production]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
                                                        <label for="" style="display:block">&nbsp;</label>
@@ -650,15 +650,15 @@ label{
                                                     <div class="form-row">
                                                         <div class="form-holder" style="flex:1">
                                                             <label for="">{{strtoupper('Name of Commercial')}}</label>
-                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                             <label for="">{{strtoupper('Role Played')}}</label>
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control">
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:2">
                                                             <label for="">{{strtoupper('Director or Production Company')}}</label>
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control">
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                                <label for="" style="display:block">&nbsp;</label>
@@ -678,16 +678,16 @@ label{
                                             <div class="form-row">
                                                 <div class="form-holder" style="flex:1">
                                                 <label for="">{{strtoupper('Name of Commercial')}}</label>                     
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_comm->count() ?? 0}}][name]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_comm->count() ?? 0}}][name]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
                                                     <label for="">{{strtoupper('Role Played')}}</label>
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_comm->count() ?? 0}}][role]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_comm->count() ?? 0}}][role]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 
                                                 <div class="form-holder" style="flex:2">
                                                     <label for="">{{strtoupper('Director or Production Company')}}</label>
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_comm->count() ?? 0}}][production]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_comm->count() ?? 0}}][production]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 
                                                 <div class="form-holder" style="flex:1">
@@ -732,15 +732,15 @@ label{
                                                     <div class="form-row">
                                                         <div class="form-holder"  style="flex:1">
                                                             <label for="">{{strtoupper('Training Class')}}</label>
-                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                             <label for="">{{strtoupper('Instructor')}}</label>
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control">
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                             <label for="">{{strtoupper('Training Company')}}</label>
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control">
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control limit_char">
                                                         </div>
                                                         <div class="form-holder" style="flex:1">
                                                                <label for="" style="display:block">&nbsp;</label>
@@ -760,15 +760,15 @@ label{
                                             <div class="form-row">              
                                                 <div class="form-holder" style="flex:1">
                                                     <label for="">{{strtoupper('Training Class')}}</label>
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_train->count() ?? 0}}][name]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_train->count() ?? 0}}][name]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
                                                     <label for="">{{strtoupper('Instructor')}}</label>
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_train->count() ?? 0}}][role]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_train->count() ?? 0}}][role]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 <div class="form-holder" style="flex:1">
                                                     <label for="">{{strtoupper('Training Company')}}</label>
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_train->count() ?? 0}}][production]" --}} placeholder="" class="form-control">
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_train->count() ?? 0}}][production]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                             
                                                 <div class="form-holder" style="flex:1">
@@ -1091,14 +1091,13 @@ label{
         });
     }
 
-    function limit(element)
-    {
-        var max_chars = 3;
+    $(document).on('input','.limit_char',function(){
+        var max_chars = 50;
 
-        if(element.value.length > max_chars) {
-            element.value = element.value.substr(0, max_chars);
+        if($(this).val().length > max_chars) {
+            $(this).val($(this).val().substr(0, max_chars)) ;
         }
-    }
+    })
 
     $(document).ready(function(){
 
