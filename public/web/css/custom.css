@@ -486,3 +486,8 @@ input[type=number] {
 .repeater .form-holder:before{
     top: 70%;
 }
+
+
+body.swal2-shown.swal2-height-auto {
+    padding-right: 0px !important;
+}
