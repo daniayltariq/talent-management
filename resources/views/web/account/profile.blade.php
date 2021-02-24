@@ -251,7 +251,7 @@ label{
                                                 <div class="col-md-4">
                                                     <label class="font-15">Weight (lbs)</label>
                                                     <div class="form-holder">
-                                                        <input type="number" name="weight" id="weight" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control" min="0" max="400">
+                                                        <input type="number" name="weight" id="weight" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control" min="0" max="400">
                                                     </div>
                                                 </div>
                                             </div>
@@ -289,19 +289,19 @@ label{
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Chest</label>
-                                                        <input type="number" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control" min="0" max="124">
+                                                        <input type="number" value="{{$profile->chest ?? ''}}" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control" min="0" max="124">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Neck</label>
-                                                        <input type="number" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control" min="0" max="50">
+                                                        <input type="number" name="neck" value="{{$profile->neck ?? ''}}" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control" min="0" max="50">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Waist</label>
-                                                        <input type="number" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control" min="0" max="100">
+                                                        <input type="number" name="waist" value="{{$profile->waist ?? ''}}" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control" min="0" max="100">
                                                     </div>
                                                 </div>
                                             </div>
@@ -310,7 +310,7 @@ label{
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Sleeves</label>
-                                                        <input type="number" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control" min="0" max="50">
+                                                        <input type="number" name="sleves" value="{{$profile->sleves ?? ''}}" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control" min="0" max="50">
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-md-4">
@@ -321,7 +321,7 @@ label{
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Shoe</label>
-                                                        <input type="number" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control" min="0" max="100">
+                                                        <input type="number" name="shoes" value="{{$profile->shoes ?? ''}}" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" placeholder="{{strtoupper('Shoe size')}}" class="form-control" min="0" max="100">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -1074,9 +1074,9 @@ label{
 </script>
 
 <script>
-    function setInputFilter(textbox, inputFilter) {
-        ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
-            textbox.addEventListener(event, function() {
+    (function($) {
+        $.fn.inputFilter = function(inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
             if (inputFilter(this.value)) {
                 this.oldValue = this.value;
                 this.oldSelectionStart = this.selectionStart;
@@ -1088,8 +1088,8 @@ label{
                 this.value = "";
             }
             });
-        });
-    }
+        };
+    }(jQuery));
 
     $(document).on('input','.limit_char',function(){
         var max_chars = 50;
@@ -1099,12 +1099,12 @@ label{
         }
     })
 
-    $(document).ready(function(){
+    /* $(document).ready(function(){
 
-        setInputFilter(document.getElementById("weight"), function(value) {
-            return /^\d*\.?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+        $("#weight").inputFilter( function(value) {
+            return /^\d*$/.test(value);
         });
-    });
+    }); */
 </script>
 
 @endsection
