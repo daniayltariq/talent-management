@@ -7650,7 +7650,7 @@ button.close {
         //     html2pdf(document.body, {
         //         pagebreak: { mode: 'avoid-all' , before: '#table-break', },
         //         filename:  'Resume.pdf',
-        //     });                 
+        //     });
         // });
 
 
@@ -7662,12 +7662,10 @@ button.close {
 
 
         var generatePdf = function () {
-                    var element = $('body');
-                    var opt = {
+                return html2pdf(document.body, {
                             pagebreak: { mode: 'avoid-all' , before: '#table-break', },
                             filename:  'Resume.pdf',
-                    }
-                    return html2pdf().set(opt).from(element).save();
+                        });
                 };
 
                     
