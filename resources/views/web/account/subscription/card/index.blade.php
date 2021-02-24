@@ -274,6 +274,10 @@
 <script>
   $(document).ready(function(){
     $('#success_otp').hide();
+
+    toastr.options = {
+      "timeOut": "8000",
+    }
   })
 </script>
 <script>
