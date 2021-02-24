@@ -7662,7 +7662,7 @@ button.close {
 
 
         function generatePdf() {        
-            return var $q = (function (resolve, reject) {
+            return function (resolve, reject) {
                         var element = document.getElementByTagName('body');
                         var opt = {
                                     pagebreak: { mode: 'avoid-all' , before: '#table-break', },
@@ -7674,7 +7674,7 @@ button.close {
                             
                         }).save();
                         resolve(1);
-                    })
+                    }
             }
 
 
