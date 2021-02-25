@@ -43,7 +43,7 @@ $(function () {
             }
 
             $('html, body').animate({
-                scrollTop: $('#wizard').offset().top
+                scrollTop: $('.page__title').offset().top
             }, 1000);
 
             form = $('#wizard-p-' + currentIndex + ' >form');
