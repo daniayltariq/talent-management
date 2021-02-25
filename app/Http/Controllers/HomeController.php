@@ -86,13 +86,13 @@ class HomeController extends Controller
       $pro = Profile::where('custom_link',$link)->orWhere('id',$link)->first();
       if ($pro) {
          $user= User::findOrFail($pro->user_id);
-         if ($user->attachments()->exists()) {
+         if (/* $user->attachments()->exists() */ $user->profile()->exists()) {
             $data=[
                'profile'=>$user->profile,
                'social_links'=>$user->social_links,
-               'images'=>$user->attachments->where('type','image'),
-               'video'=>$user->attachments->where('type','video'),
-               'audio'=>$user->attachments->where('type','audio')
+               'images'=>$user->attachments->where('type','image') ?? '',
+               'video'=>$user->attachments->where('type','video') ?? '',
+               'audio'=>$user->attachments->where('type','audio') ?? ''
             ];
 
             $subs=$user->subscriptions()->active()->first();
