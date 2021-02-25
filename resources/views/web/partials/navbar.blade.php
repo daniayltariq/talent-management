@@ -40,11 +40,19 @@
 							{{-- <li class="m-menu__list-item  {{ Request::is('how-it-works') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('how-it-works') }}">How it works</a>
 							</li> --}}
+							@if(Auth::guest()) 
+								<li class="m-menu__list-item  {{ Request::is('how-it-works') ? 'm-menu__list-item_active' : '' }}">
+									<a href="{{ route('how-it-works') }}">Join Us</a>
+								</li>
+							@endif
 							<li class="m-menu__list-item  {{ Request::is('featured-talents') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('featured_talents') }}">Featured Talent</a>
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('testimonials') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('testimonials') }}">Testimonials</a>
+							</li>
+							<li class="m-menu__list-item {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}">
+								<a href="{{ route('pricing') }}">Plans</a>
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('community') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('community') }}">Community</a>
@@ -91,9 +99,9 @@
 							
 							{{-- @if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0)) --}}
 								
-									<li class="m-menu__list-item {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}">
+									{{-- <li class="m-menu__list-item {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}">
 										<a href="{{ route('pricing') }}">Plans</a>
-									</li>
+									</li> --}}
 								
 							{{-- @endif --}}
 							
@@ -116,9 +124,7 @@
 										</li>
 									</ul>
 								</li> --}}
-								<li class="m-menu__list-item  {{ Request::is('how-it-works') ? 'm-menu__list-item_active' : '' }}">
-									<a href="{{ route('how-it-works') }}">Join Us</a>
-								</li>
+								
 								<li class="m-menu__list-item menu-item-has-children" style="padding-top: 0;">
 									<button type="button" class="btn-cust btn-warning bg-talent" style="height: unset !important">
 										<span style="left: -3px;background: none;"><i class="fas fa-list"></i></span>
