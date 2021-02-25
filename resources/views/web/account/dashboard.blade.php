@@ -789,7 +789,7 @@
                                         @if($data['plan'] && ($data['plan']->social_links==1 && $data['plan']->social_limit !== count($data["social"])) )
                                             <input data-repeater-create type="button" class="btn btn-primary" id="repeater-add-btn" value="Add"/>
                                             <hr>
-                                            <button type="submit" class="btn btn-secondary">Save</button>
+                                            <button type="submit" class="btn btn-secondary">Save and Return</button>
                                         @else
                                             <div class="alert alert-primary" role="alert">
                                                 <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
