@@ -52,10 +52,10 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
-            // 'f_name' => ['required', 'string','max:40'],
-            // 'l_name' => ['required', 'string'],
+            'f_name' => ['string','max:40'],
+            'l_name' => ['string','max:40'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email','unique:users,email,'.auth()->user()->id],
             'password' => ['nullable','string', 'min:8','confirmed'],
@@ -77,7 +77,7 @@ class DashboardController extends Controller
             $country_data=json_decode($request->new_phone,true);
            
             $user=User::findOrFail(auth()->user()->id);
-            $user->fill(is_null($request->password)?$request->except(['password','dob']):$request->all());
+            $user->fill(is_null($request->password)?$request->except(['password','dob','f_name','l_name']):$request->except(['f_name','l_name']);
             if($request->date_){
                 $user->dob=$request->date_['year'].'-'.$request->date_['month'].'-'.$request->date_['day'];
             }
@@ -93,10 +93,10 @@ class DashboardController extends Controller
             $user->custom_gender = $request->custom_gender;
             $user->save();
 
-            $user->profile()->update([
-                'legal_first_name'=> $request->f_name,
-                'legal_last_name'=> $request->l_name,
-            ]);
+            // $user->profile()->update([
+            //     'legal_first_name'=> $request->f_name,
+            //     'legal_last_name'=> $request->l_name,
+            // ]);
             
             return redirect()->back()->with(array(
                 'message' => 'Successfully updated', 
