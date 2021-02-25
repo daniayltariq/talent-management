@@ -153,7 +153,7 @@ class RegisterController extends Controller
             'g_year' => ['nullable', 'string', 'max:10'],
             "g_date_"    => "nullable|array|min:3",
             "g_date_.*"  => "nullable|string", */
-            'g_dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')],
+            'g_dob' => ['nullable','date_format:Y-m-d','before:'.date('Y-m-d')],
             'g_phone' => ['nullable', 'max:255','unique:users,g_phone,'.auth()->user()->id],
             'g_landline' => ['nullable', 'max:255','unique:users,g_landline,'.auth()->user()->id],
             'g_country' => ['nullable', 'string', 'max:255'],
@@ -161,7 +161,7 @@ class RegisterController extends Controller
             'g_state' => ['nullable', 'string', 'max:255'],
             /* 'g_h_adress_1' => ['string', 'max:255','nullable'],
             'h_adress_1' => ['string', 'max:255','nullable'], */
-            'dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')],
+            'dob' => ['nullable','date_format:Y-m-d','before:'.date('Y-m-d')],
             'f_name' => ['required', 'string', 'max:255'],
             'l_name' => ['required', 'string', 'max:255'],
             /* 'day' => ['required', 'string', 'max:10'],

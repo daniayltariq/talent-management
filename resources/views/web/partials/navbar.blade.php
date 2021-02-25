@@ -46,7 +46,7 @@
 								</li>
 							@endif
 							<li class="m-menu__list-item  {{ Request::is('featured-talents') ? 'm-menu__list-item_active' : '' }}">
-								<a href="{{ route('featured_talents') }}">Featured Talent</a>
+								<a href="{{ route('featured_talents') }}">Featured</a>
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('testimonials') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('testimonials') }}">Testimonials</a>
