@@ -185,7 +185,7 @@
     }
 
     .content:hover .content-details-set-profile{
-    top: 90%;
+    top: 60%;
     left: 30%;
     opacity: 1;
     }
