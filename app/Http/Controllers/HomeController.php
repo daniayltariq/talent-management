@@ -102,7 +102,7 @@ class HomeController extends Controller
                
                $data["plan"]=$plan;
             }
-            
+            dd($data);
             return view('web.pages.models-single',compact('data'));
          }
          else{
