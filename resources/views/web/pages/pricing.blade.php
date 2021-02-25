@@ -144,6 +144,9 @@ table.pricing td:nth-child(4) {
   padding: 9px 25px !important;
 }
 
+.talent_color{
+  color: #f37c2c ;
+}
 </style>
 @endsection
 
@@ -194,6 +197,8 @@ table.pricing td:nth-child(4) {
         <th class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
           @if (url()->previous()== route('how-it-works'))
               <a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a>
+          @else
+              <span class="txt-l talent_color">{{$plan->name}}</span>
           @endif
           
         </th>
@@ -382,12 +387,19 @@ table.pricing td:nth-child(4) {
       
       
     </tr>
-    @if (url()->previous()== route('how-it-works'))
+  
     <tr>
       <td></td>
       @foreach ($plans as $plan)
         
-         <td><a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a></td>
+        <td>
+          @if (url()->previous()== route('how-it-works'))
+            <a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a>
+          @else
+            <span class="txt-l talent_color">{{$plan->name}}</span>
+          @endif
+           
+        </td>
         
       @endforeach
       
@@ -396,7 +408,7 @@ table.pricing td:nth-child(4) {
       <td><button class="cd-btn btn btn__red secondary">Subscribe to Professional</button></td> --}}
       
     </tr>
-    @endif
+ 
     
   </tbody>
 </table>
