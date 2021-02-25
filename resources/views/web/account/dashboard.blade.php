@@ -185,7 +185,7 @@
     }
 
     .content:hover .content-details-set-profile{
-    top: 90%;
+    top: 60%;
     left: 30%;
     opacity: 1;
     }
@@ -1151,7 +1151,7 @@
                 _method: 'DELETE',
             },
             success: function(res) {
-                toastr.success('File removed successfully');
+                toastr.success('Profile Image updated');
                 // window.location.reload();
             },
             error: function(error) {

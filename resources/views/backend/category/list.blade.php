@@ -2,6 +2,7 @@
 
 @section('styles')
 <link href="{{asset('backend-assets/assets/vendors/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css')}}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.css" integrity="sha512-WfDqlW1EF2lMNxzzSID+Tp1TTEHeZ2DK+IHFzbbCHqLJGf2RyIjNFgQCRNuIa8tzHka19sUJYBO+qyvX8YBYEg==" crossorigin="anonymous" />
 	<style>
 		.bootstrap-switch-container{
 			width: 160px !important;
@@ -148,5 +149,27 @@ $(document).ready(function(){
 
 	
 });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.js" integrity="sha512-+uGHdpCaEymD6EqvUR4H/PBuwqm3JTZmRh3gT0Lq52VGDAlywdXPBEiLiZUg6D1ViLonuNSUFdbL2tH9djAP8g==" crossorigin="anonymous"></script>
+<script>
+	$('.del_pl').on('click',function(e){
+		var that=$(this);
+		e.preventDefault();
+		
+		
+		Swal.fire({
+			title: 'Are you sure?',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+			}).then((result) => {
+			if (result.isConfirmed) {
+				
+				that.parent('form').submit();
+			}
+		})
+	})
 </script>
 @endsection
