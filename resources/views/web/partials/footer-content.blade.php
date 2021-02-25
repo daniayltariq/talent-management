@@ -4,7 +4,7 @@
 			<div class="footer__widgets clearfix">
 				<div class="col-md-12 col-sm-12 col-xs-12 footer__social text-center">
 					<div class="footer__title">Our Social Media</div>
-					<ul class="fs__list clearfix" style="width: 16%;">
+					<ul class="fs__list clearfix">
 						{{-- <li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-linkedin"></i></a></li> --}}
 						{{-- <li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-facebook"></i></a></li> --}}
 						<li class="fs__list-item"><a href="https://www.instagram.com/thetalentdepot/" target="_blank" class="animation"><i class="mdi mdi-instagram"></i></a></li>
