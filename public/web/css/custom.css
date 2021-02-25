@@ -15,7 +15,12 @@ html{
 }
 .cd-full__contant {
     float: left;
-    padding-left: 10%;
+    /*padding-left: 10%; */
+    padding-top: 1%;
+    width: 100%;
+}
+.cd-slider-nav{
+    padding-top: 1.5rem!important;
 }
 
 @media only screen and (min-width: 1600px){
@@ -393,7 +398,7 @@ button.multiselect.dropdown-toggle.btn.btn-default {
 
 @media only screen and (min-width: 1170px){
     .cd-hero-slider {
-        height: 75vh;
+        height: 40vh;
     }
 }
 
