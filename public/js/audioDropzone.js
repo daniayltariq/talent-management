@@ -71,9 +71,12 @@ function render_audiodropzone(store_url) {
             var myDropzone = this;
             const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
 
-            this.on("maxfilesexceeded", function (file) {
-                toastr.error("No more files please!");
-            });
+            if (file.size > 12582912) {
+                $(file.previewElement).find('.dz-error-message').text("Your file exceeds 12 MB. Remove this file to proceed");
+            }
+            else {
+                $(file.previewElement).find('.dz-error-message').text(response.message);
+            }
             /* this.on('addedfile', function (file) {
                 console.log($('#audioDropzone')[0].dropzone.options.maxFiles);
                 if (validAudioTypes.includes(file.type)) {

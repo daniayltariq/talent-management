@@ -288,6 +288,10 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user=User::findOrFail($id);
+        if($user->profile()->exists()){
+            $user->profile()->delete();
+        }
+        
         $user->delete();
         return redirect()->back();
     }

@@ -318,7 +318,7 @@
     }
 
     .dropzone .dz-preview .dz-error-message {
-        top: 140px;     /* move the tooltip below the "Remove" link */
+        top: 150px;     /* move the tooltip below the "Remove" link */
     }
     .dropzone .dz-preview .dz-error-message:after {
         left: 20px;     /* move the tooltip's arrow to the left of the "Remove" link */
@@ -1026,7 +1026,7 @@
 <script type="text/javascript">
 
     const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
-    const validVideoTypes = ['video/mp4', 'video/x-ms-wmv', 'video/mov', 'video/wmv'];
+    const validVideoTypes = ['video/mp4','video/mkv' ,'video/x-ms-wmv', 'video/mov', 'video/wmv'];
     const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
 
     var uploadedDocumentMap = {};
