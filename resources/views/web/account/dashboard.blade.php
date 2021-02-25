@@ -357,6 +357,19 @@
     .error {
         font-size: 13px;
     }
+
+    .audio__container{
+        width: 50%;
+        display: grid;
+    }
+
+    .remove_audio{
+        display: none;
+    }
+
+    .audio__container:hover .remove_audio{
+        display: block;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -1128,7 +1141,14 @@
                 _method: 'DELETE',
             },
             success: function(res) {
-                ele.closest('.content').remove();
+                if (ele.data('type')=='audio' || ele.data('type')=='video') {
+                    console.log('remove audio');
+                    ele.closest('.audio__container').remove();
+                }
+                else{
+                    ele.closest('.content').remove();
+                }
+                
                 toastr.success('File removed successfully');
                 // window.location.reload();
             },

@@ -419,7 +419,7 @@
                      </h2>
                      <div class="sp-thumbnails">
                         @forelse ($data['video'] as $vid)
-                        <video width="320" height="240" controls>
+                        <video width="320" height="240" controls disablepictureinpicture controlsList="nodownload">
                            <source src="{{ asset('storage/uploads/uploadData/' . $vid->file ?? '') }}" type="video/mp4">
                         </video>
                         @empty
@@ -444,7 +444,7 @@
                   </h2>
                   <div class="sp-thumbnails">
 					@forelse ($data['audio'] as $audio)
-						<audio controls>
+						<audio controls controlsList="nodownload">
 							<source src="{{ asset('storage/uploads/uploadData/' . $audio->file ?? '') }}" type="audio/mpeg">
 						</audio>
 					@empty
