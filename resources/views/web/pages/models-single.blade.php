@@ -287,47 +287,48 @@
    <div class="container">
       <div class="row">
          <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
-            <div class="row">
+            <div class="row {{count($data['images'])==0 ? 'd-flex' : ''}}">
               <div class="element-loading"></div>
-               <div id="model-slider-single" class="s-model__photos col-md-6">
-    				   @if (count($data['images'])>0)
-    					   <div class="sp-slides">
-    							@foreach ($data['images'] as $img)
-    								<div class="sp-slide">
-    									<img class="sp-image" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-    									alt="single1"
-    									data-src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-    									data-small="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-    									data-medium="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-    									data-large="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-    									data-retina="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
-    									style="object-fit: cover;"/>
-    								</div>
-							@endforeach
-							
-								{{-- <div class="sp-slide">
-									<img class="sp-image" src="{{asset('web/img/single2.jpg')}}"
-									alt="single2"
-									data-src="{{asset('web/img/single2.jpg')}}"
-									data-small="{{asset('web/img/single2.jpg')}}"
-									data-medium="{{asset('web/img/single2.jpg')}}"
-									data-large="{{asset('web/img/single2.jpg')}}"
-									data-retina="{{asset('web/img/single2.jpg')}}"/>
-								</div> --}}
-						</div>
-						<div class="sp-thumbnails">
-							<h2 class="s-model__name">
-								<span class="line"></span>Model Photos
-							</h2>
-							@foreach ($data['images'] as $img)
-								<img class="sp-thumbnail" style="object-fit: cover;"  alt="thumb1" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"/>
-							@endforeach
-						</div>
-					@else
-						<h4>No photos available</h4>
-				   @endif
-                  
-               </div>
+               @if (count($data['images'])>0)
+                  <div id="model-slider-single" class="s-model__photos col-md-6">
+                     
+                        <div class="sp-slides">
+                           @foreach ($data['images'] as $img)
+                              <div class="sp-slide">
+                                 <img class="sp-image" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+                                 alt="single1"
+                                 data-src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+                                 data-small="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+                                 data-medium="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+                                 data-large="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+                                 data-retina="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"
+                                 style="object-fit: cover;"/>
+                              </div>
+                           @endforeach
+                        
+                           {{-- <div class="sp-slide">
+                              <img class="sp-image" src="{{asset('web/img/single2.jpg')}}"
+                              alt="single2"
+                              data-src="{{asset('web/img/single2.jpg')}}"
+                              data-small="{{asset('web/img/single2.jpg')}}"
+                              data-medium="{{asset('web/img/single2.jpg')}}"
+                              data-large="{{asset('web/img/single2.jpg')}}"
+                              data-retina="{{asset('web/img/single2.jpg')}}"/>
+                           </div> --}}
+                        </div>
+                        <div class="sp-thumbnails">
+                           <h2 class="s-model__name">
+                              <span class="line"></span>Model Photos
+                           </h2>
+                           @foreach ($data['images'] as $img)
+                              <img class="sp-thumbnail" style="object-fit: cover;"  alt="thumb1" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"/>
+                           @endforeach
+                        </div>
+                     
+                  </div>
+               @else
+                  <div class="col-sm-7"><h4>No photos available</h4></div>
+               @endif
                <div class="s-model__contant col-sm-5">
                   <h2 class="s-model__name">
                      <span class="line"></span>{{$data['profile']->legal_first_name ?? ''}} {{$data['profile']->legal_last_name ?? ''}}
