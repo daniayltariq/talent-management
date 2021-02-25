@@ -2,7 +2,7 @@
 <div class="row mt-5">
     <div class="col-md-12">
         <div class="alert alert-primary" role="alert">
-            <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
+            {{-- <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span> --}}
             
             <ul>
                 <li>You are allowed to add <span id="allowed_pics">{{$data['plan']->videos}}</span> Videos</li>

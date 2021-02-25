@@ -1,7 +1,7 @@
 <div class="row mt-5">
     <div class="col-md-12">
         <div class="alert alert-primary d-flex" role="alert">
-            <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
+            {{-- <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span> --}}
             <ul>
                 <li>You are allowed to add <span id="allowed_pics">{{$data['plan']->pictures}}</span> Images.</li>
                 <li>Supported formats i.e .jpeg .jpg .png</li>

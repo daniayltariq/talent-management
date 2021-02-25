@@ -2,8 +2,8 @@
 <div class="row mt-5">
     <div class="col-md-12">
         <div class="alert alert-primary" role="alert">
-            <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
-            You are allowed to add <span id="allowed_pics">{{$data['plan']->audios}}</span> Audios
+            <{{-- span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
+            You are allowed to add <span id="allowed_pics">{{$data['plan']->audios}}</span> Audios --}}
             <ul>
                 <li>You are allowed to add <span id="allowed_pics">{{$data['plan']->audios}}</span> Audios</li>
                 <li>Supported formats i.e .mp3 .wma .wav</li>
