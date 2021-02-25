@@ -80,6 +80,10 @@ class HomeController extends Controller
          'roles', function($q){
              $q->whereNotIn('name',['superadmin','agent']);
          }
+      )->whereHas(
+         'profile', function($q){
+            $q->where('profile_img','<>',null);
+         }
       )->with('profile')->get();
       $skills=Skill::all();
       /* dd($members); */
