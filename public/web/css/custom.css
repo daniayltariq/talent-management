@@ -367,7 +367,13 @@ button.multiselect.dropdown-toggle.btn.btn-default {
 
 .fs__list {
     margin: auto;
-    width: fit-content;
+    width: 16%;
+}
+@media only screen and (max-width: 992px){
+    .fs__list {
+        margin: auto;
+        width: 100%;
+    }
 }
 .footer__title {
     margin-bottom: 40px;
