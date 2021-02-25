@@ -474,14 +474,14 @@
                                     </div>
                                     <div class="col-6 form-row">
                                         <label for="dob" class="form-label mt-2">DOB</label>
-                                        @php
+                                        {{-- @php
                                             $dob=explode('-',auth()->user()->dob);
                                         @endphp
-                                        <section id="date-of-birth-example-1">
+                                        <section id="date-of-birth-example-1"> --}}
                                             {{-- <fieldset style="display: flex;">
                                               <div class="field-inline-block">
                                                 <label>Month</label> --}}
-                                                <input type="hidden" name="day_hidden" class="date-field form-control" />
+                                               {{--  <input type="hidden" name="day_hidden" class="date-field form-control" /> --}}
                                               {{-- </div>
                                               /
                                               <div class="field-inline-block">
@@ -493,8 +493,9 @@
                                                 <label>Year</label>
                                                 <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field form-control date-field--year" value="{{$dob[0]??'' }}" />
                                               </div> --}}
-                                            </fieldset>
-                                        </section>
+                                            {{-- </fieldset> --}}
+                                        {{-- </section> --}}
+                                        <input id="dob" type="date" min='1920-01-01' class="form-control" name="dob" value="{{auth()->user()->dob ?? ''}}" required autocomplete="dob" autofocus>
                                         @error('dob')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -1385,8 +1386,9 @@
                     mm='0'+mm
                 } 
 
-            /* today = yyyy+'-'+mm+'-'+dd; */
-            var max_limit = new Date();
+            today = yyyy+'-'+mm+'-'+dd;
+            document.getElementById("dob").setAttribute("max", today);
+            /* var max_limit = new Date();
             var min_limit = new Date();
             max_limit.setDate(today.getDate() - 31);
             min_limit.setDate(today.getDate() - (365*100));
@@ -1401,7 +1403,7 @@
                 monthFormat: 'short',
                 /* minYear: 1920,
                 maxYear: yyyy-1 */
-            });
+            }); */
 
             $('[name="gender"]').on('change',function(){
                 if ($(this).val()=='custom') {

@@ -3,7 +3,7 @@ function render_dropzone(store_url) {
         //id of drop zone element 1
         '#imageDropzone', {
         url: store_url,
-        maxFilesize: 12, // MB
+        maxFilesize: 4, // MB
         acceptedFiles: "image/jpg,image/jpeg,image/png",
         dictDefaultMessage: "Drag & Drop Your File(s) Here or click to upload.<br> i.e .jpg .jpeg .png",
         /* maxFiles: function (file, done) {

@@ -4,6 +4,11 @@
         <div class="alert alert-primary" role="alert">
             <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
             You are allowed to add <span id="allowed_pics">{{$data['plan']->audios}}</span> Audios
+            <ul>
+                <li>You are allowed to add <span id="allowed_pics">{{$data['plan']->audios}}</span> Audios</li>
+                <li>Supported formats i.e .mp3 .wma .wav</li>
+                <li>Allowed max file size of 12mb</li>
+            </ul>
         </div>
     </div> 
     <div class="col-md-12 mt-5">
