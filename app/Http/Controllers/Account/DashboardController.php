@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Storage;
 
 class DashboardController extends Controller
 {
@@ -124,6 +125,13 @@ class DashboardController extends Controller
             $attach->type=$request->type;
             $attach->file=$img;
             $attach->save();
+
+            if ($request->type =='image') {
+                if (auth()->user()->profile()->exists() && is_null(auth()->user()->profile->profile_img)) {
+                    auth()->user()->profile()->update(['profile_img'=>$img]);
+                }
+            }
+            
             $notify=array('name'=>$img,'original_name' => $request->file('file')->getClientOriginalName());
         }
         else{
@@ -184,6 +192,18 @@ class DashboardController extends Controller
         $path=storage_path('app/public/uploads/uploadData/'.$filename);
         if (file_exists($path)) {
             unlink($path);
+        }
+        return $filename;  
+    }
+
+    public function set_default_img(Request $request)
+    {
+        $filename =  $request->get('filename');
+        $file=Attachment::where('file',$filename)->first();
+        $path=storage_path('app/public/uploads/uploadData/'.$filename);
+        if ($file && file_exists($path)) {
+            auth()->user()->profile()->update(['profile_img'=>$filename]);
+            Storage::copy('app/public/uploads/uploadData/'.$filename, 'app/public/uploads/profile/'.$filename);
         }
         return $filename;  
     }

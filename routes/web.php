@@ -255,6 +255,8 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'
 
             Route::post('/dashboard/social_links', [App\Http\Controllers\Account\DashboardController::class, 'social_links'])->name('dashboard.social_links');
             Route::get('resume', [App\Http\Controllers\Account\DashboardController::class, 'resume'])->name('resume');
+
+            Route::get('/set_default_img', [App\Http\Controllers\Account\DashboardController::class, 'set_default_img'])->name('set_default_img');
         });
         
         Route::middleware(['hasData'])->group(function () {

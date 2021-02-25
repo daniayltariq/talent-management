@@ -31,6 +31,10 @@
                         <div class="content-details fadeIn-bottom">
                             <a type="button" class="content-title remove-img-btn" data-img="{{$img->file}}" >Remove</a>
                         </div>
+
+                        <div class="content-details-set-profile fadeIn-bottom">
+                            <a type="button" class="content-title set_default_img" data-img="{{$img->file}}" >set as profile</a>
+                        </div>
                     </div>
                 @empty
                     <h4 class="text-center">No images found</h4>

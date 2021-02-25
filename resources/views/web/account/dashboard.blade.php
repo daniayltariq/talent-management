@@ -167,6 +167,40 @@
     top: 80%;
     }
 
+    .content-details-set-profile {
+    position: absolute;
+    text-align: center;
+    /* padding-left: 1em;
+    padding-right: 1em; */
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    -webkit-transform: translate(-30%, -30%);
+    -moz-transform: translate(-30%, -30%);
+    transform: translate(-30%, -30%);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+    }
+
+    .content:hover .content-details-set-profile{
+    top: 90%;
+    left: 30%;
+    opacity: 1;
+    }
+
+    .content-details-set-profile a{
+    color: #f34444;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+    }
+
+    .content-details-set-profile a:hover{
+        text-decoration: none;
+    }
+
     .m-menu__list-item a:hover{
         text-decoration: none;
         color: #fff;
@@ -1100,6 +1134,29 @@
 		
 	});
 
+    $(document).on('click','.set_default_img',function(e){
+		var ele = $(this);
+      
+        $.ajax({
+            type: 'get',
+            url: '{{ route('account.set_default_img') }}',
+            data: {
+                filename: $(this).data('img'),
+                _method: 'DELETE',
+            },
+            success: function(res) {
+                ele.closest('.content').remove();
+                toastr.success('File removed successfully');
+                // window.location.reload();
+            },
+            error: function(error) {
+                toastr.error('something went wrong!');
+            }
+        });
+
+		
+	});
+
     /* function setDropzoneImgLimit(file)
     {
         if ( validImageTypes.includes(file.type)) {
@@ -1402,7 +1459,7 @@
                  displayFormat: 'mdy', 
                 monthFormat: 'short',
                 /* minYear: 1920,
-                maxYear: yyyy-1 */
+                maxYear: yyyy-1
             }); */
 
             $('[name="gender"]').on('change',function(){
