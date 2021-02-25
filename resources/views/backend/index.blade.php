@@ -72,7 +72,7 @@
                                                     </div>
                                                     <div class="kt-widget5__info">
                                                         <span>Author:</span>
-                                                        <span class="kt-font-info">{{$item->user->f_name ?? ''}} {{$item->user->l_name}}</span>
+                                                        <span class="kt-font-info">{{$item->user->f_name ?? ''}} {{$item->user->l_name ?? ''}}</span>
                                                         <span>Posted at:</span>
                                                         <span class="kt-font-info">{{$item->created_at ?? ''}}</span>
                                                     </div>
@@ -110,7 +110,7 @@
                                                     </div>
                                                     <div class="kt-widget5__info">
                                                         <span>Author:</span>
-                                                        <span class="kt-font-info">{{$item->user->f_name ?? ''}} {{$item->user->l_name}}</span>
+                                                        <span class="kt-font-info">{{$item->user->f_name ?? ''}} {{$item->user->l_name ?? ''}}</span>
                                                         <span>Posted at:</span>
                                                         <span class="kt-font-info">{{$item->created_at ?? ''}}</span>
                                                     </div>
@@ -147,7 +147,7 @@
                                                     </div>
                                                     <div class="kt-widget5__info">
                                                         <span>Author:</span>
-                                                        <span class="kt-font-info">{{$item->user->f_name ?? ''}} {{$item->user->l_name}}</span>
+                                                        <span class="kt-font-info">{{$item->user->f_name ?? ''}} {{$item->user->l_name ?? ''}}</span>
                                                         <span>Posted at:</span>
                                                         <span class="kt-font-info">{{ $item->created_at->format('d M Y') ?? ''}}</span>
                                                     </div>
