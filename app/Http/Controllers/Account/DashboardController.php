@@ -52,10 +52,10 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $validator = Validator::make($request->all(), [
-            'f_name' => ['required', 'string','max:40'],
-            'l_name' => ['required', 'string'],
+            // 'f_name' => ['required', 'string','max:40'],
+            // 'l_name' => ['required', 'string'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email','unique:users,email,'.auth()->user()->id],
             'password' => ['nullable','string', 'min:8','confirmed'],

@@ -426,7 +426,7 @@
                                 <div class="row mb-5">
                                     @if ($custom_url)
                                     <div class="col-12">
-                                        <label for="f_name" class="form-label mt-3">Profile URL</label>
+                                        <label class="form-label mt-3">Profile URL</label>
                                         <div class="form-holder">
                                             <div class="input-group-bs mb-3 d-flex">
                                                 <div class="input-group-prepend">
@@ -442,14 +442,14 @@
                                     
                                     <div class="col-6">
                                         <label for="f_name" class="form-label mt-3">First Name</label>
-                                        <input class="form-control" type="text" name="f_name" id="f_name" placeholder="FIRST NAME" value="{{auth()->user()->f_name ?? ''}}" />
+                                        <input class="form-control" type="text" name="" id="f_name" placeholder="FIRST NAME" value="{{ auth()->user()->f_name ?? '' }}" disabled />
                                         @error('f_name')
                                             <div class="error">{{\Str::replaceFirst('f name', 'First Name', $message) }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="l_name" class="form-label mt-3">Last Name</label>
-                                        <input class="form-control" type="text" name="l_name" id="l_name" placeholder="LAST NAME" value="{{auth()->user()->l_name ?? ''}}" />
+                                        <input class="form-control" type="text" name="" id="l_name" placeholder="LAST NAME" value="{{ auth()->user()->l_name ?? '' }}" disabled />
                                         @error('l_name')
                                             <div class="error">{{\Str::replaceFirst('l name', 'Last Name', $message) }}</div>
                                         @enderror
