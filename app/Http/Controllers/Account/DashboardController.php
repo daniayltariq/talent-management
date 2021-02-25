@@ -77,7 +77,7 @@ class DashboardController extends Controller
             $country_data=json_decode($request->new_phone,true);
            
             $user=User::findOrFail(auth()->user()->id);
-            $user->fill(is_null($request->password)?$request->except(['password','dob','f_name','l_name']):$request->except(['f_name','l_name']);
+            $user->fill(is_null($request->password)?$request->except(['password','dob','f_name','l_name']):$request->except(['f_name','l_name']));
             if($request->date_){
                 $user->dob=$request->date_['year'].'-'.$request->date_['month'].'-'.$request->date_['day'];
             }
