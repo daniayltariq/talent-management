@@ -322,9 +322,31 @@
     const cardHolderName = document.getElementById('card-holder-email');
     const cardButton = document.getElementById('card-button');
     const clientSecret = cardButton.dataset.secret;
+
     cardButton.addEventListener('click', async (e) => {
+
       event.preventDefault();
       fullPageLoader(true);
+
+      var validate_email = false;
+      $.get( "{{ route('subscription.validate_email') }}",{
+        email: $('#card-holder-email').val(),
+        _token : "{{ csrf_token() }}"
+      },function(res){
+        if(res.status == 'success'){
+          validate_email  = true;
+          stripeValidateCard();
+        }else{
+          toastr.error(res.message);
+        }
+         fullPageLoader(false);
+      });
+ 
+      
+    });
+
+    async function  stripeValidateCard(){
+
       const { setupIntent, error } = await stripe.confirmCardSetup(
             clientSecret, {
                 payment_method: {
@@ -362,7 +384,8 @@
         stripeTokenHandler(setupIntent);
         }
       }); */
-    });
+
+    }
     // Submit the form with the token ID.
     function stripeTokenHandler(setupIntent) {
       // Insert the token ID into the form so it gets submitted to the server

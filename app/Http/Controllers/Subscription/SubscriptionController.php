@@ -102,6 +102,28 @@ class SubscriptionController extends Controller
         }
     }
 
+     public function validateEmail(Request $request)
+    {
+       
+            $user=\App\Models\User::where('email',$request->email)->first();
+            if ($user) {
+                $data=array(
+                    "status"=>'error',
+                    "message"=>'email already taken'
+                );
+            }
+            else{
+                 
+                $data=array(
+                    "status"=>'success',
+                    "message"=>''
+                );
+            }
+            
+            return $data;
+ 
+    }
+
     public function sendOtp(Request $request)
     {
         /* dd($request->all()); */
