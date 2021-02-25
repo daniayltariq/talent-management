@@ -450,7 +450,8 @@
                     <!-- Tabs content -->
                     @if(!$data['profile']->profile_img)
                     <div class="alert alert-warning">
-                        You must add your image to be visible in talent listing.
+                        <p>Add or select the main image for your account.</p>
+                        <p>Adding your main image activates your Profile, your Resume, and your inclusion in search results.</p>
                     </div>
                     @endif
                     <div class="tab-content" id="v-pills-tabContent">
