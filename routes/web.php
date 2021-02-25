@@ -226,6 +226,7 @@ Route::group(['namespace' => 'Subscription\Controllers'], function () {
         Route::get('/subscription/{plan}', [App\Http\Controllers\Subscription\SubscriptionController::class, 'index'])->name('subscription.index');
         Route::post('/subscription', [App\Http\Controllers\Subscription\SubscriptionController::class, 'store'])->name('subscription.store');
         Route::get('/sendOtp', [App\Http\Controllers\Subscription\SubscriptionController::class, 'sendOtp'])->name('subscription.sendOtp');
+        Route::get('/validate_email', [App\Http\Controllers\Subscription\SubscriptionController::class, 'validateEmail'])->name('subscription.validate_email');
         Route::get('/verifyOtp', [App\Http\Controllers\Subscription\SubscriptionController::class, 'verifyOtp'])->name('subscription.verifyOtp');
     /* }); */
 });

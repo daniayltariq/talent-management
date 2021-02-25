@@ -47,27 +47,27 @@
 			<li class="selected"  style="background-image: url('{{ asset('web/img/banner/banner-3.jpg') }}')">
 				<div class="cd-full-width">
 					<div class="cd-full__contant">
-						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
+						{{-- <p class="m-img__subtitle title__grey">we are Fashion Management agency</p> --}}
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a>
+						{{-- <a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a> --}}
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>
 			<li style="background-image: url('{{ asset('web/img/banner/banner-1.jpg') }}')">
 				<div class="cd-full-width">
 					<div class="cd-full__contant">
-						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
+						{{-- <p class="m-img__subtitle title__grey">we are Fashion Management agency</p> --}}
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a>
+						{{-- <a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a> --}}
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>
 			<li style="background-image: url('{{ asset('web/img/banner/banner-2.jpg') }}')">
 				<div class="cd-full-width">
 					<div class="cd-full__contant">
-						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
+						{{-- <p class="m-img__subtitle title__grey">we are Fashion Management agency</p> --}}
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a>
+						{{-- <a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a> --}}
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>
