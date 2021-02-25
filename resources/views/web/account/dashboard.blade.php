@@ -414,6 +414,11 @@
                 </div>
                 <div class="col-md-9">
                     <!-- Tabs content -->
+                    @if(!$data['profile']->profile_img)
+                    <div class="alert alert-warning">
+                        You must add your image to be visible in talent listing.
+                    </div>
+                    @endif
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade shadow rounded bg-white show active in p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <form action="{{route('account.dashboard.profile')}}" id="personal-info-form" method="POST">
