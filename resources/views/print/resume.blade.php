@@ -520,6 +520,10 @@
         .w-3{
             width: 30%;
         }
+
+        .user-resume tr .w-3:last-child {
+            padding-left: 10px;
+        }
     
         .talent-specs th {
             width: 70%;
@@ -7409,7 +7413,7 @@ button.close {
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <h4 class="text__quote font-primary">Theater</h4>
-                                                <div class="">
+                                                <div class="user-resume">
                                                     <table class="w-100">
                                                         {{-- <tr>
                                                             <th>Name</th>

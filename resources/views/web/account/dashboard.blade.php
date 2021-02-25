@@ -310,11 +310,15 @@
     }
 
     .w-4{
-        width: 40%;
+        width: 35%;
     }
 
     .w-3{
         width: 30%;
+    }
+
+    .user-resume tr .w-3:last-child {
+        padding-left: 10px;
     }
 
     .dropzone .dz-preview .dz-error-message {
