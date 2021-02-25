@@ -150,9 +150,10 @@ class RegisterController extends Controller
             'gender' => ['required', 'string', 'max:255'],
             /* 'g_day' => ['nullable', 'string', 'max:10'],
             'g_month' => ['nullable', 'string', 'max:10'],
-            'g_year' => ['nullable', 'string', 'max:10'], */
+            'g_year' => ['nullable', 'string', 'max:10'],
             "g_date_"    => "nullable|array|min:3",
-            "g_date_.*"  => "nullable|string",
+            "g_date_.*"  => "nullable|string", */
+            'g_dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')],
             'g_phone' => ['nullable', 'max:255','unique:users,g_phone,'.auth()->user()->id],
             'g_landline' => ['nullable', 'max:255','unique:users,g_landline,'.auth()->user()->id],
             'g_country' => ['nullable', 'string', 'max:255'],
@@ -160,14 +161,14 @@ class RegisterController extends Controller
             'g_state' => ['nullable', 'string', 'max:255'],
             /* 'g_h_adress_1' => ['string', 'max:255','nullable'],
             'h_adress_1' => ['string', 'max:255','nullable'], */
-            /* 'dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')], */
+            'dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')],
             'f_name' => ['required', 'string', 'max:255'],
             'l_name' => ['required', 'string', 'max:255'],
             /* 'day' => ['required', 'string', 'max:10'],
             'month' => ['required', 'string', 'max:10'],
-            'year' => ['required', 'string', 'max:10'], */
+            'year' => ['required', 'string', 'max:10'],
             "date_"    => "required|array|min:3",
-            "date_.*"  => "required|string",
+            "date_.*"  => "required|string", */
             'phone' => ['required', 'max:255','unique:users,phone,'.auth()->user()->id],
             'landline' => ['nullable', 'max:255','unique:users,landline,'.auth()->user()->id],
             /* 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -202,7 +203,7 @@ class RegisterController extends Controller
           $user->g_l_name= $request['g_l_name']?? null;
           $user->gender= $request['gender']?? null;
           $user->custom_gender= $request['custom_gender']?? null;
-          $user->g_dob= isset($request->g_date_['year'], $request->g_date_['month'], $request->g_date_['day']) ? ($request->g_date_['year'].'-'.$request->g_date_['month'].'-'.$request->g_date_['day']) : null;
+          $user->g_dob= $request->g_dob;/* isset($request->g_date_['year'], $request->g_date_['month'], $request->g_date_['day']) ? ($request->g_date_['year'].'-'.$request->g_date_['month'].'-'.$request->g_date_['day']) : null; */
           $user->g_phone=!is_null($request['g_new_phone']) ? Str::of($request['g_phone'])->prepend('+'.$g_country_data['dialCode']) : null;
           $user->g_phone_c_data=$request['g_new_phone']?? null;
           $user->g_landline=$request['g_landline']?? null;
@@ -210,10 +211,10 @@ class RegisterController extends Controller
           $user->g_city= $request['g_city']?? null;
           $user->g_state= $request['g_state']?? null;
           /* $user->g_h_adress_1 = !is_null($request['g_h_adress_1']) ? $request['g_h_adress_1'] : null; */
-            /* 'dob= $request['dob']; */
+          $user->dob= $request->dob;
           $user->f_name= $request['f_name'];
           $user->l_name= $request['l_name'];
-          $user->dob= $request->date_['year'].'-'.$request->date_['month'].'-'.$request->date_['day'];
+          /* $user->dob= $request->date_['year'].'-'.$request->date_['month'].'-'.$request->date_['day']; */
           $user->phone=Str::of($request['phone'])->prepend('+'.$country_data['dialCode']);
           $user->phone_c_data=$request['new_phone'];
           $user->landline=$request['landline'];
@@ -226,7 +227,7 @@ class RegisterController extends Controller
           $user->passport= $request['passport'];
           $user->driver_license= $request['driver_license'];
         $user->save();
-
+       
         if($c = $request->cookie('firstPromotorRefID')){
           FPService::trackSigup($user->email,$c);
         }

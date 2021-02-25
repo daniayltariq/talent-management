@@ -264,17 +264,17 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="form-group">
                                     <label for="dob" class="col-sm-4 control-label">Date of birth <span class="req">*</span></label>
                                     <div class="col-sm-8 form-row">
-                                        {{-- <input id="dob" type="date" min='1920-01-01' class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus> --}}
-                                        {{-- @error('dob')
+                                        <input id="g_dob" type="date" min='1920-01-01' class="form-control @error('g_dob') is-invalid @enderror" name="g_dob" value="{{ old('g_dob') }}" required autocomplete="g_dob" autofocus>
+                                        @error('g_dob')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                        @enderror --}}
-                                        <section id="date-of-birth-example-1">
+                                        @enderror
+                                        {{-- <section id="date-of-birth-example-1"> --}}
                                             {{-- <fieldset style="display: flex;">
                                             <div class="field-inline-block">
                                                 <label>Month</label> --}}
-                                                <input type="hidden" name="g_day_hidden"class="date-field"{{--   value="{{ old('g_month') }}" --}}/>
+                                                {{-- <input type="hidden" name="g_day_hidden"class="date-field"/> --}}
                                             {{-- </div>
                                             /
                                             <div class="field-inline-block">
@@ -287,7 +287,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                                 <input type="text" name="g_year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year"  value="{{ old('g_year') }}"/>
                                             </div>
                                             </fieldset> --}}
-                                        </section>
+                                        {{-- </section> --}}
                                     </div>
                                 </div>
 
@@ -337,7 +337,65 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="form-group">
                                     <label for="g_state" class="col-sm-4 control-label">State <span class="req">*</span></label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="g_state" value="{{ old('g_state') }}" id="g_state">
+                                        {{-- <input type="text" class="form-control" name="g_state" value="{{ old('g_state') }}" id="g_state"> --}}
+                                        <select id="g_state" class="form-control" name="g_state">
+                                            <option label="Select"></option>
+                                            <option value="Alabama" {{ old('g_state')=='Alabama' ?'selected':''}}>Alabama</option>
+                                            <option value="Alaska" {{ old('g_state')=='Alaska' ?'selected':''}}>Alaska</option>
+                                            <option value="Arizona" {{ old('g_state')=='Arizona' ?'selected':''}}>Arizona</option>
+                                            <option value="Arkansas" {{ old('g_state')=='Arkansas' ?'selected':''}}>Arkansas</option>
+                                            <option value="California" {{ old('g_state')=='California' ?'selected':''}}>California</option>
+                                            <option value="Colorado" {{ old('g_state')=='Colorado' ?'selected':''}}>Colorado</option>
+                                            <option value="Connecticut" {{ old('g_state')=='Connecticut' ?'selected':''}}>Connecticut</option>
+                                            <option value="Delaware" {{ old('g_state')=='Delaware' ?'selected':''}}>Delaware</option>
+                                            <option value="District of Columbia" {{ old('g_state')=='District of Columbia' ?'selected':''}}>District of Columbia</option>
+                                            <option value="Florida" {{ old('g_state')=='Florida' ?'selected':''}}>Florida</option>
+                                            <option value="Georgia" {{ old('g_state')=='Georgia' ?'selected':''}}>Georgia</option>
+                                            <option value="Guam" {{ old('g_state')=='Guam' ?'selected':''}}>Guam</option>
+                                            <option value="Hawaii" {{ old('g_state')=='Hawaii' ?'selected':''}}>Hawaii</option>
+                                            <option value="Idaho" {{ old('g_state')=='Idaho' ?'selected':''}}>Idaho</option>
+                                            <option value="Illinois" {{ old('g_state')=='Illinois' ?'selected':''}}>Illinois</option>
+                                            <option value="Indiana" {{ old('g_state')=='Indiana' ?'selected':''}}>Indiana</option>
+                                            <option value="Iowa" {{ old('g_state')=='Iowa' ?'selected':''}}>Iowa</option>
+                                            <option value="Kansas" {{ old('g_state')=='Kansas' ?'selected':''}}>Kansas</option>
+                                            <option value="Kentucky" {{ old('g_state')=='Kentucky' ?'selected':''}}>Kentucky</option>
+                                            <option value="Louisiana" {{ old('g_state')=='Louisiana' ?'selected':''}}>Louisiana</option>
+                                            <option value="Maine" {{ old('g_state')=='Maine' ?'selected':''}}>Maine</option>
+                                            <option value="Maryland" {{ old('g_state')=='Maryland' ?'selected':''}}>Maryland</option>
+                                            <option value="Massachusetts" {{ old('g_state')=='Massachusetts' ?'selected':''}}>Massachusetts</option>
+                                            <option value="Michigan" {{ old('g_state')=='Michigan' ?'selected':''}}>Michigan</option>
+                                            <option value="Minnesota" {{ old('g_state')=='Minnesota' ?'selected':''}}>Minnesota</option>
+                                            <option value="Mississippi" {{ old('g_state')=='Mississippi' ?'selected':''}}>Mississippi</option>
+                                            <option value="Missouri" {{ old('g_state')=='Missouri' ?'selected':''}}>Missouri</option>
+                                            <option value="Montana" {{ old('g_state')=='Montana' ?'selected':''}}>Montana</option>
+                                            <option value="Nebraska" {{ old('g_state')=='Nebraska' ?'selected':''}}>Nebraska</option>
+                                            <option value="Nevada" {{ old('g_state')=='Nevada' ?'selected':''}}>Nevada</option>
+                                            <option value="New Hampshire" {{ old('g_state')=='New Hampshire' ?'selected':''}}>New Hampshire</option>
+                                            <option value="New Jersey" {{ old('g_state')=='New Jersey' ?'selected':''}}>New Jersey</option>
+                                            <option value="New Mexico" {{ old('g_state')=='New Mexico' ?'selected':''}}>New Mexico</option>
+                                            <option value="New York" {{ old('g_state')=='New York' ?'selected':''}}>New York</option>
+                                            <option value="North Carolina" {{ old('g_state')=='North Carolina' ?'selected':''}}>North Carolina</option>
+                                            <option value="North Dakota" {{ old('g_state')=='North Dakota' ?'selected':''}}>North Dakota</option>
+                                            <option value="Northern Marianas Islands" {{ old('g_state')=='Northern Marianas Islands' ?'selected':''}}>Northern Marianas Islands</option>
+                                            <option value="Ohio" {{ old('g_state')=='Ohio' ?'selected':''}}>Ohio</option>
+                                            <option value="Oklahoma" {{ old('g_state')=='Oklahoma' ?'selected':''}}>Oklahoma</option>
+                                            <option value="Oregon" {{ old('g_state')=='Oregon' ?'selected':''}}>Oregon</option>
+                                            <option value="Pennsylvania" {{ old('g_state')=='Pennsylvania' ?'selected':''}}>Pennsylvania</option>
+                                            <option value="Puerto Rico" {{ old('g_state')=='Puerto Rico' ?'selected':''}}>Puerto Rico</option>
+                                            <option value="Rhode Island" {{ old('g_state')=='Rhode Island' ?'selected':''}}>Rhode Island</option>
+                                            <option value="South Carolina" {{ old('g_state')=='South Carolina' ?'selected':''}}>South Carolina</option>
+                                            <option value="South Dakota" {{ old('g_state')=='South Dakota' ?'selected':''}}>South Dakota</option>
+                                            <option value="Tennessee" {{ old('g_state')=='Tennessee' ?'selected':''}}>Tennessee</option>
+                                            <option value="Texas" {{ old('g_state')=='Texas' ?'selected':''}}>Texas</option>
+                                            <option value="Utah" {{ old('g_state')=='Utah' ?'selected':''}}>Utah</option>
+                                            <option value="Vermont" {{ old('g_state')=='Vermont' ?'selected':''}}>Vermont</option>
+                                            <option value="Virginia" {{ old('g_state')=='Virginia' ?'selected':''}}>Virginia</option>
+                                            <option value="Virgin Islands" {{ old('g_state')=='Virgin Islands' ?'selected':''}}>Virgin Islands</option>
+                                            <option value="Washington" {{ old('g_state')=='Washington' ?'selected':''}}>Washington</option>
+                                            <option value="West Virginia" {{ old('g_state')=='West Virginia' ?'selected':''}}>West Virginia</option>
+                                            <option value="Wisconsin" {{ old('g_state')=='Wisconsin' ?'selected':''}}>Wisconsin</option>
+                                            <option value="Wyoming" {{ old('g_state')=='Wyoming' ?'selected':''}}>Wyoming</option>
+                                        </select>
                                     </div>
                                 </div>
                                 {{-- <div class="form-group">
@@ -388,11 +446,17 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="dob" class="col-sm-4 control-label">Date of birth <span class="req">*</span></label>
                                 <div class="col-sm-8 form-row">
-                                    <section id="date-of-birth-example-1">
+                                    <input id="dob" type="date" min='1920-01-01' class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
+                                    @error('dob')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    {{-- <section id="date-of-birth-example-1"> --}}
                                         {{-- <fieldset style="display: flex;">
                                           <div class="field-inline-block">
                                             <label>Month</label> --}}
-                                            <input type="hidden" name="day_hidden" class="date-field"{{--  value="{{ old('month') }}" --}}/>
+                                            {{-- <input type="hidden" name="day_hidden" class="date-field"/> --}}
                                           {{-- </div>
                                           /
                                           <div class="field-inline-block">
@@ -405,7 +469,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                             <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year" value="{{ old('year') }}" />
                                           </div>
                                         </fieldset> --}}
-                                    </section>
+                                    {{-- </section> --}}
                                  </div>
                             </div>
                             
@@ -624,7 +688,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
-        var user_type = 'agent';
+        /* var user_type = 'agent';
 
         var switchButton            = document.querySelector('.switch-button');
         var switchBtnRight          = document.querySelector('.switch-button-case.right');
@@ -654,7 +718,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
         switchBtnRight.addEventListener('click', function(){
             switchRight();
-        }, false);
+        }, false); */
 
     </script>
     {{-------------------------}}
@@ -838,8 +902,9 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 mm='0'+mm
             } 
 
-        /* today = yyyy+'-'+mm+'-'+dd; */
+        today = yyyy+'-'+mm+'-'+dd;
         document.getElementById("dob").setAttribute("max", today)
+        document.getElementById("g_dob").setAttribute("max", today)
     </script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autotab/1.9.2/js/jquery.autotab.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -903,13 +968,12 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
 
 
-            var max_limit = new Date();
+            /* var max_limit = new Date();
             var min_limit = new Date();
             max_limit.setDate(today.getDate() - 31);
             min_limit.setDate(today.getDate() - (365*100));
 
             $(" [name='g_day_hidden']").dropdownDatepicker({
-                /* defaultDate: "{{ auth()->user()->dob ?? ''}}", */
                 maxDate: max_limit,
                 minDate: min_limit,
                 required: true,
@@ -924,7 +988,6 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             $('[name="date_[year]"]').attr('name',"g_date_[year]");
 
             $("[name='day_hidden']").dropdownDatepicker({
-                /* defaultDate: "{{ auth()->user()->dob ?? ''}}", */
                 maxDate: max_limit,
                 minDate: min_limit,
                 required: true,
@@ -933,7 +996,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 displayFormat: 'mdy',
                 monthFormat: 'short',
             });
-
+            */
             
         })
     </script>
