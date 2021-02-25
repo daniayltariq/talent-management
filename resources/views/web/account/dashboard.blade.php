@@ -1150,7 +1150,6 @@
                 _method: 'DELETE',
             },
             success: function(res) {
-                ele.closest('.content').remove();
                 toastr.success('File removed successfully');
                 // window.location.reload();
             },
