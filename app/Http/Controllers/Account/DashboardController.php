@@ -129,6 +129,7 @@ class DashboardController extends Controller
             if ($request->type =='image') {
                 if (auth()->user()->profile()->exists() && is_null(auth()->user()->profile->profile_img)) {
                     auth()->user()->profile()->update(['profile_img'=>$img]);
+                    Storage::copy('public/uploads/uploadData/'.$filename, 'public/uploads/profile/'.$filename);
                 }
             }
             
@@ -203,7 +204,7 @@ class DashboardController extends Controller
         $path=storage_path('app/public/uploads/uploadData/'.$filename);
         if ($file && file_exists($path)) {
             auth()->user()->profile()->update(['profile_img'=>$filename]);
-            Storage::copy('app/public/uploads/uploadData/'.$filename, 'app/public/uploads/profile/'.$filename);
+            Storage::copy('public/uploads/uploadData/'.$filename, 'public/uploads/profile/'.$filename);
         }
         return $filename;  
     }
