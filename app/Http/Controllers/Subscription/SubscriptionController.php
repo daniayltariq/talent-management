@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
 use App\Domain\Mail\EmailOtp;
-
+use Illuminate\Support\Facades\Validator;
 class SubscriptionController extends Controller
 {
     /**
@@ -100,6 +100,38 @@ class SubscriptionController extends Controller
                 return 'error';
             }
         }
+    }
+
+     public function validateEmail(Request $request)
+    {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|max:191',
+            ]);
+
+            if ($validator->fails()) {
+                 return $data=array(
+                    "status"=>'error',
+                    "message"=>'Enter a valid email address.'
+                );
+            }
+ 
+            $user=\App\Models\User::where('email',$request->email)->first();
+            if ($user) {
+                $data=array(
+                    "status"=>'error',
+                    "message"=>'email already taken'
+                );
+            }
+            else{
+                 
+                $data=array(
+                    "status"=>'success',
+                    "message"=>''
+                );
+            }
+            
+            return $data;
+ 
     }
 
     public function sendOtp(Request $request)
