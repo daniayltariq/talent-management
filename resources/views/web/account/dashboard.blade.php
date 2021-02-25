@@ -359,7 +359,6 @@
     }
 
     .audio__container{
-        width: 50%;
         display: grid;
     }
 

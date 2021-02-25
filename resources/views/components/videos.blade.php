@@ -22,9 +22,9 @@
     </div>
     <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
         <div class="row">
-            <div class="sp-thumbnails d-flex">
+            <div class="sp-thumbnails">
                 @forelse ($data['video'] as $vid)
-                    <div class="audio__container">
+                    <div class="audio__container col-md-6">
                         <video width="320" height="240" controls disablepictureinpicture  controlsList="nodownload">
                             <source src="{{ asset('storage/uploads/uploadData/' . $vid->file ?? '') }}" type="video/mp4">
                         </video>
