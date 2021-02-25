@@ -1092,7 +1092,7 @@ label{
     }(jQuery));
 
     $(document).on('input','.limit_char',function(){
-        var max_chars = 25;
+        var max_chars = 20;
 
         if($(this).val().length > max_chars) {
             $(this).val($(this).val().substr(0, max_chars)) ;
