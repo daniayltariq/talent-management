@@ -48,8 +48,12 @@ class HomeController extends Controller
          'roles', function($q){
              $q->whereNotIn('name',['superadmin','agent']);
          }
+      )->whereHas(
+         'profile', function($q){
+            $q->where('profile_img','<>',null);
+         }
       )->with('profile')->get();
-
+      /* dd($models); */
       $topics=Topic::where('status',1)->latest()->get()->take(3);
       
       return view('web.index',compact('models','topics'));
@@ -60,6 +64,10 @@ class HomeController extends Controller
       $featured = User::whereHas(
          'roles', function($q){
              $q->whereNotIn('name',['superadmin','agent']);
+         }
+      )->whereHas(
+         'profile', function($q){
+            $q->where('profile_img','<>',null);
          }
       )->with('profile')->where('status',1)->where('featured',1)->get();
 

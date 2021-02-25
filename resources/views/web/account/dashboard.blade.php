@@ -1151,7 +1151,7 @@
                 _method: 'DELETE',
             },
             success: function(res) {
-                toastr.success('File removed successfully');
+                toastr.success('Profile Image updated');
                 // window.location.reload();
             },
             error: function(error) {
