@@ -362,13 +362,13 @@
         display: grid;
     }
 
-    .remove_audio{
+    /* .remove_audio{
         display: none;
     }
 
     .audio__container:hover .remove_audio{
         display: block;
-    }
+    } */
 </style>
 
 <!-- jQuery library -->
