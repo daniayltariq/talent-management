@@ -24,9 +24,13 @@
         <div class="row">
             <div class="sp-thumbnails">
                 @forelse ($data['audio'] as $audio)
-                    <audio controls>
-                        <source src="{{ asset('storage/uploads/uploadData/' . $audio->file ?? '') }}" type="audio/mpeg">
-                    </audio>
+                    <div class="audio__container col-md-6">
+                        <audio class="audio_file" controls controlsList="nodownload">
+                            <source src="{{ asset('storage/uploads/uploadData/' . $audio->file ?? '') }}" type="audio/mpeg">
+                        </audio>
+                        <a type="button" class="content-title remove-img-btn text-center remove_audio" data-type="audio" data-img="{{$audio->file}}" >Remove</a>
+                    </div>
+                    
                 @empty
                     <h4 class="text-center">No audio found</h4>
                 @endforelse

@@ -24,9 +24,12 @@
         <div class="row">
             <div class="sp-thumbnails">
                 @forelse ($data['video'] as $vid)
-                    <video width="320" height="240" controls>
-                        <source src="{{ asset('storage/uploads/uploadData/' . $vid->file ?? '') }}" type="video/mp4">
-                    </video>
+                    <div class="audio__container col-md-6">
+                        <video width="320" height="240" controls disablepictureinpicture  controlsList="nodownload">
+                            <source src="{{ asset('storage/uploads/uploadData/' . $vid->file ?? '') }}" type="video/mp4">
+                        </video>
+                        <a type="button" class="content-title remove-img-btn text-center remove_audio" data-type="video" data-img="{{$vid->file}}" >Remove</a>
+                    </div>
                 @empty
                     <h4 class="text-center">No videos found</h4>
                 @endforelse
