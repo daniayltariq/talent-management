@@ -150,7 +150,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h4 class="text__quote font-primary">Theater</h4>
-                        <div class="">
+                        <div class="user-resume">
                             <table class="w-100">
                                 {{-- <tr>
                                     <th>Name</th>
