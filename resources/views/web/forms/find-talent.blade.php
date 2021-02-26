@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@section('title', 'Find Talent')
 @section('styles')
 
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"> --}}
@@ -192,6 +192,10 @@
         color:#f37c2c;
     }
 
+    .grid-item:hover{
+        z-index: 0 !important;
+    }
+
 </style>
 @endsection
 
@@ -344,7 +348,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="haircolor" class="col-sm-4 control-label">Select Hair Color</label>
                                 <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray'],'name'=>'hair_color'])
+                                    @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray','White'],'name'=>'hair_color'])
                                     
                                 </div>
                             </div>  
@@ -352,7 +356,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="eyecolor" class="col-sm-4 control-label">Select Eye Color</label>
                                 <div class="col-sm-8 ">
-                                    @include('components.multiselect', ['options' => ['Brown','Blond','Black','Red','Gray'],'name'=>'eye_color'])
+                                    @include('components.multiselect', ['options' => ['Brown','Blue','Amber','Hazel','Gray','Green'],'name'=>'eye_color'])
                                     
                                  </div>
                             </div>  
@@ -413,15 +417,15 @@
                         <div class="grid">
                             <div class="grid-sizer"></div>
                             <div class="grid-gutter"></div>
-
-                            @foreach ($members as $member)
+                            
+                            @forelse ($members as $member)
                                 <div class="effect-bubba grid-item grid-item__width2 new-faces women" style="height: 530px;" data-category="women">
                                     <img class="img-responsive" style="object-fit: cover;width: 100%;height: 100%;" src="{{ asset(!is_null($member->profile) ? (!is_null($member->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$member->profile->profile_img)? 'storage/uploads/profile/'.$member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }} " alt="sample image">
                                     <div class="grid-item__contant-info">
                                         <div class="grid-item__contant-name picklist-btn"><a class="color-t" href="{{route('model.single',$member->id)}}">{{$member->profile()->exists() && !is_null($member->profile->legal_first_name) ? ($member->profile->legal_first_name.' '.$member->profile->legal_last_name) : ($member->f_name.' '.$member->l_name)}} </a></div>
                                         <div class="grid-item__contant-place title__grey">{{!is_null($member->profile) ?$member->profile->address_1 : ''}} {{!is_null($member->profile) ?$member->profile->country : ''}} {{!is_null($member->profile) ?$member->profile->city : ''}}</div>
-                                        <div class="grid-item__contant-place title__grey">AGE: 23</div>
-                                        <div class="grid-item__contant-place title__grey">Height: {{!is_null($member->profile) ?$member->profile->height : ''}}</div>
+                                        <div class="grid-item__contant-place title__grey">AGE: {{$member->getAgeAttribute() ?? ''}}</div>
+                                        <div class="grid-item__contant-place title__grey">Height: {{!is_null($member->profile) ?($member->profile->feet ? \Str::finish($member->profile->feet, "'") : '') : ''}} {{!is_null($member->profile) ?($member->profile->height ? \Str::finish($member->profile->height,"''") : ''): ''}}</div>
                                         <a href="{{route('model.single',$member->id)}}" class="picklist-btn"><i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i></a>
                                         {{-- <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
                                         <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i> --}}
@@ -434,124 +438,15 @@
                                             <a href="{{route('login')}}">
                                         @endguest
                                         
-                                            <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px" style="color: white" ></i>
+                                            <i class="grid-item__contant-arrow mdi mdi-account-plus mdi-24px" style="color: white" ></i>
                                         </a>
                                     </div>
                                 </div>
-                            @endforeach
+                            @empty
+                                <h4 class="text-center">No matches found</h4>
+                            @endforelse
                             
-                            {{-- <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle men" data-category="men">
-                                <img class="img-responsive" src="{{ asset('web/img/02_model-5.jpg') }} " alt="sample image">
-                                <div class="grid-item__contant-info">
-                                    <div class="grid-item__contant-name">Kate Farmer</div>
-                                    <div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
-                                    <div class="grid-item__contant-place title__grey">Manchester City</div>
-                                    <div class="grid-item__contant-place title__grey">AGE: 23</div>
-                                    <div class="grid-item__contant-place title__grey">Height: 5' 3"</div>
-                                    <i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
-                                </div>
-                            </div>
-                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 new-faces stylists" data-category="women">
-                                <img class="img-responsive" src="{{ asset('web/img/02_model-6.jpg') }} " alt="sample image">
-                                <div class="grid-item__contant-info">
-                                    <div class="grid-item__contant-name">Kate Farmer</div>
-                                    <div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
-                                    <div class="grid-item__contant-place title__grey">Manchester City</div>
-                                    <div class="grid-item__contant-place title__grey">AGE: 23</div>
-                                    <div class="grid-item__contant-place title__grey">Height: 5' 3"</div>
-                                    <i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
-                                </div>
-                            </div>
-                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 women" data-category="women">
-                                <img class="img-responsive" src="{{ asset('web/img/02_model-4.jpg') }} " alt="sample image">
-                                <div class="grid-item__contant-info">
-                                    <div class="grid-item__contant-name">Kate Farmer</div>
-                                    <div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
-                                    <div class="grid-item__contant-place title__grey">Manchester City</div>
-                                    <div class="grid-item__contant-place title__grey">AGE: 23</div>
-                                    <div class="grid-item__contant-place title__grey">Height: 5' 3"</div>
-                                    <i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
-                                </div>
-                            </div>
-                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 women" data-category="women">
-                                <img class="img-responsive" src="{{ asset('web/img/02_model-7.jpg') }} " alt="sample image">
-                                <div class="grid-item__contant-info">
-                                    <div class="grid-item__contant-name">Kate Farmer</div>
-                                    <div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
-                                    <div class="grid-item__contant-place title__grey">Manchester City</div>
-                                    <div class="grid-item__contant-place title__grey">AGE: 23</div>
-                                    <div class="grid-item__contant-place title__grey">Height: 5' 3"</div>
-                                    <i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
-                                </div>
-                            </div>
-                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 teenagers lifestyle " data-category="women">
-                                <img class="img-responsive" src="{{ asset('web/img/02_model-3.jpg') }} " alt="sample image">
-                                <div class="grid-item__contant-info">
-                                    <div class="grid-item__contant-name">Kate Farmer</div>
-                                    <div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
-                                    <div class="grid-item__contant-place title__grey">Manchester City</div>
-                                    <div class="grid-item__contant-place title__grey">AGE: 23</div>
-                                    <div class="grid-item__contant-place title__grey">Height: 5' 3"</div>
-                                    <i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
-                                </div>
-                            </div>
-                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 new-faces stylists " data-category="women">
-                                <img class="img-responsive" src="{{ asset('web/img/02_model-2.jpg') }} " alt="sample image">
-                                <div class="grid-item__contant-info">
-                                    <div class="grid-item__contant-name">Kate Farmer</div>
-                                    <div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
-                                    <div class="grid-item__contant-place title__grey">Manchester City</div>
-                                    <div class="grid-item__contant-place title__grey">AGE: 23</div>
-                                    <div class="grid-item__contant-place title__grey">Height: 5' 3"</div>
-                                    <i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
-                                </div>
-                            </div>
-                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 lifestyle men" data-category="women">
-                                <img class="img-responsive" src="{{ asset('web/img/02_model-8.jpg') }} " alt="sample image">
-                                <div class="grid-item__contant-info">
-                                    <div class="grid-item__contant-name">Kate Farmer</div>
-                                    <div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
-                                    <div class="grid-item__contant-place title__grey">Manchester City</div>
-                                    <div class="grid-item__contant-place title__grey">AGE: 23</div>
-                                    <div class="grid-item__contant-place title__grey">Height: 5' 3"</div>
-                                    <i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
-                                </div>
-                            </div>
-                            <div href="single-model.html" class="effect-bubba grid-item grid-item__width2 lifestyle men" data-category="women">
-                                <img class="img-responsive" src="{{ asset('web/img/02_model-9.jpg') }} " alt="sample image">
-                                <div class="grid-item__contant-info">
-                                    <div class="grid-item__contant-name">Kate Farmer</div>
-                                    <div class="grid-item__contant-place title__grey">Lake Adelle, USA</div>
-                                    <div class="grid-item__contant-place title__grey">Manchester City</div>
-                                    <div class="grid-item__contant-place title__grey">AGE: 23</div>
-                                    <div class="grid-item__contant-place title__grey">Height: 5' 3"</div>
-                                    <i class="grid-item__contant-arrow mdi mdi-account mdi-24px" style="color: white"></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-message-text mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-note-plus-outline mdi-24px"style="color: white" ></i>
-                                    <i class="grid-item__contant-arrow mdi mdi-account-check mdi-24px"style="color: white" ></i>
-                                </div>
-                            </div> --}}
+                            
                         </div>
                     </div>
 

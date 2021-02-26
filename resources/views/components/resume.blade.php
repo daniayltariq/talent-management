@@ -46,7 +46,7 @@
                     <table class="w-100">
                         <tr>
                           <th class="w-25" style="text-align: end">Hair: </th>
-                          <td class="pb-1 pt-1" style="width: 5%">{{!is_null($profile) && $profile->hairs ?? ''}}</td>
+                          <td class="pb-1 pt-1" style="width: 5%">{{!is_null($profile) && $profile->hairs ? \Str::ucFirst($profile->hairs):  ''}}</td>
                         </tr>
                     </table>
                   </div>
@@ -54,7 +54,7 @@
                     <table class="w-100">
                         <tr>
                           <th class="w-25">Weight: </th>
-                          <td class="pb-1 pt-1">{{!is_null($profile) && $profile->weight ?? ''}}</td>
+                          <td class="pb-1 pt-1">{{!is_null($profile) && $profile->weight ? $profile->weight :''}}</td>
                         </tr>
                     </table>
                   </div>
@@ -62,7 +62,7 @@
                     <table class="w-100">
                         <tr>
                           <th class="w-25" style="text-align: end">Eyes: </th>
-                          <td class="pb-1 pt-1" style="width: 5%">{{!is_null($profile) && $profile->eyes ?? ''}}</td>
+                          <td class="pb-1 pt-1" style="width: 5%">{{!is_null($profile) && $profile->eyes ? \Str::ucFirst($profile->eyes): ''}}</td>
                         </tr>
                     </table>
                   </div>
@@ -150,7 +150,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h4 class="text__quote font-primary">Theater</h4>
-                        <div class="">
+                        <div class="user-resume">
                             <table class="w-100">
                                 {{-- <tr>
                                     <th>Name</th>

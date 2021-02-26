@@ -4,6 +4,7 @@
 {{-- <link href="{{asset('backend-assets/assets/vendors/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css')}}" rel="stylesheet" type="text/css" /> --}}
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('css/tagsinput.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.css" integrity="sha512-WfDqlW1EF2lMNxzzSID+Tp1TTEHeZ2DK+IHFzbbCHqLJGf2RyIjNFgQCRNuIa8tzHka19sUJYBO+qyvX8YBYEg==" crossorigin="anonymous" />
 	<style>
 		.bootstrap-switch-container{
 			width: 160px !important;
@@ -245,7 +246,7 @@ $(document).ready(function(){
 	$("[name='status']").on('switchChange.bootstrapSwitch',function (e, state) {
 		console.log($(this).data('userid'));
 		const that=this;
-		$.get("{{ route('backend.room.updateStatus') }}",
+		$.get("{{ route('backend.category.updateStatus') }}",
 		{
 			room_id: $(this).data('roomid'),
 			status:state==true?1 : 0
@@ -300,5 +301,27 @@ $(document).ready(function(){
 		$('#share_picklist_modal').modal('toggle');
 	});
 });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.js" integrity="sha512-+uGHdpCaEymD6EqvUR4H/PBuwqm3JTZmRh3gT0Lq52VGDAlywdXPBEiLiZUg6D1ViLonuNSUFdbL2tH9djAP8g==" crossorigin="anonymous"></script>
+<script>
+	$('.del_pl').on('click',function(e){
+		var that=$(this);
+		e.preventDefault();
+		
+		
+		Swal.fire({
+			title: 'Are you sure?',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+			}).then((result) => {
+			if (result.isConfirmed) {
+				
+				that.parent('form').submit();
+			}
+		})
+	})
 </script>
 @endsection

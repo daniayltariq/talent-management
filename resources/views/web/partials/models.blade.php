@@ -47,8 +47,11 @@
 
 						@foreach ($models->take(6) as $key => $model)
 							@if ($model->profile)
-								<a href="{{route('model.single',$model->id)}}" class="effect-bubba grid-item grid-item__{{$grid_layout[$key]['width']}} grid-item__{{$grid_layout[$key]['height']}} teenagers women" data-category="women" style="height: 500px;">
-									<img class="img-responsive" src="{{ asset(!is_null($model->profile) ? (!is_null($model->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$model->profile->profile_img)? 'storage/uploads/profile/'.$model->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }}" alt="sample image" style="height: 100%;width: 100%;object-fit: cover;">
+								@php
+									$img_src=!is_null($model->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$model->profile->profile_img) ? 'storage/uploads/profile/'.$model->profile->profile_img : ($model->attachments()->exists() && !is_null($model->attachmentImage()) && \Storage::exists('public/uploads/uploadData/'.$model->attachmentImage()) ? 'storage/uploads/uploadData/'.$model->attachmentImage() : 'web/img/default.jpg');
+								@endphp
+								<a href="{{route('model',$model->profile->custom_link ?? $model->profile->id)}}" class="effect-bubba grid-item grid-item__{{$grid_layout[$key]['width']}} grid-item__{{$grid_layout[$key]['height']}} teenagers women" data-category="women" style="height: 500px;">
+									<img class="img-responsive" src="{{ asset($img_src) }}" alt="sample image" style="height: 100%;width: 100%;object-fit: cover;">
 									<div class="grid-item__contant-info">
 										<div class="bio-box">
 											<div class="grid-item__contant-name">{{ $model->profile->legal_first_name . ' ' . $model->profile->legal_last_name }}</div>

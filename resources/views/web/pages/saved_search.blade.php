@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 
-
+@section('title', 'Saved Search')
 @section('styles')
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,900">
 <style type="text/css">

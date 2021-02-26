@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@section('title', 'About Us')
 @section('content')
 
 <section class="page__img" style="background-image: url('{{ asset('web/img/page-img.jpg') }}')">
@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="title__wrapp">
 				{{-- <div class="page__subtitle title__grey">The Talent depot</div> --}}
-				<h1 class="page__title">About us</h1>
+				<h1 class="page__title">About</h1>
 			</div>
 		</div>
 	</div>

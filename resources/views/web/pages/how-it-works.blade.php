@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@section('title', 'How it works')
 @section('styles')
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
@@ -34,7 +34,7 @@
     <div class="section how-it-works">
         <div class="container">
         	<div class="text-center">
-        		<h2 class="text-dark">How Talent Depot works</h2>
+        		<h2 class="text-dark">How The Talent Depot Works</h2>
         		{{-- <p>Simplify and streamline your casting process to find the perfect performers for your project.</p> --}}
         	</div>
             <div class="row mt-3">
@@ -47,8 +47,14 @@
 					</p>
 					<p class="text-justify">Is the member a minor?</p>
 					<div class="text-justify" style="width: 100%;display: flex">
-						<div style="margin: 0px 20px;"><input type="radio" onclick="window.location='{{route('pricing',['minor'=>true])}}';" name="member_minor" value="yes" id=""><span> Yes</span></div>
-						<div><input type="radio" onclick="window.location='{{route('pricing',['minor'=>false])}}';" name="member_minor" value="no" id=""><span> No</span></div>
+						<div style="margin: 0px 20px;">
+                            <input type="radio" onclick="window.location='{{route('pricing',['minor'=>true])}}';" name="member_minor" value="yes" id="yes">
+                            <label for="yes"> Yes</label>
+                        </div>
+						<div>
+                            <input type="radio" onclick="window.location='{{route('pricing',['minor'=>false])}}';" name="member_minor" value="no" id="no">
+                            <label for="no"> No</label>
+                        </div>
 					</div>
             	</div>
             	<div class="col-sm-4 text-center">

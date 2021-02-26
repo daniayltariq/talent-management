@@ -1,6 +1,8 @@
 <?php
 
+use App\Services\FPService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,9 +62,21 @@ Route::get('/verified_email', function () {
     return view('web.verified');
 })->name('verified_email');
 
-Route::get('/about-us', function () {
+Route::get('/about', function () {
     return view('web.pages.about-us');
 })->name('about-us');
+
+Route::get('/become-provider', function () {
+    return view('web.pages.become-provider');
+})->name('become-provider');
+
+Route::get('/become-an-affiliate', function () {
+    return view('web.pages.become-an-affiliate');
+})->name('become-an-affiliate');
+
+Route::get('/welcome-to-the-talent-depot', function () {
+    return view('web.pages.welcome-to-the-talent-depot');
+})->name('welcome-to-the-talent-depot');
 
 
 Route::get('/forum', function () {
@@ -126,7 +140,7 @@ Route::get('/picklist-single', function () {
 |
 */
 Route::get('/ensura', function () {
-    return view('print.ensura');
+    abort(404);
 })->name('ensura');
 
 Route::get('/404', function () {
@@ -146,6 +160,10 @@ Route::get('/500', function () {
 Route::get('/403', function () {
     return view('web.errors.403');
 })->name('403');
+
+Route::get('/401', function () {
+    return view('web.errors.401');
+})->name('401');
 // End error routes
 
 Route::get('/user_agreement', function () {
@@ -165,7 +183,10 @@ Route::get('/magzine/single', [App\Http\Controllers\HomeController::class, 'magz
 
 Route::get('/models', [App\Http\Controllers\HomeController::class, 'models'])->name('models');
 Route::get('models/grid', [App\Http\Controllers\HomeController::class, 'modelsgrid'])->name('models.grid');
-Route::get('member/{link}', [App\Http\Controllers\HomeController::class, 'models'])->name('model');
+
+Route::middleware(['isSuperAgentSubscribedMember'])->group(function () {
+    Route::get('member/{link}', [App\Http\Controllers\HomeController::class, 'models'])->name('model');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('model/single/{id}', [App\Http\Controllers\HomeController::class, 'modelsingle'])->name('model.single');
@@ -205,6 +226,7 @@ Route::group(['namespace' => 'Subscription\Controllers'], function () {
         Route::get('/subscription/{plan}', [App\Http\Controllers\Subscription\SubscriptionController::class, 'index'])->name('subscription.index');
         Route::post('/subscription', [App\Http\Controllers\Subscription\SubscriptionController::class, 'store'])->name('subscription.store');
         Route::get('/sendOtp', [App\Http\Controllers\Subscription\SubscriptionController::class, 'sendOtp'])->name('subscription.sendOtp');
+        Route::get('/validate_email', [App\Http\Controllers\Subscription\SubscriptionController::class, 'validateEmail'])->name('subscription.validate_email');
         Route::get('/verifyOtp', [App\Http\Controllers\Subscription\SubscriptionController::class, 'verifyOtp'])->name('subscription.verifyOtp');
     /* }); */
 });
@@ -221,9 +243,11 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'
             
         });
         
-        Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
+        
 
-        Route::middleware(['isActive'])->group(function () {
+        Route::middleware(['isActive','hasData'])->group(function () {
+            Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
+            Route::get('/dashboard', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('dashboard');
             Route::post('/dashboard/profile', [App\Http\Controllers\Account\DashboardController::class, 'store'])->name('dashboard.profile');
             Route::post('/storeMedia', [App\Http\Controllers\Account\DashboardController::class, 'storeMedia'])->name('storeMedia');
             Route::delete('/fileDestroy', [App\Http\Controllers\Account\DashboardController::class, 'fileDestroy'])->name('fileDestroy');
@@ -232,15 +256,22 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'/* ,'verified' */,'
 
             Route::post('/dashboard/social_links', [App\Http\Controllers\Account\DashboardController::class, 'social_links'])->name('dashboard.social_links');
             Route::get('resume', [App\Http\Controllers\Account\DashboardController::class, 'resume'])->name('resume');
+
+            Route::get('/set_default_img', [App\Http\Controllers\Account\DashboardController::class, 'set_default_img'])->name('set_default_img');
         });
         
-        Route::get('/talent/profile', [App\Http\Controllers\Account\TalentController::class, 'profile'])->name('talent.profile');
-        Route::get('/talent/checkCustomLink', [App\Http\Controllers\Account\TalentController::class, 'checkCustomLink'])->name('talent.checkCustomLink');
+        Route::middleware(['hasData'])->group(function () {
+            
+            
+            Route::get('/talent/checkCustomLink', [App\Http\Controllers\Account\TalentController::class, 'checkCustomLink'])->name('talent.checkCustomLink');
+        });
     });
     
-    Route::get('/talent/detail', [App\Http\Controllers\Account\TalentController::class, 'detail'])->name('talent.detail');
-    Route::get('/fetch_attachments', [App\Http\Controllers\Account\DashboardController::class, 'fetchAttachments'])->name('fetch_attachments');
-    Route::get('/get_limit', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('get_limit');
+    Route::middleware(['hasData'])->group(function () {
+        Route::get('/talent/detail', [App\Http\Controllers\Account\TalentController::class, 'detail'])->name('talent.detail');
+        Route::get('/fetch_attachments', [App\Http\Controllers\Account\DashboardController::class, 'fetchAttachments'])->name('fetch_attachments');
+        Route::get('/get_limit', [App\Http\Controllers\Account\DashboardController::class, 'index'])->name('get_limit');
+    });
 
     /**
      * Subscription
@@ -339,6 +370,7 @@ Route::group([
     Route::get('/user_status', [App\Http\Controllers\Admin\UserController::class, 'updateStatus'])->name('user.updateStatus');
     Route::get('/user_featured', [App\Http\Controllers\Admin\UserController::class, 'markFeatured'])->name('user.markFeatured');
     Route::get('/invite_user', [App\Http\Controllers\Admin\UserController::class, 'inviteUser'])->name('user.invite');
+    Route::get('/search_user', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('user.search');
 
     Route::get('/user/impersonate/{id}', [App\Http\Controllers\Admin\UserController::class, 'impersonate'])->name('user.impersonate');
     Route::get('/user_request', [App\Http\Controllers\Admin\UserRequestController::class, 'userRequest'])->name('user.requests');
@@ -352,8 +384,8 @@ Route::group([
     Route::get('/text_talent/{id}', [App\Http\Controllers\Admin\PicklistController::class, 'text_talent'])->name('text_talent');
 
     Route::resource('tag', App\Http\Controllers\Admin\TagController::class);
-    Route::resource('room', App\Http\Controllers\Admin\RoomController::class);
-    Route::get('/room_status', [App\Http\Controllers\Admin\RoomController::class, 'updateStatus'])->name('room.updateStatus');
+    Route::resource('category', App\Http\Controllers\Admin\RoomController::class);
+    Route::get('/room_status', [App\Http\Controllers\Admin\RoomController::class, 'updateStatus'])->name('category.updateStatus');
 
     Route::get('/view_save_search', [App\Http\Controllers\Admin\DashboardController::class, 'viewSaveSearch'])->name('view_save_search');
     Route::get('/apply_saved_search/{id}', [App\Http\Controllers\Admin\DashboardController::class, 'applySaveSearch'])->name('apply_saved_search');
@@ -368,7 +400,10 @@ Route::group([
 	'middleware' => ['isAgent','verified'],
 ],function(){
     /* Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('dashboard'); */
-    Route::resource('picklist', App\Http\Controllers\Agent\PicklistController::class);
+    Route::resource('picklist', App\Http\Controllers\Agent\PicklistController::class)->except(['destroy']);
+    Route::get('/delete_picklist/{id}', [App\Http\Controllers\Agent\PicklistController::class, 'delete_picklist'])->name('delete_picklist');
+    Route::get('/delete_picklist_user/{id}', [App\Http\Controllers\Agent\PicklistController::class, 'delete_picklist_user'])->name('delete_picklist_user');
+
     Route::resource('topic', App\Http\Controllers\Agent\TopicController::class);
     Route::post('mail_talent',[App\Http\Controllers\Agent\DashboardController::class, 'mailTalent'])->name('mail_talent');
 
@@ -381,3 +416,9 @@ Route::group([
 
 //postjob controller
 Route::resource('postjob',App\Http\Controllers\PostJobController::class);
+
+Route::get('test',function(Request $request){
+    // return $request->cookie('firstPromotorRefID');
+
+    dd(FPService::trackSigup('customemasdail007@asdasgmail.com','dKGDULm5m8p624a0iVzT'));
+});

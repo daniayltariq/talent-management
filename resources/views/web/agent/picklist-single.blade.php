@@ -1,13 +1,15 @@
 @extends('web.layouts.app')
 
-
+@section('title', 'Picklist Items')
 @section('styles')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.css" integrity="sha512-WfDqlW1EF2lMNxzzSID+Tp1TTEHeZ2DK+IHFzbbCHqLJGf2RyIjNFgQCRNuIa8tzHka19sUJYBO+qyvX8YBYEg==" crossorigin="anonymous" />
 <style type="text/css">
-.btn-share {
-    padding: 16px 32px;
-    font-size: 15px;
-    margin-left: 10px;
-}
+	.btn-share {
+		padding: 16px 32px;
+		font-size: 15px;
+		margin-left: 10px;
+	}
 
 	/* Book talent modal */
 	.popup {
@@ -72,11 +74,7 @@
    font-weight: 400;
    }
 
-   .popup-contact-wrapper{
-      border-radius: 8px;
-      border: 2px solid #dadce0;
-      border-top: 4px solid #e77826;
-   }
+   
 
    .popup-close {
    width: 34px;
@@ -113,11 +111,9 @@
    }
 
    .popup-close:hover {
-   -webkit-transform: translate(50%, -50%) rotate(180deg);
-   transform: translate(50%, -50%) rotate(180deg);
-   background: #f00;
-   text-decoration: none;
-   border-color: #f00;
+	   -webkit-transform: translate(50%, -50%) rotate(180deg);
+	   transform: translate(50%, -50%) rotate(180deg);
+	   text-decoration: none;
    }
 
    .popup-close:hover:after,
@@ -137,6 +133,40 @@
 		height: 100%;
 		width: 100%;
 		object-fit: cover;
+	}
+
+	.text-red{
+		color: red;
+	}
+
+	.del_pl{
+		float: right;
+		padding: 2px 10px;
+	}
+
+	.del_pl:hover{
+		border: 1px solid #f75959;
+		border-radius: 7px;
+	}
+
+	.d-inline{
+		display: inline;
+	}
+
+	.select2-drop-active{
+		z-index: 99999999 !important;
+	}
+
+	.swal2-styled.swal2-confirm {
+		font-size: 1.625em !important;
+	}
+
+	.swal2-styled.swal2-cancel {
+		font-size: 1.625em !important;
+	}
+
+	.swal2-popup {
+		width: 37em !important;
 	}
 </style>
 @endsection
@@ -160,7 +190,7 @@
 		<div class="row">
 			<div class="blog__posts col-md-12">
 				<div class="blog__list">
-					<h4 class="widget__title">{{$picklist->title}}.</h4>
+					<h4 class="widget__title">{{$picklist->title}}</h4>
 
 					{{-- <a href="">
 
@@ -200,34 +230,37 @@
 														</tr>
 														<tr>
 															<th>Weight</th>
-															<td>{{$item->member->profile->weight ?? 0}} lbs</td>
+															<td>{{\Str::ucFirst($item->member->profile->weight ?? 0)}} lbs</td>
 														</tr>
 														<tr>
 															<th>Hair</th>
-															<td>{{$item->member->profile->hairs ?? ''}}</td>
+															<td>{{\Str::ucFirst($item->member->profile->hairs ?? '')}}</td>
 														</tr>
 														<tr>
 															<th>Eyes</th>
-															<td>{{$item->member->profile->eyes ?? ''}}</td>
+															<td>{{\Str::ucFirst($item->member->profile->eyes ?? '')}}</td>
 														</tr>
 													</table>
 												</div>
 											</div>
 											<div class="col-sm-8">
 												<div class="talent-intro">
-													<h2>{{$item->member->profile->legal_first_name ?? ''}}
-														{{$item->member->profile->legal_last_name ?? ''}}</h2>
-													<p>{{!is_null($item->member->profile->custom_link) ? url('/').'/model/'.$item->member->profile->custom_link : ''}}</p>
+													<h2 class="d-inline">{{$item->member->profile->legal_first_name ?? $item->member->f_name }}
+														{{$item->member->profile->legal_last_name ?? $item->member->l_name}}</h2>
+													
+													<a class="del_pl" type="button" href="{{route('agent.delete_picklist_user',$item->id)}}"><i class="fa fa-trash text-red"></i></a>
+													
+													<a target="_blank" href="{{!is_null($item->member->profile->custom_link) ? url('/').'/member/'.$item->member->profile->custom_link : '#'}}"><p>{{!is_null($item->member->profile->custom_link) ? url('/').'/member/'.$item->member->profile->custom_link : ''}}</p></a>
 												</div>
 
 												<div class="talent-skill">
-													<p><b>Specials Skills</b></p>
+													<p><b>Special Skills</b></p>
 													{{-- {{dd($item->member->skills)}} --}}
 													@if ($item->member()->exists() && $item->member->skills()->exists())
 														<p>
 															@foreach ($item->member->skills as $skill)
 																@if ($skill->skill()->exists())
-																	<span>{{$skill->skill->title. (!$loop->last ?',':'')}} </span>
+																	<span>{{\Str::ucFirst($skill->skill->title). (!$loop->last ?',':'')}} </span>
 																@endif
 															
 															@endforeach
@@ -389,12 +422,15 @@
 			 @csrf
 			 <input type="hidden" name="picklist_id" value="{{$picklist->id}}">
 			 <div class="form-group">
-				<label for="recipient-name" class="col-form-label">Select Recipient:</label>
-				<select class="form-control" name="recipient" >
-					<option value="all_talents">all talents</option>
+				<label for="recipient-name" class="col-form-label">Select Recipient:</label><br>
+				<input type="checkbox" id="select_all_btn" > Select All
+				<select class="form-control" name="recipient[]" id="recipient" multiple="multiple">
 					@forelse ($items as $item)
-						<option value="{{$item->member->phone ?? '' }}">{{$item->member->profile->legal_first_name ?? ''}}
-							{{$item->member->profile->legal_last_name ?? ''}}</option>
+						@if ($item->member()->exists())
+							<option value="{{$item->member->phone ?? '' }}">{{$item->member->profile->legal_first_name ?? $item->member->f_name}}
+							{{$item->member->profile->legal_last_name ?? $item->member->l_name}}</option>
+						@endif
+						
 					@endforeach
 					
 				</select>
@@ -418,7 +454,26 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.min.js"></script>
 <script>
+
+	$(document).ready(function() {
+		$('#recipient').select2({closeOnSelect:false});
+		$("#select_all_btn").click(function(){
+			if($("#select_all_btn").is(':checked') ){
+				$("#recipient > option").prop("selected","selected");
+				$("#recipient").trigger("change");
+			}else{
+				$("#recipient > option").removeAttr("selected");
+				$("#recipient").trigger("change");
+			}
+		});
+
+		$("#button").click(function(){
+			alert($("#recipient").val());
+		});
+	});
+
 	$(function() {
 	 //----- OPEN
 	   $('[pd-popup-open]').on('click', function(e)  {
@@ -441,5 +496,31 @@
 	   });
 	});
  </script>
-	
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.js" integrity="sha512-+uGHdpCaEymD6EqvUR4H/PBuwqm3JTZmRh3gT0Lq52VGDAlywdXPBEiLiZUg6D1ViLonuNSUFdbL2tH9djAP8g==" crossorigin="anonymous"></script>
+	<script>
+		$('.del_pl').on('click',function(e){
+			var that=$(this);
+			e.preventDefault();
+			
+			
+			Swal.fire({
+				title: 'Are you sure?',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes'
+				}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire(
+					'Deleted!',
+					'Picklist deleted.',
+					'success'
+					)
+					window.location.href=that.attr('href');
+				}
+			})
+		})
+	</script>
 @endsection

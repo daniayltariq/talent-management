@@ -1,5 +1,7 @@
 @extends('web.layouts.app')
 
+@section('title', 'Home')
+
 @section('styles')
 	<style>
 		.view__all {
@@ -11,7 +13,26 @@
 		.d-flex{
 			display: flex;
 		}
+
+		.overflow__wrap_aw{
+			overflow-wrap:anywhere;
+		}
 	</style>
+	@if (\Auth::check() && auth()->user()->hasRole('candidate'))
+		<script type="text/javascript">
+			var email = "{{auth()->user()->email}}";
+			var uid = {{auth()->user()->stripe_id}};
+			if (window.$FPROM){
+			$FPROM.trackSignup({email: email,uid: uid});
+			} else {
+			_fprom=window._fprom||[];window._fprom=_fprom;
+			_fprom.push(["event","signup"]);
+			_fprom.push(["email",email]);
+			_fprom.push(["uid",uid]);
+			}
+		</script>
+	@endif
+	
 @endsection
 
 @section('content')
@@ -26,27 +47,27 @@
 			<li class="selected"  style="background-image: url('{{ asset('web/img/banner/banner-3.jpg') }}')">
 				<div class="cd-full-width">
 					<div class="cd-full__contant">
-						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
+						{{-- <p class="m-img__subtitle title__grey">we are Fashion Management agency</p> --}}
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a>
+						{{-- <a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a> --}}
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>
 			<li style="background-image: url('{{ asset('web/img/banner/banner-1.jpg') }}')">
 				<div class="cd-full-width">
 					<div class="cd-full__contant">
-						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
+						{{-- <p class="m-img__subtitle title__grey">we are Fashion Management agency</p> --}}
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a>
+						{{-- <a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a> --}}
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>
 			<li style="background-image: url('{{ asset('web/img/banner/banner-2.jpg') }}')">
 				<div class="cd-full-width">
 					<div class="cd-full__contant">
-						<p class="m-img__subtitle title__grey">we are Fashion Management agency</p>
+						{{-- <p class="m-img__subtitle title__grey">we are Fashion Management agency</p> --}}
 						<h1 class="m-img__title">Model Managment<br>& Talent Agency</h1>
-						<a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a>
+						{{-- <a href="{{route('register')}}" class="cd-btn btn btn__red secondary">Join Now</a> --}}
 					</div>
 				</div> <!-- .cd-full-width -->
 			</li>
@@ -142,7 +163,7 @@
 							<div class="lp__content-wrapp">
 								<div class="date">{{$topic->created_at->diffForHumans()}}</div>
 								<h4 class="lp__title"><a href="#0" class="animation">{{$topic->title}}</a></h4>
-								<div class="text lp__text d-flex">{!!printTruncated(200, $topic->content,true)!!}</div>
+								<div class="text lp__text d-flex overflow__wrap_aw">{!!\Str::words(strip_tags($topic->content),60) !!}</div>
 								<a href="{{ route('single-post',['slug' => $topic->slug]) }}" class="more animation">read more</a>
 							</div>
 						</div>

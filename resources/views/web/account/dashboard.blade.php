@@ -1,9 +1,11 @@
 @extends('web.layouts.app')
+@section('title', 'My Account')
 @section('styles')
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.css" integrity="sha512-WfDqlW1EF2lMNxzzSID+Tp1TTEHeZ2DK+IHFzbbCHqLJGf2RyIjNFgQCRNuIa8tzHka19sUJYBO+qyvX8YBYEg==" crossorigin="anonymous" />
 <style type="text/css">
     *{
         font-size: 16px;
@@ -166,6 +168,40 @@
     top: 80%;
     }
 
+    .content-details-set-profile {
+    position: absolute;
+    text-align: center;
+    /* padding-left: 1em;
+    padding-right: 1em; */
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    -webkit-transform: translate(-30%, -30%);
+    -moz-transform: translate(-30%, -30%);
+    transform: translate(-30%, -30%);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+    }
+
+    .content:hover .content-details-set-profile{
+    top: 60%;
+    left: 30%;
+    opacity: 1;
+    }
+
+    .content-details-set-profile a{
+    color: #f34444;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+    }
+
+    .content-details-set-profile a:hover{
+        text-decoration: none;
+    }
+
     .m-menu__list-item a:hover{
         text-decoration: none;
         color: #fff;
@@ -275,20 +311,72 @@
     }
 
     .w-4{
-        width: 40%;
+        width: 35%;
     }
 
     .w-3{
         width: 30%;
     }
 
+    .user-resume tr .w-3:last-child {
+        padding-left: 10px;
+    }
+
     .dropzone .dz-preview .dz-error-message {
-        top: 140px;     /* move the tooltip below the "Remove" link */
+        top: 150px;     /* move the tooltip below the "Remove" link */
     }
     .dropzone .dz-preview .dz-error-message:after {
         left: 20px;     /* move the tooltip's arrow to the left of the "Remove" link */
         top: -18px;
         border-bottom-width: 18px;
+    }
+
+    .t-clr{
+        color: #e77929;
+    }
+    .input-group-bs {
+        background: #e9ecef;
+        padding-left: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 3px;
+        height: 33px;
+    }
+
+    .input-group-bs input {
+        border: unset;
+    }
+
+    .tal-profile {
+        height: 100%;
+        width: 100%;
+        object-fit: cover !important;
+        object-position: 100% 15%;
+    }
+    #custom_gender{
+        display: none;
+    }
+
+    .dz-error-mark > svg g g{
+        fill: #a92222 !important;
+    }
+    .error {
+        font-size: 13px;
+    }
+
+    .audio__container{
+        display: grid;
+    }
+
+    /* .remove_audio{
+        display: none;
+    }
+
+    .audio__container:hover .remove_audio{
+        display: block;
+    } */
+
+    .swal2-title{
+        font-size: 1.375em !important;
     }
 </style>
 
@@ -360,6 +448,10 @@
                             <i class="fa fa-icons mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">My Social Media Links</span></a>
                         @endif
+                        <a class="nav-link mb-3 p-3 shadow" href="{{route('model',$data['profile']->custom_link ?? $data['profile']->id)}}" target="_blank" {{-- id="v-resume-wizard-tab" data-toggle="pill" href="#v-resume-wizard" role="tab" aria-controls="v-resume-wizard" aria-selected="false" --}}>
+                            <i class="fa fa-star mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">My Profile</span>
+                        </a>
                         <a class="nav-link mb-3 p-3 shadow" id="v-resume-tab" data-toggle="pill" href="#v-resume" role="tab" aria-controls="v-resume" aria-selected="false">
                             <i class="fa fa-star mr-2"></i>
                             <span class="font-weight-bold small text-uppercase">My Resume</span></a>
@@ -377,6 +469,12 @@
                 </div>
                 <div class="col-md-9">
                     <!-- Tabs content -->
+                    @if(!$data['profile']->profile_img)
+                    <div class="alert alert-warning">
+                        <p>Add or select the main image for your account.</p>
+                        <p>Adding your main image activates your Profile, your Resume, and your inclusion in search results.</p>
+                    </div>
+                    @endif
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade shadow rounded bg-white show active in p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <form action="{{route('account.dashboard.profile')}}" id="personal-info-form" method="POST">
@@ -387,41 +485,64 @@
                                 </div>
                                 
                                 <div class="row mb-5">
+                                    @if ($custom_url)
+                                    <div class="col-12">
+                                        <label class="form-label mt-3">Profile URL</label>
+                                        <div class="form-holder">
+                                            <div class="input-group-bs mb-3 d-flex">
+                                                <div class="input-group-prepend">
+                                                <span class="input-group-text-bs" id="basic-addon3" style="    line-height: 2;">{{url('/').'/member/'}}</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="custom_link" value="{{$data['profile']->custom_link ?? ''}}" id="custom_link" aria-describedby="basic-addon3" disabled>
+                                            </div>
+                                            {{-- <small id="link_error" style="color: red"></small>
+                                            <p id="link_suggestion">Suggestions: <span id="suggestion"></span></p> --}}
+                                        </div>
+                                    </div>
+                                    @endif
+                                    
                                     <div class="col-6">
-                                        <label for="f_name" class="form-label mt-3">First Name</label>
-                                        <input class="form-control" type="text" name="f_name" id="f_name" placeholder="FIRST NAME" value="{{auth()->user()->f_name ?? ''}}" />
+                                        <label for="f_name" class="form-label mt-3">Legal First Name</label>
+                                        <input class="form-control" type="text" name="" id="f_name" placeholder="LEGAL FIRST NAME" value="{{ auth()->user()->f_name ?? '' }}" disabled />
                                         @error('f_name')
-                                            <div class="error">{{ $message }}</div>
+                                            <div class="error">{{\Str::replaceFirst('f name', 'First Name', $message) }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
-                                        <label for="l_name" class="form-label mt-3">Last Name</label>
-                                        <input class="form-control" type="text" name="l_name" id="l_name" placeholder="LAST NAME" value="{{auth()->user()->l_name ?? ''}}" />
+                                        <label for="l_name" class="form-label mt-3">Legal Last Name</label>
+                                        <input class="form-control" type="text" name="" id="l_name" placeholder="LEGAL LAST NAME" value="{{ auth()->user()->l_name ?? '' }}" disabled />
                                         @error('l_name')
-                                            <div class="error">{{ $message }}</div>
+                                            <div class="error">{{\Str::replaceFirst('l name', 'Last Name', $message) }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="gender" class="form-label mt-3">Gender</label>
                                         <select name="gender" id="gender" name = "gender" class="form-control" required>
                                             <option label="Select"></option>
-                                            <option value="female" {{ auth()->user()->gender=='female' ?'selected':''}}>Female</option>
-                                            <option value="male" {{ auth()->user()->gender=='male' ?'selected':''}}>Male</option>
+                                            <option value="female" {{ old('gender',auth()->user()->gender)=='female' ?'selected':''}}>Female</option>
+                                            <option value="male" {{ old('gender',auth()->user()->gender)=='male' ?'selected':''}}>Male</option>
+                                            <option value="Rather not say" {{ old('gender',auth()->user()->gender)=='Rather not say' ?'selected':''}}>Rather not say</option>
+                                            <option value="custom" {{ old('gender',auth()->user()->gender)=='custom' ?'selected':''}}>Custom</option>
+
                                         </select>
+                                        <input @if(old('gender',auth()->user()->gender) == 'custom' ) style="display: block;" @endif class="form-control" id="custom_gender" type="text" name="custom_gender" value="{{old('custom_gender',auth()->user()->custom_gender)}}">
                                         @error('gender')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                        @error('custom_gender')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6 form-row">
                                         <label for="dob" class="form-label mt-2">DOB</label>
-                                        @php
+                                        {{-- @php
                                             $dob=explode('-',auth()->user()->dob);
                                         @endphp
-                                        <section id="date-of-birth-example-1">
+                                        <section id="date-of-birth-example-1"> --}}
                                             {{-- <fieldset style="display: flex;">
                                               <div class="field-inline-block">
                                                 <label>Month</label> --}}
-                                                <input type="hidden" name="day_hidden" class="date-field form-control" />
+                                               {{--  <input type="hidden" name="day_hidden" class="date-field form-control" /> --}}
                                               {{-- </div>
                                               /
                                               <div class="field-inline-block">
@@ -433,8 +554,9 @@
                                                 <label>Year</label>
                                                 <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field form-control date-field--year" value="{{$dob[0]??'' }}" />
                                               </div> --}}
-                                            </fieldset>
-                                        </section>
+                                            {{-- </fieldset> --}}
+                                        {{-- </section> --}}
+                                        <input id="dob" type="date" min='1920-01-01' class="form-control" name="dob" value="{{auth()->user()->dob ?? ''}}" required autocomplete="dob" autofocus>
                                         @error('dob')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -474,7 +596,64 @@
                                     </div>
                                     <div class="col-4">
                                         <label for="state" class="form-label mt-3">State</label>
-                                        <input class="form-control" type="text" name="state" id="state" placeholder="STATE" value="{{auth()->user()->state ?? ''}}" />
+                                        <select id="state" class="form-control" name="state">
+                                            <option label="Select"></option>
+                                            <option value="Alabama" {{ auth()->user()->state=='Alabama' ?'selected':''}}>Alabama</option>
+                                            <option value="Alaska" {{ auth()->user()->state=='Alaska' ?'selected':''}}>Alaska</option>
+                                            <option value="Arizona" {{ auth()->user()->state=='Arizona' ?'selected':''}}>Arizona</option>
+                                            <option value="Arkansas" {{ auth()->user()->state=='Arkansas' ?'selected':''}}>Arkansas</option>
+                                            <option value="California" {{ auth()->user()->state=='California' ?'selected':''}}>California</option>
+                                            <option value="Colorado" {{ auth()->user()->state=='Colorado' ?'selected':''}}>Colorado</option>
+                                            <option value="Connecticut" {{ auth()->user()->state=='Connecticut' ?'selected':''}}>Connecticut</option>
+                                            <option value="Delaware" {{ auth()->user()->state=='Delaware' ?'selected':''}}>Delaware</option>
+                                            <option value="District of Columbia" {{ auth()->user()->state=='District of Columbia' ?'selected':''}}>District of Columbia</option>
+                                            <option value="Florida" {{ auth()->user()->state=='Florida' ?'selected':''}}>Florida</option>
+                                            <option value="Georgia" {{ auth()->user()->state=='Georgia' ?'selected':''}}>Georgia</option>
+                                            <option value="Guam" {{ auth()->user()->state=='Guam' ?'selected':''}}>Guam</option>
+                                            <option value="Hawaii" {{ auth()->user()->state=='Hawaii' ?'selected':''}}>Hawaii</option>
+                                            <option value="Idaho" {{ auth()->user()->state=='Idaho' ?'selected':''}}>Idaho</option>
+                                            <option value="Illinois" {{ auth()->user()->state=='Illinois' ?'selected':''}}>Illinois</option>
+                                            <option value="Indiana" {{ auth()->user()->state=='Indiana' ?'selected':''}}>Indiana</option>
+                                            <option value="Iowa" {{ auth()->user()->state=='Iowa' ?'selected':''}}>Iowa</option>
+                                            <option value="Kansas" {{ auth()->user()->state=='Kansas' ?'selected':''}}>Kansas</option>
+                                            <option value="Kentucky" {{ auth()->user()->state=='Kentucky' ?'selected':''}}>Kentucky</option>
+                                            <option value="Louisiana" {{ auth()->user()->state=='Louisiana' ?'selected':''}}>Louisiana</option>
+                                            <option value="Maine" {{ auth()->user()->state=='Maine' ?'selected':''}}>Maine</option>
+                                            <option value="Maryland" {{ auth()->user()->state=='Maryland' ?'selected':''}}>Maryland</option>
+                                            <option value="Massachusetts" {{ auth()->user()->state=='Massachusetts' ?'selected':''}}>Massachusetts</option>
+                                            <option value="Michigan" {{ auth()->user()->state=='Michigan' ?'selected':''}}>Michigan</option>
+                                            <option value="Minnesota" {{ auth()->user()->state=='Minnesota' ?'selected':''}}>Minnesota</option>
+                                            <option value="Mississippi" {{ auth()->user()->state=='Mississippi' ?'selected':''}}>Mississippi</option>
+                                            <option value="Missouri" {{ auth()->user()->state=='Missouri' ?'selected':''}}>Missouri</option>
+                                            <option value="Montana" {{ auth()->user()->state=='Montana' ?'selected':''}}>Montana</option>
+                                            <option value="Nebraska" {{ auth()->user()->state=='Nebraska' ?'selected':''}}>Nebraska</option>
+                                            <option value="Nevada" {{ auth()->user()->state=='Nevada' ?'selected':''}}>Nevada</option>
+                                            <option value="New Hampshire" {{ auth()->user()->state=='New Hampshire' ?'selected':''}}>New Hampshire</option>
+                                            <option value="New Jersey" {{ auth()->user()->state=='New Jersey' ?'selected':''}}>New Jersey</option>
+                                            <option value="New Mexico" {{ auth()->user()->state=='New Mexico' ?'selected':''}}>New Mexico</option>
+                                            <option value="New York" {{ auth()->user()->state=='New York' ?'selected':''}}>New York</option>
+                                            <option value="North Carolina" {{ auth()->user()->state=='North Carolina' ?'selected':''}}>North Carolina</option>
+                                            <option value="North Dakota" {{ auth()->user()->state=='North Dakota' ?'selected':''}}>North Dakota</option>
+                                            <option value="Northern Marianas Islands" {{ auth()->user()->state=='Northern Marianas Islands' ?'selected':''}}>Northern Marianas Islands</option>
+                                            <option value="Ohio" {{ auth()->user()->state=='Ohio' ?'selected':''}}>Ohio</option>
+                                            <option value="Oklahoma" {{ auth()->user()->state=='Oklahoma' ?'selected':''}}>Oklahoma</option>
+                                            <option value="Oregon" {{ auth()->user()->state=='Oregon' ?'selected':''}}>Oregon</option>
+                                            <option value="Pennsylvania" {{ auth()->user()->state=='Pennsylvania' ?'selected':''}}>Pennsylvania</option>
+                                            <option value="Puerto Rico" {{ auth()->user()->state=='Puerto Rico' ?'selected':''}}>Puerto Rico</option>
+                                            <option value="Rhode Island" {{ auth()->user()->state=='Rhode Island' ?'selected':''}}>Rhode Island</option>
+                                            <option value="South Carolina" {{ auth()->user()->state=='South Carolina' ?'selected':''}}>South Carolina</option>
+                                            <option value="South Dakota" {{ auth()->user()->state=='South Dakota' ?'selected':''}}>South Dakota</option>
+                                            <option value="Tennessee" {{ auth()->user()->state=='Tennessee' ?'selected':''}}>Tennessee</option>
+                                            <option value="Texas" {{ auth()->user()->state=='Texas' ?'selected':''}}>Texas</option>
+                                            <option value="Utah" {{ auth()->user()->state=='Utah' ?'selected':''}}>Utah</option>
+                                            <option value="Vermont" {{ auth()->user()->state=='Vermont' ?'selected':''}}>Vermont</option>
+                                            <option value="Virginia" {{ auth()->user()->state=='Virginia' ?'selected':''}}>Virginia</option>
+                                            <option value="Virgin Islands" {{ auth()->user()->state=='Virgin Islands' ?'selected':''}}>Virgin Islands</option>
+                                            <option value="Washington" {{ auth()->user()->state=='Washington' ?'selected':''}}>Washington</option>
+                                            <option value="West Virginia" {{ auth()->user()->state=='West Virginia' ?'selected':''}}>West Virginia</option>
+                                            <option value="Wisconsin" {{ auth()->user()->state=='Wisconsin' ?'selected':''}}>Wisconsin</option>
+                                            <option value="Wyoming" {{ auth()->user()->state=='Wyoming' ?'selected':''}}>Wyoming</option>
+                                        </select>
                                         @error('state')
                                             <div class="error">{{ $message }}</div>
                                         @enderror
@@ -542,6 +721,9 @@
                                 
                             </div>
                         </div>
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-profile-wizard" role="tabpanel" aria-labelledby="v-profile-wizard-tab">
+                            Loading...
+                        </div>
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-resume" role="tabpanel" aria-labelledby="v-resume-tab">
                             @include('components.resume',['profile'=>$data['profile']])
                            
@@ -578,7 +760,7 @@
                         </div> --}}
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-refer" role="tabpanel" aria-labelledby="v-refer-tab">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-12">
                                     @if (auth()->user()->referal_code()->exists())
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="refer_link" value="{{url('/').'/signup/?referal='.auth()->user()->referal_code->refer_code}}" placeholder="Refer url" aria-label="Refer url" aria-describedby="basic-addon2">
@@ -587,7 +769,7 @@
                                             </div>
                                         </div>
                                     @else
-                                        <button class="btn btn-primary" id="refer-btn">Generate Referal link</button>
+                                        <button class="btn btn-primary" id="refer-friend-btn">Generate Referal link</button>
                                         <div class="refer_code_div">
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control" id="refer_link" name="refer_link" placeholder="Refer url" aria-label="Refer url" aria-describedby="basic-addon2">
@@ -617,6 +799,22 @@
                         <div class="tab-pane fade shadow rounded bg-white p-5" id="v-social" role="tabpanel" aria-labelledby="v-social-tab">
                             <div class="row">
                                 <div class="col-md-12">
+                                    @if($data['plan'] && ($data['plan']->social_links==1) )
+                                        <p><em>*Your membership allows you to add of <span class="t-clr" style="font-weight: 600">{{$data['plan']->social_limit}}</span> social media links</em></p>
+                                    @endif
+
+                                    @if (count($errors) > 0)
+                                        @if($errors->has('social.*.source') || $errors->has('social.*.link'))
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        
+                                    @endif
                                     <form class="repeater" action="{{route('account.dashboard.social_links')}}" method="POST">
                                         <!--
                                             The value given to the data-repeater-list attribute will be used as the
@@ -629,11 +827,14 @@
                                             <div data-repeater-item>
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <select name="source" id="source" class="form-control">
+                                                        <select name="source" id="source" class="form-control" required>
                                                             <option value="facebook"> Facebook</option>
                                                             <option value="instagram">Instagram</option>
                                                             <option value="twitter">Twitter</option>
-                                                            <option value="linkedIn">LinkedIn</option>
+                                                            <option value="youtube">YouTube</option>
+                                                            <option value="soundcloud">SoundCloud</option>
+                                                            <option value="flickr">Flickr</option>
+                                                            {{-- <option value="other">Other..</option> --}}
                                                         </select>
                                                     </div>
                                                     <div class="col-md-4">
@@ -650,7 +851,7 @@
                                         @if($data['plan'] && ($data['plan']->social_links==1 && $data['plan']->social_limit !== count($data["social"])) )
                                             <input data-repeater-create type="button" class="btn btn-primary" id="repeater-add-btn" value="Add"/>
                                             <hr>
-                                            <button type="submit" class="btn btn-secondary">Save</button>
+                                            <button type="submit" class="btn btn-secondary">Save and Return</button>
                                         @else
                                             <div class="alert alert-primary" role="alert">
                                                 <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span>
@@ -776,6 +977,7 @@
         })
     </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.js" integrity="sha512-+uGHdpCaEymD6EqvUR4H/PBuwqm3JTZmRh3gT0Lq52VGDAlywdXPBEiLiZUg6D1ViLonuNSUFdbL2tH9djAP8g==" crossorigin="anonymous"></script>
 <script>
     function copyToClipboard() {
         /* Get the text field */
@@ -801,7 +1003,7 @@
 		}
 	});
 
-	$(document).on('click','#refer-btn',function(e){
+	$(document).on('click','#refer-friend-btn',function(e){
 		
 		@if(\Auth::guest())
 			window.location.replace("{{route('login')}}");
@@ -834,7 +1036,7 @@
 <script type="text/javascript">
 
     const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
-    const validVideoTypes = ['video/mp4', 'video/mkv', 'video/mov', 'video/wmv'];
+    const validVideoTypes = ['video/mp4','video/mkv' ,'video/x-ms-wmv', 'video/mov', 'video/wmv'];
     const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
 
     var uploadedDocumentMap = {};
@@ -846,7 +1048,7 @@
             maxFiles:"{{$data['plan']->pictures}}"-"{{count($data['images'])}}",
             maxFilesize: 12, // MB
             acceptedFiles: "image/*", /* ,.mp4,.mkv,.mov,.wmv,audio */
-            dictDefaultMessage:"Drop Your Files here.",
+            dictDefaultMessage:"Drag & Drop Your File(s) Here or click to upload.<br> i.e .jpg .jpeg .png",
             /* autoProcessQueue: false, */
             accept: function(file, done) {
                 console.log("uploaded");
@@ -937,19 +1139,61 @@
         }
     );
 
-    $(document).on('click','#remove-img-btn',function(e){
+    $(document).on('click','.remove-img-btn',function(e){
+		var ele = $(this);
+      
+        Swal.fire({
+			title: 'Are you sure?',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+			}).then((result) => {
+			if (result.isConfirmed) {
+				
+				$.ajax({
+                    type: 'delete',
+                    url: '{{ route('account.fileDestroy') }}',
+                    data: {
+                        filename: $(this).data('img'),
+                        _method: 'DELETE',
+                    },
+                    success: function(res) {
+                        if (ele.data('type')=='audio' || ele.data('type')=='video') {
+                            console.log('remove audio');
+                            ele.closest('.audio__container').remove();
+                        }
+                        else{
+                            ele.closest('.content').remove();
+                        }
+                        
+                        toastr.success('File removed successfully');
+                        // window.location.reload();
+                    },
+                    error: function(error) {
+                        toastr.error('something went wrong!');
+                    }
+                });
+			}
+		})
+        
+
 		
+	});
+
+    $(document).on('click','.set_default_img',function(e){
+		var ele = $(this);
+      
         $.ajax({
-            type: 'delete',
-            url: '{{ route('account.fileDestroy') }}',
+            type: 'get',
+            url: '{{ route('account.set_default_img') }}',
             data: {
                 filename: $(this).data('img'),
                 _method: 'DELETE',
             },
             success: function(res) {
-                console.log(res);
-                toastr.success('file uploaded');
-                window.location.reload();
+                toastr.success('Profile Image updated');
+                // window.location.reload();
             },
             error: function(error) {
                 toastr.error('something went wrong!');
@@ -1069,8 +1313,9 @@
         
         if ( $('div#v-pills-tab').find(e.target).length) 
         {
+            var target = $(e.target);
             //if images tab
-            if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-profile-tab') {
+            if ( target.parent('a#v-pills-profile-tab').length ||(e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-profile-tab')) {
                 myDropzoneTheFirst.disable();
                 console.log(e.target.id);
                 $.ajax({
@@ -1103,7 +1348,7 @@
             }
 
             //if audio tab
-            else if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-audio-tab') {
+            else if ( target.parent('a#v-pills-audio-tab').length ||(e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-audio-tab')) {
                 /* myDropzoneTheFirst.disable(); */
                 console.log(e.target.id);
                 $.ajax({
@@ -1136,7 +1381,7 @@
             }
 
             //if video tab
-            else if (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-video-tab') {
+            else if ( target.parent('a#v-pills-video-tab').length || (e.target.id === $('a.nav-link.active').attr('id') && e.target.id=='v-pills-video-tab')) {
                 /* myDropzoneTheFirst.disable(); */
                 console.log(e.target.id);
                 $.ajax({
@@ -1232,6 +1477,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-dropdown-datepicker@1.3.0/dist/jquery-dropdown-datepicker.min.js"></script>
     <script>
         $(document).ready(function(){
+
             var today = new Date();
             var dd = today.getDate();
             var mm = today.getMonth()+1; //January is 0!
@@ -1243,20 +1489,33 @@
                     mm='0'+mm
                 } 
 
-            /* today = yyyy+'-'+mm+'-'+dd; */
-            var max_limit = new Date();
+            today = yyyy+'-'+mm+'-'+dd;
+            document.getElementById("dob").setAttribute("max", today);
+            /* var max_limit = new Date();
+            var min_limit = new Date();
             max_limit.setDate(today.getDate() - 31);
+            min_limit.setDate(today.getDate() - (365*100));
             $("[name='day_hidden']").dropdownDatepicker({
                 defaultDate: "{{ auth()->user()->dob ?? ''}}",
                 maxDate: max_limit,
+                minDate: min_limit,
                 required: true,
                 wrapperClass:'d-flex',
                 dropdownClass:'date-field form-control',
-                /* displayFormat: 'ymd', */
+                 displayFormat: 'mdy', 
                 monthFormat: 'short',
                 /* minYear: 1920,
-                maxYear: yyyy-1 */
-            });
+                maxYear: yyyy-1
+            }); */
+
+            $('[name="gender"]').on('change',function(){
+                if ($(this).val()=='custom') {
+                    $('[name="custom_gender"]').show();
+                }else{
+                    $('[name="custom_gender"]').val('');
+                    $('[name="custom_gender"]').hide();
+                }
+            })
             
         })
     </script>

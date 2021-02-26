@@ -57,9 +57,20 @@ class DashboardController extends Controller
 		
 	}
 
-	public function dashboard(){
+	public function dashboard()
+	{
+		$latest=\App\Models\Topic::latest()->limit(3)->get();
+		$most_viewed=\App\Models\Topic::orderBy('views','desc')->limit(3)->get();
+		$most_liked=\App\Models\Topic::withCount('likes')
+		->orderBy('likes_count', 'desc')->limit(3)->get();
 
-		return view('backend.index');
+		$new_users=\App\Models\User::latest()->whereHas(
+            'roles', function($q){
+                $q->where('name','<>','superadmin');
+            })
+        ->limit(7)->get();
+		/* dd($new_users); */
+		return view('backend.index',compact('latest','most_viewed','most_liked','new_users'));
 
 	}
 

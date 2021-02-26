@@ -26,7 +26,13 @@ class PicklistController extends Controller
      */
     public function index(Request $request)
     {
-        $picklist=Picklist::where('user_id',auth()->user()->id)->paginate(5);
+        $picklist=Picklist::where('user_id',auth()->user()->id)->withCount(['items' => function ($q) {
+            $q->whereHas('member', function ($qq) {
+                $qq->has('profile');
+            });
+        }])->paginate(5);
+        
+        /* dd($picklist[0] ); */
         return view('web.agent.picklist',compact('picklist'));
     }
 
@@ -49,19 +55,33 @@ class PicklistController extends Controller
     public function store(Request $request)
     {
         /* dd($request->all()); */
-        $validator = Validator::make($request->all(), [
-            'name' => ['nullable','string', 'max:50'],
-            'description' => ['nullable','string', 'max:191'],
+        $rules = [
+            'description' => ['required_if:picklist_id,null','string','nullable', 'max:191'],
+            'picklist_id' => ['nullable'],
             'member_id' => ['required', 'numeric'],
-        ]);
+            'title' => ['required_if:picklist_id,null','string','nullable', 'max:50'],
+        ];
+
+        $messages = [
+            'title.required_if' => 'The :attribute field is required.',
+            'description.required_if' => 'The :attribute field is required.',
+            'member_id.unique' => 'Talent already exists.',
+        ];
+
+        if ($request->picklist_id) {
+            $rules['member_id'] = ['integer','unique:picklist_user,user_id,NULL,id,picklist_id,'.$request->picklist_id];
+        }
+
+        $validator = Validator::make($request->all(), $rules,$messages);
         
         if ($validator->fails()) {
+            /* return $validator->errors(); */
             $request->session()->flash('error', 'Something went wrong !');
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
         }
-
+        /* dd($request->all());  */
         if ($request->picklist_id) {
             $picklist = \App\Models\Picklist::findOrFail($request->picklist_id);
         } else {
@@ -109,12 +129,12 @@ class PicklistController extends Controller
     public function sendText(Request $request)
     {
         /* dd($request->all()); */
-        if($request->recipient=='all_talents')
-        {
+        /* if($request->recipient=='all_talents')
+        { */
             $talents=PicklistUser::where('picklist_id',$request->picklist_id)->get();
             try {
-                foreach ($talents as $key => $talent) {
-                    $user = User::find($talent->member->id);
+                foreach (/* $talents */$request->recipient as $key => $talent) {
+                    $user = User::where('phone',$talent/* ->member->id */)->first();
                     if ($user) {
                         $content=[
                             "message"=>$request->message,
@@ -144,7 +164,7 @@ class PicklistController extends Controller
                 );
                 
             }
-        }
+        /* }
         else{
             try {
                 $user = User::where('phone',$request->recipient)->first();
@@ -156,11 +176,7 @@ class PicklistController extends Controller
                     ];
                     $user->notify(new ClickSendNotify($content));
                 } 
-                /* Nexmo::message()->send([
-                    'to'   => $request->recipient,
-                    'from' => '16105552344',
-                    'text' => $request->message
-                ]); */
+                
 
                 $status=array(
                     'message' => 'message sent !', 
@@ -173,7 +189,7 @@ class PicklistController extends Controller
                 );
             }
             
-        }
+        } */
 
         return redirect()->back()->with($status);
     }
@@ -207,13 +223,23 @@ class PicklistController extends Controller
      * @param  \App\Farm  $farm
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $plan)
+    public function delete_picklist( Request $request,$id)
     {
-        $plan=Plan::findOrFail($plan);
-        /* dd($plan); */
-        if ($plan) {
-            $plan->delete();
-            return redirect()->back()->with('success', 'Plan deleted successfully !');
+        $picklist=Picklist::findOrFail($id);
+        /* dd($picklist); */
+        if ($picklist && $picklist->user_id == auth()->user()->id) {
+            $picklist->delete();
+            return redirect()->back()->with('success', 'picklist deleted successfully !');
+        }
+    }
+
+    public function delete_picklist_user( Request $request,$id)
+    {
+        $member=PicklistUser::findOrFail($id);
+        /* dd($picklist); */
+        if ($member) {
+            $member->delete();
+            return redirect()->back()->with('success', 'member removed successfully !');
         }
     }
 }

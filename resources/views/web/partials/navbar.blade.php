@@ -17,7 +17,7 @@
 				<div class="logo col-md-2 col-sm-4 col-xs-7">
 					<a class="navbar-brand" href="{{ route('/') }}">
 					{{-- <span class="logo__text">Talent DB</span> --}}
-					<img src="{{ asset('web/img/logo/TD_and_Words_white.png') }}" class="logo img img-fluid">
+					<img src="{{ asset('web/img/logo/generic_logo_banner_orange.png') }}" class="logo img img-fluid">
 					</a>
 				</div>
 				<div class="main__menu-wrap col-md-10 col-sm-8 col-xs-5">
@@ -37,20 +37,28 @@
 								</ul>
 							</li> --}}
 
-							<li class="m-menu__list-item  {{ Request::is('how-it-works') ? 'm-menu__list-item_active' : '' }}">
+							{{-- <li class="m-menu__list-item  {{ Request::is('how-it-works') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('how-it-works') }}">How it works</a>
-							</li>
+							</li> --}}
+							@if(Auth::guest()) 
+								<li class="m-menu__list-item  {{ Request::is('how-it-works') ? 'm-menu__list-item_active' : '' }}">
+									<a href="{{ route('how-it-works') }}">Join Us</a>
+								</li>
+							@endif
 							<li class="m-menu__list-item  {{ Request::is('featured-talents') ? 'm-menu__list-item_active' : '' }}">
-								<a href="{{ route('featured_talents') }}">Featured Talent</a>
+								<a href="{{ route('featured_talents') }}">Featured</a>
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('testimonials') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('testimonials') }}">Testimonials</a>
+							</li>
+							<li class="m-menu__list-item {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}">
+								<a href="{{ route('pricing') }}">Plans</a>
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('community') ? 'm-menu__list-item_active' : '' }}">
 								<a href="{{ route('community') }}">Community</a>
 							</li>
 							<li class="m-menu__list-item  {{ Request::is('about-us') ? 'm-menu__list-item_active' : '' }}">
-								<a href="{{ route('about-us') }}">About Us</a>
+								<a href="{{ route('about-us') }}">About</a>
 							</li>
 
 							{{-- <li class="m-menu__list-item menu-item-has-children  {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}"  >
@@ -89,13 +97,13 @@
 							</li> --}}
 							
 							
-							{{-- @if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0))
+							{{-- @if (\Auth::guest() || (\Auth::user()->hasRole('candidate') && count(auth()->user()->subscriptions()->active()->get()) == 0)) --}}
 								
-									<li class="m-menu__list-item {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}">
+									{{-- <li class="m-menu__list-item {{ Request::is('models') ? 'm-menu__list-item_active' : '' }}">
 										<a href="{{ route('pricing') }}">Plans</a>
-									</li>
+									</li> --}}
 								
-							@endif --}}
+							{{-- @endif --}}
 							
 							
 							@if(Auth::guest()) 
@@ -116,9 +124,7 @@
 										</li>
 									</ul>
 								</li> --}}
-								<li class="m-menu__list-item  {{ Request::is('how-it-works') ? 'm-menu__list-item_active' : '' }}">
-									<a href="{{ route('how-it-works') }}">Join Us</a>
-								</li>
+								
 								<li class="m-menu__list-item menu-item-has-children" style="padding-top: 0;">
 									<button type="button" class="btn-cust btn-warning bg-talent" style="height: unset !important">
 										<span style="left: -3px;background: none;"><i class="fas fa-list"></i></span>
@@ -146,13 +152,21 @@
 
 										@role('candidate')
 											<li class="m-menu__sub-item">
-												<a href="{{ route('account.dashboard') }}">Profile</a>
+												<a href="{{ route('account.dashboard') }}">My Account</a>
 											</li>
+											
+											@if (auth()->user()->profile()->exists() && auth()->user()->profile->custom_link)
+												<li class="m-menu__sub-item">
+													<a href="{{route('model',auth()->user()->profile->custom_link)}}">My Profile</a>
+												</li>
+											@endif
+
 											@if (auth()->user()->referal_code && auth()->user()->referal_code->points > 1)
 												<li class="m-menu__sub-item">
 													<a href="{{ url('/') }}/account/reward">Reward</a>
 												</li>
 											@endif
+
 											
 										@endrole
 										
@@ -163,9 +177,9 @@
 										@endrole
 
 										@if (\Auth::guest() || auth()->user()->hasRole('candidate'))
-											<li class="m-menu__sub-item">
+											{{-- <li class="m-menu__sub-item">
 												<a href="{{ route('account.talent.profile') }}">Resume Wizard</a>
-											</li>
+											</li> --}}
 											{{-- <li class="m-menu__sub-item">
 												<a href="{{ route('account.talent.detail') }}">Talent Resume</a>
 											</li> --}}
@@ -176,13 +190,13 @@
 												<a href="{{ route('agent.picklist.index') }}">My saved picklists</a>
 											</li>
 											<li class="m-menu__sub-item">
-												<a href="{{ route('agent.topic.create') }}">Create Post</a>
+												<a href="{{ route('agent.topic.create') }}">Create Topic</a>
 											</li>
 											<li class="m-menu__sub-item">
 												<a href="#" pd-popup-open="popupReferal">Refer a friend</a>
 											</li>
 											<li class="m-menu__sub-item">
-												<a href="{{ route('agent.topic.index') }}">Posts</a>
+												<a href="{{ route('agent.topic.index') }}">Topics</a>
 											</li>
 										@endrole
 										<li class="m-menu__sub-item">

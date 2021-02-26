@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@section('title', $data->title?? '' )
 @section('styles')
 	<style>
 		.stage {
@@ -271,31 +271,33 @@
 						<div class="stage">
 							<a href="#" id="read-more-btn" data-skipcount="{{count($comments)}}">Read More <i class="fas fa-arrow-down"></i></a>
 						</div>
-   						<div class="comment__respond">
-	   						<h3 id="comment-form-heading">Leave your comment</h3>
+   						@if(\Auth::check() && (\Auth::user()->getActivePlan() && (\Auth::user()->getActivePlan()->community_access==1 && \Auth::user()->getActivePlan()->community_access_perm=='R/W') ))
+	   						<div class="comment__respond">
+		   						<h3 id="comment-form-heading">Leave your comment</h3>
 
-	   						<form action="{{ route('post_comment') }}" method="post" class="vertical-form" id="comment-form">
-	   							@csrf
-								{{-- <div class="form-group">
-			    					<label for="c-name">Name <span class="req">*</span></label>
-			    					<input name="name" type="text" class="form-control" id="c-name">
-				    			</div>
-				    			<div class="form-group">
-			    					<label for="c-email">Email <span class="req">*</span></label>
-			    					<input name="" type="email" class="form-control" id="c-email">
-								</div> --}}
-								<input type="hidden" value="{{ $data->id }}" name="topic_id">
-								{{-- <input type="hidden" value="{{ $data->id }}" name="topic_id"> --}}
-								<div class="form-group">
-				    				<label for="c-text">Your message <span class="req">*</span></label>
-									<textarea name="comment" id="c-text" class="form-control"></textarea>
-								</div>
-								
-								<input type="submit" class="btn btn__red animation" name="update_cart" value="Submit comment" />
-								
-								
-							</form>
-						</div>
+		   						<form action="{{ route('post_comment') }}" method="post" class="vertical-form" id="comment-form">
+		   							@csrf
+									{{-- <div class="form-group">
+				    					<label for="c-name">Name <span class="req">*</span></label>
+				    					<input name="name" type="text" class="form-control" id="c-name">
+					    			</div>
+					    			<div class="form-group">
+				    					<label for="c-email">Email <span class="req">*</span></label>
+				    					<input name="" type="email" class="form-control" id="c-email">
+									</div> --}}
+									<input type="hidden" value="{{ $data->id }}" name="topic_id">
+									{{-- <input type="hidden" value="{{ $data->id }}" name="topic_id"> --}}
+									<div class="form-group">
+					    				<label for="c-text">Your message <span class="req">*</span></label>
+										<textarea name="comment" id="c-text" class="form-control"></textarea>
+									</div>
+									
+									<input type="submit" class="btn btn__red animation" name="update_cart" value="Submit comment" />
+									
+									
+								</form>
+							</div>
+   						@endif
    					</div>
 				</div>
 

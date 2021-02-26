@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@section('title', 'My Resume')
 @section('styles')
 
  
@@ -34,6 +34,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: 100% 15%;
 }
 
 .input-group-bs{
@@ -87,6 +88,11 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 .font-15{
     font-size: 15px;
 }
+label{
+    font-weight: 500;
+    color: #979797;
+    font-size: 14px;
+}
 </style>
 
 <link rel="stylesheet" href="{{ asset('plugins/steps/css/style.css') }}">
@@ -116,6 +122,10 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     border-radius: 25px;
     margin: 0 2.4rem;
 }
+
+.ml-auto{
+    margin-left: auto;
+}
 </style>
 @endsection
 
@@ -125,7 +135,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
             <div class="row">
                 <div class="title__wrapp">
                     
-                    <h1 class="page__title">PROFILE INFORMATION</h1>
+                    <h1 class="page__title">Profile Information</h1>
                 </div>
             </div>
         </div>
@@ -135,7 +145,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     <section class="section apply">
         <div class="container">
             <div class="row">
-                <h3 class="text__quote centered">Complete your profile form</h3>
+                {{-- <h3 class="text__quote centered">Complete your profile form</h3> --}}
                 <div class="col-lg-12 col-md-12 ">
 
                         @if ($profile)
@@ -175,7 +185,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     <input type="email" placeholder="{{strtoupper('Email')}}" name="email" class="form-control required" value="{{auth()->user()->email ?? ''}}" disabled>
                                                 </div>
 
-                                                @if ($custom_url)
+                                                {{-- @if ($custom_url)
                                                     <div class="form-holder">
                                                         <div class="input-group-bs mb-3">
                                                             <div class="input-group-prepend">
@@ -186,7 +196,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                         <small id="link_error" style="color: red"></small>
                                                         <p id="link_suggestion">Suggestions: <span id="suggestion"></span></p>
                                                     </div>
-                                                @endif
+                                                @endif --}}
                                                 
                                                 
                                             </div>
@@ -241,7 +251,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <label class="font-15">Weight (lbs)</label>
                                                     <div class="form-holder">
-                                                        <input type="text" name="weight"  value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control">
+                                                        <input type="number" name="weight" id="weight" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" value="{{$profile->weight ?? ''}}" placeholder="{{strtoupper('Weight in lbs')}}" class="form-control" min="0" max="400">
                                                     </div>
                                                 </div>
                                             </div>
@@ -249,6 +259,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="form-holder">
                                                 <label class="font-15">Eyes</label>
                                                 <select name="eyes" class="form-control" placeholder="{{strtoupper('Eye Color')}}" id="" required>
+                                                    <option value="">Select Eye Color</option>
                                                     <option value="brown" {{isset($profile->eyes) && $profile->eyes=="brown" ? 'selected' : ''}}>Brown Eyes</option>
                                                     <option value="blue" {{isset($profile->eyes) && $profile->eyes=="blue" ? 'selected' : ''}}>Blue Eyes </option>
                                                     <option value="hazel" {{isset($profile->eyes) && $profile->eyes=="hazel" ? 'selected' : ''}}>Hazel Eyes </option>
@@ -262,6 +273,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="form-holder ">
                                                 <label class="font-15">Hair</label>
                                                 <select name="hairs" class="form-control" placeholder="{{strtoupper('Hair Color')}}" id="" required>
+                                                    <option value="">Select Hair Color</option>
                                                     <option value="black" {{isset($profile->hairs) && $profile->hairs=="black" ? 'selected' : ''}}>Black hair</option>
                                                     <option value="brown" {{isset($profile->hairs) && $profile->hairs=="brown" ? 'selected' : ''}}>Brown hair</option>
                                                     <option value="red" {{isset($profile->hairs) && $profile->hairs=="red" ? 'selected' : ''}}>Red hair</option>
@@ -277,19 +289,19 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Chest</label>
-                                                        <input type="text" value="{{$profile->chest ?? ''}}" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control">
+                                                        <input type="number" value="{{$profile->chest ?? ''}}" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" name="chest" placeholder="{{strtoupper('Chest (inches)')}}" class="form-control" min="0" max="124">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Neck</label>
-                                                        <input type="text" name="neck" value="{{$profile->neck ?? ''}}" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control">
+                                                        <input type="number" name="neck" value="{{$profile->neck ?? ''}}" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" placeholder="{{strtoupper('Neck (inches) (Men only)')}}" class="form-control" min="0" max="50">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Waist</label>
-                                                        <input type="text" name="waist" value="{{$profile->waist ?? ''}}" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control">
+                                                        <input type="number" name="waist" value="{{$profile->waist ?? ''}}" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" placeholder="{{strtoupper('Waist (inches)')}}" class="form-control" min="0" max="100">
                                                     </div>
                                                 </div>
                                             </div>
@@ -297,8 +309,8 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <label class="font-15">Sleves</label>
-                                                        <input type="text" name="sleves" value="{{$profile->sleves ?? ''}}" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control">
+                                                        <label class="font-15">Sleeves</label>
+                                                        <input type="number" name="sleves" value="{{$profile->sleves ?? ''}}" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" placeholder="{{strtoupper('Sleeve (inches) (Men only)')}}" class="form-control" min="0" max="50">
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-md-4">
@@ -308,14 +320,15 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 </div> --}}
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
-                                                        <label class="font-15">Shoes</label>
-                                                        <input type="text" name="shoes" value="{{$profile->shoes ?? ''}}" placeholder="{{strtoupper('Shoe size')}}" class="form-control">
+                                                        <label class="font-15">Shoe</label>
+                                                        <input type="number" name="shoes" value="{{$profile->shoes ?? ''}}" onkeypress="return /^\d*$/i.test(event.key)" oninput="return /^\d*$/i.test(event.key)" ondrop="return /^\d*$/i.test(event.key)" placeholder="{{strtoupper('Shoe size')}}" class="form-control" min="0" max="100">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-holder">
                                                         <label class="font-15">Body Type</label>
                                                         <select name="body_type" class="form-control" placeholder="{{strtoupper('Hair Color')}}" id="" required>
+                                                            <option>Select Body type</option>
                                                             <option value="average" {{isset($profile->body_type) && $profile->body_type=="average" ? 'selected' : ''}}>Average</option>
                                                             <option value="slim" {{isset($profile->body_type) && $profile->body_type=="slim" ? 'selected' : ''}}>Slim</option>
                                                             <option value="muscular" {{isset($profile->body_type) && $profile->body_type=="muscular" ? 'selected' : ''}}>Muscular</option>
@@ -393,19 +406,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                     <div class="items" data-group="experience">
                                                         
                                                         <div class="form-row">
-                                                            <div class="form-holder" >
-                                                                <input type="text" placeholder="{{strtoupper('Name')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$key}}][name]" class="form-control">
+                                                            <div class="form-holder" style="flex:1">
+                                                                <label for="">{{strtoupper('Name')}}</label>
+                                                                <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$key}}][name]" class="form-control limit_char">
                                                             </div>
-                                                            <div class="form-holder">
-                                                                <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$key}}][role]" placeholder="{{strtoupper('Role')}}" class="form-control">
+                                                            <div class="form-holder" style="flex:1">
+                                                                <label for="">{{strtoupper('Role')}}</label>
+                                                                <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$key}}][role]" placeholder="" class="form-control limit_char">
                                                             </div>
-                                                            <div class="form-holder">
-                                                                <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$key}}][production]" placeholder="{{strtoupper('Director or Production Company')}}" class="form-control">
+                                                            <div class="form-holder" style="flex:2">
+                                                                <label for="">{{strtoupper('Director or Production Company')}}</label>
+                                                                <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$key}}][production]" placeholder="" class="form-control limit_char">
                                                             </div>
-                                                            <div class="form-holder">
-                                                                <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                                <i class="mdi mdi-close"></i>
-                                                            </button>
+                                                            <div class="form-holder" style="flex:1">
+                                                                      <label for="" style="display:block">&nbsp;</label>
+                                                                        <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                            <i class="mdi mdi-close"></i>
+                                                                        </button>
+                                                                    
                                                             </div>
                                                         </div>
                                                     </div>
@@ -415,19 +433,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                             <div class="items" data-group="experience">
                                                 
                                                 <div class="form-row">
-                                                    <div class="form-holder" >
-                                                        <input type="text" placeholder="{{strtoupper('NAME')}}" data-name="name" {{-- name="experience[{{$expr->count() ?? 0}}][name]" --}} class="form-control">
+                                                    <div class="form-holder"  style="flex:1">
+                                                        <label for="">{{strtoupper('NAME')}}</label>
+                                                        <input type="text" placeholder="" data-name="name" {{-- name="experience[{{$expr->count() ?? 0}}][name]" --}} class="form-control limit_char">
                                                     </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="role" placeholder="{{strtoupper('ROLE')}}"{{--  name="experience[{{$expr->count() ?? 0}}][role]" --}} class="form-control">
+                                                    <div class="form-holder" style="flex:1">
+                                                        <label for="">{{strtoupper('ROLE')}}</label>
+                                                        <input type="text" data-name="role" placeholder=""{{--  name="experience[{{$expr->count() ?? 0}}][role]" --}} class="form-control limit_char">
                                                     </div>
-                                                    <div class="form-holder">
-                                                        <input type="text" data-name="production" placeholder="{{strtoupper('DIRECTOR or PRODUCTION COMPANY')}}"{{--  name="experience[{{$expr->count() ?? 0}}][production]" --}} class="form-control">
+                                                    <div class="form-holder" style="flex:2">
+                                                        <label for="">{{strtoupper('DIRECTOR or PRODUCTION COMPANY')}}</label>
+                                                        <input type="text" data-name="production" placeholder=""{{--  name="experience[{{$expr->count() ?? 0}}][production]" --}} class="form-control limit_char">
                                                     </div>
-                                                    <div class="form-holder">
-                                                        <button onclick="$(this).parents('.items').remove()" data-removeindex="0" type="button" class="btn btn-danger remove-btn btn-small" disabled="disabled">
-                                                        <i class="mdi mdi-close"></i>
-                                                    </button>
+                                                    <div class="form-holder" style="flex:1">
+                                                           <label for="" style="display:block">&nbsp;</label>
+                                                            <button onclick="$(this).parents('.items').remove();window.changeDetected = true" data-removeindex="0" type="button" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -466,19 +489,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="items" data-group="experience">
                                                     
                                                     <div class="form-row">
-                                                        <div class="form-holder" >
-                                                            <input type="text" placeholder="Name" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                        <div class="form-holder"  style="flex:1">
+                                                            <label for="">Name</label>
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="Role" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">Role</label>
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="Production" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">Production</label>
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                            <i class="mdi mdi-close"></i>
-                                                        </button>
+                                                        <div class="form-holder" style="flex:1">
+                                                               <label for="" style="display:block">&nbsp;</label>
+                                                                <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                    <i class="mdi mdi-close"></i>
+                                                                </button>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -488,19 +516,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <div class="items" data-group="experience">
 
                                             <div class="form-row">
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="name"{{--  name="experience[{{$expr_theater->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Name of the Production')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">Name</label>
+                                                    <input type="text" data-name="name"{{--  name="experience[{{$expr_theater->count() ?? 0}}][name]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_theater->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Role Played')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">Role</label>
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_theater->count() ?? 0}}][role]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Director or Venue')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">Production</label>
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_theater->count() ?? 0}}][production]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
-                                                    <i class="mdi mdi-close"></i>
-                                                </button>
+                                                <div class="form-holder" style="flex:1">
+                                                       <label for="" style="display:block">&nbsp;</label>
+                                                        <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                  
                                                 </div>
                                             </div>
                                         </div>
@@ -536,19 +569,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="items" data-group="experience">
                                                     
                                                     <div class="form-row">
-                                                        <div class="form-holder" >
-                                                            <input type="text" placeholder="{{strtoupper('Name')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                        <div class="form-holder"  style="flex:1">
+                                                            <label for="">{{strtoupper('Name')}}</label>
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="{{strtoupper('Role')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Role')}}</label>
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="{{strtoupper('Production')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Production')}}</label>
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                            <i class="mdi mdi-close"></i>
-                                                        </button>
+                                                        <div class="form-holder" style="flex:1">
+                                                               <label for="" style="display:block">&nbsp;</label>
+                                                                <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                    <i class="mdi mdi-close"></i>
+                                                                </button>
+                                                             
                                                         </div>
                                                     </div>
                                                 </div>
@@ -558,19 +596,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <div class="items" data-group="experience">
 
                                             <div class="form-row">
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_tele->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Name')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Name')}}</label>
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_tele->count() ?? 0}}][name]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_tele->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Role')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Role')}}</label>
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_tele->count() ?? 0}}][role]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_tele->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Location')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Location')}}</label>
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_tele->count() ?? 0}}][production]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
-                                                    <i class="mdi mdi-close"></i>
-                                                </button>
+                                                <div class="form-holder" style="flex:1">
+                                                       <label for="" style="display:block">&nbsp;</label>
+                                                        <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -605,19 +648,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="items" data-group="experience">
                                                     
                                                     <div class="form-row">
-                                                        <div class="form-holder" >
-                                                            <input type="text" placeholder="{{strtoupper('Name of Commercial')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Name of Commercial')}}</label>
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="{{strtoupper('Role Played')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Role Played')}}</label>
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="{{strtoupper('Director or Production Company')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:2">
+                                                            <label for="">{{strtoupper('Director or Production Company')}}</label>
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                            <i class="mdi mdi-close"></i>
-                                                        </button>
+                                                        <div class="form-holder" style="flex:1">
+                                                               <label for="" style="display:block">&nbsp;</label>
+                                                                <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                <i class="mdi mdi-close"></i>
+                                                            </button>
+                                                             
                                                         </div>
                                                     </div>
                                                 </div>
@@ -628,21 +676,26 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <div class="items" data-group="experience">
 
                                             <div class="form-row">
-                                                <div class="form-holder">                     
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_comm->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Commercial')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                <label for="">{{strtoupper('Name of Commercial')}}</label>                     
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_comm->count() ?? 0}}][name]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_comm->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Role')}}" class="form-control">
-                                                </div>
-                                                
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_comm->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Production Company or Director')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Role Played')}}</label>
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_comm->count() ?? 0}}][role]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                                 
-                                                <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
-                                                    <i class="mdi mdi-close"></i>
-                                                </button>
+                                                <div class="form-holder" style="flex:2">
+                                                    <label for="">{{strtoupper('Director or Production Company')}}</label>
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_comm->count() ?? 0}}][production]" --}} placeholder="" class="form-control limit_char">
+                                                </div>
+                                                
+                                                <div class="form-holder" style="flex:1">
+                                                       <label for="" style="display:block">&nbsp;</label>
+                                                        <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -677,19 +730,24 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                                 <div class="items" data-group="experience">
                                                     
                                                     <div class="form-row">
-                                                        <div class="form-holder" >
-                                                            <input type="text" placeholder="{{strtoupper('Training Class')}}" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control">
+                                                        <div class="form-holder"  style="flex:1">
+                                                            <label for="">{{strtoupper('Training Class')}}</label>
+                                                            <input type="text" placeholder="" data-name="name" value="{{$exp->name}}" name="experience[{{$loop->index}}][name]" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="{{strtoupper('Instructor')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Instructor')}}</label>
+                                                            <input type="text" data-name="role" value="{{$exp->role}}" name="experience[{{$loop->index}}][role]" placeholder="" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="{{strtoupper('Training Company')}}" class="form-control">
+                                                        <div class="form-holder" style="flex:1">
+                                                            <label for="">{{strtoupper('Training Company')}}</label>
+                                                            <input type="text" data-name="production" value="{{$exp->production}}" name="experience[{{$loop->index}}][production]" placeholder="" class="form-control limit_char">
                                                         </div>
-                                                        <div class="form-holder">
-                                                            <button onclick="$(this).parents('.items').remove()" type="button" class="btn btn-danger repeater-add-btn btn-small">
-                                                            <i class="mdi mdi-close"></i>
-                                                        </button>
+                                                        <div class="form-holder" style="flex:1">
+                                                               <label for="" style="display:block">&nbsp;</label>
+                                                                <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" class="btn btn-danger repeater-add-btn btn-small">
+                                                                    <i class="mdi mdi-close"></i>
+                                                                </button>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -700,20 +758,25 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                                         <div class="items" data-group="experience">
 
                                             <div class="form-row">              
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_train->count() ?? 0}}][name]" --}} placeholder="{{strtoupper('Training Class')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Training Class')}}</label>
+                                                    <input type="text" data-name="name" {{-- name="experience[{{$expr_train->count() ?? 0}}][name]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_train->count() ?? 0}}][role]" --}} placeholder="{{strtoupper('Instructor')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Instructor')}}</label>
+                                                    <input type="text" data-name="role" {{-- name="experience[{{$expr_train->count() ?? 0}}][role]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
-                                                <div class="form-holder">
-                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_train->count() ?? 0}}][production]" --}} placeholder="{{strtoupper('Training Company')}}" class="form-control">
+                                                <div class="form-holder" style="flex:1">
+                                                    <label for="">{{strtoupper('Training Company')}}</label>
+                                                    <input type="text" data-name="production" {{-- name="experience[{{$expr_train->count() ?? 0}}][production]" --}} placeholder="" class="form-control limit_char">
                                                 </div>
                                             
-                                                <div class="form-holder">
-                                                    <button onclick="$(this).parents('.items').remove()" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
-                                                    <i class="mdi mdi-close"></i>
-                                                </button>
+                                                <div class="form-holder" style="flex:1">
+                                                       <label for="" style="display:block">&nbsp;</label>
+                                                        <button onclick="$(this).parents('.items').remove();window.changeDetected = true" type="button" data-removeindex="0" class="btn btn-danger remove-btn btn-small" disabled="disabled">
+                                                            <i class="mdi mdi-close"></i>
+                                                        </button>
+                                                     
                                                 </div>
                                             </div>
                                         </div>
@@ -764,6 +827,70 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
     
 @endsection
 @section('scripts')
+<script>
+    window.currentStep = 0;
+    window.finishTrigger = false;
+    window.changeDetected = false;
+    function nextCallback(addBtn,currentStep){
+
+        if(addBtn == true){
+            if($('#wizard-p-'+currentStep+' .repeater-add-btn:not(.btn-danger)')){
+                $('#wizard-p-'+currentStep+' .repeater-add-btn:not(.btn-danger)').click();
+            }
+        }
+
+         if ($('#wizard-p-' + currentStep + ' >form').valid()) 
+        {
+
+            var formDataa=new FormData($('section[aria-hidden="false"] > form')[0]);
+            console.log($('section[aria-hidden="false"] > form')[0]);
+            console.log('next callback running');
+            @if ($profile)
+                formDataa.append('method', 'PUT');
+                formDataa.append('profile_id', "{{$profile->id}}");
+            @endif
+            
+            /* console.log(params); */
+            if ($('#link_error').is(":visible")) {
+                $('#custom_link').val('');
+            }
+
+            if(window.changeDetected){
+                $.ajax({
+                    url: "{{ route('account.talent-profile.store') }}",
+                    contentType: false,
+                    processData: false,
+                    
+                    type: 'POST',
+                    data:formDataa,
+                    success: function(res) {
+                       
+                        if (res.alert_type=='success') {
+                            toastr.success(res.message);
+                            if (res.method) {
+                                $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
+                            }
+                        } else {
+                            toastr.error(res.message);
+                        }
+
+                        if (window.finishTrigger) {
+                            window.location='{{route('account.dashboard')}}';
+                        }
+                    },
+                    error: function(error) {
+                    }
+                });
+            }
+            else{
+                if (window.finishTrigger) {
+                    window.location='{{route('account.dashboard')}}';
+                }
+            }
+            window.changeDetected = false;
+        }
+    }
+</script>
 <script src="{{ asset('plugins/steps/js/jquery.steps.js') }}"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="{{ asset('plugins/steps/js/main.js') }}"></script>
@@ -778,6 +905,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 		}
 	});
     $(document).ready(function() {
+
        $("#Films").createRepeater({showItemsToDefault: true,showItemsToDefault: true,startIndex:$("#Films").data('start')});
        $("#Theater").createRepeater({showItemsToDefault: true,startIndex:$("#Theater").data('start')});
        $("#Commercials").createRepeater({showItemsToDefault: true,startIndex:$("#Commercials").data('start')});
@@ -785,7 +913,11 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
        $("#Training").createRepeater({showItemsToDefault: true,startIndex:$("#Training").data('start')});
        /* $('.repeater-add-btn').trigger('click'); */
 
-
+       $('#wizard form').find('input,select,textarea').change(function(){
+            
+            window.changeDetected = true;
+        });
+        
        $('.repeater-add-btn').click(function(){
             $(this).siblings('.btn').hide();
         });
@@ -804,40 +936,49 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
         });
 
         $('#legal_first_name, #legal_last_name').on('keyup',function(){
-            $("#custom_link").val($('#legal_first_name').val()+'_'+$('#legal_last_name').val());
+            $("#custom_link").val($('#legal_first_name').val()+'-'+$('#legal_last_name').val());
             $('#custom_link').trigger('change');
         })
 
-        $('#custom_link').on('keyup change',function(){
-            $('#link_suggestion').hide();
-            if ($(this).val() !=='') {
-                $.ajax({
-                    url: "{{ route('account.talent.checkCustomLink') }}",
-                    type: 'GET',
-                    data:{
-                        'link':$(this).val()
-                    },
-                    success: function(res) {
-                        console.log(res);
-                        if (res.alert_type=='success') {
-                            $('#link_error').hide();
-                        } else {
-                            
-                            $('#link_error').html(res.message);
-                            $('#link_error').show();
+        // $('#custom_link').on('keyup change',function(e){
+        //     $('#link_suggestion').hide();
+            
+        //     if ($(this).val() !=='') {
+        //         if(e.keyCode == 189)
+        //         {
+        //            var textValue =$(this).val().replace(/_/g,"-");
+        //             $(this).val(textValue);
+        //         }
+        //         else{
+        //             $.ajax({
+        //                 url: "{{ route('account.talent.checkCustomLink') }}", --}}
+        //                 type: 'GET',
+        //                 data:{
+        //                     'link':$(this).val()
+        //                 },
+        //                 success: function(res) {
+        //                     console.log(res);
+        //                     if (res.alert_type=='success') {
+        //                         $('#link_error').hide();
+        //                     } else {
+                                
+        //                         $('#link_error').html(res.message);
+        //                         $('#link_error').show();
 
-                            $('#suggestion').html('');
-                            res.suggestions.forEach(val => {
-                                $('#suggestion').append(val+'<br>');
-                            });
-                            $('#link_suggestion').show();
-                        }
-                    },
-                    error: function(error) {
-                    }
-                });
-            }
-        })
+        //                         $('#suggestion').html('');
+        //                         res.suggestions.forEach(val => {
+        //                             $('#suggestion').append(val+'<br>');
+        //                         });
+        //                         $('#link_suggestion').show();
+        //                     }
+        //                 },
+        //                 error: function(error) {
+        //                 }
+        //             });
+        //         }
+                
+        //     }
+        // })
 
     });
 
@@ -885,57 +1026,10 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 <script type="text/javascript">
 
 
-    $(document).on('click','a[href="#next"]',function(e){
-        if ($("#profile_form").valid()) 
-        {
 
-            /* $('section[aria-hidden="false"] *').filter(':input').each(function () {
-                if( $(this).val().length !== 0 ) {
-                    console.log($(this).attr('name')+' => '+ $(this).val());
-                    params[$(this).attr('name')]=$(this).val();
-                }
-            }); */
-            var formDataa=new FormData($('section[aria-hidden="false"] > form')[0]);
-            console.log($('section[aria-hidden="false"] > form')[0]);
-
-            @if ($profile)
-                formDataa.append('method', 'PUT');
-                formDataa.append('profile_id', "{{$profile->id}}");
-            @endif
-            
-            /* console.log(params); */
-            if ($('#link_error').is(":visible")) {
-                $('#custom_link').val('');
-            }
-
-            $.ajax({
-                url: "{{ route('account.talent-profile.store') }}",
-                contentType: false,
-                processData: false,
-                
-                type: 'POST',
-                data:formDataa,
-                success: function(res) {
-                    console.log(res);
-                    if (res.alert_type=='success') {
-                        toastr.success(res.message);
-                        if (res.method) {
-                            $('section >form').append('<input type="hidden" value='+res.method+' name="method"/>');
-                        }
-                    } else {
-                        toastr.error(res.message);
-                    }
-                },
-                error: function(error) {
-                }
-            });
-        }
-        
-        
-    })
 
     $(document).on('click','a[href="#finish"]',function(e){
-        if ($("#profile_form").valid()) 
+        if ($('#wizard-p-' + currentStep + ' >form').valid()) 
         {
             var formDataa=new FormData($('section[aria-hidden="false"] > form')[0]);
             console.log($('section[aria-hidden="false"] > form')[0]);
@@ -957,7 +1051,7 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
                     console.log(res);
                     if (res.alert_type=='success') {
                         toastr.success(res.message);
-                        window.location.reload();
+                        window.location='{{route('account.dashboard')}}';
                     } else {
                         toastr.error(res.message);
                     }
@@ -974,13 +1068,64 @@ button.btn.btn-primary.btn-small.repeater-add-btn {
 
 <script>
     $(document).ready(function(){
-        $('.actions ul').append("<li class='d-none' id='finish_btn'><a href='javascript:;'>Finish</a></li>");
+        $('.actions ul').append("<li class='ml-auto' id='finish_btn'><a href='javascript:;'>Finish</a></li>");
+        $('a[href="#next"]').parent().addClass('ml-auto');
+        $('a[href="#finish"]').parent().addClass('ml-auto');
     })
+    
+    $(document).on('hover active','a[href="#next"]',function(){
+       
+       window.finishTrigger =false;
+       
+      
+       
+   })
 
     $(document).on('click','#finish_btn',function(){
+       
+        /* if($('#wizard-p-'+window.currentStep+' .repeater-add-btn:not(.btn-danger)')){
+            $('#wizard-p-'+window.currentStep+' .repeater-add-btn:not(.btn-danger)').click();
+        } */
+        window.finishTrigger =true;
         $('a[href="#next"]').click();
-        window.location='{{route('account.dashboard')}}';
+        
+       
+        
     })
+</script>
+
+<script>
+    (function($) {
+        $.fn.inputFilter = function(inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+            if (inputFilter(this.value)) {
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                this.value = "";
+            }
+            });
+        };
+    }(jQuery));
+
+    $(document).on('input','.limit_char',function(){
+        var max_chars = 20;
+
+        if($(this).val().length > max_chars) {
+            $(this).val($(this).val().substr(0, max_chars)) ;
+        }
+    })
+
+    /* $(document).ready(function(){
+
+        $("#weight").inputFilter( function(value) {
+            return /^\d*$/.test(value);
+        });
+    }); */
 </script>
 
 @endsection

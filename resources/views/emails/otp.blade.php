@@ -387,11 +387,11 @@
       <!-- BEGIN BODY -->
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
       	<tr>
-          <td valign="top" class="bg_white" style="padding: 1em 2.5em 0 2.5em;">
+          <td valign="top" style="background:black">
           	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
           		<tr>
-          			<td class="logo">
-			            <h1 style="text-align: center"><a href="#" style="text-align: center">Talent Depot</a></h1>
+          			<td class="logo" style="text-align: center;">
+                  <img src="{{asset('web/img/logo/generic_logo_banner_orange.png')}}" style="text-align: center;width: 25%" alt="">
 			          </td>
           		</tr>
           	</table>
@@ -410,15 +410,15 @@
               </tr> --}}
               <tr>
                 <td>
-                  <h4>Dear ALFA User,</h4>
-                  <p>Here is your OTAC: {{$data['otp'] ?? ''}}</p>
-                  <p>Please enter the OTAC in the relevant fields to complete the transaction.</p>
+                  <h4 style="color: #000000">Dear Talent,</h4>
+                  <p style="color: #000000">Your verification code is <b>{{$data['otp'] ?? ''}}</b>.</p>
+                  <p style="color: #000000">Return to the Talent Link verification page and enter <b>{{$data['otp'] ?? ''}}</b> into the 6 boxes.</p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p>Regards,</p>
-                  <p>Talent Depot</p>
+                  <p style="color: #000000">Thank you and welcome!</p>
+                  <p style="color: #000000">The Talent Depot Membership Team</p>
                 </td>
               </tr>
             </table>
@@ -428,51 +428,6 @@
         </tr><!-- end tr -->
         <tr>
           <td class="bg_white">
-            {{-- <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-              <tr>
-                <td class="bg_white email-section">
-                  <div class="heading-section" style="text-align: justify; padding: 0 30px;">
-                    
-                    <p style="font-weight: 600;">If you did not intend to register an account, someone may have registered with your information by mistake. Please contact Customer Support using the contact details found at:<span><a href="{{url('/')}}">TalentDepot</a></span></p>
-                  </div>
-                  <hr>
-                  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                    
-                    <tr>
-                      <td valign="top" width="50%">
-                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                          <tr>
-                            <td style="box-sizing: border-box;
-                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-                            position: relative;
-                            line-height: 1.5em;
-                            margin-top: 0;
-                            text-align: left;
-                            font-size: 14px;">
-                              If you’re having trouble clicking the "Verify Email Address" button, copy and paste the URL below into your web browser: <br>
-                              <span style="word-break: break-all;"><a target="_blank" rel="noopener noreferrer" href="{{$url}}">{{$url}}</a></span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="padding: 0 30px;;text-align: center">
-                              <a href="{{url('/').'/privacy-policy'}}" style="padding-right: 5px;
-                              border-right: 2px solid grey;">Privacy Policy</a>
-                              <a href="{{url('/').'/terms-of-service'}}" style="padding-right: 5px;
-                              border-right: 2px solid grey;">Terms of Services</a>
-                              <a href="{{url('/').'/terms-of-use'}}">Terms of Use</a>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-
-
-
-                    </tr>
-                  </table>
-                </td>
-              </tr><!-- end: tr -->
-
-            </table> --}}
 
           </td>
         </tr><!-- end:tr -->
@@ -488,7 +443,7 @@
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="text-align: left; padding-right: 10px;">
-                        <p>&copy; 2020 Talent Depot. All Rights Reserved</p>
+                        <p>&copy; 2021 The Talent Depot. All Rights Reserved</p>
                       </td>
                     </tr>
                   </table>

@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 
-
+@section('title', 'Create Topic')
 @section('styles')
 <style type="text/css">
 .btn-half {
@@ -14,6 +14,30 @@
 .note-toolbar .btn{
    padding:10px 10px ; 
 }
+
+.invalid-feedback{
+    color: red;
+}
+
+.z-0{
+    z-index: 0;
+}
+
+.modal-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    border-top-left-radius: .3rem;
+    border-top-right-radius: .3rem;
+}
 </style>
 
 <link href="{{asset('backend-assets/assets/plugins/summernote/summernote.css')}}" rel="stylesheet">
@@ -25,7 +49,7 @@
         <div class="row">
             <div class="title__wrapp">
                 {{-- <div class="page__subtitle title__grey">Post</div> --}}
-                <h1 class="page__title">Create a Post</h1>
+                <h1 class="page__title">Create a Topic</h1>
             </div>
         </div>
     </div>
@@ -34,52 +58,52 @@
 <section class="section apply">                    
         <div class="container">
             <div class="row">
-                <h3 class="text__quote centered">Post Form</h3>
+                <h3 class="text__quote centered">Topic Form</h3>
                 <div class="col-lg-12 col-md-12 ">
 
-                   @php 
-                  $route = route('agent.topic.store');
+                  @php 
+                    $route = route('agent.topic.store');
                   if(isset($blog)){
-                  $route = route('agent.topic.update',$blog->id);
+                    $route = route('agent.topic.update',$blog->id);
                   }
                   @endphp
 
-                    <form class="apply-form form-horizontal" method="POST" action="{{ $route }}" enctype="multipart/form-data">
-                        @csrf 
-                        @if(isset($blog))
+                  <form class="apply-form form-horizontal" method="POST" action="{{ $route }}" enctype="multipart/form-data">
+                  @csrf 
+                  @if(isset($blog))
                   {{ method_field('PATCH') }}
                   @endif
                         <div class="form-block p-5">
                             <div class="form-group">
                              
-                                    <label for="name" class="control-label">Category<span class="req">*</span></label>
-                                    <input id="topic_category_id" readonly="" type="topic_category_id" class="form-control @error('topic_category_id') is-invalid @enderror readonly_normal" name="topic_category_id" value="Jobs & Castings" required autocomplete="topic_category_id" autofocus>
+                              <label for="name" class="control-label">Category<span class="req">*</span></label>
+                              <input id="topic_category_id" readonly="" type="topic_category_id" class="form-control @error('topic_category_id') is-invalid @enderror readonly_normal" name="topic_category_id" value="Jobs & Castings" required autocomplete="topic_category_id" autofocus>
 
-                                   @error('topic_category_id')
-                                       <span class="invalid-feedback" role="alert">
-                                           <strong>{{ $message }}</strong>
-                                       </span>
-                                   @enderror
+                             @error('topic_category_id')
+                                 <span class="invalid-feedback" role="alert">
+                                     <strong>{{ $message }}</strong>
+                                 </span>
+                             @enderror
                                 
                             </div>
 
                             <div class="form-group">
                              
-                                    <label for="name" class="control-label">Title<span class="req">*</span></label>
-                                    <input id="title" type="title" class="form-control @error('title') is-invalid @enderror" name="title" value="{{isset($blog)?$blog->title : ''}}" required autocomplete="title" autofocus>
+                              <label for="name" class="control-label">Title<span class="req">*</span></label>
+                              <input id="title" type="title" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') ?? $blog->title ?? '' }}" required autocomplete="title" autofocus>
 
-                                   @error('title')
-                                       <span class="invalid-feedback" role="alert">
-                                           <strong>{{ $message }}</strong>
-                                       </span>
-                                   @enderror
+                             @error('title')
+                                 <span class="invalid-feedback" role="alert">
+                                     <strong>{{ $message }}</strong>
+                                 </span>
+                             @enderror
                                 
                             </div>
 
                             <div class="form-group">
                              
-                                 <label for="name" class="control-label">Slug<span class="req">*</span></label>
-                                 <input id="slug" type="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{isset($blog)?$blog->slug : ''}}" required autocomplete="slug" autofocus>
+                                 <label for="name" class="control-label">URL<span class="req">*</span></label>
+                                 <input id="slug" type="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') ?? $blog->slug ?? ''}}" required autocomplete="slug" autofocus>
 
                                 @error('slug')
                                     <span class="invalid-feedback" role="alert">
@@ -112,14 +136,14 @@
                                            <strong>{{ $message }}</strong>
                                        </span>
                                     @enderror
-                                    <textarea name="content" id="summernote" class="summernote">{!!isset($blog)?html_entity_decode($blog->content) : ''!!}</textarea>
+                                    <textarea name="content" id="summernote" class="summernote">{!! old('content') ?? html_entity_decode($blog->content ?? '') ?? ''!!}</textarea>
                                     
                               </div>
                           
                         
                             <div class="row">
                                 <div class="col-sm-12 text-center">
-                                    <button type="submit" class="btn btn-default btn__red animation btn-half pull-right">{{ isset($blog) ? 'Update' : 'Create' }}</button>
+                                    <button type="submit" class="btn btn-default btn__red animation btn-half pull-right z-0">{{ isset($blog) ? 'Update' : 'Create' }}</button>
                                 </div>
                             </div>
                       
@@ -183,6 +207,12 @@
    }
       
    
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('.btn-fullscreen').hide();
+    })
 </script>
 
 @endsection

@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 
-
+@section('title', 'Topics')
 @section('styles')
 <style type="text/css">
 
@@ -58,7 +58,7 @@
 
 
 					<div class="row">
-						@foreach($topics as $topic)
+						@forelse($topics as $topic)
 							<div class="col-sm-12">
 								<a href="{{ route('agent.topic.edit', $topic->id)}}">
 									<div class="pick-item">
@@ -69,7 +69,11 @@
 									</div>
 								</a>
 							</div>
-						@endforeach
+						@empty
+						<div class="col-sm-12 text-center">
+							<h4>No topics Found</h4>
+						</div>
+						@endforelse
 					</div>
 					
 					

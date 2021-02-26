@@ -4,8 +4,8 @@ function render_videodropzone(store_url) {
         '#videoDropzone', {
         url: store_url,
         maxFilesize: 12, // MB
-        acceptedFiles: "video/mp4,video/mkv,video/mov,video/wmv",
-        dictDefaultMessage: "Drop Your Files here.",
+        acceptedFiles: ".mp4,.mkv,.avi,.mov,.wmv",
+        dictDefaultMessage: "Drag & Drop Your File(s) Here or click to upload.<br> i.e .mp4 .mkv .wmv",
         accept: function (file, done) {
             console.log("uploaded");
             done();
@@ -23,9 +23,9 @@ function render_videodropzone(store_url) {
             const fileType = file.type;
             console.log(fileType);
 
-            if (validVideoTypes.includes(fileType)) {
-                formData.append('type', 'video');
-            }
+            /*  if (validVideoTypes.includes(fileType)) { */
+            formData.append('type', 'video');
+            /* } */
         },
         success: function (file, response) {
             console.log(file);
@@ -71,8 +71,15 @@ function render_videodropzone(store_url) {
                 setDropzoneImgLimit(file);
             }); */
 
-            this.on("maxfilesexceeded", function (file) {
-                toastr.error("No more files please!");
+            this.on("error", function (file, response) {
+                console.log(file, response);
+                if (file.size > 12582912) {
+                    $(file.previewElement).find('.dz-error-message').text("Your file exceeds 12 MB. Remove this file to proceed");
+                }
+                else {
+                    $(file.previewElement).find('.dz-error-message').text(response.message);
+                }
+
             });
 
         }

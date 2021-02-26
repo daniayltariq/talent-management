@@ -24,6 +24,9 @@ class TalentSearch
         $user->whereHas(
             'roles', function($q){
                 $q->whereNotIn('name',['superadmin','agent']);
+            })->whereHas(
+                'profile', function($q){
+                $q->where('profile_img','<>',null);
             });
         if (session('old_query')) {
             if (session()->has('old_query.sorting')) {

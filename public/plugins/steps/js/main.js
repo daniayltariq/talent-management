@@ -9,14 +9,17 @@ $(function () {
             }
         }
     });
-
-    $("#wizard").steps({
+    window.currentStep = 0;
+    window.profileWizard = $("#wizard").steps({
         headerTag: "h4",
         bodyTag: "section",
         transitionEffect: "fade",
         enableAllSteps: true,
         transitionEffectSpeed: 500,
         onStepChanging: function (event, currentIndex, newIndex) {
+            console.log(event);
+            console.log('current: ' + currentIndex);
+            window.currentStep = newIndex;
             /* console.log($('#wizard-p-' + currentIndex + ' >form')); */
             /*  if (newIndex >= 1) {
                  $('.actions ul').addClass('actions-next');
@@ -32,21 +35,66 @@ $(function () {
             if (newIndex === 3 && Number($("#age-2").val()) < 18) {
                 return false;
             }
-            console.log(currentIndex, newIndex);
+
             if (currentIndex < newIndex) {
                 $('.actions ul').addClass('actions-next');
-                $('#finish_btn').css('display', 'block');
+                /* $('#finish_btn').css('display', 'block'); */
             } else {
                 $('.actions ul').removeClass('actions-next');
-                $('#finish_btn').css('display', 'none');
+                /* $('#finish_btn').css('display', 'none'); */
             }
+
+            $('html, body').animate({
+                scrollTop: $('.page__title').offset().top
+            }, 1000);
+
             form = $('#wizard-p-' + currentIndex + ' >form');
             form.validate().settings.ignore = ":disabled,:hidden";
 
+            repeater = $('#wizard-p-' + currentIndex);
+            items = $('#wizard-p-' + currentIndex).find(".items");
+            var triggerAddBtn = false;
+            if (items.length > 0) {
+                var child = items.eq(items.length - 1);
+
+                var row_inputs = $(child).find('input,select,textarea');
+                console.log(row_inputs);
+                var emptyFields = row_inputs.filter(function () {
+                    return $(this).val() === "";
+                }).length;
+
+                console.log(emptyFields);
+
+                if (emptyFields === 0) {
+
+                    triggerAddBtn = true;
+                } else {
+                    if (emptyFields < row_inputs.length) {
+                        window.finishTrigger = false;
+                        toastr.error('input can not be empty');
+                        return false;
+                    } else {
+
+                    }
+
+                }
+
+                /* row_inputs.each(function (index, el) {
+                    if ($(el).attr('value') == '') {
+                        toastr.error('input can not be empty');
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }); */
+            } else {
+
+            }
+            nextCallback(triggerAddBtn, currentIndex);
             return form.valid();
         },
         labels: {
-            finish: "Continue",
+            finish: "Next",
             next: "Next",
             notyet: "None yet.  Continue",
             previous: "Back"

@@ -132,7 +132,7 @@ class TopicController extends Controller
         // }
 
         return redirect()->back()->with([
-            "message" => "Topic created, waiting for approval.",
+            "message" => "Pending approval.",
             "alert-type" => "success",
         ]);
         
@@ -165,7 +165,6 @@ class TopicController extends Controller
     {
         $blog = Topic::findOrFail($id);
         $categories = self::topic_categories(['no_paginate' => true]);
-        //dd($blog->tags->pluck('tag')->toArray());
         
         return view('web.agent.topic.create',compact('categories','blog'));
     }
@@ -208,7 +207,7 @@ class TopicController extends Controller
         $blog->save();
 
         return redirect()->back()->with([
-            "message" => "Topic has been updated.",
+            "message" => "Updated successfully.",
             "alert-type" => "success",
         ]);
 

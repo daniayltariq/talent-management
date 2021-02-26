@@ -30,6 +30,6 @@ class DeactivateUser extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('Account De-activated')->markdown('emails.user.deactivate');
+        return $this->subject('Account Deactivation')->markdown('emails.user.deactivate');
     }
 }

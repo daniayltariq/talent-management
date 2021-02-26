@@ -4,8 +4,8 @@ function render_audiodropzone(store_url) {
         '#audioDropzone', {
         url: store_url,
         maxFilesize: 12, // MB
-        acceptedFiles: 'audio/mp3,audio/mpeg,audio/wav',
-        dictDefaultMessage: "Drop Your Files here.",
+        acceptedFiles: '.mp3,.wma,.wav',
+        dictDefaultMessage: "Drag & Drop Your File(s) Here or click to upload.<br> i.e .mp3 .wav",
         /* autoProcessQueue: false, */
         accept: function (file, done) {
             console.log("uploaded");
@@ -71,9 +71,12 @@ function render_audiodropzone(store_url) {
             var myDropzone = this;
             const validAudioTypes = ['audio/mp3', 'audio/mpeg', 'audio/wav'];
 
-            this.on("maxfilesexceeded", function (file) {
-                toastr.error("No more files please!");
-            });
+            if (file.size > 12582912) {
+                $(file.previewElement).find('.dz-error-message').text("Your file exceeds 12 MB. Remove this file to proceed");
+            }
+            else {
+                $(file.previewElement).find('.dz-error-message').text(response.message);
+            }
             /* this.on('addedfile', function (file) {
                 console.log($('#audioDropzone')[0].dropzone.options.maxFiles);
                 if (validAudioTypes.includes(file.type)) {

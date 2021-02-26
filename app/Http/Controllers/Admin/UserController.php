@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
+use Illuminate\Http\Request;
 use App\Domain\Mail\InviteTalent;
-use App\Domain\Mail\DeactivateUser;
 use Illuminate\Support\Facades\DB;
 
 use Spatie\Permission\Models\Role;
+use App\Domain\Mail\DeactivateUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -23,15 +24,27 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $user = User::whereHas(
-            'roles', function($q){
-                $q->where('name','<>','superadmin');
-            }
-        )->with('roles')->get();
+        if ($request->query('search_text')) {
+            $users = User::whereHas(
+                'roles', function($q){
+                    $q->where('name','<>','superadmin');
+                }
+            )
+            ->where('f_name','LIKE','%'.$request->search_text.'%')
+            ->orWhere('l_name','LIKE','%'.$request->search_text.'%')->with('roles')->paginate(25);
+        } else {
+            $users = User::whereHas(
+                'roles', function($q){
+                    $q->where('name','<>','superadmin');
+                }
+            )->with('roles')->paginate(25);
+        }
+        
+        
         $roles=Role::where('name','<>','superadmin')->get();
         
-        /* dd($user[0]->roles[0]->name); */
-        return view('backend.user.list',compact('user','roles'));
+        /* dd($users); */
+        return view('backend.user.list',compact('users','roles'));
         
     }
 
@@ -143,7 +156,7 @@ class UserController extends Controller
                         "user"=>$user,
                     ];
                     if ($request['status'] == 0) {
-                        Mail::to($user->email)->send(new DeactivateUser($data));
+                        Mail::to($user->email) ->cc(['admin@thetalentdepot.com'])->send(new DeactivateUser($data));
                     }
                     
                     $user->save();
@@ -287,6 +300,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user=User::findOrFail($id);
+        if($user->profile()->exists()){
+            $user->profile()->delete();
+            $user->posts()->delete();
+        }
+        
         $user->delete();
         return redirect()->back();
     }

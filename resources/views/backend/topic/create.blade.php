@@ -75,7 +75,7 @@
                            </div>
                         </div>
                         <div class="form-group">
-                           <label class="col-md-3 col-sm-3 col-xs-12">Add Slug</label>
+                           <label class="col-md-3 col-sm-3 col-xs-12">Add URL</label>
                            <div class="col-md-11 col-sm-11 col-xs-12">
                               <input type="text" class="form-control" name="slug" value="{{!is_null(old('slug')) ? old('slug') : (isset($blog)?$blog->slug : '')}}"/>
                               @error('slug')

@@ -1,8 +1,9 @@
 @extends('web.layouts.app')
 
-
+@section('title', 'My Picklist')
 @section('styles')
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,900">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.css" integrity="sha512-WfDqlW1EF2lMNxzzSID+Tp1TTEHeZ2DK+IHFzbbCHqLJGf2RyIjNFgQCRNuIa8tzHka19sUJYBO+qyvX8YBYEg==" crossorigin="anonymous" />
 <style type="text/css">
 
 #picklist-modal {
@@ -31,6 +32,42 @@
     box-shadow: 0px 10px 14px #61616142
 }
 
+.text-red{
+	color: red;
+}
+
+.del_pl{
+	padding: 2px 10px;
+}
+
+.del_pl:hover{
+    border: 1px solid #f75959;
+    border-radius: 7px;
+}
+
+h3{
+    font-family: 'Source Sans Pro' !important;
+}
+
+.p-1{
+	padding: 1rem;
+}
+
+.swal2-styled.swal2-confirm {
+	font-size: 1.625em !important;
+}
+
+.swal2-styled.swal2-cancel {
+	font-size: 1.625em !important;
+}
+
+.swal2-popup {
+	width: 37em !important;
+}
+
+.o-wrap-any{
+	overflow-wrap: anywhere;
+}
 </style>
 @endsection
 
@@ -63,12 +100,19 @@
 					<div class="row">
 						@forelse ($picklist as $item)
 							<div class="col-sm-12">
-								<a href="{{ route('agent.picklist.show',$item->id) }}">
-									<div class="pick-item">
-										<h3>{{$item->title}}. ({{count($item->items)}})</h3>
-										<p>{{$item->description}}</p>
+								<div class="row pick-item">
+									<div class="col-md-11">
+											<div class="">
+												<a href="{{ route('agent.picklist.show',$item->id) }}"><h3 class="o-wrap-any">{{$item->title}} ({{$item->items_count}})</h3>
+												</a>
+												<p>{{$item->description}}</p>
+											</div>
 									</div>
-								</a>
+									
+									<div class="col-sm-1">
+										<a class="del_pl" href="{{route('agent.delete_picklist',$item->id)}}"><i class="fa fa-trash text-red"></i></a>
+									</div>
+								</div>
 							</div>
 						@empty
 						<div class="col-sm-12">
@@ -150,4 +194,33 @@
 
 
 <!-- Blog Section End -->
+@endsection
+
+@section('scripts')
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.js" integrity="sha512-+uGHdpCaEymD6EqvUR4H/PBuwqm3JTZmRh3gT0Lq52VGDAlywdXPBEiLiZUg6D1ViLonuNSUFdbL2tH9djAP8g==" crossorigin="anonymous"></script>
+	<script>
+		$('.del_pl').on('click',function(e){
+			var that=$(this);
+			e.preventDefault();
+			
+			
+			Swal.fire({
+				title: 'Are you sure?',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes'
+				}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire(
+					'Deleted!',
+					'Picklist deleted.',
+					'success'
+					)
+					window.location.href=that.attr('href');
+				}
+			})
+		})
+	</script>
 @endsection

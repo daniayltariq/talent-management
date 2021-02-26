@@ -387,11 +387,11 @@
       <!-- BEGIN BODY -->
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
       	<tr>
-          <td valign="top" class="bg_white" style="padding: 1em 2.5em 0 2.5em;">
+          <td valign="top" style="background:black">
           	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
           		<tr>
-          			<td class="logo">
-			            <h1 style="text-align: center"><a href="#" style="text-align: center">Talent Depot</a></h1>
+          			<td class="logo" style="text-align: center;">
+                  <img src="{{asset('web/img/logo/generic_logo_banner_orange.png')}}" style="text-align: center;width: 25%" alt="">
 			          </td>
           		</tr>
           	</table>
@@ -410,7 +410,18 @@
               </tr> --}}
               <tr>
                 <td>
-                  <p style="margin-left: 1.7rem">Hi, {{$data['user']->f_name ?? ''}} <br>Your account has been de-activated,please follow the instructions to request for re-activation.</p>
+                  <p>Hi, {{-- {{$data['user']->f_name ?? ''}}  --}}<br></p>
+                  <div data-block-id="block-2a72cc11-1a44-479b-9fa6-6d79877595a2">Unfortunately, we deactivate your account for issues outlined in our user agreement. Most commonly, accounts may be deactivated for one or more of the following issues, however any departure to the agreed upon terms and conditions may result in deactivation of an account.</div>
+                  <ul>
+                      <li data-list="bullet">provided and submitted false or inaccurate information. (4. USER&rsquo;S REGISTRATION OBLIGATIONS)</li>
+                      <li data-list="bullet">account displays personal contact information visible to service providers. (5. USER NAME, MEMBER ACCOUNT, PASSWORD AND SECURITY)</li>
+                      <li data-list="bullet">username is obscene, unlawful, or otherwise objectionable. (5. USER NAME, MEMBER ACCOUNT, PASSWORD AND SECURITY)</li>
+                      <li data-list="bullet">uploaded content for which you are not the owner or have not been granted rights by the owner of content. (6. UPLOADING DATA)</li>
+                      <li data-list="bullet">conducted unlawful or objectionable uploads, posts, or email. (Section 10. User Conduct)</li>
+                  </ul>
+                  <div data-block-id="block-5fc44914-7cfd-46fc-9fe9-1ffc8810d471">If you would like to appeal this decision, use the link below to create an appeal email message. You will be contacted within 10 days with our determination.</div>
+                  <div data-block-id="block-ca95a18f-aa44-42ad-85f6-dda3c4d87500">Hyperlink (mailto:<a class="ql-link" href="mailto:admin@thetalentdepot.com?subject=My%20Deactivated%20Account" rel="noopener noreferrer" target="_blank">admin@thetalentdepot.com?subject=My%20Deactivated%20Account</a><span data-void-detect="true">)</span></div>
+                  <div data-block-id="block-31009aa8-a02b-466b-ae8c-bbaaf3e507f2">The Talent Depot</div>
                 </td>
               </tr>
             </table>
@@ -480,7 +491,7 @@
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="text-align: left; padding-right: 10px;">
-                        <p>&copy; 2020 Talent Depot. All Rights Reserved</p>
+                        <p>&copy; 2021 The Talent Depot. All Rights Reserved</p>
                       </td>
                     </tr>
                   </table>

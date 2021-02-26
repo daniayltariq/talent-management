@@ -1,7 +1,7 @@
 @extends('web.layouts.app')
 
 
-
+@section('title', 'Signup')
 
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
@@ -183,7 +183,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             <div class="row">
                 <div class="title__wrapp">
                     {{-- <div class="page__subtitle title__grey">Apply</div> --}}
-                    <h1 class="page__title">Work with us</h1>
+                    <h1 class="page__title">New Membership</h1>
                 </div>
             </div>
         </div>
@@ -193,7 +193,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     <section class="section apply">
         <div class="container">
             <div class="row">
-                <h3 class="text__quote centered">New membership</h3>
+                {{-- <h3 class="text__quote centered">New membership</h3> --}}
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
 
                     @if(count($errors)>0)
@@ -222,18 +222,27 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div>
                         </div> --}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-info d-flex" role="alert">
+                                    <span aria-hidden="true"><i class="fa fa-exclamation-circle"></i></span>
+                                    <p class="ml-3">You selected and are signing up for the <a href="{{route('pricing')}}" target="_blank" rel="noopener noreferrer"><b>{{$plan->name ?? ''}}</b></a> membership.</p>
+                                    
+                                </div>
+                            </div> 
+                        </div>
                         
                         <div class="form-block">
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <h4 class="control-label">I am<span class="req">*</span></h4>
                                     <div style="display: flex">
-                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="guardian" {{old('guardian')=='guardian'?'checked' : ''}}>
+                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="guardian" {{old('guardian')=='guardian'?'checked' : ''}} id="guardian" required>
                                         <label for="guardian">The parent or legal guardian of the member (if under 18)</label>
                                     </div>
                                     <div style="display: flex">
-                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="member" {{old('guardian')=='member'?'checked' : ''}}>
-                                        <label for="member">The member (if 18 or older)</label for="guardian"> 
+                                        <input type="radio" class="guardian mt-3 mr-2 @error('guardian') is-invalid @enderror" name="guardian" value="member" {{old('guardian')=='member'?'checked' : ''}} id="member">
+                                        <label for="member">The member (if 18 or older)</label for="member"> 
                                     </div>
                                     
                                     
@@ -242,7 +251,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div id="guardian_section">
                                 <h4 class="head_div">Parent/Guardian Details</h4>
                                 <div class="form-group">
-                                    <label for="g_f_name" class="col-sm-4 control-label">First Name <span class="req">*</span></label>
+                                    <label for="g_f_name" class="col-sm-4 control-label">Legal First Name <span class="req">*</span></label>
                                     <div class="col-sm-8">
                                         <input id="g_f_name" type="text" class="form-control @error('g_f_name') is-invalid @enderror" name="g_f_name" value="{{ old('g_f_name') }}" required autocomplete="g_f_name" autofocus>
 
@@ -254,7 +263,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     </div>
                                 </div> 
                                 <div class="form-group">
-                                    <label for="g_l_name" class="col-sm-4 control-label">Last Name <span class="req">*</span></label>
+                                    <label for="g_l_name" class="col-sm-4 control-label">Legal Last Name <span class="req">*</span></label>
                                     <div class="col-sm-8">
                                         <input id="g_l_name" type="text" class="form-control @error('g_l_name') is-invalid @enderror" name="g_l_name" value="{{ old('g_l_name') }}" required autocomplete="g_l_name" autofocus>
 
@@ -264,17 +273,17 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="form-group">
                                     <label for="dob" class="col-sm-4 control-label">Date of birth <span class="req">*</span></label>
                                     <div class="col-sm-8 form-row">
-                                        {{-- <input id="dob" type="date" min='1920-01-01' class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus> --}}
-                                        {{-- @error('dob')
+                                        <input id="g_dob" type="date" min='1920-01-01' class="form-control @error('g_dob') is-invalid @enderror" name="g_dob" value="{{ old('g_dob') }}" required autocomplete="g_dob" autofocus>
+                                        @error('g_dob')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                        @enderror --}}
-                                        <section id="date-of-birth-example-1">
+                                        @enderror
+                                        {{-- <section id="date-of-birth-example-1"> --}}
                                             {{-- <fieldset style="display: flex;">
                                             <div class="field-inline-block">
                                                 <label>Month</label> --}}
-                                                <input type="hidden" name="g_day_hidden"class="date-field"{{--   value="{{ old('g_month') }}" --}}/>
+                                                {{-- <input type="hidden" name="g_day_hidden"class="date-field"/> --}}
                                             {{-- </div>
                                             /
                                             <div class="field-inline-block">
@@ -287,7 +296,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                                 <input type="text" name="g_year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year"  value="{{ old('g_year') }}"/>
                                             </div>
                                             </fieldset> --}}
-                                        </section>
+                                        {{-- </section> --}}
                                     </div>
                                 </div>
 
@@ -337,7 +346,65 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 <div class="form-group">
                                     <label for="g_state" class="col-sm-4 control-label">State <span class="req">*</span></label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="g_state" value="{{ old('g_state') }}" id="g_state">
+                                        {{-- <input type="text" class="form-control" name="g_state" value="{{ old('g_state') }}" id="g_state"> --}}
+                                        <select id="g_state" class="form-control" name="g_state">
+                                            <option label="Select"></option>
+                                            <option value="Alabama" {{ old('g_state')=='Alabama' ?'selected':''}}>Alabama</option>
+                                            <option value="Alaska" {{ old('g_state')=='Alaska' ?'selected':''}}>Alaska</option>
+                                            <option value="Arizona" {{ old('g_state')=='Arizona' ?'selected':''}}>Arizona</option>
+                                            <option value="Arkansas" {{ old('g_state')=='Arkansas' ?'selected':''}}>Arkansas</option>
+                                            <option value="California" {{ old('g_state')=='California' ?'selected':''}}>California</option>
+                                            <option value="Colorado" {{ old('g_state')=='Colorado' ?'selected':''}}>Colorado</option>
+                                            <option value="Connecticut" {{ old('g_state')=='Connecticut' ?'selected':''}}>Connecticut</option>
+                                            <option value="Delaware" {{ old('g_state')=='Delaware' ?'selected':''}}>Delaware</option>
+                                            <option value="District of Columbia" {{ old('g_state')=='District of Columbia' ?'selected':''}}>District of Columbia</option>
+                                            <option value="Florida" {{ old('g_state')=='Florida' ?'selected':''}}>Florida</option>
+                                            <option value="Georgia" {{ old('g_state')=='Georgia' ?'selected':''}}>Georgia</option>
+                                            <option value="Guam" {{ old('g_state')=='Guam' ?'selected':''}}>Guam</option>
+                                            <option value="Hawaii" {{ old('g_state')=='Hawaii' ?'selected':''}}>Hawaii</option>
+                                            <option value="Idaho" {{ old('g_state')=='Idaho' ?'selected':''}}>Idaho</option>
+                                            <option value="Illinois" {{ old('g_state')=='Illinois' ?'selected':''}}>Illinois</option>
+                                            <option value="Indiana" {{ old('g_state')=='Indiana' ?'selected':''}}>Indiana</option>
+                                            <option value="Iowa" {{ old('g_state')=='Iowa' ?'selected':''}}>Iowa</option>
+                                            <option value="Kansas" {{ old('g_state')=='Kansas' ?'selected':''}}>Kansas</option>
+                                            <option value="Kentucky" {{ old('g_state')=='Kentucky' ?'selected':''}}>Kentucky</option>
+                                            <option value="Louisiana" {{ old('g_state')=='Louisiana' ?'selected':''}}>Louisiana</option>
+                                            <option value="Maine" {{ old('g_state')=='Maine' ?'selected':''}}>Maine</option>
+                                            <option value="Maryland" {{ old('g_state')=='Maryland' ?'selected':''}}>Maryland</option>
+                                            <option value="Massachusetts" {{ old('g_state')=='Massachusetts' ?'selected':''}}>Massachusetts</option>
+                                            <option value="Michigan" {{ old('g_state')=='Michigan' ?'selected':''}}>Michigan</option>
+                                            <option value="Minnesota" {{ old('g_state')=='Minnesota' ?'selected':''}}>Minnesota</option>
+                                            <option value="Mississippi" {{ old('g_state')=='Mississippi' ?'selected':''}}>Mississippi</option>
+                                            <option value="Missouri" {{ old('g_state')=='Missouri' ?'selected':''}}>Missouri</option>
+                                            <option value="Montana" {{ old('g_state')=='Montana' ?'selected':''}}>Montana</option>
+                                            <option value="Nebraska" {{ old('g_state')=='Nebraska' ?'selected':''}}>Nebraska</option>
+                                            <option value="Nevada" {{ old('g_state')=='Nevada' ?'selected':''}}>Nevada</option>
+                                            <option value="New Hampshire" {{ old('g_state')=='New Hampshire' ?'selected':''}}>New Hampshire</option>
+                                            <option value="New Jersey" {{ old('g_state')=='New Jersey' ?'selected':''}}>New Jersey</option>
+                                            <option value="New Mexico" {{ old('g_state')=='New Mexico' ?'selected':''}}>New Mexico</option>
+                                            <option value="New York" {{ old('g_state')=='New York' ?'selected':''}}>New York</option>
+                                            <option value="North Carolina" {{ old('g_state')=='North Carolina' ?'selected':''}}>North Carolina</option>
+                                            <option value="North Dakota" {{ old('g_state')=='North Dakota' ?'selected':''}}>North Dakota</option>
+                                            <option value="Northern Marianas Islands" {{ old('g_state')=='Northern Marianas Islands' ?'selected':''}}>Northern Marianas Islands</option>
+                                            <option value="Ohio" {{ old('g_state')=='Ohio' ?'selected':''}}>Ohio</option>
+                                            <option value="Oklahoma" {{ old('g_state')=='Oklahoma' ?'selected':''}}>Oklahoma</option>
+                                            <option value="Oregon" {{ old('g_state')=='Oregon' ?'selected':''}}>Oregon</option>
+                                            <option value="Pennsylvania" {{ old('g_state')=='Pennsylvania' ?'selected':''}}>Pennsylvania</option>
+                                            <option value="Puerto Rico" {{ old('g_state')=='Puerto Rico' ?'selected':''}}>Puerto Rico</option>
+                                            <option value="Rhode Island" {{ old('g_state')=='Rhode Island' ?'selected':''}}>Rhode Island</option>
+                                            <option value="South Carolina" {{ old('g_state')=='South Carolina' ?'selected':''}}>South Carolina</option>
+                                            <option value="South Dakota" {{ old('g_state')=='South Dakota' ?'selected':''}}>South Dakota</option>
+                                            <option value="Tennessee" {{ old('g_state')=='Tennessee' ?'selected':''}}>Tennessee</option>
+                                            <option value="Texas" {{ old('g_state')=='Texas' ?'selected':''}}>Texas</option>
+                                            <option value="Utah" {{ old('g_state')=='Utah' ?'selected':''}}>Utah</option>
+                                            <option value="Vermont" {{ old('g_state')=='Vermont' ?'selected':''}}>Vermont</option>
+                                            <option value="Virginia" {{ old('g_state')=='Virginia' ?'selected':''}}>Virginia</option>
+                                            <option value="Virgin Islands" {{ old('g_state')=='Virgin Islands' ?'selected':''}}>Virgin Islands</option>
+                                            <option value="Washington" {{ old('g_state')=='Washington' ?'selected':''}}>Washington</option>
+                                            <option value="West Virginia" {{ old('g_state')=='West Virginia' ?'selected':''}}>West Virginia</option>
+                                            <option value="Wisconsin" {{ old('g_state')=='Wisconsin' ?'selected':''}}>Wisconsin</option>
+                                            <option value="Wyoming" {{ old('g_state')=='Wyoming' ?'selected':''}}>Wyoming</option>
+                                        </select>
                                     </div>
                                 </div>
                                 {{-- <div class="form-group">
@@ -372,13 +439,13 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <h4 class="head_div">Member Details (<span id="member_age_text">above</span> 18)</h4>
 
                             <div class="form-group">
-                                <label for="f_name" class="col-sm-4 control-label">First Name <span class="req">*</span></label>
+                                <label for="f_name" class="col-sm-4 control-label">Legal First Name <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input id="f_name" type="text" class="form-control @error('f_name') is-invalid @enderror" name="f_name" value="{{ old('f_name') }}" required autocomplete="f_name" autofocus>
                                 </div>
                             </div> 
                             <div class="form-group">
-                                <label for="l_name" class="col-sm-4 control-label">Last Name <span class="req">*</span></label>
+                                <label for="l_name" class="col-sm-4 control-label">Legal Last Name <span class="req">*</span></label>
                                  <div class="col-sm-8">
                                     <input id="l_name" type="text" class="form-control @error('l_name') is-invalid @enderror" name="l_name" value="{{ old('l_name') }}" required autocomplete="l_name" autofocus>
 
@@ -388,11 +455,17 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="dob" class="col-sm-4 control-label">Date of birth <span class="req">*</span></label>
                                 <div class="col-sm-8 form-row">
-                                    <section id="date-of-birth-example-1">
+                                    <input id="dob" type="date" min='1920-01-01' class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob" autofocus>
+                                    @error('dob')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    {{-- <section id="date-of-birth-example-1"> --}}
                                         {{-- <fieldset style="display: flex;">
                                           <div class="field-inline-block">
                                             <label>Month</label> --}}
-                                            <input type="hidden" name="day_hidden" class="date-field"{{--  value="{{ old('month') }}" --}}/>
+                                            {{-- <input type="hidden" name="day_hidden" class="date-field"/> --}}
                                           {{-- </div>
                                           /
                                           <div class="field-inline-block">
@@ -405,7 +478,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                             <input type="text" name="year" pattern="[0-9]*" maxlength="4" size="4" class="date-field date-field--year" value="{{ old('year') }}" />
                                           </div>
                                         </fieldset> --}}
-                                    </section>
+                                    {{-- </section> --}}
                                  </div>
                             </div>
                             
@@ -477,7 +550,77 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div class="form-group">
                                 <label for="state" class="col-sm-4 control-label">State <span class="req">*</span></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="state" value="{{ old('state') }}" id="state">
+                                    <select id="state" class="form-control" name="state">
+                                        <option label="Select"></option>
+                                        <option value="Alabama" {{ old('state')=='Alabama' ?'selected':''}}>Alabama</option>
+                                        <option value="Alaska" {{ old('state')=='Alaska' ?'selected':''}}>Alaska</option>
+                                        <option value="Arizona" {{ old('state')=='Arizona' ?'selected':''}}>Arizona</option>
+                                        <option value="Arkansas" {{ old('state')=='Arkansas' ?'selected':''}}>Arkansas</option>
+                                        <option value="California" {{ old('state')=='California' ?'selected':''}}>California</option>
+                                        <option value="Colorado" {{ old('state')=='Colorado' ?'selected':''}}>Colorado</option>
+                                        <option value="Connecticut" {{ old('state')=='Connecticut' ?'selected':''}}>Connecticut</option>
+                                        <option value="Delaware" {{ old('state')=='Delaware' ?'selected':''}}>Delaware</option>
+                                        <option value="District of Columbia" {{ old('state')=='District of Columbia' ?'selected':''}}>District of Columbia</option>
+                                        <option value="Florida" {{ old('state')=='Florida' ?'selected':''}}>Florida</option>
+                                        <option value="Georgia" {{ old('state')=='Georgia' ?'selected':''}}>Georgia</option>
+                                        <option value="Guam" {{ old('state')=='Guam' ?'selected':''}}>Guam</option>
+                                        <option value="Hawaii" {{ old('state')=='Hawaii' ?'selected':''}}>Hawaii</option>
+                                        <option value="Idaho" {{ old('state')=='Idaho' ?'selected':''}}>Idaho</option>
+                                        <option value="Illinois" {{ old('state')=='Illinois' ?'selected':''}}>Illinois</option>
+                                        <option value="Indiana" {{ old('state')=='Indiana' ?'selected':''}}>Indiana</option>
+                                        <option value="Iowa" {{ old('state')=='Iowa' ?'selected':''}}>Iowa</option>
+                                        <option value="Kansas" {{ old('state')=='Kansas' ?'selected':''}}>Kansas</option>
+                                        <option value="Kentucky" {{ old('state')=='Kentucky' ?'selected':''}}>Kentucky</option>
+                                        <option value="Louisiana" {{ old('state')=='Louisiana' ?'selected':''}}>Louisiana</option>
+                                        <option value="Maine" {{ old('state')=='Maine' ?'selected':''}}>Maine</option>
+                                        <option value="Maryland" {{ old('state')=='Maryland' ?'selected':''}}>Maryland</option>
+                                        <option value="Massachusetts" {{ old('state')=='Massachusetts' ?'selected':''}}>Massachusetts</option>
+                                        <option value="Michigan" {{ old('state')=='Michigan' ?'selected':''}}>Michigan</option>
+                                        <option value="Minnesota" {{ old('state')=='Minnesota' ?'selected':''}}>Minnesota</option>
+                                        <option value="Mississippi" {{ old('state')=='Mississippi' ?'selected':''}}>Mississippi</option>
+                                        <option value="Missouri" {{ old('state')=='Missouri' ?'selected':''}}>Missouri</option>
+                                        <option value="Montana" {{ old('state')=='Montana' ?'selected':''}}>Montana</option>
+                                        <option value="Nebraska" {{ old('state')=='Nebraska' ?'selected':''}}>Nebraska</option>
+                                        <option value="Nevada" {{ old('state')=='Nevada' ?'selected':''}}>Nevada</option>
+                                        <option value="New Hampshire" {{ old('state')=='New Hampshire' ?'selected':''}}>New Hampshire</option>
+                                        <option value="New Jersey" {{ old('state')=='New Jersey' ?'selected':''}}>New Jersey</option>
+                                        <option value="New Mexico" {{ old('state')=='New Mexico' ?'selected':''}}>New Mexico</option>
+                                        <option value="New York" {{ old('state')=='New York' ?'selected':''}}>New York</option>
+                                        <option value="North Carolina" {{ old('state')=='North Carolina' ?'selected':''}}>North Carolina</option>
+                                        <option value="North Dakota" {{ old('state')=='North Dakota' ?'selected':''}}>North Dakota</option>
+                                        <option value="Northern Marianas Islands" {{ old('state')=='Northern Marianas Islands' ?'selected':''}}>Northern Marianas Islands</option>
+                                        <option value="Ohio" {{ old('state')=='Ohio' ?'selected':''}}>Ohio</option>
+                                        <option value="Oklahoma" {{ old('state')=='Oklahoma' ?'selected':''}}>Oklahoma</option>
+                                        <option value="Oregon" {{ old('state')=='Oregon' ?'selected':''}}>Oregon</option>
+                                        <option value="Pennsylvania" {{ old('state')=='Pennsylvania' ?'selected':''}}>Pennsylvania</option>
+                                        <option value="Puerto Rico" {{ old('state')=='Puerto Rico' ?'selected':''}}>Puerto Rico</option>
+                                        <option value="Rhode Island" {{ old('state')=='Rhode Island' ?'selected':''}}>Rhode Island</option>
+                                        <option value="South Carolina" {{ old('state')=='South Carolina' ?'selected':''}}>South Carolina</option>
+                                        <option value="South Dakota" {{ old('state')=='South Dakota' ?'selected':''}}>South Dakota</option>
+                                        <option value="Tennessee" {{ old('state')=='Tennessee' ?'selected':''}}>Tennessee</option>
+                                        <option value="Texas" {{ old('state')=='Texas' ?'selected':''}}>Texas</option>
+                                        <option value="Utah" {{ old('state')=='Utah' ?'selected':''}}>Utah</option>
+                                        <option value="Vermont" {{ old('state')=='Vermont' ?'selected':''}}>Vermont</option>
+                                        <option value="Virginia" {{ old('state')=='Virginia' ?'selected':''}}>Virginia</option>
+                                        <option value="Virgin Islands" {{ old('state')=='Virgin Islands' ?'selected':''}}>Virgin Islands</option>
+                                        <option value="Washington" {{ old('state')=='Washington' ?'selected':''}}>Washington</option>
+                                        <option value="West Virginia" {{ old('state')=='West Virginia' ?'selected':''}}>West Virginia</option>
+                                        <option value="Wisconsin" {{ old('state')=='Wisconsin' ?'selected':''}}>Wisconsin</option>
+                                        <option value="Wyoming" {{ old('state')=='Wyoming' ?'selected':''}}>Wyoming</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-4 control-label">Create a Password <span class="req">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="password-confirm" class="col-sm-4 control-label">Confirm Password <span class="req">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
                             {{-- <div class="form-group">
@@ -534,7 +677,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-4">
-                                    <button type="button" class="btn btn-default btn__red {{-- animation --}} btn-full pull-right" id="registerSubmitBtn">join us</button>
+                                    <button type="button" class="btn btn-default btn__red {{-- animation --}} btn-full pull-right mb-5" id="registerSubmitBtn">join us</button>
                                 </div>
                             </div>
                         </div>
@@ -554,7 +697,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
-        var user_type = 'agent';
+        /* var user_type = 'agent';
 
         var switchButton            = document.querySelector('.switch-button');
         var switchBtnRight          = document.querySelector('.switch-button-case.right');
@@ -584,7 +727,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
 
         switchBtnRight.addEventListener('click', function(){
             switchRight();
-        }, false);
+        }, false); */
 
     </script>
     {{-------------------------}}
@@ -768,8 +911,9 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                 mm='0'+mm
             } 
 
-        /* today = yyyy+'-'+mm+'-'+dd; */
+        today = yyyy+'-'+mm+'-'+dd;
         document.getElementById("dob").setAttribute("max", today)
+        document.getElementById("g_dob").setAttribute("max", today)
     </script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autotab/1.9.2/js/jquery.autotab.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -825,16 +969,26 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
     <script src="https://cdn.jsdelivr.net/npm/jquery-dropdown-datepicker@1.3.0/dist/jquery-dropdown-datepicker.min.js"></script>
     <script>
         $(document).ready(function(){
-            var max_limit = new Date();
+
+
+            $('#guardian').click(function(){
+                $('#g_country').val('United States');
+            })
+
+
+
+            /* var max_limit = new Date();
+            var min_limit = new Date();
             max_limit.setDate(today.getDate() - 31);
+            min_limit.setDate(today.getDate() - (365*100));
 
             $(" [name='g_day_hidden']").dropdownDatepicker({
-                /* defaultDate: "{{ auth()->user()->dob ?? ''}}", */
                 maxDate: max_limit,
+                minDate: min_limit,
                 required: true,
                 wrapperClass:'d-flex',
                 dropdownClass:'date-field form-control',
-                /* displayFormat: 'ymd', */
+                displayFormat: 'mdy',
                 monthFormat: 'short',
             });
 
@@ -843,15 +997,15 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
             $('[name="date_[year]"]').attr('name',"g_date_[year]");
 
             $("[name='day_hidden']").dropdownDatepicker({
-                /* defaultDate: "{{ auth()->user()->dob ?? ''}}", */
                 maxDate: max_limit,
+                minDate: min_limit,
                 required: true,
                 wrapperClass:'d-flex',
                 dropdownClass:'date-field form-control',
-                /* displayFormat: 'ymd', */
+                displayFormat: 'mdy',
                 monthFormat: 'short',
             });
-
+            */
             
         })
     </script>

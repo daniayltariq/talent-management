@@ -17,6 +17,7 @@ class DashboardController extends Controller
 	}
 	public function mailTalent(Request $request)
 	{
+		// dd(auth()->user()->email);
 		$rules = [
 			'recipient' => ['required','email'],
             'subj' => ['required','string', 'max:191'],
@@ -34,13 +35,14 @@ class DashboardController extends Controller
 		try {
 
 			$data = [
-				"subj"=>$request->recipient,
-				"message"=>$request->message,
+				"subj" => $request->subj,
+				"agent" => auth()->user()->email,
+				"message" => $request->message,
 			];
             Mail::to($request->recipient)->send(new ContactTalent($data));
 
             return redirect()->back()->with(array(
-                'message' => 'Data saved !', 
+                'message' => 'Successfully updated', 
                 'alert_type' => 'success'
             ));
             

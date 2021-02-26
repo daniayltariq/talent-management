@@ -1,10 +1,59 @@
 @extends('backend.layouts.app')
 
 @section('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.css" integrity="sha512-WfDqlW1EF2lMNxzzSID+Tp1TTEHeZ2DK+IHFzbbCHqLJGf2RyIjNFgQCRNuIa8tzHka19sUJYBO+qyvX8YBYEg==" crossorigin="anonymous" />
  <style>
 	 .kt-widget5 .kt-widget5__item .kt-widget5__content .kt-widget5__pic img {
     	max-width: 4.5rem !important;
 	 }
+
+	 .pagination {
+			display: inline-block;
+			padding-left: 0;
+			margin: 20px 0;
+			border-radius: 4px;
+		}
+
+		.pagination>li {
+			display: inline;
+		}
+
+		.blog__pagination {
+			margin: 0;
+			text-align: center;
+		}
+
+		.blog__pagination .pagination {
+			padding: 60px 0 0;
+			margin: 0;
+			border-top: 1px solid #ddd;
+		}
+
+		.pagination>li:last-child>a, .pagination>li:last-child>span, .pagination>li:first-child>a, .pagination>li:first-child>span, .pagination>li>a, .pagination>li>span {
+			border-radius: 0;
+		}
+
+		.pagination>li>a, .pagination>li>span {
+			position: relative;
+			float: left;
+			padding: 6px 12px;
+			margin-left: -1px;
+			line-height: 1.42857143;
+			color: #337ab7;
+			text-decoration: none;
+			background-color: #fff;
+			border: 1px solid #ddd;
+		}
+		.pagination>li>a, .pagination>li>span {
+			border: none;
+			color: #3a3a54;
+			font-weight: 600;
+			text-transform: uppercase;
+			background: #F6F6F6;
+			margin-left: 17px;
+			font-size: 15px;
+			padding: 8px 16px;
+		}
  </style>
 @endsection
 
@@ -46,39 +95,71 @@
 						<div class="tab-pane active" id="kt_widget5_tab1_content" aria-expanded="true">
 							<div class="kt-widget5">
 								@foreach ($items as $item)
-									<div class="kt-widget5__item">
-										<div class="kt-widget5__content">
-											<div class="kt-widget5__pic">
-												<img class="kt-widget7__img" src="{{ asset(!is_null($item->member->profile) ? (!is_null($item->member->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$item->member->profile->profile_img)? 'storage/uploads/profile/'.$item->member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }}" alt="">
-											</div>
-											<div class="kt-widget5__section">
-												<a href="#" class="kt-widget5__title">
-												{{$item->member->profile->legal_first_name?? $item->member->f_name ?? ''}} {{$item->member->profile->legal_last_name?? $item->member->l_name ?? ''}}
-												</a>
-												<p class="kt-widget5__desc">
-													Gender: {{ $item->member->gender ?? ''}}
-												</p>
-												<p class="kt-widget5__desc">
-													Age: {{ $item->member->age.' yrs'?? ''}}
-												</p>
-												<div class="kt-widget5__info">
-													<span>Email:</span>
-													<span class="kt-font-info">{{$item->member->profile->email ?? ''}}</span>
-													<span>Phone:</span>
-													<span class="kt-font-info">{{$item->member->profile->telephone ?? ''}}</span>
+									@if ($item->member()->exists())
+										<div class="kt-widget5__item">
+											<div class="kt-widget5__content">
+												<div class="kt-widget5__pic">
+													<img class="kt-widget7__img" src="{{ asset(!is_null($item->member->profile) ? (!is_null($item->member->profile->profile_img) && \Storage::exists('public/uploads/profile/'.$item->member->profile->profile_img)? 'storage/uploads/profile/'.$item->member->profile->profile_img: 'web/img/default.jpg') : 'web/img/default.jpg') }}" alt="">
+												</div>
+												<div class="kt-widget5__section">
+													<a href="#" class="kt-widget5__title">
+													{{$item->member->profile->legal_first_name?? $item->member->f_name ?? ''}} {{$item->member->profile->legal_last_name?? $item->member->l_name ?? ''}}
+													</a>
+													<p class="kt-widget5__desc">
+														Gender: {{ $item->member->gender ?? ''}}
+													</p>
+													<p class="kt-widget5__desc">
+														Age: {{ $item->member->age.' yrs'?? ''}}
+													</p>
+													<div class="kt-widget5__info">
+														<span>Email:</span>
+														<span class="kt-font-info">{{$item->member->profile->email ?? ''}}</span>
+														<span>Phone:</span>
+														<span class="kt-font-info">{{$item->member->profile->telephone ?? ''}}</span>
+													</div>
 												</div>
 											</div>
+											<div class="kt-widget5__content">
+												<a href="{{route('backend.delete_picklist_item',$item->id)}}" class="btn btn-sm btn-label-danger btn-bold del_pl">Delete</a>
+											</div>
 										</div>
-										<div class="kt-widget5__content">
-											<a href="{{route('backend.delete_picklist_item',$item->id)}}" class="btn btn-sm btn-label-danger btn-bold">Delete</a>
-										</div>
-									</div>
+									@endif
+									
 								@endforeach
 								
 							</div>
-							{{$items->render()}}
 						</div>
 					</div>
+					<nav class="blog__pagination">
+						@if ($items->lastPage() > 1)
+						 <ul class="pagination">
+							 <li class="{{ ($items->currentPage() == 1) ? ' disabled' : '' }}">
+								 <a href="{{ $items->url(1) }}">First</a>
+							  </li>
+							 @for ($i = 1; $i <= $items->lastPage(); $i++)
+								 <?php
+								 $half_total_links = floor(5 / 2);
+								 $from = $items->currentPage() - $half_total_links;
+								 $to = $items->currentPage() + $half_total_links;
+								 if ($items->currentPage() < $half_total_links) {
+									$to += $half_total_links - $items->currentPage();
+								 }
+								 if ($items->lastPage() - $items->currentPage() < $half_total_links) {
+									 $from -= $half_total_links - ($items->lastPage() - $items->currentPage()) - 1;
+								 }
+								 ?>
+								 @if ($from < $i && $i < $to)
+									 <li class="{{ ($items->currentPage() == $i) ? ' active' : '' }}">
+										 <a href="{{ $items->url($i) }}">{{ $i }}</a>
+									 </li>
+								 @endif
+							 @endfor
+							 <li class="{{ ($items->currentPage() == $items->lastPage()) ? ' disabled' : '' }}">
+								 <a href="{{ $items->url($items->lastPage()) }}">Last</a>
+							 </li>
+						 </ul>
+					 @endif
+					 </nav>
 				</div>
 			</div>
 			<!--end:: Widgets/Best Sellers-->
@@ -100,5 +181,26 @@
 $(document).ready(function(){
 	
 });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.js" integrity="sha512-+uGHdpCaEymD6EqvUR4H/PBuwqm3JTZmRh3gT0Lq52VGDAlywdXPBEiLiZUg6D1ViLonuNSUFdbL2tH9djAP8g==" crossorigin="anonymous"></script>
+<script>
+	$('.del_pl').on('click',function(e){
+		var that=$(this);
+		e.preventDefault();
+		
+		
+		Swal.fire({
+			title: 'Are you sure?',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+			}).then((result) => {
+			if (result.isConfirmed) {
+				
+				window.location.href=that.attr('href');
+			}
+		})
+	})
 </script>
 @endsection

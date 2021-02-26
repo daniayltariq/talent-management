@@ -1,6 +1,7 @@
 @extends('web.layouts.app')
 
 
+@section('title', '403')
 @section('styles')
 <style type="text/css">
 
@@ -26,8 +27,8 @@
 		<div class="row">
 			<div class="blog__posts col-md-12">
 				<div class="text-center">
-					<h4>Opps.  Looks like you don’t have access to this page</h4>
-					<img style="margin: auto;" src="{{ asset('web/img/errors/403-1.jpg') }}" class="img img-responsive img-fluid">
+					<h4>Forbidden</h4>
+					<img style="margin: auto;width: 25%" src="{{ asset('web/img/errors/403.jpeg') }}" class="img img-responsive img-fluid">
 				</div>
 				
 			</div>

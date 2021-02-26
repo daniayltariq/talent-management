@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Skill;
 use App\Models\Topic;
 use App\Search\TalentSearch;
+use App\Models\Profile;
 
 use Illuminate\Http\Request;
 
@@ -43,12 +44,16 @@ class HomeController extends Controller
       $countries =  $client->getCountries()->getCountries();
 
       dd(collect($account)); */
-      $models=\App\Models\User::whereHas(
+      $models = User::whereHas(
          'roles', function($q){
              $q->whereNotIn('name',['superadmin','agent']);
          }
+      )->whereHas(
+         'profile', function($q){
+            $q->where('profile_img','<>',null);
+         }
       )->with('profile')->get();
-
+      /* dd($models); */
       $topics=Topic::where('status',1)->latest()->get()->take(3);
       
       return view('web.index',compact('models','topics'));
@@ -56,9 +61,13 @@ class HomeController extends Controller
 
     public function featured_talents()
     {
-      $featured=\App\Models\User::whereHas(
+      $featured = User::whereHas(
          'roles', function($q){
              $q->whereNotIn('name',['superadmin','agent']);
+         }
+      )->whereHas(
+         'profile', function($q){
+            $q->where('profile_img','<>',null);
          }
       )->with('profile')->where('status',1)->where('featured',1)->get();
 
@@ -67,9 +76,13 @@ class HomeController extends Controller
 
     public function findtalent()
     {
-      $members=\App\Models\User::whereHas(
+      $members = User::whereHas(
          'roles', function($q){
              $q->whereNotIn('name',['superadmin','agent']);
+         }
+      )->whereHas(
+         'profile', function($q){
+            $q->where('profile_img','<>',null);
          }
       )->with('profile')->get();
       $skills=Skill::all();
@@ -81,12 +94,14 @@ class HomeController extends Controller
   
     public function models($link)
     {
-      $pro=\App\Models\Profile::where('custom_link',$link)->first();
+
+      $pro = Profile::where('custom_link',$link)->orWhere('id',$link)->first();
       if ($pro) {
-         $user=\App\Models\User::findOrFail($pro->user_id);
+         $user= User::findOrFail($pro->user_id);
          if ($user->attachments()->exists()) {
             $data=[
                'profile'=>$user->profile,
+               'social_links'=>$user->social_links,
                'images'=>$user->attachments->where('type','image'),
                'video'=>$user->attachments->where('type','video'),
                'audio'=>$user->attachments->where('type','audio')
@@ -103,53 +118,64 @@ class HomeController extends Controller
             return view('web.pages.models-single',compact('data'));
          }
          else{
+            if(auth()->user()->id==$user->id){
+               return view('web.pages.models-single-empty')->with('user',$user);
+            }
             return view('web.errors.404')->with('text','Profile not found');
          }
       }
-      abort(404);
+      return view('web.errors.404')->with('text','Profile not found');
       
     }
   
 
     public function modelsgrid()
     {    
-       return view('web.pages.models-grid');
+      return view('web.pages.models-grid');
     }
 
     public function modelsingle($id)
-    { 
-      $user=\App\Models\User::findOrFail($id);
-      if ($user->attachments()->exists()) {
-         $data=[
-            'profile'=>$user->profile,
-            'images'=>$user->attachments->where('type','image'),
-            'video'=>$user->attachments->where('type','video'),
-            'audio'=>$user->attachments->where('type','audio')
-         ];
-
-         $subs=$user->subscriptions()->active()->first();
+    {
+      $user= User::findOrFail($id);
+      if ($user->profile()->exists()) {
+        $custom_link=$user->profile->custom_link?$user->profile->custom_link :$user->profile->id;
          
-         if ($subs->count()>0) {
-            $plan=Plan::select('name','description','agent_contact')->where('stripe_plan',$subs->stripe_plan)->first();
-            
-            $data["plan"]=$plan;
-         }
-
-         return view('web.pages.models-single',compact('data'));
+        return redirect()->route('model',$custom_link);
       }
       else{
          return view('web.errors.404')->with('text','Profile not setup yet, What needs to do here ?');
       }
+      //old flow
+      // if ($user->attachments()->exists()) {
+      //    $data=[
+      //       'profile'=>$user->profile,
+      //       'social_links'=>$user->social_links,
+      //       'images'=>$user->attachments->where('type','image'),
+      //       'video'=>$user->attachments->where('type','video'),
+      //       'audio'=>$user->attachments->where('type','audio')
+      //    ];
+
+      //    $subs=$user->subscriptions()->active()->first();
+         
+      //    if ($subs->count()>0) {
+      //       $plan=Plan::select('name','description','agent_contact')->where('stripe_plan',$subs->stripe_plan)->first();
+            
+      //       $data["plan"]=$plan;
+      //    }
+
+      //    return view('web.pages.models-single',compact('data'));
+      // }
+      // else{
+      //    return view('web.errors.404')->with('text','Profile not setup yet, What needs to do here ?');
+      // }
       
-    }
+   }
 
    public function searchTalent(Request $request)
    {    
-      /* dd( $request->all()); */
-      $skills=Skill::all();
+      $skills = Skill::all();
       if($request->query()){
          $members=TalentSearch::apply($request);
-         /* dd( $members); */
          return view('web.forms.find-talent',compact('members','skills'));
       }
    }
@@ -157,7 +183,6 @@ class HomeController extends Controller
    public function testimonials()
    {
       $test=\App\Models\Testimonial::where('status',1)->get();
-      /* dd($test); */
       return view('web.pages.testimonials',compact('test'));
    }
 

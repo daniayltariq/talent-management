@@ -1,5 +1,29 @@
 @extends('backend.layouts.app')
 
+@section('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.css" integrity="sha512-WfDqlW1EF2lMNxzzSID+Tp1TTEHeZ2DK+IHFzbbCHqLJGf2RyIjNFgQCRNuIa8tzHka19sUJYBO+qyvX8YBYEg==" crossorigin="anonymous" />
+	<style>
+		.pagination li{
+			padding: 0.5rem 1rem;
+			font-size: 15px;
+			font-weight: 400;
+			border: 1px solid #5d78ff;
+			border-radius: 6px;
+		}
+
+		.pagination li:not(:last-child){
+			margin-right: 1.5rem !important;
+		}
+		.disabled{
+			pointer-events: none;
+		}
+
+		.btn-primary:hover,.btn-success:hover,.btn-danger:hover{
+			color: #fff !important;
+		}
+	</style>
+@endsection
+
 @section('content')
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 	<!--begin::Portlet-->
@@ -7,12 +31,12 @@
 		<div class="kt-portlet__head">
 			<div class="kt-portlet__head-label">
 				<h3 class="kt-portlet__head-title">
-					Post listings
+					Topics
 				</h3>
 				
 			</div>
 			<div class="kt-portlet__head-label" style="float: right">
-				<a href="{{ route('backend.topic.create') }}" style="background-color: #0abb87;" class="btn btn-success btn-xs"><i class='fa fa-plus'></i> Create a Post</a>
+				<a href="{{ route('backend.topic.create') }}" style="background-color: #0abb87;" class="btn btn-success btn-xs"><i class='fa fa-plus'></i> Create Topic</a>
 			</div>
 		</div>
 		<div class="kt-portlet__body">
@@ -24,10 +48,10 @@
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-								   <th>blog Title</th>
-								   <th>blog Image</th>
+								   <th>Topic Title</th>
+								   {{-- <th>blog Image</th> --}}
 								   <th>Categories</th>
-								   <th>Details</th>
+								   {{-- <th>Details</th> --}}
 								   <th>Active</th>
 								   <th>Operation</th>
 								</tr>
@@ -36,22 +60,24 @@
 								@foreach($blog as $topic)
 									<tr>
 										<td>{{ $topic->title ?? '' }}</td>
-										<td><img class="kt-media" style="max-width: 100px;height: 40px;" src="{{asset($topic->image ?? '')}}" alt=""></td>
+										{{-- <td>
+											<img class="kt-media" style="max-width: 100px;height: 40px;" src="{{asset($topic->image ?? '')}}" alt="">
+										</td> --}}
 										<td>
 											 {{ $topic->category ? $topic->category->title : '' }}
 												 
 										</td>
-										<td style="width: 40%">{{printTruncated(160, $topic->content, $isUtf8=true)}}</td>
+										{{-- <td style="width: 40%">{{printTruncated(160, $topic->content, $isUtf8=true)}}</td> --}}
 										<td>
 											<input data-switch="true" name="status" type="checkbox" data-topicid="{{$topic->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$topic->status==1?"checked=checked":""}}>
 										</td>
 										<td>
 											<a href="{{route('backend.topic.edit',$topic->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">
-												<i style="color: #5d78ff;" class="fa fa-pencil-alt"></i>
+												<i class="fa fa-pencil-alt"></i>
 											</div> </a>
 											<button data-topicid="{{$topic->id}}" name="postComm" class="btn btn-success btn-sm btn-bg-white" style="color: #5d78ff;"><i class="fa fa-comment"></i></button>
-											{{-- <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-view btn-xs" style=" color:white" ><i class="fa fa-folder" ></i> View </a>
-											<a href="{{ route('blog.updateStatus', $blog->id) }}" class="btn btn-pause btn-xs" style=" color:white" ><i class="fa fa-pause" ></i> Pause</a> --}}
+											<a href="{{ route('backend.topic.show', $topic->slug ?? $topic->id) }}" class="btn btn-secondary btn-sm btn-xs"><i class="fa fa-eye" ></i></a>
+											{{-- <a href="{{ route('blog.updateStatus', $blog->id) }}" class="btn btn-pause btn-xs" style=" color:white" ><i class="fa fa-pause" ></i> Pause</a> --}}
 											{{-- <a  href="#" class="btn btn-duplicate btn-xs" style=" color:white" ><i class="fa fa-copy" ></i> Duplicate</a> --}}
 											{{-- <a  href="#" class="btn btn-pause btn-xs" style=" color:white" ><i class="fa fa-archive" ></i> Achive </a> --}}
 											@include('components.delete' , ['data' => $topic->id, 'route' => 'backend.topic.destroy'])
@@ -61,6 +87,34 @@
 							</tbody>
 						</table>
 					</div>
+					@if ($blog->lastPage() > 1)
+					    <ul class="pagination">
+					        <li class="{{ ($blog->currentPage() == 1) ? ' disabled' : '' }}">
+					            <a href="{{ $blog->url(1) }}">First</a>
+					         </li>
+					        @for ($i = 1; $i <= $blog->lastPage(); $i++)
+					            <?php
+					            $half_total_links = floor(5 / 2);
+					            $from = $blog->currentPage() - $half_total_links;
+					            $to = $blog->currentPage() + $half_total_links;
+					            if ($blog->currentPage() < $half_total_links) {
+					               $to += $half_total_links - $blog->currentPage();
+					            }
+					            if ($blog->lastPage() - $blog->currentPage() < $half_total_links) {
+					                $from -= $half_total_links - ($blog->lastPage() - $blog->currentPage()) - 1;
+					            }
+					            ?>
+					            @if ($from < $i && $i < $to)
+					                <li class="{{ ($blog->currentPage() == $i) ? ' active' : '' }}">
+					                    <a href="{{ $blog->url($i) }}">{{ $i }}</a>
+					                </li>
+					            @endif
+					        @endfor
+					        <li class="{{ ($blog->currentPage() == $blog->lastPage()) ? ' disabled' : '' }}">
+					            <a href="{{ $blog->url($blog->lastPage()) }}">Last</a>
+					        </li>
+					    </ul>
+					@endif
 				</div>
 			</div>
 			<!--end::Section-->
@@ -130,9 +184,9 @@
 				topic_id: $(this).data('topicid'),
 				status:state==true?1 : 0
 			},
-			function(status){
+			function(res){
 				
-				if (status=="success") {
+				if (res.status=="success") {
 					$(that).bootstrapSwitch('state', state, true);
 				} else {
 					$(that).bootstrapSwitch('state', !state, true);
@@ -264,6 +318,28 @@
 					$('#post_comm_'+comm_id).remove();
 				}
 			});
+	})
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.js" integrity="sha512-+uGHdpCaEymD6EqvUR4H/PBuwqm3JTZmRh3gT0Lq52VGDAlywdXPBEiLiZUg6D1ViLonuNSUFdbL2tH9djAP8g==" crossorigin="anonymous"></script>
+<script>
+	$('.del_pl').on('click',function(e){
+		var that=$(this);
+		e.preventDefault();
+		
+		
+		Swal.fire({
+			title: 'Are you sure?',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+			}).then((result) => {
+			if (result.isConfirmed) {
+				
+				that.parent('form').submit();
+			}
+		})
 	})
 </script>
 @endsection

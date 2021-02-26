@@ -1,6 +1,7 @@
 @extends('web.layouts.app')
 
 
+@section('title', '404')
 @section('styles')
 <style type="text/css">
 .section.blog{
@@ -28,8 +29,8 @@
 		<div class="row">
 			<div class="blog__posts col-md-12">
 				<div class="text-center">
-					<h4>Opps. {{$text ?$text : 'Page not exist'}}</h4>
-					<img style="margin: auto;" src="{{ asset('web/img/errors/404.jpg') }}" class="img img-responsive img-fluid">
+					<h4>Opps. {{$text ?? 'Resource not found'}}</h4>
+					<img style="margin: auto;width: 25%" src="{{ asset('web/img/errors/404.jpeg') }}" class="img img-responsive img-fluid">
 				</div>
 				
 			</div>

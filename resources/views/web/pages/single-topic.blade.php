@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@section('title', $category->title ?? '' )
 @section('styles')
 	<style>
 		.text-up{
@@ -109,7 +109,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="title__wrapp">
-					<div class="{{-- page__subtitle --}} title__grey">from our community topics</div>
+					{{-- <div class="page__subtitle title__grey">from our community topics</div> --}}
 					<h1 class="page__title text-up">{{\Request::query('category') ? \Request::query('category').' Topics' : $category->title }}</h1>
 				</div>
 			</div>

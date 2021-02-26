@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 
-
+@section('title', 'Community')
 @section('styles')
 <style type="text/css">
 h4.widget__title.height_line {
@@ -53,12 +53,15 @@ a.btn.btn-default.btn__grey.animation {
 							<p class="widget-latest__date">RECENT POSTS</p>
 
 							@foreach($comn->topics->take(4) as $topic)
-							<div>
-								<a href="{{ route('single-post',['slug' => $topic->slug]) }}">
-									<h4 class="widget__title height_line" >{{ $topic->title }}</h4>
-								</a>
-								<p class="widget-latest__date" >Created {{ $topic->created_at->format('M d') }} at {{ $topic->created_at->format('h:i A') }}  By {{ $topic->user->f_name }} {{ $topic->user->l_name }}</p>
-							</div>
+								@if ($topic->user()->exists())
+									<div>
+										<a href="{{ route('single-post',['slug' => $topic->slug]) }}">
+											<h4 class="widget__title height_line" >{{ $topic->title }}</h4>
+										</a>
+										<p class="widget-latest__date" >Created {{ $topic->created_at->format('M d') }} at {{ $topic->created_at->format('h:i A') }}  By {{ $topic->user->f_name }} {{ $topic->user->l_name }}</p>
+									</div>
+								@endif
+							
 
 							@endforeach
 							
@@ -73,7 +76,7 @@ a.btn.btn-default.btn__grey.animation {
 								{{$comn->topics_sum_views ?? 0}} views
 								</span>
 								<span class="post__likes">
-								<a href="#"><i class="mdi mdi-heart"></i>{{$comn->likes_coun ?? 0}} likes</a>
+								<a href="#"><i class="mdi mdi-heart"></i>{{$comn->likes_count ?? 0}} likes</a>
 								</span>
 							</div>
 							<a href="{{ route('community.category',['slug' => $comn->slug]) }}" class="btn btn-default btn__grey animation">{{ $comn->topics_count }} Conversation</a>

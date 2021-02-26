@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 
-
+@section('title', 'Memberships')
 @section('styles')
 <style type="text/css">
   article {
@@ -66,6 +66,7 @@ td.default {
 }
 .bg-green {
   border-top:10px solid #00c1a1;
+  border-right: 1px solid #dddddd;
 }
 .sep {
   background:#F5F5F5;
@@ -93,6 +94,24 @@ td.default {
   td+td, th+th {
     width: auto;
   }
+
+
+  .ul-pricing {
+      display: flex;
+      width: 100%;
+      padding-left: 0;
+  }
+
+}
+
+
+@media (max-width: 640px) {
+  .ul-pricing {
+      display: flex;
+      width: 100%;
+      padding-left: 0;
+  }
+
 }
 
 .btn {
@@ -122,9 +141,12 @@ table.pricing td:nth-child(4) {
 }
 
 .cd-btn{
-  padding: 9px 35px !important;
+  padding: 9px 25px !important;
 }
 
+.talent_color{
+  color: #f37c2c ;
+}
 </style>
 @endsection
 
@@ -146,11 +168,11 @@ table.pricing td:nth-child(4) {
 <article class="mt-5">
 
 <ul class="ul-pricing">
-  @foreach ($plans as $plan)
+  {{-- @foreach ($plans as $plan)
     <li class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
       <button>{{$plan->name}}</button>
     </li>
-  @endforeach
+  @endforeach --}}
   
   {{-- <li class="bg-blue">
     <button>Standard </button>
@@ -165,12 +187,21 @@ table.pricing td:nth-child(4) {
   <thead>
     <tr>
       <th class="bg-pri text-center"><a href="{{route('how-it-works')}}" class="btn btn-primary btn-c-p">How it works</a></th>
-      @foreach ($plans as $plan)
+      {{-- @foreach ($plans as $plan)
         <th class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
-          {{$plan->name ?? ''}} {{-- <hr>
-          <div class="tw-4">{!!$plan->description ?? ''!!}</div> --}}
+          {{$plan->name ?? ''}} 
         </th>
         
+      @endforeach --}}
+      @foreach ($plans as $plan)
+        <th class="bg-{{$loop->index==0 ? 'purple' :($loop->index==1 ? 'blue' :'green') }}">
+          @if (url()->previous()== route('how-it-works'))
+              <a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a>
+          @else
+              <span class="txt-l talent_color">{{$plan->name}}</span>
+          @endif
+          
+        </th>
       @endforeach
       
     </tr>
@@ -356,16 +387,28 @@ table.pricing td:nth-child(4) {
       
       
     </tr>
+  
     <tr>
       <td></td>
       @foreach ($plans as $plan)
-        <td><a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a></td>
+        
+        <td>
+          @if (url()->previous()== route('how-it-works'))
+            <a class="cd-btn btn btn__red secondary" href="{{route('subscription.index',$plan->slug)}}">Subscribe to {{$plan->name}} </a>
+          @else
+            <span class="txt-l talent_color">{{$plan->name}}</span>
+          @endif
+           
+        </td>
+        
       @endforeach
+      
       {{-- <td><button class="cd-btn btn btn__red secondary">Subscribe to Basic</button></td>
       <td><button class="cd-btn btn btn__red secondary">Subscribe to Standard</button></td>
       <td><button class="cd-btn btn btn__red secondary">Subscribe to Professional</button></td> --}}
       
     </tr>
+ 
     
   </tbody>
 </table>
@@ -405,5 +448,22 @@ $( "ul" ).on( "click", "li", function() {
   
   // On load
   doSomething(mediaQuery);
+
+
+
+  $(document).ready(function () {    
+      var width = $(window).width();
+      $(window).resize(function () {
+          if (width <= '720') {
+              $('.bg-purple').click();
+              $('article').addClass('p-3');
+          }
+      });
+
+      if (width <= '720') {
+          $('.bg-purple').click();
+          $('article').addClass('p-3');
+      }
+  })
 </script>
 @endsection

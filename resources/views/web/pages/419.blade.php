@@ -1,5 +1,6 @@
 @extends('web.layouts.app')
 
+@section('title', '419')
 @section('styles')
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
@@ -42,7 +43,7 @@
 			</div>
 			<div class="row">
 				<div id="over" style=" width:100%; height:100%">
-					<img src="{{asset('web/img/girl_thinking.png')}}" style="width: 25%" alt="">
+					<img src="{{asset('web/img/errors/419.jpeg')}}" style="width: 25%" alt="">
 				</div>
 			</div>
         </div>

@@ -23,7 +23,7 @@ class User extends Authenticatable /* implements MustVerifyEmail */
      * @var array
      */
     protected $fillable = [
-    'f_name', 'l_name', 'b_name','about_business','provider_type','gender', 'dob', 'phone', 'landline', 'phone_c_data', 'email', 'password', 'country', 'city', 'state', 'h_adress_1', 'h_adress_2', 'zipcode',
+    'f_name', 'l_name', 'b_name','about_business','provider_type','interest_type','gender', 'dob', 'phone', 'landline', 'phone_c_data', 'email', 'password', 'country', 'city', 'state', 'h_adress_1', 'h_adress_2', 'zipcode',
     ];
 
     /**
@@ -85,6 +85,17 @@ class User extends Authenticatable /* implements MustVerifyEmail */
         
     }
 
+    public function hasData()
+    {
+        if(!is_null(auth()->user()->f_name) && !is_null(auth()->user()->l_name))
+        {
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+
     public function picklist()
     {
         return $this->hasMany('App\Models\Picklist','user_id');
@@ -125,6 +136,17 @@ class User extends Authenticatable /* implements MustVerifyEmail */
         return $this->hasMany('App\Models\Attachment','user_id');
     }
 
+    public function attachmentImage()
+    {
+        $attachment=$this->attachments->where('type','image')->first();
+        if ($attachment) {
+            return $attachment->file;
+        }
+        else{
+            return null;
+        }
+    }
+
     public function saved_search()
     {
         return $this->hasMany('App\Models\SavedSearch','user_id');
@@ -158,4 +180,5 @@ class User extends Authenticatable /* implements MustVerifyEmail */
 
         return $plan;
     }
+ 
 }

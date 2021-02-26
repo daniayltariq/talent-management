@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
+use App\Models\Profile;
 use App\Models\User;
-use Illuminate\Support\Str;
+use App\Providers\RouteServiceProvider;
+use App\Services\FPService;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -49,8 +51,13 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showRegistrationForm()
+    public function showRegistrationForm(Request $request)
     {
+
+        // if($request->query('_go')){
+        //   $request->cookie();
+        // }
+
         $countries=DB::table('countries')->select('nicename')->get();
         
         /* return view('auth.register', compact('countries')); */ // old register view
@@ -58,6 +65,9 @@ class RegisterController extends Controller
             return view('auth.registerPricing', compact('countries'));
         }
         else{
+            if($request->query('referal')){
+                return redirect()->route('how-it-works',['referal' => $request->query('referal')])->withCookie('firstPromotorRefID',$request->query('referal') , 45);
+            }
             return redirect()->route('how-it-works');
         }
         
@@ -111,14 +121,15 @@ class RegisterController extends Controller
         return $user;
     }
 
-    protected function registered()
-    {
+    protected function registered(Request $request, $user)
+    { 
+
+ 
         if(\Auth::check() && auth()->user()->hasRole('candidate')) {
             return redirect()->route('account.talent.profile');
             // return redirect()->route('superadmin.home');
         } elseif(\Auth::check() && auth()->user()->hasRole('agent')) {
             return redirect()->route('/');
-            
         }
     }
 
@@ -132,15 +143,17 @@ class RegisterController extends Controller
     {
         /* dd($request->all()); */
         $validator= Validator::make($request->all(), [
-            'guardian' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'guardian' => ['required', 'string', 'in:guardian,member'],
             'g_f_name' => ['nullable', 'string', 'max:255'],
             'g_l_name' => ['nullable', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
             /* 'g_day' => ['nullable', 'string', 'max:10'],
             'g_month' => ['nullable', 'string', 'max:10'],
-            'g_year' => ['nullable', 'string', 'max:10'], */
-            "g_date_"    => "required|array|min:3",
-            "g_date_.*"  => "required|string",
+            'g_year' => ['nullable', 'string', 'max:10'],
+            "g_date_"    => "nullable|array|min:3",
+            "g_date_.*"  => "nullable|string", */
+            'g_dob' => ['nullable','date_format:Y-m-d','before:'.date('Y-m-d')],
             'g_phone' => ['nullable', 'max:255','unique:users,g_phone,'.auth()->user()->id],
             'g_landline' => ['nullable', 'max:255','unique:users,g_landline,'.auth()->user()->id],
             'g_country' => ['nullable', 'string', 'max:255'],
@@ -148,14 +161,14 @@ class RegisterController extends Controller
             'g_state' => ['nullable', 'string', 'max:255'],
             /* 'g_h_adress_1' => ['string', 'max:255','nullable'],
             'h_adress_1' => ['string', 'max:255','nullable'], */
-            /* 'dob' => ['date_format:Y-m-d','before:'.date('Y-m-d')], */
+            'dob' => ['nullable','date_format:Y-m-d','before:'.date('Y-m-d')],
             'f_name' => ['required', 'string', 'max:255'],
             'l_name' => ['required', 'string', 'max:255'],
             /* 'day' => ['required', 'string', 'max:10'],
             'month' => ['required', 'string', 'max:10'],
-            'year' => ['required', 'string', 'max:10'], */
+            'year' => ['required', 'string', 'max:10'],
             "date_"    => "required|array|min:3",
-            "date_.*"  => "required|string",
+            "date_.*"  => "required|string", */
             'phone' => ['required', 'max:255','unique:users,phone,'.auth()->user()->id],
             'landline' => ['nullable', 'max:255','unique:users,landline,'.auth()->user()->id],
             /* 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -184,13 +197,13 @@ class RegisterController extends Controller
         }
         
         $user = User::findOrFail(auth()->user()->id);
-        
+        $user->password = Hash::make($request['password']);
           $user->guardian= !is_null($request['guardian']) ? 1 : 0;
           $user->g_f_name= $request['g_f_name']?? null;
           $user->g_l_name= $request['g_l_name']?? null;
           $user->gender= $request['gender']?? null;
           $user->custom_gender= $request['custom_gender']?? null;
-          $user->g_dob= isset($request->g_date_['year'], $request->g_date_['month'], $request->g_date_['day']) ? ($request->g_date_['year'].'-'.$request->g_date_['month'].'-'.$request->g_date_['day']) : null;
+          $user->g_dob= $request->g_dob;/* isset($request->g_date_['year'], $request->g_date_['month'], $request->g_date_['day']) ? ($request->g_date_['year'].'-'.$request->g_date_['month'].'-'.$request->g_date_['day']) : null; */
           $user->g_phone=!is_null($request['g_new_phone']) ? Str::of($request['g_phone'])->prepend('+'.$g_country_data['dialCode']) : null;
           $user->g_phone_c_data=$request['g_new_phone']?? null;
           $user->g_landline=$request['g_landline']?? null;
@@ -198,10 +211,10 @@ class RegisterController extends Controller
           $user->g_city= $request['g_city']?? null;
           $user->g_state= $request['g_state']?? null;
           /* $user->g_h_adress_1 = !is_null($request['g_h_adress_1']) ? $request['g_h_adress_1'] : null; */
-            /* 'dob= $request['dob']; */
+          $user->dob= $request->dob;
           $user->f_name= $request['f_name'];
           $user->l_name= $request['l_name'];
-          $user->dob= $request->date_['year'].'-'.$request->date_['month'].'-'.$request->date_['day'];
+          /* $user->dob= $request->date_['year'].'-'.$request->date_['month'].'-'.$request->date_['day']; */
           $user->phone=Str::of($request['phone'])->prepend('+'.$country_data['dialCode']);
           $user->phone_c_data=$request['new_phone'];
           $user->landline=$request['landline'];
@@ -214,8 +227,62 @@ class RegisterController extends Controller
           $user->passport= $request['passport'];
           $user->driver_license= $request['driver_license'];
         $user->save();
+       
+        if($c = $request->cookie('firstPromotorRefID')){
+          FPService::trackSigup($user->email,$c);
+        }
+
+        $profile = new Profile ;
+        $profile->legal_first_name=$request['f_name'];
+        $profile->legal_last_name=$request['l_name'];
+        $profile->user_id=$user->id;
+        $profile->custom_link=self::getCustomUrl($user);
+        $profile->save();
+
+
 
         return redirect()->route('account.dashboard');
     }
+
+    private static function getCustomUrl($user)
+    {
+        $suggestions=array(
+            $user->f_name.'-'.$user->l_name,
+            $user->f_name[0].'-'.$user->l_name,
+            $user->f_name.'-'.$user->l_name[0],
+            $user->f_name.''.$user->l_name,
+            $user->f_name[0].''.$user->l_name
+        );
+
+        foreach ($suggestions as $key => $suggestion) {
+            
+            $profile=Profile::where('custom_link',$suggestion)->first();
+
+            if ($profile && $profile->user_id !==auth()->user()->id) {
+                if ($key == (count($suggestions)-1)) {
+                    for($i=0;$i<2;){
+                        $suggest_update=$suggestions[0].rand(1,100);
+                        $profile=Profile::where('custom_link',$suggest_update)->first();
+                        if ($profile) {
+                            
+                        }else{
+                            $link=$suggest_update;
+                            break;
+                        }
+                    }
+                }
+                else{
+                    continue;
+                }
+                
+            }
+            else{
+                $link=$suggestion;
+                break;
+            }
+        }
+
+        return $link;
+    } 
 
 }

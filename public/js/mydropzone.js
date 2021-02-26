@@ -3,9 +3,9 @@ function render_dropzone(store_url) {
         //id of drop zone element 1
         '#imageDropzone', {
         url: store_url,
-        maxFilesize: 12, // MB
+        maxFilesize: 4, // MB
         acceptedFiles: "image/jpg,image/jpeg,image/png",
-        dictDefaultMessage: "Drop Your Files here.",
+        dictDefaultMessage: "Drag & Drop Your File(s) Here or click to upload.<br> i.e .jpg .jpeg .png",
         /* maxFiles: function (file, done) {
             if (validImageTypes.includes(file.type)) {
                 done("No more images");
@@ -51,7 +51,7 @@ function render_dropzone(store_url) {
             file.previewElement.remove()
             $.ajax({
                 type: 'delete',
-                url: "{{ route('account.fileDestroy') }}",
+                url: "/account/fileDestroy",
                 data: {
                     filename: uploadedDocumentMap[file.upload.filename],
                     _method: 'DELETE',

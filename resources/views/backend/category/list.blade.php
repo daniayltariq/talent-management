@@ -2,9 +2,14 @@
 
 @section('styles')
 <link href="{{asset('backend-assets/assets/vendors/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css')}}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.css" integrity="sha512-WfDqlW1EF2lMNxzzSID+Tp1TTEHeZ2DK+IHFzbbCHqLJGf2RyIjNFgQCRNuIa8tzHka19sUJYBO+qyvX8YBYEg==" crossorigin="anonymous" />
 	<style>
 		.bootstrap-switch-container{
 			width: 160px !important;
+		}
+
+		.btn-primary:hover,.btn-danger:hover{
+			color: #fff !important;
 		}
 	</style>
 @endsection
@@ -16,7 +21,7 @@
 		<div class="kt-portlet__head">
 			<div class="kt-portlet__head-label">
 				<h3 class="kt-portlet__head-title">
-					Room list
+					Categories
 				</h3>
 				
 			</div>
@@ -34,7 +39,7 @@
 							<thead>
 								<tr>
 									<th>#</th>
-								   <th>Room</th>
+								   <th>Category</th>
 								   <th>Slug</th>
 								   <th>Active</th>
 								   <th>Operation</th>
@@ -50,10 +55,10 @@
 											<input data-switch="true" name="status" type="checkbox" data-roomid="{{$room->id}}" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="warning" {{$room->status==1?"checked=checked":""}}>
 										</td>
 										<td>
-											<a href="{{route('backend.room.edit',$room->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Edit
+											<a href="{{route('backend.category.edit',$room->id)}}" class="btn btn-primary btn-sm btn-bg-white" style="color: #5d78ff;" ><div class="kt-demo-icon__preview">Edit
 											</div> </a>
 											
-											@include('components.delete' , ['data' => $room->id, 'route' => 'backend.room.destroy'])
+											@include('components.delete' , ['data' => $room->id, 'route' => 'backend.category.destroy'])
 										</td>
 									</tr>
 								@endforeach
@@ -126,7 +131,7 @@ $(document).ready(function(){
 	$("[name='status']").on('switchChange.bootstrapSwitch',function (e, state) {
 		/* console.log($(this).data('userid')); */
 		const that=this;
-		$.get("{{ route('backend.room.updateStatus') }}",
+		$.get("{{ route('backend.category.updateStatus') }}",
 		{
 			room_id: $(this).data('roomid'),
 			status:state==true?1 : 0
@@ -144,5 +149,27 @@ $(document).ready(function(){
 
 	
 });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.js" integrity="sha512-+uGHdpCaEymD6EqvUR4H/PBuwqm3JTZmRh3gT0Lq52VGDAlywdXPBEiLiZUg6D1ViLonuNSUFdbL2tH9djAP8g==" crossorigin="anonymous"></script>
+<script>
+	$('.del_pl').on('click',function(e){
+		var that=$(this);
+		e.preventDefault();
+		
+		
+		Swal.fire({
+			title: 'Are you sure?',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+			}).then((result) => {
+			if (result.isConfirmed) {
+				
+				that.parent('form').submit();
+			}
+		})
+	})
 </script>
 @endsection

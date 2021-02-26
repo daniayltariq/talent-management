@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Storage;
 
 class DashboardController extends Controller
 {
@@ -34,56 +35,75 @@ class DashboardController extends Controller
             return $limit;
         }
         
-        $subs=auth()->user()->subscriptions()->active()->first();
+        $subs = auth()->user()->subscriptions()->active()->first();
         
         if (!is_null($subs) && $subs->count()>0) {
-            $plan=Plan::select('name','description','pictures','audios','videos','social_links','social_limit')->where('stripe_plan',$subs->stripe_plan)->first();
+            $plan = Plan::select('name','description','pictures','audios','videos','social_links','social_limit','unique_url')->where('stripe_plan',$subs->stripe_plan)->first();
             
-            $data["plan"]=$plan;
+            $data["plan"] = $plan;
         }
-        /* dd($data['plan']); */
-        return view('web.account.dashboard',compact('data'));
+
+        $custom_url = $plan->unique_url == 1?true:false;
+
+        // dd($custom_url, $plan->unique_url, $plan);
+
+        return view('web.account.dashboard',compact('data','custom_url'));
 
     }
 
     public function store(Request $request)
     {
-        /* dd($request->all()); */
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
-            'f_name' => ['required', 'string'],
-            'l_name' => ['required', 'string'],
+            'f_name' => ['string','max:40'],
+            'l_name' => ['string','max:40'],
             'phone' => ['required', 'string'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email','unique:users,email,'.auth()->user()->id],
             'password' => ['nullable','string', 'min:8','confirmed'],
+            'gender' => ['required','string'],
+            'custom_gender' => ['required_if:gender,=,custom'],
+            'city' => ['required','string'],
+            'state' => ['required','string'],
         ]);
         
         if ($validator->fails()) {
-            $request->session()->flash('error', 'Something went wrong !');
+            /* $request->session()->flash('error', 'Something went wrong !'); */
+           /*  return $validator->errors(); */
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
         }
-
+        
         try {
             $country_data=json_decode($request->new_phone,true);
            
             $user=User::findOrFail(auth()->user()->id);
-            $user->fill(is_null($request->password)?$request->except(['password','dob']):$request->all());
-            if($request->date_){
+            $user->fill(is_null($request->password)?$request->except(['password'/* ,'dob' */,'f_name','l_name']):$request->except(['f_name','l_name']));
+            /* if($request->date_){
                 $user->dob=$request->date_['year'].'-'.$request->date_['month'].'-'.$request->date_['day'];
-            }
+            } */
             
             $user->phone=Str::of($request->phone)->prepend('+'.$country_data['dialCode']);
             $user->phone_c_data=$request->new_phone;
             if (!is_null($request->password)) {
                 $user->password=Hash::make($request->password);
             }
+
+            // store gender
+            $user->gender = $request->gender;
+            $user->custom_gender = $request->custom_gender;
             $user->save();
+
+            // $user->profile()->update([
+            //     'legal_first_name'=> $request->f_name,
+            //     'legal_last_name'=> $request->l_name,
+            // ]);
             
             return redirect()->back()->with(array(
-                'message' => 'Data saved !', 
+                'message' => 'Successfully updated', 
                 'alert-type' => 'success'
             ));
+            
         } catch (\Throwable $th) {
             return redirect()->back()->with(array(
                 'message' => 'Something went wrong.', 
@@ -106,21 +126,43 @@ class DashboardController extends Controller
             $attach->file=$img;
             $attach->save();
 
+            if ($request->type =='image') {
+                if (auth()->user()->profile()->exists() && is_null(auth()->user()->profile->profile_img)) {
+                    auth()->user()->profile()->update(['profile_img'=>$img]);
+                    Storage::copy('public/uploads/uploadData/'.$img, 'public/uploads/profile/'.$img);
+                }
+            }
+            
             $notify=array('name'=>$img,'original_name' => $request->file('file')->getClientOriginalName());
         }
         else{
             $notify=array('name'=>null,'original_name' => null);
         }
-        
-
         return response()->json($notify);
     }
     
     public function social_links(Request $request)
     {
         /* dd($request->social); */
-        if ($request->social && count($request->social)>0) {
+        $validator= Validator::make($request->all(), [
+            "social"    => "required|array",
+            "social.*"  => "required|array",
+            "social.*.source"  => "required|string",
+            "social.*.link"  => "required|string",
+        ]);
+
+        if ($validator->fails()) {
+            /* return $validator->errors(); */
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        /* dd($request->social); */
+        if (auth()->user()->social_links()->exists()) {
             auth()->user()->social_links()->delete();
+        }
+            
+        if (!is_null($request->social) && count($request->social)>0) {
             foreach($request->social as $key =>$link)
             {
                 $social=new \App\Models\SocialLink;
@@ -131,11 +173,10 @@ class DashboardController extends Controller
             }
             if ($social) {
                 return redirect()->back()->with(array(
-                    'message' => 'Data saved !', 
+                    'message' => 'Successfully Saved !', 
                     'alert_type' => 'success'
                 ));
             }
-            
         }
         
         return redirect()->back()->with(array(
@@ -156,6 +197,18 @@ class DashboardController extends Controller
         return $filename;  
     }
 
+    public function set_default_img(Request $request)
+    {
+        $filename =  $request->get('filename');
+        $file=Attachment::where('file',$filename)->first();
+        $path=storage_path('app/public/uploads/uploadData/'.$filename);
+        if ($file && file_exists($path)) {
+            auth()->user()->profile()->update(['profile_img'=>$filename]);
+            Storage::copy('public/uploads/uploadData/'.$filename, 'public/uploads/profile/'.$filename);
+        }
+        return $filename;  
+    }
+
     public function fetchAttachments(Request $request)
     {
         $data=[
@@ -163,6 +216,15 @@ class DashboardController extends Controller
             'video'=>auth()->user()->attachments->where('type','video'),
             'audio'=>auth()->user()->attachments->where('type','audio')
         ];
+        
+        $subs = auth()->user()->subscriptions()->active()->first();
+        
+        if (!is_null($subs) && $subs->count()>0) {
+            $plan = Plan::select('name','description','pictures','audios','videos','social_links','social_limit','unique_url')->where('stripe_plan',$subs->stripe_plan)->first();
+            
+            $data["plan"] = $plan;
+        }
+
         $media_key=$request->media_key;
         if ($media_key=='image') {
             return view('components.attachments',compact('data'));
@@ -184,8 +246,9 @@ class DashboardController extends Controller
 
     public function signup()
     {
+        $plan=auth()->user()->getActivePlan();
         $countries=DB::table('countries')->select('nicename')->get();
-        return view('web.account.signup', compact('countries'));
+        return view('web.account.signup', compact('countries','plan'));
     }
 
 }

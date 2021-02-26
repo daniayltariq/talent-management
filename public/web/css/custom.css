@@ -15,7 +15,13 @@ html{
 }
 .cd-full__contant {
     float: left;
-    padding-left: 10%;
+    /*padding-left: 10%; */
+    padding-top: 1%;
+    width: 100%;
+    text-align: center;
+}
+.cd-slider-nav{
+    padding-top: 1.5rem!important;
 }
 
 @media only screen and (min-width: 1600px){
@@ -361,7 +367,13 @@ button.multiselect.dropdown-toggle.btn.btn-default {
 
 .fs__list {
     margin: auto;
-    width: fit-content;
+    width: 16%;
+}
+@media only screen and (max-width: 992px){
+    .fs__list {
+        margin: auto;
+        width: 100%;
+    }
 }
 .footer__title {
     margin-bottom: 40px;
@@ -393,7 +405,7 @@ button.multiselect.dropdown-toggle.btn.btn-default {
 
 @media only screen and (min-width: 1170px){
     .cd-hero-slider {
-        height: 75vh;
+        height: 40vh;
     }
 }
 
@@ -416,29 +428,32 @@ li.testimonal__list-item.slick-slide.slick-active:nth-child(1) {
     /*display: none !important;*/
 }
 
-.middle-testimonial .border-1 {
+/*.middle-testimonial .border-1 {
     min-height: 410px;
     padding: 0 42px;
-}
-.middle-testimonial .single-testimonial {
+}*/
+/*.middle-testimonial .single-testimonial {
     transition: padding 0.5s;
     padding-top: 42px;
-   
+    transform: translateY(-42px);
 }
-
+*/
 .border-1 {
     border: 1px solid gainsboro;
     min-height: 320px;
     background:#ffffff;
 }
 .single-testimonial {
-    padding-top: 40px !important;
+    /*padding-top: 40px !important;*/
+     /*transform: translateY(-42px);*/
+      /*padding: 30px;*/
+       padding-top: 38px;
 }
 
 
 .slick-active:not(.middle-testimonial) .single-testimonial{
-    padding: 30px;
-    margin-top: 45px;
+   
+    /*margin-top: 45px;*/
 }
 
 
@@ -464,4 +479,27 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.element-loading{
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 99;
+}
+
+.line {
+   background-color: transparent !important;
+}
+
+.repeater .form-holder:before{
+    top: 70%;
+}
+
+
+body.swal2-shown.swal2-height-auto {
+    padding-right: 0px !important;
 }

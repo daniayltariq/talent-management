@@ -1,15 +1,15 @@
-<footer class="footer" style="margin: 15px 0px;">
+<footer class="footer" style="margin: 15px 0px 0px 0px;">
 	<div class="container">
 		<div class="row">
 			<div class="footer__widgets clearfix">
 				<div class="col-md-12 col-sm-12 col-xs-12 footer__social text-center">
-					<div class="footer__title">We are social</div>
+					<div class="footer__title">Our Social Media</div>
 					<ul class="fs__list clearfix">
 						{{-- <li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-linkedin"></i></a></li> --}}
-						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-facebook"></i></a></li>
-						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-instagram"></i></a></li>
-						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-twitter"></i></a></li>
-						<li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-youtube-play"></i></a></li>
+						{{-- <li class="fs__list-item"><a href="#0" class="animation"><i class="mdi mdi-facebook"></i></a></li> --}}
+						<li class="fs__list-item"><a href="https://www.instagram.com/thetalentdepot/" target="_blank" class="animation"><i class="mdi mdi-instagram"></i></a></li>
+						<li class="fs__list-item"><a href="https://twitter.com/thetalentdepot" target="_blank" class="animation"><i class="mdi mdi-twitter"></i></a></li>
+						<li class="fs__list-item"><a href="https://www.youtube.com/channel/UC0pLQeoqnjcasCJ6w4KMiZA" target="_blank" class="animation"><i class="mdi mdi-youtube-play"></i></a></li>
 					</ul>
 				</div>
 				{{-- <div class="col-md-3 col-sm-6 col-xs-12 footer__adres">
@@ -29,7 +29,9 @@
 					</div>
 				</div> --}}
 			</div>
-			<div class="footer__copyrite">© 2019 The Talent Agency. All Rights Reserved.</div>
+			<div class="footer__copyrite">© 2019 The Talent Depot. All Rights Reserved. <br>
+				<a href="#" class="text-white">Terms & Conditions</a> . <a href="#" class="text-white">Privacy Policy</a>
+			</div>
 		</div>
 	</div>
 </footer><!-- Footer End -->

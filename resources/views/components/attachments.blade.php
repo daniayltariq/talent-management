@@ -1,5 +1,15 @@
 <div class="row mt-5">
-                                    
+    <div class="col-md-12">
+        <div class="alert alert-primary d-flex" role="alert">
+            {{-- <span aria-hidden="true"><i class="fa fa-exclamation-triangle"></i></span> --}}
+            <ul>
+                <li>You are allowed to add <span id="allowed_pics">{{$data['plan']->pictures}}</span> Images.</li>
+                <li>Supported formats i.e .jpeg .jpg .png</li>
+                <li>Allowed max file size of 4mb</li>
+            </ul>
+            
+        </div>
+    </div>                 
     <div class="col-md-12 mt-5">
         <form method="post" action="{{url('image/upload/store')}}" enctype="multipart/form-data" class="dropzone" id="imageDropzone">
             @csrf
@@ -19,7 +29,11 @@
                         <div class="content-overlay"></div>
                         <img class="content-image" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}">
                         <div class="content-details fadeIn-bottom">
-                            <a type="button" class="content-title" data-img="{{$img->file}}" id="remove-img-btn">Remove</a>
+                            <a type="button" class="content-title remove-img-btn" data-img="{{$img->file}}" >Remove</a>
+                        </div>
+
+                        <div class="content-details-set-profile fadeIn-bottom">
+                            <a type="button" class="content-title set_default_img" data-img="{{$img->file}}" >set as profile</a>
                         </div>
                     </div>
                 @empty

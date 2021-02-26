@@ -1,4 +1,5 @@
 @extends('web.layouts.app')
+@section('title', 'Subscription')
 @section('styles')
     <style>
       .btn-stripe{
@@ -97,7 +98,7 @@
     }
 
     .digit-group input {
-      width: 30px;
+      width: 50px;
       height: 50px;
       background-color: white;
       border: 2px solid;
@@ -125,14 +126,49 @@
       padding: 1.5rem;
       color: #404040;
     }
+
+    .success_otp{
+      margin-bottom: 20px;
+      font-size: 20px;
+      padding: 1.5rem;
+      color: #df691a;
+    }
  
     .bg-disabled{
       background: #eae7e7 !important;
     }
 
     .otp__tries{
-      text-align: left;
+      text-align: center;
       padding: 1rem 17rem !important;
+      margin-top: 2rem;
+    }
+
+    #card-errors{
+      color: red !important;
+    }
+    /*.popup-contact-wrapper {
+        border-radius: 8px;
+        border: unset !important;
+        border-top: unset !important;
+    }*/
+
+    .popup-close:hover {
+          background: #df691a !important;
+          border-color: #ffffff !important;
+      }
+      .popup-close {
+          border: solid 4px #ffffff !important;
+      }
+
+    .popup-inner{
+      max-width: 744px;
+    }
+
+    .td-color{
+      color: #df691a;
+      border-bottom: 1px solid;
+      cursor: pointer;
     }
     /*  end otp modal */
     </style>
@@ -140,19 +176,17 @@
 @section('content')
 @include('web.partials.loader')
 <div class="container">
-    <div class="row justify-content-center" style="margin: 10rem">
-        <div class="col-md-offset-3 col-md-6 mt-5 mb-3">
-            <div class="">
-                <p>You will be charged ${{ number_format($plan->cost, 2) }} for {{ $plan->name }} Plan</p>
-                <a href="#" pd-popup-open="popupOTP"></a>
-            </div>
-            <div class="card" style="box-shadow: 0 0 0 1px #e3e8ee;">
+    <div class="row justify-content-center" style="margin-top: 20rem;margin-bottom: 15rem">
+        <div class="col-md-offset-3 col-md-6 mt-5 mb-3 pt-5">
+            
+            <div class="card" style="box-shadow: 0 0 0 1px #e3e8ee; padding: 3rem">
               <div class="row">
                 <div class="col-md-12">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="card-header" style="text-align: center;background: #fafcfe;">
-                          <img src="{{asset('images/stripe2.png')}}" style="width: 11%" alt="">
+                         <p>You will be charged ${{ number_format($plan->cost, 2) }} for {{ $plan->name }} Plan</p>
+                          <a href="#" pd-popup-open="popupOTP"></a>
                         </div>
                         {{-- @if (count($paymentMethods) > 0)
                           <div class="pay-tabs">
@@ -208,9 +242,12 @@
           <div class="row">
               <div class="col-md-12">
                 <div class="prompt">
-                  Enter the OTP sent on your email.
+                  A verification code was sent to <span><b id="otp_mail"></b></span>. <br>
+                  Please enter the verification code to validate and activate your account.
                 </div>
-                
+                <div class="success_otp" id="success_otp">
+                  Please wait while we build your account.
+                </div>
                 <form method="get" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
                   <input type="text" id="digit-1" name="digit-1" data-next="digit-2" />
                   <input type="text" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" />
@@ -220,7 +257,8 @@
                   <input type="text" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" />
                   <input type="text" id="digit-6" name="digit-6" data-previous="digit-5" />
                   <br>
-                  <p class="otp__tries">Limit: <span id="otp_tries">3</span></p>
+                  <p class="otp__tries">Please enter the 6 digit code here. <br>There is a limit of <span id="otp_tries">3</span> attempts.</p>
+                  <p>Not recieved? <a class="td-color" id="resend_email" onclick="resendOtp()">Resend email.</a></p>
                 </form>
               </div>
           </div>
@@ -233,6 +271,15 @@
 @endsection
 @section('scripts')
 <script src="https://js.stripe.com/v3/"></script>
+<script>
+  $(document).ready(function(){
+    $('#success_otp').hide();
+
+    toastr.options = {
+      "timeOut": "8000",
+    }
+  })
+</script>
 <script>
     // Create a Stripe client.
     var stripe = Stripe('{{config('app.STRIPE_KEY')}}');
@@ -275,8 +322,31 @@
     const cardHolderName = document.getElementById('card-holder-email');
     const cardButton = document.getElementById('card-button');
     const clientSecret = cardButton.dataset.secret;
+
     cardButton.addEventListener('click', async (e) => {
+
       event.preventDefault();
+      fullPageLoader(true);
+
+      var validate_email = false;
+      $.get( "{{ route('subscription.validate_email') }}",{
+        email: $('#card-holder-email').val(),
+        _token : "{{ csrf_token() }}"
+      },function(res){
+        if(res.status == 'success'){
+          validate_email  = true;
+          stripeValidateCard();
+        }else{
+          toastr.error(res.message);
+          fullPageLoader(false);
+        }
+         
+      });
+ 
+      
+    });
+
+    async function  stripeValidateCard(){
       fullPageLoader(true);
       const { setupIntent, error } = await stripe.confirmCardSetup(
             clientSecret, {
@@ -287,9 +357,16 @@
             }
         );
         if (error) {
+          
+          fullPageLoader(false);
             var errorElement = document.getElementById('card-errors');
             if (error.code=='parameter_invalid_empty') {
               toastr.error('email not valid');
+              location.reload();
+            }
+            else if (error.code=='setup_intent_unexpected_state') {
+              toastr.error('Please try again');
+              location.reload();
             } else {
               errorElement.textContent = error.message;
             }
@@ -308,7 +385,8 @@
         stripeTokenHandler(setupIntent);
         }
       }); */
-    });
+
+    }
     // Submit the form with the token ID.
     function stripeTokenHandler(setupIntent) {
       // Insert the token ID into the form so it gets submitted to the server
@@ -388,6 +466,8 @@
 
 {{-- Send OTP --}}
 <script>
+  var otpSent=false;
+
   function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -400,16 +480,26 @@
         _token : "{{ csrf_token() }}"
       }, function( res ) {
         fullPageLoader(false);
-        if (res=='success') {
-            toastr.success('Otp has been sent on your email.')
+        if (res.status=='success') {
+            toastr.success(res.message)
+            $('#otp_mail').text($('#card-holder-email').val());
             $('[pd-popup-open]').click();
-        } else if(res=='error') {
-            toastr.error(res)
+            $('#otp_tries').text(3);
+            if (otpSent) {
+              $(".digit-group input[type=text]").each(function() {
+                $(this).prop('disabled',false);
+                $(this).removeClass('bg-disabled');
+              });
+            }
+        } else if(res.status=='error') {
+            toastr.error(res.message)
         }
       });
    }
    else{
+    fullPageLoader(false);
     toastr.error('email not valid');
+    location.reload();
    }
   
  }
@@ -432,16 +522,25 @@
     }, function( res ) {
       if (res.status=='success') {
         console.log('form submit');
+        $('#success_otp').show();
         form.submit();
       } else if(res.status=='error') {
         toastr.error(res.message)
-        if (res.tries && res.tries >0) {
+        if (res.tries !=null && res.tries >=0) {
           $('#otp_tries').text(res.tries);
         }
         
         $(".digit-group input[type=text]").each(function() {
-            $(this).prop('disabled',false);
-            $(this).removeClass('bg-disabled');
+            $(this).val('');
+            if (res.tries !=null && res.tries <=0) {
+              $(this).prop('disabled', true);
+              $(this).addClass('bg-disabled');
+            }
+            else{
+              $(this).prop('disabled', false);
+              $(this).removeClass('bg-disabled');
+            }
+            
         });
       }
     });
@@ -449,4 +548,20 @@
   }
 </script>
 {{-- End Verify OTP --}}
+
+{{-- resend OTP --}}
+<script>
+  function resendOtp()
+  {
+    $(".digit-group input[type=text]").each(function() {
+      $(this).val('');
+      $(this).prop('disabled',true);
+      $(this).addClass('bg-disabled');
+    });
+    otpSent=true;
+    sendOtpOnEmail();
+    
+  }
+</script>
+{{-- End R esend OTP --}}
 @endsection

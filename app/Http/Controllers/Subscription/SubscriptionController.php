@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
 use App\Domain\Mail\EmailOtp;
-
+use Illuminate\Support\Facades\Validator;
 class SubscriptionController extends Controller
 {
     /**
@@ -102,24 +102,72 @@ class SubscriptionController extends Controller
         }
     }
 
+     public function validateEmail(Request $request)
+    {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|max:191',
+            ]);
+
+            if ($validator->fails()) {
+                 return $data=array(
+                    "status"=>'error',
+                    "message"=>'Enter a valid email address.'
+                );
+            }
+ 
+            $user=\App\Models\User::where('email',$request->email)->first();
+            if ($user) {
+                $data=array(
+                    "status"=>'error',
+                    "message"=>'email already taken'
+                );
+            }
+            else{
+                 
+                $data=array(
+                    "status"=>'success',
+                    "message"=>''
+                );
+            }
+            
+            return $data;
+ 
+    }
+
     public function sendOtp(Request $request)
     {
         /* dd($request->all()); */
         
-        try {
-            $six_digit_random_number = mt_rand(100000, 999999);
-            Cookie::queue(Cookie::make('otp', $six_digit_random_number,5));
+        //first validate email if it is already taken
+        /* try { */
+            $user=\App\Models\User::where('email',$request->email)->first();
+            if ($user) {
+                $data=array(
+                    "status"=>'error',
+                    "message"=>'email already taken'
+                );
+            }
+            else{
+                $six_digit_random_number = mt_rand(100000, 999999);
+                Cookie::queue(Cookie::make('otp', $six_digit_random_number,5));
 
-            $data=[
-                "otp"=>$six_digit_random_number,
-            ];
-            Mail::to($request->email)->send(new EmailOtp($data));
-            Cookie::queue(Cookie::make('otp_tries', 3,5));
-            return 'success';
+                $data=[
+                    "otp"=>$six_digit_random_number,
+                ];
+                Mail::to($request->email)->send(new EmailOtp($data));
+                Cookie::queue(Cookie::make('otp_tries', 3,5));
 
-        } catch (\Throwable $th) {
+                $data=array(
+                    "status"=>'success',
+                    "message"=>'Verification sent'
+                );
+            }
+            
+            return $data;
+
+        /* } catch (\Throwable $th) {
             return 'error';
-        }
+        } */
     }
 
     public function verifyOtp(Request $request)
@@ -132,7 +180,7 @@ class SubscriptionController extends Controller
             Cookie::queue(Cookie::make('otp_tries', $tries-1,5));
             $data=array(
                 "status"=>'error',
-                "message"=>'maximum limit achieved,please reload!',
+                "message"=>'Verification code attempts exceeded.',
                 "tries"=>$tries-1
             );
         }
@@ -140,21 +188,21 @@ class SubscriptionController extends Controller
             Cookie::queue(Cookie::make('otp_tries', $tries-1,5));
             $data=array(
                 "status"=>'error',
-                "message"=>'OTP has expired please reload!',
+                "message"=>'Verification code has expired please reload!',
                 "tries"=>$tries-1
             );
         }
         elseif ($request->otp == $value) {
             $data=array(
                 "status"=>'success',
-                "message"=>'OTP is valid'
+                "message"=>'Verification success.'
             );
         }
         else{
             Cookie::queue(Cookie::make('otp_tries', $tries-1,5));
             $data=array(
                 "status"=>'error',
-                "message"=>'OTP is not valid',
+                "message"=>'Verification code is incorrect. Please try again',
                 "tries"=>$tries-1
             );
         }
