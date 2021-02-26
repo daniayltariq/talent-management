@@ -101,6 +101,11 @@ class User extends Authenticatable /* implements MustVerifyEmail */
         return $this->hasMany('App\Models\Picklist','user_id');
     }
 
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Topic','user_id');
+    }
+
     public function profile()
     {
         return $this->hasOne('App\Models\Profile','user_id');
