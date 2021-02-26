@@ -251,7 +251,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <div id="guardian_section">
                                 <h4 class="head_div">Parent/Guardian Details</h4>
                                 <div class="form-group">
-                                    <label for="g_f_name" class="col-sm-4 control-label">First Name <span class="req">*</span></label>
+                                    <label for="g_f_name" class="col-sm-4 control-label">Legal First Name <span class="req">*</span></label>
                                     <div class="col-sm-8">
                                         <input id="g_f_name" type="text" class="form-control @error('g_f_name') is-invalid @enderror" name="g_f_name" value="{{ old('g_f_name') }}" required autocomplete="g_f_name" autofocus>
 
@@ -263,7 +263,7 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                     </div>
                                 </div> 
                                 <div class="form-group">
-                                    <label for="g_l_name" class="col-sm-4 control-label">Last Name <span class="req">*</span></label>
+                                    <label for="g_l_name" class="col-sm-4 control-label">Legal Last Name <span class="req">*</span></label>
                                     <div class="col-sm-8">
                                         <input id="g_l_name" type="text" class="form-control @error('g_l_name') is-invalid @enderror" name="g_l_name" value="{{ old('g_l_name') }}" required autocomplete="g_l_name" autofocus>
 
@@ -439,13 +439,13 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                             <h4 class="head_div">Member Details (<span id="member_age_text">above</span> 18)</h4>
 
                             <div class="form-group">
-                                <label for="f_name" class="col-sm-4 control-label">First Name <span class="req">*</span></label>
+                                <label for="f_name" class="col-sm-4 control-label">Legal First Name <span class="req">*</span></label>
                                 <div class="col-sm-8">
                                     <input id="f_name" type="text" class="form-control @error('f_name') is-invalid @enderror" name="f_name" value="{{ old('f_name') }}" required autocomplete="f_name" autofocus>
                                 </div>
                             </div> 
                             <div class="form-group">
-                                <label for="l_name" class="col-sm-4 control-label">Last Name <span class="req">*</span></label>
+                                <label for="l_name" class="col-sm-4 control-label">Legal Last Name <span class="req">*</span></label>
                                  <div class="col-sm-8">
                                     <input id="l_name" type="text" class="form-control @error('l_name') is-invalid @enderror" name="l_name" value="{{ old('l_name') }}" required autocomplete="l_name" autofocus>
 

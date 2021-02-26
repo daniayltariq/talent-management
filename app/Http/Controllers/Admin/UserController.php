@@ -302,6 +302,7 @@ class UserController extends Controller
         $user=User::findOrFail($id);
         if($user->profile()->exists()){
             $user->profile()->delete();
+            $user->posts()->delete();
         }
         
         $user->delete();

@@ -497,15 +497,15 @@
                                     @endif
                                     
                                     <div class="col-6">
-                                        <label for="f_name" class="form-label mt-3">First Name</label>
-                                        <input class="form-control" type="text" name="" id="f_name" placeholder="FIRST NAME" value="{{ auth()->user()->f_name ?? '' }}" disabled />
+                                        <label for="f_name" class="form-label mt-3">Legal First Name</label>
+                                        <input class="form-control" type="text" name="" id="f_name" placeholder="LEGAL FIRST NAME" value="{{ auth()->user()->f_name ?? '' }}" disabled />
                                         @error('f_name')
                                             <div class="error">{{\Str::replaceFirst('f name', 'First Name', $message) }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-6">
-                                        <label for="l_name" class="form-label mt-3">Last Name</label>
-                                        <input class="form-control" type="text" name="" id="l_name" placeholder="LAST NAME" value="{{ auth()->user()->l_name ?? '' }}" disabled />
+                                        <label for="l_name" class="form-label mt-3">Legal Last Name</label>
+                                        <input class="form-control" type="text" name="" id="l_name" placeholder="LEGAL LAST NAME" value="{{ auth()->user()->l_name ?? '' }}" disabled />
                                         @error('l_name')
                                             <div class="error">{{\Str::replaceFirst('l name', 'Last Name', $message) }}</div>
                                         @enderror
