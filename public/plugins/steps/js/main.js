@@ -65,9 +65,11 @@ $(function () {
                 console.log(emptyFields);
 
                 if (emptyFields === 0) {
+                    finishTrigger = true;
                     triggerAddBtn = true;
                 } else {
                     if (emptyFields < row_inputs.length) {
+                        finishTrigger = false;
                         toastr.error('input can not be empty');
                         return false;
                     }

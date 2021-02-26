@@ -829,6 +829,7 @@ label{
 @section('scripts')
 <script>
     window.currentStep = 0;
+    window.finishTrigger = false;
     window.changeDetected = false;
     function nextCallback(addBtn,currentStep){
 
@@ -1069,7 +1070,10 @@ label{
             $('#wizard-p-'+window.currentStep+' .repeater-add-btn:not(.btn-danger)').click();
         } */
         $('a[href="#next"]').click();
-        window.location='{{route('account.dashboard')}}';
+        if (finishTrigger) {
+            window.location='{{route('account.dashboard')}}';
+        }
+        
     })
 </script>
 
