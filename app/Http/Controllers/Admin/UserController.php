@@ -300,7 +300,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user=User::findOrFail($id);
-        if($user->profile()->exists()){
+        if($user->profile()->exists()|| $user->posts()->exists()){
             $user->profile()->delete();
             $user->posts()->delete();
         }
