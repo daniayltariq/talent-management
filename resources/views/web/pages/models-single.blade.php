@@ -289,7 +289,7 @@
          <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0">
             <div class="row {{count($data['images'])==0 ? 'd-flex' : ''}}">
               <div class="element-loading"></div>
-               @if (count($data['images'])>0)
+               @if (count($data['images'])>0 || $data['profile']->profile_img)
                   <div id="model-slider-single" class="s-model__photos col-md-6">
                      
                         <div class="sp-slides">
