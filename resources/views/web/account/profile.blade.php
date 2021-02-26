@@ -1069,7 +1069,7 @@ label{
             $('#wizard-p-'+window.currentStep+' .repeater-add-btn:not(.btn-danger)').click();
         } */
         $('a[href="#next"]').click();
-        /* window.location='{{route('account.dashboard')}}'; */
+        window.location='{{route('account.dashboard')}}';
     })
 </script>
 
