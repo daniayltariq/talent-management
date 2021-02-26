@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.css" integrity="sha512-WfDqlW1EF2lMNxzzSID+Tp1TTEHeZ2DK+IHFzbbCHqLJGf2RyIjNFgQCRNuIa8tzHka19sUJYBO+qyvX8YBYEg==" crossorigin="anonymous" />
 <style type="text/css">
     *{
         font-size: 16px;
@@ -373,6 +374,10 @@
     .audio__container:hover .remove_audio{
         display: block;
     } */
+
+    .swal2-title{
+        font-size: 1.375em !important;
+    }
 </style>
 
 <!-- jQuery library -->
@@ -972,6 +977,7 @@
         })
     </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.js" integrity="sha512-+uGHdpCaEymD6EqvUR4H/PBuwqm3JTZmRh3gT0Lq52VGDAlywdXPBEiLiZUg6D1ViLonuNSUFdbL2tH9djAP8g==" crossorigin="anonymous"></script>
 <script>
     function copyToClipboard() {
         /* Get the text field */
@@ -1136,29 +1142,41 @@
     $(document).on('click','.remove-img-btn',function(e){
 		var ele = $(this);
       
-        $.ajax({
-            type: 'delete',
-            url: '{{ route('account.fileDestroy') }}',
-            data: {
-                filename: $(this).data('img'),
-                _method: 'DELETE',
-            },
-            success: function(res) {
-                if (ele.data('type')=='audio' || ele.data('type')=='video') {
-                    console.log('remove audio');
-                    ele.closest('.audio__container').remove();
-                }
-                else{
-                    ele.closest('.content').remove();
-                }
-                
-                toastr.success('File removed successfully');
-                // window.location.reload();
-            },
-            error: function(error) {
-                toastr.error('something went wrong!');
-            }
-        });
+        Swal.fire({
+			title: 'Are you sure?',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+			}).then((result) => {
+			if (result.isConfirmed) {
+				
+				$.ajax({
+                    type: 'delete',
+                    url: '{{ route('account.fileDestroy') }}',
+                    data: {
+                        filename: $(this).data('img'),
+                        _method: 'DELETE',
+                    },
+                    success: function(res) {
+                        if (ele.data('type')=='audio' || ele.data('type')=='video') {
+                            console.log('remove audio');
+                            ele.closest('.audio__container').remove();
+                        }
+                        else{
+                            ele.closest('.content').remove();
+                        }
+                        
+                        toastr.success('File removed successfully');
+                        // window.location.reload();
+                    },
+                    error: function(error) {
+                        toastr.error('something went wrong!');
+                    }
+                });
+			}
+		})
+        
 
 		
 	});
