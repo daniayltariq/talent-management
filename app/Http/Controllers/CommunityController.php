@@ -24,7 +24,7 @@ class CommunityController extends Controller
     	$community = TopicCategory::where('status',1)->with(['topics' => function($q){
                         return $q->where('status',1)->has('user')->with('user');
                     }])->withCount(['comments'=> function($q){
-                        $q->where('approved',1);
+                        $q->where('approved',1)->has('user');
                     }])->withCount(['topics'=> function($q){
                         $q->where('status',1);
                     }])->withCount('likes')->withSum('topics','views')->paginate(5);
