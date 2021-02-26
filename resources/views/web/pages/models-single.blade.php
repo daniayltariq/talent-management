@@ -550,6 +550,22 @@
       });
     }
     $('.element-loading').remove();
+
+      var firstSliderIndex = 0;
+      var secondSliderIndex = 0;
+      $( '.sp-slides').on( 'gotoSlide', function( event ) {
+         if ( event.index !== secondSliderIndex) {
+            secondSliderIndex = firstSliderIndex = event.index;
+            $( '#sp-thumbnails' ).sliderPro( 'gotoSlide', event.index );
+         }
+      });
+      $( '#sp-thumbnails' ).on( 'gotoSlide', function( event ) {
+         if ( event.index !== firstSliderIndex) {
+            firstSliderIndex = secondSliderIndex = event.index;
+            $( '.sp-slides' ).sliderPro( 'gotoSlide', event.index );
+         }
+      });
+
   });
 
 </script>
