@@ -90,6 +90,19 @@
 			{{-- <div class="kt-portlet__head-label" style="float: right">
 				<a href="{{ route('backend.user.create') }}" class="btn btn-info btn-xs"><i class='fa fa-plus'></i> New User</a>
 			</div> --}}
+			<div class="kt-portlet__head-label" style="float: right">
+				<form action="{{route('backend.user.search')}}" method="GET">
+					<div class="form-group mb-0">
+					<div class="input-group">
+						<input type="text" class="form-control" name="search_text" placeholder="Search for...">
+						<div class="input-group-append">
+							<button class="btn btn-secondary" type="submit">Go!</button>
+						</div>
+					</div>
+				</div>
+				</form>
+				
+			</div>
 		</div>
 		<div class="kt-portlet__body">
 			<!--begin::Section-->

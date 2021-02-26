@@ -67,7 +67,7 @@ class LoginController extends Controller
         /* dd($manager->isImpersonating()); */
         if ($manager->isImpersonating()) {
             Auth::user()->leaveImpersonation();
-            return redirect()->route('backend.dashboard');
+            return redirect()->route('backend.user.index');
         }
         
         Auth::logout();

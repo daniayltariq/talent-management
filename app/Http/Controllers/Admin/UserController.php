@@ -24,14 +24,26 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::whereHas(
-            'roles', function($q){
-                $q->where('name','<>','superadmin');
-            }
-        )->with('roles')->paginate(25);
+        if ($request->query('search_text')) {
+            $users = User::whereHas(
+                'roles', function($q){
+                    $q->where('name','<>','superadmin');
+                }
+            )
+            ->where('f_name','LIKE','%'.$request->search_text.'%')
+            ->orWhere('l_name','LIKE','%'.$request->search_text.'%')->with('roles')->paginate(25);
+        } else {
+            $users = User::whereHas(
+                'roles', function($q){
+                    $q->where('name','<>','superadmin');
+                }
+            )->with('roles')->paginate(25);
+        }
+        
+        
         $roles=Role::where('name','<>','superadmin')->get();
         
-        /* dd($user); */
+        /* dd($users); */
         return view('backend.user.list',compact('users','roles'));
         
     }

@@ -17,6 +17,7 @@ $(function () {
         enableAllSteps: true,
         transitionEffectSpeed: 500,
         onStepChanging: function (event, currentIndex, newIndex) {
+            console.log('current: ' + currentIndex);
             window.currentStep = newIndex;
             /* console.log($('#wizard-p-' + currentIndex + ' >form')); */
             /*  if (newIndex >= 1) {
@@ -56,12 +57,12 @@ $(function () {
                 var child = items.eq(items.length - 1);
 
                 var row_inputs = $(child).find('input,select,textarea');
-                /* console.log(row_inputs); */
+                console.log(row_inputs);
                 var emptyFields = row_inputs.filter(function () {
                     return $(this).val() === "";
                 }).length;
 
-                /* console.log(emptyFields); */
+                console.log(emptyFields);
 
                 if (emptyFields === 0) {
                     triggerAddBtn = true;

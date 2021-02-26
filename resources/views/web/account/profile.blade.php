@@ -1019,7 +1019,7 @@ label{
 
 
     $(document).on('click','a[href="#finish"]',function(e){
-        if ($("#profile_form").valid()) 
+        if ($('#wizard-p-' + currentStep + ' >form').valid()) 
         {
             var formDataa=new FormData($('section[aria-hidden="false"] > form')[0]);
             console.log($('section[aria-hidden="false"] > form')[0]);
@@ -1065,11 +1065,11 @@ label{
 
     $(document).on('click','#finish_btn',function(){
        
-        if($('#wizard-p-'+window.currentStep+' .repeater-add-btn:not(.btn-danger)')){
+        /* if($('#wizard-p-'+window.currentStep+' .repeater-add-btn:not(.btn-danger)')){
             $('#wizard-p-'+window.currentStep+' .repeater-add-btn:not(.btn-danger)').click();
-        }
+        } */
         $('a[href="#next"]').click();
-        window.location='{{route('account.dashboard')}}';
+        /* window.location='{{route('account.dashboard')}}'; */
     })
 </script>
 
