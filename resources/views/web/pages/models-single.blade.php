@@ -293,6 +293,16 @@
                   <div id="model-slider-single" class="s-model__photos col-md-6">
                      
                         <div class="sp-slides">
+                           <div class="sp-slide">
+                              <img class="sp-image" src="{{ asset('storage/uploads/profile/' . $data['profile']->profile_img ?? '') }}"
+                              alt="single1"
+                              data-src="{{ asset('storage/uploads/profile/' . $data['profile']->profile_img ?? '') }}"
+                              data-small="{{ asset('storage/uploads/profile/' . $data['profile']->profile_img ?? '') }}"
+                              data-medium="{{ asset('storage/uploads/profile/' . $data['profile']->profile_img ?? '') }}"
+                              data-large="{{ asset('storage/uploads/profile/' . $data['profile']->profile_img ?? '') }}"
+                              data-retina="{{ asset('storage/uploads/profile/' . $data['profile']->profile_img ?? '') }}"
+                              style="object-fit: cover;"/>
+                           </div>
                            @foreach ($data['images'] as $img)
                               <div class="sp-slide">
                                  <img class="sp-image" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"

@@ -102,7 +102,7 @@ class HomeController extends Controller
             $data=[
                'profile'=>$user->profile,
                'social_links'=>$user->social_links,
-               'images'=>$user->attachments->where('type','image'),
+               'images'=>$user->attachments->where('type','image')->where('file','<>',$user->profile->profile_img??''),
                'video'=>$user->attachments->where('type','video'),
                'audio'=>$user->attachments->where('type','audio')
             ];
