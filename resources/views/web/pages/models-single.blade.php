@@ -536,6 +536,7 @@
         $( '#model-slider-single' ).sliderPro({
         width: 500,
         height: 760,
+        startSlide:0,
         fade: true,
         arrows: true,
         buttons: false,
