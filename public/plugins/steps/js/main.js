@@ -17,6 +17,7 @@ $(function () {
         enableAllSteps: true,
         transitionEffectSpeed: 500,
         onStepChanging: function (event, currentIndex, newIndex) {
+            console.log(event);
             console.log('current: ' + currentIndex);
             window.currentStep = newIndex;
             /* console.log($('#wizard-p-' + currentIndex + ' >form')); */
@@ -65,13 +66,15 @@ $(function () {
                 console.log(emptyFields);
 
                 if (emptyFields === 0) {
-                    finishTrigger = true;
+
                     triggerAddBtn = true;
                 } else {
                     if (emptyFields < row_inputs.length) {
-                        finishTrigger = false;
+                        window.finishTrigger = false;
                         toastr.error('input can not be empty');
                         return false;
+                    } else {
+
                     }
 
                 }
@@ -84,6 +87,8 @@ $(function () {
                         return true;
                     }
                 }); */
+            } else {
+
             }
             nextCallback(triggerAddBtn, currentIndex);
             return form.valid();

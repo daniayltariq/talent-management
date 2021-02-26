@@ -873,10 +873,19 @@ label{
                         } else {
                             toastr.error(res.message);
                         }
+
+                        if (window.finishTrigger) {
+                            window.location='{{route('account.dashboard')}}';
+                        }
                     },
                     error: function(error) {
                     }
                 });
+            }
+            else{
+                if (window.finishTrigger) {
+                    window.location='{{route('account.dashboard')}}';
+                }
             }
             window.changeDetected = false;
         }
@@ -1063,16 +1072,24 @@ label{
         $('a[href="#next"]').parent().addClass('ml-auto');
         $('a[href="#finish"]').parent().addClass('ml-auto');
     })
+    
+    $(document).on('hover active','a[href="#next"]',function(){
+       
+       window.finishTrigger =false;
+       
+      
+       
+   })
 
     $(document).on('click','#finish_btn',function(){
        
         /* if($('#wizard-p-'+window.currentStep+' .repeater-add-btn:not(.btn-danger)')){
             $('#wizard-p-'+window.currentStep+' .repeater-add-btn:not(.btn-danger)').click();
         } */
+        window.finishTrigger =true;
         $('a[href="#next"]').click();
-        if (finishTrigger) {
-            window.location='{{route('account.dashboard')}}';
-        }
+        
+       
         
     })
 </script>

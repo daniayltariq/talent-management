@@ -22,7 +22,7 @@ class CommunityController extends Controller
         }
 
     	$community = TopicCategory::where('status',1)->with(['topics' => function($q){
-                        return $q->where('status',1)->with('user');
+                        return $q->where('status',1)->has('user')->with('user');
                     }])->withCount(['comments'=> function($q){
                         $q->where('approved',1);
                     }])->withCount(['topics'=> function($q){

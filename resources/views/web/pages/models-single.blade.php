@@ -528,7 +528,7 @@
         arrows: true,
         buttons: false,
         fullScreen: true,
-        shuffle: true,
+        shuffle: false,
         smallSize: 500,
         mediumSize: 1000,
         largeSize: 3000,
