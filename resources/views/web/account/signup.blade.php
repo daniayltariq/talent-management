@@ -222,6 +222,15 @@ button.btn.btn-default.btn__red.animation.btn-full.pull-right {
                                 </div>
                             </div>
                         </div> --}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-info d-flex" role="alert">
+                                    <span aria-hidden="true"><i class="fa fa-exclamation-circle"></i></span>
+                                    <p class="ml-3">You selected and are signing up for the <a href="{{route('pricing')}}" target="_blank" rel="noopener noreferrer"><b>{{$plan->name ?? ''}}</b></a> membership.</p>
+                                    
+                                </div>
+                            </div> 
+                        </div>
                         
                         <div class="form-block">
                             <div class="form-group">

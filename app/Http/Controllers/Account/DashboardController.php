@@ -246,8 +246,9 @@ class DashboardController extends Controller
 
     public function signup()
     {
+        $plan=auth()->user()->getActivePlan();
         $countries=DB::table('countries')->select('nicename')->get();
-        return view('web.account.signup', compact('countries'));
+        return view('web.account.signup', compact('countries','plan'));
     }
 
 }
