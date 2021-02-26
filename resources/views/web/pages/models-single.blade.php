@@ -327,9 +327,9 @@
                            </div> --}}
                         </div>
                         <div class="sp-thumbnails">
-                           <h2 class="s-model__name">
+                           {{-- <h2 class="s-model__name">
                               <span class="line"></span>Model Photos
-                           </h2>
+                           </h2> --}}
                            
                            <img class="sp-thumbnail" style="object-fit: cover;"  alt="thumb1" src="{{ asset('storage/uploads/profile/' . $data['profile']->profile_img ?? '') }}"/>
                            @foreach ($data['images'] as $img)
@@ -536,7 +536,6 @@
         $( '#model-slider-single' ).sliderPro({
         width: 500,
         height: 760,
-        startSlide:0,
         fade: true,
         arrows: true,
         buttons: false,
@@ -550,22 +549,6 @@
       });
     }
     $('.element-loading').remove();
-
-      var firstSliderIndex = 0;
-      var secondSliderIndex = 0;
-      $( '.sp-slides').on( 'gotoSlide', function( event ) {
-         if ( event.index !== secondSliderIndex) {
-            secondSliderIndex = firstSliderIndex = event.index;
-            $( '#sp-thumbnails' ).sliderPro( 'gotoSlide', event.index );
-         }
-      });
-      $( '#sp-thumbnails' ).on( 'gotoSlide', function( event ) {
-         if ( event.index !== firstSliderIndex) {
-            firstSliderIndex = secondSliderIndex = event.index;
-            $( '.sp-slides' ).sliderPro( 'gotoSlide', event.index );
-         }
-      });
-
   });
 
 </script>
