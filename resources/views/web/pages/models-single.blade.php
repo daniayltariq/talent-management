@@ -331,7 +331,7 @@
                               <span class="line"></span>Model Photos
                            </h2>
                            
-                           <img class="sp-thumbnail" style="object-fit: cover;"  alt="thumb1" src="{{ asset('storage/uploads/uploadData/' . $data['profile']->profile_img ?? '') }}"/>
+                           <img class="sp-thumbnail" style="object-fit: cover;"  alt="thumb1" src="{{ asset('storage/uploads/profile/' . $data['profile']->profile_img ?? '') }}"/>
                            @foreach ($data['images'] as $img)
                               <img class="sp-thumbnail" style="object-fit: cover;"  alt="thumb1" src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}"/>
                            @endforeach
